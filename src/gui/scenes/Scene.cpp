@@ -37,8 +37,3 @@ TextureHandler* Scene::getTextureHandler() {
 Renderer* Scene::getRenderer() {
 	return m_Renderer;
 }
-
-Texture* Scene::createTexture(const u8* textureName)
-{
-	m_TextureHandler->createTexture( textureName );
-}

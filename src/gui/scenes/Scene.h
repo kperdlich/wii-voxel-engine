@@ -27,9 +27,6 @@ protected:
 	TextureHandler *m_TextureHandler;
 	Renderer *m_Renderer;
 
-	Texture* createTexture( const u8* textureName);
-
-
 
 };
 

@@ -51,7 +51,6 @@ void Renderer2D::drawTexture(BasicTexture* basicTexture)
 		default:
 			break;
 	}
-	//GRRLIB_DrawImg( basicTexture->getX(), basicTexture->getY(), basicTexture->getNativeTexture(), 0, 1, 1, GRRLIB_WHITE );
 }
 
 void Renderer2D::drawTile(SpriteSheet* tilemap, const f32 xpos, const f32 ypos,
@@ -60,13 +59,6 @@ void Renderer2D::drawTile(SpriteSheet* tilemap, const f32 xpos, const f32 ypos,
 {
 	GRRLIB_DrawTile(xpos, ypos, tilemap->getNativeTexture(), degrees, scaleX, scaleY, color, frame);
 }
-/*void Renderer2D::DrawTexture( Texture* texture ) {
-	GRRLIB_DrawImg( (rmode->viWidth / 2) - (texture->GetWidth() / 2) , (rmode->viHeight / 2) - ( texture->GetHeight() / 2 ), texture->GetNativeTexture() , 0, 1, 1, GRRLIB_WHITE);
-}
 
-void Renderer2D::DrawTexture( Texture* texture, const f32 xpos, const f32 ypos )
-{
-	GRRLIB_DrawImg( xpos, ypos, texture->GetNativeTexture(), 0, 1, 1, GRRLIB_WHITE );
-}*/
 
 

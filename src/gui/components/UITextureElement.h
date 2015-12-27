@@ -13,16 +13,16 @@
 
 class UITextureElement: public UIElement {
 public:
-	UITextureElement(int x, int y, float width, float height, const char* name, BasicTexture* tex);
+	UITextureElement(int x, int y, const char* name, BasicTexture* tex);
+	UITextureElement(const char* name, BasicTexture* tex);
 	virtual ~UITextureElement();
 	void load();
-	void unload();
 
-	virtual void setColor(u32 color) = 0;
-	virtual u32 getColor() = 0;
+	virtual void setColor(u32 color);
+	virtual u32 getColor();
 
-	void setX(int x);
-	void setY(int y);
+	virtual void setX(int x);
+	virtual void setY(int y);
 
 protected:
 	BasicTexture* m_texture;

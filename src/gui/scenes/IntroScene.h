@@ -8,12 +8,8 @@
 #ifndef SRC_GUI_SCENES_INTROSCENE_H_
 #define SRC_GUI_SCENES_INTROSCENE_H_
 
-#include <grrlib.h>
-#include "../../handler/Controller.h"
-#include "../../handler/TextureHandler.h"
+
 #include "Basic2DScene.h"
-#include "../../commands/client/SwitchToMainMenuCommand.h"
-#include "../../commands/client/SwitchToInGameCommand.h"
 
 class Controller;
 

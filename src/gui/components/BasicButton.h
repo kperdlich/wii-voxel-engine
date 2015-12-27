@@ -18,15 +18,19 @@ class BasicButton: public UITextureElement {
 
 public:
 	typedef void (*OnClickCallback)(BasicButton*);
+
 	BasicButton( float x, float y, const char* name, Texture* defaultTexture, Texture* highlightTexture, LabelTexture* label, OnClickCallback clickCallback );
 	virtual ~BasicButton();
 	void update();
 	bool handleMoveOver();
 	void handleOnClick();
-	void initLabel();
+	void updateLabel();
 
 	void setColor(u32 color);
-	u32 getColor();
+	void setButtonCallback(OnClickCallback callback);
+
+	virtual void setX(int x) override;
+	virtual void setY(int y) override;
 
 
 private:

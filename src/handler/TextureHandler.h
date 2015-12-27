@@ -26,6 +26,7 @@ public:
 	SpriteSheet* createTilemap( const u8* textureName );
 	Tile* createTile(int x, int y, int index, SpriteSheet* spriteSheet);
 	LabelTexture* createLabel( int x, int y, const char* text, GRRLIB_ttfFont* font, uint fontSize, u32 color );
+	LabelTexture* createLabel( const char* text, GRRLIB_ttfFont* font );
 	BasicTexture* getTextureByID( u16 index );
 	void destroyTextureByID( u16 index );
 	void destroyAllTextures();

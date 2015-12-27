@@ -7,7 +7,7 @@
 
 #include "CHotbar.h"
 
-CHotbar::CHotbar( const char* name, BasicTexture* tex ) : UITextureElement(0, 0, 0, 0, name, tex ) {
+CHotbar::CHotbar( const char* name, BasicTexture* tex ) : UITextureElement(0, 0, name, tex ) {
 
 	tex->setX( (rmode->viWidth / 2) - (m_texture->getWidth() / 2) );
 	tex->setY( rmode->viHeight - m_texture->getHeight() );

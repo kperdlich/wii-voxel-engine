@@ -94,3 +94,8 @@ LabelTexture* TextureHandler::createLabel(int x, int y, const char* text,
 	m_Textures.push_back( label );
 	return label;
 }
+
+LabelTexture* TextureHandler::createLabel( const char* text, GRRLIB_ttfFont* font )
+{
+	return createLabel(0, 0, text, font, DEFAULT_FONT_SIZE, GRRLIB_WHITE);
+}

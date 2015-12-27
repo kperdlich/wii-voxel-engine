@@ -9,7 +9,7 @@
 #include "../../handler/Controller.h"
 #include "../../utils/Debug.h"
 
-Cursor::Cursor( const char* name, BasicTexture* tex ) : UITextureElement( 0, 0, 0, 0, name, tex ) {
+Cursor::Cursor( const char* name, BasicTexture* tex ) : UITextureElement( 0, 0, name, tex ) {
 
 	m_texture->setX( (rmode->viWidth / 2) - (m_texture->getWidth() / 2) );
 	m_texture->setY( (rmode->viHeight / 2) - ( m_texture->getHeight() / 2 ) );
@@ -30,15 +30,6 @@ void Cursor::update() {
 
 	m_texture->setX( pad->getX() );
 	m_texture->setY( pad->getY() );
-
-
-	if ( pad->buttonsDown() & WPAD_BUTTON_A)
-	{
-		char* bufferClick = new char[100];
-		sprintf(bufferClick, "Push A Button" );
-		Debug::getInstance().log( bufferClick );
-	}
-
 }
 
 void Cursor::setColor(u32 color) {

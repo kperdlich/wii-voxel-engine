@@ -11,14 +11,14 @@
 #include "../../utils/Debug.h"
 #include <grrlib.h>
 
-BasicButton::BasicButton( float x, float y, const char* name, Texture* defaultTexture, Texture* highlightTexture, LabelTexture* label, OnClickCallback clickCallback  ) : m_label( label ), m_highlightTexture( highlightTexture ), m_clickCallback( clickCallback ), UITextureElement( x, y, 0, 0, name, defaultTexture )
+BasicButton::BasicButton( float x, float y, const char* name, Texture* defaultTexture, Texture* highlightTexture, LabelTexture* label, OnClickCallback clickCallback  ) : m_label( label ), m_highlightTexture( highlightTexture ), m_clickCallback( clickCallback ), UITextureElement( x, y, name, defaultTexture )
 {
 	m_texture->setX( x );
 	m_texture->setY( y );
 	m_highlightTexture->setX( x );
 	m_highlightTexture->setY( y );
 	m_highlightTexture->setVisible(false);
-	initLabel();
+	updateLabel();
 }
 
 BasicButton::~BasicButton() {
@@ -37,10 +37,6 @@ void BasicButton::update() {
 bool BasicButton::handleMoveOver() {
 
 	WiiPad* pad = Controller::getInstance().getInputHandler()->getPadByID( WII_PAD_0 );
-
-	/*bool mouseOver = pad->getX() >= m_texture->getX() && pad->getX() <= (m_texture->getX() + m_texture->getWidth())
-							&& pad->getY() >= m_texture->getY() && pad->getY() <= (m_texture->getY() + m_texture->getHeight());
-	 */
 
 	bool mouseOver = GRRLIB_PtInRect(m_texture->getX(), m_texture->getY(), m_texture->getWidth(), m_texture->getHeight(), pad->getX(), pad->getY() );
 	if ( mouseOver )
@@ -68,16 +64,17 @@ void BasicButton::handleOnClick() {
 
 void BasicButton::setColor(u32 color)
 {
-	m_texture->setColor(color);
+	UITextureElement::setColor(color);
 	m_highlightTexture->setColor(color);
 
 }
 
-u32 BasicButton::getColor(){
-	return m_texture->getColor();
+void BasicButton::setButtonCallback(OnClickCallback callback)
+{
+	m_clickCallback = callback;
 }
 
-void BasicButton::initLabel()
+void BasicButton::updateLabel()
 {
 	unsigned int newFontSize = m_texture->getHeight() - (2*BUTTON_LABEL_DISTANCE);
 	m_label->setFontSize( newFontSize );
@@ -85,6 +82,23 @@ void BasicButton::initLabel()
 
 	unsigned int textWidthInPixel = GRRLIB_WidthTTF(m_label->getFont(), m_label->getText(), m_label->getFontSize());
 	m_label->setX(m_texture->getX() + (( m_texture->getWidth() / 2) - (textWidthInPixel / 2)));
+}
+
+
+void BasicButton::setX(int x)
+{
+	UITextureElement::setX(x);
+	m_highlightTexture->setX(x);
+	updateLabel();
+
+}
+
+void BasicButton::setY(int y)
+{
+	UITextureElement::setY(y);
+	m_highlightTexture->setY(y);
+	updateLabel();
+
 }
 
 

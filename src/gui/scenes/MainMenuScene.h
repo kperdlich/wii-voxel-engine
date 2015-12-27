@@ -8,12 +8,11 @@
 #ifndef SRC_GUI_SCENES_MAINMENUSCENE_H_
 #define SRC_GUI_SCENES_MAINMENUSCENE_H_
 
-#include "../components/Logo.h"
-#include "../components/Cursor.h"
-#include "../components/ClassicBackground.h"
-#include "../components/BasicButton.h"
+
+
 #include "Basic2DScene.h"
-#include "../../commands/client/SwitchToIntroCommand.h"
+#include "../components/BasicButton.h"
+
 
 class MainMenuScene: public Basic2DScene {
 public:
@@ -24,6 +23,7 @@ public:
 	void update() override;
 private:
 	void createButtons();
+	BasicButton* createDefaultMainMenuButton( const char* buttonName, const char* buttontext, void (*clickCallback) (BasicButton*) );
 
 };
 

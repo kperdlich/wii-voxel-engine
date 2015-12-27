@@ -7,9 +7,15 @@
 
 #include "UITextureElement.h"
 
-UITextureElement::UITextureElement(int x, int y, float width, float height,
-		const char* name, BasicTexture* tex) : UIElement( x, y, width, height, name ), m_texture(tex) {
+UITextureElement::UITextureElement(int x, int y,
+		const char* name, BasicTexture* tex) : UIElement( x, y, tex->getWidth(), tex->getHeight(), name ), m_texture(tex) {
+	m_texture->setX(x);
+	m_texture->setY(y);
 
+}
+
+UITextureElement::UITextureElement(const char* name, BasicTexture* tex) : UIElement( 0, 0, tex->getWidth(), tex->getHeight(), name ), m_texture(tex)
+{
 
 }
 
@@ -22,9 +28,6 @@ void UITextureElement::load()
 {
 }
 
-void UITextureElement::unload()
-{
-}
 
 void UITextureElement::setX(int x) {
 	UIElement::setX(x);
@@ -35,4 +38,14 @@ void UITextureElement::setX(int x) {
 void UITextureElement::setY(int y) {
 	UIElement::setY(y);
 	m_texture->setY(y);
+}
+
+void UITextureElement::setColor(u32 color)
+{
+	m_texture->setColor(color);
+}
+
+u32 UITextureElement::getColor()
+{
+	return m_texture->getColor();
 }

@@ -76,31 +76,6 @@ SceneHandler.o: \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../renderer/Renderer.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../renderer/../ColorHelper.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/IntroScene.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../../handler/Controller.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../../handler/../utils/GameHelper.h \
- f:/devkitPro/libogc/include/ogc/lwp_watchdog.h \
- f:/devkitPro/libogc/include/ogc/lwp_queue.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../../handler/../utils/../handler/Controller.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../../handler/../utils/../handler/FontHandler.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/build/FreeMonoBold_ttf.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/build/Minecraft_ttf.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../../handler/../utils/../gui/ColorHelper.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../../handler/../gui/ColorHelper.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../../handler/../commands/client/SwitchToIntroCommand.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../../handler/../commands/client/../BasicCommand.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../../handler/../commands/client/../../handler/Controller.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../../handler/../commands/client/SwitchToMainMenuCommand.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../../handler/InputHandler.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../../handler/../input/WiiPad.h \
- f:/devkitPro/libogc/include/wiiuse/wpad.h \
- f:/devkitPro/libogc/include/wiiuse/wiiuse.h \
- f:/devkitPro/libogc/include/bte/bte.h \
- f:/devkitPro/libogc/include/bte/bd_addr.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../../handler/SceneHandler.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../../handler/FontHandler.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../../handler/BasicCommandHandler.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../../handler/../commands/BasicCommand.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../../handler/../commands/client/SwitchToInGameCommand.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/Basic2DScene.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../components/UIElement.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/BasicScene.h \
@@ -110,20 +85,13 @@ SceneHandler.o: \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../renderer/../Texture.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../renderer/../SpriteSheet.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../renderer/../LabelTexture.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../../commands/client/SwitchToMainMenuCommand.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../../commands/client/SwitchToInGameCommand.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/MainMenuScene.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../components/Logo.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../components/BasicButton.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../components/UITextureElement.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../components/UIElement.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../components/../BasicTexture.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../components/Cursor.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../components/ClassicBackground.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../components/../../handler/TextureHandler.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../components/BasicButton.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../components/../Texture.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../components/../LabelTexture.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../../commands/client/SwitchToIntroCommand.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/InGameScene.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/Basic3DScene.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../renderer/Renderer3D.h \
@@ -138,7 +106,31 @@ SceneHandler.o: \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../world/Camera.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../world/../../utils/Vector3f.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../utils/Debug.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../utils/../handler/Controller.h
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../utils/../handler/Controller.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../utils/../handler/../utils/GameHelper.h \
+ f:/devkitPro/libogc/include/ogc/lwp_watchdog.h \
+ f:/devkitPro/libogc/include/ogc/lwp_queue.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../utils/../handler/../utils/../handler/Controller.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../utils/../handler/../utils/../handler/FontHandler.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/build/FreeMonoBold_ttf.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/build/Minecraft_ttf.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../utils/../handler/../utils/../gui/ColorHelper.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../utils/../handler/../gui/ColorHelper.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../utils/../handler/../commands/client/SwitchToIntroCommand.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../utils/../handler/../commands/client/../BasicCommand.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../utils/../handler/../commands/client/../../handler/Controller.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../utils/../handler/../commands/client/SwitchToMainMenuCommand.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../utils/../handler/InputHandler.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../utils/../handler/../input/WiiPad.h \
+ f:/devkitPro/libogc/include/wiiuse/wpad.h \
+ f:/devkitPro/libogc/include/wiiuse/wiiuse.h \
+ f:/devkitPro/libogc/include/bte/bte.h \
+ f:/devkitPro/libogc/include/bte/bd_addr.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../utils/../handler/SceneHandler.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../utils/../handler/FontHandler.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../utils/../handler/BasicCommandHandler.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../utils/../handler/../commands/BasicCommand.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../utils/../handler/../commands/client/SwitchToInGameCommand.h
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/SceneHandler.h:
 
@@ -292,56 +284,6 @@ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../render
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/IntroScene.h:
 
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../../handler/Controller.h:
-
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../../handler/../utils/GameHelper.h:
-
-f:/devkitPro/libogc/include/ogc/lwp_watchdog.h:
-
-f:/devkitPro/libogc/include/ogc/lwp_queue.h:
-
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../../handler/../utils/../handler/Controller.h:
-
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../../handler/../utils/../handler/FontHandler.h:
-
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/build/FreeMonoBold_ttf.h:
-
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/build/Minecraft_ttf.h:
-
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../../handler/../utils/../gui/ColorHelper.h:
-
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../../handler/../gui/ColorHelper.h:
-
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../../handler/../commands/client/SwitchToIntroCommand.h:
-
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../../handler/../commands/client/../BasicCommand.h:
-
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../../handler/../commands/client/../../handler/Controller.h:
-
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../../handler/../commands/client/SwitchToMainMenuCommand.h:
-
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../../handler/InputHandler.h:
-
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../../handler/../input/WiiPad.h:
-
-f:/devkitPro/libogc/include/wiiuse/wpad.h:
-
-f:/devkitPro/libogc/include/wiiuse/wiiuse.h:
-
-f:/devkitPro/libogc/include/bte/bte.h:
-
-f:/devkitPro/libogc/include/bte/bd_addr.h:
-
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../../handler/SceneHandler.h:
-
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../../handler/FontHandler.h:
-
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../../handler/BasicCommandHandler.h:
-
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../../handler/../commands/BasicCommand.h:
-
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../../handler/../commands/client/SwitchToInGameCommand.h:
-
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/Basic2DScene.h:
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../components/UIElement.h:
@@ -360,13 +302,9 @@ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../render
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../renderer/../LabelTexture.h:
 
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../../commands/client/SwitchToMainMenuCommand.h:
-
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../../commands/client/SwitchToInGameCommand.h:
-
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/MainMenuScene.h:
 
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../components/Logo.h:
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../components/BasicButton.h:
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../components/UITextureElement.h:
 
@@ -374,19 +312,9 @@ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../compon
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../components/../BasicTexture.h:
 
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../components/Cursor.h:
-
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../components/ClassicBackground.h:
-
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../components/../../handler/TextureHandler.h:
-
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../components/BasicButton.h:
-
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../components/../Texture.h:
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../components/../LabelTexture.h:
-
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../../commands/client/SwitchToIntroCommand.h:
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/InGameScene.h:
 
@@ -417,3 +345,51 @@ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../world/
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../utils/Debug.h:
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../utils/../handler/Controller.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../utils/../handler/../utils/GameHelper.h:
+
+f:/devkitPro/libogc/include/ogc/lwp_watchdog.h:
+
+f:/devkitPro/libogc/include/ogc/lwp_queue.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../utils/../handler/../utils/../handler/Controller.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../utils/../handler/../utils/../handler/FontHandler.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/build/FreeMonoBold_ttf.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/build/Minecraft_ttf.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../utils/../handler/../utils/../gui/ColorHelper.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../utils/../handler/../gui/ColorHelper.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../utils/../handler/../commands/client/SwitchToIntroCommand.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../utils/../handler/../commands/client/../BasicCommand.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../utils/../handler/../commands/client/../../handler/Controller.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../utils/../handler/../commands/client/SwitchToMainMenuCommand.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../utils/../handler/InputHandler.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../utils/../handler/../input/WiiPad.h:
+
+f:/devkitPro/libogc/include/wiiuse/wpad.h:
+
+f:/devkitPro/libogc/include/wiiuse/wiiuse.h:
+
+f:/devkitPro/libogc/include/bte/bte.h:
+
+f:/devkitPro/libogc/include/bte/bd_addr.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../utils/../handler/SceneHandler.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../utils/../handler/FontHandler.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../utils/../handler/BasicCommandHandler.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../utils/../handler/../commands/BasicCommand.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../utils/../handler/../commands/client/SwitchToInGameCommand.h:
