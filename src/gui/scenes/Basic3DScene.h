@@ -29,7 +29,7 @@ protected:
 	Renderer3D* getRenderer();
 	EntityHandler* m_entityHandler;
 	std::vector<UIElement*> m_uiElements;
-	Camera* m_mainCamera;
+	Camera* m_mainCamera; // todo: move this to the world class
 };
 
 #endif /* SRC_GUI_SCENES_BASIC3DSCENE_H_ */

@@ -7,9 +7,13 @@
 
 #include "Entity.h"
 
-Entity::Entity() {
-	m_visible = true;
+Entity::Entity() {}
+
+Entity::Entity( Vector3f position )
+{
+	m_position = position;
 }
+
 
 Entity::~Entity() {
 	delete m_entityRenderer;
@@ -17,30 +21,6 @@ Entity::~Entity() {
 
 uint Entity::getId() {
 	return m_id;
-}
-
-double Entity::getX() {
-	return m_x;
-}
-
-void Entity::setX(double x) {
-	m_x = x;
-}
-
-double Entity::getY() {
-	return m_y;
-}
-
-void Entity::setY(double y) {
-	m_y = y;
-}
-
-double Entity::getZ() {
-	return m_z;
-}
-
-void Entity::setZ(double z) {
-	m_z = z;
 }
 
 void Entity::setId(unsigned int id) {
@@ -65,4 +45,14 @@ bool Entity::setPlayer(bool value) {
 
 EntityRenderer* Entity::getRenderer() {
 	return m_entityRenderer;
+}
+
+void Entity::setPosition( Vector3f position )
+{
+	m_position = position;
+}
+
+Vector3f Entity::getPosition()
+{
+	return m_position;
 }

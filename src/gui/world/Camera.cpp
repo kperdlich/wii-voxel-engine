@@ -68,6 +68,34 @@ Vector3f Camera::getWorldPosition() {
 }
 
 void Camera::setWorldAngle(Vector3f angle) {
+
+	if ( angle.getX() > 360 )
+	{
+		angle.setX(angle.getX() - 360);
+	}
+	else if(angle.getX() < -360)
+	{
+		angle.setX(angle.getX() + 360);
+	}
+
+	if ( angle.getY() > 360 )
+	{
+		angle.setY(angle.getY() - 360);
+	}
+	else if(angle.getY() < -360)
+	{
+		angle.setY(angle.getY() + 360);
+	}
+
+	if ( angle.getZ() > 360 )
+	{
+		angle.setZ(angle.getZ() - 360);
+	}
+	else if(angle.getZ() < -360)
+	{
+		angle.setZ(angle.getZ() + 360);
+	}
+
 	m_worldAngle.setX( angle.getX() );
 	m_worldAngle.setY( angle.getY() );
 	m_worldAngle.setZ( angle.getZ() );

@@ -66,6 +66,8 @@ EntityRenderer.o: \
  f:/devkitPro/libogc/include/grrlib/GRRLIB_settings.h \
  f:/devkitPro/libogc/include/grrlib/GRRLIB_texSetup.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/renderer/../renderer/EntityRenderer.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/renderer/../../utils/MathHelper.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/renderer/../../utils/Vector3f.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/renderer/../../gui/Texture.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/renderer/../../gui/BasicTexture.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/renderer/../../handler/TextureHandler.h \
@@ -263,6 +265,10 @@ f:/devkitPro/libogc/include/grrlib/GRRLIB_settings.h:
 f:/devkitPro/libogc/include/grrlib/GRRLIB_texSetup.h:
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/renderer/../renderer/EntityRenderer.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/renderer/../../utils/MathHelper.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/renderer/../../utils/Vector3f.h:
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/renderer/../../gui/Texture.h:
 

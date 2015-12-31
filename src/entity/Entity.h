@@ -10,23 +10,23 @@
 
 #include <grrlib.h>
 #include "renderer/EntityRenderer.h"
+#include "../utils/MathHelper.h"
 
 class EntityRenderer;
 
 class Entity {
 public:
 	Entity();
+	Entity( Vector3f position );
 	virtual ~Entity();
 
 	uint getId();
 	void setId( unsigned int id );
 
-	double getX();
-	void setX(double x);
-	double getY();
-	void setY(double y);
-	double getZ();
-	void setZ(double z);
+
+	void setPosition( Vector3f position );
+	Vector3f getPosition();
+
 	void setVisible(bool value);
 	bool isVisible();
 
@@ -37,8 +37,8 @@ public:
 
 
 protected:
-	bool m_visible, m_isPlayer;
-	double m_x, m_y, m_z;
+	bool m_visible = true, m_isPlayer;
+	Vector3f m_position;
 	uint m_id;
 	EntityRenderer* m_entityRenderer;
 

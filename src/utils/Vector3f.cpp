@@ -15,9 +15,7 @@ Vector3f::Vector3f( float x, float y, float z ) : m_x(x), m_y(y), m_z(z) {
 Vector3f::Vector3f() : m_x(0), m_y(0), m_z(0) {
 }
 
-Vector3f::~Vector3f() {
-	// TODO Auto-generated destructor stub
-}
+Vector3f::~Vector3f() { }
 
 float Vector3f::getX() {
 	return m_x;
@@ -33,14 +31,6 @@ float Vector3f::getY() {
 
 void Vector3f::setY(float y) {
 	m_y = y;
-	if(m_y > 360 )
-	{
-		m_y -= 360;
-	}
-	else if(m_y < -360)
-	{
-		m_y += 360;
-	}
 }
 
 float Vector3f::getZ() {

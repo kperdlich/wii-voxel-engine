@@ -23,9 +23,23 @@ InGameScene::~InGameScene() { }
 void InGameScene::update()
 {
 	Basic3DScene::update();
-
 	Player* player = static_cast<Player*>(m_entityHandler->getPlayer());
 	player->update();
+}
+
+void InGameScene::load()
+{
+	Basic3DScene::load();
+	initEntities();
+	drawMap();
+	m_uiElements.push_back( new CHotbar( IGS_HUD_HOTBAR, m_TextureHandler->createTexture(Hotbar_png)) );
+}
+
+void InGameScene::draw() {
+	Basic3DScene::draw();
+
+	// debug stuff
+	Player* player = static_cast<Player*>(m_entityHandler->getPlayer());
 
 	char* playerPosition = new char[100];
 	sprintf(playerPosition, "Player Position: x:%i, y:%i, z:%i", static_cast<int>(player->getWorldPosition().getX()), static_cast<int>(player->getWorldPosition().getY()), static_cast<int>(player->getWorldPosition().getZ()));
@@ -35,28 +49,25 @@ void InGameScene::update()
 	sprintf(playerRotation, "Player Rotation: x:%i, y:%i, z:%i", static_cast<int>(player->getWorldAngle().getX()), static_cast<int>(player->getWorldAngle().getY()), static_cast<int>(player->getWorldAngle().getZ()));
 	Debug::getInstance().log( playerRotation );
 
-	/**
-	 * Todo kperdlich - old debug stuff, have to remove later
-	 *
-	 * if ( pad->buttonsDown() & WPAD_BUTTON_LEFT)
-	{
-		Controller::getInstance().getBasicCommandHandler()->executeCommand( SwitchToMainMenuCommand::Name() );
-	}*/
-}
-
-void InGameScene::load()
-{
-	Basic3DScene::load();
-	initEntities();
-	m_uiElements.push_back( new CHotbar( IGS_HUD_HOTBAR, m_TextureHandler->createTexture(Hotbar_png)) );
-}
-
-void InGameScene::draw() {
-	Basic3DScene::draw();
 }
 
 void InGameScene::initEntities()
 {
 	m_entityHandler->addEntity( new Player( m_mainCamera ) );
-	m_entityHandler->addEntity( new CBlock() );
+}
+
+
+void InGameScene::drawMap()
+{
+	// just draw a basic 10*10 map
+	float blockSize = 1.0f;
+	float ypos = -3.0f;
+	for ( unsigned int x = 0; x < 10; x++)
+	{
+		for ( unsigned int z = 0; z < 10; z++)
+		{
+			m_entityHandler->addEntity( new CBlock( Vector3f(x + (x * blockSize ), ypos, z + (z * blockSize )), blockSize) );
+		}
+	}
+
 }

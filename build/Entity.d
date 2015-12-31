@@ -75,7 +75,9 @@ Entity.o: \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/renderer/../../handler/../gui/Tile.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/renderer/../../handler/../gui/SpriteSheet.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/renderer/../../handler/../gui/BasicTexture.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/renderer/../../handler/../gui/LabelTexture.h
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/renderer/../../handler/../gui/LabelTexture.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/../utils/MathHelper.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/../utils/Vector3f.h
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/Entity.h:
 
@@ -228,3 +230,7 @@ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/renderer/../../handler/.
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/renderer/../../handler/../gui/BasicTexture.h:
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/renderer/../../handler/../gui/LabelTexture.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/../utils/MathHelper.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/../utils/Vector3f.h:

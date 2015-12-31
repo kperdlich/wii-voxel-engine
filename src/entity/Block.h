@@ -15,10 +15,13 @@
 class CBlock: public Entity {
 public:
 	CBlock();
+	CBlock( Vector3f position, float size );
 	virtual ~CBlock();
+	float getSize();
 
 protected:
 	unsigned int m_blockType; // set the render texture by the type
+	float m_size; // the size from the middle point to each axis
 };
 
 #endif /* SRC_ENTITY_BLOCK_H_ */

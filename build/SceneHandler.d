@@ -101,6 +101,8 @@ SceneHandler.o: \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../renderer/../../entity/renderer/../Entity.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../renderer/../../entity/renderer/../../gui/Texture.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../renderer/../../entity/renderer/../../handler/TextureHandler.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../renderer/../../entity/../utils/MathHelper.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../renderer/../../entity/../utils/Vector3f.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../../entity/EntityHandler.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../../entity/Entity.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../world/Camera.h \
@@ -333,6 +335,10 @@ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../render
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../renderer/../../entity/renderer/../../gui/Texture.h:
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../renderer/../../entity/renderer/../../handler/TextureHandler.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../renderer/../../entity/../utils/MathHelper.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../renderer/../../entity/../utils/Vector3f.h:
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../../entity/EntityHandler.h:
 
