@@ -8,13 +8,16 @@
 #include "InGameScene.h"
 #include "../../utils/Debug.h"
 #include "../world/hud/CHotbar.h"
+#include "../components/Cursor.h"
 #include "Hotbar_png.h"
+#include "Crosshair_png.h"
 #include "ItemCSS_png.h"
 #include "../../entity/Block.h"
 #include "../../entity/Player.h"
 
 
 #define IGS_HUD_HOTBAR "IGS_HUD_HOTBAR"
+#define IGS_HUD_CROSSHAIR "IGS_HUD_CROSSHAIR"
 
 InGameScene::InGameScene() { }
 
@@ -33,6 +36,7 @@ void InGameScene::load()
 	initEntities();
 	drawMap();
 	m_uiElements.push_back( new CHotbar( IGS_HUD_HOTBAR, m_TextureHandler->createTexture(Hotbar_png)) );
+	m_uiElements.push_back( new Cursor( IGS_HUD_CROSSHAIR, m_TextureHandler->createTexture(Crosshair_png)) );
 }
 
 void InGameScene::draw() {
@@ -60,13 +64,13 @@ void InGameScene::initEntities()
 void InGameScene::drawMap()
 {
 	// just draw a basic 10*10 map
-	float blockSize = 1.0f;
-	float ypos = -3.0f;
-	for ( unsigned int x = 0; x < 10; x++)
+	float blockSize = .5f;
+	float ypos = -2.0f;
+	for ( unsigned int x = 0; x < 20; x++)
 	{
-		for ( unsigned int z = 0; z < 10; z++)
+		for ( unsigned int z = 0; z < 20; z++)
 		{
-			m_entityHandler->addEntity( new CBlock( Vector3f(x + (x * blockSize ), ypos, z + (z * blockSize )), blockSize) );
+			m_entityHandler->addEntity( new CBlock( Vector3f( (x * blockSize ) * 2, ypos, (z * blockSize ) * 2), blockSize) );
 		}
 	}
 

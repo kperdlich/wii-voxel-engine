@@ -139,7 +139,10 @@ InGameScene.o: \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../world/hud/CHotbar.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../world/hud/../../components/UITextureElement.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../world/hud/../../BasicTexture.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../components/Cursor.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../components/UITextureElement.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/build/Hotbar_png.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/build/Crosshair_png.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/build/ItemCSS_png.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../entity/Block.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../entity/Player.h \
@@ -424,7 +427,13 @@ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../world/hud/../../c
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../world/hud/../../BasicTexture.h:
 
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../components/Cursor.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../components/UITextureElement.h:
+
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/build/Hotbar_png.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/build/Crosshair_png.h:
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/build/ItemCSS_png.h:
 

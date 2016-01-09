@@ -11,8 +11,8 @@
 
 Cursor::Cursor( const char* name, BasicTexture* tex ) : UITextureElement( 0, 0, name, tex ) {
 
-	m_texture->setX( (rmode->viWidth / 2) - (m_texture->getWidth() / 2) );
-	m_texture->setY( (rmode->viHeight / 2) - ( m_texture->getHeight() / 2 ) );
+	setX( (rmode->viWidth / 2) - (m_texture->getWidth() / 2) );
+	setY( (rmode->viHeight / 2) - ( m_texture->getHeight() / 2 ) );
 }
 
 Cursor::~Cursor() {
@@ -28,8 +28,8 @@ void Cursor::update() {
 	sprintf(bufferXY, "cursor x: %d y: %d", (int)pad->getX(), (int) pad->getY());
 	Debug::getInstance().log( bufferXY );
 
-	m_texture->setX( pad->getX() );
-	m_texture->setY( pad->getY() );
+	setX( pad->getX() );
+	setY( pad->getY() );
 }
 
 void Cursor::setColor(u32 color) {

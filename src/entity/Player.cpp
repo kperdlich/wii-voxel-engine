@@ -23,19 +23,22 @@ Player::~Player() {
 
 void Player::update() {
 	static float oldX;
+	static float oldY;
 
 	WiiPad* pad = Controller::getInstance().getInputHandler()->getPadByID( WII_PAD_0 );
 
 	// update camera angle
-	if ( pad->getX() > oldX)
+
+	if ( pad->getX() < 150 && pad->getX() < oldX )
 	{
-		this->rotate( Vector3f( 0, -0.9f, 0 ));
+		this->rotate( Vector3f( 0, 0.9f, 0 )); // left
 	}
-	else if ( pad->getX() < oldX )
+	else if ( pad->getX() > rmode->viWidth - 150 && pad->getX() > oldX)
 	{
-		this->rotate( Vector3f( 0, 0.9f, 0 ));
+		this->rotate( Vector3f( 0, -0.9f, 0 )); // right
 	}
 
+	oldY = pad->getY();
 	oldX = pad->getX();
 
 	if ( pad->buttonsHeld() & WPAD_BUTTON_UP )
