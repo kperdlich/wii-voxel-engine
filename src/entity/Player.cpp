@@ -21,43 +21,50 @@ Player::~Player() {
 
 }
 
-void Player::update() {
-	static float oldX;
-	static float oldY;
-
+void Player::update()
+{
 	WiiPad* pad = Controller::getInstance().getInputHandler()->getPadByID( WII_PAD_0 );
 
-	// update camera angle
+	u32 padButtonHeld = pad->buttonsHeld();
 
-	if ( pad->getX() < 150 && pad->getX() < oldX )
-	{
-		this->rotate( Vector3f( 0, 0.9f, 0 )); // left
-	}
-	else if ( pad->getX() > rmode->viWidth - 150 && pad->getX() > oldX)
+	if ( pad->getX() >= rmode->viWidth - 120.0f )
 	{
 		this->rotate( Vector3f( 0, -0.9f, 0 )); // right
 	}
+	else if ( pad->getX() <= 120.0f )
+	{
+		this->rotate( Vector3f( 0, 0.9f, 0 )); // left
+	}
 
-	oldY = pad->getY();
-	oldX = pad->getX();
+	/*else if ( pad->getY() <= 15.0f )
+	{
+		this->rotate( Vector3f( -0.9f, 0, 0 )); // left
+	}
+	else if ( pad->getY() >= rmode->viHeight - 45.0f )
+	{
+		this->rotate( Vector3f( 0.9f, 0, 0 )); // left
+	}*/
 
-	if ( pad->buttonsHeld() & WPAD_BUTTON_UP )
+
+	if ( padButtonHeld & WPAD_BUTTON_UP )
 	{
 		moveForward();
 	}
-	if ( pad->buttonsHeld() & WPAD_BUTTON_DOWN )
+	if ( padButtonHeld & WPAD_BUTTON_DOWN )
 	{
 		moveBackward();
 	}
-	if ( pad->buttonsHeld() & WPAD_BUTTON_LEFT )
+	if ( padButtonHeld & WPAD_BUTTON_LEFT )
 	{
 		moveLeft();
 	}
-	if ( pad->buttonsHeld() & WPAD_BUTTON_RIGHT )
+	if ( padButtonHeld & WPAD_BUTTON_RIGHT )
 	{
 		moveRight();
 	}
 }
+
+
 
 void Player::moveForward()
 {

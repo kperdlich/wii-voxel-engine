@@ -8,7 +8,7 @@
 
 #include "GameHelper.h"
 
-static char* GameName =  "WiiCraft";
+static char* GameName =  "GameCraft";
 static char* BuildVersion = "1.0.0";
 
 static u8 frameCount = 0;

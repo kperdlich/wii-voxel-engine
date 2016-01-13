@@ -37,6 +37,7 @@ void InGameScene::load()
 	drawMap();
 	m_uiElements.push_back( new CHotbar( IGS_HUD_HOTBAR, m_TextureHandler->createTexture(Hotbar_png)) );
 	m_uiElements.push_back( new Cursor( IGS_HUD_CROSSHAIR, m_TextureHandler->createTexture(Crosshair_png)) );
+
 }
 
 void InGameScene::draw() {

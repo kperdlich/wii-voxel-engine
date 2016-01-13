@@ -23,7 +23,6 @@ public:
 	void moveLeft();
 	void moveRight();
 
-	//void moveTo( Vector3f movement );
 	void rotate( Vector3f rotation );
 
 	Vector3f getWorldPosition();
