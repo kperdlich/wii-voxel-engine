@@ -135,6 +135,7 @@ IntroScene.o: \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/../../entity/Entity.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/../world/Camera.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/../world/../../utils/Vector3f.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/../world/../../entity/Entity.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/FontHandler.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/BasicCommandHandler.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../commands/BasicCommand.h \
@@ -414,6 +415,8 @@ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/clien
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/../world/Camera.h:
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/../world/../../utils/Vector3f.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/../world/../../entity/Entity.h:
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/FontHandler.h:
 

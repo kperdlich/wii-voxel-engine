@@ -56,3 +56,13 @@ Vector3f Entity::getPosition()
 {
 	return m_position;
 }
+
+void Entity::setRotation( Vector3f rotation )
+{
+	m_rotation = rotation;
+}
+
+Vector3f Entity::getRotation()
+{
+	return m_rotation;
+}

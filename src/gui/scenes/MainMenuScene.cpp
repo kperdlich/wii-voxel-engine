@@ -95,6 +95,7 @@ void MainMenuScene::createButtons()
 	btnList->addComponent( createDefaultMainMenuButton( MMS_BUTTON_OPTION, "Option", NULL ) );
 	btnList->addComponent( createDefaultMainMenuButton( MMS_BUTTON_EXIT, "Exit", NULL ) );
 	m_elements.push_back( btnList );
+	//m_elements.push_back(createDefaultMainMenuButton( MMS_BUTTON_SINGLEPLAYER, "Singleplayer", &onButtonClicked ));
 }
 
 

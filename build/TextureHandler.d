@@ -129,6 +129,7 @@ TextureHandler.o: \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../utils/../handler/../gui/scenes/../../entity/Entity.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../utils/../handler/../gui/scenes/../world/Camera.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../utils/../handler/../gui/scenes/../world/../../utils/Vector3f.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../utils/../handler/../gui/scenes/../world/../../entity/Entity.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../utils/../handler/FontHandler.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../utils/../handler/BasicCommandHandler.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../utils/../handler/../commands/BasicCommand.h \
@@ -391,6 +392,8 @@ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../utils/../handler/../
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../utils/../handler/../gui/scenes/../world/Camera.h:
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../utils/../handler/../gui/scenes/../world/../../utils/Vector3f.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../utils/../handler/../gui/scenes/../world/../../entity/Entity.h:
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../utils/../handler/FontHandler.h:
 

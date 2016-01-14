@@ -14,7 +14,7 @@
 
 class Player: public Entity {
 public:
-	Player(Camera* playerCamera);
+	Player();
 	virtual ~Player();
 	void update();
 
@@ -24,15 +24,6 @@ public:
 	void moveRight();
 
 	void rotate( Vector3f rotation );
-
-	Vector3f getWorldPosition();
-	Vector3f getWorldAngle();
-
-private:
-	Camera* m_pCamera;
-
-
-
 };
 
 #endif /* SRC_ENTITY_PLAYER_H_ */

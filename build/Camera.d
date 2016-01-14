@@ -2,6 +2,7 @@ Camera.o: \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/Camera.cpp \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/Camera.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/../../utils/Vector3f.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/../../entity/Entity.h \
  f:/devkitPro/libogc/include/grrlib.h \
  f:/devkitPro/libogc/include/gccore.h \
  f:/devkitPro/libogc/include/ogc/dsp.h \
@@ -64,11 +65,27 @@ Camera.o: \
  f:/devkitPro/libogc/include/grrlib/GRRLIB_handle.h \
  f:/devkitPro/libogc/include/grrlib/GRRLIB_pixel.h \
  f:/devkitPro/libogc/include/grrlib/GRRLIB_settings.h \
- f:/devkitPro/libogc/include/grrlib/GRRLIB_texSetup.h
+ f:/devkitPro/libogc/include/grrlib/GRRLIB_texSetup.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/../../entity/renderer/EntityRenderer.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/../../entity/renderer/../Entity.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/../../entity/renderer/../../gui/Texture.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/../../entity/renderer/../../gui/BasicTexture.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/../../entity/renderer/../../handler/TextureHandler.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/../../entity/renderer/../../handler/../gui/Texture.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/../../entity/renderer/../../handler/../gui/SpriteSheet.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/../../entity/renderer/../../handler/../gui/Texture.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/../../entity/renderer/../../handler/../gui/Tile.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/../../entity/renderer/../../handler/../gui/SpriteSheet.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/../../entity/renderer/../../handler/../gui/BasicTexture.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/../../entity/renderer/../../handler/../gui/LabelTexture.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/../../entity/../utils/MathHelper.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/../../entity/../utils/Vector3f.h
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/Camera.h:
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/../../utils/Vector3f.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/../../entity/Entity.h:
 
 f:/devkitPro/libogc/include/grrlib.h:
 
@@ -195,3 +212,31 @@ f:/devkitPro/libogc/include/grrlib/GRRLIB_pixel.h:
 f:/devkitPro/libogc/include/grrlib/GRRLIB_settings.h:
 
 f:/devkitPro/libogc/include/grrlib/GRRLIB_texSetup.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/../../entity/renderer/EntityRenderer.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/../../entity/renderer/../Entity.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/../../entity/renderer/../../gui/Texture.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/../../entity/renderer/../../gui/BasicTexture.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/../../entity/renderer/../../handler/TextureHandler.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/../../entity/renderer/../../handler/../gui/Texture.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/../../entity/renderer/../../handler/../gui/SpriteSheet.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/../../entity/renderer/../../handler/../gui/Texture.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/../../entity/renderer/../../handler/../gui/Tile.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/../../entity/renderer/../../handler/../gui/SpriteSheet.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/../../entity/renderer/../../handler/../gui/BasicTexture.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/../../entity/renderer/../../handler/../gui/LabelTexture.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/../../entity/../utils/MathHelper.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/../../entity/../utils/Vector3f.h:

@@ -23,9 +23,11 @@ public:
 	uint getId();
 	void setId( unsigned int id );
 
-
 	void setPosition( Vector3f position );
 	Vector3f getPosition();
+
+	void setRotation( Vector3f position );
+	Vector3f getRotation();
 
 	void setVisible(bool value);
 	bool isVisible();
@@ -37,8 +39,8 @@ public:
 
 
 protected:
-	bool m_visible = true, m_isPlayer;
-	Vector3f m_position;
+	bool m_visible = true, m_isPlayer = false;
+	Vector3f m_position, m_rotation;
 	uint m_id;
 	EntityRenderer* m_entityRenderer;
 

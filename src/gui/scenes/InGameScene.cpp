@@ -47,18 +47,21 @@ void InGameScene::draw() {
 	Player* player = static_cast<Player*>(m_entityHandler->getPlayer());
 
 	char* playerPosition = new char[100];
-	sprintf(playerPosition, "Player Position: x:%i, y:%i, z:%i", static_cast<int>(player->getWorldPosition().getX()), static_cast<int>(player->getWorldPosition().getY()), static_cast<int>(player->getWorldPosition().getZ()));
+	sprintf(playerPosition, "Player Position: x:%i, y:%i, z:%i", static_cast<int>(player->getPosition().getX()), static_cast<int>(player->getPosition().getY()), static_cast<int>(player->getPosition().getZ()));
 	Debug::getInstance().log( playerPosition );
 
 	char* playerRotation = new char[100];
-	sprintf(playerRotation, "Player Rotation: x:%i, y:%i, z:%i", static_cast<int>(player->getWorldAngle().getX()), static_cast<int>(player->getWorldAngle().getY()), static_cast<int>(player->getWorldAngle().getZ()));
+	sprintf(playerRotation, "Player Rotation: x:%i, y:%i, z:%i", static_cast<int>(player->getRotation().getX()), static_cast<int>(player->getRotation().getY()), static_cast<int>(player->getRotation().getZ()));
 	Debug::getInstance().log( playerRotation );
 
 }
 
 void InGameScene::initEntities()
 {
-	m_entityHandler->addEntity( new Player( m_mainCamera ) );
+	Player* pPlayer = new Player();
+	pPlayer->setPosition(Vector3f(.0f, .0f, 10.0f));
+	m_mainCamera->attachTo(*pPlayer);
+	m_entityHandler->addEntity(pPlayer);
 }
 
 

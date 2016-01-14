@@ -129,6 +129,7 @@ BasicButton.o: \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../handler/../gui/scenes/../../entity/Entity.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../handler/../gui/scenes/../world/Camera.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../handler/../gui/scenes/../world/../../utils/Vector3f.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../handler/../gui/scenes/../world/../../entity/Entity.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../handler/FontHandler.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../handler/BasicCommandHandler.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../handler/../commands/BasicCommand.h \
@@ -393,6 +394,8 @@ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../handler/..
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../handler/../gui/scenes/../world/Camera.h:
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../handler/../gui/scenes/../world/../../utils/Vector3f.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../handler/../gui/scenes/../world/../../entity/Entity.h:
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../handler/FontHandler.h:
 

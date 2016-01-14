@@ -12,7 +12,7 @@ BasicScene::BasicScene() {
 }
 
 BasicScene::~BasicScene() {
-	delete m_TextureHandler;
+
 }
 
 void BasicScene::unload() {

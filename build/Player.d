@@ -81,6 +81,7 @@ Player.o: \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/../utils/Vector3f.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/../gui/world/Camera.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/../gui/world/../../utils/Vector3f.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/../gui/world/../../entity/Entity.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/../utils/Vector3f.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/../utils/Debug.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/../utils/../handler/Controller.h \
@@ -299,6 +300,8 @@ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/../utils/Vector3f.h:
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/../gui/world/Camera.h:
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/../gui/world/../../utils/Vector3f.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/../gui/world/../../entity/Entity.h:
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/../utils/Vector3f.h:
 

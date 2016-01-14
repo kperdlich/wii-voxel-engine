@@ -92,6 +92,7 @@ InGameScene.o: \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../entity/Entity.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../world/Camera.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../world/../../utils/Vector3f.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../world/../../entity/Entity.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../utils/Debug.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../utils/../handler/Controller.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../utils/../handler/../utils/GameHelper.h \
@@ -332,6 +333,8 @@ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../entity/Entity.
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../world/Camera.h:
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../world/../../utils/Vector3f.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../world/../../entity/Entity.h:
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../utils/Debug.h:
 

@@ -9,6 +9,7 @@
 #define SRC_GUI_WORLD_CAMERA_H_
 
 #include "../../utils/Vector3f.h"
+#include "../../entity/Entity.h"
 
 class Camera {
 public:
@@ -16,10 +17,7 @@ public:
 	virtual ~Camera();
 	void init();
 
-	/*void setCameraX( float x );
-	void setCameraY( float y );
-	void setCameraZ( float z );*/
-
+	void attachTo(Entity& entity);
 
 	void setWorldPosititon(Vector3f position);
 	void setWorldAngle(Vector3f angle);
@@ -46,6 +44,8 @@ private:
 			 m_worldPosition,
 			 m_worldAngle,
 			 m_wordScale;
+
+	Entity* m_attachedToEntity;
 };
 
 #endif /* SRC_GUI_WORLD_CAMERA_H_ */

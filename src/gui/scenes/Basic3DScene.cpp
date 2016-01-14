@@ -8,8 +8,6 @@
 #include "Basic3DScene.h"
 #include "../../utils/Debug.h"
 
-float a = 0;
-
 Basic3DScene::Basic3DScene()
 {
 	m_Renderer = new Renderer3D();
@@ -25,6 +23,7 @@ Basic3DScene::~Basic3DScene()
 
 void Basic3DScene::load()
 {
+	BasicScene::load();
 	m_mainCamera->init();
 }
 
@@ -32,12 +31,13 @@ void Basic3DScene::draw()
 {
 	GRRLIB_3dMode(MIN_DIST, MAX_DIST, FIELD_OF_VIEW, 0, 0 );
 
-	//GRRLIB_SetLightAmbient(0x333333FF);
-	//GRRLIB_SetLightDiff(0,(guVector){1.0f,1.0f,1.0f},20.0f,0.8f,0xFF0000FF);
-
-	GRRLIB_ObjectViewInv( -m_mainCamera->getWorldPositionX(), m_mainCamera->getWorldPositionY(), -m_mainCamera->getWorldPositionZ(),
-			m_mainCamera->getWorldAngleX(), 360 - m_mainCamera->getWorldAngleY(), m_mainCamera->getWorldAngleZ(),
-			m_mainCamera->getWorldScaleX(), m_mainCamera->getWorldScaleY(), m_mainCamera->getWorldScaleZ() );
+	GRRLIB_ObjectViewBegin();
+	GRRLIB_ObjectViewScale( m_mainCamera->getWorldScaleX(), m_mainCamera->getWorldScaleY(), m_mainCamera->getWorldScaleZ() );
+	GRRLIB_ObjectViewTrans( -m_mainCamera->getWorldPositionX(), m_mainCamera->getWorldPositionY(), -m_mainCamera->getWorldPositionZ() );
+	GRRLIB_ObjectViewRotate( 0, 360 - m_mainCamera->getWorldAngleY(), 0);
+	GRRLIB_ObjectViewRotate( m_mainCamera->getWorldAngleX(), 0, 0);
+	GRRLIB_ObjectViewRotate( 0, 0, m_mainCamera->getWorldAngleZ());
+	GRRLIB_ObjectViewEnd();
 
 	for (std::map<unsigned int, Entity*>::iterator it = m_entityHandler->getEntities()->begin(); it != m_entityHandler->getEntities()->end(); ++it)
 	{
