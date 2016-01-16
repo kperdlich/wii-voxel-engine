@@ -19,36 +19,46 @@ TextureHandler::~TextureHandler() {
 
 BasicTexture* TextureHandler::getTextureByID(u16 index)
 {
-	for( uint i = 0; i < m_Textures.size(); i++ )
+	for ( std::vector<BasicTexture*>::iterator it = m_Textures.begin(); it != m_Textures.end(); )
 	{
-		if ( static_cast<BasicTexture*>(m_Textures[ i ])->getId() == index )
+		if( (*it)->getId() == index )
 		{
-			return m_Textures[ i ];
+			return (*it);
 		}
 	}
+
 	return NULL;
 }
 
 void TextureHandler::destroyTextureByID( u16 index )
 {
-	for( uint i = 0; i < m_Textures.size(); i++ )
+	for ( std::vector<BasicTexture*>::iterator it = m_Textures.begin(); it != m_Textures.end(); )
 	{
-		if ( static_cast<BasicTexture*>(m_Textures[ i ])->getId() == index )
-		{
-			m_Textures[ i ]->unloadTexture();
-			m_Textures.erase( m_Textures.begin() + i );
-			delete m_Textures[ i ];
-			return;
-		}
+	   if( (*it)->getId() == index )
+	   {
+		  (*it)->unloadTexture();
+		  delete *it;
+		  m_Textures.erase(it);
+		  return;
+	   }
+	   else
+	   {
+		  ++it;
+	   }
 	}
 }
 
-void TextureHandler::destroyAllTextures() {
+void TextureHandler::destroyAllTextures()
+{
+	if ( m_Textures.empty() )
+		 return;
 
-	for (u16 i = 0; i < m_Textures.size(); i++)
+	for ( std::vector<BasicTexture*>::iterator it = m_Textures.begin(); it != m_Textures.end(); it++)
 	{
-		destroyTextureByID( static_cast<BasicTexture*>(m_Textures[i])->getId() );
+		(*it)->unloadTexture();
+		 delete *it;
 	}
+
 	m_Textures.clear();
 }
 
@@ -62,7 +72,7 @@ Texture* TextureHandler::createTexture(const u8* textureName ) {
 
 u16 TextureHandler::getNewIndex()
 {
-	if ( m_Textures.size() > 0 )
+	if ( !m_Textures.empty() )
 	{
 		return m_Textures.back()->getId() + 1;
 	}

@@ -29,12 +29,14 @@
 #define BUTTON_Y_DISTANCE 5
 
 
-static void onButtonClicked(BasicButton* clickedButton) {
-	if ( strcmp( clickedButton->getName(), MMS_BUTTON_SINGLEPLAYER ) == 0 )
-	{
-		Controller::getInstance().getBasicCommandHandler()->executeCommand( SwitchToInGameCommand::Name() );
-	}
-	// ..
+static void startSingleplayer(BasicButton* clickedButton)
+{
+	Controller::getInstance().getBasicCommandHandler()->executeCommand( SwitchToInGameCommand::Name() );
+}
+
+static void exitGame(BasicButton* clickedButton)
+{
+	Controller::getInstance().end();
 }
 
 
@@ -47,7 +49,7 @@ MainMenuScene::~MainMenuScene() {
 }
 
 void MainMenuScene::load() {
-
+	Basic2DScene::load();
 	m_elements.push_back( new UITextureElement( MMS_CLASSIC_BACKGROUND , m_TextureHandler->createTexture( ClassicBackgroundSprite_png )));
 	UITextureElement* logo = new UITextureElement( MMS_LOGO , m_TextureHandler->createTexture( MinecraftLogo_png));
 	logo->setX( (rmode->viWidth / 2) - (logo->getWidth() / 2) );
@@ -73,7 +75,7 @@ void MainMenuScene::update() {
 	{
 		Controller::getInstance().getBasicCommandHandler()->executeCommand( SwitchToIntroCommand::Name() );
 	}
-	else if ( pad->buttonsHeld() & WPAD_BUTTON_RIGHT )
+	else if ( pad->buttonsDown() & WPAD_BUTTON_RIGHT )
 	{
 		Controller::getInstance().getBasicCommandHandler()->executeCommand( SwitchToInGameCommand::Name() );
 	}
@@ -89,13 +91,19 @@ void MainMenuScene::createButtons()
 
 	m_TextureHandler->destroyTextureByID(startButtonTexture->getId());
 
-	List* btnList = new List( xPos, yPos, "", sizeBetweenBtns );
-	btnList->addComponent( createDefaultMainMenuButton( MMS_BUTTON_SINGLEPLAYER, "Singleplayer", &onButtonClicked ) );
-	btnList->addComponent( createDefaultMainMenuButton( MMS_BUTTON_MULTIPLAYER, "Multiplayer", NULL ) );
-	btnList->addComponent( createDefaultMainMenuButton( MMS_BUTTON_OPTION, "Option", NULL ) );
-	btnList->addComponent( createDefaultMainMenuButton( MMS_BUTTON_EXIT, "Exit", NULL ) );
-	m_elements.push_back( btnList );
-	//m_elements.push_back(createDefaultMainMenuButton( MMS_BUTTON_SINGLEPLAYER, "Singleplayer", &onButtonClicked ));
+	List* btnList = new List( xPos, yPos, sizeBetweenBtns );
+
+	BasicButton* pButtons[4];
+	pButtons[0] = createDefaultMainMenuButton( MMS_BUTTON_SINGLEPLAYER, "Singleplayer", &startSingleplayer );
+	pButtons[1] = createDefaultMainMenuButton( MMS_BUTTON_MULTIPLAYER, "Multiplayer", NULL );
+	pButtons[2] = createDefaultMainMenuButton( MMS_BUTTON_OPTION, "Option", NULL );
+	pButtons[3] = createDefaultMainMenuButton( MMS_BUTTON_EXIT, "Exit", &exitGame );
+
+	for ( unsigned int i = 0; i < 4; i++)
+	{
+		btnList->addComponent(pButtons[i]);
+		m_elements.push_back(pButtons[i]);
+	}
 }
 
 

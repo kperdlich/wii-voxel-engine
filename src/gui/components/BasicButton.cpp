@@ -56,7 +56,7 @@ void BasicButton::handleOnClick() {
 
 	WiiPad* pad = Controller::getInstance().getInputHandler()->getPadByID( WII_PAD_0 );
 
-	if ( (pad->buttonsHeld() & WPAD_BUTTON_A) && m_clickCallback )
+	if ( (pad->ButtonsUp() & WPAD_BUTTON_A) && m_clickCallback )
 	{
 		m_clickCallback(this);
 	}

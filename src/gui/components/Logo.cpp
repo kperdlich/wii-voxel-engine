@@ -9,7 +9,7 @@
 
 
 Logo::Logo(const char* name,
-		BasicTexture* tex) : UITextureElement(0, 0, 0, 0, name, tex) {
+		BasicTexture* tex) : UITextureElement(0, 0, name, tex) {
 
 	m_texture->setX( (rmode->viWidth / 2) - (m_texture->getWidth() / 2) );
 	m_texture->setY( (rmode->viHeight / 2) - ( m_texture->getHeight() / 2 ) );

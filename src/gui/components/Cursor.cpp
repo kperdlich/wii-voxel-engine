@@ -25,7 +25,7 @@ void Cursor::update() {
 	WiiPad* pad = Controller::getInstance().getInputHandler()->getPadByID( WII_PAD_0 );
 
 	char* bufferXY = new char[100];
-	sprintf(bufferXY, "cursor x: %d y: %d", (int)pad->getX(), (int) pad->getY());
+	sprintf(bufferXY, "Cursor x: %d y: %d", (int)pad->getX(), (int) pad->getY());
 	Debug::getInstance().log( bufferXY );
 
 	setX( pad->getX());

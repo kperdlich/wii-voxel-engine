@@ -9,7 +9,7 @@
 #include "../../handler/Controller.h"
 
 ClassicBackground::ClassicBackground(const char* name, BasicTexture* tex) :
-	UITextureElement(0, 0, 0, 0, name, tex ) {
+	UITextureElement(0, 0, name, tex ) {
 
 }
 
