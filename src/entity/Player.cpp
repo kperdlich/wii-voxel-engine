@@ -9,7 +9,8 @@
 #include "../utils/MathHelper.h"
 #include "../utils/Debug.h"
 
-#define CAMERA_ROTATION_SPEED 0.9f
+#define ROTATION_SPEED 0.9f
+#define PITCH_MAX 80.0f
 
 Player::Player()
 {
@@ -29,19 +30,20 @@ void Player::update()
 
 	if ( pad->getY() <= 15.0f )
 	{
-		this->rotate( Vector3f( -CAMERA_ROTATION_SPEED, 0, 0 )); // top
+		this->rotate( Vector3f( -ROTATION_SPEED, 0, 0 )); // top
 	}
 	else if ( pad->getY() >= rmode->viHeight - 45.0f )
 	{
-		this->rotate( Vector3f( CAMERA_ROTATION_SPEED, 0, 0 )); // bottom
+		this->rotate( Vector3f( ROTATION_SPEED, 0, 0 )); // bottom
 	}
-	else if ( pad->getX() >= rmode->viWidth - 120.0f )
+
+	if ( pad->getX() >= rmode->viWidth - 120.0f )
 	{
-		this->rotate( Vector3f( 0, -CAMERA_ROTATION_SPEED, 0 )); // right
+		this->rotate( Vector3f( 0, -ROTATION_SPEED, 0 )); // right
 	}
 	else if ( pad->getX() <= 120.0f )
 	{
-		this->rotate( Vector3f( 0, CAMERA_ROTATION_SPEED, 0 )); // left
+		this->rotate( Vector3f( 0, ROTATION_SPEED, 0 )); // left
 	}
 
 	if ( padButtonHeld & WPAD_BUTTON_UP )
@@ -69,7 +71,7 @@ void Player::moveForward()
 	m_position = MathHelper::calculateNewWorldPositionByRotation(
 			m_rotation.getY(),
 			m_position,
-			CAMERA_ROTATION_SPEED,
+			ROTATION_SPEED,
 			Vector3f::Forward());
 }
 
@@ -78,7 +80,7 @@ void Player::moveBackward()
 	m_position = MathHelper::calculateNewWorldPositionByRotation(
 				m_rotation.getY(),
 				m_position,
-				CAMERA_ROTATION_SPEED,
+				ROTATION_SPEED,
 				Vector3f::Backward());
 }
 
@@ -87,7 +89,7 @@ void Player::moveLeft()
 	m_position = MathHelper::calculateNewWorldPositionByRotation(
 					m_rotation.getY() - 90,
 					m_position,
-					CAMERA_ROTATION_SPEED,
+					ROTATION_SPEED,
 					Vector3f::Backward());
 
 }
@@ -98,7 +100,7 @@ void Player::moveRight()
 	m_position = MathHelper::calculateNewWorldPositionByRotation(
 						m_rotation.getY() + 90,
 						m_position,
-						CAMERA_ROTATION_SPEED,
+						ROTATION_SPEED,
 						Vector3f::Backward());
 
 }
@@ -133,7 +135,7 @@ void Player::rotate( Vector3f rotation )
 		m_rotation.setZ(m_rotation.getZ() + 360);
 	}
 
-	m_rotation.setX( m_rotation.getX() + rotation.getX() );
+	m_rotation.setX( MathHelper::clamp(m_rotation.getX() + rotation.getX(), -PITCH_MAX, PITCH_MAX));
 	m_rotation.setY( m_rotation.getY() + rotation.getY() );
 	m_rotation.setZ( m_rotation.getZ() + rotation.getZ() );
 

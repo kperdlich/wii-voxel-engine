@@ -20,3 +20,19 @@ Vector3f MathHelper::calculateNewWorldPositionByRotation(float rotation, Vector3
 	return Vector3f(x, y, z);
 
 }
+
+
+float MathHelper::clamp(float value, float minValue, float maxValue)
+{
+	return max(minValue, min(value, maxValue));
+}
+
+inline float MathHelper::min(float value1, float value2 )
+{
+	return (value1 < value2) ? (value1) : (value2);
+}
+
+inline float MathHelper::max(float value1, float value2 )
+{
+	return (value1 > value2) ? (value1) : (value2);
+}
