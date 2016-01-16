@@ -78,3 +78,8 @@ void UIElement::setY(int y)
 
 void UIElement::update() {
 }
+
+void UIElement::load()
+{
+
+}

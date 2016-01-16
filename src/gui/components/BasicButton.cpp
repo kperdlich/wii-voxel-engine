@@ -21,12 +21,12 @@ BasicButton::BasicButton( float x, float y, const char* name, Texture* defaultTe
 	updateLabel();
 }
 
-BasicButton::~BasicButton() {
-}
+BasicButton::~BasicButton() { }
 
 
 void BasicButton::update() {
 	// todo check click in cursor component or somewhere else
+
 	if ( handleMoveOver() )
 	{
 		handleOnClick();

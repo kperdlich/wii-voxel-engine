@@ -33,15 +33,14 @@ void Controller::start()
 
 	m_basicCommandHandler->executeCommand( SwitchToIntroCommand::Name() );
 
-	while( m_Running ) {
-
-		m_inputHandler->update();
-
+	while( m_Running )
+	{
 		GRRLIB_SetBackgroundColour(0x00, 0x00, 0x00, 0xFF);
 
+		m_sceneHandler->checkForNewScene(); // load new scene if necessary
+		m_inputHandler->update();
 		m_sceneHandler->update();
 		m_sceneHandler->drawScene();
-		//GRRLIB_DrawImg( (rmode->viWidth / 2) - (logoTex->GetWidth() / 2) , (rmode->viHeight / 2) - ( logoTex->GetHeight() / 2 ), logoTex->GetNativeTexture() , 0, 1, 1, GRRLIB_WHITE);
 
 		printGameVersion(0, 25, m_fontHandler->getNativFontByID( DEFAULT_FONT_ID ), DEFAULT_FONT_SIZE, GRRLIB_WHITE );
 		printFps( 500, 25, m_fontHandler->getNativFontByID( DEFAULT_FONT_ID ), DEFAULT_FONT_SIZE, GRRLIB_YELLOW );
@@ -60,6 +59,7 @@ void Controller::start()
 
 		GRRLIB_Render();
 		calculateFrameRate();
+
 	}
 
 	delete m_basicCommandHandler;

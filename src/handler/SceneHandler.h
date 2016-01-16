@@ -23,7 +23,10 @@ class SceneHandler
 
 private:
 	std::vector<Scene*> m_Scenes;
-	uint m_CurrentSceneIndex;
+	uint m_currentSceneIndex;
+	bool m_bLoadNextScene;
+	uint m_nextSceneIndex;
+
 public:
 	SceneHandler();
 	~SceneHandler();
@@ -33,6 +36,9 @@ public:
 	void drawScene();
 	void update();
 	Scene* getCurrentScene();
+	void checkForNewScene();
+
+
 };
 
 

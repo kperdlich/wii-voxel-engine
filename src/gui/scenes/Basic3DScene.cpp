@@ -19,6 +19,9 @@ Basic3DScene::~Basic3DScene()
 {
 	delete m_entityHandler;
 	delete m_mainCamera;
+	m_entityHandler = NULL;
+	m_mainCamera = NULL;
+
 }
 
 void Basic3DScene::load()
@@ -63,7 +66,7 @@ void Basic3DScene::update()
 {
 	for (int i = 0; i < m_uiElements.size(); i++)
 	{
-		static_cast<UIElement*>(m_uiElements[i])->update();
+		m_uiElements[i]->update();
 	}
 }
 

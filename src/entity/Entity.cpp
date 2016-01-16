@@ -19,6 +19,7 @@ Entity::~Entity() {
 	delete m_entityRenderer;
 }
 
+
 uint Entity::getId() {
 	return m_id;
 }

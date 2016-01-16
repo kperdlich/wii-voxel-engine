@@ -9,7 +9,7 @@
 #include "UIElement.h"
 #include "../../utils/Debug.h"
 
-List::List(int x, int y, int sizeBetweenElements ) : m_x(x), m_y(y) , m_sizeBetweenElements(sizeBetweenElements)
+List::List(int x, int y, int sizeBetweenElements ) : UIElement(x, y, 0.f, 0.f, ""), m_sizeBetweenElements(sizeBetweenElements)
 {
 
 }
@@ -21,8 +21,14 @@ List::List( int sizeBetweenElements ) : List(0, 0, sizeBetweenElements)
 
 List::~List()
 {
+	for ( unsigned int i = 0; i < m_elements.size(); i++)
+	{
+		delete m_elements[i];
+	}
 
+	m_elements.clear();
 }
+
 
 void List::addComponent(UIElement* element)
 {
@@ -43,6 +49,17 @@ void List::addComponent(UIElement* element)
 	element->setY(entryY);
 
 	m_elements.push_back( element );
+}
+
+void List::update()
+{
+	UIElement::update();
+
+	for ( unsigned int i = 0; i < m_elements.size(); i++)
+	{
+
+		m_elements[i]->update();
+	}
 
 }
 

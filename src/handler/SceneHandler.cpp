@@ -3,7 +3,7 @@
 #include "../utils/Debug.h"
 
 SceneHandler::SceneHandler() {
-	m_CurrentSceneIndex = 0; // first will be 0
+	m_currentSceneIndex = 0; // first will be 0
 }
 
 /**
@@ -12,9 +12,11 @@ SceneHandler::SceneHandler() {
 SceneHandler::~SceneHandler() {
 	for ( uint i = 0; i < m_Scenes.size(); i++ )
 	{
-		static_cast<Scene*>(m_Scenes[i])->unload();
+		m_Scenes[i]->unload();
 		delete m_Scenes[i];
 	}
+
+	m_Scenes.clear();
 }
 
 
@@ -31,27 +33,37 @@ void SceneHandler::init() {
 	m_Scenes.push_back( new InGameScene() );
 	// ..
 
-	//LoadScene( 0, true ); // load first scene
-
 }
 
-void SceneHandler::loadScene( uint index ) {
-	if ( index >= m_Scenes.size() )
-		return;
+void SceneHandler::loadScene( uint index )
+{
+	m_bLoadNextScene = true;
+	m_nextSceneIndex = index;
+}
 
-	static_cast<Scene*>(m_Scenes[m_CurrentSceneIndex])->unload();
-	m_CurrentSceneIndex = index;
-	static_cast<Scene*>(m_Scenes[m_CurrentSceneIndex])->load();
+void SceneHandler::checkForNewScene()
+{
+	if ( m_bLoadNextScene )
+	{
+		m_bLoadNextScene = false;
+
+		if ( m_nextSceneIndex < m_Scenes.size() && m_nextSceneIndex >= 0)
+		{
+			static_cast<Scene*>(m_Scenes[m_currentSceneIndex])->unload();
+			m_currentSceneIndex = m_nextSceneIndex;
+			static_cast<Scene*>(m_Scenes[m_currentSceneIndex])->load();
+		}
+	}
 }
 
 void SceneHandler::drawScene() {
-	static_cast<Scene*>(m_Scenes[m_CurrentSceneIndex])->draw();
+	static_cast<Scene*>(m_Scenes[m_currentSceneIndex])->draw();
 }
 
 void SceneHandler::update() {
-	static_cast<Scene*>(m_Scenes[m_CurrentSceneIndex])->update();
+	static_cast<Scene*>(m_Scenes[m_currentSceneIndex])->update();
 }
 
 Scene* SceneHandler::getCurrentScene() {
-	return m_Scenes[m_CurrentSceneIndex];
+	return m_Scenes[m_currentSceneIndex];
 }

@@ -21,6 +21,7 @@ UITextureElement::UITextureElement(const char* name, BasicTexture* tex) : UIElem
 
 UITextureElement::~UITextureElement()
 {
+
 }
 
 void UITextureElement::load()

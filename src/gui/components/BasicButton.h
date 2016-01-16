@@ -37,8 +37,6 @@ private:
 	Texture* m_highlightTexture;
 	LabelTexture* m_label;
 	OnClickCallback m_clickCallback;
-
-
 };
 
 #endif /* SRC_GUI_COMPONENTS_BASICBUTTON_H_ */

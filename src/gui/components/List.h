@@ -11,19 +11,19 @@
 #include "vector"
 #include "UIElement.h"
 
-class List {
+class List : public UIElement {
 
 public:
 	List(int x, int y, int sizeBetweenElements );
 	List( int sizeBetweenElements );
 	virtual ~List();
+	virtual void update();
 
 	void addComponent(UIElement* element);
 
 private:
 	std::vector<UIElement*> m_elements;
 	unsigned int m_sizeBetweenElements;
-	float m_x, m_y;
 };
 
 #endif /* SRC_GUI_COMPONENTS_LIST_H_ */

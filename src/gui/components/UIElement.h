@@ -20,7 +20,7 @@ protected:
 
 public:
 	virtual ~UIElement();
-	virtual void load() = 0;
+	virtual void load();
 	virtual void update();
 
 	float getHeight();

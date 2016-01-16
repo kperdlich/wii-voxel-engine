@@ -92,18 +92,11 @@ void MainMenuScene::createButtons()
 	m_TextureHandler->destroyTextureByID(startButtonTexture->getId());
 
 	List* btnList = new List( xPos, yPos, sizeBetweenBtns );
-
-	BasicButton* pButtons[4];
-	pButtons[0] = createDefaultMainMenuButton( MMS_BUTTON_SINGLEPLAYER, "Singleplayer", &startSingleplayer );
-	pButtons[1] = createDefaultMainMenuButton( MMS_BUTTON_MULTIPLAYER, "Multiplayer", NULL );
-	pButtons[2] = createDefaultMainMenuButton( MMS_BUTTON_OPTION, "Option", NULL );
-	pButtons[3] = createDefaultMainMenuButton( MMS_BUTTON_EXIT, "Exit", &exitGame );
-
-	for ( unsigned int i = 0; i < 4; i++)
-	{
-		btnList->addComponent(pButtons[i]);
-		m_elements.push_back(pButtons[i]);
-	}
+	btnList->addComponent( createDefaultMainMenuButton( MMS_BUTTON_SINGLEPLAYER, "Singleplayer", &startSingleplayer ));
+	btnList->addComponent( createDefaultMainMenuButton( MMS_BUTTON_MULTIPLAYER, "Multiplayer", NULL ));
+	btnList->addComponent( createDefaultMainMenuButton( MMS_BUTTON_OPTION, "Option", NULL ));
+	btnList->addComponent( createDefaultMainMenuButton( MMS_BUTTON_EXIT, "Exit", &exitGame ));
+	m_elements.push_back(btnList);
 }
 
 
