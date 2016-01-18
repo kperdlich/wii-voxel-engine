@@ -10,8 +10,6 @@
 #include "Controller.h"
 #include "../utils/Debug.h"
 
-#define DEBUG
-
 Controller::Controller() {
 	m_Running = false;
 	m_sceneHandler = new SceneHandler();

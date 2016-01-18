@@ -33,7 +33,10 @@ void Basic3DScene::load()
 
 void Basic3DScene::draw()
 {
-	GRRLIB_3dMode(MIN_DIST, MAX_DIST, FIELD_OF_VIEW, 0, 0 );
+	//GRRLIB_SetLightSpot(0, (guVector){ 10.0f, 0.0f, 10.0f }, (guVector){  0.0f, 0.0f, 0.0f }, -3.0f, 5.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0x0000FFFF);
+	//GRRLIB_SetLightDiff(0, (guVector){ 10.0f, 10.0f, 10.0f }, 10.0f,1.0f,0xFFFFFFFF);
+
+	GRRLIB_3dMode(MIN_DIST, MAX_DIST, FIELD_OF_VIEW, 1, 1 );
 
 	GRRLIB_ObjectViewBegin();
 	GRRLIB_ObjectViewScale( m_mainCamera->getWorldScaleX(), m_mainCamera->getWorldScaleY(), m_mainCamera->getWorldScaleZ() );
@@ -42,6 +45,8 @@ void Basic3DScene::draw()
 	GRRLIB_ObjectViewRotate( m_mainCamera->getWorldAngleX(), 0, 0);
 	GRRLIB_ObjectViewRotate( 0, 0, m_mainCamera->getWorldAngleZ());
 	GRRLIB_ObjectViewEnd();
+
+
 
 	for (std::map<unsigned int, Entity*>::iterator it = m_entityHandler->getEntities()->begin(); it != m_entityHandler->getEntities()->end(); ++it)
 	{

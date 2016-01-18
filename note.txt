@@ -1,3 +1,18 @@
 network stuff:
 http://forum.wiibrew.org/read.php?11,61983,page=2
 http://forum.wiibrew.org/read.php?11,7131,7355#msg-7355
+
+
+mipmaping
+
+GX_InitTexObjLOD(
+	barbTex.TexObj(),	// Texture object to set the mipmap settings to.
+	GX_LIN_MIP_LIN, 	// Set minFilt (near) as Linear-mipmap-Linear.
+	GX_LINEAR, 		// Set magFilt (far) as just Linear.
+	0.f, 			// MinLOD... Should be 0 in most cases.
+	8.f, 			// MaxLOD... 8 is good enough in most cases.
+	-0.4f, 			// LOD bias... This value reduces blurring a little.
+	GX_DISABLE, 		// No need to clamp LOD+Bias I think?
+	GX_ENABLE, 		// Compute LOD by adjacent texels, improves sharpness of far away texels.
+	GX_ANISO_4		// Anisotropy level (the higher the level, the sharper far textures will look but may also be slower).
+);

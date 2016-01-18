@@ -110,32 +110,6 @@ IntroScene.o: \
  f:/devkitPro/libogc/include/bte/bd_addr.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/SceneHandler.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/Scene.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/IntroScene.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/MainMenuScene.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/Basic2DScene.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/../components/BasicButton.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/../components/UITextureElement.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/../components/../Texture.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/../components/../LabelTexture.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/InGameScene.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/Basic3DScene.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/BasicScene.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/../renderer/Renderer3D.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/../renderer/Renderer.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/../renderer/../BasicTexture.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/../renderer/../../entity/Entity.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/../renderer/../../entity/renderer/EntityRenderer.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/../renderer/../../entity/renderer/../Entity.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/../renderer/../../entity/renderer/../../gui/Texture.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/../renderer/../../entity/renderer/../../handler/TextureHandler.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/../renderer/../../entity/../utils/MathHelper.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/../renderer/../../entity/../utils/Vector3f.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/../components/UIElement.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/../../entity/EntityHandler.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/../../entity/Entity.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/../world/Camera.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/../world/../../utils/Vector3f.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/../world/../../entity/Entity.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/FontHandler.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/BasicCommandHandler.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../commands/BasicCommand.h \
@@ -365,58 +339,6 @@ f:/devkitPro/libogc/include/bte/bd_addr.h:
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/SceneHandler.h:
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/Scene.h:
-
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/IntroScene.h:
-
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/MainMenuScene.h:
-
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/Basic2DScene.h:
-
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/../components/BasicButton.h:
-
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/../components/UITextureElement.h:
-
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/../components/../Texture.h:
-
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/../components/../LabelTexture.h:
-
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/InGameScene.h:
-
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/Basic3DScene.h:
-
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/BasicScene.h:
-
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/../renderer/Renderer3D.h:
-
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/../renderer/Renderer.h:
-
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/../renderer/../BasicTexture.h:
-
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/../renderer/../../entity/Entity.h:
-
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/../renderer/../../entity/renderer/EntityRenderer.h:
-
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/../renderer/../../entity/renderer/../Entity.h:
-
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/../renderer/../../entity/renderer/../../gui/Texture.h:
-
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/../renderer/../../entity/renderer/../../handler/TextureHandler.h:
-
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/../renderer/../../entity/../utils/MathHelper.h:
-
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/../renderer/../../entity/../utils/Vector3f.h:
-
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/../components/UIElement.h:
-
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/../../entity/EntityHandler.h:
-
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/../../entity/Entity.h:
-
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/../world/Camera.h:
-
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/../world/../../utils/Vector3f.h:
-
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/../gui/scenes/../world/../../entity/Entity.h:
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../commands/client/../../handler/FontHandler.h:
 
