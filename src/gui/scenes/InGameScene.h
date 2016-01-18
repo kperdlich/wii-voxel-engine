@@ -10,10 +10,6 @@
 
 #include "Basic3DScene.h"
 
-#define MIN_DIST 1.0f
-#define MAX_DIST 500.0f
-#define FIELD_OF_VIEW 45.0f
-
 class InGameScene: public Basic3DScene {
 public:
 	InGameScene();

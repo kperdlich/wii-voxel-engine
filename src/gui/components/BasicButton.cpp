@@ -39,12 +39,15 @@ bool BasicButton::handleMoveOver() {
 	WiiPad* pad = Controller::getInstance().getInputHandler()->getPadByID( WII_PAD_0 );
 
 	bool mouseOver = GRRLIB_PtInRect(m_texture->getX(), m_texture->getY(), m_texture->getWidth(), m_texture->getHeight(), pad->getX(), pad->getY() );
+
+#ifdef DEBUG
 	if ( mouseOver )
 	{
 		char* clickedIn = new char[50];
 		sprintf(clickedIn, "Mouse over" );
 		Debug::getInstance().log( clickedIn );
 	}
+#endif
 
 	m_texture->setVisible(!mouseOver);
 	m_highlightTexture->setVisible(mouseOver);

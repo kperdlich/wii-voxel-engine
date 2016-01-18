@@ -43,7 +43,7 @@ void InGameScene::load()
 void InGameScene::draw() {
 	Basic3DScene::draw();
 
-	// debug stuff
+#ifdef DEBUG
 	Player* player = static_cast<Player*>(m_entityHandler->getPlayer());
 
 	char* playerPosition = new char[100];
@@ -53,6 +53,7 @@ void InGameScene::draw() {
 	char* playerRotation = new char[100];
 	sprintf(playerRotation, "Player Rotation: x:%i, y:%i, z:%i", static_cast<int>(player->getRotation().getX()), static_cast<int>(player->getRotation().getY()), static_cast<int>(player->getRotation().getZ()));
 	Debug::getInstance().log( playerRotation );
+#endif
 
 }
 

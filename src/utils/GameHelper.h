@@ -19,5 +19,6 @@
 u8 calculateFrameRate();
 void printFps(unsigned int x, unsigned int y, GRRLIB_ttfFont* font, unsigned int fontSize, const u32 color );
 void printGameVersion(unsigned int x, unsigned int y, GRRLIB_ttfFont* font, unsigned int fontSize, const u32 color);
+char* getResolution();
 
 #endif /* SRC_UTILS_GAMEHELPER_H_ */

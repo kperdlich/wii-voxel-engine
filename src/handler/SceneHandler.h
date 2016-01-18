@@ -10,9 +10,6 @@
 
 #include <vector>
 #include "../gui/scenes/Scene.h"
-#include "../gui/scenes/IntroScene.h"
-#include "../gui/scenes/MainMenuScene.h"
-#include "../gui/scenes/InGameScene.h"
 
 #define INTRO_SCENE_ID 0
 #define MAIN_MENU_ID 1
@@ -36,8 +33,6 @@ public:
 	void drawScene();
 	void update();
 	Scene* getCurrentScene();
-	void checkForNewScene();
-
 
 };
 

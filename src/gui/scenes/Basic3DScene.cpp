@@ -8,6 +8,10 @@
 #include "Basic3DScene.h"
 #include "../../utils/Debug.h"
 
+#define MIN_DIST 1.0f
+#define MAX_DIST 500.0f
+#define FIELD_OF_VIEW 45.0f
+
 Basic3DScene::Basic3DScene()
 {
 	m_Renderer = new Renderer3D();
@@ -19,9 +23,6 @@ Basic3DScene::~Basic3DScene()
 {
 	delete m_entityHandler;
 	delete m_mainCamera;
-	m_entityHandler = NULL;
-	m_mainCamera = NULL;
-
 }
 
 void Basic3DScene::load()

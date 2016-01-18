@@ -1,5 +1,8 @@
 
 #include "SceneHandler.h"
+#include "../gui/scenes/IntroScene.h"
+#include "../gui/scenes/MainMenuScene.h"
+#include "../gui/scenes/InGameScene.h"
 #include "../utils/Debug.h"
 
 SceneHandler::SceneHandler() {
@@ -41,27 +44,26 @@ void SceneHandler::loadScene( uint index )
 	m_nextSceneIndex = index;
 }
 
-void SceneHandler::checkForNewScene()
-{
+
+void SceneHandler::drawScene() {
+	getCurrentScene()->draw();
+}
+
+void SceneHandler::update() {
+
 	if ( m_bLoadNextScene )
 	{
 		m_bLoadNextScene = false;
 
 		if ( m_nextSceneIndex < m_Scenes.size() && m_nextSceneIndex >= 0)
 		{
-			static_cast<Scene*>(m_Scenes[m_currentSceneIndex])->unload();
+			getCurrentScene()->unload();
 			m_currentSceneIndex = m_nextSceneIndex;
-			static_cast<Scene*>(m_Scenes[m_currentSceneIndex])->load();
+			getCurrentScene()->load();
 		}
 	}
-}
 
-void SceneHandler::drawScene() {
-	static_cast<Scene*>(m_Scenes[m_currentSceneIndex])->draw();
-}
-
-void SceneHandler::update() {
-	static_cast<Scene*>(m_Scenes[m_currentSceneIndex])->update();
+	getCurrentScene()->update();
 }
 
 Scene* SceneHandler::getCurrentScene() {

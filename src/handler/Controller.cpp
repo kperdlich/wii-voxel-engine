@@ -10,6 +10,7 @@
 #include "Controller.h"
 #include "../utils/Debug.h"
 
+#define DEBUG
 
 Controller::Controller() {
 	m_Running = false;
@@ -37,17 +38,15 @@ void Controller::start()
 	{
 		GRRLIB_SetBackgroundColour(0x00, 0x00, 0x00, 0xFF);
 
-		m_sceneHandler->checkForNewScene(); // load new scene if necessary
 		m_inputHandler->update();
 		m_sceneHandler->update();
 		m_sceneHandler->drawScene();
 
+#ifdef DEBUG
 		printGameVersion(0, 25, m_fontHandler->getNativFontByID( DEFAULT_FONT_ID ), DEFAULT_FONT_SIZE, GRRLIB_WHITE );
 		printFps( 500, 25, m_fontHandler->getNativFontByID( DEFAULT_FONT_ID ), DEFAULT_FONT_SIZE, GRRLIB_YELLOW );
 
-		char* buffer2 = new char[50];
-		sprintf(buffer2, "Resolution x: %d y: %d", rmode->viWidth, rmode->viHeight );
-		Debug::getInstance().log( buffer2 );
+		Debug::getInstance().log(getResolution());
 
 		std::vector<BasicTexture*>* textures = m_sceneHandler->getCurrentScene()->getTextureHandler()->getTextures();
 		char* buffer = new char[50];
@@ -56,6 +55,7 @@ void Controller::start()
 
 		Debug::getInstance().print();
 		Debug::getInstance().clear();
+#endif
 
 		GRRLIB_Render();
 		calculateFrameRate();
@@ -77,7 +77,7 @@ void Controller::end() {
 void Controller::init() {
 
 	GRRLIB_Init();
-	GRRLIB_Settings.antialias = true;
+	GRRLIB_Settings.antialias = false;
 
 	m_fontHandler->init();
 	m_inputHandler->init();

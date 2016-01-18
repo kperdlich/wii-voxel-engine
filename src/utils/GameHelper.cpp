@@ -40,3 +40,10 @@ void printGameVersion(unsigned int x, unsigned int y, GRRLIB_ttfFont* font, unsi
 	sprintf(buffer, "%s %s", GameName, BuildVersion);
 	GRRLIB_PrintfTTF( x, y, font, buffer, fontSize, color );
 }
+
+char* getResolution()
+{
+	char* pBuffer = new char[30];
+	sprintf(pBuffer, "Resolution x: %d y: %d", rmode->viWidth, rmode->viHeight );
+	return pBuffer;
+}
