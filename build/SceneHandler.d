@@ -108,6 +108,16 @@ SceneHandler.o: \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../world/Camera.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../world/../../utils/Vector3f.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../world/../../entity/Entity.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../world/GameWorld.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../world/../../gui/scenes/Basic3DScene.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../world/blocks/BlockManager.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../world/blocks/Block.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../world/blocks/../../Texture.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../world/blocks/BlockRenderer.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../world/blocks/../../../utils/Vector3f.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../world/blocks/../../../gui/Texture.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../world/blocks/../../../handler/TextureHandler.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../world/blocks/BlockRenderer.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../utils/Debug.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../utils/../handler/Controller.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../utils/../handler/../utils/GameHelper.h \
@@ -350,6 +360,26 @@ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../world/
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../world/../../utils/Vector3f.h:
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../world/../../entity/Entity.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../world/GameWorld.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../world/../../gui/scenes/Basic3DScene.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../world/blocks/BlockManager.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../world/blocks/Block.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../world/blocks/../../Texture.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../world/blocks/BlockRenderer.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../world/blocks/../../../utils/Vector3f.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../world/blocks/../../../gui/Texture.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../world/blocks/../../../handler/TextureHandler.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../gui/scenes/../world/blocks/BlockRenderer.h:
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/handler/../utils/Debug.h:
 

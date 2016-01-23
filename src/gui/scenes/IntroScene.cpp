@@ -37,7 +37,7 @@ void IntroScene::load()
 {
 	Basic2DScene::load();
 	m_BackgroundAlpha = 255;
-	Texture* logoTexture = m_TextureHandler->createTexture( MinecraftLogo_png);
+	Texture* logoTexture = m_TextureHandler->createTexture( MinecraftLogo_png, IS_LOGO);
 	m_elements.push_back( new UITextureElement( (rmode->viWidth / 2) - (logoTexture->getWidth() / 2), (rmode->viHeight / 2) - ( logoTexture->getHeight() / 2 ), IS_LOGO,logoTexture));
 }
 

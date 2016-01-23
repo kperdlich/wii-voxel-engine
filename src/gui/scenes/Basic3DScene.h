@@ -13,6 +13,7 @@
 #include "../components/UIElement.h"
 #include "../../entity/EntityHandler.h"
 #include "../world/Camera.h"
+#include "../world/GameWorld.h"
 
 class Basic3DScene: public BasicScene {
 public:
@@ -30,6 +31,7 @@ protected:
 	EntityHandler* m_entityHandler;
 	std::vector<UIElement*> m_uiElements;
 	Camera* m_mainCamera; // todo: move this to the world class
+	CGameWorld* m_pGameWorld;
 };
 
 #endif /* SRC_GUI_SCENES_BASIC3DSCENE_H_ */

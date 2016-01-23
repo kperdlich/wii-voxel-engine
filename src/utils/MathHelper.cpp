@@ -15,7 +15,7 @@ Vector3f MathHelper::calculateNewWorldPositionByRotation(float rotation, Vector3
 {
 	float rotationInRadians = rotation * DEGREE_TO_RADIANS;
 	float x = currentWorldPosition.getX() + ( sin(rotationInRadians) * smoothFactor * movementVector.getZ());
-	float y = 0; // todo add y axis movement
+	float y = currentWorldPosition.getY(); // todo add y axis movement
 	float z = currentWorldPosition.getZ() + ( cos(rotationInRadians) * smoothFactor * movementVector.getZ()) ;
 	return Vector3f(x, y, z);
 

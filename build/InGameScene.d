@@ -93,6 +93,16 @@ InGameScene.o: \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../world/Camera.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../world/../../utils/Vector3f.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../world/../../entity/Entity.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../world/GameWorld.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../world/../../gui/scenes/Basic3DScene.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../world/blocks/BlockManager.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../world/blocks/Block.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../world/blocks/../../Texture.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../world/blocks/BlockRenderer.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../world/blocks/../../../utils/Vector3f.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../world/blocks/../../../gui/Texture.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../world/blocks/../../../handler/TextureHandler.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../world/blocks/BlockRenderer.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../utils/Debug.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../utils/../handler/Controller.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../utils/../handler/../utils/GameHelper.h \
@@ -129,8 +139,6 @@ InGameScene.o: \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../components/UITextureElement.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/build/Hotbar_png.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/build/Crosshair_png.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/build/ItemCSS_png.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../entity/Block.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../entity/Player.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../entity/../gui/world/Camera.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../entity/../utils/Vector3f.h
@@ -321,6 +329,26 @@ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../world/../../utils
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../world/../../entity/Entity.h:
 
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../world/GameWorld.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../world/../../gui/scenes/Basic3DScene.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../world/blocks/BlockManager.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../world/blocks/Block.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../world/blocks/../../Texture.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../world/blocks/BlockRenderer.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../world/blocks/../../../utils/Vector3f.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../world/blocks/../../../gui/Texture.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../world/blocks/../../../handler/TextureHandler.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../world/blocks/BlockRenderer.h:
+
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../utils/Debug.h:
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../utils/../handler/Controller.h:
@@ -392,10 +420,6 @@ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../components/UIText
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/build/Hotbar_png.h:
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/build/Crosshair_png.h:
-
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/build/ItemCSS_png.h:
-
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../entity/Block.h:
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../entity/Player.h:
 

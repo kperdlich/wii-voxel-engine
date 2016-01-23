@@ -18,11 +18,11 @@ Basic2DScene::~Basic2DScene() {
 void Basic2DScene::draw() {
 
 	std::vector<BasicTexture*>* textures = m_TextureHandler->getTextures();
-	for (uint i = 0; i < textures->size(); i++)
+	for (std::vector<BasicTexture*>::iterator it = textures->begin(); it != textures->end(); it++)
 	{
-		if (((*textures)[i])->isVisible())
+		if ((*it)->isVisible())
 		{
-			getRenderer()->drawTexture( ((*textures)[i]) );
+			getRenderer()->drawTexture( (*it) );
 		}
 	}
 }

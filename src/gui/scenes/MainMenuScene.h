@@ -23,7 +23,7 @@ public:
 	void update() override;
 private:
 	void createButtons();
-	BasicButton* createDefaultMainMenuButton( const char* buttonName, const char* buttontext, void (*clickCallback) (BasicButton*) );
+	BasicButton* createDefaultMainMenuButton( const char* buttonName, const char* buttontext, void (*clickCallback) (BasicButton*));
 
 };
 

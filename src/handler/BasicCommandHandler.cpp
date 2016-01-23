@@ -23,7 +23,7 @@ CBasicCommandHandler::~CBasicCommandHandler() {
 void CBasicCommandHandler::executeCommand(const char* commandName) {
 	if( m_commandMap.find( commandName ) != m_commandMap.end())
 	{
-		static_cast<BasicCommand*>(m_commandMap.at( commandName ))->executeCommand();
+		m_commandMap.at( commandName )->executeCommand();
 	}
 }
 

@@ -46,9 +46,8 @@ void Controller::start()
 
 		Debug::getInstance().log(getResolution());
 
-		std::vector<BasicTexture*>* textures = m_sceneHandler->getCurrentScene()->getTextureHandler()->getTextures();
 		char* buffer = new char[50];
-		sprintf(buffer, "Loaded Textures in scene: %d", textures->size());
+		sprintf(buffer, "Loaded Textures in scene: %d", m_sceneHandler->getCurrentScene()->getTextureHandler()->TextureCount());
 		Debug::getInstance().log( buffer );
 
 		Debug::getInstance().print();

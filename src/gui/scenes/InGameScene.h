@@ -10,6 +10,7 @@
 
 #include "Basic3DScene.h"
 
+
 class InGameScene: public Basic3DScene {
 public:
 	InGameScene();
@@ -19,7 +20,7 @@ public:
 	void draw() override;
 protected:
 	void initEntities();
-	void drawMap(); // todo: let's handle this by the world class
+
 };
 
 #endif /* SRC_GUI_SCENES_INGAMESCENE_H_ */

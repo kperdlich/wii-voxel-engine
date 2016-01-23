@@ -21,6 +21,7 @@ Basic3DScene::Basic3DScene()
 
 Basic3DScene::~Basic3DScene()
 {
+	delete m_pGameWorld;
 	delete m_entityHandler;
 	delete m_mainCamera;
 }
@@ -40,13 +41,13 @@ void Basic3DScene::draw()
 
 	GRRLIB_ObjectViewBegin();
 	GRRLIB_ObjectViewScale( m_mainCamera->getWorldScaleX(), m_mainCamera->getWorldScaleY(), m_mainCamera->getWorldScaleZ() );
-	GRRLIB_ObjectViewTrans( -m_mainCamera->getWorldPositionX(), m_mainCamera->getWorldPositionY(), -m_mainCamera->getWorldPositionZ() );
+	GRRLIB_ObjectViewTrans( -m_mainCamera->getWorldPositionX(), -m_mainCamera->getWorldPositionY(), -m_mainCamera->getWorldPositionZ() );
 	GRRLIB_ObjectViewRotate( 0, 360 - m_mainCamera->getWorldAngleY(), 0);
 	GRRLIB_ObjectViewRotate( m_mainCamera->getWorldAngleX(), 0, 0);
 	GRRLIB_ObjectViewRotate( 0, 0, m_mainCamera->getWorldAngleZ());
 	GRRLIB_ObjectViewEnd();
 
-
+	m_pGameWorld->Draw();
 
 	for (std::map<unsigned int, Entity*>::iterator it = m_entityHandler->getEntities()->begin(); it != m_entityHandler->getEntities()->end(); ++it)
 	{
@@ -59,11 +60,11 @@ void Basic3DScene::draw()
 	GRRLIB_2dMode();
 
 	std::vector<BasicTexture*>* textures = m_TextureHandler->getTextures();
-	for (uint i = 0; i < textures->size(); i++)
+	for ( std::vector<BasicTexture*>::iterator it = textures->begin(); it != textures->end(); it++)
 	{
-		if (((*textures)[i])->isVisible())
+		if ((*it)->isVisible())
 		{
-			getRenderer()->draw2DTexture( ((*textures)[i]) );
+			getRenderer()->draw2DTexture( (*it) );
 		}
 	}
 }

@@ -16,6 +16,7 @@
 #include "MinecraftLogo_png.h"
 #include "../../utils/Debug.h"
 #include "Hotbar_png.h"
+#include <string.h>
 
 // define all scene components here
 #define MMS_BUTTON_SINGLEPLAYER "MMS_btnSingleplayer"
@@ -25,6 +26,9 @@
 #define MMS_CLASSIC_BACKGROUND "MMS_ClassicBackground"
 #define MMS_LOGO "MMS_Logo"
 #define MMS_CURSOR "MMS_Cursor"
+
+#define LABEL_TAG "label"
+#define HIGHLIGHT_TAG "highlight"
 
 #define BUTTON_Y_DISTANCE 5
 
@@ -50,15 +54,15 @@ MainMenuScene::~MainMenuScene() {
 
 void MainMenuScene::load() {
 	Basic2DScene::load();
-	m_elements.push_back( new UITextureElement( MMS_CLASSIC_BACKGROUND , m_TextureHandler->createTexture( ClassicBackgroundSprite_png )));
-	UITextureElement* logo = new UITextureElement( MMS_LOGO , m_TextureHandler->createTexture( MinecraftLogo_png));
+	m_elements.push_back( new UITextureElement( MMS_CLASSIC_BACKGROUND , m_TextureHandler->createTexture( ClassicBackgroundSprite_png, MMS_CLASSIC_BACKGROUND )));
+	UITextureElement* logo = new UITextureElement( MMS_LOGO , m_TextureHandler->createTexture( MinecraftLogo_png, MMS_LOGO));
 	logo->setX( (rmode->viWidth / 2) - (logo->getWidth() / 2) );
 	logo->setY( 30 );
 	m_elements.push_back( logo );
 
 	createButtons();
 
-	m_elements.push_back( new Cursor( MMS_CURSOR , m_TextureHandler->createTexture( Cursor_png )));
+	m_elements.push_back( new Cursor( MMS_CURSOR , m_TextureHandler->createTexture( Cursor_png, MMS_CURSOR )));
 }
 
 void MainMenuScene::draw() {
@@ -69,7 +73,7 @@ void MainMenuScene::draw() {
 void MainMenuScene::update() {
 	Basic2DScene::update();
 
-	// todo kperdlich - just debug stuff, add debug preprocessor definition
+#ifdef DEBUG
 	WiiPad* pad = Controller::getInstance().getInputHandler()->getPadByID( WII_PAD_0 );
 	if ( pad->buttonsDown() & WPAD_BUTTON_LEFT)
 	{
@@ -79,17 +83,17 @@ void MainMenuScene::update() {
 	{
 		Controller::getInstance().getBasicCommandHandler()->executeCommand( SwitchToInGameCommand::Name() );
 	}
+#endif
+
 }
 
 void MainMenuScene::createButtons()
 {
-	Texture* startButtonTexture = m_TextureHandler->createTexture( BasicButtonBig_png );
-
+	Texture* startButtonTexture = m_TextureHandler->createTexture( BasicButtonBig_png, "BasicButtonBig_png" );
 	int xPos = (rmode->viWidth / 2) - (startButtonTexture->getWidth() / 2);
 	int yPos = (rmode->viHeight / 2) - ( startButtonTexture->getHeight() / 2 );
 	int sizeBetweenBtns = startButtonTexture->getHeight() + BUTTON_Y_DISTANCE;
-
-	m_TextureHandler->destroyTextureByID(startButtonTexture->getId());
+	m_TextureHandler->destroyTextureByName("BasicButtonBig_png");
 
 	List* btnList = new List( xPos, yPos, sizeBetweenBtns );
 	btnList->addComponent( createDefaultMainMenuButton( MMS_BUTTON_SINGLEPLAYER, "Singleplayer", &startSingleplayer ));
@@ -103,6 +107,19 @@ void MainMenuScene::createButtons()
 BasicButton* MainMenuScene::createDefaultMainMenuButton(  const char* buttonName, const char* buttontext, void (*clickCallback) (BasicButton*) )
 {
 	FontHandler* fontHandler = Controller::getInstance().getFontHandler();
-	return new BasicButton( 0, 0, buttonName, m_TextureHandler->createTexture( BasicButtonBig_png ), m_TextureHandler->createTexture( BasicButtonBigHighlight_png ), m_TextureHandler->createLabel( buttontext, fontHandler->getNativFontByID( DEFAULT_MINECRAFT_FONT_ID )), clickCallback );
+
+	Texture* pdefaultButtonTexture = m_TextureHandler->createTexture( BasicButtonBig_png, buttonName);
+
+	char searchNamehighlight[strlen(buttonName) + strlen(HIGHLIGHT_TAG) +1];
+	strcpy( searchNamehighlight, buttonName );
+	strcat( searchNamehighlight, HIGHLIGHT_TAG );
+	Texture* pHighlightButtonTexture = m_TextureHandler->createTexture( BasicButtonBigHighlight_png, searchNamehighlight );
+
+	char searchLabel[strlen(buttonName) + strlen(LABEL_TAG) +1];
+	strcpy( searchLabel, buttonName );
+	strcat( searchLabel, LABEL_TAG );
+	LabelTexture* pButtonLabel = m_TextureHandler->createLabel( buttontext, fontHandler->getNativFontByID( DEFAULT_MINECRAFT_FONT_ID ), searchLabel);
+
+	return new BasicButton( 0, 0, buttonName, pdefaultButtonTexture, pHighlightButtonTexture, pButtonLabel, clickCallback );
 }
 
