@@ -74,7 +74,7 @@ void Controller::end() {
 void Controller::init() {
 
 	GRRLIB_Init();
-	GRRLIB_Settings.antialias = false;
+	GRRLIB_Settings.antialias = true;
 
 	m_fontHandler->init();
 	m_inputHandler->init();

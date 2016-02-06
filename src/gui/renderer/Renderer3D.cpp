@@ -5,7 +5,7 @@
  *      Author: Kevin
  */
 
-#include <grrlib.h>
+#include "../../core/grrlib.h"
 #include "Renderer3D.h"
 #include "../Texture.h"
 

@@ -3,7 +3,7 @@ UITextureElement.o: \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/UITextureElement.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/UIElement.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../BasicTexture.h \
- f:/devkitPro/libogc/include/grrlib.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../core/grrlib.h \
  f:/devkitPro/libogc/include/gccore.h \
  f:/devkitPro/libogc/include/ogc/dsp.h \
  f:/devkitPro/libogc/include/gctypes.h \
@@ -55,17 +55,17 @@ UITextureElement.o: \
  f:/devkitPro/libogc/include/ogc/mutex.h \
  f:/devkitPro/libogc/include/ogc/system.h \
  f:/devkitPro/libogc/include/ogc/wiilaunch.h \
- f:/devkitPro/libogc/include/grrlib/GRRLIB__lib.h \
- f:/devkitPro/libogc/include/grrlib/GRRLIB__inline.h \
- f:/devkitPro/libogc/include/grrlib/GRRLIB_clipping.h \
- f:/devkitPro/libogc/include/grrlib/GRRLIB_collision.h \
- f:/devkitPro/libogc/include/grrlib/GRRLIB_fbComplex.h \
- f:/devkitPro/libogc/include/grrlib/GRRLIB_fbGX.h \
- f:/devkitPro/libogc/include/grrlib/GRRLIB_fbSimple.h \
- f:/devkitPro/libogc/include/grrlib/GRRLIB_handle.h \
- f:/devkitPro/libogc/include/grrlib/GRRLIB_pixel.h \
- f:/devkitPro/libogc/include/grrlib/GRRLIB_settings.h \
- f:/devkitPro/libogc/include/grrlib/GRRLIB_texSetup.h
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../core/grrlib/GRRLIB__lib.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../core/grrlib/GRRLIB__inline.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../core/grrlib/GRRLIB_clipping.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../core/grrlib/GRRLIB_collision.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../core/grrlib/GRRLIB_fbComplex.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../core/grrlib/GRRLIB_fbGX.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../core/grrlib/GRRLIB_fbSimple.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../core/grrlib/GRRLIB_handle.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../core/grrlib/GRRLIB_pixel.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../core/grrlib/GRRLIB_settings.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../core/grrlib/GRRLIB_texSetup.h
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/UITextureElement.h:
 
@@ -73,7 +73,7 @@ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/UIElement.h:
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../BasicTexture.h:
 
-f:/devkitPro/libogc/include/grrlib.h:
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../core/grrlib.h:
 
 f:/devkitPro/libogc/include/gccore.h:
 
@@ -177,24 +177,24 @@ f:/devkitPro/libogc/include/ogc/system.h:
 
 f:/devkitPro/libogc/include/ogc/wiilaunch.h:
 
-f:/devkitPro/libogc/include/grrlib/GRRLIB__lib.h:
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../core/grrlib/GRRLIB__lib.h:
 
-f:/devkitPro/libogc/include/grrlib/GRRLIB__inline.h:
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../core/grrlib/GRRLIB__inline.h:
 
-f:/devkitPro/libogc/include/grrlib/GRRLIB_clipping.h:
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../core/grrlib/GRRLIB_clipping.h:
 
-f:/devkitPro/libogc/include/grrlib/GRRLIB_collision.h:
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../core/grrlib/GRRLIB_collision.h:
 
-f:/devkitPro/libogc/include/grrlib/GRRLIB_fbComplex.h:
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../core/grrlib/GRRLIB_fbComplex.h:
 
-f:/devkitPro/libogc/include/grrlib/GRRLIB_fbGX.h:
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../core/grrlib/GRRLIB_fbGX.h:
 
-f:/devkitPro/libogc/include/grrlib/GRRLIB_fbSimple.h:
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../core/grrlib/GRRLIB_fbSimple.h:
 
-f:/devkitPro/libogc/include/grrlib/GRRLIB_handle.h:
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../core/grrlib/GRRLIB_handle.h:
 
-f:/devkitPro/libogc/include/grrlib/GRRLIB_pixel.h:
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../core/grrlib/GRRLIB_pixel.h:
 
-f:/devkitPro/libogc/include/grrlib/GRRLIB_settings.h:
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../core/grrlib/GRRLIB_settings.h:
 
-f:/devkitPro/libogc/include/grrlib/GRRLIB_texSetup.h:
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../core/grrlib/GRRLIB_texSetup.h:

@@ -38,7 +38,7 @@ void BlockRenderer::render(Vector3f blockPosition, float blockSize, Texture* pte
 
 	};
 
-	GRRLIB_SetTexture(/*m_entityTexture->getNativeTexture()*/ ptexture->getNativeTexture(), 1);
+	GRRLIB_SetTexture(ptexture->getNativeTexture(), true, false);
 	GX_Begin(GX_QUADS, GX_VTXFMT0, 24);
 			// front side
 			GX_Position3f32(vbo[0].x, vbo[0].y, vbo[0].z);

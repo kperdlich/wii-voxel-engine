@@ -9,9 +9,9 @@
 #define SRC_UTILS_GAMEHELPER_H_
 
 #include <stdarg.h>
-#include <grrlib.h>
 #include <ogc/lwp_watchdog.h>
 
+#include "../core/grrlib.h"
 #include "../handler/Controller.h"
 #include "../handler/FontHandler.h"
 #include "../gui/ColorHelper.h"

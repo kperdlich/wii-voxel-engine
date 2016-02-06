@@ -8,7 +8,7 @@
 #ifndef SRC_GUI_BASICTEXTURE_H_
 #define SRC_GUI_BASICTEXTURE_H_
 
-#include "grrlib.h"
+#include "../core/grrlib.h"
 
 enum txTypes {
 	INVALID,

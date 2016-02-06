@@ -5,7 +5,7 @@
  *      Author: Kevin
  */
 
-#include <grrlib.h>
+#include "../../core/grrlib.h"
 #include <vector>
 #include "IntroScene.h"
 #include "../components/UITextureElement.h"

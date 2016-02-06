@@ -8,7 +8,7 @@
 #ifndef SRC_GUI_TEXTUREHANDLER_H_
 #define SRC_GUI_TEXTUREHANDLER_H_
 
-#include <grrlib.h>
+#include "../core/grrlib.h"
 #include <map>
 #include <vector>
 #include <string>

@@ -6,7 +6,7 @@
  */
 
 #include "Camera.h"
-#include <grrlib.h>
+#include "../../core/grrlib.h"
 
 Camera::Camera() : m_cam(0, 0, 0.1f), m_up(.0f, 1.0f, .0f), m_look(0, 0, 0), m_wordScale(1.0f, 1.0f, 1.0f), m_worldAngle(0, 0, 0), m_worldPosition(0, 0, 10.0f) {
 }

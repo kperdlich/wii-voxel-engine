@@ -8,7 +8,7 @@
 #ifndef SRC_GUI_FONTHANDLER_H_
 #define SRC_GUI_FONTHANDLER_H_
 
-#include <grrlib.h>
+#include "../core/grrlib.h"
 #include <vector>
 // Font
 #include "FreeMonoBold_ttf.h"

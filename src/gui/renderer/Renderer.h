@@ -8,7 +8,6 @@
 #ifndef SRC_GUI_RENDERER_RENDERER_H_
 #define SRC_GUI_RENDERER_RENDERER_H_
 
-#include <grrlib.h>
 #include "../ColorHelper.h"
 
 class Renderer

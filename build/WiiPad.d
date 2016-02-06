@@ -1,9 +1,12 @@
 WiiPad.o: \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/input/WiiPad.cpp \
- f:/devkitPro/libogc/include/grrlib.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/input/WiiPad.h \
+ f:/devkitPro/libogc/include/wiiuse/wpad.h \
+ f:/devkitPro/libogc/include/gctypes.h \
+ f:/devkitPro/libogc/include/wiiuse/wiiuse.h \
+ f:/devkitPro/libogc/include/bte/bte.h \
  f:/devkitPro/libogc/include/gccore.h \
  f:/devkitPro/libogc/include/ogc/dsp.h \
- f:/devkitPro/libogc/include/gctypes.h \
  f:/devkitPro/libogc/include/ogc/aram.h \
  f:/devkitPro/libogc/include/ogc/arqueue.h \
  f:/devkitPro/libogc/include/ogc/lwp_queue.h \
@@ -52,30 +55,33 @@ WiiPad.o: \
  f:/devkitPro/libogc/include/ogc/mutex.h \
  f:/devkitPro/libogc/include/ogc/system.h \
  f:/devkitPro/libogc/include/ogc/wiilaunch.h \
- f:/devkitPro/libogc/include/grrlib/GRRLIB__lib.h \
- f:/devkitPro/libogc/include/grrlib/GRRLIB__inline.h \
- f:/devkitPro/libogc/include/grrlib/GRRLIB_clipping.h \
- f:/devkitPro/libogc/include/grrlib/GRRLIB_collision.h \
- f:/devkitPro/libogc/include/grrlib/GRRLIB_fbComplex.h \
- f:/devkitPro/libogc/include/grrlib/GRRLIB_fbGX.h \
- f:/devkitPro/libogc/include/grrlib/GRRLIB_fbSimple.h \
- f:/devkitPro/libogc/include/grrlib/GRRLIB_handle.h \
- f:/devkitPro/libogc/include/grrlib/GRRLIB_pixel.h \
- f:/devkitPro/libogc/include/grrlib/GRRLIB_settings.h \
- f:/devkitPro/libogc/include/grrlib/GRRLIB_texSetup.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/input/WiiPad.h \
- f:/devkitPro/libogc/include/wiiuse/wpad.h \
- f:/devkitPro/libogc/include/wiiuse/wiiuse.h \
- f:/devkitPro/libogc/include/bte/bte.h \
- f:/devkitPro/libogc/include/bte/bd_addr.h
+ f:/devkitPro/libogc/include/bte/bd_addr.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/input/../core/grrlib.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/input/../core/grrlib/GRRLIB__lib.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/input/../core/grrlib/GRRLIB__inline.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/input/../core/grrlib/GRRLIB_clipping.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/input/../core/grrlib/GRRLIB_collision.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/input/../core/grrlib/GRRLIB_fbComplex.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/input/../core/grrlib/GRRLIB_fbGX.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/input/../core/grrlib/GRRLIB_fbSimple.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/input/../core/grrlib/GRRLIB_handle.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/input/../core/grrlib/GRRLIB_pixel.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/input/../core/grrlib/GRRLIB_settings.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/input/../core/grrlib/GRRLIB_texSetup.h
 
-f:/devkitPro/libogc/include/grrlib.h:
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/input/WiiPad.h:
+
+f:/devkitPro/libogc/include/wiiuse/wpad.h:
+
+f:/devkitPro/libogc/include/gctypes.h:
+
+f:/devkitPro/libogc/include/wiiuse/wiiuse.h:
+
+f:/devkitPro/libogc/include/bte/bte.h:
 
 f:/devkitPro/libogc/include/gccore.h:
 
 f:/devkitPro/libogc/include/ogc/dsp.h:
-
-f:/devkitPro/libogc/include/gctypes.h:
 
 f:/devkitPro/libogc/include/ogc/aram.h:
 
@@ -173,34 +179,28 @@ f:/devkitPro/libogc/include/ogc/system.h:
 
 f:/devkitPro/libogc/include/ogc/wiilaunch.h:
 
-f:/devkitPro/libogc/include/grrlib/GRRLIB__lib.h:
-
-f:/devkitPro/libogc/include/grrlib/GRRLIB__inline.h:
-
-f:/devkitPro/libogc/include/grrlib/GRRLIB_clipping.h:
-
-f:/devkitPro/libogc/include/grrlib/GRRLIB_collision.h:
-
-f:/devkitPro/libogc/include/grrlib/GRRLIB_fbComplex.h:
-
-f:/devkitPro/libogc/include/grrlib/GRRLIB_fbGX.h:
-
-f:/devkitPro/libogc/include/grrlib/GRRLIB_fbSimple.h:
-
-f:/devkitPro/libogc/include/grrlib/GRRLIB_handle.h:
-
-f:/devkitPro/libogc/include/grrlib/GRRLIB_pixel.h:
-
-f:/devkitPro/libogc/include/grrlib/GRRLIB_settings.h:
-
-f:/devkitPro/libogc/include/grrlib/GRRLIB_texSetup.h:
-
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/input/WiiPad.h:
-
-f:/devkitPro/libogc/include/wiiuse/wpad.h:
-
-f:/devkitPro/libogc/include/wiiuse/wiiuse.h:
-
-f:/devkitPro/libogc/include/bte/bte.h:
-
 f:/devkitPro/libogc/include/bte/bd_addr.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/input/../core/grrlib.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/input/../core/grrlib/GRRLIB__lib.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/input/../core/grrlib/GRRLIB__inline.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/input/../core/grrlib/GRRLIB_clipping.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/input/../core/grrlib/GRRLIB_collision.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/input/../core/grrlib/GRRLIB_fbComplex.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/input/../core/grrlib/GRRLIB_fbGX.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/input/../core/grrlib/GRRLIB_fbSimple.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/input/../core/grrlib/GRRLIB_handle.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/input/../core/grrlib/GRRLIB_pixel.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/input/../core/grrlib/GRRLIB_settings.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/input/../core/grrlib/GRRLIB_texSetup.h:

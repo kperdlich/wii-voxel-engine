@@ -4,7 +4,7 @@ BasicButton.o: \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/UITextureElement.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/UIElement.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../BasicTexture.h \
- f:/devkitPro/libogc/include/grrlib.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../core/grrlib.h \
  f:/devkitPro/libogc/include/gccore.h \
  f:/devkitPro/libogc/include/ogc/dsp.h \
  f:/devkitPro/libogc/include/gctypes.h \
@@ -56,17 +56,17 @@ BasicButton.o: \
  f:/devkitPro/libogc/include/ogc/mutex.h \
  f:/devkitPro/libogc/include/ogc/system.h \
  f:/devkitPro/libogc/include/ogc/wiilaunch.h \
- f:/devkitPro/libogc/include/grrlib/GRRLIB__lib.h \
- f:/devkitPro/libogc/include/grrlib/GRRLIB__inline.h \
- f:/devkitPro/libogc/include/grrlib/GRRLIB_clipping.h \
- f:/devkitPro/libogc/include/grrlib/GRRLIB_collision.h \
- f:/devkitPro/libogc/include/grrlib/GRRLIB_fbComplex.h \
- f:/devkitPro/libogc/include/grrlib/GRRLIB_fbGX.h \
- f:/devkitPro/libogc/include/grrlib/GRRLIB_fbSimple.h \
- f:/devkitPro/libogc/include/grrlib/GRRLIB_handle.h \
- f:/devkitPro/libogc/include/grrlib/GRRLIB_pixel.h \
- f:/devkitPro/libogc/include/grrlib/GRRLIB_settings.h \
- f:/devkitPro/libogc/include/grrlib/GRRLIB_texSetup.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../core/grrlib/GRRLIB__lib.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../core/grrlib/GRRLIB__inline.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../core/grrlib/GRRLIB_clipping.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../core/grrlib/GRRLIB_collision.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../core/grrlib/GRRLIB_fbComplex.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../core/grrlib/GRRLIB_fbGX.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../core/grrlib/GRRLIB_fbSimple.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../core/grrlib/GRRLIB_handle.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../core/grrlib/GRRLIB_pixel.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../core/grrlib/GRRLIB_settings.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../core/grrlib/GRRLIB_texSetup.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../Texture.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../BasicTexture.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../LabelTexture.h \
@@ -74,8 +74,10 @@ BasicButton.o: \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../handler/../utils/GameHelper.h \
  f:/devkitPro/libogc/include/ogc/lwp_watchdog.h \
  f:/devkitPro/libogc/include/ogc/lwp_queue.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../handler/../utils/../core/grrlib.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../handler/../utils/../handler/Controller.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../handler/../utils/../handler/FontHandler.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../handler/../utils/../handler/../core/grrlib.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/build/FreeMonoBold_ttf.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/build/Minecraft_ttf.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../handler/../utils/../gui/ColorHelper.h \
@@ -93,6 +95,7 @@ BasicButton.o: \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../handler/SceneHandler.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../handler/../gui/scenes/Scene.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../handler/../gui/scenes/../../handler/TextureHandler.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../handler/../gui/scenes/../../handler/../core/grrlib.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../handler/../gui/scenes/../../handler/../gui/Texture.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../handler/../gui/scenes/../../handler/../gui/SpriteSheet.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../handler/../gui/scenes/../../handler/../gui/Texture.h \
@@ -107,7 +110,8 @@ BasicButton.o: \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../handler/../commands/BasicCommand.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../handler/../commands/client/SwitchToInGameCommand.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../utils/Debug.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../utils/../handler/Controller.h
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../utils/../handler/Controller.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../core/grrlib.h
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/BasicButton.h:
 
@@ -117,7 +121,7 @@ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/UIElement.h:
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../BasicTexture.h:
 
-f:/devkitPro/libogc/include/grrlib.h:
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../core/grrlib.h:
 
 f:/devkitPro/libogc/include/gccore.h:
 
@@ -221,27 +225,27 @@ f:/devkitPro/libogc/include/ogc/system.h:
 
 f:/devkitPro/libogc/include/ogc/wiilaunch.h:
 
-f:/devkitPro/libogc/include/grrlib/GRRLIB__lib.h:
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../core/grrlib/GRRLIB__lib.h:
 
-f:/devkitPro/libogc/include/grrlib/GRRLIB__inline.h:
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../core/grrlib/GRRLIB__inline.h:
 
-f:/devkitPro/libogc/include/grrlib/GRRLIB_clipping.h:
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../core/grrlib/GRRLIB_clipping.h:
 
-f:/devkitPro/libogc/include/grrlib/GRRLIB_collision.h:
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../core/grrlib/GRRLIB_collision.h:
 
-f:/devkitPro/libogc/include/grrlib/GRRLIB_fbComplex.h:
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../core/grrlib/GRRLIB_fbComplex.h:
 
-f:/devkitPro/libogc/include/grrlib/GRRLIB_fbGX.h:
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../core/grrlib/GRRLIB_fbGX.h:
 
-f:/devkitPro/libogc/include/grrlib/GRRLIB_fbSimple.h:
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../core/grrlib/GRRLIB_fbSimple.h:
 
-f:/devkitPro/libogc/include/grrlib/GRRLIB_handle.h:
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../core/grrlib/GRRLIB_handle.h:
 
-f:/devkitPro/libogc/include/grrlib/GRRLIB_pixel.h:
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../core/grrlib/GRRLIB_pixel.h:
 
-f:/devkitPro/libogc/include/grrlib/GRRLIB_settings.h:
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../core/grrlib/GRRLIB_settings.h:
 
-f:/devkitPro/libogc/include/grrlib/GRRLIB_texSetup.h:
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../core/grrlib/GRRLIB_texSetup.h:
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../Texture.h:
 
@@ -257,9 +261,13 @@ f:/devkitPro/libogc/include/ogc/lwp_watchdog.h:
 
 f:/devkitPro/libogc/include/ogc/lwp_queue.h:
 
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../handler/../utils/../core/grrlib.h:
+
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../handler/../utils/../handler/Controller.h:
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../handler/../utils/../handler/FontHandler.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../handler/../utils/../handler/../core/grrlib.h:
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/build/FreeMonoBold_ttf.h:
 
@@ -295,6 +303,8 @@ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../handler/..
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../handler/../gui/scenes/../../handler/TextureHandler.h:
 
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../handler/../gui/scenes/../../handler/../core/grrlib.h:
+
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../handler/../gui/scenes/../../handler/../gui/Texture.h:
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../handler/../gui/scenes/../../handler/../gui/SpriteSheet.h:
@@ -324,3 +334,5 @@ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../handler/..
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../utils/Debug.h:
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../utils/../handler/Controller.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/components/../../core/grrlib.h:

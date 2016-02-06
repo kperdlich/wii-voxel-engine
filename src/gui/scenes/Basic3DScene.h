@@ -15,6 +15,8 @@
 #include "../world/Camera.h"
 #include "../world/GameWorld.h"
 
+class CGameWorld;
+
 class Basic3DScene: public BasicScene {
 public:
 	Basic3DScene();

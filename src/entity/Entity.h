@@ -8,7 +8,7 @@
 #ifndef SRC_ENTITY_ENTITY_H_
 #define SRC_ENTITY_ENTITY_H_
 
-#include <grrlib.h>
+#include "../core/grrlib.h"
 #include "renderer/EntityRenderer.h"
 #include "../utils/MathHelper.h"
 

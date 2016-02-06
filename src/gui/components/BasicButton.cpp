@@ -9,7 +9,7 @@
 #include "BasicButton.h"
 #include "../../handler/Controller.h"
 #include "../../utils/Debug.h"
-#include <grrlib.h>
+#include "../../core/grrlib.h"
 
 BasicButton::BasicButton( float x, float y, const char* name, Texture* defaultTexture, Texture* highlightTexture, LabelTexture* label, OnClickCallback clickCallback  ) : m_label( label ), m_highlightTexture( highlightTexture ), m_clickCallback( clickCallback ), UITextureElement( x, y, name, defaultTexture )
 {

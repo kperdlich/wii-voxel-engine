@@ -8,7 +8,7 @@
 #ifndef SRC_GUI_LABELTEXTURE_H_
 #define SRC_GUI_LABELTEXTURE_H_
 
-#include <grrlib.h>
+#include "../core/grrlib.h"
 #include "BasicTexture.h"
 
 class LabelTexture: public BasicTexture {
