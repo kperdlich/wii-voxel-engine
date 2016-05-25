@@ -66,8 +66,7 @@ BlockRenderer.o: \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/blocks/../../../gui/../core/grrlib/GRRLIB_pixel.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/blocks/../../../gui/../core/grrlib/GRRLIB_settings.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/blocks/../../../gui/../core/grrlib/GRRLIB_texSetup.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/blocks/../../../gui/BasicTexture.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/build/GroundText_png.h
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/blocks/../../../gui/BasicTexture.h
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/blocks/BlockRenderer.h:
 
@@ -202,5 +201,3 @@ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/blocks/../../../gui/.
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/blocks/../../../gui/../core/grrlib/GRRLIB_texSetup.h:
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/blocks/../../../gui/BasicTexture.h:
-
-c:/Users/Kevin/Desktop/MincraftWii/GameCraft/build/GroundText_png.h:

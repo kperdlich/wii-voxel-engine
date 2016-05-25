@@ -14,6 +14,7 @@
 #include "../../../handler/TextureHandler.h"
 #include "../../../utils/Vector3f.h"
 #include <map>
+#include <vector>
 
 #define BLOCK_SIZE .5f
 
@@ -30,12 +31,15 @@ public:
 	virtual ~CBlockManager();
 	void LoadBlocks();
 	void UnloadBlocks();
-	void Render(Vector3f position, unsigned int blockType);
+	void RenderBlockList();
+	bool AddBlockToRenderList(unsigned int iBlockType, Vector3f *position);
+	void ClearBlockRenderList();
 
 private:
 	CBlock* GetBlockByType(unsigned int type);
 
-	std::map<int, CBlock*> m_blocks;
+	std::map<unsigned int, CBlock*> m_blocks;
+	std::map<unsigned int, std::vector<Vector3f*> > m_mBlockRenderList;
 	TextureHandler* m_pTextureHandler;
 	BlockRenderer* m_blockRenderer;
 

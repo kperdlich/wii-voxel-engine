@@ -171,7 +171,9 @@ $(OUTPUT).elf: $(OFILES)
 	@echo $(notdir $<)
 	$(bin2o)
 
-
+%.tpl.o	:	%.tpl
+	@echo $(notdir $<)
+	$(bin2o)
 
 -include $(DEPENDS)
 
