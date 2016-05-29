@@ -86,6 +86,11 @@ Player.o: \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/../gui/world/../../utils/Vector3f.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/../gui/world/../../entity/Entity.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/../utils/Vector3f.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/CPlayerInventory.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/IEquipable.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/../gui/components/UITextureElement.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/../gui/components/UIElement.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/../gui/components/../BasicTexture.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/../utils/Debug.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/../utils/../handler/Controller.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/../utils/../handler/../utils/GameHelper.h \
@@ -290,6 +295,16 @@ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/../gui/world/../../utils
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/../gui/world/../../entity/Entity.h:
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/../utils/Vector3f.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/CPlayerInventory.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/IEquipable.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/../gui/components/UITextureElement.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/../gui/components/UIElement.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/../gui/components/../BasicTexture.h:
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/entity/../utils/Debug.h:
 

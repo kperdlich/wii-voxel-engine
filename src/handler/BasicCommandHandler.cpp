@@ -12,7 +12,7 @@ CBasicCommandHandler::CBasicCommandHandler() {
 }
 
 CBasicCommandHandler::~CBasicCommandHandler() {
-	for( std::map<const char*, BasicCommand*>::iterator cMapIt = m_commandMap.begin(); cMapIt != m_commandMap.end(); ++cMapIt )
+	for( auto cMapIt = m_commandMap.begin(); cMapIt != m_commandMap.end(); ++cMapIt )
 	{
 		delete cMapIt->second;
 	}

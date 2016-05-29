@@ -48,7 +48,7 @@ void IntroScene::update() {
 	if (m_BackgroundAlpha > 0)
 	{
 		m_BackgroundAlpha--;
-		for ( int i = 0; i < m_elements.size(); i++)
+		for ( unsigned int i = 0; i < m_elements.size(); i++)
 		{
 			UITextureElement* element = dynamic_cast<UITextureElement*>(m_elements[i]);
 			if (element && element->isVisible())

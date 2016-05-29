@@ -7,9 +7,9 @@
 
 #include "Basic2DScene.h"
 
-Basic2DScene::Basic2DScene() {
+Basic2DScene::Basic2DScene()
+{
 	m_Renderer = new Renderer2D();
-
 }
 
 Basic2DScene::~Basic2DScene() {
@@ -17,8 +17,8 @@ Basic2DScene::~Basic2DScene() {
 
 void Basic2DScene::draw() {
 
-	std::vector<BasicTexture*>* textures = m_TextureHandler->getTextures();
-	for (std::vector<BasicTexture*>::iterator it = textures->begin(); it != textures->end(); it++)
+	auto textures = m_TextureHandler->getTextures();
+	for (auto it = textures->begin(); it != textures->end(); it++)
 	{
 		if ((*it)->isVisible())
 		{
@@ -48,7 +48,7 @@ void Basic2DScene::unload()
 }
 
 void Basic2DScene::update() {
-	for (int i = 0; i < m_elements.size(); i++)
+	for (unsigned int i = 0; i < m_elements.size(); i++)
 	{
 		m_elements[i]->update();
 	}

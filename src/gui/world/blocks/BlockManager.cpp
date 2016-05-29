@@ -22,7 +22,7 @@ void CBlockManager::LoadBlocks()
 
 void CBlockManager::UnloadBlocks()
 {
-	for ( std::map<unsigned int, CBlock*>::iterator blockIterator = m_blocks.begin(); blockIterator != m_blocks.end(); blockIterator++ )
+	for ( auto blockIterator = m_blocks.begin(); blockIterator != m_blocks.end(); blockIterator++ )
 	{
 		delete blockIterator->second;
 	}
@@ -45,7 +45,7 @@ CBlockManager::~CBlockManager() {
 
 CBlock* CBlockManager::GetBlockByType(unsigned int type)
 {
-	std::map<unsigned int, CBlock*>::iterator blockIterator = m_blocks.find(type);
+	auto blockIterator = m_blocks.find(type);
 	if ( blockIterator != m_blocks.end() )
 	{
 		return blockIterator->second;
@@ -55,19 +55,19 @@ CBlock* CBlockManager::GetBlockByType(unsigned int type)
 }
 
 
-bool CBlockManager::AddBlockToRenderList(unsigned int iBlockType, Vector3f* position)
+bool CBlockManager::AddBlockToRenderList(unsigned int iBlockType, Vector3f& position)
 {
 	bool bSuccessful = false;
-	std::map<unsigned int, std::vector<Vector3f*> >::iterator blockRenderListIt = m_mBlockRenderList.find(iBlockType);
+	auto blockRenderListIt = m_mBlockRenderList.find(iBlockType);
 	if (blockRenderListIt != m_mBlockRenderList.end())
 	{
-		blockRenderListIt->second.push_back(position);
+		blockRenderListIt->second.push_back(&position);
 		bSuccessful = true;
 	}
 	else
 	{
 		std::vector<Vector3f*> blockList;
-		blockList.push_back(position);
+		blockList.push_back(&position);
 		m_mBlockRenderList.insert(std::pair<unsigned int, std::vector<Vector3f*> >(iBlockType, blockList ));
 		bSuccessful = true;
 	}
@@ -76,7 +76,7 @@ bool CBlockManager::AddBlockToRenderList(unsigned int iBlockType, Vector3f* posi
 
 void CBlockManager::RenderBlockList()
 {
-	for(std::map<unsigned int, std::vector<Vector3f*> >::iterator it = m_mBlockRenderList.begin(); it != m_mBlockRenderList.end(); ++it)
+	for(auto it = m_mBlockRenderList.begin(); it != m_mBlockRenderList.end(); ++it)
 	{
 		CBlock* pBlockToRender = GetBlockByType(it->first);
 		m_blockRenderer->Prepare( &it->second, pBlockToRender->getSize(), pBlockToRender->GetTexture() );
@@ -87,9 +87,9 @@ void CBlockManager::RenderBlockList()
 
 void CBlockManager::ClearBlockRenderList()
 {
-	for(std::map<unsigned int, std::vector<Vector3f*> >::iterator renderListIt = m_mBlockRenderList.begin(); renderListIt != m_mBlockRenderList.end(); ++renderListIt)
+	for(auto renderListIt = m_mBlockRenderList.begin(); renderListIt != m_mBlockRenderList.end(); ++renderListIt)
 	{
-		for(std::vector<Vector3f*>::iterator blockIt = renderListIt->second.begin(); blockIt != renderListIt->second.end(); ++blockIt)
+		for(auto blockIt = renderListIt->second.begin(); blockIt != renderListIt->second.end(); ++blockIt)
 		{
 			delete (*blockIt);
 		}

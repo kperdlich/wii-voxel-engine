@@ -68,7 +68,9 @@ CHud.o: \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/hud/../../components/../../core/grrlib/GRRLIB_settings.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/hud/../../components/../../core/grrlib/GRRLIB_texSetup.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/hud/CHotbar.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/hud/../../BasicTexture.h
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/hud/../../BasicTexture.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/hud/CPlayerInventoryHud.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/hud/IHudComponent.h
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/hud/CHud.h:
 
@@ -207,3 +209,7 @@ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/hud/../../components/
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/hud/CHotbar.h:
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/hud/../../BasicTexture.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/hud/CPlayerInventoryHud.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/world/hud/IHudComponent.h:

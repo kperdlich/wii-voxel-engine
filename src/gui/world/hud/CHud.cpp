@@ -22,3 +22,8 @@ CHud::~CHud() {
 void CHud::addComponent(UITextureElement* component) {
 	m_hudComponents.push_back( component );
 }
+
+void CHud::Init()
+{
+	m_playerInventoryHud = new CPlayerInventoryHud();
+}

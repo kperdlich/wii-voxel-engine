@@ -40,7 +40,7 @@ bool Entity::isPlayer() {
 	return m_isPlayer;
 }
 
-bool Entity::setPlayer(bool value) {
+void Entity::setPlayer(bool value) {
 	m_isPlayer = value;
 }
 

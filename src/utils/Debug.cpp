@@ -27,7 +27,7 @@ void Debug::log(char* msg) {
 
 void Debug::print() {
 	int y = DEBUG_LINE;
-	for (int i = 0; i < m_logs.size(); i++)
+	for (unsigned int i = 0; i < m_logs.size(); i++)
 	{
 		debug(m_logs[i], 0, y);
 
@@ -43,7 +43,7 @@ void Debug::print() {
 }
 
 void Debug::clear() {
-	for (int i = 0; i < m_logs.size(); i++)
+	for (unsigned int i = 0; i < m_logs.size(); i++)
 	{
 		delete [] m_logs[i];
 	}

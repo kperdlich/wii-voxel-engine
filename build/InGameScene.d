@@ -145,7 +145,10 @@ InGameScene.o: \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/build/Crosshair_png.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../entity/Player.h \
  c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../entity/../gui/world/Camera.h \
- c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../entity/../utils/Vector3f.h
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../entity/../utils/Vector3f.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../entity/CPlayerInventory.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../entity/IEquipable.h \
+ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../entity/../gui/components/UITextureElement.h
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/InGameScene.h:
 
@@ -438,3 +441,9 @@ c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../entity/Player.
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../entity/../gui/world/Camera.h:
 
 c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../entity/../utils/Vector3f.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../entity/CPlayerInventory.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../entity/IEquipable.h:
+
+c:/Users/Kevin/Desktop/MincraftWii/GameCraft/src/gui/scenes/../../entity/../gui/components/UITextureElement.h:

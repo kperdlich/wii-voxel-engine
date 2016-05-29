@@ -49,7 +49,7 @@ void Basic3DScene::draw()
 
 	m_pGameWorld->Draw();
 
-	for (std::map<unsigned int, Entity*>::iterator it = m_entityHandler->getEntities()->begin(); it != m_entityHandler->getEntities()->end(); ++it)
+	for (auto it = m_entityHandler->getEntities()->begin(); it != m_entityHandler->getEntities()->end(); ++it)
 	{
 		if (it->second->isVisible())
 		{
@@ -59,8 +59,8 @@ void Basic3DScene::draw()
 
 	GRRLIB_2dMode();
 
-	std::vector<BasicTexture*>* textures = m_TextureHandler->getTextures();
-	for ( std::vector<BasicTexture*>::iterator it = textures->begin(); it != textures->end(); it++)
+	auto textures = m_TextureHandler->getTextures();
+	for ( auto it = textures->begin(); it != textures->end(); it++)
 	{
 		if ((*it)->isVisible())
 		{
@@ -71,7 +71,7 @@ void Basic3DScene::draw()
 
 void Basic3DScene::update()
 {
-	for (int i = 0; i < m_uiElements.size(); i++)
+	for (unsigned int i = 0; i < m_uiElements.size(); i++)
 	{
 		m_uiElements[i]->update();
 	}

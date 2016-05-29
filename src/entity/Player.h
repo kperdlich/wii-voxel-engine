@@ -11,6 +11,8 @@
 #include "Entity.h"
 #include "../gui/world/Camera.h"
 #include "../utils/Vector3f.h"
+#include "CPlayerInventory.h"
+#include "IEquipable.h"
 
 class Player: public Entity {
 public:
@@ -23,7 +25,12 @@ public:
 	void moveLeft();
 	void moveRight();
 
+	void AddToInventory(IEquipable& item);
+
 	void rotate( Vector3f rotation );
+
+private:
+	CPlayerInventory* m_inventory;
 };
 
 #endif /* SRC_ENTITY_PLAYER_H_ */

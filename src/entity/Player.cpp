@@ -15,11 +15,14 @@
 Player::Player()
 {
 	m_entityRenderer = new EntityRenderer(this);
+	m_inventory = new CPlayerInventory();
 	setPlayer(true);
 }
 
-Player::~Player() {
-
+Player::~Player()
+{
+	delete m_entityRenderer;
+	delete m_inventory;
 }
 
 void Player::update()
@@ -139,4 +142,9 @@ void Player::rotate( Vector3f rotation )
 	m_rotation.setY( m_rotation.getY() + rotation.getY() );
 	m_rotation.setZ( m_rotation.getZ() + rotation.getZ() );
 
+}
+
+void Player::AddToInventory(IEquipable& item)
+{
+	m_inventory->AddToInventory(item);
 }

@@ -33,7 +33,7 @@ public:
 	bool isVisible();
 
 	bool isPlayer();
-	bool setPlayer( bool value );
+	void setPlayer( bool value );
 
 	EntityRenderer* getRenderer();
 

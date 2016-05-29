@@ -34,7 +34,7 @@ void BlockRenderer::Finish()
 // note: we start drawing with the top left corner, top right, bottom right, bottom left
 void BlockRenderer::render(/*Vector3f blockPosition, float blockSize*/ )
 {
-	for(std::vector<Vector3f*>::iterator it = m_positions->begin(); it != m_positions->end(); ++it)
+	for(auto it = m_positions->begin(); it != m_positions->end(); ++it)
 	{
 		Vector3f blockPosition = (**it);
 

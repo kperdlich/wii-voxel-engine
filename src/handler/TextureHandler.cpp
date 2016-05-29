@@ -20,7 +20,7 @@ TextureHandler::~TextureHandler() {
 
 BasicTexture* TextureHandler::getTextureByID(u16 index)
 {
-	for ( std::vector<BasicTexture*>::iterator it = m_textures.begin(); it != m_textures.end(); it++)
+	for ( auto it = m_textures.begin(); it != m_textures.end(); it++)
 	{
 		if( (*it)->getId() == index )
 		{
@@ -33,7 +33,7 @@ BasicTexture* TextureHandler::getTextureByID(u16 index)
 
 void TextureHandler::destroyTextureByName( const char* searchName )
 {
-	std::map<std::string, std::vector<BasicTexture*>::iterator>::iterator textureMapIt = m_textureMap.find( searchName );
+	auto textureMapIt = m_textureMap.find( searchName );
 	if ( textureMapIt != m_textureMap.end() )
 	{
 		(*textureMapIt->second)->unloadTexture();
@@ -51,7 +51,7 @@ void TextureHandler::destroyAllTextures()
 
 	m_textureMap.clear();
 
-	for ( std::vector<BasicTexture*>::iterator it = m_textures.begin(); it != m_textures.end(); it++)
+	for ( auto it = m_textures.begin(); it != m_textures.end(); it++)
 	{
 		(*it)->unloadTexture();
 		delete (*it);
@@ -128,13 +128,13 @@ unsigned int TextureHandler::TextureCount()
 
 bool TextureHandler::FindTexture(std::string key)
 {
-	std::map<std::string, std::vector<BasicTexture*>::iterator>::iterator textureMapIt = m_textureMap.find( key );
+	auto textureMapIt = m_textureMap.find( key );
 	return textureMapIt != m_textureMap.end();
 }
 
 BasicTexture* TextureHandler::GetTexture(std::string key)
 {
-	std::map<std::string, std::vector<BasicTexture*>::iterator>::iterator textureMapIt = m_textureMap.find( key );
+	auto textureMapIt = m_textureMap.find( key );
 	if ( textureMapIt != m_textureMap.end())
 	{
 		return (*textureMapIt->second);

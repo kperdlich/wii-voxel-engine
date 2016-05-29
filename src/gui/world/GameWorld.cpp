@@ -29,7 +29,7 @@ void CGameWorld::GenerateWorld()
 			{
 				unsigned int blockType = x % 2 == 0 ? BLOCK_TYPE_DIRT : BLOCK_TYPE_GRASS;
 				m_worldMap[x][y][z] = blockType;
-				m_blockManager->AddBlockToRenderList(blockType, new Vector3f( (x * BLOCK_SIZE) * 2, (y * BLOCK_SIZE) * 2, (z * BLOCK_SIZE) * 2));
+				m_blockManager->AddBlockToRenderList(blockType, *(new Vector3f( (x * BLOCK_SIZE) * 2, (y * BLOCK_SIZE) * 2, (z * BLOCK_SIZE) * 2)));
 			}
 		}
 	}

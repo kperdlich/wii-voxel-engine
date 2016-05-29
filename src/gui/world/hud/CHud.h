@@ -11,14 +11,19 @@
 #include <vector>
 #include "../../components/UITextureElement.h"
 #include "CHotbar.h"
+#include "CPlayerInventoryHud.h"
 
 class CHud {
 public:
 	CHud();
 	virtual ~CHud();
 	void addComponent( UITextureElement* component );
+	void Init();
 
 protected:
+	CPlayerInventoryHud* m_playerInventoryHud;
+
+
 	std::vector<UITextureElement*> m_hudComponents;
 
 };

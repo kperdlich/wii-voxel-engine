@@ -32,7 +32,7 @@ public:
 	void LoadBlocks();
 	void UnloadBlocks();
 	void RenderBlockList();
-	bool AddBlockToRenderList(unsigned int iBlockType, Vector3f *position);
+	bool AddBlockToRenderList(unsigned int iBlockType, Vector3f& position);
 	void ClearBlockRenderList();
 
 private:

@@ -32,6 +32,8 @@ SOURCES		:=	src \
 				src/entity/renderer \
 				src/utils \
 				src/input \
+				src/physics \
+				src/physics/collision \
  				src/gfx GRRLIB_addon
 DATA		:=	data \
 				fonts \
@@ -49,7 +51,7 @@ CORE := src/core
 # options for code generation
 #---------------------------------------------------------------------------------
 
-CFLAGS	= -g -O2 -mrvl -Wall $(MACHDEP) $(INCLUDE)
+CFLAGS	= -g -std=c++11 -O2 -mrvl -Wall $(MACHDEP) $(INCLUDE)
 CXXFLAGS	=	$(CFLAGS)
 
 LDFLAGS	=	-g $(MACHDEP) -mrvl -Wl,-Map,$(notdir $@).map
