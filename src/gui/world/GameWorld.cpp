@@ -26,8 +26,8 @@ CGameWorld::CGameWorld( Basic3DScene* pScene ) : m_pScene(pScene)
 #endif
 }
 
-CGameWorld::~CGameWorld() {
-	m_blockManager->UnloadBlocks();
+CGameWorld::~CGameWorld()
+{
 	delete m_blockManager;
 
 	delete[] m_pChunkLogBuffer;
@@ -42,12 +42,12 @@ CGameWorld::~CGameWorld() {
 	}
 
 	m_ChunkList.clear();
+
+	m_blockManager->UnloadBlocks();
 }
 
 void CGameWorld::GenerateWorld()
 {
-	auto playerPosition = m_pScene->GetEntityHandler().GetPlayer()->GetPosition();
-
 	for ( unsigned int x = 0; x < CHUNK_AMOUNT_X; x++)
 	{
 		for ( unsigned int z = 0; z < CHUNK_AMOUNT_Z; z++)

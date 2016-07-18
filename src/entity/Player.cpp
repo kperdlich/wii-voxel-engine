@@ -14,7 +14,7 @@
 #define PITCH_MAX 80.0f
 
 #ifdef DEBUG
-	char* pChunk = NULL;
+	char* pChunkBuffer = NULL;
 #endif
 
 
@@ -24,7 +24,7 @@ Player::Player()
 	m_inventory = new CPlayerInventory();
 	SetPlayer(true);
 #ifdef DEBUG
-	pChunk = new char[50];
+	pChunkBuffer = new char[50];
 #endif
 }
 
@@ -44,9 +44,12 @@ void Player::update()
 	u32 padButtonDown = pad->buttonsDown();
 
 #ifdef DEBUG
-	auto chunk = m_pWorld->GetChunkByWorldPosition( m_position );
-	sprintf(pChunk, "Current Chunk: %d/%d/%d", (unsigned int) chunk->GetCenterPosition().GetX(), (unsigned int) chunk->GetCenterPosition().GetY(), (unsigned int) chunk->GetCenterPosition().GetZ() );
-	Debug::getInstance().log( pChunk );
+	auto pChunk = m_pWorld->GetChunkByWorldPosition( m_position );
+	if ( pChunk )
+	{
+		sprintf(pChunkBuffer, "Current Chunk: %d/%d/%d", (unsigned int) chunk->GetCenterPosition().GetX(), (unsigned int) chunk->GetCenterPosition().GetY(), (unsigned int) chunk->GetCenterPosition().GetZ() );
+		Debug::getInstance().log( pChunkBuffer );
+	}
 #endif
 
 
@@ -95,6 +98,12 @@ void Player::update()
 
 		m_pWorld->RemoveBlockByWorldPosition( Vector3f( blockPos.GetX(), m_position.GetY() - 2, blockPos.GetZ() ));
 	}
+
+	if ( padButtonDown & WPAD_BUTTON_HOME )
+	{
+		Controller::getInstance().end();
+	}
+
 }
 
 
