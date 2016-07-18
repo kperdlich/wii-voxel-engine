@@ -10,12 +10,20 @@
 #include "Controller.h"
 #include "../utils/Debug.h"
 
+static char* pLoadedTextureLogBuffer;
+static char* pResolutionLogBuffer;
+
 Controller::Controller() {
 	m_Running = false;
 	m_sceneHandler = new SceneHandler();
 	m_inputHandler = new InputHandler();
 	m_fontHandler = new FontHandler();
 	m_basicCommandHandler = new CBasicCommandHandler();
+
+#ifdef DEBUG
+	pLoadedTextureLogBuffer = new char[50];
+	pResolutionLogBuffer = new char[30];
+#endif
 }
 
 Controller::~Controller() {
@@ -44,11 +52,14 @@ void Controller::start()
 		printGameVersion(0, 25, m_fontHandler->getNativFontByID( DEFAULT_FONT_ID ), DEFAULT_FONT_SIZE, GRRLIB_WHITE );
 		printFps( 500, 25, m_fontHandler->getNativFontByID( DEFAULT_FONT_ID ), DEFAULT_FONT_SIZE, GRRLIB_YELLOW );
 
-		Debug::getInstance().log(getResolution());
 
-		char* buffer = new char[50];
-		sprintf(buffer, "Loaded Textures in scene: %d", m_sceneHandler->getCurrentScene()->getTextureHandler()->TextureCount());
-		Debug::getInstance().log( buffer );
+
+		sprintf(pResolutionLogBuffer, "Resolution x: %d y: %d", rmode->viWidth, rmode->viHeight );
+		Debug::getInstance().log(pResolutionLogBuffer);
+
+
+		sprintf(pLoadedTextureLogBuffer, "Loaded Textures in scene: %d", m_sceneHandler->getCurrentScene()->getTextureHandler()->TextureCount());
+		Debug::getInstance().log( pLoadedTextureLogBuffer );
 
 		Debug::getInstance().print();
 		Debug::getInstance().clear();
@@ -56,13 +67,17 @@ void Controller::start()
 
 		GRRLIB_Render();
 		calculateFrameRate();
-
 	}
 
 	delete m_basicCommandHandler;
 	delete m_sceneHandler;
 	delete m_inputHandler;
 	delete m_fontHandler;
+
+#ifdef DEBUG
+	delete [] pResolutionLogBuffer;
+	delete [] pLoadedTextureLogBuffer;
+#endif
 
 	GRRLIB_Exit();
 }

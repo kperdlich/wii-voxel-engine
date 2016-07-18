@@ -152,7 +152,7 @@ int  GRRLIB_Init (void) {
     GX_SetAlphaUpdate(GX_TRUE);
     GX_SetAlphaCompare(GX_GREATER, 0, GX_AOP_AND, GX_ALWAYS, 0);
     GX_SetColorUpdate(GX_ENABLE);
-    GX_SetCullMode(GX_CULL_NONE);
+    GX_SetCullMode(GX_CULL_BACK);
     GRRLIB_ClipReset();
 
     // Default settings

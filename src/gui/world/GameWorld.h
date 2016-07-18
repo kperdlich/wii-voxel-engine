@@ -9,26 +9,51 @@
 #define SRC_GUI_WORLD_GAMEWORLD_H_
 
 #include "../../gui/scenes/Basic3DScene.h"
+#include "../../utils/MathHelper.h"
 #include "blocks/BlockManager.h"
 #include "blocks/BlockRenderer.h"
 
-#define WORLD_X 20
-#define WORLD_Y 1
-#define WORLD_Z 20
+#include "chunk/Chunk.h"
+#include <map>
 
-class Basic3DScene;
+#define CHUNK_AMOUNT_X 50
+#define CHUNK_AMOUNT_Z 50
+
+#define CHUNK_PLAYER_FOV 7 // how many chunks the player can see
+
+typedef struct ChunkPositionComparer
+{
+	bool operator()(class Vector3f* s1, class Vector3f* s2) const
+	{
+	    return s1->GetX() < s2->GetX() || (s1->GetX() == s2->GetX() && s1->GetZ() < s2->GetZ());
+	}
+} ChunkPositionComparer;
 
 class CGameWorld {
 public:
-	CGameWorld( Basic3DScene* pScene );
+	CGameWorld( class Basic3DScene* pScene );
 	virtual ~CGameWorld();
 	void GenerateWorld();
 	void Draw();
 
+	class CBlockManager& GetBlockManager();
+	class CChunk* GetChunkAt(Vector3f& centerPosition);
+	class CChunk* GetChunkByWorldPosition(Vector3f& worldPosition);
+	void RemoveBlockByWorldPosition(Vector3f blockPosition);
+
 private:
-	Basic3DScene* m_pScene;
+	bool ChunkInFov( Vector3f& chunkPosition, Vector3f& playerPosition, unsigned int fov);
+
+private:
+	class Basic3DScene* m_pScene;
 	CBlockManager* m_blockManager;
-	unsigned int m_worldMap[WORLD_X][WORLD_Y][WORLD_Z];
+	std::map<class Vector3f*, class CChunk*, ChunkPositionComparer> m_ChunkList;
+
+	char* m_pChunkLogBuffer;
+	char* m_pDisplayListSizeLogBuffer;
+
+	char* m_pBlocksLogBuffer;
+	char* m_pFaceLogBuffer;
 
 };
 

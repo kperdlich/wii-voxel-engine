@@ -17,49 +17,49 @@ Camera::~Camera() {
 
 void Camera::init()
 {
-	GRRLIB_Camera3dSettings(m_cam.getX(), m_cam.getY(), m_cam.getZ(), m_up.getX(), m_up.getY(), m_up.getZ(), m_look.getX(), m_look.getY(), m_look.getZ());
+	GRRLIB_Camera3dSettings(m_cam.GetX(), m_cam.GetY(), m_cam.GetZ(), m_up.GetX(), m_up.GetY(), m_up.GetZ(), m_look.GetX(), m_look.GetY(), m_look.GetZ());
 }
 
 
 float Camera::getWorldPositionX() {
-	return m_attachedToEntity->getPosition().getX();
+	return m_attachedToEntity->GetPosition().GetX();
 }
 
 float Camera::getWorldPositionY() {
-	return m_attachedToEntity->getPosition().getY();
+	return m_attachedToEntity->GetPosition().GetY();
 }
 
 float Camera::getWorldPositionZ() {
-	return m_attachedToEntity->getPosition().getZ();
+	return m_attachedToEntity->GetPosition().GetZ();
 }
 
 float Camera::getWorldAngleX() {
-	return m_attachedToEntity->getRotation().getX();
+	return m_attachedToEntity->getRotation().GetX();
 }
 
 float Camera::getWorldAngleY() {
-	return m_attachedToEntity->getRotation().getY();
+	return m_attachedToEntity->getRotation().GetY();
 }
 
 float Camera::getWorldAngleZ() {
-	return m_attachedToEntity->getRotation().getZ();
+	return m_attachedToEntity->getRotation().GetZ();
 }
 
 float Camera::getWorldScaleX() {
-	return m_wordScale.getX();
+	return m_wordScale.GetX();
 }
 
 float Camera::getWorldScaleY() {
-	return m_wordScale.getY();
+	return m_wordScale.GetY();
 }
 
 
 float Camera::getWorldScaleZ() {
-	return m_wordScale.getZ();
+	return m_wordScale.GetZ();
 }
 
 Vector3f Camera::getWorldPosition() {
-	return m_attachedToEntity->getPosition();
+	return m_attachedToEntity->GetPosition();
 }
 
 

@@ -9,6 +9,7 @@
 #define SRC_UTILS_MATHHELPER_H_
 
 #include <math.h>
+#include <cmath>
 #include "Vector3f.h"
 
 #define PI 3.14159265
@@ -19,7 +20,7 @@ public:
 	MathHelper();
 	virtual ~MathHelper();
 	static Vector3f calculateNewWorldPositionByRotation( float rotation, Vector3f currentWorldPosition, float smoothFactor, Vector3f movementVector );
-	static float clamp(float value, float minValue, float maxValue);
+	static float Clamp(float value, float minValue, float maxValue);
 	inline static float min(float value1, float value2 );
 	inline static float max(float value1, float value2 );
 };

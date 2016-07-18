@@ -40,14 +40,14 @@ bool BasicButton::handleMoveOver() {
 
 	bool mouseOver = GRRLIB_PtInRect(m_texture->getX(), m_texture->getY(), m_texture->getWidth(), m_texture->getHeight(), pad->getX(), pad->getY() );
 
-#ifdef DEBUG
+/*#ifdef DEBUG
 	if ( mouseOver )
 	{
 		char* clickedIn = new char[50];
 		sprintf(clickedIn, "Mouse over" );
 		Debug::getInstance().log( clickedIn );
 	}
-#endif
+#endif*/
 
 	m_texture->setVisible(!mouseOver);
 	m_highlightTexture->setVisible(mouseOver);

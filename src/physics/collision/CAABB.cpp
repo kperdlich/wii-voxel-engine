@@ -20,19 +20,19 @@ CAABB::~CAABB()
 
 bool CAABB::CoolidesWith( CAABB& box )
 {
-	return(m_vecMax.getX() > box.GetMin().getX() &&
-	    m_vecMin.getX() < box.GetMax().getX() &&
-	    m_vecMax.getY() > box.GetMin().getY() &&
-	    m_vecMin.getY() < box.GetMax().getY() &&
-	    m_vecMax.getZ() > box.GetMin().getZ() &&
-	    m_vecMin.getZ() < box.GetMax().getZ());
+	return(m_vecMax.GetX() > box.GetMin().GetX() &&
+	    m_vecMin.GetX() < box.GetMax().GetX() &&
+	    m_vecMax.GetY() > box.GetMin().GetY() &&
+	    m_vecMin.GetY() < box.GetMax().GetY() &&
+	    m_vecMax.GetZ() > box.GetMin().GetZ() &&
+	    m_vecMin.GetZ() < box.GetMax().GetZ());
 }
 
 bool CAABB::CoolidesWith( Vector3f& vecPoint)
 {
-	 if(vecPoint.getX() > m_vecMin.getX() && vecPoint.getX() < m_vecMax.getX() &&
-			 vecPoint.getY() > m_vecMin.getY() && vecPoint.getY() < m_vecMax.getY() &&
-			 vecPoint.getZ() > m_vecMin.getZ() && vecPoint.getZ() < m_vecMax.getZ())
+	 if(vecPoint.GetX() > m_vecMin.GetX() && vecPoint.GetX() < m_vecMax.GetX() &&
+			 vecPoint.GetY() > m_vecMin.GetY() && vecPoint.GetY() < m_vecMax.GetY() &&
+			 vecPoint.GetZ() > m_vecMin.GetZ() && vecPoint.GetZ() < m_vecMax.GetZ())
 	 {
 	        return true;
 	 }

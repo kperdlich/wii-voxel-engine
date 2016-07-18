@@ -28,19 +28,19 @@ void Entity::setId(unsigned int id) {
 	m_id = id;
 }
 
-void Entity::setVisible(bool value) {
+void Entity::SetVisible(bool value) {
 	m_visible = true;
 }
 
-bool Entity::isVisible() {
+bool Entity::IsVisible() {
 	return m_visible;
 }
 
-bool Entity::isPlayer() {
+bool Entity::IsPlayer() {
 	return m_isPlayer;
 }
 
-void Entity::setPlayer(bool value) {
+void Entity::SetPlayer(bool value) {
 	m_isPlayer = value;
 }
 
@@ -48,12 +48,12 @@ EntityRenderer* Entity::getRenderer() {
 	return m_entityRenderer;
 }
 
-void Entity::setPosition( Vector3f position )
+void Entity::SetPosition( Vector3f position )
 {
 	m_position = position;
 }
 
-Vector3f Entity::getPosition()
+Vector3f Entity::GetPosition()
 {
 	return m_position;
 }
@@ -66,4 +66,9 @@ void Entity::setRotation( Vector3f rotation )
 Vector3f Entity::getRotation()
 {
 	return m_rotation;
+}
+
+void Entity::SetWorld(class CGameWorld* pWorld)
+{
+	m_pWorld = pWorld;
 }

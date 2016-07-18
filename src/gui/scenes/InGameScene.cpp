@@ -17,27 +17,44 @@
 #define IGS_HUD_HOTBAR "IGS_HUD_HOTBAR"
 #define IGS_HUD_CROSSHAIR "IGS_HUD_CROSSHAIR"
 
-InGameScene::InGameScene() { }
 
-InGameScene::~InGameScene() { }
+static char* pPlayerPositionLogBuffer;
+static char* pPlayerRotationLogBuffer;
+
+InGameScene::InGameScene()
+{
+	#ifdef DEBUG
+		pPlayerPositionLogBuffer = new char[100];
+		pPlayerRotationLogBuffer = new char[100];
+	#endif
+}
+
+InGameScene::~InGameScene()
+{
+	#ifdef DEBUG
+		delete [] pPlayerPositionLogBuffer;
+		delete [] pPlayerRotationLogBuffer;
+	#endif
+}
 
 void InGameScene::update()
 {
 	Basic3DScene::update();
-	Player* player = static_cast<Player*>(m_entityHandler->getPlayer());
+	Player* player = static_cast<Player*>(m_entityHandler->GetPlayer());
 	player->update();
 }
 
 void InGameScene::load()
 {
 	Basic3DScene::load();
-	initEntities();
+
 	m_uiElements.push_back( new CHotbar( IGS_HUD_HOTBAR, m_TextureHandler->createTexture(Hotbar_png, IGS_HUD_HOTBAR)) );
 	m_uiElements.push_back( new Cursor( IGS_HUD_CROSSHAIR, m_TextureHandler->createTexture(Crosshair_png, IGS_HUD_CROSSHAIR)) );
 
 	m_pGameWorld = new CGameWorld(this);
 	m_pGameWorld->GenerateWorld();
 
+	initEntities();
 }
 
 void InGameScene::draw()
@@ -45,15 +62,13 @@ void InGameScene::draw()
 	Basic3DScene::draw();
 
 #ifdef DEBUG
-	Player* player = static_cast<Player*>(m_entityHandler->getPlayer());
+	Player* player = static_cast<Player*>(m_entityHandler->GetPlayer());
 
-	char* playerPosition = new char[100];
-	sprintf(playerPosition, "Player Position: x:%i, y:%i, z:%i", static_cast<int>(player->getPosition().getX()), static_cast<int>(player->getPosition().getY()), static_cast<int>(player->getPosition().getZ()));
-	Debug::getInstance().log( playerPosition );
+	sprintf(pPlayerPositionLogBuffer, "Player Position: x:%i, y:%i, z:%i", static_cast<int>(player->GetPosition().GetX()), static_cast<int>(player->GetPosition().GetY()), static_cast<int>(player->GetPosition().GetZ()));
+	Debug::getInstance().log( pPlayerPositionLogBuffer );
 
-	char* playerRotation = new char[100];
-	sprintf(playerRotation, "Player Rotation: x:%i, y:%i, z:%i", static_cast<int>(player->getRotation().getX()), static_cast<int>(player->getRotation().getY()), static_cast<int>(player->getRotation().getZ()));
-	Debug::getInstance().log( playerRotation );
+	sprintf(pPlayerRotationLogBuffer, "Player Rotation: x:%i, y:%i, z:%i", static_cast<int>(player->getRotation().GetX()), static_cast<int>(player->getRotation().GetY()), static_cast<int>(player->getRotation().GetZ()));
+	Debug::getInstance().log( pPlayerRotationLogBuffer );
 #endif
 
 }
@@ -61,7 +76,8 @@ void InGameScene::draw()
 void InGameScene::initEntities()
 {
 	Player* pPlayer = new Player();
-	pPlayer->setPosition(Vector3f(.0f, 2.0f, 10.0f));
+	pPlayer->SetPosition(Vector3f(.0f, CHUNK_SIZE_Y + 1.0f, 10.0f));
+	pPlayer->SetWorld(m_pGameWorld);
 	m_mainCamera->attachTo(*pPlayer);
 	m_entityHandler->addEntity(pPlayer);
 }

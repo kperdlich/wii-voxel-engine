@@ -15,8 +15,6 @@
 #include "../world/Camera.h"
 #include "../world/GameWorld.h"
 
-class CGameWorld;
-
 class Basic3DScene: public BasicScene {
 public:
 	Basic3DScene();
@@ -27,13 +25,14 @@ public:
 	virtual void draw();
 	virtual void update();
 
+	class EntityHandler& GetEntityHandler();
 
 protected:
-	Renderer3D* getRenderer();
-	EntityHandler* m_entityHandler;
+	class Renderer3D* getRenderer();
+	class EntityHandler* m_entityHandler;
 	std::vector<UIElement*> m_uiElements;
-	Camera* m_mainCamera; // todo: move this to the world class
-	CGameWorld* m_pGameWorld;
+	class Camera* m_mainCamera; // todo: move this to the world class
+	class CGameWorld* m_pGameWorld;
 };
 
 #endif /* SRC_GUI_SCENES_BASIC3DSCENE_H_ */

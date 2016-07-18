@@ -17,7 +17,7 @@ public:
 	Renderer3D();
 	virtual ~Renderer3D();
 	void draw2DTexture( BasicTexture* tex );
-	void drawEntity(Entity* entity);
+	void drawEntity(class Entity* entity);
 };
 
 #endif /* SRC_GUI_RENDERER_RENDERER3D_H_ */

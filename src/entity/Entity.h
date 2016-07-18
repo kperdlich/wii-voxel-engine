@@ -11,6 +11,7 @@
 #include "../core/grrlib.h"
 #include "renderer/EntityRenderer.h"
 #include "../utils/MathHelper.h"
+#include "../gui/world/GameWorld.h"
 
 class EntityRenderer;
 
@@ -23,17 +24,19 @@ public:
 	uint getId();
 	void setId( unsigned int id );
 
-	void setPosition( Vector3f position );
-	Vector3f getPosition();
+	void SetPosition( Vector3f position );
+	Vector3f GetPosition();
 
 	void setRotation( Vector3f position );
 	Vector3f getRotation();
 
-	void setVisible(bool value);
-	bool isVisible();
+	void SetVisible(bool value);
+	bool IsVisible();
 
-	bool isPlayer();
-	void setPlayer( bool value );
+	bool IsPlayer();
+	void SetPlayer( bool value );
+
+	void SetWorld(class CGameWorld* pWorld);
 
 	EntityRenderer* getRenderer();
 
@@ -43,6 +46,7 @@ protected:
 	Vector3f m_position, m_rotation;
 	uint m_id;
 	EntityRenderer* m_entityRenderer;
+	class CGameWorld* m_pWorld;
 
 };
 

@@ -25,6 +25,7 @@ SOURCES		:=	src \
 				src/gui/world \
 				src/gui/world/hud \
 				src/gui/world/blocks \
+				src/gui/world/chunk \
 				src/gui/components \
 				src/gui/renderer \
 				src/gui/scenes \

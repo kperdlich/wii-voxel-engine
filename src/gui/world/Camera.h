@@ -17,7 +17,7 @@ public:
 	virtual ~Camera();
 	void init();
 
-	void attachTo(Entity& entity);
+	void attachTo(class Entity& entity);
 
 	void setWorldPosititon(Vector3f position);
 	void setWorldAngle(Vector3f angle);

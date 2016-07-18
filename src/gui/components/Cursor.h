@@ -18,6 +18,7 @@ public:
 
 	void setColor(u32 color);
 	u32 getColor();
+
 };
 
 #endif /* SRC_GUI_COMPONENTS_CURSOR_H_ */

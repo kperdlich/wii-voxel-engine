@@ -9,7 +9,7 @@
 
 static void debug( const char *str, int x, int y )
 {
-	GRRLIB_PrintfTTF( x, y, Controller::getInstance().getFontHandler()->getNativFontByID( DEFAULT_FONT_ID ), str, DEFAULT_FONT_SIZE, GRRLIB_RED );
+	GRRLIB_PrintfTTF( x, y, Controller::getInstance().getFontHandler()->getNativFontByID( DEFAULT_FONT_ID ), str, DEFAULT_FONT_SIZE, GRRLIB_WHITE );
 }
 
 Debug::Debug() {
@@ -43,10 +43,10 @@ void Debug::print() {
 }
 
 void Debug::clear() {
-	for (unsigned int i = 0; i < m_logs.size(); i++)
+	/*for (unsigned int i = 0; i < m_logs.size(); i++)
 	{
 		delete [] m_logs[i];
-	}
+	}*/
 	m_logs.clear();
 }
 

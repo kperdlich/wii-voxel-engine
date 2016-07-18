@@ -17,27 +17,27 @@ Vector3f::Vector3f() : m_x(0), m_y(0), m_z(0) {
 
 Vector3f::~Vector3f() { }
 
-float Vector3f::getX() {
+float Vector3f::GetX() {
 	return m_x;
 }
 
-void Vector3f::setX(float x) {
+void Vector3f::SetX(float x) {
 	m_x = x;
 }
 
-float Vector3f::getY() {
+float Vector3f::GetY() {
 	return m_y;
 }
 
-void Vector3f::setY(float y) {
+void Vector3f::SetY(float y) {
 	m_y = y;
 }
 
-float Vector3f::getZ() {
+float Vector3f::GetZ() {
 	return m_z;
 }
 
-void Vector3f::setZ(float z) {
+void Vector3f::SetZ(float z) {
 	m_z = z;
 }
 
@@ -56,3 +56,5 @@ Vector3f Vector3f::Left() {
 Vector3f Vector3f::Right( ) {
 	return Vector3f( -1, 0, 0 );
 }
+
+

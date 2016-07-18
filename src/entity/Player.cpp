@@ -9,14 +9,23 @@
 #include "../utils/MathHelper.h"
 #include "../utils/Debug.h"
 
-#define ROTATION_SPEED 0.9f
+#define ROTATION_SPEED 1.4f
+#define MOVEMENT_SPEED 0.3f
 #define PITCH_MAX 80.0f
+
+#ifdef DEBUG
+	char* pChunk = NULL;
+#endif
+
 
 Player::Player()
 {
 	m_entityRenderer = new EntityRenderer(this);
 	m_inventory = new CPlayerInventory();
-	setPlayer(true);
+	SetPlayer(true);
+#ifdef DEBUG
+	pChunk = new char[50];
+#endif
 }
 
 Player::~Player()
@@ -25,11 +34,21 @@ Player::~Player()
 	delete m_inventory;
 }
 
+
+
 void Player::update()
 {
 	WiiPad* pad = Controller::getInstance().getInputHandler()->getPadByID( WII_PAD_0 );
 
 	u32 padButtonHeld = pad->buttonsHeld();
+	u32 padButtonDown = pad->buttonsDown();
+
+#ifdef DEBUG
+	auto chunk = m_pWorld->GetChunkByWorldPosition( m_position );
+	sprintf(pChunk, "Current Chunk: %d/%d/%d", (unsigned int) chunk->GetCenterPosition().GetX(), (unsigned int) chunk->GetCenterPosition().GetY(), (unsigned int) chunk->GetCenterPosition().GetZ() );
+	Debug::getInstance().log( pChunk );
+#endif
+
 
 	if ( pad->getY() <= 15.0f )
 	{
@@ -65,6 +84,17 @@ void Player::update()
 	{
 		moveRight();
 	}
+
+	if ( padButtonDown & WPAD_BUTTON_B)
+	{
+		auto blockPos = MathHelper::calculateNewWorldPositionByRotation(
+					m_rotation.GetY(),
+					Vector3f(m_position.GetX() + .5f, m_position.GetY(), m_position.GetZ() + .5f),
+					ROTATION_SPEED,
+					Vector3f::Forward());
+
+		m_pWorld->RemoveBlockByWorldPosition( Vector3f( blockPos.GetX(), m_position.GetY() - 2, blockPos.GetZ() ));
+	}
 }
 
 
@@ -72,27 +102,27 @@ void Player::update()
 void Player::moveForward()
 {
 	m_position = MathHelper::calculateNewWorldPositionByRotation(
-			m_rotation.getY(),
+			m_rotation.GetY(),
 			m_position,
-			ROTATION_SPEED,
+			MOVEMENT_SPEED,
 			Vector3f::Forward());
 }
 
 void Player::moveBackward()
 {
 	m_position = MathHelper::calculateNewWorldPositionByRotation(
-				m_rotation.getY(),
+				m_rotation.GetY(),
 				m_position,
-				ROTATION_SPEED,
+				MOVEMENT_SPEED,
 				Vector3f::Backward());
 }
 
 void Player::moveLeft()
 {
 	m_position = MathHelper::calculateNewWorldPositionByRotation(
-					m_rotation.getY() - 90,
+					m_rotation.GetY() - 90,
 					m_position,
-					ROTATION_SPEED,
+					MOVEMENT_SPEED,
 					Vector3f::Backward());
 
 }
@@ -101,9 +131,9 @@ void Player::moveRight()
 {
 
 	m_position = MathHelper::calculateNewWorldPositionByRotation(
-						m_rotation.getY() + 90,
+						m_rotation.GetY() + 90,
 						m_position,
-						ROTATION_SPEED,
+						MOVEMENT_SPEED,
 						Vector3f::Backward());
 
 }
@@ -111,36 +141,36 @@ void Player::moveRight()
 
 void Player::rotate( Vector3f rotation )
 {
-	if ( m_rotation.getX() > 360 )
+	if ( m_rotation.GetX() > 360 )
 	{
-		m_rotation.setX(m_rotation.getX() - 360);
+		m_rotation.SetX(m_rotation.GetX() - 360);
 	}
-	else if(m_rotation.getX() < -360)
+	else if(m_rotation.GetX() < -360)
 	{
-		m_rotation.setX(m_rotation.getX() + 360);
-	}
-
-	if ( m_rotation.getY() > 360 )
-	{
-		m_rotation.setY(m_rotation.getY() - 360);
-	}
-	else if(m_rotation.getY() < -360)
-	{
-		m_rotation.setY(m_rotation.getY() + 360);
+		m_rotation.SetX(m_rotation.GetX() + 360);
 	}
 
-	if ( m_rotation.getZ() > 360 )
+	if ( m_rotation.GetY() > 360 )
 	{
-		m_rotation.setZ(m_rotation.getZ() - 360);
+		m_rotation.SetY(m_rotation.GetY() - 360);
 	}
-	else if(rotation.getZ() < -360)
+	else if(m_rotation.GetY() < -360)
 	{
-		m_rotation.setZ(m_rotation.getZ() + 360);
+		m_rotation.SetY(m_rotation.GetY() + 360);
 	}
 
-	m_rotation.setX( MathHelper::clamp(m_rotation.getX() + rotation.getX(), -PITCH_MAX, PITCH_MAX));
-	m_rotation.setY( m_rotation.getY() + rotation.getY() );
-	m_rotation.setZ( m_rotation.getZ() + rotation.getZ() );
+	if ( m_rotation.GetZ() > 360 )
+	{
+		m_rotation.SetZ(m_rotation.GetZ() - 360);
+	}
+	else if(rotation.GetZ() < -360)
+	{
+		m_rotation.SetZ(m_rotation.GetZ() + 360);
+	}
+
+	m_rotation.SetX( MathHelper::Clamp(m_rotation.GetX() + rotation.GetX(), -PITCH_MAX, PITCH_MAX));
+	m_rotation.SetY( m_rotation.GetY() + rotation.GetY() );
+	m_rotation.SetZ( m_rotation.GetZ() + rotation.GetZ() );
 
 }
 

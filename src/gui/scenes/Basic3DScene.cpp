@@ -51,7 +51,7 @@ void Basic3DScene::draw()
 
 	for (auto it = m_entityHandler->getEntities()->begin(); it != m_entityHandler->getEntities()->end(); ++it)
 	{
-		if (it->second->isVisible())
+		if (it->second->IsVisible())
 		{
 			getRenderer()->drawEntity( it->second );
 		}
@@ -79,6 +79,11 @@ void Basic3DScene::update()
 
 Renderer3D* Basic3DScene::getRenderer() {
 	return static_cast<Renderer3D*>(m_Renderer);
+}
+
+EntityHandler& Basic3DScene::GetEntityHandler()
+{
+	return *m_entityHandler;
 }
 
 void Basic3DScene::unload() {

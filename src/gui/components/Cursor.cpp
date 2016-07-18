@@ -9,14 +9,24 @@
 #include "../../handler/Controller.h"
 #include "../../utils/Debug.h"
 
+static char* cursorPositionLogBuffer;
+
 Cursor::Cursor( const char* name, BasicTexture* tex ) : UITextureElement( 0, 0, name, tex ) {
 
 	setX( rmode->viWidth / 2 );
 	setY( rmode->viHeight / 2 );
+
+#ifdef DEBUG
+	cursorPositionLogBuffer = new char[50];
+#endif
 }
+
 
 Cursor::~Cursor() {
 
+#ifdef DEBUG
+	delete [] cursorPositionLogBuffer;
+#endif
 
 }
 
@@ -25,9 +35,8 @@ void Cursor::update() {
 	WiiPad* pad = Controller::getInstance().getInputHandler()->getPadByID( WII_PAD_0 );
 
 #ifdef DEBUG
-	char* bufferXY = new char[100];
-	sprintf(bufferXY, "Cursor x: %d y: %d", (int)pad->getX(), (int) pad->getY());
-	Debug::getInstance().log( bufferXY );
+	sprintf(cursorPositionLogBuffer, "Cursor x: %d y: %d", (int)pad->getX(), (int) pad->getY());
+	Debug::getInstance().log( cursorPositionLogBuffer );
 #endif
 
 	setX( pad->getX());

@@ -50,10 +50,10 @@ void EntityHandler::clear() {
 	m_entityMap.clear();
 }
 
-Entity* EntityHandler::getPlayer() {
+Entity* EntityHandler::GetPlayer() {
 	for (std::map<unsigned int, Entity*>::iterator it = m_entityMap.begin(); it != m_entityMap.end(); ++it)
 	{
-		if ( it->second->isPlayer() )
+		if ( it->second->IsPlayer() )
 		{
 			return it->second;
 		}

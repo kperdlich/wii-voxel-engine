@@ -18,12 +18,18 @@
 
 #define BLOCK_SIZE .5f
 
-#define BLOCK_TYPE_DIRT 0
-#define BLOCK_TYPE_GRASS 1
+//#define BLOCK_TYPE_DIRT 0
+//#define BLOCK_TYPE_GRASS 1
 
 #define BLOCK_TEXTURE_DIRT "BLOCK_TEXTURE_DIRT"
 #define BLOCK_TEXTURE_GRASS "BLOCK_TEXTURE_GRASS"
 
+enum BlockType {
+
+	AIR,
+	DIRT,
+	GRASS
+};
 
 class CBlockManager {
 public:
@@ -31,15 +37,13 @@ public:
 	virtual ~CBlockManager();
 	void LoadBlocks();
 	void UnloadBlocks();
-	void RenderBlockList();
-	bool AddBlockToRenderList(unsigned int iBlockType, Vector3f& position);
-	void ClearBlockRenderList();
+
+	CBlock* GetBlockByType(const BlockType type);
 
 private:
-	CBlock* GetBlockByType(unsigned int type);
 
-	std::map<unsigned int, CBlock*> m_blocks;
-	std::map<unsigned int, std::vector<Vector3f*> > m_mBlockRenderList;
+	std::map<BlockType, CBlock*> m_blocks;
+	std::map<BlockType, std::vector<Vector3f*> > m_mBlockRenderList;
 	TextureHandler* m_pTextureHandler;
 	BlockRenderer* m_blockRenderer;
 
