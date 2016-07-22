@@ -40,8 +40,8 @@ public:
 	Vector3f& GetCenterPosition();
 
 	void UpdateChunkNeighbors();
-
 	void RemoveBlockByWorldPosition(Vector3f blockPosition);
+	Vector3f GetBlockPositionByWorldPosition(Vector3f& worldPosition);
 
 private:
 	void CreateDisplayList(size_t sizeOfDisplayList);
@@ -51,6 +51,7 @@ private:
 	void ClearBlockRenderList();
 	void BuildBlockRenderList();
 	bool IsBlockVisible(uint32_t iX, uint32_t iY, uint32_t iZ, BlockFaceVisibiltyData* &pFaceData );
+	void GetLocalBlockPositionByWorldPosition(Vector3f& blockWorldPosition, unsigned int* x, unsigned int* y, unsigned int* z);
 
 private:
 	bool m_IsDirty;

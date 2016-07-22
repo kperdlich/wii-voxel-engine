@@ -12,7 +12,7 @@ CBlock::CBlock() {
 }
 
 
-CBlock::CBlock( float size, Texture* pTexture ) : /*Entity(position), */ m_size(size), m_pTexture(pTexture)
+CBlock::CBlock( float size, Texture* pTexture ) : m_size(size), m_pTexture(pTexture)
 {
 
 }

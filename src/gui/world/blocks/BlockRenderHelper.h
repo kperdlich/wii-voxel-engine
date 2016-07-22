@@ -7,19 +7,19 @@
 
 typedef struct BlockFaceVisibiltyData
 {
-	bool LeftFace = false;
-	bool RightFace = false;
-	bool FrontFace = false;
-	bool BackFace = false;
-	bool TopFace = false;
-	bool BottomFace = false;
-	unsigned int Faces = 0;
+	bool bLeftFace = false;
+	bool bRightFace = false;
+	bool bFrontFace = false;
+	bool bBackFace = false;
+	bool bTopFace = false;
+	bool bBottomFace = false;
+	unsigned int faces = 0;
 } BlockFaceVisibiltyData;
 
 typedef struct BlockRenderData
 {
-	BlockFaceVisibiltyData* FaceData = NULL;
-	Vector3f* BlockPosition = NULL;
+	BlockFaceVisibiltyData* pFaceData = NULL;
+	Vector3f* pBlockPosition = NULL;
 } BlockRenderData;
 
 

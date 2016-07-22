@@ -39,15 +39,21 @@ public:
 	class CBlockManager& GetBlockManager();
 	class CChunk* GetChunkAt(Vector3f& centerPosition);
 	class CChunk* GetChunkByWorldPosition(Vector3f& worldPosition);
-	void RemoveBlockByWorldPosition(Vector3f blockPosition);
+	void RemoveBlockByWorldPosition(Vector3f& blockPosition);
+	void UpdateFocusedBlockByWorldPosition( Vector3f& blockPosition );
+
 
 private:
 	bool ChunkInFov( Vector3f& chunkPosition, Vector3f& playerPosition, unsigned int fov);
+	void DrawFocusOnSelectedCube();
 
 private:
 	class Basic3DScene* m_pScene;
 	CBlockManager* m_blockManager;
 	std::map<class Vector3f*, class CChunk*, ChunkPositionComparer> m_ChunkList;
+
+	Vector3f m_SelectedBlockPosition;
+	bool m_bHasSelectedBlock = false;
 
 	char* m_pChunkLogBuffer;
 	char* m_pDisplayListSizeLogBuffer;

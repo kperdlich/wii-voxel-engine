@@ -94,7 +94,7 @@ void GRRLIB_3dMode(f32 minDist, f32 maxDist, f32 fov, bool texturemode, bool nor
     GX_LoadProjectionMtx(_projectionMtx, GX_PERSPECTIVE);
     GX_SetZMode (GX_TRUE, GX_LEQUAL, GX_TRUE);
 
-    GX_SetCullMode(GX_CULL_NONE);
+    GX_SetCullMode(GX_CULL_BACK);
 
     GX_ClearVtxDesc();
     GX_SetVtxDesc(GX_VA_POS, GX_DIRECT);

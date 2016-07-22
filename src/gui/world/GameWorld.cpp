@@ -124,6 +124,8 @@ void CGameWorld::Draw()
 		//}
 	}
 
+	DrawFocusOnSelectedCube();
+
 	// todo boost the performance of debug logs
 #ifdef DEBUG
 	sprintf(m_pChunkLogBuffer, "Rendered Chunks: %d/%d", chunksInFrustrum, m_ChunkList.size());
@@ -171,12 +173,39 @@ CChunk* CGameWorld::GetChunkByWorldPosition(Vector3f& worldPosition)
 	return GetChunkAt(chunkCenterPosition);
 }
 
-void CGameWorld::RemoveBlockByWorldPosition(Vector3f blockPosition)
+void CGameWorld::RemoveBlockByWorldPosition(Vector3f& blockPosition)
 {
 	auto pChunk = GetChunkByWorldPosition(blockPosition);
 	if ( pChunk )
 	{
 		pChunk->RemoveBlockByWorldPosition( blockPosition );
+	}
+}
+
+void CGameWorld::UpdateFocusedBlockByWorldPosition( Vector3f& blockPosition )
+{
+	auto pChunk = GetChunkByWorldPosition(blockPosition);
+	if ( pChunk )
+	{
+		m_SelectedBlockPosition = pChunk->GetBlockPositionByWorldPosition( blockPosition );
+		m_bHasSelectedBlock = true;
+	}
+	else
+	{
+		m_bHasSelectedBlock = false;
+	}
+}
+
+void CGameWorld::DrawFocusOnSelectedCube()
+{
+	if (m_bHasSelectedBlock )
+	{
+		m_pScene->SetGraphicsMode(false, false);
+		BlockRenderer renderer;
+		renderer.Prepare(NULL, BLOCK_SIZE, NULL);
+		renderer.DrawFocusOnSelectedCube( m_SelectedBlockPosition );
+		renderer.Finish();
+		m_pScene->SetGraphicsMode(true, true);
 	}
 }
 

@@ -27,6 +27,8 @@ public:
 
 	class EntityHandler& GetEntityHandler();
 
+	void SetGraphicsMode(bool textureMode, bool normalMode);
+
 protected:
 	class Renderer3D* getRenderer();
 	class EntityHandler* m_entityHandler;

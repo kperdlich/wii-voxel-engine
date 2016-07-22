@@ -113,36 +113,36 @@ bool CChunk::IsBlockVisible(uint32_t iX, uint32_t iY, uint32_t iZ, BlockFaceVisi
 	{
 		if ( iX == 0 && !m_bChunkLeft)
 		{
-			localFaceData.LeftFace = true;
-			localFaceData.Faces++;
+			localFaceData.bLeftFace = true;
+			localFaceData.faces++;
 			isVisible = true;
 		}
 
 		if ( iX == CHUNK_SIZE_X -1 && !m_bChunkRight)
 		{
-			localFaceData.RightFace = true;
-			localFaceData.Faces++;
+			localFaceData.bRightFace = true;
+			localFaceData.faces++;
 			isVisible = true;
 		}
 
 		if ( iZ == 0 && !m_bChunkBack)
 		{
-			localFaceData.BackFace = true;
-			localFaceData.Faces++;
+			localFaceData.bBackFace = true;
+			localFaceData.faces++;
 			isVisible = true;
 		}
 
 		if (iZ == CHUNK_SIZE_Z -1 && !m_bChunkFront)
 		{
-			localFaceData.FrontFace = true;
-			localFaceData.Faces++;
+			localFaceData.bFrontFace = true;
+			localFaceData.faces++;
 			isVisible = true;
 		}
 
 		if ( iY == CHUNK_SIZE_Y -1 )
 		{
-			localFaceData.TopFace = true;
-			localFaceData.Faces++;
+			localFaceData.bTopFace = true;
+			localFaceData.faces++;
 			isVisible = true;
 		}
 
@@ -150,44 +150,44 @@ bool CChunk::IsBlockVisible(uint32_t iX, uint32_t iY, uint32_t iZ, BlockFaceVisi
 		 // Check all 6 block faces if neighbor is air
 		if ( iX + 1 <= CHUNK_SIZE_X -1 && m_pBlocks[iX + 1][iY][iZ] == BlockType::AIR)
 		{
-			localFaceData.RightFace = true;
-			localFaceData.Faces++;
+			localFaceData.bRightFace = true;
+			localFaceData.faces++;
 			isVisible = true;
 		}
 
 		if ( iX > 0 && m_pBlocks[iX - 1][iY][iZ] == BlockType::AIR)
 		{
-			localFaceData.LeftFace = true;
-			localFaceData.Faces++;
+			localFaceData.bLeftFace = true;
+			localFaceData.faces++;
 			isVisible = true;
 		}
 
 		if ( iY + 1 <= CHUNK_SIZE_Y -1 && m_pBlocks[iX][iY + 1][iZ] == BlockType::AIR)
 		{
-			localFaceData.TopFace = true;
-			localFaceData.Faces++;
+			localFaceData.bTopFace = true;
+			localFaceData.faces++;
 			isVisible = true;
 		}
 
 
 		if (iY > 0 && m_pBlocks[iX][iY - 1][iZ] == BlockType::AIR)
 		{
-			localFaceData.BottomFace = true;
-			localFaceData.Faces++;
+			localFaceData.bBottomFace = true;
+			localFaceData.faces++;
 			isVisible = true;
 		}
 
 		if ( iZ + 1 <= CHUNK_SIZE_Z -1 && m_pBlocks[iX][iY][iZ + 1] == BlockType::AIR)
 		{
-			localFaceData.FrontFace = true;
-			localFaceData.Faces++;
+			localFaceData.bFrontFace = true;
+			localFaceData.faces++;
 			isVisible = true;
 		}
 
 		if ( iZ > 0 && m_pBlocks[iX][iY][iZ - 1] == BlockType::AIR)
 		{
-			localFaceData.BackFace = true;
-			localFaceData.Faces++;
+			localFaceData.bBackFace = true;
+			localFaceData.faces++;
 			isVisible = true;
 		}
 
@@ -195,13 +195,13 @@ bool CChunk::IsBlockVisible(uint32_t iX, uint32_t iY, uint32_t iZ, BlockFaceVisi
 		if (isVisible)
 		{
 			pFaceData = new BlockFaceVisibiltyData();
-			pFaceData->BackFace = localFaceData.BackFace;
-			pFaceData->BottomFace = localFaceData.BottomFace;
-			pFaceData->FrontFace = localFaceData.FrontFace;
-			pFaceData->LeftFace = localFaceData.LeftFace;
-			pFaceData->RightFace = localFaceData.RightFace;
-			pFaceData->TopFace = localFaceData.TopFace;
-			pFaceData->Faces = localFaceData.Faces;
+			pFaceData->bBackFace = localFaceData.bBackFace;
+			pFaceData->bBottomFace = localFaceData.bBottomFace;
+			pFaceData->bFrontFace = localFaceData.bFrontFace;
+			pFaceData->bLeftFace = localFaceData.bLeftFace;
+			pFaceData->bRightFace = localFaceData.bRightFace;
+			pFaceData->bTopFace = localFaceData.bTopFace;
+			pFaceData->faces = localFaceData.faces;
 		}
 	}
 
@@ -224,11 +224,11 @@ void CChunk::BuildBlockRenderList()
 				if ( IsBlockVisible(x, y, z, pFaceData))
 				{
 					BlockRenderData* renderData = new BlockRenderData();
-					renderData->FaceData = pFaceData;
-					renderData->BlockPosition = new Vector3f( (m_pCenterPosition->GetX() - (CHUNK_SIZE_X / 2) + (x * BLOCK_SIZE * 2)), (m_pCenterPosition->GetY() - (CHUNK_SIZE_Y / 2) + (y * BLOCK_SIZE * 2)), (m_pCenterPosition->GetZ() - (CHUNK_SIZE_Z / 2) + (z * BLOCK_SIZE * 2)));
+					renderData->pFaceData = pFaceData;
+					renderData->pBlockPosition = new Vector3f( (m_pCenterPosition->GetX() - (CHUNK_SIZE_X / 2) + (x * BLOCK_SIZE * 2)), (m_pCenterPosition->GetY() - (CHUNK_SIZE_Y / 2) + (y * BLOCK_SIZE * 2)), (m_pCenterPosition->GetZ() - (CHUNK_SIZE_Z / 2) + (z * BLOCK_SIZE * 2)));
 					AddBlockToRenderList(m_pBlocks[x][y][z], *renderData);
 					m_AmountOfBlocks++;
-					m_AmountOfFaces += pFaceData->Faces;
+					m_AmountOfFaces += pFaceData->faces;
 				}
 			}
 		}
@@ -241,8 +241,8 @@ void CChunk::ClearBlockRenderList()
 	{
 		for(auto blockIt = renderListIt->second.begin(); blockIt != renderListIt->second.end(); ++blockIt)
 		{
-			delete ((*blockIt)->FaceData);
-			delete ((*blockIt)->BlockPosition);
+			delete ((*blockIt)->pFaceData);
+			delete ((*blockIt)->pBlockPosition);
 			delete (*blockIt);
 		}
 	}
@@ -331,12 +331,26 @@ void CChunk::RebuildDisplayList()
 
 void CChunk::RemoveBlockByWorldPosition(Vector3f blockPosition)
 {
-	unsigned int x = (unsigned int) blockPosition.GetX() % (unsigned int) CHUNK_SIZE_X;
-	unsigned int y = (unsigned int) blockPosition.GetY() % (unsigned int) CHUNK_SIZE_Y;
-	unsigned int z = (unsigned int) blockPosition.GetZ() % (unsigned int) CHUNK_SIZE_Z;
+	unsigned int x,y,z;
+
+	GetLocalBlockPositionByWorldPosition(blockPosition, &x, &y, &z);
 
 	m_pBlocks[x][y][z] = BlockType::AIR;
 
 	m_IsDirty = true;
 }
 
+void CChunk::GetLocalBlockPositionByWorldPosition(Vector3f& blockWorldPosition, unsigned int* x, unsigned int* y, unsigned int* z)
+{
+	*x = (unsigned int) blockWorldPosition.GetX() % (unsigned int) CHUNK_SIZE_X;
+	*y = (unsigned int) blockWorldPosition.GetY() % (unsigned int) CHUNK_SIZE_Y;
+	*z = (unsigned int) blockWorldPosition.GetZ() % (unsigned int) CHUNK_SIZE_Z;
+}
+
+Vector3f CChunk::GetBlockPositionByWorldPosition(Vector3f& worldPosition)
+{
+	unsigned int x,y,z;
+	GetLocalBlockPositionByWorldPosition(worldPosition, &x, &y, &z);
+
+	return Vector3f( (m_pCenterPosition->GetX() - (CHUNK_SIZE_X / 2) + (x * BLOCK_SIZE * 2)), (m_pCenterPosition->GetY() - (CHUNK_SIZE_Y / 2) + (y * BLOCK_SIZE * 2)), (m_pCenterPosition->GetZ() - (CHUNK_SIZE_Z / 2) + (z * BLOCK_SIZE * 2)));
+}

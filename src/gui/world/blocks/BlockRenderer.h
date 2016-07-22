@@ -19,6 +19,7 @@ public:
 	void Prepare(std::vector<BlockRenderData*> *positionList, float blockSize, Texture* ptexture);
 	void Rebuild();
 	void Finish();
+	void DrawFocusOnSelectedCube(Vector3f& blockWorldPosition);
 
 private:
 	float m_renderBlockSize;

@@ -47,7 +47,7 @@ void Player::update()
 	auto pChunk = m_pWorld->GetChunkByWorldPosition( m_position );
 	if ( pChunk )
 	{
-		sprintf(pChunkBuffer, "Current Chunk: %d/%d/%d", (unsigned int) chunk->GetCenterPosition().GetX(), (unsigned int) chunk->GetCenterPosition().GetY(), (unsigned int) chunk->GetCenterPosition().GetZ() );
+		sprintf(pChunkBuffer, "Current Chunk: %d/%d/%d", (unsigned int) pChunk->GetCenterPosition().GetX(), (unsigned int) pChunk->GetCenterPosition().GetY(), (unsigned int) pChunk->GetCenterPosition().GetZ() );
 		Debug::getInstance().log( pChunkBuffer );
 	}
 #endif
@@ -88,22 +88,23 @@ void Player::update()
 		moveRight();
 	}
 
+	auto focusedBlockPos = MathHelper::calculateNewWorldPositionByRotation(
+						m_rotation.GetY(),
+						Vector3f(m_position.GetX() + .5f, m_position.GetY() - 2, m_position.GetZ() + .5f),
+						ROTATION_SPEED,
+						Vector3f::Forward());
+
+	m_pWorld->UpdateFocusedBlockByWorldPosition(focusedBlockPos);
+
 	if ( padButtonDown & WPAD_BUTTON_B)
 	{
-		auto blockPos = MathHelper::calculateNewWorldPositionByRotation(
-					m_rotation.GetY(),
-					Vector3f(m_position.GetX() + .5f, m_position.GetY(), m_position.GetZ() + .5f),
-					ROTATION_SPEED,
-					Vector3f::Forward());
-
-		m_pWorld->RemoveBlockByWorldPosition( Vector3f( blockPos.GetX(), m_position.GetY() - 2, blockPos.GetZ() ));
+		m_pWorld->RemoveBlockByWorldPosition( focusedBlockPos );
 	}
 
 	if ( padButtonDown & WPAD_BUTTON_HOME )
 	{
 		Controller::getInstance().end();
 	}
-
 }
 
 
