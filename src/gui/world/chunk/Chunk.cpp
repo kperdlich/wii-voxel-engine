@@ -66,10 +66,10 @@ void CChunk::UpdateChunkNeighbors()
 	Vector3f frontChunkPos(m_pCenterPosition->GetX(), m_pCenterPosition->GetY(), m_pCenterPosition->GetZ() + CHUNK_SIZE_Z);
 	Vector3f backChunkPos(m_pCenterPosition->GetX(), m_pCenterPosition->GetY(), m_pCenterPosition->GetZ() - CHUNK_SIZE_X);
 
-	m_bChunkLeft = m_pWorldManager->GetChunkAt(leftChunkPos);
-	m_bChunkRight = m_pWorldManager->GetChunkAt(rightChunkPos);
-	m_bChunkFront = m_pWorldManager->GetChunkAt(frontChunkPos);
-	m_bChunkBack = m_pWorldManager->GetChunkAt(backChunkPos);
+	m_pChunkLeft = m_pWorldManager->GetChunkAt(leftChunkPos);
+	m_pChunkRight = m_pWorldManager->GetChunkAt(rightChunkPos);
+	m_pChunkFront = m_pWorldManager->GetChunkAt(frontChunkPos);
+	m_pChunkBack = m_pWorldManager->GetChunkAt(backChunkPos);
 }
 
 
@@ -98,8 +98,6 @@ bool CChunk::AddBlockToRenderList(BlockType type, BlockRenderData& blockRenderDa
 		bSuccessful = true;
 	}
 
-	m_IsDirty = true;
-
 	return bSuccessful;
 }
 
@@ -108,44 +106,88 @@ bool CChunk::IsBlockVisible(uint32_t iX, uint32_t iY, uint32_t iZ, BlockFaceVisi
 
 	BlockFaceVisibiltyData localFaceData;
 	bool isVisible = false;
+	bool bIsAir = m_pBlocks[iX][iY][iZ] == BlockType::AIR;
 
-	if ( m_pBlocks[iX][iY][iZ] != BlockType::AIR )
+	if ( iX == 0 )
 	{
-		if ( iX == 0 && !m_bChunkLeft)
+		if (bIsAir)
+		{
+			if ( !m_bNeighbourUpdate && m_pChunkLeft && m_pChunkLeft->m_pBlocks[CHUNK_SIZE_X -1][iY][iZ] != BlockType::AIR)
+			{
+				m_pChunkLeft->SetDirty(true); //rebuild neighbour
+				m_pChunkLeft->m_bNeighbourUpdate = true;
+			}
+		}
+		else if ( !m_pChunkLeft || (m_pChunkLeft && m_pChunkLeft->m_pBlocks[CHUNK_SIZE_X -1][iY][iZ] == BlockType::AIR))
 		{
 			localFaceData.bLeftFace = true;
 			localFaceData.faces++;
 			isVisible = true;
 		}
+	}
 
-		if ( iX == CHUNK_SIZE_X -1 && !m_bChunkRight)
+	if ( iX == CHUNK_SIZE_X -1 )
+	{
+		if (bIsAir)
+		{
+			if ( !m_bNeighbourUpdate && m_pChunkRight && m_pChunkRight->m_pBlocks[0][iY][iZ] != BlockType::AIR)
+			{
+				m_pChunkRight->SetDirty(true); //rebuild neighbour
+				m_pChunkRight->m_bNeighbourUpdate = true;
+			}
+		}
+		else if ( !m_pChunkRight || (m_pChunkRight && m_pChunkRight->m_pBlocks[0][iY][iZ] == BlockType::AIR))
 		{
 			localFaceData.bRightFace = true;
 			localFaceData.faces++;
 			isVisible = true;
 		}
+	}
 
-		if ( iZ == 0 && !m_bChunkBack)
+	if ( iZ == 0 )
+	{
+		if (bIsAir)
+		{
+			if ( !m_bNeighbourUpdate && m_pChunkBack && m_pChunkBack->m_pBlocks[iX][iY][CHUNK_SIZE_Z -1] != BlockType::AIR)
+			{
+				m_pChunkBack->SetDirty(true); //rebuild neighbour
+				m_pChunkBack->m_bNeighbourUpdate = true;
+			}
+		}
+		else if (!m_pChunkBack || (m_pChunkBack && m_pChunkBack->m_pBlocks[iX][iY][CHUNK_SIZE_Z -1] == BlockType::AIR))
 		{
 			localFaceData.bBackFace = true;
 			localFaceData.faces++;
 			isVisible = true;
 		}
+	}
 
-		if (iZ == CHUNK_SIZE_Z -1 && !m_bChunkFront)
+	if (iZ == CHUNK_SIZE_Z -1 )
+	{
+		if (bIsAir)
+		{
+			if ( !m_bNeighbourUpdate && m_pChunkFront && m_pChunkFront->m_pBlocks[iX][iY][0] != BlockType::AIR)
+			{
+				m_pChunkFront->SetDirty(true); //rebuild neighbour
+				m_pChunkFront->m_bNeighbourUpdate = true;
+			}
+		}
+		else if ( !m_pChunkFront || (m_pChunkFront && m_pChunkFront->m_pBlocks[iX][iY][0] == BlockType::AIR))
 		{
 			localFaceData.bFrontFace = true;
 			localFaceData.faces++;
 			isVisible = true;
 		}
+	}
 
+	if ( !bIsAir )
+	{
 		if ( iY == CHUNK_SIZE_Y -1 )
 		{
 			localFaceData.bTopFace = true;
 			localFaceData.faces++;
 			isVisible = true;
 		}
-
 
 		 // Check all 6 block faces if neighbor is air
 		if ( iX + 1 <= CHUNK_SIZE_X -1 && m_pBlocks[iX + 1][iY][iZ] == BlockType::AIR)
@@ -190,7 +232,6 @@ bool CChunk::IsBlockVisible(uint32_t iX, uint32_t iY, uint32_t iZ, BlockFaceVisi
 			localFaceData.faces++;
 			isVisible = true;
 		}
-
 
 		if (isVisible)
 		{
@@ -299,34 +340,38 @@ Vector3f& CChunk::GetCenterPosition()
 
 void CChunk::DeleteDisplayList()
 {
-	free(m_DispList);
-	m_DisplayListSize = 0;
-	m_DispList = NULL;
-	m_IsDirty = true;
+	if ( m_DisplayListSize > 0 )
+	{
+		free(m_DispList);
+		m_DisplayListSize = 0;
+		m_DispList = NULL;
+		m_IsDirty = true;
+	}
 }
 
 void CChunk::RebuildDisplayList()
 {
-	auto pBlockRender = new BlockRenderer();
+	BlockRenderer blockRenderer;
 
 	ClearBlockRenderList();
 	BuildBlockRenderList();
 
+	DeleteDisplayList();
 	CreateDisplayList( size_t((32 * 6) * m_AmountOfFaces) ); // 32 * 6 magic numbers, seems to work fine
 
 	for(auto it = m_mBlockRenderList.begin(); it != m_mBlockRenderList.end(); ++it)
 	{
 		auto pBlockToRender = m_pWorldManager->GetBlockManager().GetBlockByType(it->first);
-		pBlockRender->Prepare( &it->second, pBlockToRender->getSize(), pBlockToRender->GetTexture());
-		pBlockRender->Rebuild();
+		blockRenderer.Prepare( &it->second, pBlockToRender->getSize(), pBlockToRender->GetTexture());
+		blockRenderer.Rebuild();
 	}
 
-	pBlockRender->Finish();
+	blockRenderer.Finish();
 
 	FinishDisplayList();
 	ClearBlockRenderList();
 
-	delete pBlockRender;
+	m_bNeighbourUpdate = false;
 }
 
 void CChunk::RemoveBlockByWorldPosition(Vector3f blockPosition)

@@ -55,6 +55,7 @@ private:
 
 private:
 	bool m_IsDirty;
+	bool m_bNeighbourUpdate = false;
 	uint32_t m_DisplayListSize = 0;
 	void* m_DispList = NULL;
 
@@ -67,10 +68,10 @@ private:
 	std::map<BlockType, std::vector<BlockRenderData*> > m_mBlockRenderList;
 	class CGameWorld* m_pWorldManager;
 
-	bool m_bChunkLeft = false;
-	bool m_bChunkRight = false;
-	bool m_bChunkFront = false;
-	bool m_bChunkBack = false;
+	CChunk* m_pChunkLeft = NULL;
+	CChunk* m_pChunkRight = NULL;
+	CChunk* m_pChunkFront = NULL;
+	CChunk* m_pChunkBack = NULL;
 };
 
 #endif /* SRC_GUI_WORLD_CHUNK_CHUNK_H_ */
