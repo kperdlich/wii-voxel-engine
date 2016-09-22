@@ -42,6 +42,8 @@ public:
 	void UpdateChunkNeighbors();
 	void RemoveBlockByWorldPosition(Vector3f blockPosition);
 	Vector3f GetBlockPositionByWorldPosition(Vector3f& worldPosition);
+	BlockType GetBlockTypeByWorldPosition(Vector3f& worldPosition);
+	Vector3f ValidatePhysicalPosition(Vector3f& position);
 
 private:
 	void CreateDisplayList(size_t sizeOfDisplayList);

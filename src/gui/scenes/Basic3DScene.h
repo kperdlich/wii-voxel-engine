@@ -33,7 +33,7 @@ protected:
 	class Renderer3D* getRenderer();
 	class EntityHandler* m_entityHandler;
 	std::vector<UIElement*> m_uiElements;
-	class Camera* m_mainCamera; // todo: move this to the world class
+	class Camera* m_mainCamera;
 	class CGameWorld* m_pGameWorld;
 };
 

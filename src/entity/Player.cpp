@@ -10,7 +10,7 @@
 #include "../utils/Debug.h"
 
 #define ROTATION_SPEED 1.4f
-#define MOVEMENT_SPEED 0.3f
+#define MOVEMENT_SPEED 0.1f
 #define PITCH_MAX 80.0f
 
 #ifdef DEBUG
@@ -87,9 +87,13 @@ void Player::update()
 		moveRight();
 	}
 
+	Vector3f blockPositionUnderPlayer(m_position.GetX() + 0.5f, 0.0f, m_position.GetZ() + 0.5f);
+	Vector3f newPosition = m_pWorld->GetNewPlayerPosition(blockPositionUnderPlayer);
+	m_position.SetY(newPosition.GetY() + 2.0f);
+
 	auto focusedBlockPos = MathHelper::calculateNewWorldPositionByRotation(
 						m_rotation.GetY(),
-						Vector3f(m_position.GetX() + .5f, m_position.GetY() - 2, m_position.GetZ() + .5f),
+						Vector3f(m_position.GetX() + 0.5f, m_position.GetY() - 2.0f, m_position.GetZ() + 0.5f),
 						ROTATION_SPEED,
 						Vector3f::Forward());
 

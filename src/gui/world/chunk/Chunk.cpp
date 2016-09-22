@@ -400,3 +400,26 @@ Vector3f CChunk::GetBlockPositionByWorldPosition(Vector3f& worldPosition)
 
 	return Vector3f( (m_pCenterPosition->GetX() - (CHUNK_SIZE_X / 2) + (x * BLOCK_SIZE * 2)), (m_pCenterPosition->GetY() - (CHUNK_SIZE_Y / 2) + (y * BLOCK_SIZE * 2)), (m_pCenterPosition->GetZ() - (CHUNK_SIZE_Z / 2) + (z * BLOCK_SIZE * 2)));
 }
+
+BlockType CChunk::GetBlockTypeByWorldPosition(Vector3f& worldPosition)
+{
+	unsigned int x,y,z;
+	GetLocalBlockPositionByWorldPosition(worldPosition, &x, &y, &z);
+	return m_pBlocks[x][y][z];
+}
+
+Vector3f CChunk::ValidatePhysicalPosition(Vector3f& position)
+{
+	Vector3f pos = GetBlockPositionByWorldPosition(position);
+
+	for ( unsigned int i = CHUNK_SIZE_Y - 1; i > 1; i--)
+	{
+		pos.SetY(i);
+		if ( GetBlockTypeByWorldPosition(pos) != BlockType::AIR )
+		{
+			break;
+		}
+	}
+
+	return pos;
+}

@@ -163,6 +163,7 @@ CChunk* CGameWorld::GetChunkAt(Vector3f& centerPosition)
 	return NULL;
 }
 
+// todo replace param vector with floats
 CChunk* CGameWorld::GetChunkByWorldPosition(Vector3f& worldPosition)
 {
 	unsigned int x = worldPosition.GetX() / CHUNK_SIZE_X;
@@ -194,6 +195,42 @@ void CGameWorld::UpdateFocusedBlockByWorldPosition( Vector3f& blockPosition )
 	{
 		m_bHasSelectedBlock = false;
 	}
+}
+
+Vector3f CGameWorld::GetBlockPositionByWorldPosition(Vector3f worldPosition)
+{
+	Vector3f pos;
+	auto pChunk = GetChunkByWorldPosition(worldPosition);
+	if ( pChunk )
+	{
+		return pChunk->GetBlockPositionByWorldPosition(worldPosition);
+	}
+
+	return pos;
+}
+
+BlockType CGameWorld::GetBlockByWorldPosition(Vector3f worldPosition)
+{
+	auto pChunk = GetChunkByWorldPosition(worldPosition);
+	if ( pChunk )
+	{
+		return pChunk->GetBlockTypeByWorldPosition(worldPosition);
+	}
+
+	return BlockType::AIR;
+}
+
+// todo replace param vector with floats
+Vector3f CGameWorld::GetNewPlayerPosition( Vector3f& playerWorldPosition )
+{
+	auto pChunk = GetChunkByWorldPosition(playerWorldPosition);
+	if ( pChunk )
+	{
+		return pChunk->ValidatePhysicalPosition(playerWorldPosition);
+	}
+
+	return playerWorldPosition;
+
 }
 
 void CGameWorld::DrawFocusOnSelectedCube()

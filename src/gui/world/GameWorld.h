@@ -41,6 +41,9 @@ public:
 	class CChunk* GetChunkByWorldPosition(Vector3f& worldPosition);
 	void RemoveBlockByWorldPosition(Vector3f& blockPosition);
 	void UpdateFocusedBlockByWorldPosition( Vector3f& blockPosition );
+	BlockType GetBlockByWorldPosition(Vector3f worldPosition);
+	Vector3f GetBlockPositionByWorldPosition(Vector3f worldPosition);
+	Vector3f GetNewPlayerPosition( Vector3f& playerWorldPosition );
 
 
 private:
