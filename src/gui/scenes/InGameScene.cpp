@@ -77,6 +77,7 @@ void InGameScene::initEntities()
 {
 	Player* pPlayer = new Player();
 	pPlayer->SetPosition(Vector3f(.0f, CHUNK_SIZE_Y + 1.0f, 0.0f));
+	pPlayer->setRotation(Vector3f(.0f, 225.0f, .0f));
 	pPlayer->SetWorld(m_pGameWorld);
 	m_mainCamera->attachTo(*pPlayer);
 	m_entityHandler->addEntity(pPlayer);

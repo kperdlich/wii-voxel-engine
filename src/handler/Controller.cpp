@@ -52,11 +52,8 @@ void Controller::start()
 		printGameVersion(0, 25, m_fontHandler->getNativFontByID( DEFAULT_FONT_ID ), DEFAULT_FONT_SIZE, GRRLIB_WHITE );
 		printFps( 500, 25, m_fontHandler->getNativFontByID( DEFAULT_FONT_ID ), DEFAULT_FONT_SIZE, GRRLIB_YELLOW );
 
-
-
 		sprintf(pResolutionLogBuffer, "Resolution x: %d y: %d", rmode->viWidth, rmode->viHeight );
 		Debug::getInstance().log(pResolutionLogBuffer);
-
 
 		sprintf(pLoadedTextureLogBuffer, "Loaded Textures in scene: %d", m_sceneHandler->getCurrentScene()->getTextureHandler()->TextureCount());
 		Debug::getInstance().log( pLoadedTextureLogBuffer );

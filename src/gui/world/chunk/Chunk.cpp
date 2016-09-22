@@ -17,6 +17,7 @@ CChunk::CChunk(class CGameWorld& gameWorld) : m_IsDirty(true)
 
 CChunk::~CChunk()
 {
+	DeleteDisplayList();
 	ClearBlockRenderList();
 
 	for (int x = 0; x < CHUNK_SIZE_X; ++x)

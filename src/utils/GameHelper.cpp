@@ -9,28 +9,29 @@
 #include "GameHelper.h"
 
 static char* GameName =  "GameCraft";
-static char* BuildVersion = "1.0.0";
+static char* BuildVersion = "0.0.1";
 
 static u8 frameCount = 0;
-static u32 lastTime;
-static u8 FPS = 0;
+static u32 fpsLastTime;
+static u8 fps = 0;
 
-u8 calculateFrameRate() {
+u8 calculateFrameRate()
+{
     u32 currentTime = ticks_to_millisecs(gettime());
 
     frameCount++;
-    if(currentTime - lastTime > 1000) {
-        lastTime = currentTime;
-        FPS = frameCount;
+    if(currentTime - fpsLastTime > 1000) {
+    	fpsLastTime = currentTime;
+    	fps = frameCount;
         frameCount = 0;
     }
-    return FPS;
+    return fps;
 }
 
 void printFps(unsigned int x, unsigned int y, GRRLIB_ttfFont* font, unsigned int fontSize, const u32 color )
 {
 	char buffer[20];
-	sprintf(buffer, "FPS: %d", FPS);
+	sprintf(buffer, "FPS: %d", fps);
 	GRRLIB_PrintfTTF( x, y, font, buffer, fontSize, color );
 }
 

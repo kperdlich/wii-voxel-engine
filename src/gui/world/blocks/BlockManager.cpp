@@ -35,15 +35,9 @@ void CBlockManager::UnloadBlocks()
 }
 
 
-CBlockManager::CBlockManager( TextureHandler* ptextureHandler) : m_pTextureHandler(ptextureHandler) {
-	m_blockRenderer = new BlockRenderer();
+CBlockManager::CBlockManager( TextureHandler* ptextureHandler) : m_pTextureHandler(ptextureHandler) {}
 
-}
-
-CBlockManager::~CBlockManager()
-{
-	delete m_blockRenderer;
-}
+CBlockManager::~CBlockManager() {}
 
 
 CBlock* CBlockManager::GetBlockByType(const BlockType type)

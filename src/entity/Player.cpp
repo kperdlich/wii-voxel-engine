@@ -30,7 +30,6 @@ Player::Player()
 
 Player::~Player()
 {
-	delete m_entityRenderer;
 	delete m_inventory;
 }
 

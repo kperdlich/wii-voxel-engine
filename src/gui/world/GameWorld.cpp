@@ -28,22 +28,22 @@ CGameWorld::CGameWorld( Basic3DScene* pScene ) : m_pScene(pScene)
 
 CGameWorld::~CGameWorld()
 {
-	delete m_blockManager;
-
+#ifdef DEBUG
 	delete[] m_pChunkLogBuffer;
 	delete[] m_pDisplayListSizeLogBuffer;
 	delete[] m_pBlocksLogBuffer;
 	delete[] m_pFaceLogBuffer;
+#endif
 
 	for (auto chunkEntry : m_ChunkList)
 	{
 		delete chunkEntry.first;
 		delete chunkEntry.second;
 	}
-
 	m_ChunkList.clear();
 
 	m_blockManager->UnloadBlocks();
+	delete m_blockManager;
 }
 
 void CGameWorld::GenerateWorld()
