@@ -19,6 +19,7 @@ class MathHelper {
 public:
 	MathHelper();
 	virtual ~MathHelper();
+	static Vector3f calculateNewWorldPositionByRotation( Vector3f rotation, Vector3f currentWorldPosition, float smoothFactor, Vector3f movementVector );
 	static Vector3f calculateNewWorldPositionByRotation( float rotation, Vector3f currentWorldPosition, float smoothFactor, Vector3f movementVector );
 	static float Clamp(float value, float minValue, float maxValue);
 	inline static float min(float value1, float value2 );

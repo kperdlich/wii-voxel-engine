@@ -87,15 +87,16 @@ void Player::update()
 		moveRight();
 	}
 
-	Vector3f blockPositionUnderPlayer(m_position.GetX() + 0.5f, 0.0f, m_position.GetZ() + 0.5f);
+	Vector3f blockPositionUnderPlayer(m_position.GetX() + BLOCK_SIZE, 0.0f, m_position.GetZ() + BLOCK_SIZE);
 	Vector3f newPosition = m_pWorld->GetNewPlayerPosition(blockPositionUnderPlayer);
 	m_position.SetY(newPosition.GetY() + 2.0f);
 
 	auto focusedBlockPos = MathHelper::calculateNewWorldPositionByRotation(
-						m_rotation.GetY(),
-						Vector3f(m_position.GetX() + 0.5f, m_position.GetY() - 2.0f, m_position.GetZ() + 0.5f),
-						ROTATION_SPEED,
-						Vector3f::Forward());
+							Vector3f(m_rotation.GetX(), m_rotation.GetY(), m_rotation.GetZ()),
+							Vector3f(m_position.GetX() + BLOCK_SIZE, m_position.GetY(), m_position.GetZ() + BLOCK_SIZE),
+							ROTATION_SPEED,
+							Vector3f::Forward());
+
 
 	m_pWorld->UpdateFocusedBlockByWorldPosition(focusedBlockPos);
 

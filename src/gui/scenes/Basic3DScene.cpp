@@ -8,9 +8,9 @@
 #include "Basic3DScene.h"
 #include "../../utils/Debug.h"
 
-#define MIN_DIST 1.0f
-#define MAX_DIST 500.0f
-#define FIELD_OF_VIEW 45.0f
+#define MIN_DIST 0.1f
+#define MAX_DIST 200.0f
+#define FIELD_OF_VIEW 90.0f
 
 Basic3DScene::Basic3DScene()
 {
