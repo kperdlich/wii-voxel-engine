@@ -40,6 +40,7 @@ public:
 	class CChunk* GetChunkAt(Vector3f& centerPosition);
 	class CChunk* GetChunkByWorldPosition(Vector3f& worldPosition);
 	void RemoveBlockByWorldPosition(Vector3f& blockPosition);
+	void AddBlockAtWorldPosition(Vector3f& blockPosition, BlockType type);
 	void UpdateFocusedBlockByWorldPosition( Vector3f& blockPosition );
 	BlockType GetBlockByWorldPosition(Vector3f worldPosition);
 	Vector3f GetBlockPositionByWorldPosition(Vector3f worldPosition);

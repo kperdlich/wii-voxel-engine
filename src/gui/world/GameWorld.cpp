@@ -182,6 +182,14 @@ void CGameWorld::RemoveBlockByWorldPosition(Vector3f& blockPosition)
 		pChunk->RemoveBlockByWorldPosition( blockPosition );
 	}
 }
+void CGameWorld::AddBlockAtWorldPosition(Vector3f& blockPosition, BlockType type)
+{
+	auto pChunk = GetChunkByWorldPosition(blockPosition);
+	if ( pChunk )
+	{
+		pChunk->AddBlockByWorldPosition(blockPosition, type );
+	}
+}
 
 void CGameWorld::UpdateFocusedBlockByWorldPosition( Vector3f& blockPosition )
 {

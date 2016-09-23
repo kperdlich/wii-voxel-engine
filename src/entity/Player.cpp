@@ -11,7 +11,7 @@
 
 #define ROTATION_SPEED 1.4f
 #define MOVEMENT_SPEED 0.1f
-#define PITCH_MAX 80.0f
+#define PITCH_MAX 90.0f
 
 #ifdef DEBUG
 	char* pChunkBuffer = NULL;
@@ -103,6 +103,11 @@ void Player::update()
 	if ( padButtonDown & WPAD_BUTTON_B)
 	{
 		m_pWorld->RemoveBlockByWorldPosition( focusedBlockPos );
+	}
+
+	if ( padButtonDown & WPAD_BUTTON_A)
+	{
+		m_pWorld->AddBlockAtWorldPosition(focusedBlockPos, BlockType::DIRT );
 	}
 
 	if ( padButtonDown & WPAD_BUTTON_HOME )

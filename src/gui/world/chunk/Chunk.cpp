@@ -53,7 +53,15 @@ void CChunk::Init(Vector3f& position)
 		{
 			for ( unsigned int z = 0; z < CHUNK_SIZE_Z; z++)
 			{
-				BlockType blockType = x % 2 == 0 ? BlockType::DIRT : BlockType::GRASS;
+				BlockType blockType = BlockType::AIR;
+				if ( y < CHUNK_SIZE_Y - 3)
+				{
+					blockType = BlockType::DIRT;
+				}
+				else if ( y == CHUNK_SIZE_Y - 3 )
+				{
+					blockType = BlockType::GRASS;
+				}
 				m_pBlocks[x][y][z] = blockType;
 			}
 		}
@@ -384,6 +392,18 @@ void CChunk::RemoveBlockByWorldPosition(Vector3f blockPosition)
 	m_pBlocks[x][y][z] = BlockType::AIR;
 
 	m_IsDirty = true;
+}
+
+void CChunk::AddBlockByWorldPosition(Vector3f blockPosition, BlockType type)
+{
+	unsigned int x,y,z;
+	GetLocalBlockPositionByWorldPosition(blockPosition, &x, &y, &z);
+
+	if ( m_pBlocks[x][y][z] == BlockType::AIR)
+	{
+		 m_pBlocks[x][y][z] = type;
+		 m_IsDirty = true;
+	}
 }
 
 void CChunk::GetLocalBlockPositionByWorldPosition(Vector3f& blockWorldPosition, unsigned int* x, unsigned int* y, unsigned int* z)

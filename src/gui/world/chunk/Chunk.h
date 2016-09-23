@@ -41,6 +41,7 @@ public:
 
 	void UpdateChunkNeighbors();
 	void RemoveBlockByWorldPosition(Vector3f blockPosition);
+	void AddBlockByWorldPosition(Vector3f blockPosition, BlockType type);
 	Vector3f GetBlockPositionByWorldPosition(Vector3f& worldPosition);
 	BlockType GetBlockTypeByWorldPosition(Vector3f& worldPosition);
 	Vector3f ValidatePhysicalPosition(Vector3f& position);
