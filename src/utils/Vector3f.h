@@ -1,5 +1,5 @@
-#ifndef SRC_UTILS_VECTOR3F_H_
-#define SRC_UTILS_VECTOR3F_H_
+#ifndef _VECTOR3F_H_
+#define _VECTOR3F_H_
 
 class Vector3f {
 public:
@@ -7,11 +7,11 @@ public:
 	Vector3f();
 	virtual ~Vector3f();
 
-	float GetX();
+	float GetX() const;
 	void SetX(float x);
-	float GetY();
+	float GetY() const;
 	void SetY(float y);
-	float GetZ();
+	float GetZ() const;
 	void SetZ(float z);
 
 
@@ -25,4 +25,4 @@ private:
 
 };
 
-#endif /* SRC_UTILS_VECTOR3F_H_ */
+#endif /* _VECTOR3F_H_ */

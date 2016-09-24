@@ -5,8 +5,8 @@
  *      Author: Kevin
  */
 
-#ifndef SRC_ENTITY_CSWORD_H_
-#define SRC_ENTITY_CSWORD_H_
+#ifndef _CSWORD_H_
+#define _CSWORD_H_
 
 #include "Entity.h"
 #include "IEquipable.h"
@@ -19,4 +19,4 @@ public:
 
 };
 
-#endif /* SRC_ENTITY_CSWORD_H_ */
+#endif /* _CSWORD_H_ */

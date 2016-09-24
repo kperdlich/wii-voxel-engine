@@ -5,8 +5,8 @@
  *      Author: Kevin
  */
 
-#ifndef SRC_UTILS_TILEHELPER_H_
-#define SRC_UTILS_TILEHELPER_H_
+#ifndef _TILEHELPER_H_
+#define _TILEHELPER_H_
 
 
 #define TILE_HEIGHT 16

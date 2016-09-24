@@ -5,8 +5,8 @@
  *      Author: Kevin
  */
 
-#ifndef SRC_ENTITY_ENTITYHANDLER_H_
-#define SRC_ENTITY_ENTITYHANDLER_H_
+#ifndef _ENTITYHANDLER_H_
+#define _ENTITYHANDLER_H_
 
 #include <map>
 #include "Entity.h"
@@ -16,19 +16,19 @@ public:
 	EntityHandler();
 	virtual ~EntityHandler();
 
-	class Entity* getEntity(unsigned int id);
-	void addEntity(class Entity* entity);
+	class Entity* GetEntity(unsigned int id);
+	void AddEntity(class Entity* entity);
 
-	void update();
-	void clear();
+	void Update();
+	void Clear();
 
-	std::map<unsigned int, class Entity*>* getEntities();
+	const std::map<unsigned int, class Entity*>* GetEntities() const;
 
-	class Entity* GetPlayer();
+	class Entity* GetPlayer() const;
 
 private:
 	std::map<unsigned int, class Entity*> m_entityMap;
-	unsigned int getNewID();
+	unsigned int GetNewID();
 };
 
-#endif /* SRC_ENTITY_ENTITYHANDLER_H_ */
+#endif /* _ENTITYHANDLER_H_ */

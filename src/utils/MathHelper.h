@@ -5,8 +5,8 @@
  *      Author: Kevin
  */
 
-#ifndef SRC_UTILS_MATHHELPER_H_
-#define SRC_UTILS_MATHHELPER_H_
+#ifndef _MATHHELPER_H_
+#define _MATHHELPER_H_
 
 #include <math.h>
 #include <cmath>
@@ -19,11 +19,11 @@ class MathHelper {
 public:
 	MathHelper();
 	virtual ~MathHelper();
-	static Vector3f calculateNewWorldPositionByRotation( Vector3f rotation, Vector3f currentWorldPosition, float smoothFactor, Vector3f movementVector );
-	static Vector3f calculateNewWorldPositionByRotation( float rotation, Vector3f currentWorldPosition, float smoothFactor, Vector3f movementVector );
+	static Vector3f CalculateNewWorldPositionByCotation( const Vector3f& rotation, const Vector3f& currentWorldPosition, float smoothFactor, const Vector3f& movementVector );
+	static Vector3f CalculateNewWorldPositionByRotation( float rotation, Vector3f currentWorldPosition, float smoothFactor, Vector3f movementVector );
 	static float Clamp(float value, float minValue, float maxValue);
-	inline static float min(float value1, float value2 );
-	inline static float max(float value1, float value2 );
+	inline static float Min(float value1, float value2 );
+	inline static float Max(float value1, float value2 );
 };
 
-#endif /* SRC_UTILS_MATHHELPER_H_ */
+#endif /* _MATHHELPER_H_ */

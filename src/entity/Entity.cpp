@@ -15,36 +15,44 @@ Entity::Entity( Vector3f position )
 }
 
 
-Entity::~Entity() {
+Entity::~Entity()
+{
 	delete m_entityRenderer;
 }
 
 
-uint Entity::getId() {
+uint Entity::GetId() const
+{
 	return m_id;
 }
 
-void Entity::setId(unsigned int id) {
+void Entity::SetId(unsigned int id)
+{
 	m_id = id;
 }
 
-void Entity::SetVisible(bool value) {
+void Entity::SetVisible(bool value)
+{
 	m_visible = true;
 }
 
-bool Entity::IsVisible() {
+bool Entity::IsVisible() const
+{
 	return m_visible;
 }
 
-bool Entity::IsPlayer() {
+bool Entity::IsPlayer() const
+{
 	return m_isPlayer;
 }
 
-void Entity::SetPlayer(bool value) {
+void Entity::SetPlayer(bool value)
+{
 	m_isPlayer = value;
 }
 
-EntityRenderer* Entity::getRenderer() {
+const EntityRenderer* Entity::GetRenderer() const
+{
 	return m_entityRenderer;
 }
 
@@ -53,17 +61,17 @@ void Entity::SetPosition( Vector3f position )
 	m_position = position;
 }
 
-Vector3f Entity::GetPosition()
+const Vector3f& Entity::GetPosition() const
 {
 	return m_position;
 }
 
-void Entity::setRotation( Vector3f rotation )
+void Entity::SetRotation( Vector3f rotation )
 {
 	m_rotation = rotation;
 }
 
-Vector3f Entity::getRotation()
+const Vector3f& Entity::GetRotation() const
 {
 	return m_rotation;
 }

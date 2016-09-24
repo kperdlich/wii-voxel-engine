@@ -18,19 +18,18 @@ include $(DEVKITPPC)/wii_rules
 TARGET		:=	$(notdir $(CURDIR))
 BUILD		:=	build
 SOURCES		:=	src \
-				src/handler \
+				src/world \
+				src/world/hud \
+				src/world/blocks \
+				src/world/chunk \
 				src/commands \
 				src/commands/client \
-				src/gui \
-				src/gui/world \
-				src/gui/world/hud \
-				src/gui/world/blocks \
-				src/gui/world/chunk \
-				src/gui/components \
-				src/gui/renderer \
-				src/gui/scenes \
+				src/components \
+				src/renderer \
+				src/scenes \
 				src/entity \
-				src/entity/renderer \
+				src/textures \
+				src/font \
 				src/utils \
 				src/input \
 				src/physics \

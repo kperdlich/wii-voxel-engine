@@ -16,6 +16,6 @@ SwitchToIntroCommand::~SwitchToIntroCommand() {
 	// TODO Auto-generated destructor stub
 }
 
-void SwitchToIntroCommand::executeCommand() {
-	Controller::getInstance().getSceneHandler()->loadScene( INTRO_SCENE_ID );
+void SwitchToIntroCommand::ExecuteCommand() {
+	Controller::GetInstance().GetSceneHandler().LoadScene( INTRO_SCENE_ID );
 }

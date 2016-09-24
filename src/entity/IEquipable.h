@@ -5,10 +5,10 @@
  *      Author: Kevin
  */
 
-#ifndef SRC_ENTITY_IEQUIPABLE_H_
-#define SRC_ENTITY_IEQUIPABLE_H_
+#ifndef _IEQUIPABLE_H_
+#define _IEQUIPABLE_H_
 
-#include "../gui/components/UITextureElement.h"
+#include "../components/UITextureElement.h"
 #include "Entity.h"
 
 class IEquipable {
@@ -21,4 +21,4 @@ public:
 
 };
 
-#endif /* SRC_ENTITY_IEQUIPABLE_H_ */
+#endif /* _IEQUIPABLE_H_ */

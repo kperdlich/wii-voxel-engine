@@ -5,11 +5,11 @@
  *      Author: Kevin
  */
 
-#ifndef SRC_UTILS_DEBUG_H_
-#define SRC_UTILS_DEBUG_H_
+#ifndef _DEBUG_H_
+#define _DEBUG_H_
 
 #include <vector>
-#include "../handler/Controller.h"
+#include "../Controller.h"
 
 #define DEBUG_LINE 200
 
@@ -21,11 +21,11 @@ private:
 public:
 	Debug();
 	virtual ~Debug();
-	void log(char* msg);
-	void print();
-	void clear();
+	void Log(char* msg);
+	void Print();
+	void Clear();
 
-	static Debug& getInstance()
+	static Debug& GetInstance()
 	{
 		static Debug instance;
 		return instance;
@@ -36,4 +36,4 @@ public:
 
 };
 
-#endif /* SRC_UTILS_DEBUG_H_ */
+#endif /* _DEBUG_H_ */

@@ -16,6 +16,6 @@ SwitchToMainMenuCommand::~SwitchToMainMenuCommand() {
 	// TODO Auto-generated destructor stub
 }
 
-void SwitchToMainMenuCommand::executeCommand() {
-	Controller::getInstance().getSceneHandler()->loadScene( MAIN_MENU_ID  );
+void SwitchToMainMenuCommand::ExecuteCommand() {
+	Controller::GetInstance().GetSceneHandler().LoadScene( MAIN_MENU_ID );
 }

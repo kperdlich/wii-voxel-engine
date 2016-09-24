@@ -16,6 +16,6 @@ SwitchToInGameCommand::~SwitchToInGameCommand() {
 	// TODO Auto-generated destructor stub
 }
 
-void SwitchToInGameCommand::executeCommand() {
-	Controller::getInstance().getSceneHandler()->loadScene( IN_GAME_ID );
+void SwitchToInGameCommand::ExecuteCommand() {
+	Controller::GetInstance().GetSceneHandler().LoadScene( IN_GAME_ID );
 }

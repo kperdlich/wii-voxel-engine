@@ -7,8 +7,8 @@
 
 #include "../../utils/Vector3f.h"
 
-#ifndef SRC_PHYSICS_COLLISION_CAABB_H_
-#define SRC_PHYSICS_COLLISION_CAABB_H_
+#ifndef _CAABB_H_
+#define _CAABB_H_
 
 class CAABB {
 public:
@@ -26,4 +26,4 @@ private:
 
 };
 
-#endif /* SRC_PHYSICS_COLLISION_CAABB_H_ */
+#endif /* _CAABB_H_ */

@@ -5,18 +5,18 @@
  *      Author: Kevin
  */
 
-#ifndef SRC_COMMANDS_CLIENT_SWITCHTOMAINMENUCOMMAND_H_
-#define SRC_COMMANDS_CLIENT_SWITCHTOMAINMENUCOMMAND_H_
+#ifndef _SWITCHTOMAINMENUCOMMAND_H_
+#define _SWITCHTOMAINMENUCOMMAND_H_
 
 #include "../BasicCommand.h"
-#include "../../handler/Controller.h"
+#include "../../Controller.h"
 
 class SwitchToMainMenuCommand: public BasicCommand {
 public:
 	SwitchToMainMenuCommand();
 	virtual ~SwitchToMainMenuCommand();
-	void executeCommand() override;
+	void ExecuteCommand() override;
 	static const char* Name() { return "SwitchToMainMenuCommand"; };
 };
 
-#endif /* SRC_COMMANDS_CLIENT_SWITCHTOMAINMENUCOMMAND_H_ */
+#endif /* _SWITCHTOMAINMENUCOMMAND_H_ */

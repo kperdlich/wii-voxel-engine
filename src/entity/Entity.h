@@ -5,13 +5,13 @@
  *      Author: Kevin
  */
 
-#ifndef SRC_ENTITY_ENTITY_H_
-#define SRC_ENTITY_ENTITY_H_
+#ifndef _ENTITY_H_
+#define _ENTITY_H_
 
+#include "../renderer/EntityRenderer.h"
 #include "../core/grrlib.h"
-#include "renderer/EntityRenderer.h"
 #include "../utils/MathHelper.h"
-#include "../gui/world/GameWorld.h"
+#include "../world/GameWorld.h"
 
 class EntityRenderer;
 
@@ -21,24 +21,24 @@ public:
 	Entity( Vector3f position );
 	virtual ~Entity();
 
-	uint getId();
-	void setId( unsigned int id );
+	uint GetId() const;
+	void SetId( unsigned int id );
 
 	void SetPosition( Vector3f position );
-	Vector3f GetPosition();
+	const Vector3f& GetPosition() const;
 
-	void setRotation( Vector3f position );
-	Vector3f getRotation();
+	void SetRotation( Vector3f position );
+	const Vector3f& GetRotation() const;
 
 	void SetVisible(bool value);
-	bool IsVisible();
+	bool IsVisible() const;
 
-	bool IsPlayer();
+	bool IsPlayer() const;
 	void SetPlayer( bool value );
 
 	void SetWorld(class CGameWorld* pWorld);
 
-	EntityRenderer* getRenderer();
+	const EntityRenderer* GetRenderer() const;
 
 
 protected:
@@ -50,4 +50,4 @@ protected:
 
 };
 
-#endif /* SRC_ENTITY_ENTITY_H_ */
+#endif /* _ENTITY_H_ */

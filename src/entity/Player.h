@@ -5,11 +5,11 @@
  *      Author: Kevin
  */
 
-#ifndef SRC_ENTITY_PLAYER_H_
-#define SRC_ENTITY_PLAYER_H_
+#ifndef _PLAYER_H_
+#define _PLAYER_H_
 
 #include "Entity.h"
-#include "../gui/world/Camera.h"
+#include "../world/Camera.h"
 #include "../utils/Vector3f.h"
 #include "CPlayerInventory.h"
 #include "IEquipable.h"
@@ -18,19 +18,19 @@ class Player: public Entity {
 public:
 	Player();
 	virtual ~Player();
-	void update();
+	void Update();
 
-	void moveForward();
-	void moveBackward();
-	void moveLeft();
-	void moveRight();
+	void MoveForward();
+	void MoveBackward();
+	void MoveLeft();
+	void MoveRight();
 
 	void AddToInventory(IEquipable& item);
 
-	void rotate( Vector3f rotation );
+	void Rotate( Vector3f rotation );
 
 private:
 	CPlayerInventory* m_inventory;
 };
 
-#endif /* SRC_ENTITY_PLAYER_H_ */
+#endif /* _PLAYER_H_ */

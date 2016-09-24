@@ -9,7 +9,7 @@
 
 static void debug( const char *str, int x, int y )
 {
-	GRRLIB_PrintfTTF( x, y, Controller::getInstance().getFontHandler()->getNativFontByID( DEFAULT_FONT_ID ), str, DEFAULT_FONT_SIZE, GRRLIB_WHITE );
+	GRRLIB_PrintfTTF( x, y, Controller::GetInstance().GetFontHandler().GetNativFontByID( DEFAULT_FONT_ID ), str, DEFAULT_FONT_SIZE, GRRLIB_WHITE );
 }
 
 Debug::Debug() {
@@ -21,11 +21,13 @@ Debug::~Debug() {
 
 }
 
-void Debug::log(char* msg) {
+void Debug::Log(char* msg)
+{
 	m_logs.push_back( msg );
 }
 
-void Debug::print() {
+void Debug::Print()
+{
 	int y = DEBUG_LINE;
 	for (unsigned int i = 0; i < m_logs.size(); i++)
 	{
@@ -42,7 +44,7 @@ void Debug::print() {
 	}
 }
 
-void Debug::clear() {
+void Debug::Clear() {
 	/*for (unsigned int i = 0; i < m_logs.size(); i++)
 	{
 		delete [] m_logs[i];

@@ -5,18 +5,18 @@
  *      Author: Kevin
  */
 
-#ifndef SRC_COMMANDS_CLIENT_SWITCHTOINGAMECOMMAND_H_
-#define SRC_COMMANDS_CLIENT_SWITCHTOINGAMECOMMAND_H_
+#ifndef _SWITCHTOINGAMECOMMAND_H_
+#define _SWITCHTOINGAMECOMMAND_H_
 
 #include "../BasicCommand.h"
-#include "../../handler/Controller.h"
+#include "../../Controller.h"
 
 class SwitchToInGameCommand: public BasicCommand {
 public:
 	SwitchToInGameCommand();
 	virtual ~SwitchToInGameCommand();
-	void executeCommand() override;
+	void ExecuteCommand() override;
 	static const char* Name() { return "SwitchToInGameCommand"; };
 };
 
-#endif /* SRC_COMMANDS_CLIENT_SWITCHTOINGAMECOMMAND_H_ */
+#endif /* _SWITCHTOINGAMECOMMAND_H_ */

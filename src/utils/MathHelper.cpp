@@ -11,7 +11,7 @@ MathHelper::MathHelper() { }
 
 MathHelper::~MathHelper() { }
 
-Vector3f MathHelper::calculateNewWorldPositionByRotation(Vector3f rotation, Vector3f currentWorldPosition, float smoothFactor, Vector3f movementVector)
+Vector3f MathHelper::CalculateNewWorldPositionByCotation(const Vector3f& rotation, const Vector3f& currentWorldPosition, float smoothFactor, const Vector3f& movementVector)
 {
 	float rotationYInRadians = rotation.GetY() * DEGREE_TO_RADIANS;
 	float rotationXInRadians = rotation.GetX() * DEGREE_TO_RADIANS;
@@ -22,7 +22,7 @@ Vector3f MathHelper::calculateNewWorldPositionByRotation(Vector3f rotation, Vect
 }
 
 
-Vector3f MathHelper::calculateNewWorldPositionByRotation(float rotation, Vector3f currentWorldPosition, float smoothFactor, Vector3f movementVector)
+Vector3f MathHelper::CalculateNewWorldPositionByRotation(float rotation, Vector3f currentWorldPosition, float smoothFactor, Vector3f movementVector)
 {
 	float rotationInRadians = rotation * DEGREE_TO_RADIANS;
 	float x = currentWorldPosition.GetX() + ( sin(rotationInRadians) * smoothFactor * movementVector.GetZ());
@@ -34,15 +34,15 @@ Vector3f MathHelper::calculateNewWorldPositionByRotation(float rotation, Vector3
 
 float MathHelper::Clamp(float value, float minValue, float maxValue)
 {
-	return max(minValue, min(value, maxValue));
+	return Max(minValue, Min(value, maxValue));
 }
 
-inline float MathHelper::min(float value1, float value2 )
+inline float MathHelper::Min(float value1, float value2 )
 {
 	return (value1 < value2) ? (value1) : (value2);
 }
 
-inline float MathHelper::max(float value1, float value2 )
+inline float MathHelper::Max(float value1, float value2 )
 {
 	return (value1 > value2) ? (value1) : (value2);
 }

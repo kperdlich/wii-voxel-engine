@@ -5,8 +5,8 @@
  *      Author: Kevin
  */
 
-#ifndef SRC_INPUT_WIIPAD_H_
-#define SRC_INPUT_WIIPAD_H_
+#ifndef _WIIPAD_H_
+#define _WIIPAD_H_
 
 #include <wiiuse/wpad.h>
 
@@ -21,13 +21,13 @@ private:
 public:
 	WiiPad( int chanID );
 	virtual ~WiiPad();
-	void update();
-	float getX();
-	float getY();
-	u32 buttonsDown();
-	u32 buttonsHeld();
-	u32 ButtonsUp();
-	WPADData* getData();
+	void Update();
+	float GetX() const;
+	float GetY() const;
+	u32 ButtonsDown() const;
+	u32 ButtonsHeld() const;
+	u32 ButtonsUp() const;
+	const WPADData* GetData() const;
 };
 
-#endif /* SRC_INPUT_WIIPAD_H_ */
+#endif /* _WIIPAD_H_ */

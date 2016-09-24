@@ -16,5 +16,5 @@ BasicCommand::~BasicCommand() {
 	// TODO Auto-generated destructor stub
 }
 
-void BasicCommand::executeCommand() {
+void BasicCommand::ExecuteCommand() {
 }

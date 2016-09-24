@@ -13,11 +13,11 @@ EntityHandler::EntityHandler() {
 
 EntityHandler::~EntityHandler()
 {
-	clear();
+	Clear();
 
 }
 
-Entity* EntityHandler::getEntity(unsigned int id)
+Entity* EntityHandler::GetEntity(unsigned int id)
 {
 	std::map<unsigned int, Entity*>::iterator it = m_entityMap.find(id);
 	if ( it != m_entityMap.end() )
@@ -26,23 +26,24 @@ Entity* EntityHandler::getEntity(unsigned int id)
 	return NULL;
 }
 
-void EntityHandler::addEntity(Entity* entity)
+void EntityHandler::AddEntity(Entity* entity)
 {
-	unsigned int newId = getNewID();
-	entity->setId( newId );
+	unsigned int newId = GetNewID();
+	entity->SetId( newId );
 	m_entityMap.insert( std::pair<unsigned int, Entity*>(newId, entity) );
 }
 
-void EntityHandler::update() {
+void EntityHandler::Update() {
 
 }
 
-std::map<unsigned int, Entity*>* EntityHandler::getEntities() {
+const std::map<unsigned int, Entity*>* EntityHandler::GetEntities() const
+{
 	return &m_entityMap;
 }
 
-void EntityHandler::clear() {
-	for (std::map<unsigned int, Entity*>::iterator it = m_entityMap.begin(); it != m_entityMap.end(); ++it)
+void EntityHandler::Clear() {
+	for (auto it = m_entityMap.begin(); it != m_entityMap.end(); ++it)
 	{
 		delete it->second;
 	}
@@ -50,8 +51,8 @@ void EntityHandler::clear() {
 	m_entityMap.clear();
 }
 
-Entity* EntityHandler::GetPlayer() {
-	for (std::map<unsigned int, Entity*>::iterator it = m_entityMap.begin(); it != m_entityMap.end(); ++it)
+Entity* EntityHandler::GetPlayer() const {
+	for (auto it = m_entityMap.begin(); it != m_entityMap.end(); ++it)
 	{
 		if ( it->second->IsPlayer() )
 		{
@@ -62,7 +63,7 @@ Entity* EntityHandler::GetPlayer() {
 	return NULL;
 }
 
-unsigned int EntityHandler::getNewID()
+unsigned int EntityHandler::GetNewID()
 {
 	if ( m_entityMap.size() < 1)
 		return 0;

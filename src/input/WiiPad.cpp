@@ -29,7 +29,7 @@ WiiPad::WiiPad( int chanID ) : m_ChanID( chanID )
 
 WiiPad::~WiiPad() { }
 
-void WiiPad::update()
+void WiiPad::Update()
 {
 	m_Data = WPAD_Data( m_ChanID );
 	m_ButtonDown = WPAD_ButtonsDown( m_ChanID );
@@ -37,26 +37,26 @@ void WiiPad::update()
 	m_ButtonUp = WPAD_ButtonsUp( m_ChanID );
 }
 
-float WiiPad::getX() {
+float WiiPad::GetX() const {
 	return m_Data->ir.x;
 }
 
-float WiiPad::getY() {
+float WiiPad::GetY() const {
 	return m_Data->ir.y;
 }
 
-u32 WiiPad::buttonsDown() {
+u32 WiiPad::ButtonsDown() const {
 	return m_ButtonDown;
 }
 
-u32 WiiPad::buttonsHeld() {
+u32 WiiPad::ButtonsHeld() const {
 	return m_ButtonHeld;
 }
 
-u32 WiiPad::ButtonsUp() {
+u32 WiiPad::ButtonsUp() const {
 	return m_ButtonUp;
 }
 
-WPADData* WiiPad::getData() {
+const WPADData* WiiPad::GetData() const {
 	return m_Data;
 }

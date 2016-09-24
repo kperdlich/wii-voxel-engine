@@ -5,8 +5,8 @@
  *      Author: Kevin
  */
 
-#ifndef SRC_ENTITY_CPLAYERINVENTORY_H_
-#define SRC_ENTITY_CPLAYERINVENTORY_H_
+#ifndef _CPLAYERINVENTORY_H_
+#define _CPLAYERINVENTORY_H_
 
 #include "IEquipable.h"
 
@@ -24,4 +24,4 @@ private:
 	uint m_inventoryIndex = 0;
 };
 
-#endif /* SRC_ENTITY_CPLAYERINVENTORY_H_ */
+#endif /* _CPLAYERINVENTORY_H_ */

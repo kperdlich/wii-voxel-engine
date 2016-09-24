@@ -35,63 +35,63 @@ Player::~Player()
 
 
 
-void Player::update()
+void Player::Update()
 {
-	WiiPad* pad = Controller::getInstance().getInputHandler()->getPadByID( WII_PAD_0 );
+	WiiPad* pad = Controller::GetInstance().GetInputHandler().GetPadByID( WII_PAD_0 );
 
-	u32 padButtonHeld = pad->buttonsHeld();
-	u32 padButtonDown = pad->buttonsDown();
+	u32 padButtonHeld = pad->ButtonsHeld();
+	u32 padButtonDown = pad->ButtonsDown();
 
 #ifdef DEBUG
 	auto pChunk = m_pWorld->GetChunkByWorldPosition( m_position );
 	if ( pChunk )
 	{
 		sprintf(pChunkBuffer, "Current Chunk: %d/%d/%d", (unsigned int) pChunk->GetCenterPosition().GetX(), (unsigned int) pChunk->GetCenterPosition().GetY(), (unsigned int) pChunk->GetCenterPosition().GetZ() );
-		Debug::getInstance().log( pChunkBuffer );
+		Debug::GetInstance().Log( pChunkBuffer );
 	}
 #endif
 
 
-	if ( pad->getY() <= 15.0f )
+	if ( pad->GetY() <= 15.0f )
 	{
-		this->rotate( Vector3f( -ROTATION_SPEED, 0, 0 )); // top
+		this->Rotate( Vector3f( -ROTATION_SPEED, 0, 0 )); // top
 	}
-	else if ( pad->getY() >= rmode->viHeight - 45.0f )
+	else if ( pad->GetY() >= rmode->viHeight - 45.0f )
 	{
-		this->rotate( Vector3f( ROTATION_SPEED, 0, 0 )); // bottom
+		this->Rotate( Vector3f( ROTATION_SPEED, 0, 0 )); // bottom
 	}
 
-	if ( pad->getX() >= rmode->viWidth - 120.0f )
+	if ( pad->GetX() >= rmode->viWidth - 120.0f )
 	{
-		this->rotate( Vector3f( 0, -ROTATION_SPEED, 0 )); // right
+		this->Rotate( Vector3f( 0, -ROTATION_SPEED, 0 )); // right
 	}
-	else if ( pad->getX() <= 120.0f )
+	else if ( pad->GetX() <= 120.0f )
 	{
-		this->rotate( Vector3f( 0, ROTATION_SPEED, 0 )); // left
+		this->Rotate( Vector3f( 0, ROTATION_SPEED, 0 )); // left
 	}
 
 	if ( padButtonHeld & WPAD_BUTTON_UP )
 	{
-		moveForward();
+		MoveForward();
 	}
 	if ( padButtonHeld & WPAD_BUTTON_DOWN )
 	{
-		moveBackward();
+		MoveBackward();
 	}
 	if ( padButtonHeld & WPAD_BUTTON_LEFT )
 	{
-		moveLeft();
+		MoveLeft();
 	}
 	if ( padButtonHeld & WPAD_BUTTON_RIGHT )
 	{
-		moveRight();
+		MoveRight();
 	}
 
 	Vector3f blockPositionUnderPlayer(m_position.GetX() + BLOCK_SIZE, 0.0f, m_position.GetZ() + BLOCK_SIZE);
 	Vector3f newPosition = m_pWorld->GetNewPlayerPosition(blockPositionUnderPlayer);
 	m_position.SetY(newPosition.GetY() + 2.0f);
 
-	auto focusedBlockPos = MathHelper::calculateNewWorldPositionByRotation(
+	auto focusedBlockPos = MathHelper::CalculateNewWorldPositionByCotation(
 							Vector3f(m_rotation.GetX(), m_rotation.GetY(), m_rotation.GetZ()),
 							Vector3f(m_position.GetX() + BLOCK_SIZE, m_position.GetY(), m_position.GetZ() + BLOCK_SIZE),
 							ROTATION_SPEED,
@@ -112,33 +112,33 @@ void Player::update()
 
 	if ( padButtonDown & WPAD_BUTTON_HOME )
 	{
-		Controller::getInstance().end();
+		Controller::GetInstance().End();
 	}
 }
 
 
 
-void Player::moveForward()
+void Player::MoveForward()
 {
-	m_position = MathHelper::calculateNewWorldPositionByRotation(
+	m_position = MathHelper::CalculateNewWorldPositionByRotation(
 			m_rotation.GetY(),
 			m_position,
 			MOVEMENT_SPEED,
 			Vector3f::Forward());
 }
 
-void Player::moveBackward()
+void Player::MoveBackward()
 {
-	m_position = MathHelper::calculateNewWorldPositionByRotation(
+	m_position = MathHelper::CalculateNewWorldPositionByRotation(
 				m_rotation.GetY(),
 				m_position,
 				MOVEMENT_SPEED,
 				Vector3f::Backward());
 }
 
-void Player::moveLeft()
+void Player::MoveLeft()
 {
-	m_position = MathHelper::calculateNewWorldPositionByRotation(
+	m_position = MathHelper::CalculateNewWorldPositionByRotation(
 					m_rotation.GetY() - 90,
 					m_position,
 					MOVEMENT_SPEED,
@@ -146,10 +146,10 @@ void Player::moveLeft()
 
 }
 
-void Player::moveRight()
+void Player::MoveRight()
 {
 
-	m_position = MathHelper::calculateNewWorldPositionByRotation(
+	m_position = MathHelper::CalculateNewWorldPositionByRotation(
 						m_rotation.GetY() + 90,
 						m_position,
 						MOVEMENT_SPEED,
@@ -158,7 +158,7 @@ void Player::moveRight()
 }
 
 
-void Player::rotate( Vector3f rotation )
+void Player::Rotate( Vector3f rotation )
 {
 	if ( m_rotation.GetX() > 360 )
 	{

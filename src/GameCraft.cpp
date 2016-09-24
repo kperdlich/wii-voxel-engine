@@ -1,8 +1,8 @@
-#include "handler/Controller.h"
+#include "Controller.h"
 
 int main( int argc, char **argv ) {
 
-	Controller::getInstance().start();
+	Controller::GetInstance().Start();
     return 0;
 }
 
