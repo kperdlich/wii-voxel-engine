@@ -1,9 +1,21 @@
-/*
- * MainMenuScene.cpp
+/***
  *
- *  Created on: 13.06.2015
- *      Author: Kevin
- */
+ * Copyright (C) 2016 DaeFennek
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+***/
 
 #include "MainMenuScene.h"
 #include "../components/Cursor.h"
@@ -14,7 +26,9 @@
 #include "ClassicBackgroundSprite_png.h"
 #include "BasicButtonBig_png.h"
 #include "BasicButtonBigHighlight_png.h"
-#include "MinecraftLogo_png.h"
+#include "WoxelCraft_png.h"
+#include "WoxelCraft_png.h"
+
 #include "Hotbar_png.h"
 #include <string.h>
 
@@ -55,7 +69,7 @@ MainMenuScene::~MainMenuScene() {
 void MainMenuScene::Load() {
 	Basic2DScene::Load();
 	m_elements.push_back( new UITextureElement( MMS_CLASSIC_BACKGROUND , m_TextureHandler->CreateTexture( ClassicBackgroundSprite_png, MMS_CLASSIC_BACKGROUND )));
-	UITextureElement* logo = new UITextureElement( MMS_LOGO , m_TextureHandler->CreateTexture( MinecraftLogo_png, MMS_LOGO));
+	UITextureElement* logo = new UITextureElement( MMS_LOGO , m_TextureHandler->CreateTexture( WoxelCraft_png, MMS_LOGO));
 	logo->SetX( (rmode->viWidth / 2) - (logo->GetWidth() / 2) );
 	logo->SetY( 30 );
 	m_elements.push_back( logo );

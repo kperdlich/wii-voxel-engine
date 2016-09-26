@@ -1,9 +1,21 @@
-/*
- * Controller.cpp
+/***
  *
- *  Created on: 24.05.2015
- *      Author: Kevin
- */
+ * Copyright (C) 2016 DaeFennek
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+***/
 
 
 #include "Controller.h"
@@ -46,9 +58,10 @@ void Controller::Start()
 		m_sceneHandler->Update();
 		m_sceneHandler->DrawScene();
 
+		printFps( 500, 25, m_fontHandler->GetNativFontByID( DEFAULT_FONT_ID ), DEFAULT_FONT_SIZE, GRRLIB_YELLOW );
+
 #ifdef DEBUG
 		printGameVersion(0, 25, m_fontHandler->GetNativFontByID( DEFAULT_FONT_ID ), DEFAULT_FONT_SIZE, GRRLIB_WHITE );
-		printFps( 500, 25, m_fontHandler->GetNativFontByID( DEFAULT_FONT_ID ), DEFAULT_FONT_SIZE, GRRLIB_YELLOW );
 
 		sprintf(pResolutionLogBuffer, "Resolution x: %d y: %d", rmode->viWidth, rmode->viHeight );
 		Debug::GetInstance().Log(pResolutionLogBuffer);

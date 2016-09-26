@@ -1,9 +1,21 @@
-/*
- * MathHelper.cpp
+/***
  *
- *  Created on: 05.08.2015
- *      Author: Kevin
- */
+ * Copyright (C) 2016 DaeFennek
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+***/
 
 #include "MathHelper.h"
 
@@ -11,18 +23,18 @@ MathHelper::MathHelper() { }
 
 MathHelper::~MathHelper() { }
 
-Vector3f MathHelper::CalculateNewWorldPositionByCotation(const Vector3f& rotation, const Vector3f& currentWorldPosition, float smoothFactor, const Vector3f& movementVector)
+Vector3f MathHelper::CalculateNewWorldPositionByRotation(const Vector3f& rotation, const Vector3f& currentWorldPosition, float smoothFactor, const Vector3f& movementVector)
 {
 	float rotationYInRadians = rotation.GetY() * DEGREE_TO_RADIANS;
 	float rotationXInRadians = rotation.GetX() * DEGREE_TO_RADIANS;
 	float x = currentWorldPosition.GetX() + ( sin(rotationYInRadians) * smoothFactor * movementVector.GetZ());
-	float y = currentWorldPosition.GetY() + ( sin(rotationXInRadians) * smoothFactor * movementVector.GetZ());;
+	float y = currentWorldPosition.GetY() + ( sin(rotationXInRadians) * smoothFactor * movementVector.GetZ());
 	float z = currentWorldPosition.GetZ() + ( cos(rotationYInRadians) * smoothFactor * movementVector.GetZ()) ;
 	return Vector3f(x, y, z);
 }
 
 
-Vector3f MathHelper::CalculateNewWorldPositionByRotation(float rotation, Vector3f currentWorldPosition, float smoothFactor, Vector3f movementVector)
+Vector3f MathHelper::CalculateNewWorldPositionByRotation(float rotation, const Vector3f& currentWorldPosition, float smoothFactor, const Vector3f& movementVector)
 {
 	float rotationInRadians = rotation * DEGREE_TO_RADIANS;
 	float x = currentWorldPosition.GetX() + ( sin(rotationInRadians) * smoothFactor * movementVector.GetZ());
