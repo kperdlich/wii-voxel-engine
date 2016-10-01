@@ -69,7 +69,6 @@ void List::Update()
 
 	for ( unsigned int i = 0; i < m_elements.size(); i++)
 	{
-
 		m_elements[i]->Update();
 	}
 

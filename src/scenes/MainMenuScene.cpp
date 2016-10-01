@@ -71,7 +71,7 @@ void MainMenuScene::Load() {
 	m_elements.push_back( new UITextureElement( MMS_CLASSIC_BACKGROUND , m_TextureHandler->CreateTexture( ClassicBackgroundSprite_png, MMS_CLASSIC_BACKGROUND )));
 	UITextureElement* logo = new UITextureElement( MMS_LOGO , m_TextureHandler->CreateTexture( WoxelCraft_png, MMS_LOGO));
 	logo->SetX( (rmode->viWidth / 2) - (logo->GetWidth() / 2) );
-	logo->SetY( 30 );
+	logo->SetY( 60 );
 	m_elements.push_back( logo );
 
 	CreateMainMenuButtonList();
@@ -105,7 +105,7 @@ void MainMenuScene::CreateMainMenuButtonList()
 {
 	Texture* startButtonTexture = m_TextureHandler->CreateTexture( BasicButtonBig_png, "BasicButtonBig_png" );
 	int xPos = (rmode->viWidth / 2) - (startButtonTexture->GetWidth() / 2);
-	int yPos = (rmode->viHeight / 2) - ( startButtonTexture->GetHeight() / 2 );
+	int yPos = (rmode->viHeight / 2) - ( startButtonTexture->GetHeight() / 2);
 	int sizeBetweenBtns = startButtonTexture->GetHeight() + BUTTON_Y_DISTANCE;
 	m_TextureHandler->DestroyTextureByName("BasicButtonBig_png");
 
