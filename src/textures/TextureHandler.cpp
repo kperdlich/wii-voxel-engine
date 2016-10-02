@@ -72,6 +72,7 @@ void TextureHandler::DestroyAllTextures()
 	m_textures.clear();
 }
 
+
 Texture* TextureHandler::CreateTexture(const u8* textureName, const char* searchName )
 {
 	if ( FindTexture(searchName))
@@ -84,6 +85,13 @@ Texture* TextureHandler::CreateTexture(const u8* textureName, const char* search
 	std::vector<BasicTexture*>::iterator textureIt = m_textures.insert(m_textures.end(), tex );
 	m_textureMap.insert( std::pair<std::string, std::vector<BasicTexture*>::iterator>(searchName, textureIt ));
 	return tex;
+}
+
+Texture* TextureHandler::CreateTexture( const u8* textureName, const char* searchName, bool visible )
+{
+	Texture* pTexture = CreateTexture(textureName, searchName);
+	pTexture->SetVisible(visible);
+	return pTexture;
 }
 
 u16 TextureHandler::GetNewIndex() const

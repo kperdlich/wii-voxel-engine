@@ -37,6 +37,7 @@ private:
 public:
 	TextureHandler();
 	~TextureHandler();
+	Texture* CreateTexture( const u8* textureName, const char* searchName, bool visible );
 	Texture* CreateTexture( const u8* textureName, const char* searchName );
 	LabelTexture* CreateLabel( int x, int y, const char* text, GRRLIB_ttfFont* font, uint fontSize, u32 color, const char* searchName );
 	LabelTexture* CreateLabel( const char* text, GRRLIB_ttfFont* font, const char* searchName );

@@ -26,6 +26,7 @@
 #include "../entity/EntityHandler.h"
 #include "../world/Camera.h"
 #include "../world/GameWorld.h"
+#include "../world/CSkyBox.h"
 
 class Basic3DScene: public BasicScene {
 public:
@@ -47,6 +48,7 @@ protected:
 	std::vector<UIElement*> m_uiElements;
 	class Camera* m_mainCamera;
 	class CGameWorld* m_pGameWorld;
+	class CSkyBox* m_pSkyBox;
 };
 
 #endif /* _BASIC3DSCENE_H_ */

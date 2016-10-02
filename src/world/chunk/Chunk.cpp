@@ -19,6 +19,7 @@
 
 #include <cstdlib>
 #include "Chunk.h"
+#include "../../utils/CRenderHelper.h"
 #include "../../renderer/BlockRenderer.h"
 #include "../../utils/Debug.h"
 
@@ -378,7 +379,7 @@ void CChunk::RebuildDisplayList()
 	BuildBlockRenderList();
 
 	DeleteDisplayList();
-	CreateDisplayList( size_t((32 * 6) * m_AmountOfFaces) ); // 32 * 6 magic numbers, seems to work fine
+	CreateDisplayList( CRenderHelper::GetDisplayListSizeForFaces(m_AmountOfFaces) );
 
 	for(auto it = m_mBlockRenderList.begin(); it != m_mBlockRenderList.end(); ++it)
 	{

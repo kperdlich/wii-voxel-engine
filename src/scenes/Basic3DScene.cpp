@@ -29,6 +29,7 @@ Basic3DScene::Basic3DScene()
 	m_Renderer = new Renderer3D();
 	m_entityHandler = new EntityHandler();
 	m_mainCamera = new Camera();
+	m_pSkyBox = new CSkyBox();
 }
 
 Basic3DScene::~Basic3DScene()
@@ -36,12 +37,14 @@ Basic3DScene::~Basic3DScene()
 	delete m_pGameWorld;
 	delete m_entityHandler;
 	delete m_mainCamera;
+	delete m_pSkyBox;
 }
 
 void Basic3DScene::Load()
 {
 	BasicScene::Load();
 	m_mainCamera->Init();
+	m_pSkyBox->Init();
 }
 
 void Basic3DScene::Draw()
@@ -50,6 +53,18 @@ void Basic3DScene::Draw()
 	//GRRLIB_SetLightDiff(0, (guVector){ 10.0f, 10.0f, 10.0f }, 10.0f,1.0f,0xFFFFFFFF);
 
 	GRRLIB_3dMode(MIN_DIST, MAX_DIST, FIELD_OF_VIEW, 1, 1);
+
+	GRRLIB_ObjectViewBegin();
+	GRRLIB_ObjectViewScale( m_mainCamera->GetWorldScaleX(), m_mainCamera->GetWorldScaleY(), m_mainCamera->GetWorldScaleZ() );
+	GRRLIB_ObjectViewTrans( -50, -50, -50 );
+	GRRLIB_ObjectViewRotate( 0, 360 - m_mainCamera->GetWorldAngleY(), 0);
+	GRRLIB_ObjectViewRotate( m_mainCamera->GetWorldAngleX(), 0, 0);
+	GRRLIB_ObjectViewRotate( 0, 0, m_mainCamera->GetWorldAngleZ());
+	GRRLIB_ObjectViewEnd();
+
+	SetGraphicsMode(true, false);
+	m_pSkyBox->Render();
+	SetGraphicsMode(true, true);
 
 	GRRLIB_ObjectViewBegin();
 	GRRLIB_ObjectViewScale( m_mainCamera->GetWorldScaleX(), m_mainCamera->GetWorldScaleY(), m_mainCamera->GetWorldScaleZ() );
