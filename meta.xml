@@ -1,0 +1,9 @@
+ <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+  <app version="1">
+    <name>WoxelCraft</name>
+    <coder>DaeFennek</coder>
+    <version>0.0.2</version>
+    <release_date>20161002000000</release_date>
+    <short_description>3D Voxel Engine and Minecraft clone</short_description>
+    <long_description>WoxelCraft is a 3D Voxel Engine and a basic clone of Minecraft for the Nintendo Wii.</long_description>
+  </app>
