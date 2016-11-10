@@ -31,15 +31,9 @@ public:
 	Player();
 	virtual ~Player();
 	void Update();
-
-	void MoveForward();
-	void MoveBackward();
-	void MoveLeft();
-	void MoveRight();
-
 	void AddToInventory(IEquipable& item);
-
-	void Rotate( Vector3f rotation );
+	void Move(float x, float y);
+	void Rotate( const Vector3f& rotation );
 
 private:
 	CPlayerInventory* m_inventory;

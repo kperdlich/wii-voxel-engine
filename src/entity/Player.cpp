@@ -59,6 +59,7 @@ void Player::Update()
 	if ( pChunk )
 	{
 		sprintf(pChunkBuffer, "Current Chunk: %d/%d/%d", (unsigned int) pChunk->GetCenterPosition().GetX(), (unsigned int) pChunk->GetCenterPosition().GetY(), (unsigned int) pChunk->GetCenterPosition().GetZ() );
+		//sprintf(pChunkBuffer, "Nunchunk: X: %f Y:%f", pad->GetNunchukAngleX(), pad->GetNunchukAngleY() );
 		Debug::GetInstance().Log( pChunkBuffer );
 	}
 #endif
@@ -66,48 +67,33 @@ void Player::Update()
 
 	if ( pad->GetY() <= 15.0f )
 	{
-		this->Rotate( Vector3f( -ROTATION_SPEED, 0, 0 )); // top
+		Rotate( Vector3f( -ROTATION_SPEED, 0, 0 )); // top
 	}
 	else if ( pad->GetY() >= rmode->viHeight - 45.0f )
 	{
-		this->Rotate( Vector3f( ROTATION_SPEED, 0, 0 )); // bottom
+		Rotate( Vector3f( ROTATION_SPEED, 0, 0 )); // bottom
 	}
 
 	if ( pad->GetX() >= rmode->viWidth - 120.0f )
 	{
-		this->Rotate( Vector3f( 0, -ROTATION_SPEED, 0 )); // right
+		Rotate( Vector3f( 0, -ROTATION_SPEED, 0 )); // right
 	}
 	else if ( pad->GetX() <= 120.0f )
 	{
-		this->Rotate( Vector3f( 0, ROTATION_SPEED, 0 )); // left
+		Rotate( Vector3f( 0, ROTATION_SPEED, 0 )); // left
 	}
 
-	if ( padButtonHeld & WPAD_BUTTON_UP )
-	{
-		MoveForward();
-	}
-	if ( padButtonHeld & WPAD_BUTTON_DOWN )
-	{
-		MoveBackward();
-	}
-	if ( padButtonHeld & WPAD_BUTTON_LEFT )
-	{
-		MoveLeft();
-	}
-	if ( padButtonHeld & WPAD_BUTTON_RIGHT )
-	{
-		MoveRight();
-	}
+	Move(-(pad->GetNunchukAngleX()), -(pad->GetNunchukAngleY()));
 
+	// shity physics
 	Vector3f blockPositionUnderPlayer(m_position.GetX() + BLOCK_SIZE, 0.0f, m_position.GetZ() + BLOCK_SIZE);
 	Vector3f newPosition = m_pWorld->GetNewPlayerPosition(blockPositionUnderPlayer);
 	m_position.SetY(newPosition.GetY() + 2.0f);
 
-	auto focusedBlockPos = MathHelper::CalculateNewWorldPositionByRotation(
+	Vector3f focusedBlockPos = MathHelper::CalculateNewWorldPositionByRotation(
 							Vector3f(m_rotation.GetX(), m_rotation.GetY(), m_rotation.GetZ()),
 							Vector3f(m_position.GetX() + BLOCK_SIZE, m_position.GetY(), m_position.GetZ() + BLOCK_SIZE),
-							ROTATION_SPEED,
-							Vector3f::Forward());
+							-ROTATION_SPEED);
 
 
 	m_pWorld->UpdateFocusedBlockByWorldPosition(focusedBlockPos);
@@ -130,47 +116,38 @@ void Player::Update()
 
 
 
-void Player::MoveForward()
+void Player::Move(float x, float y)
 {
-	m_position = MathHelper::CalculateNewWorldPositionByRotation(
-			m_rotation.GetY(),
-			m_position,
-			MOVEMENT_SPEED,
-			Vector3f::Forward());
-}
-
-void Player::MoveBackward()
-{
-	m_position = MathHelper::CalculateNewWorldPositionByRotation(
-				m_rotation.GetY(),
-				m_position,
-				MOVEMENT_SPEED,
-				Vector3f::Backward());
-}
-
-void Player::MoveLeft()
-{
-	m_position = MathHelper::CalculateNewWorldPositionByRotation(
-					m_rotation.GetY() - 90,
+	if ( y != 0.0f)
+	{
+		m_position = MathHelper::CalculateNewWorldPositionByRotation(
+					m_rotation.GetY(),
 					m_position,
-					MOVEMENT_SPEED,
-					Vector3f::Backward());
+					y * MOVEMENT_SPEED);
+	}
 
+	if ( x != 0.0f)
+	{
+		float strafeValue = 0.0f;
+
+		if ( x > 0 )
+		{
+			strafeValue = -90;
+		}
+		else if ( x < 0)
+		{
+			strafeValue = 90;
+		}
+
+		m_position = MathHelper::CalculateNewWorldPositionByRotation(
+					m_rotation.GetY() + strafeValue,
+					m_position,
+					fabs(x) * MOVEMENT_SPEED);
+	}
 }
 
-void Player::MoveRight()
-{
 
-	m_position = MathHelper::CalculateNewWorldPositionByRotation(
-						m_rotation.GetY() + 90,
-						m_position,
-						MOVEMENT_SPEED,
-						Vector3f::Backward());
-
-}
-
-
-void Player::Rotate( Vector3f rotation )
+void Player::Rotate( const Vector3f& rotation )
 {
 	if ( m_rotation.GetX() > 360 )
 	{

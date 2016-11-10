@@ -36,6 +36,8 @@ public:
 	void Update();
 	float GetX() const;
 	float GetY() const;
+	float GetNunchukAngleY() const;
+	float GetNunchukAngleX() const;
 	u32 ButtonsDown() const;
 	u32 ButtonsHeld() const;
 	u32 ButtonsUp() const;

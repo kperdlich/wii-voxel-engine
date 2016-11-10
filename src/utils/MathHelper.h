@@ -33,8 +33,11 @@ private:
 	MathHelper();
 public:
 	virtual ~MathHelper();
-	static Vector3f CalculateNewWorldPositionByRotation( const Vector3f& rotation, const Vector3f& currentWorldPosition, float smoothFactor, const Vector3f& movementVector );
-	static Vector3f CalculateNewWorldPositionByRotation( float rotation, const Vector3f& currentWorldPosition, float smoothFactor, const Vector3f& movementVector );
+	static Vector3f CalculateNewWorldPositionByRotation( const Vector3f& rotation, const Vector3f& currentWorldPosition, const Vector3f& directionVector );
+	static Vector3f CalculateNewWorldPositionByRotation( const Vector3f& rotation, const Vector3f& currentWorldPosition, float direction );
+	static Vector3f CalculateNewWorldPositionByRotation( float rotation, const Vector3f& currentWorldPosition, const Vector3f& directionVector );
+	static Vector3f CalculateNewWorldPositionByRotation( float rotation, const Vector3f& currentWorldPosition, float direction );
+
 	static float Clamp(float value, float minValue, float maxValue);
 	inline static float Min(float value1, float value2 );
 	inline static float Max(float value1, float value2 );

@@ -23,23 +23,41 @@ MathHelper::MathHelper() { }
 
 MathHelper::~MathHelper() { }
 
-Vector3f MathHelper::CalculateNewWorldPositionByRotation(const Vector3f& rotation, const Vector3f& currentWorldPosition, float smoothFactor, const Vector3f& movementVector)
+Vector3f MathHelper::CalculateNewWorldPositionByRotation(const Vector3f& rotation, const Vector3f& currentWorldPosition, const Vector3f& directionVector)
 {
 	float rotationYInRadians = rotation.GetY() * DEGREE_TO_RADIANS;
 	float rotationXInRadians = rotation.GetX() * DEGREE_TO_RADIANS;
-	float x = currentWorldPosition.GetX() + ( sin(rotationYInRadians) * smoothFactor * movementVector.GetZ());
-	float y = currentWorldPosition.GetY() + ( sin(rotationXInRadians) * smoothFactor * movementVector.GetZ());
-	float z = currentWorldPosition.GetZ() + ( cos(rotationYInRadians) * smoothFactor * movementVector.GetZ()) ;
+	float x = currentWorldPosition.GetX() + (sin(rotationYInRadians) * directionVector.GetX());
+	float y = currentWorldPosition.GetY() + (sin(rotationXInRadians) * directionVector.GetY());
+	float z = currentWorldPosition.GetZ() + (cos(rotationYInRadians) * directionVector.GetZ()) ;
 	return Vector3f(x, y, z);
 }
 
+Vector3f MathHelper::CalculateNewWorldPositionByRotation( const Vector3f& rotation, const Vector3f& currentWorldPosition, float direction)
+{
+	float rotationYInRadians = rotation.GetY() * DEGREE_TO_RADIANS;
+	float rotationXInRadians = rotation.GetX() * DEGREE_TO_RADIANS;
+	float x = currentWorldPosition.GetX() + (sin(rotationYInRadians) * direction);
+	float y = currentWorldPosition.GetY() + (sin(rotationXInRadians) * direction);
+	float z = currentWorldPosition.GetZ() + (cos(rotationYInRadians) * direction);
+	return Vector3f(x, y, z);
+}
 
-Vector3f MathHelper::CalculateNewWorldPositionByRotation(float rotation, const Vector3f& currentWorldPosition, float smoothFactor, const Vector3f& movementVector)
+Vector3f MathHelper::CalculateNewWorldPositionByRotation(float rotation, const Vector3f& currentWorldPosition, const Vector3f& directionVector)
 {
 	float rotationInRadians = rotation * DEGREE_TO_RADIANS;
-	float x = currentWorldPosition.GetX() + ( sin(rotationInRadians) * smoothFactor * movementVector.GetZ());
-	float y = currentWorldPosition.GetY();
-	float z = currentWorldPosition.GetZ() + ( cos(rotationInRadians) * smoothFactor * movementVector.GetZ()) ;
+	float x = currentWorldPosition.GetX() + (sin(rotationInRadians) * directionVector.GetX());
+	float y = currentWorldPosition.GetY() + (sin(rotationInRadians) * directionVector.GetY());
+	float z = currentWorldPosition.GetZ() + (cos(rotationInRadians) * directionVector.GetZ());
+	return Vector3f(x, y, z);
+}
+
+Vector3f MathHelper::CalculateNewWorldPositionByRotation( float rotation, const Vector3f& currentWorldPosition, float direction)
+{
+	float rotationInRadians = rotation * DEGREE_TO_RADIANS;
+	float x = currentWorldPosition.GetX() + (sin(rotationInRadians) * direction);
+	float y = currentWorldPosition.GetY() + (sin(rotationInRadians) * direction);
+	float z = currentWorldPosition.GetZ() + (cos(rotationInRadians) * direction);
 	return Vector3f(x, y, z);
 }
 

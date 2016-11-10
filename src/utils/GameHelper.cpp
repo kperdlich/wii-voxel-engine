@@ -21,7 +21,7 @@
 #include "GameHelper.h"
 
 static char* GameName =  "WoxelCraft";
-static char* BuildVersion = "0.0.2";
+static char* BuildVersion = "0.0.3";
 
 static u8 frameCount = 0;
 static u32 fpsLastTime;

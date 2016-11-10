@@ -250,7 +250,6 @@ Vector3f CGameWorld::GetNewPlayerPosition( const Vector3f& playerWorldPosition )
 	}
 
 	return playerWorldPosition;
-
 }
 
 void CGameWorld::DrawFocusOnSelectedCube()

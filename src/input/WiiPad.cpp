@@ -31,6 +31,7 @@
  */
 #include "WiiPad.h"
 #include "../core/grrlib.h"
+#include <math.h>
 
 
 WiiPad::WiiPad( int chanID ) : m_ChanID( chanID )
@@ -49,26 +50,102 @@ void WiiPad::Update()
 	m_ButtonUp = WPAD_ButtonsUp( m_ChanID );
 }
 
-float WiiPad::GetX() const {
+float WiiPad::GetX() const
+{
 	return m_Data->ir.x;
 }
 
-float WiiPad::GetY() const {
+float WiiPad::GetY() const
+{
 	return m_Data->ir.y;
 }
 
-u32 WiiPad::ButtonsDown() const {
+float WiiPad::GetNunchukAngleY() const
+{
+	static float driftY = 0;
+
+	float y = m_Data->exp.nunchuk.js.pos.y - m_Data->exp.nunchuk.js.min.y;
+	y -= (m_Data->exp.nunchuk.js.max.y - m_Data->exp.nunchuk.js.min.y) * 0.5f;
+
+	if (fabs(y) - 100.0F > driftY)
+	{
+		if (y < 0)
+		{
+			driftY = -(y + 100.0F);
+		}
+		else
+		{
+			driftY = 100.0F - y;
+		}
+	}
+
+	if (fabs(y + driftY) > 100.0F)
+	{
+		driftY = 0;
+	}
+
+	y += driftY;
+	y *= 0.01F;
+
+	if (fabs(y) < 0.32F)
+	{
+		y = 0;
+	}
+
+	return y;
+}
+
+float WiiPad::GetNunchukAngleX() const
+{
+	static float driftX = 0;
+
+	float x = m_Data->exp.nunchuk.js.pos.x - m_Data->exp.nunchuk.js.min.x;
+	x -= (m_Data->exp.nunchuk.js.max.x - m_Data->exp.nunchuk.js.min.x) * 0.5F;
+
+	if (fabs(x) - 100.0F > driftX)
+	{
+		if (x < 0)
+		{
+			driftX = -(x + 100.0F);
+		}
+		else
+		{
+			driftX = 100.0F - x;
+		}
+	}
+
+	if (fabs(x + driftX) > 100.0F)
+	{
+		driftX = 0;
+	}
+
+	x += driftX;
+	x *= 0.01F;
+
+	if (fabs(x) < 0.32F)
+	{
+		x = 0;
+	}
+
+	return x;
+}
+
+u32 WiiPad::ButtonsDown() const
+{
 	return m_ButtonDown;
 }
 
-u32 WiiPad::ButtonsHeld() const {
+u32 WiiPad::ButtonsHeld() const
+{
 	return m_ButtonHeld;
 }
 
-u32 WiiPad::ButtonsUp() const {
+u32 WiiPad::ButtonsUp() const
+{
 	return m_ButtonUp;
 }
 
-const WPADData* WiiPad::GetData() const {
+const WPADData* WiiPad::GetData() const
+{
 	return m_Data;
 }
