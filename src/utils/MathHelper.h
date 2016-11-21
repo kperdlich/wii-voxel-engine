@@ -22,7 +22,7 @@
 
 #include <math.h>
 #include <cmath>
-#include "Vector3f.h"
+#include "Vector3.h"
 
 #define PI 3.14159265
 #define DEGREE_TO_RADIANS PI / 180
@@ -33,14 +33,14 @@ private:
 	MathHelper();
 public:
 	virtual ~MathHelper();
-	static Vector3f CalculateNewWorldPositionByRotation( const Vector3f& rotation, const Vector3f& currentWorldPosition, const Vector3f& directionVector );
-	static Vector3f CalculateNewWorldPositionByRotation( const Vector3f& rotation, const Vector3f& currentWorldPosition, float direction );
-	static Vector3f CalculateNewWorldPositionByRotation( float rotation, const Vector3f& currentWorldPosition, const Vector3f& directionVector );
-	static Vector3f CalculateNewWorldPositionByRotation( float rotation, const Vector3f& currentWorldPosition, float direction );
+	static Vector3 CalculateNewWorldPositionByRotation( const Vector3& rotation, const Vector3& currentWorldPosition, const Vector3& directionVector );
+	static Vector3 CalculateNewWorldPositionByRotation( const Vector3& rotation, const Vector3& currentWorldPosition, float direction );
+	static Vector3 CalculateNewWorldPositionByRotation( float rotation, const Vector3& currentWorldPosition, const Vector3& directionVector );
+	static Vector3 CalculateNewWorldPositionByRotation( float rotation, const Vector3& currentWorldPosition, float direction );
 
-	static float Clamp(float value, float minValue, float maxValue);
-	inline static float Min(float value1, float value2 );
-	inline static float Max(float value1, float value2 );
+	static double Clamp(double value, double minValue, double maxValue);
+	inline static double Min(double value1, double value2 );
+	inline static double Max(double value1, double value2 );
 };
 
 #endif /* _MATHHELPER_H_ */

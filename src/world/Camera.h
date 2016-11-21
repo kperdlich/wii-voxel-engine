@@ -20,7 +20,7 @@
 #ifndef _CAMERA_H_
 #define _CAMERA_H_
 
-#include "../utils/Vector3f.h"
+#include "../utils/Vector3.h"
 #include "../entity/Entity.h"
 
 class Camera {
@@ -31,18 +31,18 @@ public:
 
 	void AttachTo(class Entity& entity);
 
-	void SetWorldPosititon(Vector3f position);
-	void SetWorldAngle(Vector3f angle);
+	void SetWorldPosititon(Vector3 position);
+	void SetWorldAngle(Vector3 angle);
 
 	float GetWorldPositionX() const;
 	float GetWorldPositionY() const;
 	float GetWorldPositionZ() const;
-	const Vector3f& GetWorldPosition() const;
+	const Vector3& GetWorldPosition() const;
 
 	float GetWorldAngleX() const;
 	float GetWorldAngleY() const;
 	float GetWorldAngleZ() const;
-	const Vector3f& GetWorldAngle() const;
+	const Vector3& GetWorldAngle() const;
 
 	float GetWorldScaleX() const;
 	float GetWorldScaleY() const;
@@ -50,7 +50,7 @@ public:
 
 
 private:
-	Vector3f m_cam,
+	Vector3 m_cam,
 			 m_up,
 			 m_look,
 			 m_worldPosition,

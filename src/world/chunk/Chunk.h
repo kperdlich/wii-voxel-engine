@@ -23,7 +23,7 @@
 #include <stdint.h>
 #include "../GameWorld.h"
 #include "../../renderer/BlockRenderHelper.h"
-#include "../../utils/Vector3f.h"
+#include "../../utils/Vector3.h"
 
 #define CHUNK_SIZE_X 16
 #define CHUNK_SIZE_Y 16
@@ -36,7 +36,7 @@ public:
 	CChunk(class CGameWorld &gameWorld);
 	virtual ~CChunk();
 
-	void Init(Vector3f& position);
+	void Init(Vector3& position);
 	void RebuildDisplayList();
 	void Render();
 
@@ -49,24 +49,24 @@ public:
 
 	void DeleteDisplayList();
 
-	const Vector3f& GetCenterPosition() const;
+	const Vector3& GetCenterPosition() const;
 
 	void UpdateChunkNeighbors();
-	void RemoveBlockByWorldPosition(const Vector3f& blockPosition);
-	void AddBlockByWorldPosition(const Vector3f& blockPosition, BlockType type);
-	Vector3f GetBlockPositionByWorldPosition(const Vector3f& worldPosition) const;
-	BlockType GetBlockTypeByWorldPosition(const Vector3f& worldPosition) const;
-	Vector3f ValidatePhysicalPosition(const Vector3f& position) const;
+	void RemoveBlockByWorldPosition(const Vector3& blockPosition);
+	void AddBlockByWorldPosition(const Vector3& blockPosition, BlockType type);
+	Vector3 GetBlockPositionByWorldPosition(const Vector3& worldPosition) const;
+	BlockType GetBlockTypeByWorldPosition(const Vector3& worldPosition) const;
+	Vector3 ValidatePhysicalPosition(const Vector3& position) const;
 
 private:
 	void CreateDisplayList(size_t sizeOfDisplayList);
 	void FinishDisplayList();
 	bool AddBlockToRenderList(BlockType type, const BlockRenderVO& blockRenderVO);
-	void RemoveBlock(const Vector3f& position);
+	void RemoveBlock(const Vector3& position);
 	void ClearBlockRenderList();
 	void BuildBlockRenderList();
 	bool IsBlockVisible(uint32_t iX, uint32_t iY, uint32_t iZ, BlockFaceVisibiltyVO* &pFaceVO );
-	void GetLocalBlockPositionByWorldPosition(const Vector3f& blockWorldPosition, unsigned int* x, unsigned int* y, unsigned int* z) const;
+	void GetLocalBlockPositionByWorldPosition(const Vector3& blockWorldPosition, unsigned int* x, unsigned int* y, unsigned int* z) const;
 
 private:
 	bool m_IsDirty;
@@ -77,7 +77,7 @@ private:
 	uint64_t m_AmountOfBlocks = 0;
 	uint64_t m_AmountOfFaces = 0;
 
-	Vector3f* m_pCenterPosition;
+	Vector3* m_pCenterPosition;
 
 	BlockType*** m_pBlocks;
 	std::map<BlockType, std::vector<const BlockRenderVO*> > m_mBlockRenderList;

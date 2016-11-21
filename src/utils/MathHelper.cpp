@@ -23,56 +23,56 @@ MathHelper::MathHelper() { }
 
 MathHelper::~MathHelper() { }
 
-Vector3f MathHelper::CalculateNewWorldPositionByRotation(const Vector3f& rotation, const Vector3f& currentWorldPosition, const Vector3f& directionVector)
+Vector3 MathHelper::CalculateNewWorldPositionByRotation(const Vector3& rotation, const Vector3& currentWorldPosition, const Vector3& directionVector)
 {
 	float rotationYInRadians = rotation.GetY() * DEGREE_TO_RADIANS;
 	float rotationXInRadians = rotation.GetX() * DEGREE_TO_RADIANS;
 	float x = currentWorldPosition.GetX() + (sin(rotationYInRadians) * directionVector.GetX());
 	float y = currentWorldPosition.GetY() + (sin(rotationXInRadians) * directionVector.GetY());
 	float z = currentWorldPosition.GetZ() + (cos(rotationYInRadians) * directionVector.GetZ()) ;
-	return Vector3f(x, y, z);
+	return Vector3(x, y, z);
 }
 
-Vector3f MathHelper::CalculateNewWorldPositionByRotation( const Vector3f& rotation, const Vector3f& currentWorldPosition, float direction)
+Vector3 MathHelper::CalculateNewWorldPositionByRotation( const Vector3& rotation, const Vector3& currentWorldPosition, float direction)
 {
 	float rotationYInRadians = rotation.GetY() * DEGREE_TO_RADIANS;
 	float rotationXInRadians = rotation.GetX() * DEGREE_TO_RADIANS;
 	float x = currentWorldPosition.GetX() + (sin(rotationYInRadians) * direction);
 	float y = currentWorldPosition.GetY() + (sin(rotationXInRadians) * direction);
 	float z = currentWorldPosition.GetZ() + (cos(rotationYInRadians) * direction);
-	return Vector3f(x, y, z);
+	return Vector3(x, y, z);
 }
 
-Vector3f MathHelper::CalculateNewWorldPositionByRotation(float rotation, const Vector3f& currentWorldPosition, const Vector3f& directionVector)
+Vector3 MathHelper::CalculateNewWorldPositionByRotation(float rotation, const Vector3& currentWorldPosition, const Vector3& directionVector)
 {
 	float rotationInRadians = rotation * DEGREE_TO_RADIANS;
 	float x = currentWorldPosition.GetX() + (sin(rotationInRadians) * directionVector.GetX());
 	float y = currentWorldPosition.GetY() + (sin(rotationInRadians) * directionVector.GetY());
 	float z = currentWorldPosition.GetZ() + (cos(rotationInRadians) * directionVector.GetZ());
-	return Vector3f(x, y, z);
+	return Vector3(x, y, z);
 }
 
-Vector3f MathHelper::CalculateNewWorldPositionByRotation( float rotation, const Vector3f& currentWorldPosition, float direction)
+Vector3 MathHelper::CalculateNewWorldPositionByRotation( float rotation, const Vector3& currentWorldPosition, float direction)
 {
 	float rotationInRadians = rotation * DEGREE_TO_RADIANS;
 	float x = currentWorldPosition.GetX() + (sin(rotationInRadians) * direction);
 	float y = currentWorldPosition.GetY() + (sin(rotationInRadians) * direction);
 	float z = currentWorldPosition.GetZ() + (cos(rotationInRadians) * direction);
-	return Vector3f(x, y, z);
+	return Vector3(x, y, z);
 }
 
 
-float MathHelper::Clamp(float value, float minValue, float maxValue)
+double MathHelper::Clamp(double value, double minValue, double maxValue)
 {
 	return Max(minValue, Min(value, maxValue));
 }
 
-inline float MathHelper::Min(float value1, float value2 )
+inline double MathHelper::Min(double value1, double value2 )
 {
 	return (value1 < value2) ? (value1) : (value2);
 }
 
-inline float MathHelper::Max(float value1, float value2 )
+inline double MathHelper::Max(double value1, double value2 )
 {
 	return (value1 > value2) ? (value1) : (value2);
 }

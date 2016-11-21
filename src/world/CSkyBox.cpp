@@ -19,7 +19,7 @@
 
 #include "CSkyBox.h"
 #include "../utils/CRenderHelper.h"
-#include "../utils/Vector3f.h"
+#include "../utils/Vector3.h"
 
 #include "SkyBox_Top_png.h"
 #include "SkyBox_Left_png.h"

@@ -67,32 +67,32 @@ void Player::Update()
 
 	if ( pad->GetY() <= 15.0f )
 	{
-		Rotate( Vector3f( -ROTATION_SPEED, 0, 0 )); // top
+		Rotate( Vector3( -ROTATION_SPEED, 0, 0 )); // top
 	}
 	else if ( pad->GetY() >= rmode->viHeight - 45.0f )
 	{
-		Rotate( Vector3f( ROTATION_SPEED, 0, 0 )); // bottom
+		Rotate( Vector3( ROTATION_SPEED, 0, 0 )); // bottom
 	}
 
 	if ( pad->GetX() >= rmode->viWidth - 120.0f )
 	{
-		Rotate( Vector3f( 0, -ROTATION_SPEED, 0 )); // right
+		Rotate( Vector3( 0, -ROTATION_SPEED, 0 )); // right
 	}
 	else if ( pad->GetX() <= 120.0f )
 	{
-		Rotate( Vector3f( 0, ROTATION_SPEED, 0 )); // left
+		Rotate( Vector3( 0, ROTATION_SPEED, 0 )); // left
 	}
 
 	Move(-(pad->GetNunchukAngleX()), -(pad->GetNunchukAngleY()));
 
 	// shity physics
-	Vector3f blockPositionUnderPlayer(m_position.GetX() + BLOCK_SIZE, 0.0f, m_position.GetZ() + BLOCK_SIZE);
-	Vector3f newPosition = m_pWorld->GetNewPlayerPosition(blockPositionUnderPlayer);
+	Vector3 blockPositionUnderPlayer(m_position.GetX() + BLOCK_SIZE, 0.0f, m_position.GetZ() + BLOCK_SIZE);
+	Vector3 newPosition = m_pWorld->GetNewPlayerPosition(blockPositionUnderPlayer);
 	m_position.SetY(newPosition.GetY() + 2.0f);
 
-	Vector3f focusedBlockPos = MathHelper::CalculateNewWorldPositionByRotation(
-							Vector3f(m_rotation.GetX(), m_rotation.GetY(), m_rotation.GetZ()),
-							Vector3f(m_position.GetX() + BLOCK_SIZE, m_position.GetY(), m_position.GetZ() + BLOCK_SIZE),
+	Vector3 focusedBlockPos = MathHelper::CalculateNewWorldPositionByRotation(
+							Vector3(m_rotation.GetX(), m_rotation.GetY(), m_rotation.GetZ()),
+							Vector3(m_position.GetX() + BLOCK_SIZE, m_position.GetY(), m_position.GetZ() + BLOCK_SIZE),
 							-ROTATION_SPEED);
 
 
@@ -147,7 +147,7 @@ void Player::Move(float x, float y)
 }
 
 
-void Player::Rotate( const Vector3f& rotation )
+void Player::Rotate( const Vector3& rotation )
 {
 	if ( m_rotation.GetX() > 360 )
 	{

@@ -76,13 +76,13 @@ float Camera::GetWorldScaleZ() const
 	return m_wordScale.GetZ();
 }
 
-const Vector3f& Camera::GetWorldPosition() const
+const Vector3& Camera::GetWorldPosition() const
 {
 	return m_attachedToEntity->GetPosition();
 }
 
 
-const Vector3f& Camera::GetWorldAngle() const
+const Vector3& Camera::GetWorldAngle() const
 {
 	return m_attachedToEntity->GetRotation();
 }

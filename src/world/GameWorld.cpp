@@ -18,6 +18,8 @@
 ***/
 
 #include <stdint.h>
+#include <cstdlib>
+#include <time.h>
 #include <string>
 #include <inttypes.h>
 #include "GameWorld.h"
@@ -30,11 +32,16 @@ CGameWorld::CGameWorld( Basic3DScene* pScene ) : m_pScene(pScene)
 	m_blockManager = new CBlockManager( pScene->GetTextureHandler() );
 	m_blockManager->LoadBlocks();
 
+	srand (time(NULL));
+
+	m_pNoise = new PerlinNoise(.25, .15625, 1.5, 6.0, rand());
+
 #ifdef DEBUG
 	m_pChunkLogBuffer = new char[50];
 	m_pDisplayListSizeLogBuffer = new char[50];
 	m_pBlocksLogBuffer = new char[50];
 	m_pFaceLogBuffer = new char[50];
+	m_pSeedBuffer = new char[20];
 #endif
 }
 
@@ -45,6 +52,7 @@ CGameWorld::~CGameWorld()
 	delete[] m_pDisplayListSizeLogBuffer;
 	delete[] m_pBlocksLogBuffer;
 	delete[] m_pFaceLogBuffer;
+	delete[] m_pSeedBuffer;
 #endif
 
 	for (auto chunkEntry : m_ChunkList)
@@ -56,6 +64,7 @@ CGameWorld::~CGameWorld()
 
 	m_blockManager->UnloadBlocks();
 	delete m_blockManager;
+	delete m_pNoise;
 }
 
 void CGameWorld::GenerateWorld()
@@ -65,8 +74,8 @@ void CGameWorld::GenerateWorld()
 		for ( unsigned int z = 0; z < CHUNK_AMOUNT_Z; z++)
 		{
 			auto pChunk = new CChunk(*this);
-			auto pPosition = new Vector3f((float) (CHUNK_SIZE_X * x) + (CHUNK_SIZE_X / 2),  (float)CHUNK_SIZE_Y / 2, (float) (CHUNK_SIZE_Z * z) + (CHUNK_SIZE_Z / 2));
-			m_ChunkList.insert(std::pair<Vector3f*, CChunk*>( pPosition, pChunk ));
+			auto pPosition = new Vector3((float) (CHUNK_SIZE_X * x) + (CHUNK_SIZE_X / 2),  (float)CHUNK_SIZE_Y / 2, (float) (CHUNK_SIZE_Z * z) + (CHUNK_SIZE_Z / 2));
+			m_ChunkList.insert(std::pair<Vector3*, CChunk*>( pPosition, pChunk ));
 			pChunk->Init( *pPosition );
 		}
 	}
@@ -143,6 +152,9 @@ void CGameWorld::Draw()
 	sprintf(m_pChunkLogBuffer, "Rendered Chunks: %d/%d", chunksInFrustrum, m_ChunkList.size());
 	Debug::GetInstance().Log( m_pChunkLogBuffer );
 
+	sprintf(m_pSeedBuffer, "Seed: %d", m_pNoise->RandomSeed());
+	Debug::GetInstance().Log( m_pSeedBuffer );
+
 	//sprintf(m_pDisplayListSizeLogBuffer, "DisplayList size (MB): %d", displayListSize / 1024 / 1024);
 	//Debug::getInstance().log( m_pDisplayListSizeLogBuffer );
 
@@ -154,7 +166,7 @@ void CGameWorld::Draw()
 #endif
 }
 
-bool CGameWorld::ChunkInFov( Vector3f& chunkPosition, Vector3f& playerPosition, unsigned int fov)
+bool CGameWorld::ChunkInFov( Vector3& chunkPosition, Vector3& playerPosition, unsigned int fov)
 {
 	return (std::abs(chunkPosition.GetX() - playerPosition.GetX()) < CHUNK_SIZE_X * fov) &&
 			(std::abs(chunkPosition.GetZ() - playerPosition.GetZ()) < CHUNK_SIZE_Z * fov);
@@ -165,7 +177,7 @@ CBlockManager& CGameWorld::GetBlockManager()
 	return *m_blockManager;
 }
 
-CChunk* CGameWorld::GetChunkAt(const Vector3f& centerPosition) const
+CChunk* CGameWorld::GetChunkAt(const Vector3& centerPosition) const
 {
 	auto chunkIt = m_ChunkList.find(&centerPosition);
 	if (chunkIt != m_ChunkList.end())
@@ -176,17 +188,17 @@ CChunk* CGameWorld::GetChunkAt(const Vector3f& centerPosition) const
 }
 
 // todo replace param vector with floats
-CChunk* CGameWorld::GetChunkByWorldPosition(const Vector3f& worldPosition)
+CChunk* CGameWorld::GetChunkByWorldPosition(const Vector3& worldPosition)
 {
 	unsigned int x = worldPosition.GetX() / CHUNK_SIZE_X;
 	unsigned int z = worldPosition.GetZ() / CHUNK_SIZE_Z;
 
-	Vector3f chunkCenterPosition((x * CHUNK_SIZE_X) + (CHUNK_SIZE_X / 2), CHUNK_SIZE_Y / 2, (z * CHUNK_SIZE_Z) + (CHUNK_SIZE_Z / 2));
+	Vector3 chunkCenterPosition((x * CHUNK_SIZE_X) + (CHUNK_SIZE_X / 2), CHUNK_SIZE_Y / 2, (z * CHUNK_SIZE_Z) + (CHUNK_SIZE_Z / 2));
 
 	return GetChunkAt(chunkCenterPosition);
 }
 
-void CGameWorld::RemoveBlockByWorldPosition(const Vector3f& blockPosition)
+void CGameWorld::RemoveBlockByWorldPosition(const Vector3& blockPosition)
 {
 	auto pChunk = GetChunkByWorldPosition(blockPosition);
 	if ( pChunk )
@@ -194,7 +206,7 @@ void CGameWorld::RemoveBlockByWorldPosition(const Vector3f& blockPosition)
 		pChunk->RemoveBlockByWorldPosition( blockPosition );
 	}
 }
-void CGameWorld::AddBlockAtWorldPosition(const Vector3f& blockPosition, BlockType type)
+void CGameWorld::AddBlockAtWorldPosition(const Vector3& blockPosition, BlockType type)
 {
 	auto pChunk = GetChunkByWorldPosition(blockPosition);
 	if ( pChunk )
@@ -203,7 +215,7 @@ void CGameWorld::AddBlockAtWorldPosition(const Vector3f& blockPosition, BlockTyp
 	}
 }
 
-void CGameWorld::UpdateFocusedBlockByWorldPosition( const Vector3f& blockPosition )
+void CGameWorld::UpdateFocusedBlockByWorldPosition( const Vector3& blockPosition )
 {
 	auto pChunk = GetChunkByWorldPosition(blockPosition);
 	if ( pChunk )
@@ -217,9 +229,9 @@ void CGameWorld::UpdateFocusedBlockByWorldPosition( const Vector3f& blockPositio
 	}
 }
 
-Vector3f CGameWorld::GetBlockPositionByWorldPosition(const Vector3f& worldPosition)
+Vector3 CGameWorld::GetBlockPositionByWorldPosition(const Vector3& worldPosition)
 {
-	Vector3f pos;
+	Vector3 pos;
 	auto pChunk = GetChunkByWorldPosition(worldPosition);
 	if ( pChunk )
 	{
@@ -229,7 +241,7 @@ Vector3f CGameWorld::GetBlockPositionByWorldPosition(const Vector3f& worldPositi
 	return pos;
 }
 
-BlockType CGameWorld::GetBlockByWorldPosition(const Vector3f& worldPosition)
+BlockType CGameWorld::GetBlockByWorldPosition(const Vector3& worldPosition)
 {
 	auto pChunk = GetChunkByWorldPosition(worldPosition);
 	if ( pChunk )
@@ -241,7 +253,7 @@ BlockType CGameWorld::GetBlockByWorldPosition(const Vector3f& worldPosition)
 }
 
 // todo replace param vector with floats
-Vector3f CGameWorld::GetNewPlayerPosition( const Vector3f& playerWorldPosition )
+Vector3 CGameWorld::GetNewPlayerPosition( const Vector3& playerWorldPosition )
 {
 	auto pChunk = GetChunkByWorldPosition(playerWorldPosition);
 	if ( pChunk )
@@ -263,6 +275,11 @@ void CGameWorld::DrawFocusOnSelectedCube()
 		renderer.Finish();
 		m_pScene->SetGraphicsMode(true, true);
 	}
+}
+
+const PerlinNoise& CGameWorld::GetNoise() const
+{
+	return *m_pNoise;
 }
 
 

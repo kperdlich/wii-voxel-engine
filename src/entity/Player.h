@@ -22,7 +22,7 @@
 
 #include "Entity.h"
 #include "../world/Camera.h"
-#include "../utils/Vector3f.h"
+#include "../utils/Vector3.h"
 #include "CPlayerInventory.h"
 #include "IEquipable.h"
 
@@ -33,7 +33,7 @@ public:
 	void Update();
 	void AddToInventory(IEquipable& item);
 	void Move(float x, float y);
-	void Rotate( const Vector3f& rotation );
+	void Rotate( const Vector3& rotation );
 
 private:
 	CPlayerInventory* m_inventory;

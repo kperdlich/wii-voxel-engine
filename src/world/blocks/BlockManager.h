@@ -25,7 +25,7 @@
 #include "Block.h"
 #include "../../renderer/BlockRenderer.h"
 #include "../../textures/TextureHandler.h"
-#include "../../utils/Vector3f.h"
+#include "../../utils/Vector3.h"
 
 #define BLOCK_SIZE .5f
 
@@ -51,7 +51,7 @@ public:
 private:
 
 	std::map<BlockType, CBlock*> m_blocks;
-	std::map<BlockType, std::vector<Vector3f*> > m_mBlockRenderList;
+	std::map<BlockType, std::vector<Vector3*> > m_mBlockRenderList;
 	TextureHandler* m_pTextureHandler;
 	BlockRenderer* m_blockRenderer;
 

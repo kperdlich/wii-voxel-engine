@@ -23,6 +23,7 @@
 #include <map>
 #include "blocks/BlockManager.h"
 #include "chunk/Chunk.h"
+#include "PerlinNoise.h"
 #include "../renderer/BlockRenderer.h"
 #include "../scenes/Basic3DScene.h"
 #include "../utils/MathHelper.h"
@@ -34,7 +35,7 @@
 
 typedef struct ChunkPositionComparer
 {
-	bool operator()(const class Vector3f* s1, const class Vector3f* s2) const
+	bool operator()(const class Vector3* s1, const class Vector3* s2) const
 	{
 	    return s1->GetX() < s2->GetX() || (s1->GetX() == s2->GetX() && s1->GetZ() < s2->GetZ());
 	}
@@ -48,26 +49,27 @@ public:
 	void Draw();
 
 	class CBlockManager& GetBlockManager();
-	class CChunk* GetChunkAt(const Vector3f& centerPosition) const;
-	class CChunk* GetChunkByWorldPosition(const Vector3f& worldPosition);
-	void RemoveBlockByWorldPosition(const Vector3f& blockPosition);
-	void AddBlockAtWorldPosition(const Vector3f& blockPosition, BlockType type);
-	void UpdateFocusedBlockByWorldPosition( const Vector3f& blockPosition );
-	BlockType GetBlockByWorldPosition(const Vector3f& worldPosition);
-	Vector3f GetBlockPositionByWorldPosition(const Vector3f& worldPosition);
-	Vector3f GetNewPlayerPosition( const Vector3f& playerWorldPosition );
+	class CChunk* GetChunkAt(const Vector3& centerPosition) const;
+	class CChunk* GetChunkByWorldPosition(const Vector3& worldPosition);
+	void RemoveBlockByWorldPosition(const Vector3& blockPosition);
+	void AddBlockAtWorldPosition(const Vector3& blockPosition, BlockType type);
+	void UpdateFocusedBlockByWorldPosition( const Vector3& blockPosition );
+	BlockType GetBlockByWorldPosition(const Vector3& worldPosition);
+	Vector3 GetBlockPositionByWorldPosition(const Vector3& worldPosition);
+	Vector3 GetNewPlayerPosition( const Vector3& playerWorldPosition );
 
+	const PerlinNoise& GetNoise() const;
 
 private:
-	bool ChunkInFov( Vector3f& chunkPosition, Vector3f& playerPosition, unsigned int fov);
+	bool ChunkInFov( Vector3& chunkPosition, Vector3& playerPosition, unsigned int fov);
 	void DrawFocusOnSelectedCube();
 
 private:
 	class Basic3DScene* m_pScene;
 	CBlockManager* m_blockManager;
-	std::map<const class Vector3f*, class CChunk*, ChunkPositionComparer> m_ChunkList;
+	std::map<const class Vector3*, class CChunk*, ChunkPositionComparer> m_ChunkList;
 
-	Vector3f m_SelectedBlockPosition;
+	Vector3 m_SelectedBlockPosition;
 	bool m_bHasSelectedBlock = false;
 
 	char* m_pChunkLogBuffer;
@@ -75,6 +77,9 @@ private:
 
 	char* m_pBlocksLogBuffer;
 	char* m_pFaceLogBuffer;
+	char* m_pSeedBuffer;
+
+	PerlinNoise* m_pNoise;
 
 };
 

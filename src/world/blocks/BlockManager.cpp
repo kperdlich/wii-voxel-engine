@@ -20,7 +20,7 @@
 #include "BlockManager.h"
 #include "../CFrustrum.h"
 #include "../GameWorld.h"
-#include "../../utils/Vector3f.h"
+#include "../../utils/Vector3.h"
 #include "../../utils/Debug.h"
 #include "GroundText_png.h"
 #include "Grass_png.h"

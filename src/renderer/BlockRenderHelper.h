@@ -37,7 +37,7 @@ typedef struct BlockFaceVisibiltyVO
 typedef struct BlockRenderVO
 {
 	BlockFaceVisibiltyVO* pFaceVO = NULL;
-	Vector3f* pBlockPosition = NULL;
+	Vector3* pBlockPosition = NULL;
 } BlockRenderVO;
 
 

@@ -31,7 +31,7 @@ public:
 	void Prepare(std::vector<const BlockRenderVO*> *positionList, float blockSize, const Texture* ptexture);
 	void Rebuild();
 	void Finish();
-	void DrawFocusOnSelectedCube(const Vector3f& blockWorldPosition);
+	void DrawFocusOnSelectedCube(const Vector3& blockWorldPosition);
 
 private:
 	float m_renderBlockSize = 0.0f;

@@ -17,24 +17,24 @@
  *
 ***/
 
-#include "../../utils/Vector3f.h"
+#include "../../utils/Vector3.h"
 
 #ifndef _CAABB_H_
 #define _CAABB_H_
 
 class CAABB {
 public:
-	CAABB(Vector3f& vecMin, Vector3f& vecMax);
+	CAABB(Vector3& vecMin, Vector3& vecMax);
 	virtual ~CAABB();
 
-	Vector3f& GetMin();
-	Vector3f& GetMax();
+	Vector3& GetMin();
+	Vector3& GetMax();
 
 	bool CoolidesWith( CAABB& box );
-	bool CoolidesWith( Vector3f& vecPoint);
+	bool CoolidesWith( Vector3& vecPoint);
 
 private:
-	Vector3f m_vecMin, m_vecMax;
+	Vector3 m_vecMin, m_vecMax;
 
 };
 

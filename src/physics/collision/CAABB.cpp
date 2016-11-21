@@ -19,7 +19,7 @@
 
 #include "CAABB.h"
 
-CAABB::CAABB(Vector3f& vecMin, Vector3f& vecMax) : m_vecMin(vecMin), m_vecMax(vecMax)
+CAABB::CAABB(Vector3& vecMin, Vector3& vecMax) : m_vecMin(vecMin), m_vecMax(vecMax)
 {
 
 
@@ -40,7 +40,7 @@ bool CAABB::CoolidesWith( CAABB& box )
 	    m_vecMin.GetZ() < box.GetMax().GetZ());
 }
 
-bool CAABB::CoolidesWith( Vector3f& vecPoint)
+bool CAABB::CoolidesWith( Vector3& vecPoint)
 {
 	 if(vecPoint.GetX() > m_vecMin.GetX() && vecPoint.GetX() < m_vecMax.GetX() &&
 			 vecPoint.GetY() > m_vecMin.GetY() && vecPoint.GetY() < m_vecMax.GetY() &&
@@ -52,12 +52,12 @@ bool CAABB::CoolidesWith( Vector3f& vecPoint)
 	return false;
 }
 
-Vector3f& CAABB::GetMin()
+Vector3& CAABB::GetMin()
 {
 	return m_vecMin;
 }
 
-Vector3f& CAABB::GetMax()
+Vector3& CAABB::GetMax()
 {
 	return m_vecMax;
 }

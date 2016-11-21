@@ -21,7 +21,7 @@
 
 Entity::Entity() {}
 
-Entity::Entity( Vector3f position )
+Entity::Entity( Vector3 position )
 {
 	m_position = position;
 }
@@ -68,22 +68,22 @@ const EntityRenderer* Entity::GetRenderer() const
 	return m_entityRenderer;
 }
 
-void Entity::SetPosition( Vector3f position )
+void Entity::SetPosition( Vector3 position )
 {
 	m_position = position;
 }
 
-const Vector3f& Entity::GetPosition() const
+const Vector3& Entity::GetPosition() const
 {
 	return m_position;
 }
 
-void Entity::SetRotation( Vector3f rotation )
+void Entity::SetRotation( Vector3 rotation )
 {
 	m_rotation = rotation;
 }
 
-const Vector3f& Entity::GetRotation() const
+const Vector3& Entity::GetRotation() const
 {
 	return m_rotation;
 }

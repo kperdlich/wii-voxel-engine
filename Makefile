@@ -51,8 +51,8 @@ CORE := src/core
 # options for code generation
 #---------------------------------------------------------------------------------
 
-CFLAGS	= -g -std=c++11 -O2 -mrvl -Wall $(MACHDEP) $(INCLUDE)
-CXXFLAGS	=	$(CFLAGS)
+CFLAGS	= -g -O2 -maltivec -mcpu=750 -mrvl -Wall $(MACHDEP) $(INCLUDE)
+CXXFLAGS =-std=c++11 $(CFLAGS)
 
 LDFLAGS	=	-g $(MACHDEP) -mrvl -Wl,-Map,$(notdir $@).map
 
