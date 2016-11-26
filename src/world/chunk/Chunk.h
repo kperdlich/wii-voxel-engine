@@ -29,6 +29,13 @@
 #define CHUNK_SIZE_Y 16
 #define CHUNK_SIZE_Z 16
 
+#define CHUNK_BLOCK_SIZE_X (BLOCK_SIZE * CHUNK_SIZE_X)
+#define CHUNK_BLOCK_SIZE_Y (BLOCK_SIZE * CHUNK_SIZE_Y)
+#define CHUNK_BLOCK_SIZE_Z (BLOCK_SIZE * CHUNK_SIZE_Z)
+
+struct Vec3i {
+	unsigned int m_x, m_y, m_z;
+};
 
 class CChunk {
 public:
@@ -66,7 +73,9 @@ private:
 	void ClearBlockRenderList();
 	void BuildBlockRenderList();
 	bool IsBlockVisible(uint32_t iX, uint32_t iY, uint32_t iZ, BlockFaceVisibiltyVO* &pFaceVO );
-	void GetLocalBlockPositionByWorldPosition(const Vector3& blockWorldPosition, unsigned int* x, unsigned int* y, unsigned int* z) const;
+	Vec3i GetLocalBlockPositionByWorldPosition(const Vector3& blockWorldPosition) const;
+
+	Vector3 LocalPositionToGlobalPosition(const Vec3i& localPosition) const;
 
 private:
 	bool m_IsDirty;
@@ -88,5 +97,7 @@ private:
 	CChunk* m_pChunkFront = NULL;
 	CChunk* m_pChunkBack = NULL;
 };
+
+
 
 #endif /* _CHUNK_H_ */

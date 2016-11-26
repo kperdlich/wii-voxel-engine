@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
-***/
+ ***/
 
 #ifndef _BLOCKRENDERHELPER_H_
 #define _BLOCKRENDERHELPER_H_
@@ -23,8 +23,7 @@
 #include <stddef.h>
 #include "../utils/MathHelper.h"
 
-typedef struct BlockFaceVisibiltyVO
-{
+typedef struct BlockFaceVisibiltyVO {
 	bool bLeftFace = false;
 	bool bRightFace = false;
 	bool bFrontFace = false;
@@ -34,11 +33,9 @@ typedef struct BlockFaceVisibiltyVO
 	unsigned int faces = 0;
 } BlockFaceVisibiltyVO;
 
-typedef struct BlockRenderVO
-{
+typedef struct BlockRenderVO {
 	BlockFaceVisibiltyVO* pFaceVO = NULL;
 	Vector3* pBlockPosition = NULL;
 } BlockRenderVO;
-
 
 #endif /* _BLOCKRENDERHELPER_H_ */

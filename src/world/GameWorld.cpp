@@ -74,7 +74,7 @@ void CGameWorld::GenerateWorld()
 		for ( unsigned int z = 0; z < CHUNK_AMOUNT_Z; z++)
 		{
 			auto pChunk = new CChunk(*this);
-			auto pPosition = new Vector3((float) (CHUNK_SIZE_X * x) + (CHUNK_SIZE_X / 2),  (float)CHUNK_SIZE_Y / 2, (float) (CHUNK_SIZE_Z * z) + (CHUNK_SIZE_Z / 2));
+			auto pPosition = new Vector3((CHUNK_BLOCK_SIZE_X * x) + (CHUNK_BLOCK_SIZE_X / 2), CHUNK_BLOCK_SIZE_Y / 2, (CHUNK_BLOCK_SIZE_Z * z) + (CHUNK_BLOCK_SIZE_Z / 2));
 			m_ChunkList.insert(std::pair<Vector3*, CChunk*>( pPosition, pChunk ));
 			pChunk->Init( *pPosition );
 		}
@@ -168,8 +168,8 @@ void CGameWorld::Draw()
 
 bool CGameWorld::ChunkInFov( Vector3& chunkPosition, Vector3& playerPosition, unsigned int fov)
 {
-	return (std::abs(chunkPosition.GetX() - playerPosition.GetX()) < CHUNK_SIZE_X * fov) &&
-			(std::abs(chunkPosition.GetZ() - playerPosition.GetZ()) < CHUNK_SIZE_Z * fov);
+	return (std::abs(chunkPosition.GetX() - playerPosition.GetX()) < CHUNK_BLOCK_SIZE_X * fov) &&
+			(std::abs(chunkPosition.GetZ() - playerPosition.GetZ()) < CHUNK_BLOCK_SIZE_Z * fov);
 }
 
 CBlockManager& CGameWorld::GetBlockManager()
@@ -190,10 +190,10 @@ CChunk* CGameWorld::GetChunkAt(const Vector3& centerPosition) const
 // todo replace param vector with floats
 CChunk* CGameWorld::GetChunkByWorldPosition(const Vector3& worldPosition)
 {
-	unsigned int x = worldPosition.GetX() / CHUNK_SIZE_X;
-	unsigned int z = worldPosition.GetZ() / CHUNK_SIZE_Z;
+	unsigned int x = worldPosition.GetX() / CHUNK_BLOCK_SIZE_X;
+	unsigned int z = worldPosition.GetZ() / CHUNK_BLOCK_SIZE_Z;
 
-	Vector3 chunkCenterPosition((x * CHUNK_SIZE_X) + (CHUNK_SIZE_X / 2), CHUNK_SIZE_Y / 2, (z * CHUNK_SIZE_Z) + (CHUNK_SIZE_Z / 2));
+	Vector3 chunkCenterPosition((x * CHUNK_BLOCK_SIZE_X) + (CHUNK_BLOCK_SIZE_X / 2), CHUNK_BLOCK_SIZE_Y / 2, (z * CHUNK_BLOCK_SIZE_Z) + (CHUNK_BLOCK_SIZE_Z / 2));
 
 	return GetChunkAt(chunkCenterPosition);
 }
@@ -231,14 +231,13 @@ void CGameWorld::UpdateFocusedBlockByWorldPosition( const Vector3& blockPosition
 
 Vector3 CGameWorld::GetBlockPositionByWorldPosition(const Vector3& worldPosition)
 {
-	Vector3 pos;
 	auto pChunk = GetChunkByWorldPosition(worldPosition);
 	if ( pChunk )
 	{
 		return pChunk->GetBlockPositionByWorldPosition(worldPosition);
 	}
 
-	return pos;
+	return Vector3(0,0,0);
 }
 
 BlockType CGameWorld::GetBlockByWorldPosition(const Vector3& worldPosition)
@@ -270,7 +269,7 @@ void CGameWorld::DrawFocusOnSelectedCube()
 	{
 		m_pScene->SetGraphicsMode(false, false);
 		BlockRenderer renderer;
-		renderer.Prepare(NULL, BLOCK_SIZE, NULL);
+		renderer.Prepare(NULL, BLOCK_SIZE_HALF, NULL);
 		renderer.DrawFocusOnSelectedCube( m_SelectedBlockPosition );
 		renderer.Finish();
 		m_pScene->SetGraphicsMode(true, true);

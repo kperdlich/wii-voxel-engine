@@ -27,7 +27,8 @@
 #include "../../textures/TextureHandler.h"
 #include "../../utils/Vector3.h"
 
-#define BLOCK_SIZE .5f
+#define BLOCK_SIZE_HALF .25f
+#define BLOCK_SIZE BLOCK_SIZE_HALF * 2
 
 #define BLOCK_TEXTURE_DIRT "BLOCK_TEXTURE_DIRT"
 #define BLOCK_TEXTURE_GRASS "BLOCK_TEXTURE_GRASS"
@@ -41,7 +42,7 @@ enum BlockType {
 
 class CBlockManager {
 public:
-	CBlockManager( TextureHandler& ptextureHandler );
+	CBlockManager(TextureHandler& ptextureHandler);
 	virtual ~CBlockManager();
 	void LoadBlocks();
 	void UnloadBlocks();

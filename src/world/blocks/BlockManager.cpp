@@ -31,9 +31,9 @@ void CBlockManager::LoadBlocks()
 	m_pTextureHandler->CreateTexture( GroundText_png, BLOCK_TEXTURE_DIRT )->SetVisible(false);
 	m_pTextureHandler->CreateTexture( Grass_png, BLOCK_TEXTURE_GRASS )->SetVisible(false);
 
-	m_blocks.insert(std::pair< BlockType, CBlock* >( BlockType::AIR, new CBlock( BLOCK_SIZE, NULL))); // no texture for air!
-	m_blocks.insert(std::pair< BlockType, CBlock* >( BlockType::DIRT, new CBlock( BLOCK_SIZE, dynamic_cast<const Texture*>(m_pTextureHandler->GetTexture(BLOCK_TEXTURE_DIRT)))));
-	m_blocks.insert(std::pair< BlockType, CBlock* >( BlockType::GRASS, new CBlock( BLOCK_SIZE, dynamic_cast<const Texture*>(m_pTextureHandler->GetTexture(BLOCK_TEXTURE_GRASS)))));
+	m_blocks.insert(std::pair< BlockType, CBlock* >( BlockType::AIR, new CBlock( BLOCK_SIZE_HALF, NULL))); // no texture for air!
+	m_blocks.insert(std::pair< BlockType, CBlock* >( BlockType::DIRT, new CBlock( BLOCK_SIZE_HALF, dynamic_cast<const Texture*>(m_pTextureHandler->GetTexture(BLOCK_TEXTURE_DIRT)))));
+	m_blocks.insert(std::pair< BlockType, CBlock* >( BlockType::GRASS, new CBlock( BLOCK_SIZE_HALF, dynamic_cast<const Texture*>(m_pTextureHandler->GetTexture(BLOCK_TEXTURE_GRASS)))));
 }
 
 void CBlockManager::UnloadBlocks()

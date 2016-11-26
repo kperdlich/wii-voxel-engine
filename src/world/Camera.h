@@ -34,19 +34,19 @@ public:
 	void SetWorldPosititon(Vector3 position);
 	void SetWorldAngle(Vector3 angle);
 
-	float GetWorldPositionX() const;
-	float GetWorldPositionY() const;
-	float GetWorldPositionZ() const;
+	double GetWorldPositionX() const;
+	double GetWorldPositionY() const;
+	double GetWorldPositionZ() const;
 	const Vector3& GetWorldPosition() const;
 
-	float GetWorldAngleX() const;
-	float GetWorldAngleY() const;
-	float GetWorldAngleZ() const;
+	double GetWorldAngleX() const;
+	double GetWorldAngleY() const;
+	double GetWorldAngleZ() const;
 	const Vector3& GetWorldAngle() const;
 
-	float GetWorldScaleX() const;
-	float GetWorldScaleY() const;
-	float GetWorldScaleZ() const;
+	double GetWorldScaleX() const;
+	double GetWorldScaleY() const;
+	double GetWorldScaleZ() const;
 
 
 private:

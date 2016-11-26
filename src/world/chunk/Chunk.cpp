@@ -74,8 +74,8 @@ void CChunk::Init(Vector3& position)
 			}
 
 			double xWorld, zWorld;
-			xWorld = (m_pCenterPosition->GetX() - (CHUNK_SIZE_X / 2) + (x * BLOCK_SIZE * 2));
-			zWorld = (m_pCenterPosition->GetZ() - (CHUNK_SIZE_Z / 2) + (z * BLOCK_SIZE * 2));
+			xWorld = (m_pCenterPosition->GetX() - (CHUNK_BLOCK_SIZE_X / 2) + (x * BLOCK_SIZE));
+			zWorld = (m_pCenterPosition->GetZ() - (CHUNK_BLOCK_SIZE_Z / 2) + (z * BLOCK_SIZE));
 
 			double noise = pn.GetHeight(xWorld, zWorld);
 			unsigned int height = (unsigned int) MathHelper::Clamp(CHUNK_SIZE_Y * noise, 1.0, CHUNK_SIZE_Y);
@@ -97,10 +97,10 @@ void CChunk::Init(Vector3& position)
 
 void CChunk::UpdateChunkNeighbors()
 {
-	Vector3 leftChunkPos(m_pCenterPosition->GetX() - CHUNK_SIZE_X, m_pCenterPosition->GetY(), m_pCenterPosition->GetZ());
-	Vector3 rightChunkPos(m_pCenterPosition->GetX() + CHUNK_SIZE_X, m_pCenterPosition->GetY(), m_pCenterPosition->GetZ());
-	Vector3 frontChunkPos(m_pCenterPosition->GetX(), m_pCenterPosition->GetY(), m_pCenterPosition->GetZ() + CHUNK_SIZE_Z);
-	Vector3 backChunkPos(m_pCenterPosition->GetX(), m_pCenterPosition->GetY(), m_pCenterPosition->GetZ() - CHUNK_SIZE_X);
+	Vector3 leftChunkPos(m_pCenterPosition->GetX() - CHUNK_BLOCK_SIZE_X, m_pCenterPosition->GetY(), m_pCenterPosition->GetZ());
+	Vector3 rightChunkPos(m_pCenterPosition->GetX() + CHUNK_BLOCK_SIZE_X, m_pCenterPosition->GetY(), m_pCenterPosition->GetZ());
+	Vector3 frontChunkPos(m_pCenterPosition->GetX(), m_pCenterPosition->GetY(), m_pCenterPosition->GetZ() + CHUNK_BLOCK_SIZE_Z);
+	Vector3 backChunkPos(m_pCenterPosition->GetX(), m_pCenterPosition->GetY(), m_pCenterPosition->GetZ() - CHUNK_BLOCK_SIZE_X);
 
 	m_pChunkLeft = m_pWorldManager->GetChunkAt(leftChunkPos);
 	m_pChunkRight = m_pWorldManager->GetChunkAt(rightChunkPos);
@@ -300,9 +300,10 @@ void CChunk::BuildBlockRenderList()
 
 				if ( IsBlockVisible(x, y, z, pFaceVO))
 				{
+					Vector3 worldBlockPos = LocalPositionToGlobalPosition({ x, y, z });
 					BlockRenderVO* renderVO = new BlockRenderVO();
 					renderVO->pFaceVO = pFaceVO;
-					renderVO->pBlockPosition = new Vector3( (m_pCenterPosition->GetX() - (CHUNK_SIZE_X / 2) + (x * BLOCK_SIZE * 2)), (m_pCenterPosition->GetY() - (CHUNK_SIZE_Y / 2) + (y * BLOCK_SIZE * 2)), (m_pCenterPosition->GetZ() - (CHUNK_SIZE_Z / 2) + (z * BLOCK_SIZE * 2)));
+					renderVO->pBlockPosition = new Vector3(worldBlockPos.GetX(), worldBlockPos.GetY(), worldBlockPos.GetZ());
 					AddBlockToRenderList(m_pBlocks[x][y][z], *renderVO);
 					m_AmountOfBlocks++;
 					m_AmountOfFaces += pFaceVO->faces;
@@ -412,58 +413,66 @@ void CChunk::RebuildDisplayList()
 
 void CChunk::RemoveBlockByWorldPosition(const Vector3& blockPosition)
 {
-	unsigned int x,y,z;
-	GetLocalBlockPositionByWorldPosition(blockPosition, &x, &y, &z);
+	Vec3i vec = GetLocalBlockPositionByWorldPosition(blockPosition);
 
-	m_pBlocks[x][y][z] = BlockType::AIR;
+	m_pBlocks[vec.m_x][vec.m_y][vec.m_z] = BlockType::AIR;
 	m_IsDirty = true;
 }
 
 void CChunk::AddBlockByWorldPosition(const Vector3& blockPosition, BlockType type)
 {
-	unsigned int x,y,z;
-	GetLocalBlockPositionByWorldPosition(blockPosition, &x, &y, &z);
+	Vec3i vec = GetLocalBlockPositionByWorldPosition(blockPosition);
 
-	if ( m_pBlocks[x][y][z] == BlockType::AIR)
+	if ( m_pBlocks[vec.m_x][vec.m_y][vec.m_z] == BlockType::AIR)
 	{
-		 m_pBlocks[x][y][z] = type;
+		 m_pBlocks[vec.m_x][vec.m_y][vec.m_z] = type;
 		 m_IsDirty = true;
 	}
 }
 
-void CChunk::GetLocalBlockPositionByWorldPosition(const Vector3& blockWorldPosition, unsigned int* x, unsigned int* y, unsigned int* z) const
+Vec3i CChunk::GetLocalBlockPositionByWorldPosition(const Vector3& blockWorldPosition) const
 {
-	*x = (unsigned int) blockWorldPosition.GetX() % (unsigned int) CHUNK_SIZE_X;
-	*y = (unsigned int) blockWorldPosition.GetY() % (unsigned int) CHUNK_SIZE_Y;
-	*z = (unsigned int) blockWorldPosition.GetZ() % (unsigned int) CHUNK_SIZE_Z;
+	Vec3i vec;
+	float blockScale = BLOCK_SIZE;
+
+	vec.m_x = (unsigned int) (fmod(blockWorldPosition.GetX(), CHUNK_BLOCK_SIZE_X) / blockScale);
+	vec.m_y = (unsigned int) (fmod(blockWorldPosition.GetY(), CHUNK_BLOCK_SIZE_Y) / blockScale);
+	vec.m_z = (unsigned int) (fmod(blockWorldPosition.GetZ(), CHUNK_BLOCK_SIZE_Z) / blockScale);
+
+	return vec;
 }
 
 Vector3 CChunk::GetBlockPositionByWorldPosition(const Vector3& worldPosition) const
 {
-	unsigned int x,y,z;
-	GetLocalBlockPositionByWorldPosition(worldPosition, &x, &y, &z);
-	return Vector3( (m_pCenterPosition->GetX() - (CHUNK_SIZE_X / 2) + (x * BLOCK_SIZE * 2)), (m_pCenterPosition->GetY() - (CHUNK_SIZE_Y / 2) + (y * BLOCK_SIZE * 2)), (m_pCenterPosition->GetZ() - (CHUNK_SIZE_Z / 2) + (z * BLOCK_SIZE * 2)));
+	Vec3i vec = GetLocalBlockPositionByWorldPosition(worldPosition);
+	return LocalPositionToGlobalPosition(vec);
 }
 
 BlockType CChunk::GetBlockTypeByWorldPosition(const Vector3& worldPosition) const
 {
-	unsigned int x,y,z;
-	GetLocalBlockPositionByWorldPosition(worldPosition, &x, &y, &z);
-	return m_pBlocks[x][y][z];
+	Vec3i vec = GetLocalBlockPositionByWorldPosition(worldPosition);
+	return m_pBlocks[vec.m_x][vec.m_y][vec.m_z];
 }
 
 Vector3 CChunk::ValidatePhysicalPosition(const Vector3& position) const
 {
 	Vector3 pos = GetBlockPositionByWorldPosition(position);
-	unsigned int currentPos = CHUNK_SIZE_Y - 1;
+	float currentPos = CHUNK_BLOCK_SIZE_Y - (BLOCK_SIZE);
 	bool bValidated = false;
 	do
 	{
 		pos.SetY(currentPos);
 		bValidated = (GetBlockTypeByWorldPosition(pos) != BlockType::AIR) || (currentPos == 0);
-		currentPos--;
+		currentPos -= BLOCK_SIZE;
 
 	} while(!bValidated);
 
 	return pos;
+}
+
+Vector3 CChunk::LocalPositionToGlobalPosition(const Vec3i& localPosition) const
+{
+	return Vector3( (m_pCenterPosition->GetX() - (CHUNK_BLOCK_SIZE_X / 2) + (localPosition.m_x * BLOCK_SIZE)),
+			(m_pCenterPosition->GetY() - (CHUNK_BLOCK_SIZE_Y / 2) + (localPosition.m_y * BLOCK_SIZE)),
+			(m_pCenterPosition->GetZ() - (CHUNK_BLOCK_SIZE_Z / 2) + (localPosition.m_z * BLOCK_SIZE)));
 }

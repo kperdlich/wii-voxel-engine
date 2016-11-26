@@ -20,7 +20,7 @@
 #include "Camera.h"
 #include "../core/grrlib.h"
 
-Camera::Camera() : m_cam(0, 0, 0.1f), m_up(.0f, 1.0f, .0f), m_look(0, 0, 0), m_wordScale(1.0f, 1.0f, 1.0f), m_worldAngle(0, 0, 0), m_worldPosition(0, 0, 10.0f) {
+Camera::Camera() : m_cam(0, 0, 0.1f), m_up(.0f, 1.0f, .0f), m_look(0, 0, 0), m_wordScale(1.0f, 1.0f, 1.0f), m_worldAngle(0, 0, 0), m_worldPosition(10.0f, CHUNK_BLOCK_SIZE_Y , 10.0f) {
 }
 
 Camera::~Camera() {}
@@ -30,48 +30,48 @@ void Camera::Init()
 	GRRLIB_Camera3dSettings(m_cam.GetX(), m_cam.GetY(), m_cam.GetZ(), m_up.GetX(), m_up.GetY(), m_up.GetZ(), m_look.GetX(), m_look.GetY(), m_look.GetZ());
 }
 
-float Camera::GetWorldPositionX() const
+double Camera::GetWorldPositionX() const
 {
 	return m_attachedToEntity->GetPosition().GetX();
 }
 
-float Camera::GetWorldPositionY() const
+double Camera::GetWorldPositionY() const
 {
 	return m_attachedToEntity->GetPosition().GetY();
 }
 
-float Camera::GetWorldPositionZ() const
+double Camera::GetWorldPositionZ() const
 {
 	return m_attachedToEntity->GetPosition().GetZ();
 }
 
-float Camera::GetWorldAngleX() const
+double Camera::GetWorldAngleX() const
 {
 	return m_attachedToEntity->GetRotation().GetX();
 }
 
-float Camera::GetWorldAngleY() const
+double Camera::GetWorldAngleY() const
 {
 	return m_attachedToEntity->GetRotation().GetY();
 }
 
-float Camera::GetWorldAngleZ() const
+double Camera::GetWorldAngleZ() const
 {
 	return m_attachedToEntity->GetRotation().GetZ();
 }
 
-float Camera::GetWorldScaleX() const
+double Camera::GetWorldScaleX() const
 {
 	return m_wordScale.GetX();
 }
 
-float Camera::GetWorldScaleY() const
+double Camera::GetWorldScaleY() const
 {
 	return m_wordScale.GetY();
 }
 
 
-float Camera::GetWorldScaleZ() const
+double Camera::GetWorldScaleZ() const
 {
 	return m_wordScale.GetZ();
 }

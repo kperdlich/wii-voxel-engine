@@ -45,8 +45,6 @@ Player::~Player()
 	delete m_inventory;
 }
 
-
-
 void Player::Update()
 {
 	WiiPad* pad = Controller::GetInstance().GetInputHandler().GetPadByID( WII_PAD_0 );
@@ -86,15 +84,15 @@ void Player::Update()
 	Move(-(pad->GetNunchukAngleX()), -(pad->GetNunchukAngleY()));
 
 	// shity physics
-	Vector3 blockPositionUnderPlayer(m_position.GetX() + BLOCK_SIZE, 0.0f, m_position.GetZ() + BLOCK_SIZE);
+	Vector3 blockPositionUnderPlayer(m_position.GetX() + BLOCK_SIZE_HALF, 0.0f, m_position.GetZ() + BLOCK_SIZE_HALF);
 	Vector3 newPosition = m_pWorld->GetNewPlayerPosition(blockPositionUnderPlayer);
-	m_position.SetY(newPosition.GetY() + 2.0f);
+	m_position.SetY(newPosition.GetY() + (2 * BLOCK_SIZE));
+
 
 	Vector3 focusedBlockPos = MathHelper::CalculateNewWorldPositionByRotation(
 							Vector3(m_rotation.GetX(), m_rotation.GetY(), m_rotation.GetZ()),
-							Vector3(m_position.GetX() + BLOCK_SIZE, m_position.GetY(), m_position.GetZ() + BLOCK_SIZE),
+							Vector3(m_position.GetX() + BLOCK_SIZE_HALF, m_position.GetY(), m_position.GetZ() + BLOCK_SIZE_HALF),
 							-ROTATION_SPEED);
-
 
 	m_pWorld->UpdateFocusedBlockByWorldPosition(focusedBlockPos);
 
@@ -108,13 +106,36 @@ void Player::Update()
 		m_pWorld->AddBlockAtWorldPosition(focusedBlockPos, BlockType::DIRT );
 	}
 
+	// todo move to non-player related place
 	if ( padButtonDown & WPAD_BUTTON_HOME)
 	{
 		Controller::GetInstance().End();
 	}
+
+	UpdateInventory();
+
 }
 
+void Player::UpdateInventory()
+{
+	WiiPad* pad = Controller::GetInstance().GetInputHandler().GetPadByID( WII_PAD_0 );
 
+	u32 padButtonHeld = pad->ButtonsHeld();
+	u32 padButtonDown = pad->ButtonsDown();
+
+
+	if ( padButtonDown & WPAD_BUTTON_LEFT)
+	{
+
+	}
+
+	if ( padButtonDown & WPAD_BUTTON_RIGHT )
+	{
+
+	}
+
+
+}
 
 void Player::Move(float x, float y)
 {
@@ -176,9 +197,8 @@ void Player::Rotate( const Vector3& rotation )
 		m_rotation.SetZ(m_rotation.GetZ() + 360);
 	}
 
-	m_rotation.SetX( MathHelper::Clamp(m_rotation.GetX() + rotation.GetX(), -PITCH_MAX, PITCH_MAX));
-	m_rotation.SetY( m_rotation.GetY() + rotation.GetY() );
-	m_rotation.SetZ( m_rotation.GetZ() + rotation.GetZ() );
+	m_rotation += rotation;
+	m_rotation.SetX(MathHelper::Clamp(m_rotation.GetX() + rotation.GetX(), -PITCH_MAX, PITCH_MAX));
 
 }
 

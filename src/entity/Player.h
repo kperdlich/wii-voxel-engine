@@ -36,7 +36,12 @@ public:
 	void Rotate( const Vector3& rotation );
 
 private:
+	void UpdateInventory();
+
+private:
 	CPlayerInventory* m_inventory;
+
+
 };
 
 #endif /* _PLAYER_H_ */
