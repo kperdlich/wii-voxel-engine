@@ -18,50 +18,84 @@
 ***/
 
 #include "Debug.h"
+#include <stdio.h>
 
-static void debug( const char *str, int x, int y )
+#define DEBUG_STRINGS 25
+#define CHARS_PER_DEBUG_STRING 50 // should always be enough for debug logs
+
+Debug::Debug()
 {
-	GRRLIB_PrintfTTF( x, y, Controller::GetInstance().GetFontHandler().GetNativFontByID( DEFAULT_FONT_ID ), str, DEFAULT_FONT_SIZE, GRRLIB_WHITE );
+    AllocateDebugBuffer();
 }
 
-Debug::Debug() {
-
-
-}
-
-Debug::~Debug() {
-
-}
-
-void Debug::Log(char* msg)
+Debug::~Debug()
 {
-	m_logs.push_back( msg );
+    DestroyDebugBuffer();
+}
+
+void Debug::AllocateDebugBuffer()
+{
+    for ( uint i = 0; i < DEBUG_STRINGS; i++)
+    {
+        m_logs.push_back(new char[CHARS_PER_DEBUG_STRING]);
+    }
+}
+
+void Debug::DestroyDebugBuffer()
+{
+    for ( uint i = 0; i < DEBUG_STRINGS; i++)
+    {
+        delete[] m_logs[i];
+    }
+}
+
+char* Debug::GetNextLogBuffer()
+{
+    if ( m_logIndex == DEBUG_STRINGS - 1)
+    {
+        m_logIndex = DEFAULT_DEBUG_INDEX;
+        m_logOverflow = true;
+    }
+    return m_logs[++m_logIndex];
+}
+
+void Debug::Log(char* format, ...)
+{    
+    va_list args;
+    va_start(args, format);
+
+    char* pBuffer = GetNextLogBuffer();
+    vsprintf(pBuffer, format, args);
+
+    va_end(args);
 }
 
 void Debug::Print()
 {
-	int y = DEBUG_LINE;
-	for (unsigned int i = 0; i < m_logs.size(); i++)
+    uint y = DEBUG_LINE;
+    for (char i = 0; i <= m_logIndex; i++)
 	{
-		debug(m_logs[i], 0, y);
+        GRRLIB_PrintfTTF( 0, y, Controller::GetInstance().GetFontHandler().GetNativFontByID( DEFAULT_FONT_ID ), m_logs[i], DEFAULT_FONT_SIZE, m_logOverflow ? GRRLIB_RED : GRRLIB_WHITE );
 
-		if ( y >= 450 )
+        if ( m_logIndex > DEBUG_STRINGS )
 		{
 			y = DEBUG_LINE;
 		}
 		else
 		{
 			y += 10;
-		}
-	}
+        }
+    }
 }
 
-void Debug::Clear() {
-	/*for (unsigned int i = 0; i < m_logs.size(); i++)
-	{
-		delete [] m_logs[i];
-	}*/
-	m_logs.clear();
+void Debug::Reset()
+{
+    m_logIndex = DEFAULT_DEBUG_INDEX;
+}
+
+void Debug::Destroy()
+{
+    DestroyDebugBuffer();
 }
 
 

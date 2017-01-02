@@ -33,8 +33,8 @@ TextureHandler::~TextureHandler() {
 BasicTexture* TextureHandler::GetTextureByID(u16 index)
 {
 	for ( auto it = m_textures.begin(); it != m_textures.end(); it++)
-	{
-		if( (*it)->GetId() == index )
+	{        
+        if( (*it)->GetId() == index )
 		{
 			return (*it);
 		}

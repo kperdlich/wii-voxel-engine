@@ -33,34 +33,17 @@ CGameWorld::CGameWorld( Basic3DScene* pScene ) : m_pScene(pScene)
 	m_blockManager->LoadBlocks();
 
 	srand (time(NULL));
-
-	m_pNoise = new PerlinNoise(.25, .15625, 1.5, 6.0, rand());
-
-#ifdef DEBUG
-	m_pChunkLogBuffer = new char[50];
-	m_pDisplayListSizeLogBuffer = new char[50];
-	m_pBlocksLogBuffer = new char[50];
-	m_pFaceLogBuffer = new char[50];
-	m_pSeedBuffer = new char[20];
-#endif
+    m_pNoise = new PerlinNoise(.25, .15625, 1.5, 6.0, rand());
 }
 
 CGameWorld::~CGameWorld()
 {
-#ifdef DEBUG
-	delete[] m_pChunkLogBuffer;
-	delete[] m_pDisplayListSizeLogBuffer;
-	delete[] m_pBlocksLogBuffer;
-	delete[] m_pFaceLogBuffer;
-	delete[] m_pSeedBuffer;
-#endif
-
-	for (auto chunkEntry : m_ChunkList)
+    for (auto chunkEntry : m_ChunkMap)
 	{
 		delete chunkEntry.first;
 		delete chunkEntry.second;
 	}
-	m_ChunkList.clear();
+    m_ChunkMap.clear();
 
 	m_blockManager->UnloadBlocks();
 	delete m_blockManager;
@@ -75,12 +58,12 @@ void CGameWorld::GenerateWorld()
 		{
 			auto pChunk = new CChunk(*this);
 			auto pPosition = new Vector3((CHUNK_BLOCK_SIZE_X * x) + (CHUNK_BLOCK_SIZE_X / 2), CHUNK_BLOCK_SIZE_Y / 2, (CHUNK_BLOCK_SIZE_Z * z) + (CHUNK_BLOCK_SIZE_Z / 2));
-			m_ChunkList.insert(std::pair<Vector3*, CChunk*>( pPosition, pChunk ));
+            m_ChunkMap.insert(std::pair<Vector3*, CChunk*>( pPosition, pChunk ));
 			pChunk->Init( *pPosition );
 		}
 	}
 
-	for (auto chunkEntry : m_ChunkList)
+    for (auto chunkEntry : m_ChunkMap)
 	{
 		chunkEntry.second->UpdateChunkNeighbors();
 	}
@@ -103,7 +86,7 @@ void CGameWorld::Draw()
 
 	CFrustrum::Instance().CalculateFrustum();
 
-	for( auto chunkEntry : m_ChunkList)
+    for( auto chunkEntry : m_ChunkMap)
 	{
 		auto chunk = chunkEntry.second;
 #ifdef DEBUG
@@ -148,12 +131,9 @@ void CGameWorld::Draw()
 	DrawFocusOnSelectedCube();
 
 	// todo boost the performance of debug logs
-#ifdef DEBUG
-	sprintf(m_pChunkLogBuffer, "Rendered Chunks: %d/%d", chunksInFrustrum, m_ChunkList.size());
-	Debug::GetInstance().Log( m_pChunkLogBuffer );
-
-	sprintf(m_pSeedBuffer, "Seed: %d", m_pNoise->RandomSeed());
-	Debug::GetInstance().Log( m_pSeedBuffer );
+#ifdef DEBUG    
+    Debug::GetInstance().Log( "Rendered Chunks: %d/%d", chunksInFrustrum, m_ChunkMap.size() );
+    Debug::GetInstance().Log( "Seed: %d", m_pNoise->RandomSeed() );
 
 	//sprintf(m_pDisplayListSizeLogBuffer, "DisplayList size (MB): %d", displayListSize / 1024 / 1024);
 	//Debug::getInstance().log( m_pDisplayListSizeLogBuffer );
@@ -179,8 +159,8 @@ CBlockManager& CGameWorld::GetBlockManager()
 
 CChunk* CGameWorld::GetChunkAt(const Vector3& centerPosition) const
 {
-	auto chunkIt = m_ChunkList.find(&centerPosition);
-	if (chunkIt != m_ChunkList.end())
+    auto chunkIt = m_ChunkMap.find(&centerPosition);
+    if (chunkIt != m_ChunkMap.end())
 	{
 		return chunkIt->second;
 	}

@@ -42,7 +42,6 @@ void BasicButton::Update()
 	{
 		HandleOnClick();
 	}
-
 }
 
 bool BasicButton::HandleMoveOver() {

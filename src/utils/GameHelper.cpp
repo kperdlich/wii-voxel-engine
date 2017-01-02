@@ -27,7 +27,7 @@ static u8 frameCount = 0;
 static u32 fpsLastTime;
 static u8 fps = 0;
 
-u8 calculateFrameRate()
+u8 CalculateFrameRate()
 {
     u32 currentTime = ticks_to_millisecs(gettime());
 
@@ -40,14 +40,14 @@ u8 calculateFrameRate()
     return fps;
 }
 
-void printFps(unsigned int x, unsigned int y, GRRLIB_ttfFont* font, unsigned int fontSize, const u32 color )
+void PrintFps(unsigned int x, unsigned int y, GRRLIB_ttfFont* font, unsigned int fontSize, const u32 color )
 {
 	char buffer[20];
 	sprintf(buffer, "FPS: %d", fps);
 	GRRLIB_PrintfTTF( x, y, font, buffer, fontSize, color );
 }
 
-void printGameVersion(unsigned int x, unsigned int y, GRRLIB_ttfFont* font, unsigned int fontSize, const u32 color)
+void PrintGameVersion(unsigned int x, unsigned int y, GRRLIB_ttfFont* font, unsigned int fontSize, const u32 color)
 {
 	char buffer[sizeof(GameName) + sizeof(BuildVersion) + 2];
 	sprintf(buffer, "%s %s", GameName, BuildVersion);

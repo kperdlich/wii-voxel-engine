@@ -28,26 +28,10 @@
 #define IGS_HUD_HOTBAR "IGS_HUD_HOTBAR"
 #define IGS_HUD_CROSSHAIR "IGS_HUD_CROSSHAIR"
 
-#ifdef DEBUG
-	static char* pPlayerPositionLogBuffer;
-	static char* pPlayerRotationLogBuffer;
-#endif
 
-InGameScene::InGameScene()
-{
-	#ifdef DEBUG
-		pPlayerPositionLogBuffer = new char[100];
-		pPlayerRotationLogBuffer = new char[100];
-	#endif
-}
+InGameScene::InGameScene() {}
 
-InGameScene::~InGameScene()
-{
-	#ifdef DEBUG
-		delete [] pPlayerPositionLogBuffer;
-		delete [] pPlayerRotationLogBuffer;
-	#endif
-}
+InGameScene::~InGameScene() {}
 
 void InGameScene::Update()
 {
@@ -76,11 +60,11 @@ void InGameScene::Draw()
 #ifdef DEBUG
 	Player* player = static_cast<Player*>(m_entityHandler->GetPlayer());
 
-	sprintf(pPlayerPositionLogBuffer, "Player Position: x:%i, y:%i, z:%i", static_cast<int>(player->GetPosition().GetX()), static_cast<int>(player->GetPosition().GetY()), static_cast<int>(player->GetPosition().GetZ()));
-	Debug::GetInstance().Log( pPlayerPositionLogBuffer );
+    //sprintf(pPlayerPositionLogBuffer, );
+    Debug::GetInstance().Log( "Player Position: x:%i, y:%i, z:%i", static_cast<int>(player->GetPosition().GetX()), static_cast<int>(player->GetPosition().GetY()), static_cast<int>(player->GetPosition().GetZ()) );
 
-	sprintf(pPlayerRotationLogBuffer, "Player Rotation: x:%i, y:%i, z:%i", static_cast<int>(player->GetRotation().GetX()), static_cast<int>(player->GetRotation().GetY()), static_cast<int>(player->GetRotation().GetZ()));
-	Debug::GetInstance().Log( pPlayerRotationLogBuffer );
+    //sprintf(pPlayerRotationLogBuffer, );
+    Debug::GetInstance().Log( "Player Rotation: x:%i, y:%i, z:%i", static_cast<int>(player->GetRotation().GetX()), static_cast<int>(player->GetRotation().GetY()), static_cast<int>(player->GetRotation().GetZ()) );
 #endif
 
 }

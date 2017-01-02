@@ -21,77 +21,65 @@
 #include "Controller.h"
 #include "utils/Debug.h"
 
-#ifdef DEBUG
-	static char* pLoadedTextureLogBuffer;
-	static char* pResolutionLogBuffer;
-#endif
-Controller::Controller() {
-	m_Running = false;
-	m_sceneHandler = new SceneHandler();
-	m_inputHandler = new InputHandler();
-	m_fontHandler = new FontHandler();
-	m_basicCommandHandler = new CBasicCommandHandler();
 
-#ifdef DEBUG
-	pLoadedTextureLogBuffer = new char[50];
-	pResolutionLogBuffer = new char[30];
-#endif
+Controller::Controller()
+{
+    m_bRunning = false;
+    m_pSceneHandler = new SceneHandler();
+    m_pInputHandler = new InputHandler();
+    m_pFontHandler = new FontHandler();
+    m_pBasicCommandHandler = new CBasicCommandHandler();
 }
 
 Controller::~Controller() {}
 
 
-
 void Controller::Start()
 {
-	m_Running = true;
+    m_bRunning = true;
 
 	Init();
 
-	m_basicCommandHandler->ExecuteCommand( SwitchToIntroCommand::Name() );
+    m_pBasicCommandHandler->ExecuteCommand( SwitchToIntroCommand::Name() );
 
-	while( m_Running )
+    while( m_bRunning )
 	{
 		GRRLIB_SetBackgroundColour(0x00, 0x00, 0x00, 0xFF);
 
-		m_inputHandler->Update();
-		m_sceneHandler->Update();
-		m_sceneHandler->DrawScene();
+        m_pInputHandler->Update();
+        m_pSceneHandler->Update();
+        m_pSceneHandler->DrawScene();
 
-		printFps( 500, 25, m_fontHandler->GetNativFontByID( DEFAULT_FONT_ID ), DEFAULT_FONT_SIZE, GRRLIB_YELLOW );
+        PrintFps( 500, 25, m_pFontHandler->GetNativFontByID( DEFAULT_FONT_ID ), DEFAULT_FONT_SIZE, GRRLIB_YELLOW );
 
 #ifdef DEBUG
-		printGameVersion(0, 25, m_fontHandler->GetNativFontByID( DEFAULT_FONT_ID ), DEFAULT_FONT_SIZE, GRRLIB_WHITE );
+        PrintGameVersion(0, 25, m_pFontHandler->GetNativFontByID( DEFAULT_FONT_ID ), DEFAULT_FONT_SIZE, GRRLIB_WHITE );
 
-		sprintf(pResolutionLogBuffer, "Resolution x: %d y: %d", rmode->viWidth, rmode->viHeight );
-		Debug::GetInstance().Log(pResolutionLogBuffer);
+        Debug::GetInstance().Log("Resolution x: %d y: %d", rmode->viWidth, rmode->viHeight);
+        Debug::GetInstance().Log( "Loaded Textures in scene: %d", m_pSceneHandler->GetCurrentScene().GetTextureHandler().TextureCount() );
 
-		sprintf(pLoadedTextureLogBuffer, "Loaded Textures in scene: %d", m_sceneHandler->GetCurrentScene().GetTextureHandler().TextureCount());
-		Debug::GetInstance().Log( pLoadedTextureLogBuffer );
-
-		Debug::GetInstance().Print();
-		Debug::GetInstance().Clear();
+        Debug::GetInstance().Print();
+        Debug::GetInstance().Reset();
 #endif
 
 		GRRLIB_Render();
-		calculateFrameRate();
+        CalculateFrameRate();
 	}
 
-	delete m_basicCommandHandler;
-	delete m_sceneHandler;
-	delete m_inputHandler;
-	delete m_fontHandler;
+    delete m_pBasicCommandHandler;
+    delete m_pSceneHandler;
+    delete m_pInputHandler;
+    delete m_pFontHandler;
 
-#ifdef DEBUG
-	delete [] pResolutionLogBuffer;
-	delete [] pLoadedTextureLogBuffer;
+#ifdef DEBUG	
+    Debug::GetInstance().Destroy();
 #endif
 
 	GRRLIB_Exit();
 }
 
 void Controller::End() {
-	m_Running = false;
+    m_bRunning = false;
 }
 
 void Controller::Init() {
@@ -99,33 +87,33 @@ void Controller::Init() {
 	GRRLIB_Init();
 	GRRLIB_Settings.antialias = true;
 
-	m_fontHandler->Init();
-	m_inputHandler->Init();
-	m_sceneHandler->Init();
-	m_basicCommandHandler->Init();
+    m_pFontHandler->Init();
+    m_pInputHandler->Init();
+    m_pSceneHandler->Init();
+    m_pBasicCommandHandler->Init();
 }
 
 void Controller::SwitchToNextScene()
 {
-	m_sceneHandler->LoadNextScene();
+    m_pSceneHandler->LoadNextScene();
 }
 
 SceneHandler& Controller::GetSceneHandler()
 {
-	return *m_sceneHandler;
+    return *m_pSceneHandler;
 }
 
 InputHandler& Controller::GetInputHandler()
 {
-	return *m_inputHandler;
+    return *m_pInputHandler;
 }
 
 FontHandler& Controller::GetFontHandler()
 {
-	return *m_fontHandler;
+    return *m_pFontHandler;
 }
 
 CBasicCommandHandler& Controller::GetBasicCommandHandler()
 {
-	return *m_basicCommandHandler;
+    return *m_pBasicCommandHandler;
 }

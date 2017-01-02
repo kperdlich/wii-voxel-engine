@@ -67,7 +67,7 @@ private:
 private:
 	class Basic3DScene* m_pScene;
 	CBlockManager* m_blockManager;
-	std::map<const class Vector3*, class CChunk*, ChunkPositionComparer> m_ChunkList;
+    std::map<const class Vector3*, class CChunk*, ChunkPositionComparer> m_ChunkMap;
 
 	Vector3 m_SelectedBlockPosition;
 	bool m_bHasSelectedBlock = false;

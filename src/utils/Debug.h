@@ -24,18 +24,27 @@
 #include "../Controller.h"
 
 #define DEBUG_LINE 200
+#define DEFAULT_DEBUG_INDEX -1
 
 class Debug {
 
 private:
-	std::vector<char*> m_logs;
+    std::vector<char*> m_logs;
+    char m_logIndex = DEFAULT_DEBUG_INDEX;
+    bool m_logOverflow = false;
+
+private:
+    void AllocateDebugBuffer();
+    void DestroyDebugBuffer();
+    char* GetNextLogBuffer();
 
 public:
 	Debug();
 	virtual ~Debug();
-	void Log(char* msg);
+    void Log(char* format, ...);
 	void Print();
-	void Clear();
+    void Reset();
+    void Destroy();
 
 	static Debug& GetInstance()
 	{

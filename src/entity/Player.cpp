@@ -25,19 +25,12 @@
 #define MOVEMENT_SPEED 0.1f
 #define PITCH_MAX 90.0f
 
-#ifdef DEBUG
-	char* pChunkBuffer = NULL;
-#endif
-
 
 Player::Player()
 {
 	m_entityRenderer = new EntityRenderer(this);
 	m_inventory = new CPlayerInventory();
 	SetPlayer(true);
-#ifdef DEBUG
-	pChunkBuffer = new char[50];
-#endif
 }
 
 Player::~Player()
@@ -55,10 +48,9 @@ void Player::Update()
 #ifdef DEBUG
 	auto pChunk = m_pWorld->GetChunkByWorldPosition( m_position );
 	if ( pChunk )
-	{
-		sprintf(pChunkBuffer, "Current Chunk: %d/%d/%d", (unsigned int) pChunk->GetCenterPosition().GetX(), (unsigned int) pChunk->GetCenterPosition().GetY(), (unsigned int) pChunk->GetCenterPosition().GetZ() );
+    {
 		//sprintf(pChunkBuffer, "Nunchunk: X: %f Y:%f", pad->GetNunchukAngleX(), pad->GetNunchukAngleY() );
-		Debug::GetInstance().Log( pChunkBuffer );
+        Debug::GetInstance().Log( "Current Chunk: %d/%d/%d", (unsigned int) pChunk->GetCenterPosition().GetX(), (unsigned int) pChunk->GetCenterPosition().GetY(), (unsigned int) pChunk->GetCenterPosition().GetZ()  );
 	}
 #endif
 

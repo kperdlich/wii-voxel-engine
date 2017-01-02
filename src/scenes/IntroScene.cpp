@@ -79,7 +79,7 @@ void IntroScene::Update() {
 	if ( pad->ButtonsDown() & WPAD_BUTTON_RIGHT)
 	{
 		Controller::GetInstance().GetBasicCommandHandler().ExecuteCommand( SwitchToMainMenuCommand::Name() );
-	}
+    }
 }
 
 void IntroScene::Draw() {

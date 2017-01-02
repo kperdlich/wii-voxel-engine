@@ -34,7 +34,7 @@ Texture::~Texture()
 
 GRRLIB_texImg* Texture::GetNativeTexture() const
 {
-	return this->m_Texture;
+    return this->m_Texture;
 }
 
 void Texture::LoadTexture() {

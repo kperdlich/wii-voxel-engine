@@ -33,17 +33,17 @@
 #define DEFAULT_FONT_ID 0
 #define DEFAULT_MINECRAFT_FONT_ID 1
 
-//#define DEBUG
+#define DEBUG
 
 class Controller {
 
 private:
 	Controller();
-	class SceneHandler* m_sceneHandler;
-	class InputHandler* m_inputHandler;
-	class FontHandler*  m_fontHandler;
-	class CBasicCommandHandler* m_basicCommandHandler;
-	bool m_Running;
+    class SceneHandler* m_pSceneHandler;
+    class InputHandler* m_pInputHandler;
+    class FontHandler*  m_pFontHandler;
+    class CBasicCommandHandler* m_pBasicCommandHandler;
+    bool m_bRunning;
 
 public:
 	~Controller();

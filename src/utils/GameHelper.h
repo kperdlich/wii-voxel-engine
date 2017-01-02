@@ -28,9 +28,9 @@
 #include "../font/FontHandler.h"
 #include "../utils/ColorHelper.h"
 
-u8 calculateFrameRate();
-void printFps(unsigned int x, unsigned int y, GRRLIB_ttfFont* font, unsigned int fontSize, const u32 color );
-void printGameVersion(unsigned int x, unsigned int y, GRRLIB_ttfFont* font, unsigned int fontSize, const u32 color);
+u8 CalculateFrameRate();
+void PrintFps(unsigned int x, unsigned int y, GRRLIB_ttfFont* font, unsigned int fontSize, const u32 color );
+void PrintGameVersion(unsigned int x, unsigned int y, GRRLIB_ttfFont* font, unsigned int fontSize, const u32 color);
 char* getResolution();
 
 #endif /* _GAMEHELPER_H_ */

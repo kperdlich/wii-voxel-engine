@@ -47,17 +47,6 @@
 #define BUTTON_Y_DISTANCE 5
 
 
-static void OnStartSingleplayer(BasicButton* clickedButton)
-{
-	Controller::GetInstance().GetBasicCommandHandler().ExecuteCommand( SwitchToInGameCommand::Name() );
-}
-
-static void OnExitGame(BasicButton* clickedButton)
-{
-	Controller::GetInstance().End();
-}
-
-
 MainMenuScene::MainMenuScene() {
 
 }
@@ -80,8 +69,8 @@ void MainMenuScene::Load() {
 }
 
 void MainMenuScene::Draw() {
-	GRRLIB_SetBackgroundColour(0x24, 0x5E, 0x23, 1);
-	Basic2DScene::Draw();
+    GRRLIB_SetBackgroundColour(0x24, 0x5E, 0x23, 1);
+	Basic2DScene::Draw();    
 }
 
 void MainMenuScene::Update() {
@@ -96,8 +85,8 @@ void MainMenuScene::Update() {
 	else if ( pad->ButtonsDown() & WPAD_BUTTON_RIGHT )
 	{
 		Controller::GetInstance().GetBasicCommandHandler().ExecuteCommand( SwitchToInGameCommand::Name() );
-	}
-#endif
+    }
+#endif   
 
 }
 
@@ -110,10 +99,10 @@ void MainMenuScene::CreateMainMenuButtonList()
 	m_TextureHandler->DestroyTextureByName("BasicButtonBig_png");
 
 	List* btnList = new List( xPos, yPos, sizeBetweenBtns );
-	btnList->AddComponent( CreateDefaultMainMenuButton( MMS_BUTTON_SINGLEPLAYER, "Singleplayer", &OnStartSingleplayer ));
+    btnList->AddComponent( CreateDefaultMainMenuButton( MMS_BUTTON_SINGLEPLAYER, "Singleplayer", [] (BasicButton* clickedButton) { Controller::GetInstance().GetBasicCommandHandler().ExecuteCommand(SwitchToInGameCommand::Name()); }));
 	btnList->AddComponent( CreateDefaultMainMenuButton( MMS_BUTTON_MULTIPLAYER, "Multiplayer", NULL ));
 	btnList->AddComponent( CreateDefaultMainMenuButton( MMS_BUTTON_OPTION, "Option", NULL ));
-	btnList->AddComponent( CreateDefaultMainMenuButton( MMS_BUTTON_EXIT, "Exit", &OnExitGame));
+    btnList->AddComponent( CreateDefaultMainMenuButton( MMS_BUTTON_EXIT, "Exit", [] (BasicButton* clickedButton) { Controller::GetInstance().End(); }));
 	m_elements.push_back(btnList);
 }
 
