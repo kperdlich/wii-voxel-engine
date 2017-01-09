@@ -19,8 +19,9 @@
 
 #include "UITextureElement.h"
 
-UITextureElement::UITextureElement(int x, int y,
-		const char* name, BasicTexture* tex) : UIElement( x, y, tex->GetWidth(), tex->GetHeight(), name ), m_texture(tex) {
+UITextureElement::UITextureElement(uint32_t x, uint32_t y,
+        const char* name, BasicTexture* tex) : UIElement( x, y, tex->GetWidth(), tex->GetHeight(), name ), m_texture(tex)
+{
 	m_texture->SetX(x);
 	m_texture->SetY(y);
 
@@ -37,18 +38,19 @@ UITextureElement::~UITextureElement()
 }
 
 void UITextureElement::Load()
-
 {
 }
 
 
-void UITextureElement::SetX(int x) {
+void UITextureElement::SetX(uint32_t x)
+{
 	UIElement::SetX(x);
 	m_texture->SetX(x);
 }
 
 
-void UITextureElement::SetY(int y) {
+void UITextureElement::SetY(uint32_t y)
+{
 	UIElement::SetY(y);
 	m_texture->SetY(y);
 }

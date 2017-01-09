@@ -47,16 +47,16 @@
 #define BUTTON_Y_DISTANCE 5
 
 
-MainMenuScene::MainMenuScene() {
+CMainMenuScene::CMainMenuScene() {
 
 }
 
-MainMenuScene::~MainMenuScene() {
+CMainMenuScene::~CMainMenuScene() {
 
 }
 
-void MainMenuScene::Load() {
-	Basic2DScene::Load();
+void CMainMenuScene::Load() {
+    Basic2DScene::Load();
 	m_elements.push_back( new UITextureElement( MMS_CLASSIC_BACKGROUND , m_TextureHandler->CreateTexture( ClassicBackgroundSprite_png, MMS_CLASSIC_BACKGROUND )));
 	UITextureElement* logo = new UITextureElement( MMS_LOGO , m_TextureHandler->CreateTexture( WoxelCraft_png, MMS_LOGO));
 	logo->SetX( (rmode->viWidth / 2) - (logo->GetWidth() / 2) );
@@ -68,29 +68,31 @@ void MainMenuScene::Load() {
 	m_elements.push_back( new Cursor( MMS_CURSOR , m_TextureHandler->CreateTexture( Cursor_png, MMS_CURSOR )));
 }
 
-void MainMenuScene::Draw() {
+void CMainMenuScene::Draw()
+{
     GRRLIB_SetBackgroundColour(0x24, 0x5E, 0x23, 1);
-	Basic2DScene::Draw();    
+    Basic2DScene::Draw();
 }
 
-void MainMenuScene::Update() {
-	Basic2DScene::Update();
+void CMainMenuScene::Update(float deltaSeconds)
+{
+    Basic2DScene::Update(deltaSeconds);
 
 #ifdef DEBUG
-	WiiPad* pad = Controller::GetInstance().GetInputHandler().GetPadByID( WII_PAD_0 );
+    WiiPad* pad = Controller::GetInstance().GetInputHandler().GetPadByID( WII_PAD_0 );
 	if ( pad->ButtonsDown() & WPAD_BUTTON_LEFT)
 	{
-		Controller::GetInstance().GetBasicCommandHandler().ExecuteCommand( SwitchToIntroCommand::Name() );
+        Controller::GetInstance().GetBasicCommandHandler().ExecuteCommand( SwitchToIntroCommand::Name() );
 	}
 	else if ( pad->ButtonsDown() & WPAD_BUTTON_RIGHT )
 	{
-		Controller::GetInstance().GetBasicCommandHandler().ExecuteCommand( SwitchToInGameCommand::Name() );
+        Controller::GetInstance().GetBasicCommandHandler().ExecuteCommand( SwitchToInGameCommand::Name() );
     }
 #endif   
 
 }
 
-void MainMenuScene::CreateMainMenuButtonList()
+void CMainMenuScene::CreateMainMenuButtonList()
 {
 	Texture* startButtonTexture = m_TextureHandler->CreateTexture( BasicButtonBig_png, "BasicButtonBig_png" );
 	int xPos = (rmode->viWidth / 2) - (startButtonTexture->GetWidth() / 2);
@@ -100,16 +102,16 @@ void MainMenuScene::CreateMainMenuButtonList()
 
 	List* btnList = new List( xPos, yPos, sizeBetweenBtns );
     btnList->AddComponent( CreateDefaultMainMenuButton( MMS_BUTTON_SINGLEPLAYER, "Singleplayer", [] (BasicButton* clickedButton) { Controller::GetInstance().GetBasicCommandHandler().ExecuteCommand(SwitchToInGameCommand::Name()); }));
-	btnList->AddComponent( CreateDefaultMainMenuButton( MMS_BUTTON_MULTIPLAYER, "Multiplayer", NULL ));
-	btnList->AddComponent( CreateDefaultMainMenuButton( MMS_BUTTON_OPTION, "Option", NULL ));
+    btnList->AddComponent( CreateDefaultMainMenuButton( MMS_BUTTON_MULTIPLAYER, "Multiplayer", nullptr ));
+    btnList->AddComponent( CreateDefaultMainMenuButton( MMS_BUTTON_OPTION, "Option", nullptr ));
     btnList->AddComponent( CreateDefaultMainMenuButton( MMS_BUTTON_EXIT, "Exit", [] (BasicButton* clickedButton) { Controller::GetInstance().End(); }));
 	m_elements.push_back(btnList);
 }
 
 
-BasicButton* MainMenuScene::CreateDefaultMainMenuButton(  const char* buttonName, const char* buttontext, void (*clickCallback) (BasicButton*) )
+BasicButton* CMainMenuScene::CreateDefaultMainMenuButton(  const char* buttonName, const char* buttontext, void (*clickCallback) (BasicButton*) )
 {
-	FontHandler& fontHandler = Controller::GetInstance().GetFontHandler();
+    FontHandler& fontHandler = Controller::GetInstance().GetFontHandler();
 
 	Texture* pdefaultButtonTexture = m_TextureHandler->CreateTexture( BasicButtonBig_png, buttonName);
 

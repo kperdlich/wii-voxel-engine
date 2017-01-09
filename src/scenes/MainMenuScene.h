@@ -21,18 +21,17 @@
 #define _MAINMENUSCENE_H_
 
 
-
 #include "Basic2DScene.h"
 #include "../components/BasicButton.h"
 
 
-class MainMenuScene: public Basic2DScene {
+class CMainMenuScene: public Basic2DScene {
 public:
-	MainMenuScene();
-	virtual ~MainMenuScene();
+    CMainMenuScene();
+    virtual ~CMainMenuScene();
 	void Load() override;
 	void Draw() override;
-	void Update() override;
+    void Update(float deltaSeconds) override;
 private:
 	void CreateMainMenuButtonList();
 	BasicButton* CreateDefaultMainMenuButton( const char* buttonName, const char* buttontext, void (*clickCallback) (BasicButton*));

@@ -17,25 +17,20 @@
  *
 ***/
 
-#include "../../utils/Vector3.h"
+#ifndef SRC_UTILS_CRENDERHELPER_H_
+#define SRC_UTILS_CRENDERHELPER_H_
 
-#ifndef _CAABB_H_
-#define _CAABB_H_
+#include <stdint.h>
+#include <stddef.h>
 
-class CAABB {
-public:
-	CAABB(Vector3& vecMin, Vector3& vecMax);
-	virtual ~CAABB();
-
-	Vector3& GetMin();
-	Vector3& GetMax();
-
-	bool CoolidesWith( CAABB& box );
-	bool CoolidesWith( Vector3& vecPoint);
-
+class CRenderHelper {
 private:
-	Vector3 m_vecMin, m_vecMax;
+	CRenderHelper();
+public:
 
+    static size_t GetDisplayListSizeForFaces(uint32_t faces);
+
+	virtual ~CRenderHelper();
 };
 
-#endif /* _CAABB_H_ */
+#endif /* SRC_UTILS_CRENDERHELPER_H_ */

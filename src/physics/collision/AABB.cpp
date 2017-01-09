@@ -17,20 +17,20 @@
  *
 ***/
 
-#include "CAABB.h"
+#include "AABB.h"
 
-CAABB::CAABB(Vector3& vecMin, Vector3& vecMax) : m_vecMin(vecMin), m_vecMax(vecMax)
+AABB::AABB(Vector3& vecMin, Vector3& vecMax) : m_vecMin(vecMin), m_vecMax(vecMax)
 {
 
 
 }
 
-CAABB::~CAABB()
+AABB::~AABB()
 {
 
 }
 
-bool CAABB::CoolidesWith( CAABB& box )
+bool AABB::CoolidesWith( AABB& box )
 {
 	return(m_vecMax.GetX() > box.GetMin().GetX() &&
 	    m_vecMin.GetX() < box.GetMax().GetX() &&
@@ -40,7 +40,7 @@ bool CAABB::CoolidesWith( CAABB& box )
 	    m_vecMin.GetZ() < box.GetMax().GetZ());
 }
 
-bool CAABB::CoolidesWith( Vector3& vecPoint)
+bool AABB::CoolidesWith( Vector3& vecPoint)
 {
 	 if(vecPoint.GetX() > m_vecMin.GetX() && vecPoint.GetX() < m_vecMax.GetX() &&
 			 vecPoint.GetY() > m_vecMin.GetY() && vecPoint.GetY() < m_vecMax.GetY() &&
@@ -52,12 +52,12 @@ bool CAABB::CoolidesWith( Vector3& vecPoint)
 	return false;
 }
 
-Vector3& CAABB::GetMin()
+Vector3& AABB::GetMin()
 {
 	return m_vecMin;
 }
 
-Vector3& CAABB::GetMax()
+Vector3& AABB::GetMax()
 {
 	return m_vecMax;
 }

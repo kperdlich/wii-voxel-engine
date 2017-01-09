@@ -20,12 +20,14 @@
 #ifndef _UIELEMENT_H_
 #define _UIELEMENT_H_
 
+#include <stdint.h>
+
 class UIElement
 {
 
 protected:
-	UIElement(int x, int y, float width, float height, const char* name );
-	int m_x, m_y;
+    UIElement(uint32_t x, uint32_t y, float width, float height, const char* name );
+    uint32_t m_x, m_y;
 	float m_width, m_height;
 	const char* m_Name; // note: the name has to be unique per scene!!!
 	bool m_visible;
@@ -43,10 +45,10 @@ public:
 	float GetWidth() const;
 	void SetWidth(float width);
 
-	virtual int GetX() const;
-	virtual void SetX(int x);
-	virtual int GetY() const;
-	virtual void SetY(int y);
+    virtual uint32_t GetX() const;
+    virtual void SetX(uint32_t x);
+    virtual uint32_t GetY() const;
+    virtual void SetY(uint32_t y);
 };
 
 

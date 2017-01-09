@@ -33,37 +33,38 @@
 #define DEFAULT_FONT_ID 0
 #define DEFAULT_MINECRAFT_FONT_ID 1
 
-#define DEBUG
+//#define DEBUG
 
 class Controller {
 
 private:
-	Controller();
+    Controller();
     class SceneHandler* m_pSceneHandler;
     class InputHandler* m_pInputHandler;
     class FontHandler*  m_pFontHandler;
-    class CBasicCommandHandler* m_pBasicCommandHandler;
-    bool m_bRunning;
+    class BasicCommandHandler* m_pBasicCommandHandler;
+    bool m_bRunning = false;
+    uint32_t m_millisecondsDeltaLastFrame = 0;
 
 public:
-	~Controller();
+    ~Controller();
 	void Start();
 	void End();
 	void Init();
 	void SwitchToNextScene();
-	class SceneHandler& GetSceneHandler();
-	class InputHandler& GetInputHandler();
-	class FontHandler& GetFontHandler();
-	class CBasicCommandHandler& GetBasicCommandHandler();
+    class SceneHandler& GetSceneHandler();
+    class InputHandler& GetInputHandler();
+    class FontHandler& GetFontHandler();
+    class BasicCommandHandler& GetBasicCommandHandler();
 
-	static Controller& GetInstance()
+    static Controller& GetInstance()
 	{
-		static Controller instance;
-		return instance;
+        static Controller s_instance;
+        return s_instance;
 	}
 
-	Controller(Controller const&)	  = delete;
-	void operator=(Controller const&) = delete;
+    Controller(Controller const&)	  = delete;
+    void operator=(Controller const&) = delete;
 
 };
 

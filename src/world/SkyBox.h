@@ -17,14 +17,27 @@
  *
 ***/
 
-#include "CMesh.h"
+#ifndef SRC_WORLD_CSKYBOX_H_
+#define SRC_WORLD_CSKYBOX_H_
 
-CMesh::CMesh() {
-	// TODO Auto-generated constructor stub
+#include "../textures/Texture.h"
+#include "../Controller.h"
 
-}
 
-CMesh::~CMesh() {
-	// TODO Auto-generated destructor stub
-}
+class SkyBox {
+public:
+    SkyBox();
+    virtual ~SkyBox();
+	void Render();
+	void Init();
 
+private:
+	void CreateSkyBox();
+
+	Texture* m_pSkyBoxTextures[6];
+	uint32_t m_DisplayListSize = 0;
+    void* m_pDispList = nullptr;
+
+};
+
+#endif /* SRC_WORLD_CSKYBOX_H_ */

@@ -17,17 +17,27 @@
  *
 ***/
 
-#ifndef _BASICSCENE_H_
-#define _BASICSCENE_H_
+#ifndef _CHUD_H_
+#define _CHUD_H_
 
-#include "Scene.h"
+#include <vector>
+#include "../../components/UITextureElement.h"
+#include "Hotbar.h"
+#include "PlayerInventoryHud.h"
 
-class BasicScene: public Scene {
+class Hud {
 public:
-	BasicScene();
-	virtual ~BasicScene();
-	virtual void Unload() override;
+    Hud();
+    virtual ~Hud();
+	void addComponent( UITextureElement* component );
+	void Init();
+
+protected:
+	PlayerInventoryHud* m_playerInventoryHud;
+
+
+	std::vector<UITextureElement*> m_hudComponents;
 
 };
 
-#endif /* _BASICSCENE_H_ */
+#endif /* _CHUD_H_ */

@@ -20,7 +20,7 @@
 #include "Tile.h"
 #include "../utils/TileHelper.h"
 
-Tile::Tile( float x, float y, int index, class SpriteSheet* tileSheet, const u16 id ) :
+Tile::Tile( float x, float y, uint32_t index, class SpriteSheet* tileSheet, const uint16_t id ) :
 	m_sheetIndex( index ), m_TileSheet(tileSheet), BasicTexture(x, y, id)
 {
 	m_visible = true;
@@ -40,21 +40,21 @@ bool Tile::IsVisible() const
 	return m_TileSheet->isLoaded() && m_visible;
 }
 
-SpriteSheet* Tile::getSpriteSheet() {
+SpriteSheet* Tile::GetSpriteSheet() {
 	return m_TileSheet;
 }
 
-int Tile::getSheetIndex()
+uint32_t Tile::GetSheetIndex()
 {
 	return m_sheetIndex;
 }
 
-uint Tile::GetWidth() const
+uint32_t Tile::GetWidth() const
 {
 	return TILE_WIDTH;
 }
 
-uint Tile::GetHeight() const
+uint32_t Tile::GetHeight() const
 {
 	return TILE_HEIGHT;
 }

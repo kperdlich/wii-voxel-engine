@@ -17,23 +17,18 @@
  *
 ***/
 
-#include "CHud.h"
+#ifndef _CSWORD_H_
+#define _CSWORD_H_
 
-// define all component names here!
+#include "Entity.h"
+#include "IEquipable.h"
 
-CHud::CHud() {
+class Sword: public IEquipable, public Entity {
+public:
+    Sword();
+    virtual ~Sword();
 
 
+};
 
-}
-
-CHud::~CHud() {}
-
-void CHud::addComponent(UITextureElement* component) {
-	m_hudComponents.push_back( component );
-}
-
-void CHud::Init()
-{
-	m_playerInventoryHud = new CPlayerInventoryHud();
-}
+#endif /* _CSWORD_H_ */

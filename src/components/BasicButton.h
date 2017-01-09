@@ -26,8 +26,8 @@
 
 #define BUTTON_LABEL_DISTANCE 3
 
-class BasicButton: public UITextureElement {
-
+class BasicButton: public UITextureElement
+{
 public:
 	typedef void (*OnClickCallback)(BasicButton*);
 
@@ -41,13 +41,13 @@ public:
 	void SetColor(u32 color);
 	void SetButtonCallback(OnClickCallback callback);
 
-	virtual void SetX(int x) override;
-	virtual void SetY(int y) override;
+    virtual void SetX(uint32_t x) override;
+    virtual void SetY(uint32_t y) override;
 
 
 private:
-	Texture* m_highlightTexture = NULL;
-	LabelTexture* m_label = NULL;
+    Texture* m_highlightTexture = nullptr;
+    LabelTexture* m_label = nullptr;
 	OnClickCallback m_clickCallback;
 };
 

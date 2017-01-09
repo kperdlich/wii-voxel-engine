@@ -21,16 +21,16 @@
 #include "Chunk.h"
 #include "../PerlinNoise.h"
 #include "../../utils/MathHelper.h"
-#include "../../utils/CRenderHelper.h"
+#include "../../utils/RenderHelper.h"
 #include "../../renderer/BlockRenderer.h"
 #include "../../utils/Debug.h"
 
-CChunk::CChunk(class CGameWorld& gameWorld) : m_IsDirty(true)
+Chunk::Chunk(class CGameWorld& gameWorld) : m_IsDirty(true)
 {
 	m_pWorldManager = &gameWorld;
 }
 
-CChunk::~CChunk()
+Chunk::~Chunk()
 {
 	DeleteDisplayList();
 	ClearBlockRenderList();
@@ -47,16 +47,16 @@ CChunk::~CChunk()
 	delete [] m_pBlocks;
 }
 
-void CChunk::Init(Vector3& position)
+void Chunk::Init(Vector3& position)
 {
 	m_pCenterPosition = &position;
 
 	m_pBlocks = new BlockType**[CHUNK_SIZE_X];
-	for (unsigned int x = 0; x < CHUNK_SIZE_X; x++)
+	for (uint32_t x = 0; x < CHUNK_SIZE_X; x++)
 	{
 		m_pBlocks[x] = new BlockType*[CHUNK_SIZE_Y];
 
-		for (unsigned int y = 0; y < CHUNK_SIZE_Y; y++)
+		for (uint32_t y = 0; y < CHUNK_SIZE_Y; y++)
 		{
 			m_pBlocks[x][y] = new BlockType[CHUNK_SIZE_Z];
 		}
@@ -64,11 +64,11 @@ void CChunk::Init(Vector3& position)
 
 	const PerlinNoise& pn = m_pWorldManager->GetNoise();
 
-	for ( unsigned int x = 0; x < CHUNK_SIZE_X; x++)
+	for ( uint32_t x = 0; x < CHUNK_SIZE_X; x++)
 	{
-		for ( unsigned int z = 0; z < CHUNK_SIZE_Z; z++)
+		for ( uint32_t z = 0; z < CHUNK_SIZE_Z; z++)
 		{
-			for ( unsigned int y = 0; y < CHUNK_SIZE_Y; y++)
+			for ( uint32_t y = 0; y < CHUNK_SIZE_Y; y++)
 			{
 				m_pBlocks[x][y][z] = BlockType::AIR;
 			}
@@ -78,9 +78,9 @@ void CChunk::Init(Vector3& position)
 			zWorld = (m_pCenterPosition->GetZ() - (CHUNK_BLOCK_SIZE_Z / 2) + (z * BLOCK_SIZE));
 
 			double noise = pn.GetHeight(xWorld, zWorld);
-			unsigned int height = (unsigned int) MathHelper::Clamp(CHUNK_SIZE_Y * noise, 1.0, CHUNK_SIZE_Y);
+			uint32_t height = (uint32_t) MathHelper::Clamp(CHUNK_SIZE_Y * noise, 1.0, CHUNK_SIZE_Y);
 
-			for (unsigned int y = 0; y < height; y++)
+			for (uint32_t y = 0; y < height; y++)
 			{
 				if ( y == height - 1 )
 				{
@@ -95,7 +95,7 @@ void CChunk::Init(Vector3& position)
 	}
 }
 
-void CChunk::UpdateChunkNeighbors()
+void Chunk::UpdateChunkNeighbors()
 {
 	Vector3 leftChunkPos(m_pCenterPosition->GetX() - CHUNK_BLOCK_SIZE_X, m_pCenterPosition->GetY(), m_pCenterPosition->GetZ());
 	Vector3 rightChunkPos(m_pCenterPosition->GetX() + CHUNK_BLOCK_SIZE_X, m_pCenterPosition->GetY(), m_pCenterPosition->GetZ());
@@ -109,7 +109,7 @@ void CChunk::UpdateChunkNeighbors()
 }
 
 
-void CChunk::Render()
+void Chunk::Render()
 {
 	if ( m_DisplayListSize > 0 )
 	{
@@ -117,7 +117,7 @@ void CChunk::Render()
 	}
 }
 
-bool CChunk::AddBlockToRenderList(BlockType type, const BlockRenderVO& blockRenderVO)
+bool Chunk::AddBlockToRenderList(BlockType type, const BlockRenderVO& blockRenderVO)
 {
 	bool bSuccessful = false;
 	auto blockRenderListIt = m_mBlockRenderList.find(type);
@@ -137,7 +137,7 @@ bool CChunk::AddBlockToRenderList(BlockType type, const BlockRenderVO& blockRend
 	return bSuccessful;
 }
 
-bool CChunk::IsBlockVisible(uint32_t iX, uint32_t iY, uint32_t iZ, BlockFaceVisibiltyVO* &pFaceVO)
+bool Chunk::IsBlockVisible(uint32_t iX, uint32_t iY, uint32_t iZ, BlockFaceVisibiltyVO* &pFaceVO)
 {
 
 	BlockFaceVisibiltyVO localFaceVO;
@@ -285,18 +285,18 @@ bool CChunk::IsBlockVisible(uint32_t iX, uint32_t iY, uint32_t iZ, BlockFaceVisi
 	return isVisible;
 }
 
-void CChunk::BuildBlockRenderList()
+void Chunk::BuildBlockRenderList()
 {
-	m_AmountOfBlocks = 0;
-	m_AmountOfFaces = 0;
+    m_amountOfBlocks = 0;
+    m_amountOfFaces = 0;
 
-	for ( unsigned int x = 0; x < CHUNK_SIZE_X; x++)
+	for ( uint32_t x = 0; x < CHUNK_SIZE_X; x++)
 	{
-		for ( unsigned int y = 0; y < CHUNK_SIZE_Y; y++ )
+		for ( uint32_t y = 0; y < CHUNK_SIZE_Y; y++ )
 		{
-			for ( unsigned int z = 0; z < CHUNK_SIZE_Z; z++)
+			for ( uint32_t z = 0; z < CHUNK_SIZE_Z; z++)
 			{
-				BlockFaceVisibiltyVO* pFaceVO = NULL;
+                BlockFaceVisibiltyVO* pFaceVO = nullptr;
 
 				if ( IsBlockVisible(x, y, z, pFaceVO))
 				{
@@ -305,15 +305,15 @@ void CChunk::BuildBlockRenderList()
 					renderVO->pFaceVO = pFaceVO;
 					renderVO->pBlockPosition = new Vector3(worldBlockPos.GetX(), worldBlockPos.GetY(), worldBlockPos.GetZ());
 					AddBlockToRenderList(m_pBlocks[x][y][z], *renderVO);
-					m_AmountOfBlocks++;
-					m_AmountOfFaces += pFaceVO->faces;
+                    m_amountOfBlocks++;
+                    m_amountOfFaces += pFaceVO->faces;
 				}
 			}
 		}
 	}
 }
 
-void CChunk::ClearBlockRenderList()
+void Chunk::ClearBlockRenderList()
 {
 	for(auto renderListIt = m_mBlockRenderList.begin(); renderListIt != m_mBlockRenderList.end(); ++renderListIt)
 	{
@@ -329,7 +329,7 @@ void CChunk::ClearBlockRenderList()
 }
 
 
-void CChunk::CreateDisplayList(size_t sizeOfDisplayList)
+void Chunk::CreateDisplayList(size_t sizeOfDisplayList)
 {
 	m_DispList = memalign(32, sizeOfDisplayList);
 	memset(m_DispList, 0, sizeOfDisplayList);
@@ -337,56 +337,56 @@ void CChunk::CreateDisplayList(size_t sizeOfDisplayList)
 	GX_BeginDispList(m_DispList, sizeOfDisplayList);
 }
 
-void CChunk::FinishDisplayList()
+void Chunk::FinishDisplayList()
 {
 	m_DisplayListSize = GX_EndDispList();
 	m_IsDirty = false;
 }
 
 
-bool CChunk::IsDirty()
+bool Chunk::IsDirty()
 {
 	return m_IsDirty;
 }
 
-void CChunk::SetDirty(bool dirty)
+void Chunk::SetDirty(bool dirty)
 {
 	m_IsDirty = dirty;
 }
 
-uint32_t CChunk::GetDisplayListSize() const
+uint32_t Chunk::GetDisplayListSize() const
 {
 	return m_DisplayListSize;
 }
 
 
-uint64_t CChunk::GetAmountOfBlocks() const
+uint64_t Chunk::GetAmountOfBlocks() const
 {
-	return m_AmountOfBlocks;
+    return m_amountOfBlocks;
 }
 
-uint64_t CChunk::GetAmountOfFaces() const
+uint64_t Chunk::GetAmountOfFaces() const
 {
-	return m_AmountOfFaces;
+    return m_amountOfFaces;
 }
 
-const Vector3& CChunk::GetCenterPosition() const
+const Vector3& Chunk::GetCenterPosition() const
 {
 	return *m_pCenterPosition;
 }
 
-void CChunk::DeleteDisplayList()
+void Chunk::DeleteDisplayList()
 {
 	if ( m_DisplayListSize > 0 )
 	{
 		free(m_DispList);
 		m_DisplayListSize = 0;
-		m_DispList = NULL;
+        m_DispList = nullptr;
 		m_IsDirty = true;
 	}
 }
 
-void CChunk::RebuildDisplayList()
+void Chunk::RebuildDisplayList()
 {
 	BlockRenderer blockRenderer;
 
@@ -394,7 +394,7 @@ void CChunk::RebuildDisplayList()
 	BuildBlockRenderList();
 
 	DeleteDisplayList();
-	CreateDisplayList( CRenderHelper::GetDisplayListSizeForFaces(m_AmountOfFaces) );
+    CreateDisplayList( CRenderHelper::GetDisplayListSizeForFaces(m_amountOfFaces) );
 
 	for(auto it = m_mBlockRenderList.begin(); it != m_mBlockRenderList.end(); ++it)
 	{
@@ -411,7 +411,7 @@ void CChunk::RebuildDisplayList()
 	m_bNeighbourUpdate = false;
 }
 
-void CChunk::RemoveBlockByWorldPosition(const Vector3& blockPosition)
+void Chunk::RemoveBlockByWorldPosition(const Vector3& blockPosition)
 {
 	Vec3i vec = GetLocalBlockPositionByWorldPosition(blockPosition);
 
@@ -419,7 +419,7 @@ void CChunk::RemoveBlockByWorldPosition(const Vector3& blockPosition)
 	m_IsDirty = true;
 }
 
-void CChunk::AddBlockByWorldPosition(const Vector3& blockPosition, BlockType type)
+void Chunk::AddBlockByWorldPosition(const Vector3& blockPosition, BlockType type)
 {
 	Vec3i vec = GetLocalBlockPositionByWorldPosition(blockPosition);
 
@@ -430,31 +430,31 @@ void CChunk::AddBlockByWorldPosition(const Vector3& blockPosition, BlockType typ
 	}
 }
 
-Vec3i CChunk::GetLocalBlockPositionByWorldPosition(const Vector3& blockWorldPosition) const
+Vec3i Chunk::GetLocalBlockPositionByWorldPosition(const Vector3& blockWorldPosition) const
 {
 	Vec3i vec;
 	float blockScale = BLOCK_SIZE;
 
-	vec.m_x = (unsigned int) (fmod(blockWorldPosition.GetX(), CHUNK_BLOCK_SIZE_X) / blockScale);
-	vec.m_y = (unsigned int) (fmod(blockWorldPosition.GetY(), CHUNK_BLOCK_SIZE_Y) / blockScale);
-	vec.m_z = (unsigned int) (fmod(blockWorldPosition.GetZ(), CHUNK_BLOCK_SIZE_Z) / blockScale);
+	vec.m_x = (uint32_t) (fmod(blockWorldPosition.GetX(), CHUNK_BLOCK_SIZE_X) / blockScale);
+	vec.m_y = (uint32_t) (fmod(blockWorldPosition.GetY(), CHUNK_BLOCK_SIZE_Y) / blockScale);
+	vec.m_z = (uint32_t) (fmod(blockWorldPosition.GetZ(), CHUNK_BLOCK_SIZE_Z) / blockScale);
 
 	return vec;
 }
 
-Vector3 CChunk::GetBlockPositionByWorldPosition(const Vector3& worldPosition) const
+Vector3 Chunk::GetBlockPositionByWorldPosition(const Vector3& worldPosition) const
 {
 	Vec3i vec = GetLocalBlockPositionByWorldPosition(worldPosition);
 	return LocalPositionToGlobalPosition(vec);
 }
 
-BlockType CChunk::GetBlockTypeByWorldPosition(const Vector3& worldPosition) const
+BlockType Chunk::GetBlockTypeByWorldPosition(const Vector3& worldPosition) const
 {
 	Vec3i vec = GetLocalBlockPositionByWorldPosition(worldPosition);
 	return m_pBlocks[vec.m_x][vec.m_y][vec.m_z];
 }
 
-Vector3 CChunk::ValidatePhysicalPosition(const Vector3& position) const
+Vector3 Chunk::ValidatePhysicalPosition(const Vector3& position) const
 {
 	Vector3 pos = GetBlockPositionByWorldPosition(position);
 	float currentPos = CHUNK_BLOCK_SIZE_Y - (BLOCK_SIZE);
@@ -470,7 +470,7 @@ Vector3 CChunk::ValidatePhysicalPosition(const Vector3& position) const
 	return pos;
 }
 
-Vector3 CChunk::LocalPositionToGlobalPosition(const Vec3i& localPosition) const
+Vector3 Chunk::LocalPositionToGlobalPosition(const Vec3i& localPosition) const
 {
 	return Vector3( (m_pCenterPosition->GetX() - (CHUNK_BLOCK_SIZE_X / 2) + (localPosition.m_x * BLOCK_SIZE)),
 			(m_pCenterPosition->GetY() - (CHUNK_BLOCK_SIZE_Y / 2) + (localPosition.m_y * BLOCK_SIZE)),

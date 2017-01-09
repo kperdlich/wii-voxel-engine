@@ -18,25 +18,25 @@
 ***/
 
 #include "BlockManager.h"
-#include "../CFrustrum.h"
+#include "../Frustrum.h"
 #include "../GameWorld.h"
 #include "../../utils/Vector3.h"
 #include "../../utils/Debug.h"
 #include "GroundText_png.h"
 #include "Grass_png.h"
 
-void CBlockManager::LoadBlocks()
+void BlockManager::LoadBlocks()
 {
 	// todo dirty workaround - have to fix texture handler
 	m_pTextureHandler->CreateTexture( GroundText_png, BLOCK_TEXTURE_DIRT )->SetVisible(false);
 	m_pTextureHandler->CreateTexture( Grass_png, BLOCK_TEXTURE_GRASS )->SetVisible(false);
 
-	m_blocks.insert(std::pair< BlockType, CBlock* >( BlockType::AIR, new CBlock( BLOCK_SIZE_HALF, NULL))); // no texture for air!
-	m_blocks.insert(std::pair< BlockType, CBlock* >( BlockType::DIRT, new CBlock( BLOCK_SIZE_HALF, dynamic_cast<const Texture*>(m_pTextureHandler->GetTexture(BLOCK_TEXTURE_DIRT)))));
-	m_blocks.insert(std::pair< BlockType, CBlock* >( BlockType::GRASS, new CBlock( BLOCK_SIZE_HALF, dynamic_cast<const Texture*>(m_pTextureHandler->GetTexture(BLOCK_TEXTURE_GRASS)))));
+    m_blocks.insert(std::pair< BlockType, Block* >( BlockType::AIR, new Block( BLOCK_SIZE_HALF, nullptr))); // no texture for air!
+	m_blocks.insert(std::pair< BlockType, Block* >( BlockType::DIRT, new Block( BLOCK_SIZE_HALF, dynamic_cast<const Texture*>(m_pTextureHandler->GetTexture(BLOCK_TEXTURE_DIRT)))));
+	m_blocks.insert(std::pair< BlockType, Block* >( BlockType::GRASS, new Block( BLOCK_SIZE_HALF, dynamic_cast<const Texture*>(m_pTextureHandler->GetTexture(BLOCK_TEXTURE_GRASS)))));
 }
 
-void CBlockManager::UnloadBlocks()
+void BlockManager::UnloadBlocks()
 {
 	for ( auto blockIterator = m_blocks.begin(); blockIterator != m_blocks.end(); blockIterator++ )
 	{
@@ -47,14 +47,14 @@ void CBlockManager::UnloadBlocks()
 }
 
 
-CBlockManager::CBlockManager( TextureHandler& ptextureHandler) {
+BlockManager::BlockManager( TextureHandler& ptextureHandler) {
 	m_pTextureHandler = &ptextureHandler;
 }
 
-CBlockManager::~CBlockManager() {}
+BlockManager::~BlockManager() {}
 
 
-CBlock* CBlockManager::GetBlockByType(const BlockType type)
+Block* BlockManager::GetBlockByType(const BlockType type)
 {
 	auto blockIterator = m_blocks.find(type);
 	if ( blockIterator != m_blocks.end() )
@@ -62,5 +62,5 @@ CBlock* CBlockManager::GetBlockByType(const BlockType type)
 		return blockIterator->second;
 	}
 
-	return NULL;
+    return nullptr;
 }

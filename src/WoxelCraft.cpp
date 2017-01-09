@@ -22,6 +22,6 @@
 
 int main( int argc, char **argv )
 {
-	Controller::GetInstance().Start();
+    Controller::GetInstance().Start();
     return 0;
 }

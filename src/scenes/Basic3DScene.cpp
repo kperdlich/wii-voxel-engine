@@ -29,7 +29,7 @@ Basic3DScene::Basic3DScene()
 	m_Renderer = new Renderer3D();
 	m_entityHandler = new EntityHandler();
 	m_mainCamera = new Camera();
-	m_pSkyBox = new CSkyBox();
+    m_pSkyBox = new SkyBox();
 }
 
 Basic3DScene::~Basic3DScene()
@@ -42,7 +42,7 @@ Basic3DScene::~Basic3DScene()
 
 void Basic3DScene::Load()
 {
-	BasicScene::Load();
+    Scene::Load();
 	m_mainCamera->Init();
 	m_pSkyBox->Init();
 }
@@ -96,9 +96,9 @@ void Basic3DScene::Draw()
 	}
 }
 
-void Basic3DScene::Update()
+void Basic3DScene::Update(float deltaSeconds)
 {
-	for (unsigned int i = 0; i < m_uiElements.size(); i++)
+	for (uint32_t i = 0; i < m_uiElements.size(); i++)
 	{
 		m_uiElements[i]->Update();
 	}
@@ -115,14 +115,14 @@ EntityHandler& Basic3DScene::GetEntityHandler()
 }
 
 void Basic3DScene::Unload() {
-	for (uint i = 0; i < m_uiElements.size(); i++)
+    for (uint32_t i = 0; i < m_uiElements.size(); i++)
 	{
 		delete m_uiElements[i];
 	}
 
 	m_uiElements.clear();
 	m_entityHandler->Clear();
-	BasicScene::Unload();
+    Scene::Unload();
 }
 
 void Basic3DScene::SetGraphicsMode(bool textureMode, bool normalMode)

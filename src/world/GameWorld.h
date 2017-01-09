@@ -48,9 +48,9 @@ public:
 	void GenerateWorld();
 	void Draw();
 
-	class CBlockManager& GetBlockManager();
-	class CChunk* GetChunkAt(const Vector3& centerPosition) const;
-	class CChunk* GetChunkByWorldPosition(const Vector3& worldPosition);
+	class BlockManager& GetBlockManager();
+	class Chunk* GetChunkAt(const Vector3& centerPosition) const;
+	class Chunk* GetChunkByWorldPosition(const Vector3& worldPosition);
 	void RemoveBlockByWorldPosition(const Vector3& blockPosition);
 	void AddBlockAtWorldPosition(const Vector3& blockPosition, BlockType type);
 	void UpdateFocusedBlockByWorldPosition( const Vector3& blockPosition );
@@ -61,13 +61,13 @@ public:
 	const PerlinNoise& GetNoise() const;
 
 private:
-	bool ChunkInFov( Vector3& chunkPosition, Vector3& playerPosition, unsigned int fov);
+	bool ChunkInFov( Vector3& chunkPosition, Vector3& playerPosition, uint32_t fov);
 	void DrawFocusOnSelectedCube();
 
 private:
 	class Basic3DScene* m_pScene;
-	CBlockManager* m_blockManager;
-    std::map<const class Vector3*, class CChunk*, ChunkPositionComparer> m_ChunkMap;
+	BlockManager* m_blockManager;
+    std::map<const class Vector3*, class Chunk*, ChunkPositionComparer> m_ChunkMap;
 
 	Vector3 m_SelectedBlockPosition;
 	bool m_bHasSelectedBlock = false;

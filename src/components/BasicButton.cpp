@@ -77,16 +77,16 @@ void BasicButton::SetButtonCallback(OnClickCallback callback)
 
 void BasicButton::UpdateLabel()
 {
-	unsigned int newFontSize = m_texture->GetHeight() - (2*BUTTON_LABEL_DISTANCE);
+	uint32_t newFontSize = m_texture->GetHeight() - (2*BUTTON_LABEL_DISTANCE);
 	m_label->setFontSize( newFontSize );
 	m_label->SetY( m_texture->GetY() + BUTTON_LABEL_DISTANCE );
 
-	unsigned int textWidthInPixel = GRRLIB_WidthTTF(&m_label->getFont(), m_label->getText(), m_label->getFontSize());
+	uint32_t textWidthInPixel = GRRLIB_WidthTTF(&m_label->getFont(), m_label->getText(), m_label->getFontSize());
 	m_label->SetX(m_texture->GetX() + (( m_texture->GetWidth() / 2) - (textWidthInPixel / 2)));
 }
 
 
-void BasicButton::SetX(int x)
+void BasicButton::SetX(uint32_t x)
 {
 	UITextureElement::SetX(x);
 	m_highlightTexture->SetX(x);
@@ -94,7 +94,7 @@ void BasicButton::SetX(int x)
 
 }
 
-void BasicButton::SetY(int y)
+void BasicButton::SetY(uint32_t y)
 {
 	UITextureElement::SetY(y);
 	m_highlightTexture->SetY(y);

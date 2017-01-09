@@ -23,11 +23,11 @@
 #include "Basic3DScene.h"
 
 
-class InGameScene: public Basic3DScene {
+class CInGameScene: public Basic3DScene {
 public:
-	InGameScene();
-	virtual ~InGameScene();
-	void Update() override;
+    CInGameScene();
+    virtual ~CInGameScene();
+    void Update(float deltaSeconds) override;
 	void Load() override;
 	void Draw() override;
 protected:

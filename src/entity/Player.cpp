@@ -21,26 +21,26 @@
 #include "../utils/MathHelper.h"
 #include "../utils/Debug.h"
 
-#define ROTATION_SPEED 1.4f
-#define MOVEMENT_SPEED 0.1f
+#define ROTATION_SPEED 50.0f
+#define MOVEMENT_SPEED 5.0f
 #define PITCH_MAX 90.0f
 
 
-Player::Player()
+CPlayer::CPlayer()
 {
 	m_entityRenderer = new EntityRenderer(this);
-	m_inventory = new CPlayerInventory();
+    m_pInventory = new PlayerInventory();
 	SetPlayer(true);
 }
 
-Player::~Player()
+CPlayer::~CPlayer()
 {
-	delete m_inventory;
+    delete m_pInventory;
 }
 
-void Player::Update()
+void CPlayer::Update(float deltaSeconds)
 {
-	WiiPad* pad = Controller::GetInstance().GetInputHandler().GetPadByID( WII_PAD_0 );
+    WiiPad* pad = Controller::GetInstance().GetInputHandler().GetPadByID( WII_PAD_0 );
 
 	u32 padButtonHeld = pad->ButtonsHeld();
 	u32 padButtonDown = pad->ButtonsDown();
@@ -48,32 +48,31 @@ void Player::Update()
 #ifdef DEBUG
 	auto pChunk = m_pWorld->GetChunkByWorldPosition( m_position );
 	if ( pChunk )
-    {
-		//sprintf(pChunkBuffer, "Nunchunk: X: %f Y:%f", pad->GetNunchukAngleX(), pad->GetNunchukAngleY() );
-        Debug::GetInstance().Log( "Current Chunk: %d/%d/%d", (unsigned int) pChunk->GetCenterPosition().GetX(), (unsigned int) pChunk->GetCenterPosition().GetY(), (unsigned int) pChunk->GetCenterPosition().GetZ()  );
+    {		
+        Debug::GetInstance().Log( "Current Chunk: %d/%d/%d", (uint32_t) pChunk->GetCenterPosition().GetX(), (uint32_t) pChunk->GetCenterPosition().GetY(), (uint32_t) pChunk->GetCenterPosition().GetZ()  );
 	}
 #endif
 
 
 	if ( pad->GetY() <= 15.0f )
 	{
-		Rotate( Vector3( -ROTATION_SPEED, 0, 0 )); // top
+        Rotate( Vector3( -ROTATION_SPEED * deltaSeconds, 0, 0 )); // top
 	}
 	else if ( pad->GetY() >= rmode->viHeight - 45.0f )
 	{
-		Rotate( Vector3( ROTATION_SPEED, 0, 0 )); // bottom
+        Rotate( Vector3( ROTATION_SPEED * deltaSeconds, 0, 0 )); // bottom
 	}
 
 	if ( pad->GetX() >= rmode->viWidth - 120.0f )
 	{
-		Rotate( Vector3( 0, -ROTATION_SPEED, 0 )); // right
+        Rotate( Vector3( 0, -ROTATION_SPEED * deltaSeconds, 0 )); // right
 	}
 	else if ( pad->GetX() <= 120.0f )
 	{
-		Rotate( Vector3( 0, ROTATION_SPEED, 0 )); // left
+        Rotate( Vector3( 0, ROTATION_SPEED * deltaSeconds, 0 )); // left
 	}
 
-	Move(-(pad->GetNunchukAngleX()), -(pad->GetNunchukAngleY()));
+    Move(-(pad->GetNunchukAngleX()), -(pad->GetNunchukAngleY()), deltaSeconds);
 
 	// shity physics
 	Vector3 blockPositionUnderPlayer(m_position.GetX() + BLOCK_SIZE_HALF, 0.0f, m_position.GetZ() + BLOCK_SIZE_HALF);
@@ -81,10 +80,9 @@ void Player::Update()
 	m_position.SetY(newPosition.GetY() + (2 * BLOCK_SIZE));
 
 
-	Vector3 focusedBlockPos = MathHelper::CalculateNewWorldPositionByRotation(
-							Vector3(m_rotation.GetX(), m_rotation.GetY(), m_rotation.GetZ()),
-							Vector3(m_position.GetX() + BLOCK_SIZE_HALF, m_position.GetY(), m_position.GetZ() + BLOCK_SIZE_HALF),
-							-ROTATION_SPEED);
+    Vector3 focusedBlockPos = MathHelper::CalculateNewWorldPositionByRotation(m_rotation,
+                                Vector3(m_position.GetX() + BLOCK_SIZE_HALF, m_position.GetY(), m_position.GetZ() + BLOCK_SIZE_HALF),
+                                -2*BLOCK_SIZE);
 
 	m_pWorld->UpdateFocusedBlockByWorldPosition(focusedBlockPos);
 
@@ -101,16 +99,16 @@ void Player::Update()
 	// todo move to non-player related place
 	if ( padButtonDown & WPAD_BUTTON_HOME)
 	{
-		Controller::GetInstance().End();
+        Controller::GetInstance().End();
 	}
 
 	UpdateInventory();
 
 }
 
-void Player::UpdateInventory()
+void CPlayer::UpdateInventory()
 {
-	WiiPad* pad = Controller::GetInstance().GetInputHandler().GetPadByID( WII_PAD_0 );
+    WiiPad* pad = Controller::GetInstance().GetInputHandler().GetPadByID( WII_PAD_0 );
 
 	u32 padButtonHeld = pad->ButtonsHeld();
 	u32 padButtonDown = pad->ButtonsDown();
@@ -129,14 +127,14 @@ void Player::UpdateInventory()
 
 }
 
-void Player::Move(float x, float y)
+void CPlayer::Move(float x, float y, float deltaSeconds)
 {
 	if ( y != 0.0f)
 	{
 		m_position = MathHelper::CalculateNewWorldPositionByRotation(
 					m_rotation.GetY(),
 					m_position,
-					y * MOVEMENT_SPEED);
+                    y * MOVEMENT_SPEED * deltaSeconds);
 	}
 
 	if ( x != 0.0f)
@@ -155,27 +153,18 @@ void Player::Move(float x, float y)
 		m_position = MathHelper::CalculateNewWorldPositionByRotation(
 					m_rotation.GetY() + strafeValue,
 					m_position,
-					fabs(x) * MOVEMENT_SPEED);
+                    fabs(x) * MOVEMENT_SPEED * deltaSeconds);
 	}
 }
 
 
-void Player::Rotate( const Vector3& rotation )
+void CPlayer::Rotate( const Vector3& rotation )
 {
-	if ( m_rotation.GetX() > 360 )
-	{
-		m_rotation.SetX(m_rotation.GetX() - 360);
-	}
-	else if(m_rotation.GetX() < -360)
-	{
-		m_rotation.SetX(m_rotation.GetX() + 360);
-	}
-
 	if ( m_rotation.GetY() > 360 )
 	{
 		m_rotation.SetY(m_rotation.GetY() - 360);
 	}
-	else if(m_rotation.GetY() < -360)
+    else if(m_rotation.GetY() < 0)
 	{
 		m_rotation.SetY(m_rotation.GetY() + 360);
 	}
@@ -184,17 +173,16 @@ void Player::Rotate( const Vector3& rotation )
 	{
 		m_rotation.SetZ(m_rotation.GetZ() - 360);
 	}
-	else if(rotation.GetZ() < -360)
+    else if(rotation.GetZ() < 0)
 	{
 		m_rotation.SetZ(m_rotation.GetZ() + 360);
 	}
 
 	m_rotation += rotation;
-	m_rotation.SetX(MathHelper::Clamp(m_rotation.GetX() + rotation.GetX(), -PITCH_MAX, PITCH_MAX));
-
+    m_rotation.SetX(MathHelper::Clamp(m_rotation.GetX(), -PITCH_MAX, PITCH_MAX));
 }
 
-void Player::AddToInventory(IEquipable& item)
+void CPlayer::AddToInventory(IEquipable& item)
 {
-	m_inventory->AddToInventory(item);
+    m_pInventory->AddToInventory(item);
 }

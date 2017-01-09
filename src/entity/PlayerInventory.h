@@ -17,14 +17,23 @@
  *
 ***/
 
-#include "CPlayerInventoryHud.h"
+#ifndef _CPLAYERINVENTORY_H_
+#define _CPLAYERINVENTORY_H_
 
-CPlayerInventoryHud::CPlayerInventoryHud() {
+#include "IEquipable.h"
 
+#define INVENTORY_MAX_SIZE 10
 
-}
+class PlayerInventory {
+public:
+    PlayerInventory();
+    virtual ~PlayerInventory();
 
-CPlayerInventoryHud::~CPlayerInventoryHud() {
+	bool AddToInventory(IEquipable& item);
 
-}
+private:
+	std::vector<IEquipable*> m_pInventory;
+    uint32_t m_inventoryIndex = 0;
+};
 
+#endif /* _CPLAYERINVENTORY_H_ */

@@ -38,7 +38,7 @@ void BlockRenderer::Prepare(std::vector<const BlockRenderVO*> *positionList, flo
 void BlockRenderer::Finish()
 {
 	m_renderBlockSize = 0.0f;
-	m_positions = NULL;
+    m_positions = nullptr;
 }
 
 // note: we start drawing with the top left corner, top right, bottom right, bottom left

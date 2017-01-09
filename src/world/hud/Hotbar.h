@@ -17,18 +17,16 @@
  *
 ***/
 
-#ifndef _CSWORD_H_
-#define _CSWORD_H_
+#ifndef _CHOTBAR_H_
+#define _CHOTBAR_H_
 
-#include "Entity.h"
-#include "IEquipable.h"
+#include "../../components/UITextureElement.h"
+#include "../../textures/BasicTexture.h"
 
-class CSword: public IEquipable, public Entity {
+class Hotbar: public UITextureElement {
 public:
-	CSword();
-	virtual ~CSword();
-
-
+    Hotbar( const char* name, BasicTexture* tex );
+    virtual ~Hotbar();
 };
 
-#endif /* _CSWORD_H_ */
+#endif /* _CHOTBAR_H_ */

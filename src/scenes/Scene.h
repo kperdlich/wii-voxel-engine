@@ -26,12 +26,12 @@
 class Scene {
 
 public:
-	Scene();
-	virtual ~Scene();
+    Scene();
+    virtual ~Scene();
 	virtual void Load();
 	virtual void Unload();
 	virtual void Draw();
-	virtual void Update();
+    virtual void Update(float deltaSeconds);
 	virtual TextureHandler& GetTextureHandler() const;
 	virtual Renderer& GetRenderer() const;
 

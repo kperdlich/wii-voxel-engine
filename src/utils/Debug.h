@@ -30,7 +30,7 @@ class Debug {
 
 private:
     std::vector<char*> m_logs;
-    char m_logIndex = DEFAULT_DEBUG_INDEX;
+    signed char m_logIndex = DEFAULT_DEBUG_INDEX;
     bool m_logOverflow = false;
 
 private:
@@ -48,8 +48,8 @@ public:
 
 	static Debug& GetInstance()
 	{
-		static Debug instance;
-		return instance;
+        static Debug s_instance;
+        return s_instance;
 	}
 
 	Debug(Debug const&)	  = delete;

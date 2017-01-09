@@ -57,7 +57,7 @@ private:
 			 m_worldAngle,
 			 m_wordScale;
 
-	Entity* m_attachedToEntity = NULL;
+    Entity* m_attachedToEntity = nullptr;
 };
 
 #endif /* _CAMERA_H_ */

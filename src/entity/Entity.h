@@ -29,12 +29,12 @@ class EntityRenderer;
 
 class Entity {
 public:
-	Entity();
-	Entity( Vector3 position );
-	virtual ~Entity();
+    Entity();
+    Entity( Vector3 position );
+    virtual ~Entity();
 
-	uint GetId() const;
-	void SetId( unsigned int id );
+    uint32_t GetId() const;
+    void SetId( uint32_t id );
 
 	void SetPosition( Vector3 position );
 	const Vector3& GetPosition() const;
@@ -56,7 +56,7 @@ public:
 protected:
 	bool m_visible = true, m_isPlayer = false;
 	Vector3 m_position, m_rotation;
-	uint m_id;
+    uint32_t m_id;
 	EntityRenderer* m_entityRenderer;
 	class CGameWorld* m_pWorld;
 

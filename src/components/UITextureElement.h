@@ -25,16 +25,16 @@
 
 class UITextureElement: public UIElement {
 public:
-	UITextureElement(int x, int y, const char* name, BasicTexture* tex);
+    UITextureElement(uint32_t x, uint32_t y, const char* name, BasicTexture* tex);
 	UITextureElement(const char* name, BasicTexture* tex);
 	virtual ~UITextureElement();
 	void Load() override;
 
-	virtual void SetColor(u32 color);
-	virtual u32 GetColor() const;
+    virtual void SetColor(uint32_t color);
+    virtual uint32_t GetColor() const;
 
-	virtual void SetX(int x) override;
-	virtual void SetY(int y) override;
+    virtual void SetX(uint32_t x) override;
+    virtual void SetY(uint32_t y) override;
 
 protected:
 	BasicTexture* m_texture;

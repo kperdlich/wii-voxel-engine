@@ -26,16 +26,16 @@
 class List : public UIElement {
 
 public:
-	List(int x, int y, int sizeBetweenElements );
-	List( int sizeBetweenElements );
+    List(uint32_t x, uint32_t y, uint32_t sizeBetweenElements );
+    List( uint32_t sizeBetweenElements );
 	virtual ~List();
-	virtual void Update();
+    virtual void Update() override;
 
 	void AddComponent(UIElement* element);
 
 private:
 	std::vector<UIElement*> m_elements;
-	unsigned int m_sizeBetweenElements;
+	uint32_t m_sizeBetweenElements;
 };
 
 #endif /* _LIST_H_ */

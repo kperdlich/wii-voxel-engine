@@ -17,27 +17,19 @@
  *
 ***/
 
-#ifndef _CHUD_H_
-#define _CHUD_H_
+#ifndef _CPLAYERINVENTORYHUD_H_
+#define _CPLAYERINVENTORYHUD_H_
 
-#include <vector>
-#include "../../components/UITextureElement.h"
-#include "CHotbar.h"
-#include "CPlayerInventoryHud.h"
+#include "IHudComponent.h"
 
-class CHud {
+class PlayerInventoryHud: public IHudComponent {
 public:
-	CHud();
-	virtual ~CHud();
-	void addComponent( UITextureElement* component );
-	void Init();
+	PlayerInventoryHud();
+	virtual ~PlayerInventoryHud();
 
-protected:
-	CPlayerInventoryHud* m_playerInventoryHud;
+	void Update();
 
-
-	std::vector<UITextureElement*> m_hudComponents;
 
 };
 
-#endif /* _CHUD_H_ */
+#endif /* _CPLAYERINVENTORYHUD_H_ */

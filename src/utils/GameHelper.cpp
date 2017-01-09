@@ -23,31 +23,34 @@
 static char* GameName =  "WoxelCraft";
 static char* BuildVersion = "0.0.3";
 
-static u8 frameCount = 0;
-static u32 fpsLastTime;
-static u8 fps = 0;
+static uint8_t fps = 0;
 
-u8 CalculateFrameRate()
+uint8_t CalculateFrameRate()
 {
-    u32 currentTime = ticks_to_millisecs(gettime());
+    static uint8_t frameCount = 0;
+    static uint32_t fpsLastTime;
+
+    uint32_t currentTime = ticks_to_millisecs(gettime());
 
     frameCount++;
-    if(currentTime - fpsLastTime > 1000) {
+    if(currentTime - fpsLastTime > 1000)
+    {
     	fpsLastTime = currentTime;
     	fps = frameCount;
         frameCount = 0;
     }
+
     return fps;
 }
 
-void PrintFps(unsigned int x, unsigned int y, GRRLIB_ttfFont* font, unsigned int fontSize, const u32 color )
+void PrintFps(uint32_t x, uint32_t y, GRRLIB_ttfFont* font, uint32_t fontSize, const u32 color )
 {
 	char buffer[20];
 	sprintf(buffer, "FPS: %d", fps);
 	GRRLIB_PrintfTTF( x, y, font, buffer, fontSize, color );
 }
 
-void PrintGameVersion(unsigned int x, unsigned int y, GRRLIB_ttfFont* font, unsigned int fontSize, const u32 color)
+void PrintGameVersion(uint32_t x, uint32_t y, GRRLIB_ttfFont* font, uint32_t fontSize, const u32 color)
 {
 	char buffer[sizeof(GameName) + sizeof(BuildVersion) + 2];
 	sprintf(buffer, "%s %s", GameName, BuildVersion);

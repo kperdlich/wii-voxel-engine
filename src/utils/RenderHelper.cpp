@@ -17,20 +17,14 @@
  *
 ***/
 
-#ifndef SRC_UTILS_CRENDERHELPER_H_
-#define SRC_UTILS_CRENDERHELPER_H_
+#include "RenderHelper.h"
 
-#include <stdint.h>
-#include <stddef.h>
+CRenderHelper::CRenderHelper() {}
 
-class CRenderHelper {
-private:
-	CRenderHelper();
-public:
+CRenderHelper::~CRenderHelper() {}
 
-	static size_t GetDisplayListSizeForFaces(uint64_t faces);
+size_t CRenderHelper::GetDisplayListSizeForFaces(uint32_t faces)
+{
+    return (size_t) ((32 * 6) * faces); // 32 * 6 magic numbers, seems to work fine
+}
 
-	virtual ~CRenderHelper();
-};
-
-#endif /* SRC_UTILS_CRENDERHELPER_H_ */

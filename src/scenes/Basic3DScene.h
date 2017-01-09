@@ -20,23 +20,23 @@
 #ifndef _BASIC3DSCENE_H_
 #define _BASIC3DSCENE_H_
 
-#include "BasicScene.h"
+#include "Scene.h"
 #include "../renderer/Renderer3D.h"
 #include "../components/UIElement.h"
 #include "../entity/EntityHandler.h"
 #include "../world/Camera.h"
 #include "../world/GameWorld.h"
-#include "../world/CSkyBox.h"
+#include "../world/SkyBox.h"
 
-class Basic3DScene: public BasicScene {
+class Basic3DScene: public Scene {
 public:
-	Basic3DScene();
-	virtual ~Basic3DScene();
-	virtual void Load();
-	virtual void Unload();
+    Basic3DScene();
+    virtual ~Basic3DScene();
+    virtual void Load() override;
+    virtual void Unload() override;
 
-	virtual void Draw();
-	virtual void Update();
+    virtual void Draw() override;
+    virtual void Update(float deltaSeconds) override;
 
 	class EntityHandler& GetEntityHandler();
 
@@ -48,7 +48,7 @@ protected:
 	std::vector<UIElement*> m_uiElements;
 	class Camera* m_mainCamera;
 	class CGameWorld* m_pGameWorld;
-	class CSkyBox* m_pSkyBox;
+	class SkyBox* m_pSkyBox;
 };
 
 #endif /* _BASIC3DSCENE_H_ */

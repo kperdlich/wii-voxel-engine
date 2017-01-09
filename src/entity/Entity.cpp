@@ -33,12 +33,12 @@ Entity::~Entity()
 }
 
 
-uint Entity::GetId() const
+uint32_t Entity::GetId() const
 {
 	return m_id;
 }
 
-void Entity::SetId(unsigned int id)
+void Entity::SetId(uint32_t id)
 {
 	m_id = id;
 }

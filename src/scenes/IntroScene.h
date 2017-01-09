@@ -25,13 +25,13 @@
 
 class Controller;
 
-class IntroScene : public Basic2DScene
+class CIntroScene : public Basic2DScene
 {
 public:
-	IntroScene();
-	~IntroScene();
+    CIntroScene();
+    ~CIntroScene();
 	void Load() override;
-	void Update() override;
+    void Update(float deltaSeconds) override;
 	void Draw() override;
 
 private:

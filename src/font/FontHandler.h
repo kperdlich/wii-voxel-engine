@@ -40,7 +40,7 @@ public:
 	~FontHandler();
 	void Init();
 	void CreateFont(const u8* file_base, s32 file_size);
-	GRRLIB_ttfFont* GetNativFontByID( uint id );
+    GRRLIB_ttfFont* GetNativFontByID( uint32_t id );
 
 };
 

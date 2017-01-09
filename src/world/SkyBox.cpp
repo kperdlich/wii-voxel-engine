@@ -17,8 +17,8 @@
  *
 ***/
 
-#include "CSkyBox.h"
-#include "../utils/CRenderHelper.h"
+#include "SkyBox.h"
+#include "../utils/RenderHelper.h"
 #include "../utils/Vector3.h"
 
 #include "SkyBox_Top_png.h"
@@ -39,25 +39,25 @@
 #define PLAYER_DISTANCE 120.0f
 #define SKYBOX_FACES 6
 
-CSkyBox::CSkyBox()
+SkyBox::SkyBox()
 {
-	for ( unsigned int i = 0; i < 6; i++)
+	for ( uint32_t i = 0; i < 6; i++)
 	{
-		m_pSkyBoxTextures[i] = NULL;
+        m_pSkyBoxTextures[i] = nullptr;
 	}
 }
 
-CSkyBox::~CSkyBox()
+SkyBox::~SkyBox()
 {
 	if ( m_DisplayListSize > 0 )
 	{
 		free(m_pDispList);
 		m_DisplayListSize = 0;
-		m_pDispList = NULL;
+        m_pDispList = nullptr;
 	}
 }
 
-void CSkyBox::Init()
+void SkyBox::Init()
 {
 	m_pSkyBoxTextures[SKY_FRONT] = Controller::GetInstance().GetSceneHandler().GetCurrentScene().GetTextureHandler().CreateTexture(SkyBox_Front_png, "SKY_FRONT", false);
 	m_pSkyBoxTextures[SKY_RIGHT] = Controller::GetInstance().GetSceneHandler().GetCurrentScene().GetTextureHandler().CreateTexture(SkyBox_Right_png, "SKY_RIGHT", false);
@@ -69,7 +69,7 @@ void CSkyBox::Init()
 	CreateSkyBox();
 }
 
-void CSkyBox::CreateSkyBox()
+void SkyBox::CreateSkyBox()
 {
 	size_t size = CRenderHelper::GetDisplayListSizeForFaces(SKYBOX_FACES);
 	m_pDispList = memalign(32, size);
@@ -185,7 +185,7 @@ void CSkyBox::CreateSkyBox()
 
 
 
-void CSkyBox::Render()
+void SkyBox::Render()
 {
 	if ( m_DisplayListSize > 0 )
 	{

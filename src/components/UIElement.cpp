@@ -20,7 +20,7 @@
 
 #include "UIElement.h"
 
-UIElement::UIElement(int x, int y, float width, float height, const char* name) :
+UIElement::UIElement(uint32_t x, uint32_t y, float width, float height, const char* name) :
 		m_x( x ), m_y( y ), m_width( width ), m_height( height ), m_Name( name )
 {
 
@@ -68,22 +68,22 @@ void UIElement::SetWidth(float width)
 	m_width = width;
 }
 
-int UIElement::GetX() const
+uint32_t UIElement::GetX() const
 {
 	return m_x;
 }
 
-void UIElement::SetX(int x)
+void UIElement::SetX(uint32_t x)
 {
 	m_x = x;
 }
 
-int UIElement::GetY() const
+uint32_t UIElement::GetY() const
 {
 	return m_y;
 }
 
-void UIElement::SetY(int y)
+void UIElement::SetY(uint32_t y)
 {
 	m_y = y;
 }

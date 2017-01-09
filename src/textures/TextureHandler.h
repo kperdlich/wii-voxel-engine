@@ -37,17 +37,17 @@ private:
 public:
 	TextureHandler();
 	~TextureHandler();
-	Texture* CreateTexture( const u8* textureName, const char* searchName, bool visible );
-	Texture* CreateTexture( const u8* textureName, const char* searchName );
-	LabelTexture* CreateLabel( int x, int y, const char* text, GRRLIB_ttfFont* font, uint fontSize, u32 color, const char* searchName );
+    Texture* CreateTexture( const uint8_t* textureName, const char* searchName, bool visible );
+    Texture* CreateTexture( const uint8_t* textureName, const char* searchName );
+    LabelTexture* CreateLabel( int x, int y, const char* text, GRRLIB_ttfFont* font, uint32_t fontSize, uint32_t color, const char* searchName );
 	LabelTexture* CreateLabel( const char* text, GRRLIB_ttfFont* font, const char* searchName );
-	BasicTexture* GetTextureByID( u16 index );
+    BasicTexture* GetTextureByID( uint16_t index );
 	void DestroyTextureByName( const char* searchName );
 	void DestroyAllTextures();
 	const std::vector<BasicTexture*>* GetTextures() const;
 	bool FindTexture(std::string key) const;
 	const BasicTexture* GetTexture(std::string key) const;
-	unsigned int TextureCount() const;
+	uint32_t TextureCount() const;
 protected:
 	u16 GetNewIndex() const;
 

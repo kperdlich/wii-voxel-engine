@@ -22,11 +22,11 @@
 
 #include "../../textures/Texture.h"
 
-class CBlock {
+class Block {
 public:
-	CBlock();
-	CBlock( float size, const Texture* pTexture );
-	virtual ~CBlock();
+    Block();
+    Block( float size, const Texture* pTexture );
+    virtual ~Block();
 	float GetSize() const;
 	const Texture* GetTexture() const;
 

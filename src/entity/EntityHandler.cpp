@@ -29,27 +29,27 @@ EntityHandler::~EntityHandler()
 
 }
 
-Entity* EntityHandler::GetEntity(unsigned int id)
+Entity* EntityHandler::GetEntity(uint32_t id)
 {
-	std::map<unsigned int, Entity*>::iterator it = m_entityMap.find(id);
+    std::map<uint32_t, Entity*>::iterator it = m_entityMap.find(id);
 	if ( it != m_entityMap.end() )
 		return it->second;
 
-	return NULL;
+    return nullptr;
 }
 
 void EntityHandler::AddEntity(Entity* entity)
 {
-	unsigned int newId = GetNewID();
+    uint32_t newId = GetNewID();
 	entity->SetId( newId );
-	m_entityMap.insert( std::pair<unsigned int, Entity*>(newId, entity) );
+    m_entityMap.insert( std::pair<uint32_t, Entity*>(newId, entity) );
 }
 
 void EntityHandler::Update() {
 
 }
 
-const std::map<unsigned int, Entity*>* EntityHandler::GetEntities() const
+const std::map<uint32_t, Entity*>* EntityHandler::GetEntities() const
 {
 	return &m_entityMap;
 }
@@ -72,10 +72,10 @@ Entity* EntityHandler::GetPlayer() const {
 		}
 	}
 
-	return NULL;
+    return nullptr;
 }
 
-unsigned int EntityHandler::GetNewID()
+uint32_t EntityHandler::GetNewID()
 {
 	if ( m_entityMap.size() < 1)
 		return 0;

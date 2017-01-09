@@ -23,23 +23,23 @@
 #include "Entity.h"
 #include "../world/Camera.h"
 #include "../utils/Vector3.h"
-#include "CPlayerInventory.h"
+#include "PlayerInventory.h"
 #include "IEquipable.h"
 
-class Player: public Entity {
+class CPlayer: public Entity {
 public:
-	Player();
-	virtual ~Player();
-	void Update();
+    CPlayer();
+    virtual ~CPlayer();
+    void Update(float deltaSeconds);
 	void AddToInventory(IEquipable& item);
-	void Move(float x, float y);
+    void Move(float x, float y, float deltaTime);
 	void Rotate( const Vector3& rotation );
 
 private:
 	void UpdateInventory();
 
 private:
-	CPlayerInventory* m_inventory;
+    PlayerInventory* m_pInventory;
 
 
 };

@@ -40,19 +40,19 @@ void Basic2DScene::Draw() {
 }
 
 void Basic2DScene::Load() {
-	BasicScene::Load();
+    Scene::Load();
 	GRRLIB_2dMode();
 }
 
 
 void Basic2DScene::Unload()
 {
-	for (uint i = 0; i < m_elements.size(); i++)
+    for (uint32_t i = 0; i < m_elements.size(); i++)
 	{
 		delete m_elements[i];
 	}
 	m_elements.clear();
-	BasicScene::Unload();
+    Scene::Unload();
 
 }
 Renderer2D& Basic2DScene::Get2DRenderer()
@@ -60,8 +60,8 @@ Renderer2D& Basic2DScene::Get2DRenderer()
 	return static_cast<Renderer2D&>(*m_Renderer);
 }
 
-void Basic2DScene::Update() {
-	for (unsigned int i = 0; i < m_elements.size(); i++)
+void Basic2DScene::Update(float deltaSeconds) {
+	for (uint32_t i = 0; i < m_elements.size(); i++)
 	{
 		m_elements[i]->Update();
 	}

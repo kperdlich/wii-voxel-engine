@@ -19,27 +19,27 @@
 
 #include "Block.h"
 
-CBlock::CBlock() {
+Block::Block() {
 
 }
 
 
-CBlock::CBlock( float size, const Texture* pTexture ) : m_size(size), m_pTexture(pTexture)
+Block::Block( float size, const Texture* pTexture ) : m_size(size), m_pTexture(pTexture)
 {
 
 }
 
-CBlock::~CBlock() {
+Block::~Block() {
 
 }
 
 
-const Texture* CBlock::GetTexture() const
+const Texture* Block::GetTexture() const
 {
 	return m_pTexture;
 }
 
-float CBlock::GetSize() const
+float Block::GetSize() const
 {
 	return m_size;
 }

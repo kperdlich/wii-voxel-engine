@@ -28,19 +28,19 @@ public:
 	EntityHandler();
 	virtual ~EntityHandler();
 
-	class Entity* GetEntity(unsigned int id);
+	class Entity* GetEntity(uint32_t id);
 	void AddEntity(class Entity* entity);
 
 	void Update();
 	void Clear();
 
-	const std::map<unsigned int, class Entity*>* GetEntities() const;
+	const std::map<uint32_t, class Entity*>* GetEntities() const;
 
 	class Entity* GetPlayer() const;
 
 private:
-	std::map<unsigned int, class Entity*> m_entityMap;
-	unsigned int GetNewID();
+	std::map<uint32_t, class Entity*> m_entityMap;
+	uint32_t GetNewID();
 };
 
 #endif /* _ENTITYHANDLER_H_ */

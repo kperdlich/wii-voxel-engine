@@ -50,7 +50,7 @@ void Renderer2D::DrawTexture(const BasicTexture& basicTexture)
 		case TILE:
 		{
 			Tile ti = static_cast<const Tile&>( basicTexture);
-			GRRLIB_DrawTile(ti.GetX(), ti.GetY(), ti.getSpriteSheet()->GetNativeTexture(), 0, 1, 1, GRRLIB_WHITE, ti.getSheetIndex());
+			GRRLIB_DrawTile(ti.GetX(), ti.GetY(), ti.GetSpriteSheet()->GetNativeTexture(), 0, 1, 1, GRRLIB_WHITE, ti.GetSheetIndex());
 			break;
 		}
 		case LABEL:

@@ -17,19 +17,23 @@
  *
 ***/
 
-#ifndef _CPLAYERINVENTORYHUD_H_
-#define _CPLAYERINVENTORYHUD_H_
+#include "Hud.h"
 
-#include "IHudComponent.h"
+// define all component names here!
 
-class CPlayerInventoryHud: public IHudComponent {
-public:
-	CPlayerInventoryHud();
-	virtual ~CPlayerInventoryHud();
-
-	void Update();
+Hud::Hud() {
 
 
-};
 
-#endif /* _CPLAYERINVENTORYHUD_H_ */
+}
+
+Hud::~Hud() {}
+
+void Hud::addComponent(UITextureElement* component) {
+	m_hudComponents.push_back( component );
+}
+
+void Hud::Init()
+{
+	m_playerInventoryHud = new PlayerInventoryHud();
+}

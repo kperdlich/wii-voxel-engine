@@ -17,25 +17,50 @@
  *
 ***/
 
-#include "CPlayerInventory.h"
+#ifndef _CFRUSTRUM_H_
+#define _CFRUSTRUM_H_
 
-CPlayerInventory::CPlayerInventory() {
-	// TODO Auto-generated constructor stub
+class Frustrum {
+public:
+	Frustrum();
+	virtual ~Frustrum();
 
-}
+	bool CubeInFrustum( float x1, float y1, float z1, float x2, float y2, float z2  );
+	bool SphereInFrustum(float x, float y, float z, float radius);
+	bool PointInFrustum(float x, float y, float z);
+	void CalculateFrustum();
+	void NormalizePlane(float frustum[6][4], int side);
 
-CPlayerInventory::~CPlayerInventory() {
-	// TODO Auto-generated destructor stub
-}
+	static Frustrum& Instance();
 
-bool CPlayerInventory::AddToInventory(IEquipable& item)
-{
-	if ( m_pInventory.size() < INVENTORY_MAX_SIZE )
+
+	enum sides
 	{
-		m_pInventory.push_back(&item);
-		return true;
-	}
+		RIGHT = 0,
+		LEFT,
+		BOTTOM,
+		TOP,
+		BACK,
+		FRONT
+	};
 
-	return false;
-}
+	enum corners
+	{
+		A = 0,
+		B,
+		C,
+		D,
+	};
 
+
+private:
+	float m_Frustum[6][4];
+
+	float proj[16];
+	float modl[16];
+	float clip[16];
+
+
+};
+
+#endif /* _CFRUSTRUM_H_ */

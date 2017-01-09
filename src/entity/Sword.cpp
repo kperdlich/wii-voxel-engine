@@ -17,18 +17,14 @@
  *
 ***/
 
-#include "BasicScene.h"
+#include "Sword.h"
 
-BasicScene::BasicScene() {
-	m_TextureHandler = new TextureHandler();
-}
-
-BasicScene::~BasicScene() {
+Sword::Sword() {
+	// TODO Auto-generated constructor stub
 
 }
 
-void BasicScene::Unload() {
-	m_TextureHandler->DestroyAllTextures();
+Sword::~Sword() {
+	// TODO Auto-generated destructor stub
 }
-
 

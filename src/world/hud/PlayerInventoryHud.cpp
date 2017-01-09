@@ -17,14 +17,14 @@
  *
 ***/
 
-#include "CSword.h"
+#include "PlayerInventoryHud.h"
 
-CSword::CSword() {
-	// TODO Auto-generated constructor stub
+PlayerInventoryHud::PlayerInventoryHud() {
+
 
 }
 
-CSword::~CSword() {
-	// TODO Auto-generated destructor stub
+PlayerInventoryHud::~PlayerInventoryHud() {
+
 }
 

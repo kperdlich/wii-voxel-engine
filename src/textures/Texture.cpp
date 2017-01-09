@@ -23,7 +23,7 @@
 
 Texture::Texture(float x, float y, const unsigned char* texture, const u16 id ) : m_TextureBytes(texture), BasicTexture(x, y, id)
 {
-	m_Texture = NULL;
+    m_Texture = nullptr;
 	m_visible = true;
 }
 
@@ -66,7 +66,7 @@ void Texture::UnloadTexture()
 	m_TextureLoaded = false;
 }
 
-uint Texture::GetWidth() const
+uint32_t Texture::GetWidth() const
 {
 
 	if ( m_TextureLoaded )
@@ -76,7 +76,7 @@ uint Texture::GetWidth() const
 	return 0;
 }
 
-uint Texture::GetHeight() const
+uint32_t Texture::GetHeight() const
 {
 
 	if ( m_TextureLoaded )

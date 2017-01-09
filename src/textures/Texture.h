@@ -28,12 +28,12 @@ class Texture : public BasicTexture
 {
 
 protected:
-	const unsigned char* m_TextureBytes = NULL;
-	GRRLIB_texImg* m_Texture = NULL;
+    const unsigned char* m_TextureBytes = nullptr;
+    GRRLIB_texImg* m_Texture = nullptr;
 	bool m_TextureLoaded;
 
 public:
-	Texture( float x, float y, const unsigned char* texture, const u16 id );
+    Texture( float x, float y, const unsigned char* texture, const uint16_t id );
 	virtual ~Texture();
 
 	virtual txTypes GetTextureType() const override;
@@ -43,8 +43,8 @@ public:
 	virtual void LoadTexture() override;
 	virtual void UnloadTexture() override;
 
-	virtual uint GetWidth() const override;
-	virtual uint GetHeight() const override;
+    virtual uint32_t GetWidth() const override;
+    virtual uint32_t GetHeight() const override;
 
 	bool isLoaded() const;
 	virtual bool IsVisible() const override;

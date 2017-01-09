@@ -21,19 +21,19 @@
 #include "UIElement.h"
 #include "../utils/Debug.h"
 
-List::List(int x, int y, int sizeBetweenElements ) : UIElement(x, y, 0.f, 0.f, ""), m_sizeBetweenElements(sizeBetweenElements)
+List::List(uint32_t x, uint32_t y, uint32_t sizeBetweenElements ) : UIElement(x, y, 0.f, 0.f, nullptr), m_sizeBetweenElements(sizeBetweenElements)
 {
 
 }
 
-List::List( int sizeBetweenElements ) : List(0, 0, sizeBetweenElements)
+List::List( uint32_t sizeBetweenElements ) : List(0, 0, sizeBetweenElements)
 {
 
 }
 
 List::~List()
 {
-	for ( unsigned int i = 0; i < m_elements.size(); i++)
+	for ( uint32_t i = 0; i < m_elements.size(); i++)
 	{
 		delete m_elements[i];
 	}
@@ -44,7 +44,7 @@ List::~List()
 
 void List::AddComponent(UIElement* element)
 {
-	unsigned int entryX, entryY;
+	uint32_t entryX, entryY;
 	if ( m_elements.size() == 0 )
 	{
 		entryX = m_x;
@@ -67,7 +67,7 @@ void List::Update()
 {
 	UIElement::Update();
 
-	for ( unsigned int i = 0; i < m_elements.size(); i++)
+	for ( uint32_t i = 0; i < m_elements.size(); i++)
 	{
 		m_elements[i]->Update();
 	}

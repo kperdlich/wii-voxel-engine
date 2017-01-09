@@ -17,16 +17,13 @@
  *
 ***/
 
-#ifndef _CHOTBAR_H_
-#define _CHOTBAR_H_
+#ifndef _CMESH_H_
+#define _CMESH_H_
 
-#include "../../components/UITextureElement.h"
-#include "../../textures/BasicTexture.h"
-
-class CHotbar: public UITextureElement {
+class Mesh {
 public:
-	CHotbar( const char* name, BasicTexture* tex );
-	virtual ~CHotbar();
+    Mesh();
+    virtual ~Mesh();
 };
 
-#endif /* _CHOTBAR_H_ */
+#endif /* _CMESH_H_ */

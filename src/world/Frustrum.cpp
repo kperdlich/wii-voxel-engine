@@ -17,7 +17,7 @@
  *
 ***/
 
-#include "CFrustrum.h"
+#include "Frustrum.h"
 #include <math.h>
 #include "../core/grrlib.h"
 
@@ -25,11 +25,11 @@ extern Mtx	_GRR_view;
 extern Mtx	_ObjTransformationMtx;
 extern Mtx44 _projectionMtx;
 
-CFrustrum::CFrustrum() {}
+Frustrum::Frustrum() {}
 
-CFrustrum::~CFrustrum() {}
+Frustrum::~Frustrum() {}
 
-bool CFrustrum::CubeInFrustum( float x1, float y1, float z1, float x2, float y2, float z2 )
+bool Frustrum::CubeInFrustum( float x1, float y1, float z1, float x2, float y2, float z2 )
 {
 	for (int i = 0; i < 6; i++)
 		{
@@ -49,7 +49,7 @@ bool CFrustrum::CubeInFrustum( float x1, float y1, float z1, float x2, float y2,
 }
 
 
-bool CFrustrum::SphereInFrustum(float x, float y, float z, float radius)
+bool Frustrum::SphereInFrustum(float x, float y, float z, float radius)
 {
 	for (int i = 0; i < 6; i++)
 	{
@@ -62,7 +62,7 @@ bool CFrustrum::SphereInFrustum(float x, float y, float z, float radius)
 	return true;
 }
 
-bool CFrustrum::PointInFrustum(float x, float y, float z)
+bool Frustrum::PointInFrustum(float x, float y, float z)
 {
 	for (int i = 0; i < 6; i++)
 	{
@@ -75,7 +75,7 @@ bool CFrustrum::PointInFrustum(float x, float y, float z)
 	return true;
 }
 
-void CFrustrum::CalculateFrustum()
+void Frustrum::CalculateFrustum()
 {
 	proj[0] = _projectionMtx[0][0];
 	proj[1] = _projectionMtx[0][1];
@@ -180,7 +180,7 @@ void CFrustrum::CalculateFrustum()
 	NormalizePlane(m_Frustum, 5);
 }
 
-void CFrustrum::NormalizePlane(float frustum[6][4], int side)
+void Frustrum::NormalizePlane(float frustum[6][4], int side)
 {
 	float magnitude = (float)sqrt(frustum[side][0] * frustum[side][0] + frustum[side][1] * frustum[side][1] + frustum[side][2] * frustum[side][2]);
 
@@ -190,9 +190,9 @@ void CFrustrum::NormalizePlane(float frustum[6][4], int side)
 	frustum[side][3] /= magnitude;
 }
 
-CFrustrum& CFrustrum::Instance()
+Frustrum& Frustrum::Instance()
 {
-  static CFrustrum frustum;
+  static Frustrum frustum;
   frustum.CalculateFrustum();
   return frustum;
 }

@@ -19,6 +19,7 @@
 
 
 #include "Controller.h"
+#include <ogc/lwp_watchdog.h>
 #include "utils/Debug.h"
 
 
@@ -28,7 +29,7 @@ Controller::Controller()
     m_pSceneHandler = new SceneHandler();
     m_pInputHandler = new InputHandler();
     m_pFontHandler = new FontHandler();
-    m_pBasicCommandHandler = new CBasicCommandHandler();
+    m_pBasicCommandHandler = new BasicCommandHandler();
 }
 
 Controller::~Controller() {}
@@ -43,11 +44,13 @@ void Controller::Start()
     m_pBasicCommandHandler->ExecuteCommand( SwitchToIntroCommand::Name() );
 
     while( m_bRunning )
-	{
-		GRRLIB_SetBackgroundColour(0x00, 0x00, 0x00, 0xFF);
+    {
+        uint32_t startFrameTime = ticks_to_millisecs(gettime());
 
-        m_pInputHandler->Update();
-        m_pSceneHandler->Update();
+        GRRLIB_SetBackgroundColour(0x00, 0x00, 0x00, 0xFF);
+
+        m_pInputHandler->Update();        
+        m_pSceneHandler->Update(m_millisecondsDeltaLastFrame / 1000.0f);
         m_pSceneHandler->DrawScene();
 
         PrintFps( 500, 25, m_pFontHandler->GetNativFontByID( DEFAULT_FONT_ID ), DEFAULT_FONT_SIZE, GRRLIB_YELLOW );
@@ -62,8 +65,10 @@ void Controller::Start()
         Debug::GetInstance().Reset();
 #endif
 
-		GRRLIB_Render();
+        GRRLIB_Render();
         CalculateFrameRate();
+
+        m_millisecondsDeltaLastFrame = ticks_to_millisecs(gettime()) - startFrameTime;
 	}
 
     delete m_pBasicCommandHandler;
@@ -78,11 +83,13 @@ void Controller::Start()
 	GRRLIB_Exit();
 }
 
-void Controller::End() {
+void Controller::End()
+{
     m_bRunning = false;
 }
 
-void Controller::Init() {
+void Controller::Init()
+{
 
 	GRRLIB_Init();
 	GRRLIB_Settings.antialias = true;
@@ -92,6 +99,7 @@ void Controller::Init() {
     m_pSceneHandler->Init();
     m_pBasicCommandHandler->Init();
 }
+
 
 void Controller::SwitchToNextScene()
 {
@@ -113,7 +121,7 @@ FontHandler& Controller::GetFontHandler()
     return *m_pFontHandler;
 }
 
-CBasicCommandHandler& Controller::GetBasicCommandHandler()
+BasicCommandHandler& Controller::GetBasicCommandHandler()
 {
     return *m_pBasicCommandHandler;
 }

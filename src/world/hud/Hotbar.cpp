@@ -17,14 +17,14 @@
  *
 ***/
 
-#include "CRenderHelper.h"
+#include "Hotbar.h"
 
-CRenderHelper::CRenderHelper() {}
+Hotbar::Hotbar( const char* name, BasicTexture* tex ) : UITextureElement(0, 0, name, tex ) {
 
-CRenderHelper::~CRenderHelper() {}
+	tex->SetX( (rmode->viWidth / 2) - (m_texture->GetWidth() / 2) );
+	tex->SetY( rmode->viHeight - m_texture->GetHeight() );
 
-size_t CRenderHelper::GetDisplayListSizeForFaces(uint64_t faces)
-{
-	return size_t((32 * 6) * faces); // 32 * 6 magic numbers, seems to work fine
 }
 
+Hotbar::~Hotbar() {
+}

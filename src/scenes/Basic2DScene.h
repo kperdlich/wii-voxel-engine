@@ -22,17 +22,17 @@
 
 #include <vector>
 #include "../components/UIElement.h"
-#include "BasicScene.h"
+#include "Scene.h"
 #include "../renderer/Renderer2D.h"
 
-class Basic2DScene: public BasicScene {
+class Basic2DScene: public Scene {
 public:
-	Basic2DScene();
-	virtual ~Basic2DScene();
+    Basic2DScene();
+    virtual ~Basic2DScene();
 	virtual void Draw() override;
 	virtual void Load() override;
 	virtual void Unload() override;
-	virtual void Update() override;
+    virtual void Update(float deltaSeconds) override;
 
 protected:
 	Renderer2D& Get2DRenderer();

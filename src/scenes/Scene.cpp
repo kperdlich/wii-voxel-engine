@@ -20,7 +20,9 @@
 #include "Scene.h"
 
 
-Scene::Scene() {
+Scene::Scene()
+{
+    m_TextureHandler = new TextureHandler();
 }
 
 
@@ -33,14 +35,15 @@ Scene::~Scene()
 void Scene::Load() {
 }
 
-void Scene::Unload() {
+void Scene::Unload()
+{
+    m_TextureHandler->DestroyAllTextures();
 }
 
 void Scene::Draw() {
 }
 
-void Scene::Update() {
-}
+void Scene::Update(float deltaSeconds) {}
 
 TextureHandler& Scene::GetTextureHandler() const
 {

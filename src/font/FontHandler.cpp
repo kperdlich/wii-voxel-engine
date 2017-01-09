@@ -25,7 +25,7 @@ FontHandler::FontHandler() {
 
 FontHandler::~FontHandler() {
 
-	for ( uint i = 0; i < m_fonts.size(); i++ )
+    for ( uint32_t i = 0; i < m_fonts.size(); i++ )
 	{
 		GRRLIB_FreeTTF (m_fonts[ i ]);
 	}
@@ -43,11 +43,11 @@ void FontHandler::CreateFont( const u8* file_base, s32 file_size ) {
 	m_fonts.push_back( ttfFont );
 }
 
-GRRLIB_ttfFont* FontHandler::GetNativFontByID( uint id ) {
+GRRLIB_ttfFont* FontHandler::GetNativFontByID( uint32_t id ) {
 	if ( id >= 0 && id < m_fonts.size() )
 	{
 		return m_fonts[ id ];
 	}
 
-	return NULL;
+    return nullptr;
 }

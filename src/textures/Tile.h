@@ -26,19 +26,19 @@
 
 class Tile : public BasicTexture {
 public:
-	Tile(float x, float y, int index, class SpriteSheet* tileSheet, const u16 id  );
+    Tile(float x, float y, uint32_t index, class SpriteSheet* tileSheet, const uint16_t id  );
 	virtual ~Tile();
 	virtual txTypes GetTextureType() const override;
 
 	virtual bool IsVisible() const override;
-	SpriteSheet* getSpriteSheet();
-	int getSheetIndex();
+    SpriteSheet* GetSpriteSheet();
+    uint32_t GetSheetIndex();
 
-	virtual uint GetWidth() const override;
-	virtual uint GetHeight() const override;
+    virtual uint32_t GetWidth() const override;
+    virtual uint32_t GetHeight() const override;
 
 private:
-	int m_sheetIndex;
+    uint32_t m_sheetIndex;
 	SpriteSheet* m_TileSheet;
 
 };

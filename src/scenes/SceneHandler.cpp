@@ -30,7 +30,7 @@ SceneHandler::SceneHandler() {}
  * delete all scenes
  */
 SceneHandler::~SceneHandler() {
-	for ( uint i = 0; i < m_Scenes.size(); i++ )
+    for ( uint32_t i = 0; i < m_Scenes.size(); i++ )
 	{
 		m_Scenes[i]->Unload();
 		delete m_Scenes[i];
@@ -48,18 +48,18 @@ void SceneHandler::Init() {
 	 * 2. Main menue
 	 * 3. Ingame
 	 */
-	m_Scenes.push_back( new IntroScene() );
-	m_Scenes.push_back( new MainMenuScene() );
-	m_Scenes.push_back( new InGameScene() );
+    m_Scenes.push_back( new CIntroScene() );
+    m_Scenes.push_back( new CMainMenuScene() );
+    m_Scenes.push_back( new CInGameScene() );
 	// ..
 }
 
 void SceneHandler::LoadScene( int index )
 {
-	if ( index != m_currentSceneIndex && index != m_nextSceneIndex && index > INVALID_SCENE)
+    if ( index != m_CurrentSceneIndex && index != m_NextSceneIndex && index > INVALID_SCENE)
 	{
 		m_bLoadNextScene = true;
-		m_nextSceneIndex = index;
+        m_NextSceneIndex = index;
 	}
 }
 
@@ -69,27 +69,27 @@ void SceneHandler::DrawScene()
 	GetCurrentScene().Draw();
 }
 
-void SceneHandler::Update() {
-
+void SceneHandler::Update(float deltaSeconds)
+{
 	if ( m_bLoadNextScene )
 	{
 		m_bLoadNextScene = false;
 
-		if ( m_nextSceneIndex < m_Scenes.size() && m_nextSceneIndex >= 0)
+        if ( m_NextSceneIndex < m_Scenes.size() && m_NextSceneIndex >= 0)
 		{
-			if ( m_currentSceneIndex > INVALID_SCENE )
+            if ( m_CurrentSceneIndex > INVALID_SCENE )
 			{
 				GetCurrentScene().Unload();
 			}
-			m_currentSceneIndex = m_nextSceneIndex;
+            m_CurrentSceneIndex = m_NextSceneIndex;
 			GetCurrentScene().Load();
 		}
 	}
 
-	GetCurrentScene().Update();
+    GetCurrentScene().Update(deltaSeconds);
 }
 
 Scene& SceneHandler::GetCurrentScene()
 {
-	return *m_Scenes[m_currentSceneIndex];
+    return *m_Scenes[m_CurrentSceneIndex];
 }

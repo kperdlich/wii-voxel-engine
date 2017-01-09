@@ -23,16 +23,16 @@
 #include <string>
 #include <inttypes.h>
 #include "GameWorld.h"
-#include "CFrustrum.h"
+#include "Frustrum.h"
 #include "../utils/Debug.h"
 
 
 CGameWorld::CGameWorld( Basic3DScene* pScene ) : m_pScene(pScene)
 {
-	m_blockManager = new CBlockManager( pScene->GetTextureHandler() );
+    m_blockManager = new BlockManager( pScene->GetTextureHandler() );
 	m_blockManager->LoadBlocks();
 
-	srand (time(NULL));
+    srand (time(nullptr));
     m_pNoise = new PerlinNoise(.25, .15625, 1.5, 6.0, rand());
 }
 
@@ -52,13 +52,13 @@ CGameWorld::~CGameWorld()
 
 void CGameWorld::GenerateWorld()
 {
-	for ( unsigned int x = 0; x < CHUNK_AMOUNT_X; x++)
+	for ( uint32_t x = 0; x < CHUNK_AMOUNT_X; x++)
 	{
-		for ( unsigned int z = 0; z < CHUNK_AMOUNT_Z; z++)
+		for ( uint32_t z = 0; z < CHUNK_AMOUNT_Z; z++)
 		{
-			auto pChunk = new CChunk(*this);
+            auto pChunk = new Chunk(*this);
 			auto pPosition = new Vector3((CHUNK_BLOCK_SIZE_X * x) + (CHUNK_BLOCK_SIZE_X / 2), CHUNK_BLOCK_SIZE_Y / 2, (CHUNK_BLOCK_SIZE_Z * z) + (CHUNK_BLOCK_SIZE_Z / 2));
-            m_ChunkMap.insert(std::pair<Vector3*, CChunk*>( pPosition, pChunk ));
+            m_ChunkMap.insert(std::pair<Vector3*, Chunk*>( pPosition, pChunk ));
 			pChunk->Init( *pPosition );
 		}
 	}
@@ -84,7 +84,7 @@ void CGameWorld::Draw()
 
 	auto playerPosition = m_pScene->GetEntityHandler().GetPlayer()->GetPosition();
 
-	CFrustrum::Instance().CalculateFrustum();
+    Frustrum::Instance().CalculateFrustum();
 
     for( auto chunkEntry : m_ChunkMap)
 	{
@@ -146,32 +146,32 @@ void CGameWorld::Draw()
 #endif
 }
 
-bool CGameWorld::ChunkInFov( Vector3& chunkPosition, Vector3& playerPosition, unsigned int fov)
+bool CGameWorld::ChunkInFov( Vector3& chunkPosition, Vector3& playerPosition, uint32_t fov)
 {
 	return (std::abs(chunkPosition.GetX() - playerPosition.GetX()) < CHUNK_BLOCK_SIZE_X * fov) &&
 			(std::abs(chunkPosition.GetZ() - playerPosition.GetZ()) < CHUNK_BLOCK_SIZE_Z * fov);
 }
 
-CBlockManager& CGameWorld::GetBlockManager()
+BlockManager& CGameWorld::GetBlockManager()
 {
 	return *m_blockManager;
 }
 
-CChunk* CGameWorld::GetChunkAt(const Vector3& centerPosition) const
+Chunk* CGameWorld::GetChunkAt(const Vector3& centerPosition) const
 {
     auto chunkIt = m_ChunkMap.find(&centerPosition);
     if (chunkIt != m_ChunkMap.end())
 	{
 		return chunkIt->second;
 	}
-	return NULL;
+    return nullptr;
 }
 
 // todo replace param vector with floats
-CChunk* CGameWorld::GetChunkByWorldPosition(const Vector3& worldPosition)
+Chunk* CGameWorld::GetChunkByWorldPosition(const Vector3& worldPosition)
 {
-	unsigned int x = worldPosition.GetX() / CHUNK_BLOCK_SIZE_X;
-	unsigned int z = worldPosition.GetZ() / CHUNK_BLOCK_SIZE_Z;
+	uint32_t x = worldPosition.GetX() / CHUNK_BLOCK_SIZE_X;
+	uint32_t z = worldPosition.GetZ() / CHUNK_BLOCK_SIZE_Z;
 
 	Vector3 chunkCenterPosition((x * CHUNK_BLOCK_SIZE_X) + (CHUNK_BLOCK_SIZE_X / 2), CHUNK_BLOCK_SIZE_Y / 2, (z * CHUNK_BLOCK_SIZE_Z) + (CHUNK_BLOCK_SIZE_Z / 2));
 
@@ -249,7 +249,7 @@ void CGameWorld::DrawFocusOnSelectedCube()
 	{
 		m_pScene->SetGraphicsMode(false, false);
 		BlockRenderer renderer;
-		renderer.Prepare(NULL, BLOCK_SIZE_HALF, NULL);
+        renderer.Prepare(nullptr, BLOCK_SIZE_HALF, nullptr);
 		renderer.DrawFocusOnSelectedCube( m_SelectedBlockPosition );
 		renderer.Finish();
 		m_pScene->SetGraphicsMode(true, true);

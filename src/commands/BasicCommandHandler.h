@@ -28,11 +28,11 @@
 #include "../commands/client/SwitchToMainMenuCommand.h"
 
 
-class CBasicCommandHandler {
+class BasicCommandHandler {
 	std::map< const char*, BasicCommand* > m_commandMap;
 public:
-	CBasicCommandHandler();
-	virtual ~CBasicCommandHandler();
+	BasicCommandHandler();
+	virtual ~BasicCommandHandler();
 	void ExecuteCommand( const char* commandName );
 	void Init();
 };

@@ -30,12 +30,12 @@ Debug::Debug()
 
 Debug::~Debug()
 {
-    DestroyDebugBuffer();
+
 }
 
 void Debug::AllocateDebugBuffer()
 {
-    for ( uint i = 0; i < DEBUG_STRINGS; i++)
+    for ( uint32_t i = 0; i < DEBUG_STRINGS; i++)
     {
         m_logs.push_back(new char[CHARS_PER_DEBUG_STRING]);
     }
@@ -43,7 +43,7 @@ void Debug::AllocateDebugBuffer()
 
 void Debug::DestroyDebugBuffer()
 {
-    for ( uint i = 0; i < DEBUG_STRINGS; i++)
+    for ( uint32_t i = 0; i < DEBUG_STRINGS; i++)
     {
         delete[] m_logs[i];
     }
@@ -72,7 +72,7 @@ void Debug::Log(char* format, ...)
 
 void Debug::Print()
 {
-    uint y = DEBUG_LINE;
+    uint32_t y = DEBUG_LINE;
     for (char i = 0; i <= m_logIndex; i++)
 	{
         GRRLIB_PrintfTTF( 0, y, Controller::GetInstance().GetFontHandler().GetNativFontByID( DEFAULT_FONT_ID ), m_logs[i], DEFAULT_FONT_SIZE, m_logOverflow ? GRRLIB_RED : GRRLIB_WHITE );

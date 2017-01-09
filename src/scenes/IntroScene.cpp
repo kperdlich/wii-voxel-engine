@@ -19,9 +19,11 @@
 
 #include "../core/grrlib.h"
 #include <vector>
+#include <math.h>
 #include "IntroScene.h"
 #include "../components/UITextureElement.h"
 #include "../commands/client/SwitchToMainMenuCommand.h"
+
 
 #include "../utils/Debug.h"
 #include "BlockCSS_png.h"
@@ -36,31 +38,32 @@
 
 #define LOGO_INDEX 0
 
-IntroScene::IntroScene()  {
+CIntroScene::CIntroScene()  {
 
 }
 
-IntroScene::~IntroScene() {
+CIntroScene::~CIntroScene() {
 
 }
 
 
-void IntroScene::Load()
+void CIntroScene::Load()
 {
-	Basic2DScene::Load();
+    Basic2DScene::Load();
 	m_BackgroundAlpha = 255;
 	Texture* logoTexture = m_TextureHandler->CreateTexture( WoxelCraft_png, IS_LOGO);
 	m_elements.push_back( new UITextureElement( (rmode->viWidth / 2) - (logoTexture->GetWidth() / 2), (rmode->viHeight / 2) - ( logoTexture->GetHeight() / 2 ), IS_LOGO,logoTexture));
 }
 
 
-void IntroScene::Update() {
-	Basic2DScene::Update();
+void CIntroScene::Update(float deltaSeconds)
+{
+    Basic2DScene::Update(deltaSeconds);
 
 	if (m_BackgroundAlpha > 0)
 	{
-		m_BackgroundAlpha--;
-		for ( unsigned int i = 0; i < m_elements.size(); i++)
+        m_BackgroundAlpha -= deltaSeconds * 10;
+        for ( uint32_t i = 0; i < m_elements.size(); i++)
 		{
 			UITextureElement* element = dynamic_cast<UITextureElement*>(m_elements[i]);
 			if (element && element->IsVisible())
@@ -71,18 +74,18 @@ void IntroScene::Update() {
 	}
 	else
 	{
-		Controller::GetInstance().GetBasicCommandHandler().ExecuteCommand( SwitchToMainMenuCommand::Name() );
+        Controller::GetInstance().GetBasicCommandHandler().ExecuteCommand( SwitchToMainMenuCommand::Name() );
 	}
 
 
-	WiiPad* pad = Controller::GetInstance().GetInputHandler().GetPadByID( WII_PAD_0 );
+    WiiPad* pad = Controller::GetInstance().GetInputHandler().GetPadByID( WII_PAD_0 );
 	if ( pad->ButtonsDown() & WPAD_BUTTON_RIGHT)
 	{
-		Controller::GetInstance().GetBasicCommandHandler().ExecuteCommand( SwitchToMainMenuCommand::Name() );
+        Controller::GetInstance().GetBasicCommandHandler().ExecuteCommand( SwitchToMainMenuCommand::Name() );
     }
 }
 
-void IntroScene::Draw() {
+void CIntroScene::Draw() {
 	GRRLIB_SetBackgroundColour(0x00, 0x00, 0x00, 0xFF);
-	Basic2DScene::Draw();
+    Basic2DScene::Draw();
 }

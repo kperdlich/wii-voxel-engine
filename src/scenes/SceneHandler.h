@@ -21,7 +21,7 @@
 #define _SCENEHANDLER_H_
 
 #include <vector>
-#include "../scenes/Scene.h"
+#include "Scene.h"
 
 #define INVALID_SCENE -1
 #define INTRO_SCENE_ID 0
@@ -32,20 +32,20 @@ class SceneHandler
 {
 
 private:
-	std::vector<Scene*> m_Scenes;
-	int m_currentSceneIndex = INVALID_SCENE;
+    std::vector<Scene*> m_Scenes;
+    int m_CurrentSceneIndex = INVALID_SCENE;
 	bool m_bLoadNextScene = false;
-	int m_nextSceneIndex = INVALID_SCENE;
+    int m_NextSceneIndex = INVALID_SCENE;
 
 public:
-	SceneHandler();
-	~SceneHandler();
+    SceneHandler();
+    ~SceneHandler();
 	void Init();
 	void LoadScene(int index );
 	void LoadNextScene();
 	void DrawScene();
-	void Update();
-	Scene& GetCurrentScene();
+    void Update(float deltaSeconds);
+    Scene& GetCurrentScene();
 
 };
 

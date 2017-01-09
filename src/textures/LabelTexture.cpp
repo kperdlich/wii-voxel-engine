@@ -19,7 +19,7 @@
 
 #include "LabelTexture.h"
 
-LabelTexture::LabelTexture( const char* text, float x, float y, const u16 id, GRRLIB_ttfFont* font, uint fontSize, u32 color ) : m_text( text ), m_font( font ), m_fontSize( fontSize ), m_textColor( color ), BasicTexture(x, y,id ) {
+LabelTexture::LabelTexture( const char* text, float x, float y, const uint16_t id, GRRLIB_ttfFont* font, uint32_t fontSize, uint32_t color ) : m_text( text ), m_font( font ), m_fontSize( fontSize ), m_textColor( color ), BasicTexture(x, y,id ) {
 
 	m_visible = true;
 
@@ -42,12 +42,12 @@ txTypes LabelTexture::GetTextureType() const
 	return LABEL;
 }
 
-uint LabelTexture::getFontSize() const
+uint32_t LabelTexture::getFontSize() const
 {
 	return m_fontSize;
 }
 
-u32 LabelTexture::getTextColor() const
+uint32_t LabelTexture::getTextColor() const
 {
 	return m_textColor;
 }
@@ -57,7 +57,7 @@ bool LabelTexture::IsVisible() const
 	return true;
 }
 
-void LabelTexture::setFontSize(uint fontSize)
+void LabelTexture::setFontSize(uint32_t fontSize)
 {
 	m_fontSize = fontSize;
 

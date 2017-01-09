@@ -34,14 +34,14 @@
 #define CHUNK_BLOCK_SIZE_Z (BLOCK_SIZE * CHUNK_SIZE_Z)
 
 struct Vec3i {
-	unsigned int m_x, m_y, m_z;
+	uint32_t m_x, m_y, m_z;
 };
 
-class CChunk {
+class Chunk {
 public:
 
-	CChunk(class CGameWorld &gameWorld);
-	virtual ~CChunk();
+    Chunk(class CGameWorld &gameWorld);
+    virtual ~Chunk();
 
 	void Init(Vector3& position);
 	void RebuildDisplayList();
@@ -81,10 +81,10 @@ private:
 	bool m_IsDirty;
 	bool m_bNeighbourUpdate = false;
 	uint32_t m_DisplayListSize = 0;
-	void* m_DispList = NULL;
+    void* m_DispList = nullptr;
 
-	uint64_t m_AmountOfBlocks = 0;
-	uint64_t m_AmountOfFaces = 0;
+    uint32_t m_amountOfBlocks = 0;
+    uint32_t m_amountOfFaces = 0;
 
 	Vector3* m_pCenterPosition;
 
@@ -92,10 +92,10 @@ private:
 	std::map<BlockType, std::vector<const BlockRenderVO*> > m_mBlockRenderList;
 	class CGameWorld* m_pWorldManager;
 
-	CChunk* m_pChunkLeft = NULL;
-	CChunk* m_pChunkRight = NULL;
-	CChunk* m_pChunkFront = NULL;
-	CChunk* m_pChunkBack = NULL;
+    Chunk* m_pChunkLeft = nullptr;
+    Chunk* m_pChunkRight = nullptr;
+    Chunk* m_pChunkFront = nullptr;
+    Chunk* m_pChunkBack = nullptr;
 };
 
 

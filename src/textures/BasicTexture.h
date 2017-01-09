@@ -32,7 +32,7 @@ enum txTypes {
 
 class BasicTexture {
 public:
-	BasicTexture(float x, float y, u16 id);
+    BasicTexture(float x, float y, uint16_t id);
 	virtual ~BasicTexture();
 	virtual txTypes GetTextureType() const;
 
@@ -44,22 +44,22 @@ public:
 	float GetY() const;
 	void SetY(float y);
 
-	void SetColor(u32 color);
-	u32 GetColor() const;
+    void SetColor(uint32_t color);
+    uint32_t GetColor() const;
 
-	virtual uint GetWidth() const;
-	virtual uint GetHeight() const;
+    virtual uint32_t GetWidth() const;
+    virtual uint32_t GetHeight() const;
 
-	u16 GetId() const;
+    uint16_t GetId() const;
 
 	virtual bool IsVisible() const;
 	virtual void SetVisible(bool value);
 
 protected:
 	float m_x, m_y;
-	const u16 m_id;
+    const uint16_t m_id;
 	bool m_visible;
-	u32 m_color;
+    uint32_t m_color;
 };
 
 #endif /* _BASICTEXTURE_H_ */

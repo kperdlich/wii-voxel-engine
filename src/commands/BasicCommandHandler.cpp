@@ -19,11 +19,11 @@
 
 #include "BasicCommandHandler.h"
 
-CBasicCommandHandler::CBasicCommandHandler() {
+BasicCommandHandler::BasicCommandHandler() {
 
 }
 
-CBasicCommandHandler::~CBasicCommandHandler() {
+BasicCommandHandler::~BasicCommandHandler() {
 	for( auto cMapIt = m_commandMap.begin(); cMapIt != m_commandMap.end(); ++cMapIt )
 	{
 		delete cMapIt->second;
@@ -32,14 +32,14 @@ CBasicCommandHandler::~CBasicCommandHandler() {
 	m_commandMap.clear();
 }
 
-void CBasicCommandHandler::ExecuteCommand(const char* commandName) {
+void BasicCommandHandler::ExecuteCommand(const char* commandName) {
 	if( m_commandMap.find( commandName ) != m_commandMap.end())
 	{
 		m_commandMap.at( commandName )->ExecuteCommand();
 	}
 }
 
-void CBasicCommandHandler::Init() {
+void BasicCommandHandler::Init() {
 	// register all client side commands
 	m_commandMap.clear();
 

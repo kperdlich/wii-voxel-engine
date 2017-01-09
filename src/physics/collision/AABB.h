@@ -17,23 +17,25 @@
  *
 ***/
 
-#ifndef _CPLAYERINVENTORY_H_
-#define _CPLAYERINVENTORY_H_
+#include "../../utils/Vector3.h"
 
-#include "IEquipable.h"
+#ifndef _CAABB_H_
+#define _CAABB_H_
 
-#define INVENTORY_MAX_SIZE 10
-
-class CPlayerInventory {
+class AABB {
 public:
-	CPlayerInventory();
-	virtual ~CPlayerInventory();
+	AABB(Vector3& vecMin, Vector3& vecMax);
+	virtual ~AABB();
 
-	bool AddToInventory(IEquipable& item);
+	Vector3& GetMin();
+	Vector3& GetMax();
+
+	bool CoolidesWith( AABB& box );
+	bool CoolidesWith( Vector3& vecPoint);
 
 private:
-	std::vector<IEquipable*> m_pInventory;
-	uint m_inventoryIndex = 0;
+	Vector3 m_vecMin, m_vecMax;
+
 };
 
-#endif /* _CPLAYERINVENTORY_H_ */
+#endif /* _CAABB_H_ */

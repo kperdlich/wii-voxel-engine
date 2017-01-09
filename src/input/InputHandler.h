@@ -39,7 +39,7 @@ public:
 	InputHandler();
 	void Init();
 	void Update();
-	WiiPad* GetPadByID( uint padID );
+    WiiPad* GetPadByID( uint32_t padID );
 };
 
 

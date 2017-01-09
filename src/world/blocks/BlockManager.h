@@ -40,18 +40,18 @@ enum BlockType {
 	GRASS
 };
 
-class CBlockManager {
+class BlockManager {
 public:
-	CBlockManager(TextureHandler& ptextureHandler);
-	virtual ~CBlockManager();
+	BlockManager(TextureHandler& ptextureHandler);
+	virtual ~BlockManager();
 	void LoadBlocks();
 	void UnloadBlocks();
 
-	CBlock* GetBlockByType(const BlockType type);
+	Block* GetBlockByType(const BlockType type);
 
 private:
 
-	std::map<BlockType, CBlock*> m_blocks;
+	std::map<BlockType, Block*> m_blocks;
 	std::map<BlockType, std::vector<Vector3*> > m_mBlockRenderList;
 	TextureHandler* m_pTextureHandler;
 	BlockRenderer* m_blockRenderer;

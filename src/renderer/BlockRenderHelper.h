@@ -20,7 +20,7 @@
 #ifndef _BLOCKRENDERHELPER_H_
 #define _BLOCKRENDERHELPER_H_
 
-#include <stddef.h>
+#include <stdint.h>
 #include "../utils/MathHelper.h"
 
 typedef struct BlockFaceVisibiltyVO {
@@ -30,12 +30,12 @@ typedef struct BlockFaceVisibiltyVO {
 	bool bBackFace = false;
 	bool bTopFace = false;
 	bool bBottomFace = false;
-	unsigned int faces = 0;
+	uint32_t faces = 0;
 } BlockFaceVisibiltyVO;
 
 typedef struct BlockRenderVO {
-	BlockFaceVisibiltyVO* pFaceVO = NULL;
-	Vector3* pBlockPosition = NULL;
+    BlockFaceVisibiltyVO* pFaceVO = nullptr;
+    Vector3* pBlockPosition = nullptr;
 } BlockRenderVO;
 
 #endif /* _BLOCKRENDERHELPER_H_ */

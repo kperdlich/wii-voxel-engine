@@ -40,7 +40,7 @@ BasicTexture* TextureHandler::GetTextureByID(u16 index)
 		}
 	}
 
-	return NULL;
+    return nullptr;
 }
 
 void TextureHandler::DestroyTextureByName( const char* searchName )
@@ -75,6 +75,7 @@ void TextureHandler::DestroyAllTextures()
 
 Texture* TextureHandler::CreateTexture(const u8* textureName, const char* searchName )
 {
+     // todo handle error!
 	if ( FindTexture(searchName))
 	{
 		throw;
@@ -109,8 +110,9 @@ const std::vector<BasicTexture*>* TextureHandler::GetTextures() const
 }
 
 LabelTexture* TextureHandler::CreateLabel(int x, int y, const char* text,
-		GRRLIB_ttfFont* font, uint fontSize, u32 color, const char* searchName)
+        GRRLIB_ttfFont* font, uint32_t fontSize, u32 color, const char* searchName)
 {
+    // todo handle error!
 	if ( FindTexture(searchName))
 	{
 		throw;
@@ -129,7 +131,7 @@ LabelTexture* TextureHandler::CreateLabel( const char* text, GRRLIB_ttfFont* fon
 }
 
 
-unsigned int TextureHandler::TextureCount() const
+uint32_t TextureHandler::TextureCount() const
 {
 	return m_textures.size();
 }
@@ -148,5 +150,5 @@ const BasicTexture* TextureHandler::GetTexture(std::string key) const
 		return (*textureMapIt->second);
 	}
 
-	return NULL;
+    return nullptr;
 }

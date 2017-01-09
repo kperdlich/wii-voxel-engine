@@ -20,7 +20,7 @@
 #include "BasicTexture.h"
 #include "../utils/ColorHelper.h"
 
-BasicTexture::BasicTexture( float x, float y, u16 id ) : m_x(x), m_y(y), m_id(id) {
+BasicTexture::BasicTexture( float x, float y, uint16_t id ) : m_x(x), m_y(y), m_id(id) {
 	m_color = GRRLIB_WHITE;
 }
 
@@ -46,7 +46,7 @@ void BasicTexture::SetY(float y) {
 	m_y = y;
 }
 
-u16 BasicTexture::GetId() const
+uint16_t BasicTexture::GetId() const
 {
 	return m_id;
 }
@@ -70,7 +70,7 @@ void BasicTexture::SetColor(u32 color)
 	m_color = color;
 }
 
-u32 BasicTexture::GetColor() const
+uint32_t BasicTexture::GetColor() const
 {
 	return m_color;
 }
@@ -80,12 +80,12 @@ void BasicTexture::SetVisible( bool value )
 	m_visible = value;
 }
 
-uint BasicTexture::GetWidth() const
+uint32_t BasicTexture::GetWidth() const
 {
 	return 0;
 }
 
-uint BasicTexture::GetHeight() const
+uint32_t BasicTexture::GetHeight() const
 {
 	return 0;
 }
