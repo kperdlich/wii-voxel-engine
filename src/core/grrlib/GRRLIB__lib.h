@@ -157,7 +157,7 @@ void GRRLIB_ObjectViewTrans(f32 posx, f32 posy, f32 posz);
 void GRRLIB_ObjectViewEnd(void);
 void GRRLIB_ObjectView(f32 posx, f32 posy, f32 posz, f32 angx, f32 angy, f32 angz,  f32 scalx, f32 scaly, f32 scalz);
 void GRRLIB_ObjectViewInv(f32 posx, f32 posy, f32 posz, f32 angx, f32 angy, f32 angz,  f32 scalx, f32 scaly, f32 scalz);
-void GRRLIB_SetTexture(GRRLIB_texImg *tex, bool rep, bool bUseMitMapping);
+void GRRLIB_SetTexture(GRRLIB_texImg *tex, bool rep, bool bUseMipMapping);
 void GRRLIB_DrawTorus(f32 r, f32 R, int nsides, int rings, bool filled, u32 col);
 void GRRLIB_DrawSphere(f32 r, int lats, int longs, bool filled, u32 col);
 void GRRLIB_DrawCube(f32 size, bool filled, u32 col);

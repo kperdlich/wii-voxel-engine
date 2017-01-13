@@ -20,20 +20,23 @@
 #ifndef _BLOCKRENDERER_H_
 #define _BLOCKRENDERER_H_
 
-#include "BlockRenderHelper.h"
-#include "../textures/Texture.h"
 #include <vector>
+#include "BlockRenderHelper.h"
+#include "../world/blocks/Block.h"
+#include "../textures/Texture.h"
+
 
 class BlockRenderer {
 public:
 	BlockRenderer();
 	virtual ~BlockRenderer();
-	void Prepare(std::vector<const BlockRenderVO*> *positionList, float blockSize, const Texture* ptexture);
-	void Rebuild();
+    void Prepare(std::vector<const BlockRenderVO*> *positionList, const Block& block);
+    void Draw();
 	void Finish();
-	void DrawFocusOnSelectedCube(const Vector3& blockWorldPosition);
+    static void DrawFocusOnSelectedCube(const Vector3& blockWorldPosition, float blockSizeToCenter);
 
 private:
+    const Block* m_pBlock;
 	float m_renderBlockSize = 0.0f;
 	std::vector<const BlockRenderVO*>* m_positions;
 

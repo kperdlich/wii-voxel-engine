@@ -24,10 +24,12 @@
 #include <inttypes.h>
 #include "GameWorld.h"
 #include "Frustrum.h"
+#include "../utils/RenderHelper.h"
 #include "../utils/Debug.h"
 
 
-CGameWorld::CGameWorld( Basic3DScene* pScene ) : m_pScene(pScene)
+
+GameWorld::GameWorld( Basic3DScene* pScene ) : m_pScene(pScene)
 {
     m_blockManager = new BlockManager( pScene->GetTextureHandler() );
 	m_blockManager->LoadBlocks();
@@ -36,7 +38,7 @@ CGameWorld::CGameWorld( Basic3DScene* pScene ) : m_pScene(pScene)
     m_pNoise = new PerlinNoise(.25, .15625, 1.5, 6.0, rand());
 }
 
-CGameWorld::~CGameWorld()
+GameWorld::~GameWorld()
 {
     for (auto chunkEntry : m_ChunkMap)
 	{
@@ -50,7 +52,7 @@ CGameWorld::~CGameWorld()
 	delete m_pNoise;
 }
 
-void CGameWorld::GenerateWorld()
+void GameWorld::GenerateWorld()
 {
 	for ( uint32_t x = 0; x < CHUNK_AMOUNT_X; x++)
 	{
@@ -70,7 +72,7 @@ void CGameWorld::GenerateWorld()
 }
 
 
-void CGameWorld::Draw()
+void GameWorld::Draw()
 {
 
 #ifdef DEBUG
@@ -135,29 +137,26 @@ void CGameWorld::Draw()
     Debug::GetInstance().Log( "Rendered Chunks: %d/%d", chunksInFrustrum, m_ChunkMap.size() );
     Debug::GetInstance().Log( "Seed: %d", m_pNoise->RandomSeed() );
 
-	//sprintf(m_pDisplayListSizeLogBuffer, "DisplayList size (MB): %d", displayListSize / 1024 / 1024);
-	//Debug::getInstance().log( m_pDisplayListSizeLogBuffer );
+    //Debug::GetInstance().Log( "DisplayList size (MB): %d", displayListSize / 1024 / 1024 );
 
-	//ssprintf(m_pBlocksLogBuffer, "Blocks: %" PRId64 "/%" PRId64, activeBlocks, blocks);
-	//sDebug::getInstance().log( m_pBlocksLogBuffer );
+    //Debug::GetInstance().Log( "Blocks: %" PRId64 "/%" PRId64, activeBlocks, blocks );
 
-	//ssprintf(m_pFaceLogBuffer, "Faces: %" PRId64 "/%" PRId64, activeFaces, faces);
-	//sDebug::getInstance().log( m_pFaceLogBuffer );
+    //Debug::GetInstance().Log(  "Faces: %" PRId64 "/%" PRId64, activeFaces, faces );
 #endif
 }
 
-bool CGameWorld::ChunkInFov( Vector3& chunkPosition, Vector3& playerPosition, uint32_t fov)
+bool GameWorld::ChunkInFov( Vector3& chunkPosition, Vector3& playerPosition, uint32_t fov)
 {
 	return (std::abs(chunkPosition.GetX() - playerPosition.GetX()) < CHUNK_BLOCK_SIZE_X * fov) &&
 			(std::abs(chunkPosition.GetZ() - playerPosition.GetZ()) < CHUNK_BLOCK_SIZE_Z * fov);
 }
 
-BlockManager& CGameWorld::GetBlockManager()
+BlockManager& GameWorld::GetBlockManager()
 {
 	return *m_blockManager;
 }
 
-Chunk* CGameWorld::GetChunkAt(const Vector3& centerPosition) const
+Chunk* GameWorld::GetChunkAt(const Vector3& centerPosition) const
 {
     auto chunkIt = m_ChunkMap.find(&centerPosition);
     if (chunkIt != m_ChunkMap.end())
@@ -167,8 +166,7 @@ Chunk* CGameWorld::GetChunkAt(const Vector3& centerPosition) const
     return nullptr;
 }
 
-// todo replace param vector with floats
-Chunk* CGameWorld::GetChunkByWorldPosition(const Vector3& worldPosition)
+Chunk* GameWorld::GetChunkByWorldPosition(const Vector3& worldPosition)
 {
 	uint32_t x = worldPosition.GetX() / CHUNK_BLOCK_SIZE_X;
 	uint32_t z = worldPosition.GetZ() / CHUNK_BLOCK_SIZE_Z;
@@ -178,7 +176,7 @@ Chunk* CGameWorld::GetChunkByWorldPosition(const Vector3& worldPosition)
 	return GetChunkAt(chunkCenterPosition);
 }
 
-void CGameWorld::RemoveBlockByWorldPosition(const Vector3& blockPosition)
+void GameWorld::RemoveBlockByWorldPosition(const Vector3& blockPosition)
 {
 	auto pChunk = GetChunkByWorldPosition(blockPosition);
 	if ( pChunk )
@@ -186,7 +184,7 @@ void CGameWorld::RemoveBlockByWorldPosition(const Vector3& blockPosition)
 		pChunk->RemoveBlockByWorldPosition( blockPosition );
 	}
 }
-void CGameWorld::AddBlockAtWorldPosition(const Vector3& blockPosition, BlockType type)
+void GameWorld::AddBlockAtWorldPosition(const Vector3& blockPosition, BlockType type)
 {
 	auto pChunk = GetChunkByWorldPosition(blockPosition);
 	if ( pChunk )
@@ -195,7 +193,7 @@ void CGameWorld::AddBlockAtWorldPosition(const Vector3& blockPosition, BlockType
 	}
 }
 
-void CGameWorld::UpdateFocusedBlockByWorldPosition( const Vector3& blockPosition )
+void GameWorld::UpdateFocusedBlockByWorldPosition( const Vector3& blockPosition )
 {
 	auto pChunk = GetChunkByWorldPosition(blockPosition);
 	if ( pChunk )
@@ -209,7 +207,7 @@ void CGameWorld::UpdateFocusedBlockByWorldPosition( const Vector3& blockPosition
 	}
 }
 
-Vector3 CGameWorld::GetBlockPositionByWorldPosition(const Vector3& worldPosition)
+Vector3 GameWorld::GetBlockPositionByWorldPosition(const Vector3& worldPosition)
 {
 	auto pChunk = GetChunkByWorldPosition(worldPosition);
 	if ( pChunk )
@@ -220,7 +218,7 @@ Vector3 CGameWorld::GetBlockPositionByWorldPosition(const Vector3& worldPosition
 	return Vector3(0,0,0);
 }
 
-BlockType CGameWorld::GetBlockByWorldPosition(const Vector3& worldPosition)
+BlockType GameWorld::GetBlockByWorldPosition(const Vector3& worldPosition)
 {
 	auto pChunk = GetChunkByWorldPosition(worldPosition);
 	if ( pChunk )
@@ -232,7 +230,7 @@ BlockType CGameWorld::GetBlockByWorldPosition(const Vector3& worldPosition)
 }
 
 // todo replace param vector with floats
-Vector3 CGameWorld::GetNewPlayerPosition( const Vector3& playerWorldPosition )
+Vector3 GameWorld::GetNewPlayerPosition( const Vector3& playerWorldPosition )
 {
 	auto pChunk = GetChunkByWorldPosition(playerWorldPosition);
 	if ( pChunk )
@@ -243,20 +241,17 @@ Vector3 CGameWorld::GetNewPlayerPosition( const Vector3& playerWorldPosition )
 	return playerWorldPosition;
 }
 
-void CGameWorld::DrawFocusOnSelectedCube()
-{
-	if (m_bHasSelectedBlock )
+void GameWorld::DrawFocusOnSelectedCube()
+{    
+    if (m_bHasSelectedBlock )
 	{
-		m_pScene->SetGraphicsMode(false, false);
-		BlockRenderer renderer;
-        renderer.Prepare(nullptr, BLOCK_SIZE_HALF, nullptr);
-		renderer.DrawFocusOnSelectedCube( m_SelectedBlockPosition );
-		renderer.Finish();
-		m_pScene->SetGraphicsMode(true, true);
-	}
+        RenderHelper::SetGraphicsMode(false, false);
+        BlockRenderer::DrawFocusOnSelectedCube( m_SelectedBlockPosition, BLOCK_SIZE_HALF );
+        RenderHelper::SetGraphicsMode(true, true);
+    }
 }
 
-const PerlinNoise& CGameWorld::GetNoise() const
+const PerlinNoise& GameWorld::GetNoise() const
 {
 	return *m_pNoise;
 }

@@ -22,15 +22,16 @@
 
 #include <stdint.h>
 #include <stddef.h>
+#include "../core/grrlib.h"
 
-class CRenderHelper {
+class RenderHelper {
 private:
-	CRenderHelper();
+    RenderHelper();
 public:
 
     static size_t GetDisplayListSizeForFaces(uint32_t faces);
-
-	virtual ~CRenderHelper();
+    static void SetGraphicsMode(bool bTexturemode, bool bNormalMode);
+    virtual ~RenderHelper();
 };
 
 #endif /* SRC_UTILS_CRENDERHELPER_H_ */

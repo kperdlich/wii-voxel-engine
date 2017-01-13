@@ -41,10 +41,10 @@ typedef struct ChunkPositionComparer
 	}
 } ChunkPositionComparer;
 
-class CGameWorld {
+class GameWorld {
 public:
-	CGameWorld( class Basic3DScene* pScene );
-	virtual ~CGameWorld();
+	GameWorld( class Basic3DScene* pScene );
+	virtual ~GameWorld();
 	void GenerateWorld();
 	void Draw();
 
@@ -70,14 +70,7 @@ private:
     std::map<const class Vector3*, class Chunk*, ChunkPositionComparer> m_ChunkMap;
 
 	Vector3 m_SelectedBlockPosition;
-	bool m_bHasSelectedBlock = false;
-
-	char* m_pChunkLogBuffer;
-	char* m_pDisplayListSizeLogBuffer;
-
-	char* m_pBlocksLogBuffer;
-	char* m_pFaceLogBuffer;
-	char* m_pSeedBuffer;
+	bool m_bHasSelectedBlock = false;	
 
 	PerlinNoise* m_pNoise;
 

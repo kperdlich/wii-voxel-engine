@@ -40,7 +40,7 @@ struct Vec3i {
 class Chunk {
 public:
 
-    Chunk(class CGameWorld &gameWorld);
+    Chunk(class GameWorld &gameWorld);
     virtual ~Chunk();
 
 	void Init(Vector3& position);
@@ -78,10 +78,10 @@ private:
 	Vector3 LocalPositionToGlobalPosition(const Vec3i& localPosition) const;
 
 private:
-	bool m_IsDirty;
+    bool m_isDirty;
 	bool m_bNeighbourUpdate = false;
-	uint32_t m_DisplayListSize = 0;
-    void* m_DispList = nullptr;
+    uint32_t m_displayListSize = 0;
+    void* m_pDispList = nullptr;
 
     uint32_t m_amountOfBlocks = 0;
     uint32_t m_amountOfFaces = 0;
@@ -90,7 +90,7 @@ private:
 
 	BlockType*** m_pBlocks;
 	std::map<BlockType, std::vector<const BlockRenderVO*> > m_mBlockRenderList;
-	class CGameWorld* m_pWorldManager;
+	class GameWorld* m_pWorldManager;
 
     Chunk* m_pChunkLeft = nullptr;
     Chunk* m_pChunkRight = nullptr;

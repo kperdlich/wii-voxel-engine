@@ -20,19 +20,31 @@
 #ifndef _BLOCK_H_
 #define _BLOCK_H_
 
+#include <vector>
+#include <map>
 #include "../../textures/Texture.h"
+
+enum EBlockFaces
+{
+    Left,
+    Right,
+    Front,
+    Back,
+    Top,
+    Bottom
+};
 
 class Block {
 public:
     Block();
-    Block( float size, const Texture* pTexture );
+    Block( float size, std::map<const Texture*, std::vector<EBlockFaces>> textureMap);
     virtual ~Block();
 	float GetSize() const;
-	const Texture* GetTexture() const;
+    const std::map<const Texture*, std::vector<EBlockFaces>>& GetTextures() const;
 
 protected:
-	float m_size; // the size from the middle point to each axis
-	const Texture* m_pTexture;
+	float m_size; // the size from the middle point to each axis   
+    std::map<const Texture*, std::vector<EBlockFaces>> m_textureMap;
 
 };
 

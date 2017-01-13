@@ -19,12 +19,40 @@
 
 #include "RenderHelper.h"
 
-CRenderHelper::CRenderHelper() {}
+RenderHelper::RenderHelper() {}
 
-CRenderHelper::~CRenderHelper() {}
+RenderHelper::~RenderHelper() {}
 
-size_t CRenderHelper::GetDisplayListSizeForFaces(uint32_t faces)
+size_t RenderHelper::GetDisplayListSizeForFaces(uint32_t faces)
 {
     return (size_t) ((32 * 6) * faces); // 32 * 6 magic numbers, seems to work fine
 }
 
+void RenderHelper::SetGraphicsMode(bool bTexturemode, bool bNormalMode)
+{
+    GX_ClearVtxDesc();
+    GX_SetVtxDesc(GX_VA_POS, GX_DIRECT);
+
+    if(bNormalMode)
+        GX_SetVtxDesc(GX_VA_NRM, GX_DIRECT);
+
+    GX_SetVtxDesc(GX_VA_CLR0, GX_DIRECT);
+
+    if(bTexturemode)
+        GX_SetVtxDesc(GX_VA_TEX0, GX_DIRECT);
+
+    GX_SetVtxAttrFmt(GX_VTXFMT0, GX_VA_POS, GX_POS_XYZ, GX_F32, 0);
+
+    if(bNormalMode)
+        GX_SetVtxAttrFmt(GX_VTXFMT0, GX_VA_NRM, GX_NRM_XYZ, GX_F32, 0);
+
+    GX_SetVtxAttrFmt(GX_VTXFMT0, GX_VA_CLR0, GX_CLR_RGBA, GX_RGBA8, 0);
+
+    if(bTexturemode)
+        GX_SetVtxAttrFmt(GX_VTXFMT0, GX_VA_TEX0, GX_TEX_ST, GX_F32, 0);
+
+    if(bTexturemode)
+        GX_SetTevOp(GX_TEVSTAGE0, GX_MODULATE);
+    else
+        GX_SetTevOp(GX_TEVSTAGE0, GX_PASSCLR);
+}

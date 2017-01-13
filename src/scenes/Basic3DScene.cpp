@@ -18,6 +18,7 @@
 ***/
 
 #include "Basic3DScene.h"
+#include "../utils/RenderHelper.h"
 #include "../utils/Debug.h"
 
 #define MIN_DIST 0.1f
@@ -62,9 +63,9 @@ void Basic3DScene::Draw()
 	GRRLIB_ObjectViewRotate( 0, 0, m_mainCamera->GetWorldAngleZ());
 	GRRLIB_ObjectViewEnd();
 
-	SetGraphicsMode(true, false);
+    RenderHelper::SetGraphicsMode(true, false);
 	m_pSkyBox->Render();
-	SetGraphicsMode(true, true);
+    RenderHelper::SetGraphicsMode(true, true);
 
 	GRRLIB_ObjectViewBegin();
 	GRRLIB_ObjectViewScale( m_mainCamera->GetWorldScaleX(), m_mainCamera->GetWorldScaleY(), m_mainCamera->GetWorldScaleZ() );
@@ -84,7 +85,7 @@ void Basic3DScene::Draw()
 		}
 	}
 
-	GRRLIB_2dMode();
+    GRRLIB_2dMode();
 
 	auto textures = m_TextureHandler->GetTextures();
 	for ( auto it = textures->begin(); it != textures->end(); it++)
@@ -93,7 +94,7 @@ void Basic3DScene::Draw()
 		{
 			Get3DRenderer().draw2DTexture( (*it) );
 		}
-	}
+    }
 }
 
 void Basic3DScene::Update(float deltaSeconds)
@@ -114,7 +115,8 @@ EntityHandler& Basic3DScene::GetEntityHandler()
 	return *m_entityHandler;
 }
 
-void Basic3DScene::Unload() {
+void Basic3DScene::Unload()
+{
     for (uint32_t i = 0; i < m_uiElements.size(); i++)
 	{
 		delete m_uiElements[i];
@@ -123,27 +125,4 @@ void Basic3DScene::Unload() {
 	m_uiElements.clear();
 	m_entityHandler->Clear();
     Scene::Unload();
-}
-
-void Basic3DScene::SetGraphicsMode(bool textureMode, bool normalMode)
-{
-	GX_ClearVtxDesc();
-	GX_SetVtxDesc(GX_VA_POS, GX_DIRECT);
-	if(normalMode)
-		GX_SetVtxDesc(GX_VA_NRM, GX_DIRECT);
-	GX_SetVtxDesc(GX_VA_CLR0, GX_DIRECT);
-	if(textureMode)
-		GX_SetVtxDesc(GX_VA_TEX0, GX_DIRECT);
-
-	GX_SetVtxAttrFmt(GX_VTXFMT0, GX_VA_POS, GX_POS_XYZ, GX_F32, 0);
-	if(normalMode)
-		GX_SetVtxAttrFmt(GX_VTXFMT0, GX_VA_NRM, GX_NRM_XYZ, GX_F32, 0);
-	GX_SetVtxAttrFmt(GX_VTXFMT0, GX_VA_CLR0, GX_CLR_RGBA, GX_RGBA8, 0);
-	if(textureMode)
-		GX_SetVtxAttrFmt(GX_VTXFMT0, GX_VA_TEX0, GX_TEX_ST, GX_F32, 0);
-
-	if(textureMode)
-		GX_SetTevOp(GX_TEVSTAGE0, GX_MODULATE);
-	else
-		GX_SetTevOp(GX_TEVSTAGE0, GX_PASSCLR);
 }

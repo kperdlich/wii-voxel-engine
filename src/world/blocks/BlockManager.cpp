@@ -22,18 +22,65 @@
 #include "../GameWorld.h"
 #include "../../utils/Vector3.h"
 #include "../../utils/Debug.h"
-#include "GroundText_png.h"
+
+#include "Dirt_png.h"
 #include "Grass_png.h"
+#include "Grass_Side_png.h"
 
 void BlockManager::LoadBlocks()
 {
-	// todo dirty workaround - have to fix texture handler
-	m_pTextureHandler->CreateTexture( GroundText_png, BLOCK_TEXTURE_DIRT )->SetVisible(false);
-	m_pTextureHandler->CreateTexture( Grass_png, BLOCK_TEXTURE_GRASS )->SetVisible(false);
+    Texture* pDirtTexture = m_pTextureHandler->CreateTexture( Dirt_png, BLOCK_TEXTURE_DIRT );
+    Texture* pGrassTexture = m_pTextureHandler->CreateTexture( Grass_png, BLOCK_TEXTURE_GRASS );
+    Texture* pGrassSideTexture = m_pTextureHandler->CreateTexture( Grass_Side_png, BLOCK_TEXTURE_GRASS_SIDE );
 
-    m_blocks.insert(std::pair< BlockType, Block* >( BlockType::AIR, new Block( BLOCK_SIZE_HALF, nullptr))); // no texture for air!
-	m_blocks.insert(std::pair< BlockType, Block* >( BlockType::DIRT, new Block( BLOCK_SIZE_HALF, dynamic_cast<const Texture*>(m_pTextureHandler->GetTexture(BLOCK_TEXTURE_DIRT)))));
-	m_blocks.insert(std::pair< BlockType, Block* >( BlockType::GRASS, new Block( BLOCK_SIZE_HALF, dynamic_cast<const Texture*>(m_pTextureHandler->GetTexture(BLOCK_TEXTURE_GRASS)))));
+    // todo dirty workaround - have to fix texture handler
+    pDirtTexture->SetVisible(false);
+    pGrassTexture->SetVisible(false);
+    pGrassSideTexture->SetVisible(false);
+
+    std::map<const Texture*, std::vector<EBlockFaces>> dirtTextureMap =
+    {
+        {
+          pDirtTexture,
+          {
+              EBlockFaces::Left,
+              EBlockFaces::Right,
+              EBlockFaces::Front,
+              EBlockFaces::Back,
+              EBlockFaces::Top,
+              EBlockFaces::Bottom,
+          }
+        }
+    };
+
+    std::map<const Texture*, std::vector<EBlockFaces>> grassTextureMap =
+    {
+        {
+            pGrassTexture,
+            {
+                  EBlockFaces::Top
+            }
+        },
+        {
+            pDirtTexture,
+            {
+                  EBlockFaces::Bottom
+            }
+        },
+        {
+            pGrassSideTexture,
+            {
+                EBlockFaces::Left,
+                EBlockFaces::Right,
+                EBlockFaces::Front,
+                EBlockFaces::Back
+            }
+        }
+    };
+
+    m_blocks.insert(std::pair< BlockType, Block* >( BlockType::AIR, new Block( BLOCK_SIZE_HALF, {}))); // no texture for air!
+    m_blocks.insert(std::pair< BlockType, Block* >( BlockType::DIRT, new Block( BLOCK_SIZE_HALF, dirtTextureMap )));
+    m_blocks.insert(std::pair< BlockType, Block* >( BlockType::GRASS, new Block( BLOCK_SIZE_HALF, grassTextureMap)));
 }
 
 void BlockManager::UnloadBlocks()

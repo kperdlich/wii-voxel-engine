@@ -88,7 +88,7 @@ const Vector3& Entity::GetRotation() const
 	return m_rotation;
 }
 
-void Entity::SetWorld(class CGameWorld* pWorld)
+void Entity::SetWorld(class GameWorld* pWorld)
 {
 	m_pWorld = pWorld;
 }

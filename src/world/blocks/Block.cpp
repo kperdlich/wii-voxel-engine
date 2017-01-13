@@ -24,7 +24,7 @@ Block::Block() {
 }
 
 
-Block::Block( float size, const Texture* pTexture ) : m_size(size), m_pTexture(pTexture)
+Block::Block( float size, std::map<const Texture*, std::vector<EBlockFaces>> textureMap ) : m_size(size), m_textureMap(textureMap)
 {
 
 }
@@ -34,9 +34,9 @@ Block::~Block() {
 }
 
 
-const Texture* Block::GetTexture() const
+const std::map<const Texture*, std::vector<EBlockFaces>>& Block::GetTextures() const
 {
-	return m_pTexture;
+    return m_textureMap;
 }
 
 float Block::GetSize() const

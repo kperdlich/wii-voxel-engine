@@ -24,13 +24,13 @@
 #include "../utils/MathHelper.h"
 
 typedef struct BlockFaceVisibiltyVO {
-	bool bLeftFace = false;
-	bool bRightFace = false;
-	bool bFrontFace = false;
-	bool bBackFace = false;
-	bool bTopFace = false;
-	bool bBottomFace = false;
-	uint32_t faces = 0;
+    bool bLeftFace = false;
+    bool bRightFace = false;
+    bool bFrontFace = false;
+    bool bBackFace = false;
+    bool bTopFace = false;
+    bool bBottomFace = false;
+    uint32_t faces = 0;
 } BlockFaceVisibiltyVO;
 
 typedef struct BlockRenderVO {

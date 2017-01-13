@@ -25,7 +25,7 @@
 #include "../../renderer/BlockRenderer.h"
 #include "../../utils/Debug.h"
 
-Chunk::Chunk(class CGameWorld& gameWorld) : m_IsDirty(true)
+Chunk::Chunk(class GameWorld& gameWorld) : m_isDirty(true)
 {
 	m_pWorldManager = &gameWorld;
 }
@@ -111,9 +111,9 @@ void Chunk::UpdateChunkNeighbors()
 
 void Chunk::Render()
 {
-	if ( m_DisplayListSize > 0 )
+    if ( m_displayListSize > 0 )
 	{
-		GX_CallDispList(m_DispList, m_DisplayListSize);
+        GX_CallDispList(m_pDispList, m_displayListSize);
 	}
 }
 
@@ -331,32 +331,32 @@ void Chunk::ClearBlockRenderList()
 
 void Chunk::CreateDisplayList(size_t sizeOfDisplayList)
 {
-	m_DispList = memalign(32, sizeOfDisplayList);
-	memset(m_DispList, 0, sizeOfDisplayList);
-	DCInvalidateRange(m_DispList, sizeOfDisplayList);
-	GX_BeginDispList(m_DispList, sizeOfDisplayList);
+    m_pDispList = memalign(32, sizeOfDisplayList);
+    memset(m_pDispList, 0, sizeOfDisplayList);
+    DCInvalidateRange(m_pDispList, sizeOfDisplayList);
+    GX_BeginDispList(m_pDispList, sizeOfDisplayList);
 }
 
 void Chunk::FinishDisplayList()
 {
-	m_DisplayListSize = GX_EndDispList();
-	m_IsDirty = false;
+    m_displayListSize = GX_EndDispList();
+    m_isDirty = false;
 }
 
 
 bool Chunk::IsDirty()
 {
-	return m_IsDirty;
+    return m_isDirty;
 }
 
 void Chunk::SetDirty(bool dirty)
 {
-	m_IsDirty = dirty;
+    m_isDirty = dirty;
 }
 
 uint32_t Chunk::GetDisplayListSize() const
 {
-	return m_DisplayListSize;
+    return m_displayListSize;
 }
 
 
@@ -377,12 +377,12 @@ const Vector3& Chunk::GetCenterPosition() const
 
 void Chunk::DeleteDisplayList()
 {
-	if ( m_DisplayListSize > 0 )
+    if ( m_displayListSize > 0 )
 	{
-		free(m_DispList);
-		m_DisplayListSize = 0;
-        m_DispList = nullptr;
-		m_IsDirty = true;
+        free(m_pDispList);
+        m_displayListSize = 0;
+        m_pDispList = nullptr;
+        m_isDirty = true;
 	}
 }
 
@@ -394,16 +394,16 @@ void Chunk::RebuildDisplayList()
 	BuildBlockRenderList();
 
 	DeleteDisplayList();
-    CreateDisplayList( CRenderHelper::GetDisplayListSizeForFaces(m_amountOfFaces) );
+    CreateDisplayList( RenderHelper::GetDisplayListSizeForFaces(m_amountOfFaces) );
 
-	for(auto it = m_mBlockRenderList.begin(); it != m_mBlockRenderList.end(); ++it)
+    for(auto it = m_mBlockRenderList.begin(); it != m_mBlockRenderList.end(); ++it)
 	{
-		auto pBlockToRender = m_pWorldManager->GetBlockManager().GetBlockByType(it->first);
-		blockRenderer.Prepare( &it->second, pBlockToRender->GetSize(), pBlockToRender->GetTexture());
-		blockRenderer.Rebuild();
+        auto pBlockToRender = m_pWorldManager->GetBlockManager().GetBlockByType(it->first);
+        blockRenderer.Prepare( &it->second, *pBlockToRender);
+        blockRenderer.Draw();
 	}
 
-	blockRenderer.Finish();
+    blockRenderer.Finish();
 
 	FinishDisplayList();
 	ClearBlockRenderList();
@@ -416,7 +416,7 @@ void Chunk::RemoveBlockByWorldPosition(const Vector3& blockPosition)
 	Vec3i vec = GetLocalBlockPositionByWorldPosition(blockPosition);
 
 	m_pBlocks[vec.m_x][vec.m_y][vec.m_z] = BlockType::AIR;
-	m_IsDirty = true;
+    m_isDirty = true;
 }
 
 void Chunk::AddBlockByWorldPosition(const Vector3& blockPosition, BlockType type)
@@ -426,7 +426,7 @@ void Chunk::AddBlockByWorldPosition(const Vector3& blockPosition, BlockType type
 	if ( m_pBlocks[vec.m_x][vec.m_y][vec.m_z] == BlockType::AIR)
 	{
 		 m_pBlocks[vec.m_x][vec.m_y][vec.m_z] = type;
-		 m_IsDirty = true;
+         m_isDirty = true;
 	}
 }
 

@@ -40,14 +40,14 @@ public:
 
 	class EntityHandler& GetEntityHandler();
 
-	void SetGraphicsMode(bool textureMode, bool normalMode);
+
 
 protected:
 	class Renderer3D& Get3DRenderer();
 	class EntityHandler* m_entityHandler;
 	std::vector<UIElement*> m_uiElements;
 	class Camera* m_mainCamera;
-	class CGameWorld* m_pGameWorld;
+    class GameWorld* m_pGameWorld;
 	class SkyBox* m_pSkyBox;
 };
 

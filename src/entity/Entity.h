@@ -48,7 +48,7 @@ public:
 	bool IsPlayer() const;
 	void SetPlayer( bool value );
 
-	void SetWorld(class CGameWorld* pWorld);
+	void SetWorld(class GameWorld* pWorld);
 
 	const EntityRenderer* GetRenderer() const;
 
@@ -58,7 +58,7 @@ protected:
 	Vector3 m_position, m_rotation;
     uint32_t m_id;
 	EntityRenderer* m_entityRenderer;
-	class CGameWorld* m_pWorld;
+	class GameWorld* m_pWorld;
 
 };
 

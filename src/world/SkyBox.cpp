@@ -71,7 +71,7 @@ void SkyBox::Init()
 
 void SkyBox::CreateSkyBox()
 {
-	size_t size = CRenderHelper::GetDisplayListSizeForFaces(SKYBOX_FACES);
+    size_t size = RenderHelper::GetDisplayListSizeForFaces(SKYBOX_FACES);
 	m_pDispList = memalign(32, size);
 	memset(m_pDispList, 0, size);
 	DCInvalidateRange(m_pDispList, size);
@@ -79,7 +79,7 @@ void SkyBox::CreateSkyBox()
 
 	GX_SetCullMode(GX_CULL_BACK);
 
-	GRRLIB_SetTexture(m_pSkyBoxTextures[SKY_RIGHT]->GetNativeTexture(), true, false);
+    GRRLIB_SetTexture(m_pSkyBoxTextures[SKY_RIGHT]->GetNativeTexture(), true, false);
 	GX_Begin(GX_QUADS, GX_VTXFMT0, 4);
 		GX_Position3f32(PLAYER_DISTANCE,PLAYER_DISTANCE,0);
 		GX_Color1u32(0xFFFFFFFF);
@@ -95,7 +95,7 @@ void SkyBox::CreateSkyBox()
 		GX_TexCoord2f32(0,1);
 	GX_End();
 
-	GRRLIB_SetTexture(m_pSkyBoxTextures[SKY_FRONT]->GetNativeTexture(), true, false);
+    GRRLIB_SetTexture(m_pSkyBoxTextures[SKY_FRONT]->GetNativeTexture(), true, false);
 	GX_Begin(GX_QUADS, GX_VTXFMT0, 4);
 		GX_Position3f32(0,PLAYER_DISTANCE,0);
 		GX_Color1u32(0xFFFFFFFF);
@@ -112,7 +112,7 @@ void SkyBox::CreateSkyBox()
 	GX_End();
 
 
-	GRRLIB_SetTexture(m_pSkyBoxTextures[SKY_UP]->GetNativeTexture(), true, false);
+    GRRLIB_SetTexture(m_pSkyBoxTextures[SKY_UP]->GetNativeTexture(), true, false);
 	GX_Begin(GX_QUADS, GX_VTXFMT0, 4);
 		GX_Position3f32(0,PLAYER_DISTANCE,0);
 		GX_Color1u32(0xFFFFFFFF);
@@ -130,7 +130,7 @@ void SkyBox::CreateSkyBox()
 
 	GX_SetCullMode(GX_CULL_FRONT);
 
-	GRRLIB_SetTexture(m_pSkyBoxTextures[SKY_LEFT]->GetNativeTexture(), true, false);
+    GRRLIB_SetTexture(m_pSkyBoxTextures[SKY_LEFT]->GetNativeTexture(), true, false);
 	GX_Begin(GX_QUADS, GX_VTXFMT0, 4);
 		GX_Position3f32(0,PLAYER_DISTANCE,0);
 		GX_Color1u32(0xFFFFFFFF);
@@ -146,7 +146,7 @@ void SkyBox::CreateSkyBox()
 		GX_TexCoord2f32(0,1);
 	GX_End();
 
-	GRRLIB_SetTexture(m_pSkyBoxTextures[SKY_BACK]->GetNativeTexture(), true, false);
+    GRRLIB_SetTexture(m_pSkyBoxTextures[SKY_BACK]->GetNativeTexture(), true, false);
 	GX_Begin(GX_QUADS, GX_VTXFMT0, 4);
 		GX_Position3f32(0,PLAYER_DISTANCE,PLAYER_DISTANCE);
 		GX_Color1u32(0xFFFFFFFF);
@@ -162,7 +162,7 @@ void SkyBox::CreateSkyBox()
 		GX_TexCoord2f32(0,1);
 	GX_End();
 
-	GRRLIB_SetTexture(m_pSkyBoxTextures[SKY_DOWN]->GetNativeTexture(), true, false);
+    GRRLIB_SetTexture(m_pSkyBoxTextures[SKY_DOWN]->GetNativeTexture(), true, false);
 	GX_Begin(GX_QUADS, GX_VTXFMT0, 4);
 		GX_Position3f32(0,0,0);
 		GX_Color1u32(0xFFFFFFFF);

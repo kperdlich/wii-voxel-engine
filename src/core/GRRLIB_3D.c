@@ -331,7 +331,7 @@ void GRRLIB_ObjectViewInv(f32 posx, f32 posy, f32 posz, f32 angx, f32 angy, f32 
  * @param tex Pointer to an image texture (GRRLIB_texImg format).
  * @param rep Texture Repeat Mode, True will repeat it, False won't.
  */
-void GRRLIB_SetTexture(GRRLIB_texImg *tex, bool rep, bool bUseMitMapping) {
+void GRRLIB_SetTexture(GRRLIB_texImg *tex, bool rep, bool bUseMipMapping) {
 
 	GXTexObj  texObj;
 
@@ -342,7 +342,7 @@ void GRRLIB_SetTexture(GRRLIB_texImg *tex, bool rep, bool bUseMitMapping) {
         GX_InitTexObj(&texObj, tex->data, tex->w, tex->h, GX_TF_RGBA8, GX_CLAMP, GX_CLAMP, GX_TRUE);
     }
 
-    if ( bUseMitMapping )
+    if ( bUseMipMapping )
     {
     	GX_InitTexObjLOD(&texObj, GX_LIN_MIP_LIN, GX_LINEAR, 0.0f, 8.0f, -0.4f, GX_DISABLE, GX_ENABLE, GX_ANISO_4);
     }
