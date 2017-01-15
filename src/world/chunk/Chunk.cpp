@@ -341,6 +341,8 @@ void Chunk::FinishDisplayList()
 {
     m_displayListSize = GX_EndDispList();
     m_isDirty = false;
+    // Update display list size to the size returned by GX_EndDispList() to save memory
+    realloc(m_pDispList, m_displayListSize);
 }
 
 
