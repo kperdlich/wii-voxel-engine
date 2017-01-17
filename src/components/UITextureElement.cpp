@@ -17,50 +17,50 @@
  *
 ***/
 
-#include "UITextureElement.h"
+#include "UiTextureElement.h"
 
-UITextureElement::UITextureElement(uint32_t x, uint32_t y,
-        const char* name, BasicTexture* tex) : UIElement( x, y, tex->GetWidth(), tex->GetHeight(), name ), m_texture(tex)
+UiTextureElement::UiTextureElement(uint32_t x, uint32_t y,
+        const char* name, BasicTexture* tex) : UiElement( x, y, tex->GetWidth(), tex->GetHeight(), name ), m_texture(tex)
 {
 	m_texture->SetX(x);
 	m_texture->SetY(y);
 
 }
 
-UITextureElement::UITextureElement(const char* name, BasicTexture* tex) : UIElement( 0, 0, tex->GetWidth(), tex->GetHeight(), name ), m_texture(tex)
+UiTextureElement::UiTextureElement(const char* name, BasicTexture* tex) : UiElement( 0, 0, tex->GetWidth(), tex->GetHeight(), name ), m_texture(tex)
 {
 
 }
 
-UITextureElement::~UITextureElement()
+UiTextureElement::~UiTextureElement()
 {
 
 }
 
-void UITextureElement::Load()
+void UiTextureElement::Load()
 {
 }
 
 
-void UITextureElement::SetX(uint32_t x)
+void UiTextureElement::SetX(uint32_t x)
 {
-	UIElement::SetX(x);
+	UiElement::SetX(x);
 	m_texture->SetX(x);
 }
 
 
-void UITextureElement::SetY(uint32_t y)
+void UiTextureElement::SetY(uint32_t y)
 {
-	UIElement::SetY(y);
+	UiElement::SetY(y);
 	m_texture->SetY(y);
 }
 
-void UITextureElement::SetColor(u32 color)
+void UiTextureElement::SetColor(u32 color)
 {
 	m_texture->SetColor(color);
 }
 
-u32 UITextureElement::GetColor() const
+u32 UiTextureElement::GetColor() const
 {
 	return m_texture->GetColor();
 }

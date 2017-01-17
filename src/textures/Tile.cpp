@@ -23,21 +23,21 @@
 Tile::Tile( float x, float y, uint32_t index, class SpriteSheet* tileSheet, const uint16_t id ) :
 	m_sheetIndex( index ), m_TileSheet(tileSheet), BasicTexture(x, y, id)
 {
-	m_visible = true;
+	m_bVisible = true;
 
 }
 
 Tile::~Tile() {
 }
 
-txTypes Tile::GetTextureType() const
+ETextureType Tile::GetTextureType() const
 {
 	return TILE;
 }
 
 bool Tile::IsVisible() const
 {
-	return m_TileSheet->isLoaded() && m_visible;
+	return m_TileSheet->IsLoaded() && m_bVisible;
 }
 
 SpriteSheet* Tile::GetSpriteSheet() {

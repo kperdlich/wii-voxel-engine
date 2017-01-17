@@ -18,7 +18,7 @@
 ***/
 
 #include "SkyBox.h"
-#include "../utils/RenderHelper.h"
+#include "../renderer/MasterRenderer.h"
 #include "../utils/Vector3.h"
 
 #include "SkyBox_Top_png.h"
@@ -41,7 +41,7 @@
 
 SkyBox::SkyBox()
 {
-	for ( uint32_t i = 0; i < 6; i++)
+    for ( uint8_t i = 0; i < 6; i++)
 	{
         m_pSkyBoxTextures[i] = nullptr;
 	}
@@ -49,29 +49,31 @@ SkyBox::SkyBox()
 
 SkyBox::~SkyBox()
 {
-	if ( m_DisplayListSize > 0 )
+    if ( m_displayListSize > 0 )
 	{
 		free(m_pDispList);
-		m_DisplayListSize = 0;
+        m_displayListSize = 0;
         m_pDispList = nullptr;
 	}
 }
 
 void SkyBox::Init()
 {
-	m_pSkyBoxTextures[SKY_FRONT] = Controller::GetInstance().GetSceneHandler().GetCurrentScene().GetTextureHandler().CreateTexture(SkyBox_Front_png, "SKY_FRONT", false);
-	m_pSkyBoxTextures[SKY_RIGHT] = Controller::GetInstance().GetSceneHandler().GetCurrentScene().GetTextureHandler().CreateTexture(SkyBox_Right_png, "SKY_RIGHT", false);
-	m_pSkyBoxTextures[SKY_LEFT] = Controller::GetInstance().GetSceneHandler().GetCurrentScene().GetTextureHandler().CreateTexture(SkyBox_Left_png, "SKY_LEFT", false);
-	m_pSkyBoxTextures[SKY_BACK] = Controller::GetInstance().GetSceneHandler().GetCurrentScene().GetTextureHandler().CreateTexture(SkyBox_Back_png, "SKY_BACK", false);
-	m_pSkyBoxTextures[SKY_UP] = Controller::GetInstance().GetSceneHandler().GetCurrentScene().GetTextureHandler().CreateTexture(SkyBox_Top_png, "SKY_UP", false);
-	m_pSkyBoxTextures[SKY_DOWN] = Controller::GetInstance().GetSceneHandler().GetCurrentScene().GetTextureHandler().CreateTexture(SkyBox_Bottom_png, "SKY_DOWN", false);
+    auto textureHandler = Controller::GetInstance().GetSceneHandler().GetCurrentScene().GetTextureHandler();
+
+    m_pSkyBoxTextures[SKY_FRONT] = textureHandler.CreateTexture(SkyBox_Front_png, "SKY_FRONT", false);
+    m_pSkyBoxTextures[SKY_RIGHT] = textureHandler.CreateTexture(SkyBox_Right_png, "SKY_RIGHT", false);
+    m_pSkyBoxTextures[SKY_LEFT] = textureHandler.CreateTexture(SkyBox_Left_png, "SKY_LEFT", false);
+    m_pSkyBoxTextures[SKY_BACK] = textureHandler.CreateTexture(SkyBox_Back_png, "SKY_BACK", false);
+    m_pSkyBoxTextures[SKY_UP] = textureHandler.CreateTexture(SkyBox_Top_png, "SKY_UP", false);
+    m_pSkyBoxTextures[SKY_DOWN] = textureHandler.CreateTexture(SkyBox_Bottom_png, "SKY_DOWN", false);
 
 	CreateSkyBox();
 }
 
 void SkyBox::CreateSkyBox()
 {
-    size_t size = RenderHelper::GetDisplayListSizeForFaces(SKYBOX_FACES);
+    size_t size = MasterRenderer::GetDisplayListSizeForFaces(SKYBOX_FACES);
 	m_pDispList = memalign(32, size);
 	memset(m_pDispList, 0, size);
 	DCInvalidateRange(m_pDispList, size);
@@ -79,7 +81,7 @@ void SkyBox::CreateSkyBox()
 
 	GX_SetCullMode(GX_CULL_BACK);
 
-    GRRLIB_SetTexture(m_pSkyBoxTextures[SKY_RIGHT]->GetNativeTexture(), true, false);
+    MasterRenderer::LoadTexture(*m_pSkyBoxTextures[SKY_RIGHT]);
 	GX_Begin(GX_QUADS, GX_VTXFMT0, 4);
 		GX_Position3f32(PLAYER_DISTANCE,PLAYER_DISTANCE,0);
 		GX_Color1u32(0xFFFFFFFF);
@@ -95,7 +97,7 @@ void SkyBox::CreateSkyBox()
 		GX_TexCoord2f32(0,1);
 	GX_End();
 
-    GRRLIB_SetTexture(m_pSkyBoxTextures[SKY_FRONT]->GetNativeTexture(), true, false);
+    MasterRenderer::LoadTexture(*m_pSkyBoxTextures[SKY_FRONT]);
 	GX_Begin(GX_QUADS, GX_VTXFMT0, 4);
 		GX_Position3f32(0,PLAYER_DISTANCE,0);
 		GX_Color1u32(0xFFFFFFFF);
@@ -112,7 +114,7 @@ void SkyBox::CreateSkyBox()
 	GX_End();
 
 
-    GRRLIB_SetTexture(m_pSkyBoxTextures[SKY_UP]->GetNativeTexture(), true, false);
+    MasterRenderer::LoadTexture(*m_pSkyBoxTextures[SKY_UP]);
 	GX_Begin(GX_QUADS, GX_VTXFMT0, 4);
 		GX_Position3f32(0,PLAYER_DISTANCE,0);
 		GX_Color1u32(0xFFFFFFFF);
@@ -130,7 +132,7 @@ void SkyBox::CreateSkyBox()
 
 	GX_SetCullMode(GX_CULL_FRONT);
 
-    GRRLIB_SetTexture(m_pSkyBoxTextures[SKY_LEFT]->GetNativeTexture(), true, false);
+    MasterRenderer::LoadTexture(*m_pSkyBoxTextures[SKY_LEFT]);
 	GX_Begin(GX_QUADS, GX_VTXFMT0, 4);
 		GX_Position3f32(0,PLAYER_DISTANCE,0);
 		GX_Color1u32(0xFFFFFFFF);
@@ -146,7 +148,7 @@ void SkyBox::CreateSkyBox()
 		GX_TexCoord2f32(0,1);
 	GX_End();
 
-    GRRLIB_SetTexture(m_pSkyBoxTextures[SKY_BACK]->GetNativeTexture(), true, false);
+    MasterRenderer::LoadTexture(*m_pSkyBoxTextures[SKY_BACK]);
 	GX_Begin(GX_QUADS, GX_VTXFMT0, 4);
 		GX_Position3f32(0,PLAYER_DISTANCE,PLAYER_DISTANCE);
 		GX_Color1u32(0xFFFFFFFF);
@@ -162,7 +164,7 @@ void SkyBox::CreateSkyBox()
 		GX_TexCoord2f32(0,1);
 	GX_End();
 
-    GRRLIB_SetTexture(m_pSkyBoxTextures[SKY_DOWN]->GetNativeTexture(), true, false);
+    MasterRenderer::LoadTexture(*m_pSkyBoxTextures[SKY_DOWN]);
 	GX_Begin(GX_QUADS, GX_VTXFMT0, 4);
 		GX_Position3f32(0,0,0);
 		GX_Color1u32(0xFFFFFFFF);
@@ -180,16 +182,17 @@ void SkyBox::CreateSkyBox()
 
 	GX_SetCullMode(GX_CULL_BACK);
 
-	m_DisplayListSize = GX_EndDispList();
+    m_displayListSize = GX_EndDispList();
+    realloc(m_pDispList, m_displayListSize);
 }
 
 
 
 void SkyBox::Render()
 {
-	if ( m_DisplayListSize > 0 )
+    if ( m_displayListSize > 0 )
 	{
-		GX_CallDispList(m_pDispList, m_DisplayListSize);
+        GX_CallDispList(m_pDispList, m_displayListSize);
 	}
 }
 

@@ -18,16 +18,17 @@
 ***/
 
 #include "Renderer2D.h"
+#include "MasterRenderer.h"
 
 void Renderer2D::DrawTexture(const Texture* texture, const f32 xpos, const f32 ypos,
 		const f32 degrees, const f32 scaleX, const f32 scaleY,
 		const f32 color)
 {
-	GRRLIB_DrawImg( xpos , ypos, texture->GetNativeTexture(), degrees, scaleX, scaleY, color);
+    MasterRenderer::DrawImage(*texture, xpos , ypos, degrees, scaleX, scaleY, color);
 }
 
 void Renderer2D::DrawTexture(const Texture* texture, const f32 xpos, const f32 ypos) {
-	GRRLIB_DrawImg( xpos, ypos, texture->GetNativeTexture(), 0, 1, 1, GRRLIB_WHITE );
+    MasterRenderer::DrawImage(*texture, xpos, ypos, 0, 1, 1, GRRLIB_WHITE );
 }
 
 Renderer2D::Renderer2D() {
@@ -44,13 +45,13 @@ void Renderer2D::DrawTexture(const BasicTexture& basicTexture)
 		case SPRITE:
 		{
 			Texture tx = static_cast<const Texture&>(basicTexture);
-			GRRLIB_DrawImg( tx.GetX(), tx.GetY(), tx.GetNativeTexture(), 0, 1, 1, tx.GetColor() );
+            MasterRenderer::DrawImage(tx, tx.GetX(), tx.GetY(), 0, 1, 1, tx.GetColor() );
 			break;
 		}
 		case TILE:
 		{
 			Tile ti = static_cast<const Tile&>( basicTexture);
-			GRRLIB_DrawTile(ti.GetX(), ti.GetY(), ti.GetSpriteSheet()->GetNativeTexture(), 0, 1, 1, GRRLIB_WHITE, ti.GetSheetIndex());
+            GRRLIB_DrawTile(ti.GetX(), ti.GetY(), ti.GetSpriteSheet()->GetGrrlibTexture(), 0, 1, 1, GRRLIB_WHITE, ti.GetSheetIndex());
 			break;
 		}
 		case LABEL:
@@ -68,7 +69,7 @@ void Renderer2D::DrawTile(const SpriteSheet* tilemap, const f32 xpos, const f32 
 		const f32 degrees, const f32 scaleX, const f32 scaleY, const u32 color,
 		const int frame)
 {
-	GRRLIB_DrawTile(xpos, ypos, tilemap->GetNativeTexture(), degrees, scaleX, scaleY, color, frame);
+    GRRLIB_DrawTile(xpos, ypos, tilemap->GetGrrlibTexture(), degrees, scaleX, scaleY, color, frame);
 }
 
 

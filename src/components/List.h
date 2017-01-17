@@ -21,9 +21,9 @@
 #define _LIST_H_
 
 #include "vector"
-#include "UIElement.h"
+#include "UiElement.h"
 
-class List : public UIElement {
+class List : public UiElement {
 
 public:
     List(uint32_t x, uint32_t y, uint32_t sizeBetweenElements );
@@ -31,10 +31,10 @@ public:
 	virtual ~List();
     virtual void Update() override;
 
-	void AddComponent(UIElement* element);
+	void AddComponent(UiElement* element);
 
 private:
-	std::vector<UIElement*> m_elements;
+	std::vector<UiElement*> m_elements;
 	uint32_t m_sizeBetweenElements;
 };
 

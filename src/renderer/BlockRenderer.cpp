@@ -18,7 +18,7 @@
 ***/
 
 #include "BlockRenderer.h"
-//#include "MipTexture_tpl.h"
+#include "../renderer/MasterRenderer.h"
 
 BlockRenderer::BlockRenderer() {}
 
@@ -44,10 +44,10 @@ void BlockRenderer::Draw()
 
     for ( auto textureIt = textureMap.begin();  textureIt != textureMap.end(); ++textureIt )
     {
-        auto texture = textureIt->first;
+        auto pTexture = textureIt->first;
         auto textureFaces = textureIt->second;
 
-        GRRLIB_SetTexture(texture->GetNativeTexture(), true, false);
+        MasterRenderer::LoadTexture(*pTexture);
 
         for ( auto textureFaceIt = textureFaces.begin();  textureFaceIt != textureFaces.end(); ++textureFaceIt )
         {
@@ -59,7 +59,8 @@ void BlockRenderer::Draw()
                 BlockFaceVisibiltyVO blockRenderVO = *(*it)->pFaceVO;
 
                 // see http://www.matrix44.net/cms/wp-content/uploads/2011/03/ogl_coord_object_space_cube.png
-                guVector vertices[8] = {
+                guVector vertices[8] =
+                {
                         { blockPosition.GetX() - m_renderBlockSize, blockPosition.GetY() + m_renderBlockSize, blockPosition.GetZ() + m_renderBlockSize },// v1
                         { blockPosition.GetX() - m_renderBlockSize, blockPosition.GetY() - m_renderBlockSize, blockPosition.GetZ() + m_renderBlockSize }, //v2
                         { blockPosition.GetX() + m_renderBlockSize, blockPosition.GetY() - m_renderBlockSize, blockPosition.GetZ() + m_renderBlockSize }, //v3
@@ -216,7 +217,8 @@ void BlockRenderer::Draw()
 void BlockRenderer::DrawFocusOnSelectedCube(const Vector3& blockWorldPosition, float blockSizeToCenter)
 {
 	// see http://www.matrix44.net/cms/wp-content/uploads/2011/03/ogl_coord_object_space_cube.png
-	guVector vertices[8] = {
+    guVector vertices[8] =
+    {
             { blockWorldPosition.GetX() - blockSizeToCenter, blockWorldPosition.GetY() + blockSizeToCenter, blockWorldPosition.GetZ() + blockSizeToCenter },// v1
             { blockWorldPosition.GetX() - blockSizeToCenter, blockWorldPosition.GetY() - blockSizeToCenter, blockWorldPosition.GetZ() + blockSizeToCenter }, //v2
             { blockWorldPosition.GetX() + blockSizeToCenter, blockWorldPosition.GetY() - blockSizeToCenter, blockWorldPosition.GetZ() + blockSizeToCenter }, //v3
@@ -225,7 +227,6 @@ void BlockRenderer::DrawFocusOnSelectedCube(const Vector3& blockWorldPosition, f
             { blockWorldPosition.GetX() + blockSizeToCenter, blockWorldPosition.GetY() + blockSizeToCenter, blockWorldPosition.GetZ() - blockSizeToCenter }, // v6
             { blockWorldPosition.GetX() + blockSizeToCenter, blockWorldPosition.GetY() - blockSizeToCenter, blockWorldPosition.GetZ() - blockSizeToCenter }, // v7
             { blockWorldPosition.GetX() - blockSizeToCenter, blockWorldPosition.GetY() - blockSizeToCenter, blockWorldPosition.GetZ() - blockSizeToCenter } // v8
-
 	};
 
 	GX_Begin(GX_LINESTRIP, GX_VTXFMT0, 16);

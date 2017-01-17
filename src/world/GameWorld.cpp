@@ -24,7 +24,7 @@
 #include <inttypes.h>
 #include "GameWorld.h"
 #include "Frustrum.h"
-#include "../utils/RenderHelper.h"
+#include "../renderer/MasterRenderer.h"
 #include "../utils/Debug.h"
 
 
@@ -245,9 +245,9 @@ void GameWorld::DrawFocusOnSelectedCube()
 {    
     if (m_bHasSelectedBlock )
 	{
-        RenderHelper::SetGraphicsMode(false, false);
+        MasterRenderer::SetGraphicsMode(false, false);
         BlockRenderer::DrawFocusOnSelectedCube( m_SelectedBlockPosition, BLOCK_SIZE_HALF );
-        RenderHelper::SetGraphicsMode(true, true);
+        MasterRenderer::SetGraphicsMode(true, true);
     }
 }
 

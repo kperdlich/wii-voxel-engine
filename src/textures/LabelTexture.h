@@ -27,7 +27,7 @@ class LabelTexture: public BasicTexture {
 public:
     LabelTexture( const char* text, float x, float y, const uint16_t id, GRRLIB_ttfFont* font, uint32_t fontSize, uint32_t color );
 	virtual ~LabelTexture();
-	virtual txTypes GetTextureType() const override;
+	virtual ETextureType GetTextureType() const override;
 
 	GRRLIB_ttfFont& getFont() const;
 	const char* getText() const;

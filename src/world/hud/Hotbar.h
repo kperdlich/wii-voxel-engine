@@ -20,10 +20,10 @@
 #ifndef _CHOTBAR_H_
 #define _CHOTBAR_H_
 
-#include "../../components/UITextureElement.h"
+#include "../../components/UiTextureElement.h"
 #include "../../textures/BasicTexture.h"
 
-class Hotbar: public UITextureElement {
+class Hotbar: public UiTextureElement {
 public:
     Hotbar( const char* name, BasicTexture* tex );
     virtual ~Hotbar();

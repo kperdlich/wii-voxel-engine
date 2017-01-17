@@ -44,7 +44,7 @@ private:
     class FontHandler*  m_pFontHandler;
     class BasicCommandHandler* m_pBasicCommandHandler;
     bool m_bRunning = false;
-    uint32_t m_millisecondsDeltaLastFrame = 0;
+    uint32_t m_millisecondsLastFrame = 0;
 
 public:
     ~Controller();

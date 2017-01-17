@@ -18,6 +18,7 @@
 ***/
 
 #include "Renderer3D.h"
+#include "MasterRenderer.h"
 #include "../core/grrlib.h"
 #include "../textures/Texture.h"
 
@@ -28,7 +29,7 @@ Renderer3D::~Renderer3D() {}
 void Renderer3D::draw2DTexture( BasicTexture* tex )
 {
 	Texture* tx = (Texture*) tex;
-	GRRLIB_DrawImg( tx->GetX(), tx->GetY(), tx->GetNativeTexture(), 0, 1, 1, tx->GetColor() );
+    MasterRenderer::DrawImage( *tx, tx->GetX(), tx->GetY(), 0, 1, 1, tx->GetColor() );
 }
 
 void Renderer3D::drawEntity(const Entity* entity) const

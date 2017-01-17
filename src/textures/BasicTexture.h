@@ -22,7 +22,7 @@
 
 #include "../core/grrlib.h"
 
-enum txTypes {
+enum ETextureType {
 	INVALID,
 	SPRITE,
 	SPRITE_SHEET,
@@ -34,7 +34,7 @@ class BasicTexture {
 public:
     BasicTexture(float x, float y, uint16_t id);
 	virtual ~BasicTexture();
-	virtual txTypes GetTextureType() const;
+    virtual ETextureType GetTextureType() const;
 
 	virtual void LoadTexture();
 	virtual void UnloadTexture();
@@ -58,7 +58,7 @@ public:
 protected:
 	float m_x, m_y;
     const uint16_t m_id;
-	bool m_visible;
+	bool m_bVisible;
     uint32_t m_color;
 };
 

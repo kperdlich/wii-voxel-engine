@@ -20,13 +20,13 @@
 #ifndef _BASICBUTTON_H_
 #define _BASICBUTTON_H_
 
-#include "UITextureElement.h"
+#include "UiTextureElement.h"
 #include "../textures/Texture.h"
 #include "../textures/LabelTexture.h"
 
 #define BUTTON_LABEL_DISTANCE 3
 
-class BasicButton: public UITextureElement
+class BasicButton: public UiTextureElement
 {
 public:
 	typedef void (*OnClickCallback)(BasicButton*);

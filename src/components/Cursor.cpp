@@ -22,7 +22,7 @@
 #include "../utils/Debug.h"
 
 
-Cursor::Cursor( const char* name, BasicTexture* tex ) : UITextureElement( 0, 0, name, tex )
+Cursor::Cursor( const char* name, BasicTexture* tex ) : UiTextureElement( 0, 0, name, tex )
 {
 	SetX( rmode->viWidth / 2 );
 	SetY( rmode->viHeight / 2 );

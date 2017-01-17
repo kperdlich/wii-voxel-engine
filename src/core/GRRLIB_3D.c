@@ -336,10 +336,10 @@ void GRRLIB_SetTexture(GRRLIB_texImg *tex, bool rep, bool bUseMipMapping) {
 	GXTexObj  texObj;
 
     if (rep) {
-        GX_InitTexObj(&texObj, tex->data, tex->w, tex->h, GX_TF_RGBA8, GX_REPEAT, GX_REPEAT, GX_TRUE);
+        GX_InitTexObj(&texObj, tex->data, tex->w, tex->h, GX_TF_RGBA8, GX_REPEAT, GX_REPEAT, GX_FALSE);
     }
     else {
-        GX_InitTexObj(&texObj, tex->data, tex->w, tex->h, GX_TF_RGBA8, GX_CLAMP, GX_CLAMP, GX_TRUE);
+        GX_InitTexObj(&texObj, tex->data, tex->w, tex->h, GX_TF_RGBA8, GX_CLAMP, GX_CLAMP, GX_FALSE);
     }
 
     if ( bUseMipMapping )

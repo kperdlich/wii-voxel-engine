@@ -18,10 +18,10 @@
 ***/
 
 #include "List.h"
-#include "UIElement.h"
+#include "UiElement.h"
 #include "../utils/Debug.h"
 
-List::List(uint32_t x, uint32_t y, uint32_t sizeBetweenElements ) : UIElement(x, y, 0.f, 0.f, nullptr), m_sizeBetweenElements(sizeBetweenElements)
+List::List(uint32_t x, uint32_t y, uint32_t sizeBetweenElements ) : UiElement(x, y, 0.f, 0.f, nullptr), m_sizeBetweenElements(sizeBetweenElements)
 {
 
 }
@@ -42,7 +42,7 @@ List::~List()
 }
 
 
-void List::AddComponent(UIElement* element)
+void List::AddComponent(UiElement* element)
 {
 	uint32_t entryX, entryY;
 	if ( m_elements.size() == 0 )
@@ -52,7 +52,7 @@ void List::AddComponent(UIElement* element)
 	}
 	else
 	{
-		UIElement* lastEntry = m_elements.back();
+		UiElement* lastEntry = m_elements.back();
 		entryX= lastEntry->GetX();
 		entryY = lastEntry->GetY() + m_sizeBetweenElements;
 	}
@@ -65,7 +65,7 @@ void List::AddComponent(UIElement* element)
 
 void List::Update()
 {
-	UIElement::Update();
+	UiElement::Update();
 
 	for ( uint32_t i = 0; i < m_elements.size(); i++)
 	{

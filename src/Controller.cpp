@@ -50,7 +50,7 @@ void Controller::Start()
         GRRLIB_SetBackgroundColour(0x00, 0x00, 0x00, 0xFF);
 
         m_pInputHandler->Update();        
-        m_pSceneHandler->Update(m_millisecondsDeltaLastFrame / 1000.0f);
+        m_pSceneHandler->Update(m_millisecondsLastFrame / 1000.0f);
         m_pSceneHandler->DrawScene();
 
         PrintFps( 500, 25, m_pFontHandler->GetNativFontByID( DEFAULT_FONT_ID ), DEFAULT_FONT_SIZE, GRRLIB_YELLOW );
@@ -68,7 +68,7 @@ void Controller::Start()
         GRRLIB_Render();
         CalculateFrameRate();
 
-        m_millisecondsDeltaLastFrame = ticks_to_millisecs(gettime()) - startFrameTime;
+        m_millisecondsLastFrame = ticks_to_millisecs(gettime()) - startFrameTime;
 	}
 
     delete m_pBasicCommandHandler;

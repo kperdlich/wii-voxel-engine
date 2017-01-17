@@ -20,7 +20,7 @@
 #ifndef _IEQUIPABLE_H_
 #define _IEQUIPABLE_H_
 
-#include "../components/UITextureElement.h"
+#include "../components/UiTextureElement.h"
 #include "Entity.h"
 
 class IEquipable {
@@ -28,7 +28,7 @@ public:
 	IEquipable();
 	virtual ~IEquipable();
 
-	virtual UITextureElement& GetUITextureElement() = 0;
+	virtual UiTextureElement& GetUiTextureElement() = 0;
 	virtual Entity& GetEntity() = 0;
 
 };

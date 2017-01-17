@@ -21,7 +21,7 @@
 #include <vector>
 #include <math.h>
 #include "IntroScene.h"
-#include "../components/UITextureElement.h"
+#include "../components/UiTextureElement.h"
 #include "../commands/client/SwitchToMainMenuCommand.h"
 
 
@@ -52,7 +52,7 @@ void CIntroScene::Load()
     Basic2DScene::Load();
 	m_BackgroundAlpha = 255;
 	Texture* logoTexture = m_TextureHandler->CreateTexture( WoxelCraft_png, IS_LOGO);
-	m_elements.push_back( new UITextureElement( (rmode->viWidth / 2) - (logoTexture->GetWidth() / 2), (rmode->viHeight / 2) - ( logoTexture->GetHeight() / 2 ), IS_LOGO,logoTexture));
+	m_elements.push_back( new UiTextureElement( (rmode->viWidth / 2) - (logoTexture->GetWidth() / 2), (rmode->viHeight / 2) - ( logoTexture->GetHeight() / 2 ), IS_LOGO,logoTexture));
 }
 
 
@@ -65,7 +65,7 @@ void CIntroScene::Update(float deltaSeconds)
         m_BackgroundAlpha -= deltaSeconds * 10;
         for ( uint32_t i = 0; i < m_elements.size(); i++)
 		{
-			UITextureElement* element = dynamic_cast<UITextureElement*>(m_elements[i]);
+			UiTextureElement* element = dynamic_cast<UiTextureElement*>(m_elements[i]);
 			if (element && element->IsVisible())
 			{
 				element->SetColor( 0xFFFFFF00 | m_BackgroundAlpha );

@@ -28,7 +28,7 @@ class Tile : public BasicTexture {
 public:
     Tile(float x, float y, uint32_t index, class SpriteSheet* tileSheet, const uint16_t id  );
 	virtual ~Tile();
-	virtual txTypes GetTextureType() const override;
+	virtual ETextureType GetTextureType() const override;
 
 	virtual bool IsVisible() const override;
     SpriteSheet* GetSpriteSheet();

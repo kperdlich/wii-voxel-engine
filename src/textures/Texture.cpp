@@ -21,10 +21,10 @@
 #include "Texture.h"
 
 
-Texture::Texture(float x, float y, const unsigned char* texture, const u16 id ) : m_TextureBytes(texture), BasicTexture(x, y, id)
+Texture::Texture(float x, float y, const unsigned char* texture, const u16 id ) : m_pTextureBytes(texture), BasicTexture(x, y, id)
 {
-    m_Texture = nullptr;
-	m_visible = true;
+    m_pTexture = nullptr;
+    m_bVisible = true;
 }
 
 Texture::~Texture()
@@ -32,46 +32,61 @@ Texture::~Texture()
 
 }
 
-GRRLIB_texImg* Texture::GetNativeTexture() const
+GRRLIB_texImg* Texture::GetGrrlibTexture() const
 {
-    return this->m_Texture;
+    return this->m_pTexture;
 }
 
-void Texture::LoadTexture() {
+void Texture::LoadTexture()
+{
+    UnloadTexture();
 
-	if ( m_Texture )
-	{
-		GRRLIB_FreeTexture( m_Texture );
-	}
+    m_pTexture = GRRLIB_LoadTexture( m_pTextureBytes );
 
-	if ( m_TextureBytes )
-	{
-		m_Texture = GRRLIB_LoadTexture( m_TextureBytes );
-	}
-	else
-	{
-		m_Texture = GRRLIB_CreateEmptyTexture(rmode->fbWidth, rmode->efbHeight);
-	}
+    if ( m_pTexture )
+    {
+        m_pTextureObject = new GXTexObj();
 
-	m_TextureLoaded = true;
+        GX_InitTexObj(m_pTextureObject, m_pTexture->data, m_pTexture->w, m_pTexture->h, GX_TF_RGBA8, GX_REPEAT, GX_REPEAT, GX_FALSE);
+
+        GX_InitTexObjLOD(m_pTextureObject, GX_LINEAR, GX_LINEAR, 0.0f, 0.0f, 0.0f, 0, 0, GX_ANISO_1);
+
+        if (GRRLIB_Settings.antialias == false)
+        {
+
+            GX_SetCopyFilter(GX_FALSE, rmode->sample_pattern, GX_FALSE, rmode->vfilter);
+        }
+        else
+        {
+            GX_SetCopyFilter(rmode->aa, rmode->sample_pattern, GX_TRUE, rmode->vfilter);
+        }
+
+        m_bTextureLoaded = true;
+    }
 }
 
 void Texture::UnloadTexture()
 {
 
-	if ( m_Texture )
+    if ( m_pTexture )
 	{
-		GRRLIB_FreeTexture( m_Texture );
+        GRRLIB_FreeTexture( m_pTexture );
 	}
-	m_TextureLoaded = false;
+
+    if ( m_pTextureObject )
+    {
+        delete m_pTextureObject;
+    }
+
+    m_bTextureLoaded = false;
 }
 
 uint32_t Texture::GetWidth() const
 {
 
-	if ( m_TextureLoaded )
+    if ( m_bTextureLoaded )
 	{
-		return m_Texture->w;
+        return m_pTexture->w;
 	}
 	return 0;
 }
@@ -79,24 +94,24 @@ uint32_t Texture::GetWidth() const
 uint32_t Texture::GetHeight() const
 {
 
-	if ( m_TextureLoaded )
+    if ( m_bTextureLoaded )
 	{
-		return m_Texture->h;
+        return m_pTexture->h;
 	}
 	return 0;
 }
 
 bool Texture::IsVisible() const
 {
-	return m_visible && m_TextureLoaded;
+    return m_bVisible && m_bTextureLoaded;
 }
 
-txTypes Texture::GetTextureType() const
+ETextureType Texture::GetTextureType() const
 {
 	return SPRITE;
 }
 
-bool Texture::isLoaded() const
+bool Texture::IsLoaded() const
 {
-	return m_TextureLoaded;
+    return m_bTextureLoaded;
 }

@@ -18,7 +18,7 @@
 ***/
 
 #include "Basic3DScene.h"
-#include "../utils/RenderHelper.h"
+#include "../renderer/MasterRenderer.h"
 #include "../utils/Debug.h"
 
 #define MIN_DIST 0.1f
@@ -63,9 +63,9 @@ void Basic3DScene::Draw()
 	GRRLIB_ObjectViewRotate( 0, 0, m_mainCamera->GetWorldAngleZ());
 	GRRLIB_ObjectViewEnd();
 
-    RenderHelper::SetGraphicsMode(true, false);
+    MasterRenderer::SetGraphicsMode(true, false);
 	m_pSkyBox->Render();
-    RenderHelper::SetGraphicsMode(true, true);
+    MasterRenderer::SetGraphicsMode(true, true);
 
 	GRRLIB_ObjectViewBegin();
 	GRRLIB_ObjectViewScale( m_mainCamera->GetWorldScaleX(), m_mainCamera->GetWorldScaleY(), m_mainCamera->GetWorldScaleZ() );

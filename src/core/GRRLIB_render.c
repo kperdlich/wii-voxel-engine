@@ -27,7 +27,7 @@ THE SOFTWARE.
 extern  GRRLIB_drawSettings  GRRLIB_Settings;
 extern  Mtx                  GXmodelView2D;
 
-static  guVector  axis = (guVector){0, 0, 1};
+guVector  axis = (guVector){0, 0, 1};
 
 /**
  * Draw a texture.

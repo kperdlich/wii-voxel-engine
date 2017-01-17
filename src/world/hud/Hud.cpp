@@ -29,7 +29,7 @@ Hud::Hud() {
 
 Hud::~Hud() {}
 
-void Hud::addComponent(UITextureElement* component) {
+void Hud::addComponent(UiTextureElement* component) {
 	m_hudComponents.push_back( component );
 }
 

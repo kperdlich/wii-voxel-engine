@@ -22,7 +22,7 @@
 
 SpriteSheet::SpriteSheet( const unsigned char* texture, const u16 id ) : Texture( 0, 0, texture, id )
 {
-	m_visible = false;
+	m_bVisible = false;
 }
 
 SpriteSheet::~SpriteSheet() {}
@@ -30,12 +30,12 @@ SpriteSheet::~SpriteSheet() {}
 void SpriteSheet::LoadTexture()
 {
 	Texture::LoadTexture();
-	GRRLIB_InitTileSet( m_Texture, TILE_WIDTH, TILE_HEIGHT, 0 );
+	GRRLIB_InitTileSet( m_pTexture, TILE_WIDTH, TILE_HEIGHT, 0 );
 }
 
 void SpriteSheet::UnloadTexture() {}
 
-txTypes SpriteSheet::GetTextureType() const
+ETextureType SpriteSheet::GetTextureType() const
 {
 	return SPRITE_SHEET;
 }

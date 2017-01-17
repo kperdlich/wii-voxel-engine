@@ -20,9 +20,9 @@
 #ifndef _CURSOR_H_
 #define _CURSOR_H_
 
-#include "UITextureElement.h"
+#include "UiTextureElement.h"
 
-class Cursor: public UITextureElement {
+class Cursor: public UiTextureElement {
 public:
 	Cursor( const char* name, BasicTexture* tex );
 	virtual ~Cursor();

@@ -22,23 +22,31 @@
 
 #include "../core/grrlib.h"
 #include "BasicTexture.h"
+#include <ogc/gx.h>
 
 
 class Texture : public BasicTexture
 {
 
 protected:
-    const unsigned char* m_TextureBytes = nullptr;
-    GRRLIB_texImg* m_Texture = nullptr;
-	bool m_TextureLoaded;
+    const unsigned char* m_pTextureBytes = nullptr;
+    GRRLIB_texImg* m_pTexture = nullptr;
+    bool m_bTextureLoaded;
+
+    GXTexObj* m_pTextureObject = nullptr;
 
 public:
     Texture( float x, float y, const unsigned char* texture, const uint16_t id );
 	virtual ~Texture();
 
-	virtual txTypes GetTextureType() const override;
+	virtual ETextureType GetTextureType() const override;
 
-	GRRLIB_texImg* GetNativeTexture() const;
+    GRRLIB_texImg* GetGrrlibTexture() const;
+
+    GXTexObj* GetTextureObject() const
+    {
+        return m_pTextureObject;
+    }
 
 	virtual void LoadTexture() override;
 	virtual void UnloadTexture() override;
@@ -46,7 +54,7 @@ public:
     virtual uint32_t GetWidth() const override;
     virtual uint32_t GetHeight() const override;
 
-	bool isLoaded() const;
+    bool IsLoaded() const;
 	virtual bool IsVisible() const override;
 };
 

@@ -21,7 +21,7 @@
 #include "Chunk.h"
 #include "../PerlinNoise.h"
 #include "../../utils/MathHelper.h"
-#include "../../utils/RenderHelper.h"
+#include "../../renderer/MasterRenderer.h"
 #include "../../renderer/BlockRenderer.h"
 #include "../../utils/Debug.h"
 
@@ -396,7 +396,7 @@ void Chunk::RebuildDisplayList()
 	BuildBlockRenderList();
 
 	DeleteDisplayList();
-    CreateDisplayList( RenderHelper::GetDisplayListSizeForFaces(m_amountOfFaces) );
+    CreateDisplayList( MasterRenderer::GetDisplayListSizeForFaces(m_amountOfFaces) );
 
     for(auto it = m_mBlockRenderList.begin(); it != m_mBlockRenderList.end(); ++it)
 	{

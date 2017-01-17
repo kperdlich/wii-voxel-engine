@@ -19,7 +19,7 @@
 
 #include "MainMenuScene.h"
 #include "../components/Cursor.h"
-#include "../components/UITextureElement.h"
+#include "../components/UiTextureElement.h"
 #include "../components/List.h"
 #include "../utils/Debug.h"
 #include "Cursor_png.h"
@@ -57,8 +57,8 @@ CMainMenuScene::~CMainMenuScene() {
 
 void CMainMenuScene::Load() {
     Basic2DScene::Load();
-	m_elements.push_back( new UITextureElement( MMS_CLASSIC_BACKGROUND , m_TextureHandler->CreateTexture( ClassicBackgroundSprite_png, MMS_CLASSIC_BACKGROUND )));
-	UITextureElement* logo = new UITextureElement( MMS_LOGO , m_TextureHandler->CreateTexture( WoxelCraft_png, MMS_LOGO));
+	m_elements.push_back( new UiTextureElement( MMS_CLASSIC_BACKGROUND , m_TextureHandler->CreateTexture( ClassicBackgroundSprite_png, MMS_CLASSIC_BACKGROUND )));
+	UiTextureElement* logo = new UiTextureElement( MMS_LOGO , m_TextureHandler->CreateTexture( WoxelCraft_png, MMS_LOGO));
 	logo->SetX( (rmode->viWidth / 2) - (logo->GetWidth() / 2) );
 	logo->SetY( 60 );
 	m_elements.push_back( logo );

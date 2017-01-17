@@ -51,7 +51,7 @@ uint16_t BasicTexture::GetId() const
 	return m_id;
 }
 
-txTypes BasicTexture::GetTextureType() const
+ETextureType BasicTexture::GetTextureType() const
 {
 	return INVALID;
 }
@@ -77,7 +77,7 @@ uint32_t BasicTexture::GetColor() const
 
 void BasicTexture::SetVisible( bool value )
 {
-	m_visible = value;
+	m_bVisible = value;
 }
 
 uint32_t BasicTexture::GetWidth() const

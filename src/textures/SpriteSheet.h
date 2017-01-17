@@ -30,7 +30,7 @@ public:
 	virtual ~SpriteSheet();
 	virtual void LoadTexture() override;
 	virtual void UnloadTexture() override;
-	virtual txTypes GetTextureType() const override;
+	virtual ETextureType GetTextureType() const override;
 };
 
 #endif /* _SPRITESHEET_H_ */

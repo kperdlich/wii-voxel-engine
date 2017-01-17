@@ -21,7 +21,7 @@
 #define _BASIC2DSCENE_H_
 
 #include <vector>
-#include "../components/UIElement.h"
+#include "../components/UiElement.h"
 #include "Scene.h"
 #include "../renderer/Renderer2D.h"
 
@@ -37,7 +37,7 @@ public:
 protected:
 	Renderer2D& Get2DRenderer();
 
-	std::vector<UIElement*> m_elements;
+	std::vector<UiElement*> m_elements;
 
 };
 

@@ -34,8 +34,8 @@ public:
 private:
 	void CreateSkyBox();
 
-	Texture* m_pSkyBoxTextures[6];
-	uint32_t m_DisplayListSize = 0;
+    Texture* m_pSkyBoxTextures[6];
+	uint32_t m_displayListSize = 0;
     void* m_pDispList = nullptr;
 
 };

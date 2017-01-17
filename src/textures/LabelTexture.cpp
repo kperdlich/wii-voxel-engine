@@ -21,7 +21,7 @@
 
 LabelTexture::LabelTexture( const char* text, float x, float y, const uint16_t id, GRRLIB_ttfFont* font, uint32_t fontSize, uint32_t color ) : m_text( text ), m_font( font ), m_fontSize( fontSize ), m_textColor( color ), BasicTexture(x, y,id ) {
 
-	m_visible = true;
+	m_bVisible = true;
 
 }
 
@@ -37,7 +37,7 @@ const char* LabelTexture::getText() const
 	return m_text;
 }
 
-txTypes LabelTexture::GetTextureType() const
+ETextureType LabelTexture::GetTextureType() const
 {
 	return LABEL;
 }

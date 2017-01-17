@@ -20,14 +20,14 @@
 #ifndef _UITEXTUREELEMENT_H_
 #define _UITEXTUREELEMENT_H_
 
-#include "UIElement.h"
+#include "UiElement.h"
 #include "../textures/BasicTexture.h"
 
-class UITextureElement: public UIElement {
+class UiTextureElement: public UiElement {
 public:
-    UITextureElement(uint32_t x, uint32_t y, const char* name, BasicTexture* tex);
-	UITextureElement(const char* name, BasicTexture* tex);
-	virtual ~UITextureElement();
+    UiTextureElement(uint32_t x, uint32_t y, const char* name, BasicTexture* tex);
+    UiTextureElement(const char* name, BasicTexture* tex);
+    virtual ~UiTextureElement();
 	void Load() override;
 
     virtual void SetColor(uint32_t color);

@@ -22,7 +22,7 @@
 
 #include "Scene.h"
 #include "../renderer/Renderer3D.h"
-#include "../components/UIElement.h"
+#include "../components/UiElement.h"
 #include "../entity/EntityHandler.h"
 #include "../world/Camera.h"
 #include "../world/GameWorld.h"
@@ -45,7 +45,7 @@ public:
 protected:
 	class Renderer3D& Get3DRenderer();
 	class EntityHandler* m_entityHandler;
-	std::vector<UIElement*> m_uiElements;
+	std::vector<UiElement*> m_uiElements;
 	class Camera* m_mainCamera;
     class GameWorld* m_pGameWorld;
 	class SkyBox* m_pSkyBox;

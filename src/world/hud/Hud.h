@@ -21,7 +21,7 @@
 #define _CHUD_H_
 
 #include <vector>
-#include "../../components/UITextureElement.h"
+#include "../../components/UiTextureElement.h"
 #include "Hotbar.h"
 #include "PlayerInventoryHud.h"
 
@@ -29,14 +29,14 @@ class Hud {
 public:
     Hud();
     virtual ~Hud();
-	void addComponent( UITextureElement* component );
+	void addComponent( UiTextureElement* component );
 	void Init();
 
 protected:
 	PlayerInventoryHud* m_playerInventoryHud;
 
 
-	std::vector<UITextureElement*> m_hudComponents;
+	std::vector<UiTextureElement*> m_hudComponents;
 
 };
 
