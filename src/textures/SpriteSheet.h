@@ -26,7 +26,7 @@
 class SpriteSheet: public Texture {
 
 public:
-	SpriteSheet( const unsigned char* texture, const u16 id );
+    SpriteSheet( const TextureData& textureData, const u16 id );
 	virtual ~SpriteSheet();
 	virtual void LoadTexture() override;
 	virtual void UnloadTexture() override;

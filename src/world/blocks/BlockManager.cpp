@@ -23,15 +23,15 @@
 #include "../../utils/Vector3.h"
 #include "../../utils/Debug.h"
 
-#include "Dirt_png.h"
-#include "Grass_png.h"
-#include "Grass_Side_png.h"
+#include "Dirt_tpl.h"
+#include "Grass_tpl.h"
+#include "Grass_Side_tpl.h"
 
 void BlockManager::LoadBlocks()
 {
-    Texture* pDirtTexture = m_pTextureHandler->CreateTexture( Dirt_png, BLOCK_TEXTURE_DIRT );
-    Texture* pGrassTexture = m_pTextureHandler->CreateTexture( Grass_png, BLOCK_TEXTURE_GRASS );
-    Texture* pGrassSideTexture = m_pTextureHandler->CreateTexture( Grass_Side_png, BLOCK_TEXTURE_GRASS_SIDE );
+    Texture* pDirtTexture = m_pTextureHandler->CreateTexture(Dirt_tpl, Dirt_tpl_size, BLOCK_TEXTURE_DIRT );
+    Texture* pGrassTexture = m_pTextureHandler->CreateTexture(Grass_tpl, Grass_tpl_size, BLOCK_TEXTURE_GRASS );
+    Texture* pGrassSideTexture = m_pTextureHandler->CreateTexture(Grass_Side_tpl, Grass_Side_tpl_size, BLOCK_TEXTURE_GRASS_SIDE );
 
     // todo dirty workaround - have to fix texture handler
     pDirtTexture->SetVisible(false);

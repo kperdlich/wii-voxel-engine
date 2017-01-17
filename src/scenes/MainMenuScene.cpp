@@ -57,15 +57,15 @@ CMainMenuScene::~CMainMenuScene() {
 
 void CMainMenuScene::Load() {
     Basic2DScene::Load();
-	m_elements.push_back( new UiTextureElement( MMS_CLASSIC_BACKGROUND , m_TextureHandler->CreateTexture( ClassicBackgroundSprite_png, MMS_CLASSIC_BACKGROUND )));
-	UiTextureElement* logo = new UiTextureElement( MMS_LOGO , m_TextureHandler->CreateTexture( WoxelCraft_png, MMS_LOGO));
+    m_elements.push_back( new UiTextureElement( MMS_CLASSIC_BACKGROUND , m_TextureHandler->CreateTexture(ClassicBackgroundSprite_png, ClassicBackgroundSprite_png_size, MMS_CLASSIC_BACKGROUND )));
+    UiTextureElement* logo = new UiTextureElement( MMS_LOGO , m_TextureHandler->CreateTexture(WoxelCraft_png, WoxelCraft_png_size, MMS_LOGO));
 	logo->SetX( (rmode->viWidth / 2) - (logo->GetWidth() / 2) );
 	logo->SetY( 60 );
 	m_elements.push_back( logo );
 
 	CreateMainMenuButtonList();
 
-	m_elements.push_back( new Cursor( MMS_CURSOR , m_TextureHandler->CreateTexture( Cursor_png, MMS_CURSOR )));
+    m_elements.push_back( new Cursor( MMS_CURSOR , m_TextureHandler->CreateTexture(Cursor_png, Cursor_png_size, MMS_CURSOR )));
 }
 
 void CMainMenuScene::Draw()
@@ -94,7 +94,7 @@ void CMainMenuScene::Update(float deltaSeconds)
 
 void CMainMenuScene::CreateMainMenuButtonList()
 {
-	Texture* startButtonTexture = m_TextureHandler->CreateTexture( BasicButtonBig_png, "BasicButtonBig_png" );
+    Texture* startButtonTexture = m_TextureHandler->CreateTexture(BasicButtonBig_png, BasicButtonBig_png_size, "BasicButtonBig_png" );
 	int xPos = (rmode->viWidth / 2) - (startButtonTexture->GetWidth() / 2);
 	int yPos = (rmode->viHeight / 2) - ( startButtonTexture->GetHeight() / 2);
 	int sizeBetweenBtns = startButtonTexture->GetHeight() + BUTTON_Y_DISTANCE;
@@ -113,12 +113,12 @@ BasicButton* CMainMenuScene::CreateDefaultMainMenuButton(  const char* buttonNam
 {
     FontHandler& fontHandler = Controller::GetInstance().GetFontHandler();
 
-	Texture* pdefaultButtonTexture = m_TextureHandler->CreateTexture( BasicButtonBig_png, buttonName);
+    Texture* pdefaultButtonTexture = m_TextureHandler->CreateTexture(BasicButtonBig_png, BasicButtonBig_png_size, buttonName);
 
 	char searchNamehighlight[strlen(buttonName) + strlen(HIGHLIGHT_TAG) +1];
 	strcpy( searchNamehighlight, buttonName );
 	strcat( searchNamehighlight, HIGHLIGHT_TAG );
-	Texture* pHighlightButtonTexture = m_TextureHandler->CreateTexture( BasicButtonBigHighlight_png, searchNamehighlight );
+    Texture* pHighlightButtonTexture = m_TextureHandler->CreateTexture(BasicButtonBigHighlight_png, BasicButtonBigHighlight_png_size, searchNamehighlight );
 
 	char searchLabel[strlen(buttonName) + strlen(LABEL_TAG) +1];
 	strcpy( searchLabel, buttonName );

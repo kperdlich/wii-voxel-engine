@@ -20,7 +20,7 @@
 #include "SpriteSheet.h"
 #include "../utils/TileHelper.h"
 
-SpriteSheet::SpriteSheet( const unsigned char* texture, const u16 id ) : Texture( 0, 0, texture, id )
+SpriteSheet::SpriteSheet( const TextureData& textureData, const u16 id ) : Texture( 0, 0, textureData, id )
 {
 	m_bVisible = false;
 }
@@ -30,7 +30,7 @@ SpriteSheet::~SpriteSheet() {}
 void SpriteSheet::LoadTexture()
 {
 	Texture::LoadTexture();
-	GRRLIB_InitTileSet( m_pTexture, TILE_WIDTH, TILE_HEIGHT, 0 );
+    GRRLIB_InitTileSet( m_pGrrlibTexture, TILE_WIDTH, TILE_HEIGHT, 0 );
 }
 
 void SpriteSheet::UnloadTexture() {}

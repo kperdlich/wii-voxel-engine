@@ -73,24 +73,25 @@ void TextureHandler::DestroyAllTextures()
 }
 
 
-Texture* TextureHandler::CreateTexture(const u8* textureName, const char* searchName )
+Texture* TextureHandler::CreateTexture(const uint8_t* pTextureData, uint32_t textureSize, const char* pSearchName)
 {
      // todo handle error!
-	if ( FindTexture(searchName))
+    if ( FindTexture(pSearchName))
 	{
 		throw;
 	}
 
-	Texture* tex = new Texture( 0, 0, textureName, GetNewIndex() );
+    TextureData textureData = { pTextureData, textureSize };
+    Texture* tex = new Texture( 0, 0, textureData, GetNewIndex() );
 	tex->LoadTexture();
 	std::vector<BasicTexture*>::iterator textureIt = m_textures.insert(m_textures.end(), tex );
-	m_textureMap.insert( std::pair<std::string, std::vector<BasicTexture*>::iterator>(searchName, textureIt ));
+    m_textureMap.insert( std::pair<std::string, std::vector<BasicTexture*>::iterator>(pSearchName, textureIt ));
 	return tex;
 }
 
-Texture* TextureHandler::CreateTexture( const u8* textureName, const char* searchName, bool visible )
+Texture* TextureHandler::CreateTexture( const uint8_t* pTextureData, uint32_t textureSize, const char* pSearchName, bool visible )
 {
-	Texture* pTexture = CreateTexture(textureName, searchName);
+    Texture* pTexture = CreateTexture(pTextureData, textureSize, pSearchName);
 	pTexture->SetVisible(visible);
 	return pTexture;
 }

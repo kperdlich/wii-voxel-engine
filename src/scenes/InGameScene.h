@@ -31,7 +31,7 @@ public:
 	void Load() override;
 	void Draw() override;
 protected:
-	void initEntities();
+	void InitEntities();
 
 };
 

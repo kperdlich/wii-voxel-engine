@@ -51,7 +51,7 @@ void CIntroScene::Load()
 {
     Basic2DScene::Load();
 	m_BackgroundAlpha = 255;
-	Texture* logoTexture = m_TextureHandler->CreateTexture( WoxelCraft_png, IS_LOGO);
+    Texture* logoTexture = m_TextureHandler->CreateTexture(WoxelCraft_png, WoxelCraft_png_size, IS_LOGO);
 	m_elements.push_back( new UiTextureElement( (rmode->viWidth / 2) - (logoTexture->GetWidth() / 2), (rmode->viHeight / 2) - ( logoTexture->GetHeight() / 2 ), IS_LOGO,logoTexture));
 }
 

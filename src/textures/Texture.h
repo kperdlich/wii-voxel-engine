@@ -24,19 +24,25 @@
 #include "BasicTexture.h"
 #include <ogc/gx.h>
 
+typedef struct
+{
+    const uint8_t* pTextureData;
+    uint32_t textureSize;
+} TextureData;
 
 class Texture : public BasicTexture
 {
 
 protected:
-    const unsigned char* m_pTextureBytes = nullptr;
-    GRRLIB_texImg* m_pTexture = nullptr;
+    TextureData m_textureData;
+    GRRLIB_texImg* m_pGrrlibTexture = nullptr;
     bool m_bTextureLoaded;
 
+    void* m_pTplTextureData = nullptr;
     GXTexObj* m_pTextureObject = nullptr;
 
 public:
-    Texture( float x, float y, const unsigned char* texture, const uint16_t id );
+    Texture( float x, float y, const TextureData& textureData, const uint16_t id );
 	virtual ~Texture();
 
 	virtual ETextureType GetTextureType() const override;
@@ -49,13 +55,21 @@ public:
     }
 
 	virtual void LoadTexture() override;
-	virtual void UnloadTexture() override;
+    virtual void UnloadTexture() override;
 
     virtual uint32_t GetWidth() const override;
     virtual uint32_t GetHeight() const override;
 
     bool IsLoaded() const;
 	virtual bool IsVisible() const override;
+
+    void PrintTlpInfo();
+
+private:
+    void LoadTplTexture();
+    void LoadDefaultTexture();
+    bool IsTplTexture();
+
 };
 
 

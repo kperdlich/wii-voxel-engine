@@ -61,12 +61,12 @@ void SkyBox::Init()
 {
     auto textureHandler = Controller::GetInstance().GetSceneHandler().GetCurrentScene().GetTextureHandler();
 
-    m_pSkyBoxTextures[SKY_FRONT] = textureHandler.CreateTexture(SkyBox_Front_png, "SKY_FRONT", false);
-    m_pSkyBoxTextures[SKY_RIGHT] = textureHandler.CreateTexture(SkyBox_Right_png, "SKY_RIGHT", false);
-    m_pSkyBoxTextures[SKY_LEFT] = textureHandler.CreateTexture(SkyBox_Left_png, "SKY_LEFT", false);
-    m_pSkyBoxTextures[SKY_BACK] = textureHandler.CreateTexture(SkyBox_Back_png, "SKY_BACK", false);
-    m_pSkyBoxTextures[SKY_UP] = textureHandler.CreateTexture(SkyBox_Top_png, "SKY_UP", false);
-    m_pSkyBoxTextures[SKY_DOWN] = textureHandler.CreateTexture(SkyBox_Bottom_png, "SKY_DOWN", false);
+    m_pSkyBoxTextures[SKY_FRONT] = textureHandler.CreateTexture(SkyBox_Front_png, SkyBox_Front_png_size, "SKY_FRONT", false);
+    m_pSkyBoxTextures[SKY_RIGHT] = textureHandler.CreateTexture(SkyBox_Right_png, SkyBox_Right_png_size, "SKY_RIGHT", false);
+    m_pSkyBoxTextures[SKY_LEFT] = textureHandler.CreateTexture(SkyBox_Left_png, SkyBox_Left_png_size, "SKY_LEFT", false);
+    m_pSkyBoxTextures[SKY_BACK] = textureHandler.CreateTexture(SkyBox_Back_png, SkyBox_Back_png_size, "SKY_BACK", false);
+    m_pSkyBoxTextures[SKY_UP] = textureHandler.CreateTexture(SkyBox_Top_png, SkyBox_Top_png_size, "SKY_UP", false);
+    m_pSkyBoxTextures[SKY_DOWN] = textureHandler.CreateTexture(SkyBox_Bottom_png, SkyBox_Bottom_png_size, "SKY_DOWN", false);
 
 	CreateSkyBox();
 }

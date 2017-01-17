@@ -44,27 +44,26 @@ void CInGameScene::Load()
 {
     Basic3DScene::Load();
 
-	m_uiElements.push_back( new Hotbar( IGS_HUD_HOTBAR, m_TextureHandler->CreateTexture(Hotbar_png, IGS_HUD_HOTBAR)) );
-	m_uiElements.push_back( new Cursor( IGS_HUD_CROSSHAIR, m_TextureHandler->CreateTexture(Crosshair_png, IGS_HUD_CROSSHAIR)) );
+    m_uiElements.push_back( new Hotbar( IGS_HUD_HOTBAR, m_TextureHandler->CreateTexture(Hotbar_png, Hotbar_png_size, IGS_HUD_HOTBAR)) );
+    m_uiElements.push_back( new Cursor( IGS_HUD_CROSSHAIR, m_TextureHandler->CreateTexture(Crosshair_png, Crosshair_png_size, IGS_HUD_CROSSHAIR)) );
 
 	m_pGameWorld = new GameWorld(this);
 	m_pGameWorld->GenerateWorld();
 
-	initEntities();
+    InitEntities();
 }
+
 
 void CInGameScene::Draw()
 {
-    Basic3DScene::Draw();
+    Basic3DScene::Draw();   
 
 #ifdef DEBUG
     CPlayer* player = static_cast<CPlayer*>(m_entityHandler->GetPlayer());
     Debug::GetInstance().Log( "Player Position: x:%d, y:%d, z:%d", static_cast<int>(player->GetPosition().GetX()), static_cast<int>(player->GetPosition().GetY()), static_cast<int>(player->GetPosition().GetZ()) );
     Debug::GetInstance().Log( "Player Rotation: x:%d, y:%d, z:%d", static_cast<int>(player->GetRotation().GetX()), static_cast<int>(player->GetRotation().GetY()), static_cast<int>(player->GetRotation().GetZ()) );
 
-
     /*
-
     GRRLIB_SetLightAmbient(0x404040FF);
     GRRLIB_SetLightSpot(0, (guVector){ 10.0f, 0.0f, 10.0f }, (guVector){  0.0f, 0.0f, 0.0f }, 1.0f, 3.0f, 1.0f, 1.0f, 0.0f, 0.0f, GRRLIB_RED);
 
@@ -86,7 +85,7 @@ void CInGameScene::Draw()
 #endif
 }
 
-void CInGameScene::initEntities()
+void CInGameScene::InitEntities()
 {
     CPlayer* pPlayer = new CPlayer();
 	pPlayer->SetPosition(Vector3(10.0f, CHUNK_BLOCK_SIZE_Y, 10.0f));
