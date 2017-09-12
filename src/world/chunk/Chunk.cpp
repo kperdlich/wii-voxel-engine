@@ -82,18 +82,72 @@ void Chunk::Init(Vector3& position)
 
 			for (uint32_t y = 0; y < height; y++)
 			{
-				if ( y == height - 1 )
+                if ( y == height - 1 )
 				{
-					m_pBlocks[x][y][z] = BlockType::GRASS;
-				}
-				else
-				{
-					m_pBlocks[x][y][z] = BlockType::DIRT;
-				}
+                    m_pBlocks[x][y][z] = BlockType::GRASS;
+				}                
+                else if (y <= STONE_LEVEL )
+                {
+                    m_pBlocks[x][y][z] = BlockType::STONE;
+                }
+                else
+                {
+                    m_pBlocks[x][y][z] = BlockType::DIRT;
+                }
 			}
 		}
 	}
+
+    CreateTrees();
 }
+
+void Chunk::CreateTrees()
+{
+    srand (time(NULL));
+    uint32_t x = 2 + (rand() % (CHUNK_SIZE_X - 4)); // value range 2 - 14
+    srand (time(NULL));
+    uint32_t z = 2 + (rand() % (CHUNK_SIZE_Z - 4));
+
+    double xWorld = (m_pCenterPosition->GetX() - (CHUNK_BLOCK_SIZE_X / 2) + (x * BLOCK_SIZE));
+    double zWorld = (m_pCenterPosition->GetZ() - (CHUNK_BLOCK_SIZE_Z / 2) + (z * BLOCK_SIZE));
+
+    double noise = m_pWorldManager->GetNoise().GetHeight(xWorld, zWorld);
+
+    uint32_t y = (uint32_t) MathHelper::Clamp(CHUNK_SIZE_Y * noise, 1.0, CHUNK_SIZE_Y);
+
+
+    if ( y < CHUNK_SIZE_Y - TREE_HIGHT)
+    {
+        if ( m_pBlocks[x][y-1][z] == BlockType::GRASS)
+        {
+
+            for (int8_t i = -2; i <= 2; i++)
+            {
+                for (int8_t j = -2; j <= 2; j++)
+                {
+                    m_pBlocks[x+i][y+3][z+j] = BlockType::LEAF;
+                    m_pBlocks[x+i][y+4][z+j] = BlockType::LEAF;
+                }
+            }
+
+            for (int8_t i = -1; i <= 1; i++)
+            {
+                for (int8_t j = -1; j <= 1; j++)
+                {
+                    m_pBlocks[x+i][y+5][z+j] = BlockType::LEAF;
+                    m_pBlocks[x+i][y+6][z+j] = ((i % 2) == 0) || ((j % 2) == 0) ? (BlockType::LEAF) : (BlockType::AIR);
+                }
+            }
+
+
+            for (uint32_t i = 0; i < 3; i++)
+            {
+                m_pBlocks[x][y+i][z] = BlockType::WOOD;
+            }
+        }
+    }
+}
+
 
 void Chunk::UpdateChunkNeighbors()
 {
@@ -458,13 +512,21 @@ BlockType Chunk::GetBlockTypeByWorldPosition(const Vector3& worldPosition) const
 
 Vector3 Chunk::ValidatePhysicalPosition(const Vector3& position) const
 {
-	Vector3 pos = GetBlockPositionByWorldPosition(position);
+    Vector3 pos = GetBlockPositionByWorldPosition(position);
 	float currentPos = CHUNK_BLOCK_SIZE_Y - (BLOCK_SIZE);
 	bool bValidated = false;
 	do
 	{
 		pos.SetY(currentPos);
-		bValidated = (GetBlockTypeByWorldPosition(pos) != BlockType::AIR) || (currentPos == 0);
+        bValidated = (GetBlockTypeByWorldPosition(pos) != BlockType::AIR) || (currentPos == 0);
+        /*  quick physics fix for the tree update
+         *  Player shouldn't jump higher than blocksize
+         */
+        if (bValidated)
+        {
+            double distance = position.GetY() - currentPos;
+            bValidated = distance > (-BLOCK_SIZE);
+        }
 		currentPos -= BLOCK_SIZE;
 
 	} while(!bValidated);

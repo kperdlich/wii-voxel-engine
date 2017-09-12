@@ -55,8 +55,8 @@ void BlockRenderer::Draw()
 
             for(auto it = m_positions->begin(); it != m_positions->end(); ++it)
             {
-                Vector3 blockPosition = *(*it)->pBlockPosition;
-                BlockFaceVisibiltyVO blockRenderVO = *(*it)->pFaceVO;
+                Vector3& blockPosition = *(*it)->pBlockPosition;
+                BlockFaceVisibiltyVO& blockRenderVO = *(*it)->pFaceVO;
 
                 // see http://www.matrix44.net/cms/wp-content/uploads/2011/03/ogl_coord_object_space_cube.png
                 guVector vertices[8] =

@@ -33,6 +33,9 @@
 #define CHUNK_BLOCK_SIZE_Y (BLOCK_SIZE * CHUNK_SIZE_Y)
 #define CHUNK_BLOCK_SIZE_Z (BLOCK_SIZE * CHUNK_SIZE_Z)
 
+#define STONE_LEVEL 2
+#define TREE_HIGHT 6
+
 struct Vec3i {
 	uint32_t m_x, m_y, m_z;
 };
@@ -74,8 +77,10 @@ private:
 	void BuildBlockRenderList();
 	bool IsBlockVisible(uint32_t iX, uint32_t iY, uint32_t iZ, BlockFaceVisibiltyVO* &pFaceVO );
 	Vec3i GetLocalBlockPositionByWorldPosition(const Vector3& blockWorldPosition) const;
-
 	Vector3 LocalPositionToGlobalPosition(const Vec3i& localPosition) const;
+    void CreateTrees();
+
+
 
 private:
     bool m_isDirty;

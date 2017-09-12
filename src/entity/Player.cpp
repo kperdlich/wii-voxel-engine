@@ -72,10 +72,12 @@ void CPlayer::Update(float deltaSeconds)
         Rotate( Vector3( 0, ROTATION_SPEED * deltaSeconds, 0 )); // left
 	}
 
+    float playerY = m_position.GetY();
+
     Move(-(pad->GetNunchukAngleX()), -(pad->GetNunchukAngleY()), deltaSeconds);
 
 	// shity physics
-	Vector3 blockPositionUnderPlayer(m_position.GetX() + BLOCK_SIZE_HALF, 0.0f, m_position.GetZ() + BLOCK_SIZE_HALF);
+    Vector3 blockPositionUnderPlayer(m_position.GetX() + BLOCK_SIZE_HALF, playerY, m_position.GetZ() + BLOCK_SIZE_HALF);
 	Vector3 newPosition = m_pWorld->GetNewPlayerPosition(blockPositionUnderPlayer);
 	m_position.SetY(newPosition.GetY() + (2 * BLOCK_SIZE));
 
