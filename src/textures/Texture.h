@@ -42,7 +42,7 @@ protected:
     GXTexObj* m_pTextureObject = nullptr;
 
 public:
-    Texture( float x, float y, const TextureData& textureData, const uint16_t id );
+    Texture( float x, float y, TextureData textureData, const uint16_t id );
 	virtual ~Texture();
 
 	virtual ETextureType GetTextureType() const override;

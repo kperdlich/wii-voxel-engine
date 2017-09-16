@@ -47,12 +47,10 @@ typedef struct {
     uint8_t	unpacked;
 } TPL_Texture;
 
-Texture::Texture(float x, float y, const TextureData& textureData, const uint16_t id ) : BasicTexture(x, y, id)
+Texture::Texture(float x, float y, TextureData textureData, const uint16_t id ) : BasicTexture(x, y, id), m_textureData(textureData)
 {
     m_pGrrlibTexture = nullptr;
     m_bVisible = true;
-    m_textureData.pTextureData = textureData.pTextureData;
-    m_textureData.textureSize = textureData.textureSize;
 }
 
 Texture::~Texture()
@@ -100,7 +98,7 @@ void Texture::LoadDefaultTexture()
 
     if ( m_pGrrlibTexture )
     {
-        GX_InitTexObj(m_pTextureObject, m_pGrrlibTexture->data, m_pGrrlibTexture->w, m_pGrrlibTexture->h, GX_TF_RGBA8, GX_REPEAT, GX_REPEAT, GX_FALSE);
+        GX_InitTexObj(m_pTextureObject, m_pGrrlibTexture->data, m_pGrrlibTexture->w, m_pGrrlibTexture->h, GX_TF_RGBA8, GX_CLAMP, GX_CLAMP, GX_FALSE);
 
         GX_InitTexObjLOD(m_pTextureObject, GX_LINEAR, GX_LINEAR, 0.0f, 0.0f, 0.0f, 0, 0, GX_ANISO_1);
 
