@@ -100,12 +100,6 @@ void Controller::Init()
     m_pBasicCommandHandler->Init();
 }
 
-
-void Controller::SwitchToNextScene()
-{
-    m_pSceneHandler->LoadNextScene();
-}
-
 SceneHandler& Controller::GetSceneHandler()
 {
     return *m_pSceneHandler;

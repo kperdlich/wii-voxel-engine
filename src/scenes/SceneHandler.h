@@ -41,8 +41,7 @@ public:
     SceneHandler();
     ~SceneHandler();
 	void Init();
-	void LoadScene(int index );
-	void LoadNextScene();
+	void LoadScene(int index );	
 	void DrawScene();
     void Update(float deltaSeconds);
     Scene& GetCurrentScene();

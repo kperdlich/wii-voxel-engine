@@ -51,7 +51,7 @@ public:
 	void Start();
 	void End();
 	void Init();
-	void SwitchToNextScene();
+
     class SceneHandler& GetSceneHandler();
     class InputHandler& GetInputHandler();
     class FontHandler& GetFontHandler();
