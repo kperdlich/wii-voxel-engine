@@ -48,26 +48,15 @@ public:
         m_sortingLayerIndex = index;
     }
 
-    uint16_t GetSortingLayerIndex()
+    uint16_t GetSortingLayerIndex() const
     {
         return m_sortingLayerIndex;
-    }
-
-    bool operator > (const Sprite& sprite) const
-    {
-        return (m_sortingLayerIndex > sprite.m_sortingLayerIndex);
-    }
-
-    bool operator < (const Sprite& sprite) const
-    {
-        return (m_sortingLayerIndex < sprite.m_sortingLayerIndex);
     }
 
 protected:
     bool m_bVisible = true;
     uint16_t m_sortingLayerIndex = 0;
 };
-
 
 
 

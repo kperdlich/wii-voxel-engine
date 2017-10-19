@@ -33,6 +33,9 @@ class TextureHandler {
 
 private:
 
+    std::vector<const Sprite*> m_spriteRenderCash;
+    bool m_spriteCashDirty = true;
+
     std::map<std::string, Sprite*> m_spriteAtlas;
     std::unordered_map<std::string, Texture*> m_textureAtlas;    
 
@@ -42,8 +45,8 @@ public:
 
     Texture* CreateTexture( const uint8_t* pTextureData, uint32_t textureSize, const char* pSearchName );
     Sprite* CreateSprite( const uint8_t* pTextureData, uint32_t textureSize, const char* pSearchName, uint16_t sortingLayer = 0);
-    Label* CreateLabel( int x, int y, const char* text, GRRLIB_ttfFont* font, uint32_t fontSize, uint32_t color, const char* searchName );
-    Label* CreateLabel( const char* text, GRRLIB_ttfFont* font, const char* searchName );
+    Label* CreateLabel( int x, int y, const char* text, GRRLIB_ttfFont* font, uint32_t fontSize, uint32_t color, const char* searchName, uint16_t sortingLayer = 0 );
+    Label* CreateLabel( const char* text, GRRLIB_ttfFont* font, const char* searchName, uint16_t sortingLayer = 0 );
 
     void DestroySpriteByName( const char* searchName );
     void DestroyTextureByName( const char* searchName );
@@ -66,6 +69,11 @@ public:
     uint32_t SpriteCount() const
     {
         return m_spriteAtlas.size();
+    }
+
+    void SetSpriteCashDirty(bool value)
+    {
+        m_spriteCashDirty = value;
     }
 
 protected:

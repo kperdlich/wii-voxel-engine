@@ -38,23 +38,29 @@ BasicButton::~BasicButton() { }
 
 void BasicButton::Update()
 {
-	if ( HandleMoveOver() )
+    if ( MouseOver() )
 	{
-		HandleOnClick();
+        CheckForClick();
 	}
 }
 
-bool BasicButton::HandleMoveOver() {
-
+bool BasicButton::MouseOver()
+{
 	WiiPad* pad = Controller::GetInstance().GetInputHandler().GetPadByID( WII_PAD_0 );
 	bool mouseOver = GRRLIB_PtInRect(m_texture->GetX(), m_texture->GetY(), m_texture->GetWidth(), m_texture->GetHeight(), pad->GetX(), pad->GetY() );
-	m_texture->SetVisible(!mouseOver);
-	m_highlightTexture->SetVisible(mouseOver);
+    if ( mouseOver != m_mouseOver )
+    {
+        m_texture->SetVisible(!mouseOver);
+        m_highlightTexture->SetVisible(mouseOver);
+        Controller::GetInstance().GetSceneHandler().GetCurrentScene().GetTextureHandler().SetSpriteCashDirty(true);
+        m_mouseOver = mouseOver;
+    }
+
 	return mouseOver;
 }
 
-void BasicButton::HandleOnClick() {
-
+void BasicButton::CheckForClick()
+{
 	WiiPad* pad = Controller::GetInstance().GetInputHandler().GetPadByID( WII_PAD_0 );
 
 	if ( (pad->ButtonsUp() & WPAD_BUTTON_A) && m_clickCallback )

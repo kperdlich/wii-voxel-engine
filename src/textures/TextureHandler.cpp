@@ -92,7 +92,7 @@ Texture* TextureHandler::CreateTexture(const uint8_t* pTextureData, uint32_t tex
     TextureLoadingData textureData = { pTextureData, textureSize };
     Texture* tex = new Texture( 0, 0, textureData, GetNewTextureIndex() );
     tex->Load();
-    m_textureAtlas.insert(std::make_pair(pSearchName, tex));
+    m_textureAtlas.emplace(pSearchName, tex);
     return tex;
 }
 
@@ -123,7 +123,7 @@ u16 TextureHandler::GetNewSpriteIndex()
 }
 
 Label* TextureHandler::CreateLabel(int x, int y, const char* text,
-        GRRLIB_ttfFont* font, uint32_t fontSize, u32 color, const char* searchName)
+        GRRLIB_ttfFont* font, uint32_t fontSize, u32 color, const char* searchName, uint16_t sortingLayer)
 {
     if ( FindSprite(searchName))
 	{
@@ -132,13 +132,14 @@ Label* TextureHandler::CreateLabel(int x, int y, const char* text,
 
     Label* label = new Label( text, x, y, {nullptr, 0}, GetNewSpriteIndex(), font, fontSize, color );
     label->Load();
-    m_spriteAtlas.insert(std::make_pair(searchName, label));
+    label->SetSortingLayerIndex(sortingLayer);
+    m_spriteAtlas.emplace(searchName, label);
 	return label;
 }
 
-Label* TextureHandler::CreateLabel( const char* text, GRRLIB_ttfFont* font, const char* searchName )
+Label* TextureHandler::CreateLabel( const char* text, GRRLIB_ttfFont* font, const char* searchName, uint16_t sortingLayer )
 {
-    return CreateLabel(0, 0, text, font, DEFAULT_FONT_SIZE, GRRLIB_WHITE, searchName);
+    return CreateLabel(0, 0, text, font, DEFAULT_FONT_SIZE, GRRLIB_WHITE, searchName, sortingLayer);
 }
 
 bool TextureHandler::FindTexture(std::string key) const
@@ -166,19 +167,23 @@ const Sprite *TextureHandler::GetSprite(std::string key) const
 
 std::vector<const Sprite*> TextureHandler::GetSpriteRenderList()
 {
-    std::vector<const Sprite*> sprites;
-    for ( auto it = m_spriteAtlas.begin(); it != m_spriteAtlas.end(); it++)
+    if ( m_spriteCashDirty )
     {
-        Sprite* pSprite = it->second;
-        if (pSprite->IsVisible())
+        m_spriteRenderCash.clear();
+        for ( auto it = m_spriteAtlas.begin(); it != m_spriteAtlas.end(); it++)
         {
-            sprites.push_back(pSprite);
+            Sprite* pSprite = it->second;
+            if (pSprite->IsVisible())
+            {
+                m_spriteRenderCash.push_back(pSprite);
+            }
         }
+
+        std::sort(m_spriteRenderCash.begin(), m_spriteRenderCash.end(), [](const Sprite* a, const Sprite* b) { return a->GetSortingLayerIndex() < b->GetSortingLayerIndex(); });
+        m_spriteCashDirty = false;
     }
 
-    // todo fix z-sorting
-    std::sort(sprites.begin(), sprites.end());
-    return sprites;
+    return m_spriteRenderCash;
 }
 
 const Texture* TextureHandler::GetTexture(std::string key) const

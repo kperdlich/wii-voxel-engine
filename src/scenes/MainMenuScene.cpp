@@ -33,19 +33,23 @@
 #include <string.h>
 
 // define all scene components here
-#define MMS_BUTTON_SINGLEPLAYER "MMS_btnSingleplayer"
-#define MMS_BUTTON_MULTIPLAYER "MMS_btnMultiplayer"
-#define MMS_BUTTON_OPTION "MMS_btnOption"
-#define MMS_BUTTON_EXIT "MMS_btnExit"
-#define MMS_CLASSIC_BACKGROUND "MMS_ClassicBackground"
-#define MMS_LOGO "MMS_Logo"
-#define MMS_CURSOR "MMS_Cursor"
+#define MMS_BUTTON_SINGLEPLAYER  "MMS_btnSingleplayer"
+#define MMS_BUTTON_MULTIPLAYER   "MMS_btnMultiplayer"
+#define MMS_BUTTON_OPTION        "MMS_btnOption"
+#define MMS_BUTTON_EXIT          "MMS_btnExit"
+#define MMS_CLASSIC_BACKGROUND   "MMS_ClassicBackground"
+#define MMS_LOGO                 "MMS_Logo"
+#define MMS_CURSOR               "MMS_Cursor"
 
-#define LABEL_TAG "label"
-#define HIGHLIGHT_TAG "highlight"
+#define LABEL_TAG                "label"
+#define HIGHLIGHT_TAG            "highlight"
 
-#define BUTTON_Y_DISTANCE 5
+#define BUTTON_Y_DISTANCE        5
 
+// Sorting Layers
+#define BACKGROUND_SORTING_LAYER 0
+#define COMPONENTS_SORTING_LAYER 1
+#define CURSOR_SORTING_LAYER     2
 
 CMainMenuScene::CMainMenuScene() {
 
@@ -57,15 +61,15 @@ CMainMenuScene::~CMainMenuScene() {
 
 void CMainMenuScene::Load() {
     Basic2DScene::Load();
-    m_elements.push_back( new UiTextureElement( MMS_CLASSIC_BACKGROUND , m_TextureHandler->CreateSprite(ClassicBackgroundSprite_png, ClassicBackgroundSprite_png_size, MMS_CLASSIC_BACKGROUND, 0 )));
-    UiTextureElement* logo = new UiTextureElement( MMS_LOGO , m_TextureHandler->CreateSprite(WoxelCraft_png, WoxelCraft_png_size, MMS_LOGO, 1));
+    m_elements.push_back( new UiTextureElement( MMS_CLASSIC_BACKGROUND , m_TextureHandler->CreateSprite(ClassicBackgroundSprite_png, ClassicBackgroundSprite_png_size, MMS_CLASSIC_BACKGROUND, BACKGROUND_SORTING_LAYER )));
+    UiTextureElement* logo = new UiTextureElement( MMS_LOGO , m_TextureHandler->CreateSprite(WoxelCraft_png, WoxelCraft_png_size, MMS_LOGO, COMPONENTS_SORTING_LAYER));
 	logo->SetX( (rmode->viWidth / 2) - (logo->GetWidth() / 2) );
 	logo->SetY( 60 );
 	m_elements.push_back( logo );
 
 	CreateMainMenuButtonList();
 
-    m_elements.push_back( new Cursor( MMS_CURSOR , m_TextureHandler->CreateSprite(Cursor_png, Cursor_png_size, MMS_CURSOR, 2 )));
+    m_elements.push_back( new Cursor( MMS_CURSOR , m_TextureHandler->CreateSprite(Cursor_png, Cursor_png_size, MMS_CURSOR, CURSOR_SORTING_LAYER )));
 }
 
 void CMainMenuScene::Draw()
@@ -113,17 +117,17 @@ BasicButton* CMainMenuScene::CreateDefaultMainMenuButton(  const char* buttonNam
 {
     FontHandler& fontHandler = Controller::GetInstance().GetFontHandler();
 
-    auto pdefaultButtonTexture = m_TextureHandler->CreateSprite(BasicButtonBig_png, BasicButtonBig_png_size, buttonName);
+    auto pdefaultButtonTexture = m_TextureHandler->CreateSprite(BasicButtonBig_png, BasicButtonBig_png_size, buttonName, COMPONENTS_SORTING_LAYER);
 
 	char searchNamehighlight[strlen(buttonName) + strlen(HIGHLIGHT_TAG) +1];
 	strcpy( searchNamehighlight, buttonName );
 	strcat( searchNamehighlight, HIGHLIGHT_TAG );
-    auto pHighlightButtonTexture = m_TextureHandler->CreateSprite(BasicButtonBigHighlight_png, BasicButtonBigHighlight_png_size, searchNamehighlight, 1 );
+    auto pHighlightButtonTexture = m_TextureHandler->CreateSprite(BasicButtonBigHighlight_png, BasicButtonBigHighlight_png_size, searchNamehighlight, COMPONENTS_SORTING_LAYER);
 
 	char searchLabel[strlen(buttonName) + strlen(LABEL_TAG) +1];
 	strcpy( searchLabel, buttonName );
 	strcat( searchLabel, LABEL_TAG );
-    auto pButtonLabel = m_TextureHandler->CreateLabel( buttontext, fontHandler.GetNativFontByID( DEFAULT_MINECRAFT_FONT_ID ), searchLabel);
+    auto pButtonLabel = m_TextureHandler->CreateLabel( buttontext, fontHandler.GetNativFontByID( DEFAULT_MINECRAFT_FONT_ID ), searchLabel, COMPONENTS_SORTING_LAYER);
 
 	return new BasicButton( 0, 0, buttonName, pdefaultButtonTexture, pHighlightButtonTexture, pButtonLabel, clickCallback );
 }

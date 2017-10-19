@@ -34,8 +34,8 @@ public:
     BasicButton( float x, float y, const char* name, Sprite* defaultTexture, Sprite* highlightTexture, Label* label, OnClickCallback clickCallback );
 	virtual ~BasicButton();
 	void Update();
-	bool HandleMoveOver();
-	void HandleOnClick();
+    bool MouseOver();
+    void CheckForClick();
 	void UpdateLabel();
 
 	void SetColor(u32 color);
@@ -49,6 +49,7 @@ private:
     Sprite* m_highlightTexture = nullptr;
     Label* m_label = nullptr;
 	OnClickCallback m_clickCallback;
+    bool m_mouseOver = false;
 };
 
 #endif /* _BASICBUTTON_H_ */
