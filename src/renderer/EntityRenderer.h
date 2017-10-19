@@ -31,8 +31,8 @@ public:
 	EntityRenderer(Entity* entity);
 	virtual ~EntityRenderer();
 	virtual void Render() const;
-	void SetTexture( Texture* texture );
-	Texture* GetTexture() const;
+    void SetTexture( Texture* texture );
+    Texture* GetTexture() const;
 protected:
 	TextureHandler& GetTextureHandler();
 	Texture* m_entityTexture;

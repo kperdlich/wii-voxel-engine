@@ -21,12 +21,12 @@
 #define _UITEXTUREELEMENT_H_
 
 #include "UiElement.h"
-#include "../textures/BasicTexture.h"
+#include "../textures/Sprite.h"
 
 class UiTextureElement: public UiElement {
 public:
-    UiTextureElement(uint32_t x, uint32_t y, const char* name, BasicTexture* tex);
-    UiTextureElement(const char* name, BasicTexture* tex);
+    UiTextureElement(uint32_t x, uint32_t y, const char* name, Sprite* tex);
+    UiTextureElement(const char* name, Sprite* tex);
     virtual ~UiTextureElement();
 	void Load() override;
 
@@ -37,7 +37,7 @@ public:
     virtual void SetY(uint32_t y) override;
 
 protected:
-	BasicTexture* m_texture;
+        Sprite* m_texture;
 };
 
 #endif /* _UITEXTUREELEMENT_H_ */

@@ -27,16 +27,13 @@ Basic2DScene::Basic2DScene()
 Basic2DScene::~Basic2DScene() {
 }
 
-void Basic2DScene::Draw() {
-
-	auto textures = m_TextureHandler->GetTextures();
-	for (auto it = textures->begin(); it != textures->end(); it++)
-	{
-		if ((*it)->IsVisible())
-		{
-			Get2DRenderer().DrawTexture( (**it) );
-		}
-	}
+void Basic2DScene::Draw()
+{
+    auto sprites = m_TextureHandler->GetSpriteRenderList();
+    for (auto it = sprites.begin(); it != sprites.end(); it++)
+    {
+        Get2DRenderer().Draw( (**it) );
+    }
 }
 
 void Basic2DScene::Load() {

@@ -59,7 +59,7 @@ void Controller::Start()
         PrintGameVersion(0, 25, m_pFontHandler->GetNativFontByID( DEFAULT_FONT_ID ), DEFAULT_FONT_SIZE, GRRLIB_WHITE );
 
         Debug::GetInstance().Log("Resolution x: %d y: %d", rmode->viWidth, rmode->viHeight);
-        Debug::GetInstance().Log( "Loaded Textures in scene: %d", m_pSceneHandler->GetCurrentScene().GetTextureHandler().TextureCount() );
+        Debug::GetInstance().Log( "Loaded Textures in scene: %d", m_pSceneHandler->GetCurrentScene().GetTextureHandler().SpriteCount() );
 
         Debug::GetInstance().Print();
         Debug::GetInstance().Reset();

@@ -24,7 +24,7 @@
 
 class Cursor: public UiTextureElement {
 public:
-	Cursor( const char* name, BasicTexture* tex );
+    Cursor( const char* name, Sprite* sprite );
 	virtual ~Cursor();
 	void Update();
 };

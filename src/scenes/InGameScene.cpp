@@ -44,8 +44,8 @@ void CInGameScene::Load()
 {
     Basic3DScene::Load();
 
-    m_uiElements.push_back( new Hotbar( IGS_HUD_HOTBAR, m_TextureHandler->CreateTexture(Hotbar_png, Hotbar_png_size, IGS_HUD_HOTBAR)) );
-    m_uiElements.push_back( new Cursor( IGS_HUD_CROSSHAIR, m_TextureHandler->CreateTexture(Crosshair_png, Crosshair_png_size, IGS_HUD_CROSSHAIR)) );
+    m_uiElements.push_back( new Hotbar( IGS_HUD_HOTBAR, m_TextureHandler->CreateSprite(Hotbar_png, Hotbar_png_size, IGS_HUD_HOTBAR)) );
+    m_uiElements.push_back( new Cursor( IGS_HUD_CROSSHAIR, m_TextureHandler->CreateSprite(Crosshair_png, Crosshair_png_size, IGS_HUD_CROSSHAIR)) );
 
 	m_pGameWorld = new GameWorld(this);
 	m_pGameWorld->GenerateWorld();

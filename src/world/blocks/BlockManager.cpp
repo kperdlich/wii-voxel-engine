@@ -39,16 +39,7 @@ void BlockManager::LoadBlocks()
     Texture* pStoneTexture = m_pTextureHandler->CreateTexture(Stone_tpl, Stone_tpl_size, BLOCK_TEXTURE_STONE );
     Texture* pWoodTexture = m_pTextureHandler->CreateTexture(Wood_tpl, Wood_tpl_size, BLOCK_TEXTURE_WOOD );
     Texture* pLeafTexture = m_pTextureHandler->CreateTexture(Leaf_tpl, Leaf_tpl_size, BLOCK_TEXTURE_LEAF );
-    Texture* pTreeTexture = m_pTextureHandler->CreateTexture(Tree_tpl, Tree_tpl_size, BLOCK_TEXTURE_TREE );
-
-    // todo dirty workaround - have to fix texture handler
-    pDirtTexture->SetVisible(false);
-    pGrassTexture->SetVisible(false);
-    pGrassSideTexture->SetVisible(false);
-    pStoneTexture->SetVisible(false);
-    pWoodTexture->SetVisible(false);
-    pLeafTexture->SetVisible(false);
-    pTreeTexture->SetVisible(false);
+    Texture* pTreeTexture = m_pTextureHandler->CreateTexture(Tree_tpl, Tree_tpl_size, BLOCK_TEXTURE_TREE );   
 
     std::map<const Texture*, std::vector<EBlockFaces>> dirtTextureMap =
     {

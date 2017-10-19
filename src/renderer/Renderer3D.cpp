@@ -26,13 +26,12 @@ Renderer3D::Renderer3D() {}
 
 Renderer3D::~Renderer3D() {}
 
-void Renderer3D::draw2DTexture( BasicTexture* tex )
-{
-	Texture* tx = (Texture*) tex;
-    MasterRenderer::DrawImage( *tx, tx->GetX(), tx->GetY(), 0, 1, 1, tx->GetColor() );
+void Renderer3D::DrawSprite( const Sprite* sprite ) const
+{	
+    MasterRenderer::DrawSprite( *sprite, sprite->GetX(), sprite->GetY(), 0, 1, 1, sprite->GetColor() );
 }
 
-void Renderer3D::drawEntity(const Entity* entity) const
+void Renderer3D::DrawEntity(const Entity* entity) const
 {
 	entity->GetRenderer()->Render();
 }

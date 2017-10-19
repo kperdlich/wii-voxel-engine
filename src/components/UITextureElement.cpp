@@ -20,14 +20,14 @@
 #include "UiTextureElement.h"
 
 UiTextureElement::UiTextureElement(uint32_t x, uint32_t y,
-        const char* name, BasicTexture* tex) : UiElement( x, y, tex->GetWidth(), tex->GetHeight(), name ), m_texture(tex)
+        const char* name, Sprite* tex) : UiElement( x, y, tex->GetWidth(), tex->GetHeight(), name ), m_texture(tex)
 {
 	m_texture->SetX(x);
 	m_texture->SetY(y);
 
 }
 
-UiTextureElement::UiTextureElement(const char* name, BasicTexture* tex) : UiElement( 0, 0, tex->GetWidth(), tex->GetHeight(), name ), m_texture(tex)
+UiTextureElement::UiTextureElement(const char* name, Sprite* tex) : UiElement( 0, 0, tex->GetWidth(), tex->GetHeight(), name ), m_texture(tex)
 {
 
 }

@@ -18,74 +18,48 @@
 ***/
 
 #include "BasicTexture.h"
-#include "../utils/ColorHelper.h"
 
-BasicTexture::BasicTexture( float x, float y, uint16_t id ) : m_x(x), m_y(y), m_id(id) {
-	m_color = GRRLIB_WHITE;
-}
-
-BasicTexture::~BasicTexture() {
-}
-
-
-float BasicTexture::GetX() const
+void BasicTexture::Load()
 {
-	return m_x;
+    m_loadedTexture = GRRLIB_LoadTexture( m_textureLoadingData.pTextureData );
+
+    if ( m_loadedTexture )
+    {        
+        m_pTextureObject = new GXTexObj();
+        auto pLoadedTextureInfo = static_cast<GRRLIB_texImg*>(m_loadedTexture);
+
+        GX_InitTexObj(m_pTextureObject, pLoadedTextureInfo->data, pLoadedTextureInfo->w, pLoadedTextureInfo->h, GX_TF_RGBA8, GX_CLAMP, GX_CLAMP, GX_FALSE);
+
+        GX_InitTexObjLOD(m_pTextureObject, GX_LINEAR, GX_LINEAR, 0.0f, 0.0f, 0.0f, 0, 0, GX_ANISO_1);
+
+        if (GRRLIB_Settings.antialias == false)
+        {
+            GX_SetCopyFilter(GX_FALSE, rmode->sample_pattern, GX_FALSE, rmode->vfilter);
+        }
+        else
+        {
+            GX_SetCopyFilter(rmode->aa, rmode->sample_pattern, GX_TRUE, rmode->vfilter);
+        }
+
+        m_width = pLoadedTextureInfo->w;
+        m_height = pLoadedTextureInfo->h;
+        m_bTextureLoaded = true;
+    }
 }
 
-void BasicTexture::SetX(float x) {
-	m_x = x;
-}
-
-float BasicTexture::GetY() const
+void BasicTexture::Unload()
 {
-	return m_y;
-}
+    if ( m_loadedTexture )
+    {
+        GRRLIB_FreeTexture(static_cast<GRRLIB_texImg*>(m_loadedTexture));
+    }
 
-void BasicTexture::SetY(float y) {
-	m_y = y;
-}
+    if (m_pTextureObject)
+    {
+        delete m_pTextureObject;
+    }
 
-uint16_t BasicTexture::GetId() const
-{
-	return m_id;
-}
-
-ETextureType BasicTexture::GetTextureType() const
-{
-	return INVALID;
-}
-
-void BasicTexture::LoadTexture() {}
-
-void BasicTexture::UnloadTexture() {}
-
-bool BasicTexture::IsVisible() const
-{
-	return false;
-}
-
-void BasicTexture::SetColor(u32 color)
-{
-	m_color = color;
-}
-
-uint32_t BasicTexture::GetColor() const
-{
-	return m_color;
-}
-
-void BasicTexture::SetVisible( bool value )
-{
-	m_bVisible = value;
-}
-
-uint32_t BasicTexture::GetWidth() const
-{
-	return 0;
-}
-
-uint32_t BasicTexture::GetHeight() const
-{
-	return 0;
+    m_width = 0;
+    m_height = 0;
+    m_bTextureLoaded = false;
 }

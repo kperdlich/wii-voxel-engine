@@ -21,11 +21,11 @@
 #define _CHOTBAR_H_
 
 #include "../../components/UiTextureElement.h"
-#include "../../textures/BasicTexture.h"
+#include "../../textures/Sprite.h"
 
 class Hotbar: public UiTextureElement {
 public:
-    Hotbar( const char* name, BasicTexture* tex );
+    Hotbar( const char* name, Sprite* sprite);
     virtual ~Hotbar();
 };
 

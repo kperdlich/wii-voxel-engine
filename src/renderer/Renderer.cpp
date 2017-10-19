@@ -25,6 +25,6 @@ Renderer::Renderer() {
 Renderer::~Renderer() {
 }
 
-void Renderer::draw() const {
+void Renderer::Draw() const {
 }
 

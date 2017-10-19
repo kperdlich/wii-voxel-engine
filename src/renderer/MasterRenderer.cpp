@@ -52,13 +52,13 @@ extern  GRRLIB_drawSettings  GRRLIB_Settings;
 extern  Mtx                  GXmodelView2D;
 extern guVector axis;
 
-void MasterRenderer::DrawImage(const Texture& texture, float xpos, float ypos, float degrees, float scaleX, float scaleY, uint32_t color)
+void MasterRenderer::DrawSprite(const Sprite& sprite, float xpos, float ypos, float degrees, float scaleX, float scaleY, uint32_t color)
  {
      u16       width, height;
      Mtx       m, m1, m2, mv;
 
-     GXTexObj* texObj = texture.GetTextureObject();
-     GRRLIB_texImg* tex = texture.GetGrrlibTexture();
+     GXTexObj* texObj = sprite.GetTextureObject();
+     GRRLIB_texImg* tex = static_cast<GRRLIB_texImg*>(sprite.GetLoadedTexture());
 
      GX_LoadTexObj(texObj,      GX_TEXMAP0);
      GX_SetTevOp  (GX_TEVSTAGE0, GX_MODULATE);

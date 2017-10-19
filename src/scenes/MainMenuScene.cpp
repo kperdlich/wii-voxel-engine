@@ -57,15 +57,15 @@ CMainMenuScene::~CMainMenuScene() {
 
 void CMainMenuScene::Load() {
     Basic2DScene::Load();
-    m_elements.push_back( new UiTextureElement( MMS_CLASSIC_BACKGROUND , m_TextureHandler->CreateTexture(ClassicBackgroundSprite_png, ClassicBackgroundSprite_png_size, MMS_CLASSIC_BACKGROUND )));
-    UiTextureElement* logo = new UiTextureElement( MMS_LOGO , m_TextureHandler->CreateTexture(WoxelCraft_png, WoxelCraft_png_size, MMS_LOGO));
+    m_elements.push_back( new UiTextureElement( MMS_CLASSIC_BACKGROUND , m_TextureHandler->CreateSprite(ClassicBackgroundSprite_png, ClassicBackgroundSprite_png_size, MMS_CLASSIC_BACKGROUND, 0 )));
+    UiTextureElement* logo = new UiTextureElement( MMS_LOGO , m_TextureHandler->CreateSprite(WoxelCraft_png, WoxelCraft_png_size, MMS_LOGO, 1));
 	logo->SetX( (rmode->viWidth / 2) - (logo->GetWidth() / 2) );
 	logo->SetY( 60 );
 	m_elements.push_back( logo );
 
 	CreateMainMenuButtonList();
 
-    m_elements.push_back( new Cursor( MMS_CURSOR , m_TextureHandler->CreateTexture(Cursor_png, Cursor_png_size, MMS_CURSOR )));
+    m_elements.push_back( new Cursor( MMS_CURSOR , m_TextureHandler->CreateSprite(Cursor_png, Cursor_png_size, MMS_CURSOR, 2 )));
 }
 
 void CMainMenuScene::Draw()
@@ -94,11 +94,11 @@ void CMainMenuScene::Update(float deltaSeconds)
 
 void CMainMenuScene::CreateMainMenuButtonList()
 {
-    Texture* startButtonTexture = m_TextureHandler->CreateTexture(BasicButtonBig_png, BasicButtonBig_png_size, "BasicButtonBig_png" );
+    auto startButtonTexture = m_TextureHandler->CreateSprite(BasicButtonBig_png, BasicButtonBig_png_size, "BasicButtonBig_png" );
 	int xPos = (rmode->viWidth / 2) - (startButtonTexture->GetWidth() / 2);
 	int yPos = (rmode->viHeight / 2) - ( startButtonTexture->GetHeight() / 2);
 	int sizeBetweenBtns = startButtonTexture->GetHeight() + BUTTON_Y_DISTANCE;
-	m_TextureHandler->DestroyTextureByName("BasicButtonBig_png");
+    m_TextureHandler->DestroyTextureByName("BasicButtonBig_png");
 
 	List* btnList = new List( xPos, yPos, sizeBetweenBtns );
     btnList->AddComponent( CreateDefaultMainMenuButton( MMS_BUTTON_SINGLEPLAYER, "Singleplayer", [] (BasicButton* clickedButton) { Controller::GetInstance().GetBasicCommandHandler().ExecuteCommand(SwitchToInGameCommand::Name()); }));
@@ -113,17 +113,17 @@ BasicButton* CMainMenuScene::CreateDefaultMainMenuButton(  const char* buttonNam
 {
     FontHandler& fontHandler = Controller::GetInstance().GetFontHandler();
 
-    Texture* pdefaultButtonTexture = m_TextureHandler->CreateTexture(BasicButtonBig_png, BasicButtonBig_png_size, buttonName);
+    auto pdefaultButtonTexture = m_TextureHandler->CreateSprite(BasicButtonBig_png, BasicButtonBig_png_size, buttonName);
 
 	char searchNamehighlight[strlen(buttonName) + strlen(HIGHLIGHT_TAG) +1];
 	strcpy( searchNamehighlight, buttonName );
 	strcat( searchNamehighlight, HIGHLIGHT_TAG );
-    Texture* pHighlightButtonTexture = m_TextureHandler->CreateTexture(BasicButtonBigHighlight_png, BasicButtonBigHighlight_png_size, searchNamehighlight );
+    auto pHighlightButtonTexture = m_TextureHandler->CreateSprite(BasicButtonBigHighlight_png, BasicButtonBigHighlight_png_size, searchNamehighlight, 1 );
 
 	char searchLabel[strlen(buttonName) + strlen(LABEL_TAG) +1];
 	strcpy( searchLabel, buttonName );
 	strcat( searchLabel, LABEL_TAG );
-	LabelTexture* pButtonLabel = m_TextureHandler->CreateLabel( buttontext, fontHandler.GetNativFontByID( DEFAULT_MINECRAFT_FONT_ID ), searchLabel);
+    auto pButtonLabel = m_TextureHandler->CreateLabel( buttontext, fontHandler.GetNativFontByID( DEFAULT_MINECRAFT_FONT_ID ), searchLabel);
 
 	return new BasicButton( 0, 0, buttonName, pdefaultButtonTexture, pHighlightButtonTexture, pButtonLabel, clickCallback );
 }

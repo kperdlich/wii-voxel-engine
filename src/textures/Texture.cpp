@@ -47,35 +47,21 @@ typedef struct {
     uint8_t	unpacked;
 } TPL_Texture;
 
-Texture::Texture(float x, float y, TextureData textureData, const uint16_t id ) : BasicTexture(x, y, id), m_textureData(textureData)
+void Texture::LoadTPLTexture()
 {
-    m_pGrrlibTexture = nullptr;
-    m_bVisible = true;
-}
+    m_pTextureObject = new GXTexObj();
 
-Texture::~Texture()
-{
-
-}
-
-GRRLIB_texImg* Texture::GetGrrlibTexture() const
-{
-    return this->m_pGrrlibTexture;
-}
-
-void Texture::LoadTplTexture()
-{
     //const TPL_Header* pHeader = reinterpret_cast<const TPL_Header*>(m_textureData.pTextureData);
     //const TPL_Addr* pAddr =reinterpret_cast<const TPL_Addr*>((m_textureData.pTextureData + sizeof(TPL_Header)));
-    const TPL_Texture* pTexture = reinterpret_cast<const TPL_Texture*>((m_textureData.pTextureData + sizeof(TPL_Header) + sizeof(TPL_Addr)));
+    const TPL_Texture* pTexture = reinterpret_cast<const TPL_Texture*>((m_textureLoadingData.pTextureData + sizeof(TPL_Header) + sizeof(TPL_Addr)));
 
-    uint32_t size = m_textureData.textureSize - sizeof(TPL_Header) - sizeof(TPL_Addr) - sizeof(TPL_Texture);
-    m_pTplTextureData = memalign(32, size);
-    memcpy(m_pTplTextureData, (void*) (m_textureData.pTextureData + pTexture->dataOffs), size);
+    uint32_t size = m_textureLoadingData.textureSize - sizeof(TPL_Header) - sizeof(TPL_Addr) - sizeof(TPL_Texture);
+    m_pTPLTextureData = memalign(32, size);
+    memcpy(m_pTPLTextureData, (void*) (m_textureLoadingData.pTextureData + pTexture->dataOffs), size);
 
-    DCFlushRange(m_pTplTextureData, size);
+    DCFlushRange(m_pTPLTextureData, size);    
 
-    GX_InitTexObj(m_pTextureObject, m_pTplTextureData, pTexture->width, pTexture->height, pTexture->format, pTexture->wrap_s, pTexture->wrap_t, GX_FALSE);
+    GX_InitTexObj(m_pTextureObject, m_pTPLTextureData, pTexture->width, pTexture->height, pTexture->format, pTexture->wrap_s, pTexture->wrap_t, GX_FALSE);
 
     if (pTexture->maxLod)
     {
@@ -89,102 +75,57 @@ void Texture::LoadTplTexture()
         GX_InitTexObjFilterMode(m_pTextureObject, pTexture->minFilt, pTexture->magFilt);
     }
 
+    m_width = pTexture->width;
+    m_height = pTexture->height;
     m_bTextureLoaded = true;
 }
 
-void Texture::LoadDefaultTexture()
+
+bool Texture::IsTPLTexture()
 {
-    m_pGrrlibTexture = GRRLIB_LoadTexture( m_textureData.pTextureData );
-
-    if ( m_pGrrlibTexture )
-    {
-        GX_InitTexObj(m_pTextureObject, m_pGrrlibTexture->data, m_pGrrlibTexture->w, m_pGrrlibTexture->h, GX_TF_RGBA8, GX_CLAMP, GX_CLAMP, GX_FALSE);
-
-        GX_InitTexObjLOD(m_pTextureObject, GX_LINEAR, GX_LINEAR, 0.0f, 0.0f, 0.0f, 0, 0, GX_ANISO_1);
-
-        if (GRRLIB_Settings.antialias == false)
-        {
-
-            GX_SetCopyFilter(GX_FALSE, rmode->sample_pattern, GX_FALSE, rmode->vfilter);
-        }
-        else
-        {
-            GX_SetCopyFilter(rmode->aa, rmode->sample_pattern, GX_TRUE, rmode->vfilter);
-        }
-
-        m_bTextureLoaded = true;
-    }
-}
-
-bool Texture::IsTplTexture()
-{
-    const TPL_Header* pHeader = reinterpret_cast<const TPL_Header*>(m_textureData.pTextureData);
+    const TPL_Header* pHeader = reinterpret_cast<const TPL_Header*>(m_textureLoadingData.pTextureData);
     return (pHeader && pHeader->magic == 0x20af30);
 }
 
-void Texture::LoadTexture()
+void Texture::Load()
 {
-    UnloadTexture();
+    Unload();    
 
-    m_pTextureObject = new GXTexObj();
-
-    if ( IsTplTexture())
+    if ( IsTPLTexture())
     {
-        LoadTplTexture();
+        LoadTPLTexture();
     }
     else
     {
-        LoadDefaultTexture();
+        BasicTexture::Load();      
     }
 }
 
-void Texture::UnloadTexture()
+void Texture::Unload()
 {
+    BasicTexture::Unload();
 
-    if ( m_pGrrlibTexture )
-	{
-        GRRLIB_FreeTexture( m_pGrrlibTexture );
-	}
-
-    if ( m_pTextureObject )
+    if (  m_pTPLTextureData )
     {
-        delete m_pTextureObject;
+        free(m_pTPLTextureData);
     }
 
-    if (  m_pTplTextureData )
-    {
-        free(m_pTplTextureData);
-    }
-
-    m_bTextureLoaded = false;
+    m_width = 0;
+    m_height = 0;
 }
 
 uint32_t Texture::GetWidth() const
 {
-
-    if ( m_bTextureLoaded )
-	{
-        return m_pGrrlibTexture->w;
-	}
-	return 0;
+   return m_width;
 }
 
 uint32_t Texture::GetHeight() const
 {
-
-    if ( m_bTextureLoaded )
-	{
-        return m_pGrrlibTexture->h;
-	}
-	return 0;
+   return m_height;
 }
 
-bool Texture::IsVisible() const
-{
-    return m_bVisible && m_bTextureLoaded;
-}
 
-void Texture::PrintTlpInfo()
+void Texture::PrintTPLInfo()
 {
 
 #ifdef DEBUG
@@ -209,12 +150,3 @@ void Texture::PrintTlpInfo()
 }
 
 
-ETextureType Texture::GetTextureType() const
-{
-	return SPRITE;
-}
-
-bool Texture::IsLoaded() const
-{
-    return m_bTextureLoaded;
-}

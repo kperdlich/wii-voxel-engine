@@ -23,7 +23,7 @@
 #include "../utils/Debug.h"
 #include "../core/grrlib.h"
 
-BasicButton::BasicButton( float x, float y, const char* name, Texture* defaultTexture, Texture* highlightTexture, LabelTexture* label, OnClickCallback clickCallback  ) : m_label( label ), m_highlightTexture( highlightTexture ), m_clickCallback( clickCallback ), UiTextureElement( x, y, name, defaultTexture )
+BasicButton::BasicButton( float x, float y, const char* name, Sprite* defaultTexture, Sprite* highlightTexture, Label* label, OnClickCallback clickCallback  ) : m_label( label ), m_highlightTexture( highlightTexture ), m_clickCallback( clickCallback ), UiTextureElement( x, y, name, defaultTexture )
 {
 	m_texture->SetX( x );
 	m_texture->SetY( y );

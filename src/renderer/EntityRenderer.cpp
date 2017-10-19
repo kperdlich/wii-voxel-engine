@@ -28,9 +28,9 @@ EntityRenderer::~EntityRenderer() {
 
 }
 
-void EntityRenderer::SetTexture(Texture* texture) {
-	m_entityTexture = texture;
-	m_entityTexture->SetVisible(false); // invisible else it would be rendered by the 2d renderer as a normal texture
+void EntityRenderer::SetTexture(Texture* texture)
+{
+	m_entityTexture = texture;	
 }
 
 Texture* EntityRenderer::GetTexture() const

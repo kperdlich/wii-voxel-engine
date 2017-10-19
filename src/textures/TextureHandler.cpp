@@ -18,138 +18,176 @@
 ***/
 
 
+#include <functional>
+#include <algorithm>
 #include "TextureHandler.h"
 #include "../utils/Debug.h"
-#include <functional>
-
-TextureHandler::TextureHandler() {
-
-}
-
-TextureHandler::~TextureHandler() {
-}
 
 
-BasicTexture* TextureHandler::GetTextureByID(u16 index)
+void TextureHandler::DestroySpriteByName(const char *searchName)
 {
-	for ( auto it = m_textures.begin(); it != m_textures.end(); it++)
-	{        
-        if( (*it)->GetId() == index )
-		{
-			return (*it);
-		}
-	}
-
-    return nullptr;
+    auto spriteAtlasIt = m_spriteAtlas.find( searchName );
+    if ( spriteAtlasIt != m_spriteAtlas.end() )
+    {
+        spriteAtlasIt->second->Unload();
+        delete spriteAtlasIt->second;
+        m_spriteAtlas.erase(searchName);
+    }
 }
 
 void TextureHandler::DestroyTextureByName( const char* searchName )
 {
-	auto textureMapIt = m_textureMap.find( searchName );
-	if ( textureMapIt != m_textureMap.end() )
+    auto textureAtlasIt = m_textureAtlas.find( searchName );
+    if ( textureAtlasIt != m_textureAtlas.end() )
 	{
-		(*textureMapIt->second)->UnloadTexture();
-		delete (*textureMapIt->second);
-		m_textures.erase( textureMapIt->second );
-		m_textureMap.erase(searchName);
+        textureAtlasIt->second->Unload();
+        delete textureAtlasIt->second;
+        m_textureAtlas.erase(searchName);
 	}
 }
 
 
 void TextureHandler::DestroyAllTextures()
 {
-	if ( m_textures.empty() )
-		 return;
+    if ( m_textureAtlas.empty())
+        return;
 
-	m_textureMap.clear();
+    for ( auto it = m_textureAtlas.begin(); it != m_textureAtlas.end(); it++)
+    {
+        it->second->Unload();
+        delete it->second;
+    }
 
-	for ( auto it = m_textures.begin(); it != m_textures.end(); it++)
-	{
-		(*it)->UnloadTexture();
-		delete (*it);
-	}
+    m_textureAtlas.clear();   
+}
 
-	m_textures.clear();
+void TextureHandler::DestroyAllSprites()
+{
+    if ( m_spriteAtlas.empty())
+        return;
+
+    for ( auto it = m_spriteAtlas.begin(); it != m_spriteAtlas.end(); it++)
+    {
+        it->second->Unload();
+        delete it->second;
+    }
+
+    m_spriteAtlas.clear();
+}
+
+void TextureHandler::DestroyAll()
+{
+    DestroyAllTextures();
+    DestroyAllSprites();
 }
 
 
 Texture* TextureHandler::CreateTexture(const uint8_t* pTextureData, uint32_t textureSize, const char* pSearchName)
-{
-     // todo handle error!
+{    
     if ( FindTexture(pSearchName))
 	{
-		throw;
+        return nullptr;
 	}
 
-    TextureData textureData = { pTextureData, textureSize };
-    Texture* tex = new Texture( 0, 0, textureData, GetNewIndex() );
-	tex->LoadTexture();
-	std::vector<BasicTexture*>::iterator textureIt = m_textures.insert(m_textures.end(), tex );
-    m_textureMap.insert( std::pair<std::string, std::vector<BasicTexture*>::iterator>(pSearchName, textureIt ));
-	return tex;
+    TextureLoadingData textureData = { pTextureData, textureSize };
+    Texture* tex = new Texture( 0, 0, textureData, GetNewTextureIndex() );
+    tex->Load();
+    m_textureAtlas.insert(std::make_pair(pSearchName, tex));
+    return tex;
 }
 
-Texture* TextureHandler::CreateTexture( const uint8_t* pTextureData, uint32_t textureSize, const char* pSearchName, bool visible )
+Sprite* TextureHandler::CreateSprite(const uint8_t *pSpriteData, uint32_t spriteSize, const char *pSearchName, uint16_t sortingLayer)
 {
-    Texture* pTexture = CreateTexture(pTextureData, textureSize, pSearchName);
-	pTexture->SetVisible(visible);
-	return pTexture;
+    if ( FindSprite(pSearchName))
+    {
+        return nullptr;
+    }
+
+    TextureLoadingData textureData = { pSpriteData, spriteSize };
+    auto sprite = new Sprite( 0, 0, textureData, GetNewSpriteIndex() );
+    sprite->SetSortingLayerIndex(sortingLayer);
+    sprite->Load();
+    m_spriteAtlas.emplace(pSearchName, sprite);
+    return sprite;
 }
 
-u16 TextureHandler::GetNewIndex() const
+
+u16 TextureHandler::GetNewTextureIndex()
 {
-	if ( !m_textures.empty() )
-	{
-		return m_textures.back()->GetId() + 1;
-	}
-	return 0;
+    return ++m_textureIndex;
 }
 
-const std::vector<BasicTexture*>* TextureHandler::GetTextures() const
+u16 TextureHandler::GetNewSpriteIndex()
 {
-	return &m_textures;
+     return ++m_spriteIndex;
 }
 
-LabelTexture* TextureHandler::CreateLabel(int x, int y, const char* text,
+Label* TextureHandler::CreateLabel(int x, int y, const char* text,
         GRRLIB_ttfFont* font, uint32_t fontSize, u32 color, const char* searchName)
 {
-    // todo handle error!
-	if ( FindTexture(searchName))
+    if ( FindSprite(searchName))
 	{
-		throw;
+        return nullptr;
 	}
 
-	LabelTexture* label = new LabelTexture( text, x, y, GetNewIndex(), font, fontSize, color );
-	label->LoadTexture();
-	std::vector<BasicTexture*>::iterator labelIt = m_textures.insert(m_textures.end(), label );
-	m_textureMap.insert(std::pair<std::string, std::vector<BasicTexture*>::iterator>(searchName, labelIt ));
+    Label* label = new Label( text, x, y, {nullptr, 0}, GetNewSpriteIndex(), font, fontSize, color );
+    label->Load();
+    m_spriteAtlas.insert(std::make_pair(searchName, label));
 	return label;
 }
 
-LabelTexture* TextureHandler::CreateLabel( const char* text, GRRLIB_ttfFont* font, const char* searchName )
+Label* TextureHandler::CreateLabel( const char* text, GRRLIB_ttfFont* font, const char* searchName )
 {
-	return CreateLabel(0, 0, text, font, DEFAULT_FONT_SIZE, GRRLIB_WHITE, searchName);
-}
-
-
-uint32_t TextureHandler::TextureCount() const
-{
-	return m_textures.size();
+    return CreateLabel(0, 0, text, font, DEFAULT_FONT_SIZE, GRRLIB_WHITE, searchName);
 }
 
 bool TextureHandler::FindTexture(std::string key) const
 {
-	auto textureMapIt = m_textureMap.find( key );
-	return textureMapIt != m_textureMap.end();
+    auto textureAtlasIt = m_textureAtlas.find(key);
+    return textureAtlasIt != m_textureAtlas.end();
 }
 
-const BasicTexture* TextureHandler::GetTexture(std::string key) const
+bool TextureHandler::FindSprite(std::string key) const
 {
-	auto textureMapIt = m_textureMap.find( key );
-	if ( textureMapIt != m_textureMap.end())
-	{
-		return (*textureMapIt->second);
-	}
+    auto spriteAtlasIt = m_spriteAtlas.find(key);
+    return spriteAtlasIt != m_spriteAtlas.end();
+}
+
+const Sprite *TextureHandler::GetSprite(std::string key) const
+{
+    auto spriteAtlasIt = m_spriteAtlas.find(key);
+    if (spriteAtlasIt != m_spriteAtlas.end())
+    {
+       return (spriteAtlasIt->second);
+    }
 
     return nullptr;
+}
+
+std::vector<const Sprite*> TextureHandler::GetSpriteRenderList()
+{
+    std::vector<const Sprite*> sprites;
+    for ( auto it = m_spriteAtlas.begin(); it != m_spriteAtlas.end(); it++)
+    {
+        Sprite* pSprite = it->second;
+        if (pSprite->IsVisible())
+        {
+            sprites.push_back(pSprite);
+        }
+    }
+
+    // todo fix z-sorting
+    std::sort(sprites.begin(), sprites.end());
+    return sprites;
+}
+
+const Texture* TextureHandler::GetTexture(std::string key) const
+{
+     auto textureAtlasIt = m_textureAtlas.find(key);
+     if (textureAtlasIt != m_textureAtlas.end())
+     {
+        return (textureAtlasIt->second);
+     }
+
+     return nullptr;    
 }

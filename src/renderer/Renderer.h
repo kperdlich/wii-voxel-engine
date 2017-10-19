@@ -27,7 +27,7 @@ class Renderer
 public:
 	Renderer();
 	virtual ~Renderer();
-	virtual void draw() const;
+    virtual void Draw() const;
 };
 
 

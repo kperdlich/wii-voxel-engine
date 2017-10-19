@@ -17,20 +17,33 @@
  *
 ***/
 
-#ifndef _SPRITESHEET_H_
-#define _SPRITESHEET_H_
+#ifndef _LABELSPRITE_H_
+#define _LABELSPRITE_H_
 
-#include "Texture.h"
-#include <vector>
+#include "../core/grrlib.h"
+#include "Sprite.h"
 
-class SpriteSheet: public Texture {
-
+class Label: public Sprite {
 public:
-    SpriteSheet( const TextureData& textureData, const u16 id );
-	virtual ~SpriteSheet();
-	virtual void LoadTexture() override;
-	virtual void UnloadTexture() override;
+    Label( const char* text, float x, float y, TextureLoadingData textureData, const uint16_t id, GRRLIB_ttfFont* font, uint32_t fontSize, uint32_t color );
+    virtual ~Label();
 	virtual ETextureType GetTextureType() const override;
+
+	GRRLIB_ttfFont& getFont() const;
+	const char* getText() const;
+    uint32_t getFontSize() const;
+    uint32_t getTextColor() const;
+
+    virtual bool IsVisible() const override;
+
+    void setFontSize(uint32_t fontSize);
+    void setTextColor(uint32_t textColor);
+
+private:
+	const char* m_text;
+	GRRLIB_ttfFont* m_font;
+    uint32_t m_fontSize = 0;
+    uint32_t m_textColor = 0;
 };
 
-#endif /* _SPRITESHEET_H_ */
+#endif /* _LABELSPRITE_H_ */

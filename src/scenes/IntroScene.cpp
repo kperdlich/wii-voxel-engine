@@ -24,17 +24,14 @@
 #include "../components/UiTextureElement.h"
 #include "../commands/client/SwitchToMainMenuCommand.h"
 
-
 #include "../utils/Debug.h"
 #include "BlockCSS_png.h"
 #include "ClassicBackgroundSprite_png.h"
 #include "WoxelCraft_png.h"
 
-
 // define all component names here!
 #define IS_CLASSIC_BACKGROUND "IS_ClassicBackground"
 #define IS_LOGO "IS_Logo"
-
 
 #define LOGO_INDEX 0
 
@@ -51,8 +48,8 @@ void CIntroScene::Load()
 {
     Basic2DScene::Load();
 	m_BackgroundAlpha = 255;
-    Texture* logoTexture = m_TextureHandler->CreateTexture(WoxelCraft_png, WoxelCraft_png_size, IS_LOGO);
-	m_elements.push_back( new UiTextureElement( (rmode->viWidth / 2) - (logoTexture->GetWidth() / 2), (rmode->viHeight / 2) - ( logoTexture->GetHeight() / 2 ), IS_LOGO,logoTexture));
+    auto logoSprite = m_TextureHandler->CreateSprite(WoxelCraft_png, WoxelCraft_png_size, IS_LOGO);
+    m_elements.push_back( new UiTextureElement( (rmode->viWidth / 2) - (logoSprite->GetWidth() / 2), (rmode->viHeight / 2) - ( logoSprite->GetHeight() / 2 ), IS_LOGO, logoSprite));
 }
 
 
@@ -85,7 +82,8 @@ void CIntroScene::Update(float deltaSeconds)
     }
 }
 
-void CIntroScene::Draw() {
+void CIntroScene::Draw()
+{
 	GRRLIB_SetBackgroundColour(0x00, 0x00, 0x00, 0xFF);
     Basic2DScene::Draw();
 }

@@ -21,36 +21,59 @@
 #define _TEXTUREHANDLER_H_
 
 #include "../core/grrlib.h"
+#include "../textures/Texture.h"
+#include "../textures/Sprite.h"
+#include "../textures/LabelSprite.h"
+#include <unordered_map>
 #include <map>
 #include <vector>
 #include <string>
-#include "../textures/Texture.h"
-#include "../textures/SpriteSheet.h"
-#include "../textures/LabelTexture.h"
 
 class TextureHandler {
 
 private:
-	std::vector<BasicTexture*> m_textures;
-	std::map<std::string, std::vector<BasicTexture*>::iterator> m_textureMap;
+
+    std::map<std::string, Sprite*> m_spriteAtlas;
+    std::unordered_map<std::string, Texture*> m_textureAtlas;    
 
 public:
-	TextureHandler();
-	~TextureHandler();
-    Texture* CreateTexture( const uint8_t* pTextureData, uint32_t textureSize, const char* searchName, bool visible );
-    Texture* CreateTexture( const uint8_t* pTextureData, uint32_t textureSize, const char* searchName );
-    LabelTexture* CreateLabel( int x, int y, const char* text, GRRLIB_ttfFont* font, uint32_t fontSize, uint32_t color, const char* searchName );
-	LabelTexture* CreateLabel( const char* text, GRRLIB_ttfFont* font, const char* searchName );
-    BasicTexture* GetTextureByID( uint16_t index );
-	void DestroyTextureByName( const char* searchName );
-	void DestroyAllTextures();
-	const std::vector<BasicTexture*>* GetTextures() const;
-	bool FindTexture(std::string key) const;
-	const BasicTexture* GetTexture(std::string key) const;
-	uint32_t TextureCount() const;
-protected:
-	u16 GetNewIndex() const;
+    TextureHandler() {}
+    ~TextureHandler() {}
 
+    Texture* CreateTexture( const uint8_t* pTextureData, uint32_t textureSize, const char* pSearchName );
+    Sprite* CreateSprite( const uint8_t* pTextureData, uint32_t textureSize, const char* pSearchName, uint16_t sortingLayer = 0);
+    Label* CreateLabel( int x, int y, const char* text, GRRLIB_ttfFont* font, uint32_t fontSize, uint32_t color, const char* searchName );
+    Label* CreateLabel( const char* text, GRRLIB_ttfFont* font, const char* searchName );
+
+    void DestroySpriteByName( const char* searchName );
+    void DestroyTextureByName( const char* searchName );
+	void DestroyAllTextures();
+    void DestroyAllSprites();
+    void DestroyAll();    
+
+	bool FindTexture(std::string key) const;
+    bool FindSprite(std::string key) const;
+    const Texture* GetTexture(std::string key) const;
+    const Sprite* GetSprite(std::string key) const;
+
+    std::vector<const Sprite*> GetSpriteRenderList();
+
+    uint32_t TextureCount() const
+    {
+        return m_textureAtlas.size();
+    }
+
+    uint32_t SpriteCount() const
+    {
+        return m_spriteAtlas.size();
+    }
+
+protected:
+    u16 GetNewTextureIndex();
+    u16 GetNewSpriteIndex();
+
+    u16 m_spriteIndex = 0;
+    u16 m_textureIndex = 0;
 };
 
 

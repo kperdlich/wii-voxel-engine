@@ -24,51 +24,35 @@
 #include "BasicTexture.h"
 #include <ogc/gx.h>
 
-typedef struct
-{
-    const uint8_t* pTextureData;
-    uint32_t textureSize;
-} TextureData;
+
 
 class Texture : public BasicTexture
 {
 
-protected:
-    TextureData m_textureData;
-    GRRLIB_texImg* m_pGrrlibTexture = nullptr;
-    bool m_bTextureLoaded;
-
-    void* m_pTplTextureData = nullptr;
-    GXTexObj* m_pTextureObject = nullptr;
-
 public:
-    Texture( float x, float y, TextureData textureData, const uint16_t id );
-	virtual ~Texture();
+    Texture( float x, float y, TextureLoadingData textureData, const uint16_t id ) : BasicTexture(x, y, textureData, id) {}
+    virtual ~Texture() {}
 
-	virtual ETextureType GetTextureType() const override;
-
-    GRRLIB_texImg* GetGrrlibTexture() const;
-
-    GXTexObj* GetTextureObject() const
-    {
-        return m_pTextureObject;
-    }
-
-	virtual void LoadTexture() override;
-    virtual void UnloadTexture() override;
+    virtual void Load() override;
+    virtual void Unload() override;
 
     virtual uint32_t GetWidth() const override;
-    virtual uint32_t GetHeight() const override;
+    virtual uint32_t GetHeight() const override;	
 
-    bool IsLoaded() const;
-	virtual bool IsVisible() const override;
+    void PrintTPLInfo();
 
-    void PrintTlpInfo();
+    virtual ETextureType GetTextureType() const override
+    {
+        return TEXTURE;
+    }
+
+protected:
+    void* m_pTPLTextureData = nullptr;
 
 private:
-    void LoadTplTexture();
-    void LoadDefaultTexture();
-    bool IsTplTexture();
+
+    void LoadTPLTexture();
+    bool IsTPLTexture();
 
 };
 

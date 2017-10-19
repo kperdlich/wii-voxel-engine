@@ -28,8 +28,8 @@ class Renderer3D: public Renderer {
 public:
 	Renderer3D();
 	virtual ~Renderer3D();
-	void draw2DTexture( BasicTexture* tex );
-	void drawEntity(const class Entity* entity) const;
+    void DrawSprite( const Sprite* sprite ) const;
+    void DrawEntity(const class Entity* entity) const;
 };
 
 #endif /* _RENDERER3D_H_ */

@@ -81,19 +81,16 @@ void Basic3DScene::Draw()
 	{
 		if (it->second->IsVisible())
 		{
-			Get3DRenderer().drawEntity( it->second );
+			Get3DRenderer().DrawEntity( it->second );
 		}
 	}
 
     GRRLIB_2dMode();
 
-	auto textures = m_TextureHandler->GetTextures();
-	for ( auto it = textures->begin(); it != textures->end(); it++)
-	{
-		if ((*it)->IsVisible())
-		{
-			Get3DRenderer().draw2DTexture( (*it) );
-		}
+    auto sprites = m_TextureHandler->GetSpriteRenderList();
+    for (auto it = sprites.begin(); it != sprites.end(); it++)
+    {
+        Get3DRenderer().DrawSprite((*it) );
     }
 }
 

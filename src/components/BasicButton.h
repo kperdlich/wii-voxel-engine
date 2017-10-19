@@ -22,7 +22,7 @@
 
 #include "UiTextureElement.h"
 #include "../textures/Texture.h"
-#include "../textures/LabelTexture.h"
+#include "../textures/LabelSprite.h"
 
 #define BUTTON_LABEL_DISTANCE 3
 
@@ -31,7 +31,7 @@ class BasicButton: public UiTextureElement
 public:
 	typedef void (*OnClickCallback)(BasicButton*);
 
-	BasicButton( float x, float y, const char* name, Texture* defaultTexture, Texture* highlightTexture, LabelTexture* label, OnClickCallback clickCallback );
+    BasicButton( float x, float y, const char* name, Sprite* defaultTexture, Sprite* highlightTexture, Label* label, OnClickCallback clickCallback );
 	virtual ~BasicButton();
 	void Update();
 	bool HandleMoveOver();
@@ -46,8 +46,8 @@ public:
 
 
 private:
-    Texture* m_highlightTexture = nullptr;
-    LabelTexture* m_label = nullptr;
+    Sprite* m_highlightTexture = nullptr;
+    Label* m_label = nullptr;
 	OnClickCallback m_clickCallback;
 };
 
