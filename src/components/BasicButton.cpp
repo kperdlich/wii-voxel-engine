@@ -84,10 +84,10 @@ void BasicButton::SetButtonCallback(OnClickCallback callback)
 void BasicButton::UpdateLabel()
 {
 	uint32_t newFontSize = m_texture->GetHeight() - (2*BUTTON_LABEL_DISTANCE);
-	m_label->setFontSize( newFontSize );
+	m_label->SetFontSize( newFontSize );
 	m_label->SetY( m_texture->GetY() + BUTTON_LABEL_DISTANCE );
 
-	uint32_t textWidthInPixel = GRRLIB_WidthTTF(&m_label->getFont(), m_label->getText(), m_label->getFontSize());
+	uint32_t textWidthInPixel = GRRLIB_WidthTTF(&m_label->GetFont(), m_label->GetText(), m_label->GetFontSize());
 	m_label->SetX(m_texture->GetX() + (( m_texture->GetWidth() / 2) - (textWidthInPixel / 2)));
 }
 

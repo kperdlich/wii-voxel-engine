@@ -50,7 +50,7 @@ void Renderer2D::Draw(const Sprite& sprite)
 		case LABEL:
 		{
             Label label = static_cast<const Label&>(sprite);
-			GRRLIB_PrintfTTF( label.GetX(), label.GetY(), &label.getFont(), label.getText(), label.getFontSize(), label.getTextColor() );
+			GRRLIB_PrintfTTF( label.GetX(), label.GetY(), &label.GetFont(), label.GetText(), label.GetFontSize(), label.GetTextColor() );
 			break;
 		}
 		default:

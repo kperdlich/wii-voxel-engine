@@ -90,7 +90,7 @@ Texture* TextureHandler::CreateTexture(const uint8_t* pTextureData, uint32_t tex
 	}
 
     TextureLoadingData textureData = { pTextureData, textureSize };
-    Texture* tex = new Texture( 0, 0, textureData, GetNewTextureIndex() );
+    Texture* tex = new Texture( 0, 0, textureData);
     tex->Load();
     m_textureAtlas.emplace(pSearchName, tex);
     return tex;
@@ -104,23 +104,13 @@ Sprite* TextureHandler::CreateSprite(const uint8_t *pSpriteData, uint32_t sprite
     }
 
     TextureLoadingData textureData = { pSpriteData, spriteSize };
-    auto sprite = new Sprite( 0, 0, textureData, GetNewSpriteIndex() );
+    auto sprite = new Sprite( 0, 0, textureData );
     sprite->SetSortingLayerIndex(sortingLayer);
     sprite->Load();
     m_spriteAtlas.emplace(pSearchName, sprite);
     return sprite;
 }
 
-
-u16 TextureHandler::GetNewTextureIndex()
-{
-    return ++m_textureIndex;
-}
-
-u16 TextureHandler::GetNewSpriteIndex()
-{
-     return ++m_spriteIndex;
-}
 
 Label* TextureHandler::CreateLabel(int x, int y, const char* text,
         GRRLIB_ttfFont* font, uint32_t fontSize, u32 color, const char* searchName, uint16_t sortingLayer)
@@ -130,7 +120,7 @@ Label* TextureHandler::CreateLabel(int x, int y, const char* text,
         return nullptr;
 	}
 
-    Label* label = new Label( text, x, y, {nullptr, 0}, GetNewSpriteIndex(), font, fontSize, color );
+    Label* label = new Label( text, x, y, {nullptr, 0}, font, fontSize, color );
     label->Load();
     label->SetSortingLayerIndex(sortingLayer);
     m_spriteAtlas.emplace(searchName, label);

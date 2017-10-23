@@ -30,7 +30,7 @@ class Texture : public BasicTexture
 {
 
 public:
-    Texture( float x, float y, TextureLoadingData textureData, const uint16_t id ) : BasicTexture(x, y, textureData, id) {}
+    Texture(float x, float y, TextureLoadingData textureData) : BasicTexture(x, y, textureData) {}
     virtual ~Texture() {}
 
     virtual void Load() override;

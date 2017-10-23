@@ -59,7 +59,8 @@ CMainMenuScene::~CMainMenuScene() {
 
 }
 
-void CMainMenuScene::Load() {
+void CMainMenuScene::Load()
+{
     Basic2DScene::Load();
     m_elements.push_back( new UiTextureElement( MMS_CLASSIC_BACKGROUND , m_TextureHandler->CreateSprite(ClassicBackgroundSprite_png, ClassicBackgroundSprite_png_size, MMS_CLASSIC_BACKGROUND, BACKGROUND_SORTING_LAYER )));
     UiTextureElement* logo = new UiTextureElement( MMS_LOGO , m_TextureHandler->CreateSprite(WoxelCraft_png, WoxelCraft_png_size, MMS_LOGO, COMPONENTS_SORTING_LAYER));
@@ -113,7 +114,7 @@ void CMainMenuScene::CreateMainMenuButtonList()
 }
 
 
-BasicButton* CMainMenuScene::CreateDefaultMainMenuButton(  const char* buttonName, const char* buttontext, void (*clickCallback) (BasicButton*) )
+BasicButton* CMainMenuScene::CreateDefaultMainMenuButton( const char* buttonName, const char* buttontext, void (*clickCallback) (BasicButton*) )
 {
     FontHandler& fontHandler = Controller::GetInstance().GetFontHandler();
 

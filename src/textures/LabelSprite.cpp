@@ -19,17 +19,17 @@
 
 #include "LabelSprite.h"
 
-Label::Label( const char* text, float x, float y, TextureLoadingData textureData, const uint16_t id, GRRLIB_ttfFont* font, uint32_t fontSize, uint32_t color )
-    : m_text( text ), m_font( font ), m_fontSize( fontSize ), m_textColor( color ), Sprite(x, y, textureData, id ) {}
+Label::Label( const char* text, float x, float y, TextureLoadingData textureData, GRRLIB_ttfFont* font, uint32_t fontSize, uint32_t color )
+    : Sprite(x, y, textureData), m_text( text ), m_font( font ), m_fontSize( fontSize ), m_textColor( color ) {}
 
 Label::~Label() {}
 
-GRRLIB_ttfFont& Label::getFont() const
+GRRLIB_ttfFont& Label::GetFont() const
 {
 	return *m_font;
 }
 
-const char* Label::getText() const
+const char* Label::GetText() const
 {
 	return m_text;
 }
@@ -39,12 +39,12 @@ ETextureType Label::GetTextureType() const
 	return LABEL;
 }
 
-uint32_t Label::getFontSize() const
+uint32_t Label::GetFontSize() const
 {
 	return m_fontSize;
 }
 
-uint32_t Label::getTextColor() const
+uint32_t Label::GetTextColor() const
 {
 	return m_textColor;
 }
@@ -54,13 +54,13 @@ bool Label::IsVisible() const
 	return true;
 }
 
-void Label::setFontSize(uint32_t fontSize)
+void Label::SetFontSize(uint32_t fontSize)
 {
 	m_fontSize = fontSize;
 
 }
 
-void Label::setTextColor(u32 textColor)
+void Label::SetTextColor(u32 textColor)
 {
 	m_textColor = textColor;
 }

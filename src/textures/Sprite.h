@@ -25,7 +25,7 @@
 class Sprite : public BasicTexture
 {
 public:
-    Sprite( float x, float y, TextureLoadingData textureData, const uint16_t id ) : BasicTexture(x, y, textureData, id), m_bVisible(true) {}
+    Sprite( float x, float y, TextureLoadingData textureData ) : BasicTexture(x, y, textureData), m_bVisible(true) {}
     ~Sprite(){}
 
     virtual ETextureType GetTextureType() const override

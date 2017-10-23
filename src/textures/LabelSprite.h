@@ -25,19 +25,19 @@
 
 class Label: public Sprite {
 public:
-    Label( const char* text, float x, float y, TextureLoadingData textureData, const uint16_t id, GRRLIB_ttfFont* font, uint32_t fontSize, uint32_t color );
+    Label( const char* text, float x, float y, TextureLoadingData textureData, GRRLIB_ttfFont* font, uint32_t fontSize, uint32_t color);
     virtual ~Label();
 	virtual ETextureType GetTextureType() const override;
 
-	GRRLIB_ttfFont& getFont() const;
-	const char* getText() const;
-    uint32_t getFontSize() const;
-    uint32_t getTextColor() const;
+    GRRLIB_ttfFont& GetFont() const;
+    const char* GetText() const;
+    uint32_t GetFontSize() const;
+    uint32_t GetTextColor() const;
 
     virtual bool IsVisible() const override;
 
-    void setFontSize(uint32_t fontSize);
-    void setTextColor(uint32_t textColor);
+    void SetFontSize(uint32_t fontSize);
+    void SetTextColor(uint32_t textColor);
 
 private:
 	const char* m_text;

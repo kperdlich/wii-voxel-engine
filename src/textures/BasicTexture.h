@@ -40,7 +40,7 @@ typedef struct
 
 class BasicTexture {
 public:
-    BasicTexture(float x, float y, TextureLoadingData textureData, uint16_t id) : m_x(x), m_y(y), m_textureLoadingData(textureData), m_id(id), m_color(GRRLIB_WHITE) {}
+    BasicTexture(float x, float y, TextureLoadingData textureData) : m_x(x), m_y(y), m_textureLoadingData(textureData), m_color(GRRLIB_WHITE) {}
     virtual ~BasicTexture() {}
 
     virtual void Load();
@@ -94,12 +94,7 @@ public:
     bool IsLoaded() const
     {
         return m_bTextureLoaded;
-    }
-
-    uint16_t GetId() const
-    {
-        return m_id;
-    }
+    }   
 
     /**
      * @brief GetLoadedTexture
@@ -121,8 +116,7 @@ public:
 
 protected:
 	float m_x, m_y;
-    float m_width, m_height;
-    const uint16_t m_id;	
+    float m_width, m_height;    	
     uint32_t m_color;
     TextureLoadingData m_textureLoadingData;
     bool m_bTextureLoaded = false;

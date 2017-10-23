@@ -74,14 +74,7 @@ public:
     void SetSpriteCashDirty(bool value)
     {
         m_spriteCashDirty = value;
-    }
-
-protected:
-    u16 GetNewTextureIndex();
-    u16 GetNewSpriteIndex();
-
-    u16 m_spriteIndex = 0;
-    u16 m_textureIndex = 0;
+    }   
 };
 
 
