@@ -49,7 +49,8 @@
 // Sorting Layers
 #define BACKGROUND_SORTING_LAYER 0
 #define COMPONENTS_SORTING_LAYER 1
-#define CURSOR_SORTING_LAYER     2
+#define LABEL_SORTING_LAYER      2
+#define CURSOR_SORTING_LAYER     3
 
 CMainMenuScene::CMainMenuScene() {
 
@@ -103,7 +104,8 @@ void CMainMenuScene::CreateMainMenuButtonList()
 	int xPos = (rmode->viWidth / 2) - (startButtonTexture->GetWidth() / 2);
 	int yPos = (rmode->viHeight / 2) - ( startButtonTexture->GetHeight() / 2);
 	int sizeBetweenBtns = startButtonTexture->GetHeight() + BUTTON_Y_DISTANCE;
-    m_TextureHandler->DestroyTextureByName("BasicButtonBig_png");
+    m_TextureHandler->DestroySpriteByName("BasicButtonBig_png");
+
 
 	List* btnList = new List( xPos, yPos, sizeBetweenBtns );
     btnList->AddComponent( CreateDefaultMainMenuButton( MMS_BUTTON_SINGLEPLAYER, "Singleplayer", [] (BasicButton* clickedButton) { Controller::GetInstance().GetBasicCommandHandler().ExecuteCommand(SwitchToInGameCommand::Name()); }));
@@ -128,7 +130,7 @@ BasicButton* CMainMenuScene::CreateDefaultMainMenuButton( const char* buttonName
 	char searchLabel[strlen(buttonName) + strlen(LABEL_TAG) +1];
 	strcpy( searchLabel, buttonName );
 	strcat( searchLabel, LABEL_TAG );
-    auto pButtonLabel = m_TextureHandler->CreateLabel( buttontext, fontHandler.GetNativFontByID( DEFAULT_MINECRAFT_FONT_ID ), searchLabel, COMPONENTS_SORTING_LAYER);
+    auto pButtonLabel = m_TextureHandler->CreateLabel( buttontext, fontHandler.GetNativFontByID( DEFAULT_MINECRAFT_FONT_ID ), searchLabel, LABEL_SORTING_LAYER);
 
 	return new BasicButton( 0, 0, buttonName, pdefaultButtonTexture, pHighlightButtonTexture, pButtonLabel, clickCallback );
 }

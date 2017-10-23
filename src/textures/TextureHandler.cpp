@@ -24,7 +24,7 @@
 #include "../utils/Debug.h"
 
 
-void TextureHandler::DestroySpriteByName(const char *searchName)
+bool TextureHandler::DestroySpriteByName(const char *searchName)
 {
     auto spriteAtlasIt = m_spriteAtlas.find( searchName );
     if ( spriteAtlasIt != m_spriteAtlas.end() )
@@ -32,10 +32,12 @@ void TextureHandler::DestroySpriteByName(const char *searchName)
         spriteAtlasIt->second->Unload();
         delete spriteAtlasIt->second;
         m_spriteAtlas.erase(searchName);
+        return true;
     }
+    return false;
 }
 
-void TextureHandler::DestroyTextureByName( const char* searchName )
+bool TextureHandler::DestroyTextureByName( const char* searchName )
 {
     auto textureAtlasIt = m_textureAtlas.find( searchName );
     if ( textureAtlasIt != m_textureAtlas.end() )
@@ -43,7 +45,9 @@ void TextureHandler::DestroyTextureByName( const char* searchName )
         textureAtlasIt->second->Unload();
         delete textureAtlasIt->second;
         m_textureAtlas.erase(searchName);
+        return true;
 	}
+    return false;
 }
 
 

@@ -36,7 +36,7 @@ private:
     std::vector<const Sprite*> m_spriteRenderCash;
     bool m_spriteCashDirty = true;
 
-    std::map<std::string, Sprite*> m_spriteAtlas;
+    std::unordered_map<std::string, Sprite*> m_spriteAtlas;
     std::unordered_map<std::string, Texture*> m_textureAtlas;    
 
 public:
@@ -48,8 +48,8 @@ public:
     Label* CreateLabel( int x, int y, const char* text, GRRLIB_ttfFont* font, uint32_t fontSize, uint32_t color, const char* searchName, uint16_t sortingLayer = 0 );
     Label* CreateLabel( const char* text, GRRLIB_ttfFont* font, const char* searchName, uint16_t sortingLayer = 0 );
 
-    void DestroySpriteByName( const char* searchName );
-    void DestroyTextureByName( const char* searchName );
+    bool DestroySpriteByName( const char* searchName );
+    bool DestroyTextureByName( const char* searchName );
 	void DestroyAllTextures();
     void DestroyAllSprites();
     void DestroyAll();    
