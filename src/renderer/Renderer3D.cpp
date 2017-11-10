@@ -24,11 +24,6 @@ Renderer3D::Renderer3D() {}
 
 Renderer3D::~Renderer3D() {}
 
-void Renderer3D::DrawSprite( const Sprite* sprite ) const
-{	
-    MasterRenderer::DrawSprite(*sprite);
-}
-
 void Renderer3D::DrawEntity(const Entity* entity) const
 {
 	entity->GetRenderer()->Render();

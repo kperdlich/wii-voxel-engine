@@ -21,7 +21,7 @@
 
 Basic2DScene::Basic2DScene()
 {
-    m_Renderer = new Renderer();
+    m_renderer = new Renderer();
 }
 
 Basic2DScene::~Basic2DScene() {
@@ -29,10 +29,10 @@ Basic2DScene::~Basic2DScene() {
 
 void Basic2DScene::Draw()
 {
-    auto sprites = m_TextureHandler->GetSpriteRenderList();
+    auto sprites = m_spriteStageManager->GetSpriteRenderList();
     for (auto it = sprites.begin(); it != sprites.end(); it++)
     {
-        m_Renderer->Draw( (**it) );
+        m_renderer->Draw( (*it) );
     }
 }
 

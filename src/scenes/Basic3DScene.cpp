@@ -27,7 +27,7 @@
 
 Basic3DScene::Basic3DScene()
 {
-	m_Renderer = new Renderer3D();
+    m_renderer = new Renderer3D();
 	m_entityHandler = new EntityHandler();
 	m_mainCamera = new Camera();
     m_pSkyBox = new SkyBox();
@@ -87,10 +87,10 @@ void Basic3DScene::Draw()
 
     GRRLIB_2dMode();
 
-    auto sprites = m_TextureHandler->GetSpriteRenderList();
+    auto sprites = m_spriteStageManager->GetSpriteRenderList();
     for (auto it = sprites.begin(); it != sprites.end(); it++)
     {
-        m_Renderer->Draw(**it);
+        m_renderer->Draw(*it);
     }
 }
 
@@ -104,7 +104,7 @@ void Basic3DScene::Update(float deltaSeconds)
 
 Renderer3D& Basic3DScene::Get3DRenderer()
 {
-	return static_cast<Renderer3D&>(*m_Renderer);
+    return static_cast<Renderer3D&>(*m_renderer);
 }
 
 EntityHandler& Basic3DScene::GetEntityHandler()

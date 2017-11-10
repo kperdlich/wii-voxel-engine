@@ -25,15 +25,21 @@
 
 BasicButton::BasicButton( float x, float y, const char* name, Sprite* defaultTexture, Sprite* highlightTexture, Label* label, OnClickCallback clickCallback  ) : m_label( label ), m_highlightTexture( highlightTexture ), m_clickCallback( clickCallback ), UiTextureElement( x, y, name, defaultTexture )
 {
-	m_texture->SetX( x );
-	m_texture->SetY( y );
+    m_sprite->SetX( x );
+    m_sprite->SetY( y );
 	m_highlightTexture->SetX( x );
 	m_highlightTexture->SetY( y );
 	m_highlightTexture->SetVisible(false);
 	UpdateLabel();
 }
 
-BasicButton::~BasicButton() { }
+BasicButton::~BasicButton()
+{
+    if ( m_highlightTexture )
+        delete m_highlightTexture;
+    if ( m_label )
+        delete m_label;
+}
 
 
 void BasicButton::Update()
@@ -47,12 +53,12 @@ void BasicButton::Update()
 bool BasicButton::MouseOver()
 {
 	WiiPad* pad = Engine::Get().GetInputHandler().GetPadByID( WII_PAD_0 );
-	bool mouseOver = GRRLIB_PtInRect(m_texture->GetX(), m_texture->GetY(), m_texture->GetWidth(), m_texture->GetHeight(), pad->GetX(), pad->GetY() );
+    bool mouseOver = GRRLIB_PtInRect(m_sprite->GetX(), m_sprite->GetY(), m_sprite->GetWidth(), m_sprite->GetHeight(), pad->GetX(), pad->GetY() );
     if ( mouseOver != m_mouseOver )
     {
-        m_texture->SetVisible(!mouseOver);
+        m_sprite->SetVisible(!mouseOver);
         m_highlightTexture->SetVisible(mouseOver);
-        Engine::Get().GetSceneHandler().GetCurrentScene().GetSpriteStageManager().SetSpriteCashDirty(true);
+        Engine::Get().GetSpriteStageManager().SetSpriteCashDirty(true);
         m_mouseOver = mouseOver;
     }
 
@@ -83,12 +89,12 @@ void BasicButton::SetButtonCallback(OnClickCallback callback)
 
 void BasicButton::UpdateLabel()
 {
-	uint32_t newFontSize = m_texture->GetHeight() - (2*BUTTON_LABEL_DISTANCE);
+    uint32_t newFontSize = m_sprite->GetHeight() - (2*BUTTON_LABEL_DISTANCE);
 	m_label->SetFontSize( newFontSize );
-	m_label->SetY( m_texture->GetY() + BUTTON_LABEL_DISTANCE );
+    m_label->SetY( m_sprite->GetY() + BUTTON_LABEL_DISTANCE );
 
-	uint32_t textWidthInPixel = GRRLIB_WidthTTF(&m_label->GetFont(), m_label->GetText(), m_label->GetFontSize());
-	m_label->SetX(m_texture->GetX() + (( m_texture->GetWidth() / 2) - (textWidthInPixel / 2)));
+    uint32_t textWidthInPixel = GRRLIB_WidthTTF(&m_label->GetFont(), m_label->GetText().c_str(), m_label->GetFontSize());
+    m_label->SetX(m_sprite->GetX() + (( m_sprite->GetWidth() / 2) - (textWidthInPixel / 2)));
 }
 
 

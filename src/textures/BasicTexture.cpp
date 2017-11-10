@@ -18,19 +18,27 @@
 ***/
 
 #include "BasicTexture.h"
+#include "../Engine.h"
+
+BasicTexture::BasicTexture(float x, float y, TextureLoadingData textureData) : m_x(x), m_y(y), m_textureLoadingData(textureData), m_color(GRRLIB_WHITE) { }
+
+BasicTexture::~BasicTexture()
+{
+    Unload();
+}
 
 void BasicTexture::Load()
 {
-    m_loadedTexture = GRRLIB_LoadTexture( m_textureLoadingData.pTextureData );
+    m_loadedTexture = GRRLIB_LoadTexture( m_textureLoadingData.textureData );
 
     if ( m_loadedTexture )
     {        
-        m_pTextureObject = new GXTexObj();
-        auto pLoadedTextureInfo = static_cast<GRRLIB_texImg*>(m_loadedTexture);
+        m_textureObject = new GXTexObj();
+        auto loadedTextureInfo = static_cast<GRRLIB_texImg*>(m_loadedTexture);
 
-        GX_InitTexObj(m_pTextureObject, pLoadedTextureInfo->data, pLoadedTextureInfo->w, pLoadedTextureInfo->h, GX_TF_RGBA8, GX_CLAMP, GX_CLAMP, GX_FALSE);
+        GX_InitTexObj(m_textureObject, loadedTextureInfo->data, loadedTextureInfo->w, loadedTextureInfo->h, GX_TF_RGBA8, GX_CLAMP, GX_CLAMP, GX_FALSE);
 
-        GX_InitTexObjLOD(m_pTextureObject, GX_LINEAR, GX_LINEAR, 0.0f, 0.0f, 0.0f, 0, 0, GX_ANISO_1);
+        GX_InitTexObjLOD(m_textureObject, GX_LINEAR, GX_LINEAR, 0.0f, 0.0f, 0.0f, 0, 0, GX_ANISO_1);
 
         if (GRRLIB_Settings.antialias == false)
         {
@@ -41,8 +49,8 @@ void BasicTexture::Load()
             GX_SetCopyFilter(rmode->aa, rmode->sample_pattern, GX_TRUE, rmode->vfilter);
         }
 
-        m_width = pLoadedTextureInfo->w;
-        m_height = pLoadedTextureInfo->h;
+        m_width = loadedTextureInfo->w;
+        m_height = loadedTextureInfo->h;
         m_bTextureLoaded = true;
     }
 }
@@ -54,9 +62,9 @@ void BasicTexture::Unload()
         GRRLIB_FreeTexture(static_cast<GRRLIB_texImg*>(m_loadedTexture));
     }
 
-    if (m_pTextureObject)
+    if (m_textureObject)
     {
-        delete m_pTextureObject;
+        delete m_textureObject;
     }
 
     m_width = 0;

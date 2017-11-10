@@ -23,6 +23,8 @@
 #define DEBUG_STRINGS 25
 #define CHARS_PER_DEBUG_STRING 50 // should always be enough for debug logs
 
+#ifdef DEBUG
+
 Debug::Debug()
 {
     AllocateDebugBuffer();
@@ -98,5 +100,6 @@ void Debug::Destroy()
     DestroyDebugBuffer();
 }
 
+#endif
 
 

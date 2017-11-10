@@ -19,7 +19,6 @@
 
 
 #include "Engine.h"
-#include <ogc/lwp_watchdog.h>
 #include "utils/Debug.h"
 
 
@@ -59,7 +58,7 @@ void Engine::Start()
         PrintGameVersion(0, 25, m_pFontHandler->GetNativFontByID( DEFAULT_FONT_ID ), DEFAULT_FONT_SIZE, GRRLIB_WHITE );
 
         LOG("Resolution x: %d y: %d", rmode->viWidth, rmode->viHeight);
-        LOG( "Loaded Textures in scene: %d", m_pSceneHandler->GetCurrentScene().GetSpriteStageManager().SpriteCount() );
+        LOG( "Loaded Sprites in scene: %d", GetSpriteStageManager().SpriteCount() );
 
         Debug::GetInstance().Print();
         Debug::GetInstance().Reset();

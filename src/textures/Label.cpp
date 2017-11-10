@@ -18,18 +18,31 @@
 ***/
 
 #include "Label.h"
+#include "../Engine.h"
 
-Label::Label( const char* text, float x, float y, TextureLoadingData textureData, GRRLIB_ttfFont* font, uint32_t fontSize, uint32_t color )
-    : Sprite(x, y, textureData), m_text( text ), m_font( font ), m_fontSize( fontSize ), m_textColor( color ) {}
+Label::Label(const std::string& text, float x, float y, TextureLoadingData textureData, GRRLIB_ttfFont* font, uint32_t fontSize, uint32_t color )
+    : Sprite(x, y, textureData), m_text( text ), m_font( font ), m_fontSize( fontSize ), m_textColor( color )
+{
+}
 
-Label::~Label() {}
+Label::~Label() { }
+
+Label *Label::Create(std::string text, GRRLIB_ttfFont *font, std::string searchName, uint16_t sortingLayer)
+{
+    Label* label = new Label( text, 0, 0, {nullptr, 0}, font, DEFAULT_FONT_SIZE, GRRLIB_WHITE );
+    label->SetName(searchName);
+    label->SetSortingLayerIndex(sortingLayer);
+    label->Load();
+    Engine::Get().GetSpriteStageManager().Add(label);
+    return label;
+}
 
 GRRLIB_ttfFont& Label::GetFont() const
 {
 	return *m_font;
 }
 
-const char* Label::GetText() const
+const std::string& Label::GetText() const
 {
 	return m_text;
 }

@@ -37,7 +37,7 @@ public:
     virtual void SetY(uint32_t y) override;
 
 protected:
-        Sprite* m_texture;
+        Sprite* m_sprite;
 };
 
 #endif /* _UITEXTUREELEMENT_H_ */

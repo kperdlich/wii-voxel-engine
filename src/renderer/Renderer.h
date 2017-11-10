@@ -28,7 +28,7 @@ class Renderer
 public:
 	Renderer();
 	virtual ~Renderer();
-    virtual void Draw( const Sprite& sprite);
+    virtual void Draw( const Sprite* sprite);
 };
 
 

@@ -33,7 +33,7 @@
 #define DEFAULT_FONT_ID 0
 #define DEFAULT_MINECRAFT_FONT_ID 1
 
-#define DEBUG
+//#define DEBUG
 
 class Engine {
 
@@ -50,7 +50,7 @@ public:
     ~Engine();
 	void Start();
 	void End();
-	void Init();
+    void Init();
 
     class SceneHandler& GetSceneHandler();
     class InputHandler& GetInputHandler();

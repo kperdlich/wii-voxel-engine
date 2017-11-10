@@ -27,8 +27,7 @@
 class Renderer3D: public Renderer {
 public:
 	Renderer3D();
-	virtual ~Renderer3D();
-    void DrawSprite( const Sprite* sprite ) const;
+	virtual ~Renderer3D();    
     void DrawEntity(const class Entity* entity) const;
 };
 

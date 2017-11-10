@@ -25,19 +25,19 @@ Renderer::Renderer() {}
 
 Renderer::~Renderer() {}
 
-void Renderer::Draw( const Sprite& sprite)
+void Renderer::Draw(const Sprite* sprite)
 {
-    switch( sprite.GetTextureType() )
+    switch( sprite->GetTextureType() )
     {
         case SPRITE:
         {
-            MasterRenderer::DrawSprite(sprite);
+            MasterRenderer::DrawSprite(*sprite);
             break;
         }
         case LABEL:
         {
-            Label label = static_cast<const Label&>(sprite);
-            GRRLIB_PrintfTTF( label.GetX(), label.GetY(), &label.GetFont(), label.GetText(), label.GetFontSize(), label.GetTextColor() );
+            const Label* label = static_cast<const Label*>(sprite);
+            GRRLIB_PrintfTTF( label->GetX(), label->GetY(), &label->GetFont(), label->GetText().c_str(), label->GetFontSize(), label->GetTextColor() );
             break;
         }
         default:

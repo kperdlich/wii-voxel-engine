@@ -36,8 +36,8 @@ public:
 	virtual Renderer& GetRenderer() const;
 
 protected:
-	SpriteStageManager *m_TextureHandler;
-	Renderer *m_Renderer;
+    SpriteStageManager *m_spriteStageManager;
+    Renderer *m_renderer;
 
 
 };

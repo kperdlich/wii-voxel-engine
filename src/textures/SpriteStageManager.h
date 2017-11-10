@@ -39,20 +39,15 @@ private:
 
 public:
     SpriteStageManager() {}
-    ~SpriteStageManager() {}
+    ~SpriteStageManager() {}   
 
-    Sprite* CreateSprite( const uint8_t* pTextureData, uint32_t textureSize, const char* pSearchName, uint16_t sortingLayer = 0);
-    Label* CreateLabel( int x, int y, const char* text, GRRLIB_ttfFont* font, uint32_t fontSize, uint32_t color, const char* searchName, uint16_t sortingLayer = 0 );
-    Label* CreateLabel( const char* text, GRRLIB_ttfFont* font, const char* searchName, uint16_t sortingLayer = 0 );
-
-    bool DestroySpriteByName( const char* searchName );
-    void DestroyAllSprites();
-    void DestroyAll();    
-    bool FindSprite(std::string key) const;
+    void Clear();    
+    bool FindSprite(const std::string& name) const;
 
     Sprite* Add(Sprite* sprite);
+    bool Remove(const Sprite& sprite);
 
-    const Sprite* GetSprite(std::string key) const;
+    const Sprite* GetSprite(const std::string& key) const;
 
     std::vector<const Sprite*>& GetSpriteRenderList();
 

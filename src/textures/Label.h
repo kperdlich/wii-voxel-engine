@@ -24,13 +24,17 @@
 #include "Sprite.h"
 
 class Label: public Sprite {
+private:
+    Label( const std::string& text, float x, float y, TextureLoadingData textureData, GRRLIB_ttfFont* font, uint32_t fontSize, uint32_t color);    
+
 public:
-    Label( const char* text, float x, float y, TextureLoadingData textureData, GRRLIB_ttfFont* font, uint32_t fontSize, uint32_t color);
     virtual ~Label();
-	virtual ETextureType GetTextureType() const override;
+    static Label* Create(std::string text, GRRLIB_ttfFont* font, std::string searchName, uint16_t sortingLayer = 0);
+
+    virtual ETextureType GetTextureType() const override;
 
     GRRLIB_ttfFont& GetFont() const;
-    const char* GetText() const;
+    const std::string& GetText() const;
     uint32_t GetFontSize() const;
     uint32_t GetTextColor() const;
 
@@ -40,7 +44,7 @@ public:
     void SetTextColor(uint32_t textColor);
 
 private:
-	const char* m_text;
+    std::string m_text;
 	GRRLIB_ttfFont* m_font;
     uint32_t m_fontSize = 0;
     uint32_t m_textColor = 0;

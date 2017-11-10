@@ -25,12 +25,13 @@
 
 class Sprite : public BasicTexture
 {
-public:
-    Sprite( float x, float y, TextureLoadingData textureData ) : BasicTexture(x, y, textureData), m_bVisible(true) {}
-    ~Sprite(){}
+protected:
+    Sprite( float x, float y, TextureLoadingData textureData );
 
+public:    
+    ~Sprite();
 
-    static Sprite* Create(const uint8_t *pSpriteData, uint32_t spriteSize, const char *pSearchName, uint16_t sortingLayer = 0);
+    static Sprite* Create(const uint8_t *pSpriteData, uint32_t spriteSize, std::string searchName, uint16_t sortingLayer = 0);
 
     virtual ETextureType GetTextureType() const override
     {
@@ -57,7 +58,7 @@ public:
         return m_sortingLayerIndex;
     }
 
-    std::string GetName() const
+    const std::string& GetName() const
     {
         return m_name;
     }

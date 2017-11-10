@@ -21,8 +21,8 @@
 
 Hotbar::Hotbar( const char* name, Sprite* sprite ) : UiTextureElement(0, 0, name, sprite ) {
 
-    sprite->SetX( (rmode->viWidth / 2) - (m_texture->GetWidth() / 2) );
-    sprite->SetY( rmode->viHeight - m_texture->GetHeight() );
+    sprite->SetX( (rmode->viWidth / 2) - (m_sprite->GetWidth() / 2) );
+    sprite->SetY( rmode->viHeight - m_sprite->GetHeight() );
 
 }
 

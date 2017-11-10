@@ -104,8 +104,8 @@ void MainMenuScene::CreateMainMenuButtonList()
     auto startButtonTexture = Sprite::Create(BasicButtonBig_png, BasicButtonBig_png_size, "BasicButtonBig_png" );
 	int xPos = (rmode->viWidth / 2) - (startButtonTexture->GetWidth() / 2);
 	int yPos = (rmode->viHeight / 2) - ( startButtonTexture->GetHeight() / 2);
-	int sizeBetweenBtns = startButtonTexture->GetHeight() + BUTTON_Y_DISTANCE;
-    m_TextureHandler->DestroySpriteByName("BasicButtonBig_png");
+	int sizeBetweenBtns = startButtonTexture->GetHeight() + BUTTON_Y_DISTANCE;    
+    delete startButtonTexture;
 
 	List* btnList = new List( xPos, yPos, sizeBetweenBtns );
     btnList->AddComponent( CreateDefaultMainMenuButton( MMS_BUTTON_SINGLEPLAYER, "Singleplayer", [] (BasicButton* clickedButton) { Engine::Get().GetBasicCommandHandler().ExecuteCommand(SwitchToInGameCommand::Name()); }));
@@ -125,9 +125,8 @@ BasicButton* MainMenuScene::CreateDefaultMainMenuButton( const char* buttonName,
     std::string searchNamehighlight = std::string(buttonName).append(HIGHLIGHT_TAG);
     auto pHighlightButtonTexture = Sprite::Create(BasicButtonBigHighlight_png, BasicButtonBigHighlight_png_size, searchNamehighlight.c_str(), COMPONENTS_SORTING_LAYER);
 
-
     std::string searchLabel = std::string(buttonName).append(LABEL_TAG);
-    auto pButtonLabel = m_TextureHandler->CreateLabel( buttontext, fontHandler.GetNativFontByID( DEFAULT_MINECRAFT_FONT_ID ), searchLabel.c_str(), LABEL_SORTING_LAYER);
+    auto pButtonLabel = Label::Create(buttontext, fontHandler.GetNativFontByID( DEFAULT_MINECRAFT_FONT_ID ), searchLabel.c_str(), LABEL_SORTING_LAYER);
 
 	return new BasicButton( 0, 0, buttonName, pdefaultButtonTexture, pHighlightButtonTexture, pButtonLabel, clickCallback );
 }

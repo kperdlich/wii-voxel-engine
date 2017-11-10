@@ -32,6 +32,9 @@
     #define LOG(format, ...)
 #endif
 
+
+#ifdef DEBUG
+
 class Debug {
 
 private:
@@ -59,8 +62,9 @@ public:
 	}
 
 	Debug(Debug const&)	  = delete;
-	void operator=(Debug const&) = delete;
-
+	void operator=(Debug const&) = delete;    
 };
+
+#endif
 
 #endif /* _DEBUG_H_ */

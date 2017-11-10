@@ -22,14 +22,17 @@
 
 Scene::Scene()
 {
-    m_TextureHandler = new SpriteStageManager();
+    m_spriteStageManager = new SpriteStageManager();
 }
 
 
 Scene::~Scene()
 {
-	delete m_TextureHandler;
-	delete m_Renderer;
+    if (m_spriteStageManager)
+        delete m_spriteStageManager;
+
+    if (m_renderer)
+        delete m_renderer;
 }
 
 void Scene::Load() {
@@ -37,7 +40,7 @@ void Scene::Load() {
 
 void Scene::Unload()
 {
-    m_TextureHandler->DestroyAll();
+    m_spriteStageManager->Clear();
 }
 
 void Scene::Draw() {
@@ -47,10 +50,10 @@ void Scene::Update(float deltaSeconds) {}
 
 SpriteStageManager& Scene::GetSpriteStageManager() const
 {
-	return *m_TextureHandler;
+    return *m_spriteStageManager;
 }
 
 Renderer& Scene::GetRenderer() const
 {
-	return *m_Renderer;
+    return *m_renderer;
 }

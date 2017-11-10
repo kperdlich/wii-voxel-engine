@@ -34,14 +34,14 @@ enum ETextureType {
 
 typedef struct
 {
-    const uint8_t* pTextureData;
+    const uint8_t* textureData;
     uint32_t textureSize;
 } TextureLoadingData;
 
 class BasicTexture {
 public:
-    BasicTexture(float x, float y, TextureLoadingData textureData) : m_x(x), m_y(y), m_textureLoadingData(textureData), m_color(GRRLIB_WHITE) {}
-    virtual ~BasicTexture() {}
+    BasicTexture(float x, float y, TextureLoadingData textureData);
+    virtual ~BasicTexture();
 
     virtual void Load();
     virtual void Unload();
@@ -111,7 +111,7 @@ public:
      */
     GXTexObj* GetTextureObject() const
     {
-        return m_pTextureObject;
+        return m_textureObject;
     }
 
     float GetScaleX() const
@@ -142,7 +142,7 @@ protected:
     TextureLoadingData m_textureLoadingData;
     bool m_bTextureLoaded = false;
     void* m_loadedTexture = nullptr;
-    GXTexObj* m_pTextureObject = nullptr;
+    GXTexObj* m_textureObject = nullptr;
 };
 
 #endif /* _BASICTEXTURE_H_ */

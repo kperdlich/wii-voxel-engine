@@ -24,72 +24,20 @@
 #include "../utils/Debug.h"
 
 
-bool SpriteStageManager::DestroySpriteByName(const char *searchName)
+void SpriteStageManager::Clear()
 {
-    auto spriteAtlasIt = m_spriteAtlas.find( searchName );
-    if ( spriteAtlasIt != m_spriteAtlas.end() )
-    {
-        spriteAtlasIt->second->Unload();
-        delete spriteAtlasIt->second;
-        m_spriteAtlas.erase(searchName);
-        return true;
-    }
-    return false;
-}
-
-
-void SpriteStageManager::DestroyAllSprites()
-{
-    if ( m_spriteAtlas.empty())
-        return;
-
-    for ( auto it = m_spriteAtlas.begin(); it != m_spriteAtlas.end(); it++)
-    {
-        it->second->Unload();
-        delete it->second;
-    }
-
     m_spriteAtlas.clear();
-}
-
-void SpriteStageManager::DestroyAll()
-{
-    DestroyAllSprites();
+    m_spriteRenderCash.clear();
+    m_spriteCashDirty = true;
 }
 
 
-Sprite* SpriteStageManager::CreateSprite(const uint8_t *pSpriteData, uint32_t spriteSize, const char *pSearchName, uint16_t sortingLayer)
+bool SpriteStageManager::FindSprite(const std::string& name ) const
 {
-    TextureLoadingData textureData = { pSpriteData, spriteSize };
-    auto sprite = new Sprite( 0, 0, textureData );
-    sprite->SetSortingLayerIndex(sortingLayer);
-    sprite->Load();
-    m_spriteAtlas.insert(std::make_pair(pSearchName, sprite));
-    return sprite;
-}
-
-
-Label* SpriteStageManager::CreateLabel(int x, int y, const char* text,
-        GRRLIB_ttfFont* font, uint32_t fontSize, u32 color, const char* searchName, uint16_t sortingLayer)
-{
-    Label* label = new Label( text, x, y, {nullptr, 0}, font, fontSize, color );
-    label->Load();
-    label->SetSortingLayerIndex(sortingLayer);
-    m_spriteAtlas.insert(std::make_pair(searchName, label));
-	return label;
-}
-
-Label* SpriteStageManager::CreateLabel( const char* text, GRRLIB_ttfFont* font, const char* searchName, uint16_t sortingLayer )
-{
-    return CreateLabel(0, 0, text, font, DEFAULT_FONT_SIZE, GRRLIB_WHITE, searchName, sortingLayer);
-}
-
-
-bool SpriteStageManager::FindSprite(std::string key) const
-{
-    auto spriteAtlasIt = m_spriteAtlas.find(key);
+    auto spriteAtlasIt = m_spriteAtlas.find(name);
     return spriteAtlasIt != m_spriteAtlas.end();
 }
+
 
 Sprite* SpriteStageManager::Add(Sprite *sprite)
 {
@@ -97,7 +45,20 @@ Sprite* SpriteStageManager::Add(Sprite *sprite)
     return sprite;
 }
 
-const Sprite *SpriteStageManager::GetSprite(std::string key) const
+bool SpriteStageManager::Remove(const Sprite& sprite)
+{
+    auto spriteAtlasIt = m_spriteAtlas.find(sprite.GetName());
+    if (spriteAtlasIt != m_spriteAtlas.end())
+    {
+        m_spriteAtlas.erase(sprite.GetName());
+        m_spriteCashDirty = true;
+        return true;
+    }
+
+    return false;
+}
+
+const Sprite *SpriteStageManager::GetSprite(const std::string& key) const
 {
     auto spriteAtlasIt = m_spriteAtlas.find(key);
     if (spriteAtlasIt != m_spriteAtlas.end())
@@ -115,10 +76,10 @@ std::vector<const Sprite*>& SpriteStageManager::GetSpriteRenderList()
         m_spriteRenderCash.clear();
         for ( auto it = m_spriteAtlas.begin(); it != m_spriteAtlas.end(); it++)
         {
-            Sprite* pSprite = it->second;
-            if (pSprite->IsVisible())
+            Sprite* sprite = it->second;
+            if (sprite->IsVisible())
             {
-                m_spriteRenderCash.push_back(pSprite);
+                m_spriteRenderCash.push_back(sprite);
             }
         }
 
