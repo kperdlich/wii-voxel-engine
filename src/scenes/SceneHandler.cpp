@@ -48,9 +48,9 @@ void SceneHandler::Init() {
 	 * 2. Main menue
 	 * 3. Ingame
 	 */
-    m_Scenes.push_back( new CIntroScene() );
-    m_Scenes.push_back( new CMainMenuScene() );
-    m_Scenes.push_back( new CInGameScene() );
+    m_Scenes.push_back( new IntroScene() );
+    m_Scenes.push_back( new MainMenuScene() );
+    m_Scenes.push_back( new InGameScene() );
 	// ..
 }
 

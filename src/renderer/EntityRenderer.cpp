@@ -42,5 +42,5 @@ void EntityRenderer::Render() const {}
 
 SpriteStageManager& EntityRenderer::GetTextureHandler()
 {
-	return Engine::Get().GetSceneHandler().GetCurrentScene().GetTextureHandler();
+	return Engine::Get().GetSceneHandler().GetCurrentScene().GetSpriteStageManager();
 }

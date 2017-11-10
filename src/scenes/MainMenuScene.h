@@ -25,10 +25,10 @@
 #include "../components/BasicButton.h"
 
 
-class CMainMenuScene: public Basic2DScene {
+class MainMenuScene: public Basic2DScene {
 public:
-    CMainMenuScene();
-    virtual ~CMainMenuScene();
+    MainMenuScene();
+    virtual ~MainMenuScene();
 	void Load() override;
 	void Draw() override;
     void Update(float deltaSeconds) override;

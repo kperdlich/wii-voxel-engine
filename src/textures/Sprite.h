@@ -21,12 +21,16 @@
 #define SPRITE_H
 
 #include "BasicTexture.h"
+#include <string>
 
 class Sprite : public BasicTexture
 {
 public:
     Sprite( float x, float y, TextureLoadingData textureData ) : BasicTexture(x, y, textureData), m_bVisible(true) {}
     ~Sprite(){}
+
+
+    static Sprite* Create(const uint8_t *pSpriteData, uint32_t spriteSize, const char *pSearchName, uint16_t sortingLayer = 0);
 
     virtual ETextureType GetTextureType() const override
     {
@@ -53,9 +57,20 @@ public:
         return m_sortingLayerIndex;
     }
 
+    std::string GetName() const
+    {
+        return m_name;
+    }
+
+    void SetName(const std::string& name)
+    {
+        m_name = name;
+    }
+
 protected:
     bool m_bVisible = true;
     uint16_t m_sortingLayerIndex = 0;
+    std::string m_name;
 };
 
 

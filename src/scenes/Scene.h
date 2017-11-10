@@ -32,7 +32,7 @@ public:
 	virtual void Unload();
 	virtual void Draw();
     virtual void Update(float deltaSeconds);
-	virtual SpriteStageManager& GetTextureHandler() const;
+	virtual SpriteStageManager& GetSpriteStageManager() const;
 	virtual Renderer& GetRenderer() const;
 
 protected:

@@ -29,23 +29,23 @@
 #define IGS_HUD_CROSSHAIR "IGS_HUD_CROSSHAIR"
 
 
-CInGameScene::CInGameScene() {}
+InGameScene::InGameScene() {}
 
-CInGameScene::~CInGameScene() {}
+InGameScene::~InGameScene() {}
 
-void CInGameScene::Update(float deltaSeconds)
+void InGameScene::Update(float deltaSeconds)
 {
     Basic3DScene::Update(deltaSeconds);
     CPlayer* player = static_cast<CPlayer*>(m_entityHandler->GetPlayer());
     player->Update(deltaSeconds);
 }
 
-void CInGameScene::Load()
+void InGameScene::Load()
 {
     Basic3DScene::Load();
 
-    m_uiElements.push_back( new Hotbar( IGS_HUD_HOTBAR, m_TextureHandler->CreateSprite(Hotbar_png, Hotbar_png_size, IGS_HUD_HOTBAR)) );
-    m_uiElements.push_back( new Cursor( IGS_HUD_CROSSHAIR, m_TextureHandler->CreateSprite(Crosshair_png, Crosshair_png_size, IGS_HUD_CROSSHAIR)) );
+    m_uiElements.push_back( new Hotbar( IGS_HUD_HOTBAR, Sprite::Create(Hotbar_png, Hotbar_png_size, IGS_HUD_HOTBAR)) );
+    m_uiElements.push_back( new Cursor( IGS_HUD_CROSSHAIR, Sprite::Create(Crosshair_png, Crosshair_png_size, IGS_HUD_CROSSHAIR)) );
 
     m_pGameWorld = new GameWorld();
 	m_pGameWorld->GenerateWorld();
@@ -54,7 +54,7 @@ void CInGameScene::Load()
 }
 
 
-void CInGameScene::Draw()
+void InGameScene::Draw()
 {
     Basic3DScene::Draw();   
 
@@ -85,7 +85,7 @@ void CInGameScene::Draw()
 #endif
 }
 
-void CInGameScene::InitEntities()
+void InGameScene::InitEntities()
 {
     CPlayer* pPlayer = new CPlayer();
 	pPlayer->SetPosition(Vector3(10.0f, CHUNK_BLOCK_SIZE_Y, 10.0f));

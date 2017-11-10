@@ -18,5 +18,16 @@
 ***/
 
 #include "Sprite.h"
+#include "../Engine.h"
 
 
+Sprite* Sprite::Create(const uint8_t *spriteData, uint32_t spriteSize, const char *searchName, uint16_t sortingLayer)
+{
+    TextureLoadingData spriteLoadingData = { spriteData, spriteSize };
+    auto sprite = new Sprite( 0, 0, spriteLoadingData );
+    sprite->SetName(std::string(searchName));
+    sprite->SetSortingLayerIndex(sortingLayer);
+    sprite->Load();
+    Engine::Get().GetSpriteStageManager().Add(sprite);
+    return sprite;
+}

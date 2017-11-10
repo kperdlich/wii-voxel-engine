@@ -25,11 +25,11 @@
 
 class Engine;
 
-class CIntroScene : public Basic2DScene
+class IntroScene : public Basic2DScene
 {
 public:
-    CIntroScene();
-    ~CIntroScene();
+    IntroScene();
+    ~IntroScene();
 	void Load() override;
     void Update(float deltaSeconds) override;
 	void Draw() override;

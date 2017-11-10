@@ -53,35 +53,35 @@
 #define LABEL_SORTING_LAYER      2
 #define CURSOR_SORTING_LAYER     3
 
-CMainMenuScene::CMainMenuScene() {
+MainMenuScene::MainMenuScene() {
 
 }
 
-CMainMenuScene::~CMainMenuScene() {
+MainMenuScene::~MainMenuScene() {
 
 }
 
-void CMainMenuScene::Load()
+void MainMenuScene::Load()
 {
     Basic2DScene::Load();
-    m_elements.push_back( new UiTextureElement( MMS_CLASSIC_BACKGROUND , m_TextureHandler->CreateSprite(ClassicBackgroundSprite_png, ClassicBackgroundSprite_png_size, MMS_CLASSIC_BACKGROUND, BACKGROUND_SORTING_LAYER )));
-    UiTextureElement* logo = new UiTextureElement( MMS_LOGO , m_TextureHandler->CreateSprite(WoxelCraft_png, WoxelCraft_png_size, MMS_LOGO, COMPONENTS_SORTING_LAYER));
+    m_elements.push_back( new UiTextureElement( MMS_CLASSIC_BACKGROUND , Sprite::Create(ClassicBackgroundSprite_png, ClassicBackgroundSprite_png_size, MMS_CLASSIC_BACKGROUND, BACKGROUND_SORTING_LAYER )));
+    UiTextureElement* logo = new UiTextureElement( MMS_LOGO , Sprite::Create(WoxelCraft_png, WoxelCraft_png_size, MMS_LOGO, COMPONENTS_SORTING_LAYER));
 	logo->SetX( (rmode->viWidth / 2) - (logo->GetWidth() / 2) );
 	logo->SetY( 60 );
 	m_elements.push_back( logo );
 
 	CreateMainMenuButtonList();
 
-    m_elements.push_back( new Cursor( MMS_CURSOR , m_TextureHandler->CreateSprite(Cursor_png, Cursor_png_size, MMS_CURSOR, CURSOR_SORTING_LAYER )));
+    m_elements.push_back( new Cursor( MMS_CURSOR , Sprite::Create(Cursor_png, Cursor_png_size, MMS_CURSOR, CURSOR_SORTING_LAYER )));
 }
 
-void CMainMenuScene::Draw()
+void MainMenuScene::Draw()
 {
     GRRLIB_SetBackgroundColour(0x24, 0x5E, 0x23, 1);
     Basic2DScene::Draw();
 }
 
-void CMainMenuScene::Update(float deltaSeconds)
+void MainMenuScene::Update(float deltaSeconds)
 {
     Basic2DScene::Update(deltaSeconds);
 
@@ -99,9 +99,9 @@ void CMainMenuScene::Update(float deltaSeconds)
 
 }
 
-void CMainMenuScene::CreateMainMenuButtonList()
+void MainMenuScene::CreateMainMenuButtonList()
 {
-    auto startButtonTexture = m_TextureHandler->CreateSprite(BasicButtonBig_png, BasicButtonBig_png_size, "BasicButtonBig_png" );
+    auto startButtonTexture = Sprite::Create(BasicButtonBig_png, BasicButtonBig_png_size, "BasicButtonBig_png" );
 	int xPos = (rmode->viWidth / 2) - (startButtonTexture->GetWidth() / 2);
 	int yPos = (rmode->viHeight / 2) - ( startButtonTexture->GetHeight() / 2);
 	int sizeBetweenBtns = startButtonTexture->GetHeight() + BUTTON_Y_DISTANCE;
@@ -116,14 +116,14 @@ void CMainMenuScene::CreateMainMenuButtonList()
 }
 
 
-BasicButton* CMainMenuScene::CreateDefaultMainMenuButton( const char* buttonName, const char* buttontext, void (*clickCallback) (BasicButton*) )
+BasicButton* MainMenuScene::CreateDefaultMainMenuButton( const char* buttonName, const char* buttontext, void (*clickCallback) (BasicButton*) )
 {
     FontHandler& fontHandler = Engine::Get().GetFontHandler();
 
-    auto pdefaultButtonTexture = m_TextureHandler->CreateSprite(BasicButtonBig_png, BasicButtonBig_png_size, buttonName, COMPONENTS_SORTING_LAYER);
+    auto pdefaultButtonTexture = Sprite::Create(BasicButtonBig_png, BasicButtonBig_png_size, buttonName, COMPONENTS_SORTING_LAYER);
 
     std::string searchNamehighlight = std::string(buttonName).append(HIGHLIGHT_TAG);
-    auto pHighlightButtonTexture = m_TextureHandler->CreateSprite(BasicButtonBigHighlight_png, BasicButtonBigHighlight_png_size, searchNamehighlight.c_str(), COMPONENTS_SORTING_LAYER);
+    auto pHighlightButtonTexture = Sprite::Create(BasicButtonBigHighlight_png, BasicButtonBigHighlight_png_size, searchNamehighlight.c_str(), COMPONENTS_SORTING_LAYER);
 
 
     std::string searchLabel = std::string(buttonName).append(LABEL_TAG);

@@ -35,25 +35,25 @@
 
 #define LOGO_INDEX 0
 
-CIntroScene::CIntroScene()  {
+IntroScene::IntroScene()  {
 
 }
 
-CIntroScene::~CIntroScene() {
+IntroScene::~IntroScene() {
 
 }
 
 
-void CIntroScene::Load()
+void IntroScene::Load()
 {
     Basic2DScene::Load();
 	m_BackgroundAlpha = 255;
-    auto logoSprite = m_TextureHandler->CreateSprite(WoxelCraft_png, WoxelCraft_png_size, IS_LOGO);
+    auto logoSprite = Sprite::Create(WoxelCraft_png, WoxelCraft_png_size, IS_LOGO);
     m_elements.push_back( new UiTextureElement( (rmode->viWidth / 2) - (logoSprite->GetWidth() / 2), (rmode->viHeight / 2) - ( logoSprite->GetHeight() / 2 ), IS_LOGO, logoSprite));
 }
 
 
-void CIntroScene::Update(float deltaSeconds)
+void IntroScene::Update(float deltaSeconds)
 {
     Basic2DScene::Update(deltaSeconds);
 
@@ -82,7 +82,7 @@ void CIntroScene::Update(float deltaSeconds)
     }
 }
 
-void CIntroScene::Draw()
+void IntroScene::Draw()
 {
 	GRRLIB_SetBackgroundColour(0x00, 0x00, 0x00, 0xFF);
     Basic2DScene::Draw();

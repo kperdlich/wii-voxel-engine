@@ -72,8 +72,6 @@ Sprite* SpriteStageManager::CreateSprite(const uint8_t *pSpriteData, uint32_t sp
 Label* SpriteStageManager::CreateLabel(int x, int y, const char* text,
         GRRLIB_ttfFont* font, uint32_t fontSize, u32 color, const char* searchName, uint16_t sortingLayer)
 {
-
-
     Label* label = new Label( text, x, y, {nullptr, 0}, font, fontSize, color );
     label->Load();
     label->SetSortingLayerIndex(sortingLayer);
@@ -91,6 +89,12 @@ bool SpriteStageManager::FindSprite(std::string key) const
 {
     auto spriteAtlasIt = m_spriteAtlas.find(key);
     return spriteAtlasIt != m_spriteAtlas.end();
+}
+
+Sprite* SpriteStageManager::Add(Sprite *sprite)
+{
+    m_spriteAtlas.insert(std::make_pair(sprite->GetName(), sprite));
+    return sprite;
 }
 
 const Sprite *SpriteStageManager::GetSprite(std::string key) const

@@ -26,7 +26,11 @@
 #define DEBUG_LINE 200
 #define DEFAULT_DEBUG_INDEX -1
 
-#define LOG(format, ...) Debug::GetInstance().Log(format, __VA_ARGS__)
+#ifdef DEBUG
+    #define LOG(format, ...) Debug::GetInstance().Log(format, __VA_ARGS__)
+#else
+    #define LOG(format, ...)
+#endif
 
 class Debug {
 

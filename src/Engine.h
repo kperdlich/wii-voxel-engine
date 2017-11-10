@@ -56,6 +56,7 @@ public:
     class InputHandler& GetInputHandler();
     class FontHandler& GetFontHandler();
     class BasicCommandHandler& GetBasicCommandHandler();
+    class SpriteStageManager& GetSpriteStageManager();
 
     static Engine& Get()
 	{

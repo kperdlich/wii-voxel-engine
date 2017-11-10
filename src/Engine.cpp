@@ -59,7 +59,7 @@ void Engine::Start()
         PrintGameVersion(0, 25, m_pFontHandler->GetNativFontByID( DEFAULT_FONT_ID ), DEFAULT_FONT_SIZE, GRRLIB_WHITE );
 
         LOG("Resolution x: %d y: %d", rmode->viWidth, rmode->viHeight);
-        LOG( "Loaded Textures in scene: %d", m_pSceneHandler->GetCurrentScene().GetTextureHandler().SpriteCount() );
+        LOG( "Loaded Textures in scene: %d", m_pSceneHandler->GetCurrentScene().GetSpriteStageManager().SpriteCount() );
 
         Debug::GetInstance().Print();
         Debug::GetInstance().Reset();
@@ -118,4 +118,9 @@ FontHandler& Engine::GetFontHandler()
 BasicCommandHandler& Engine::GetBasicCommandHandler()
 {
     return *m_pBasicCommandHandler;
+}
+
+SpriteStageManager& Engine::GetSpriteStageManager()
+{
+    return GetSceneHandler().GetCurrentScene().GetSpriteStageManager();
 }

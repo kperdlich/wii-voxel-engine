@@ -45,7 +45,7 @@ void Scene::Draw() {
 
 void Scene::Update(float deltaSeconds) {}
 
-SpriteStageManager& Scene::GetTextureHandler() const
+SpriteStageManager& Scene::GetSpriteStageManager() const
 {
 	return *m_TextureHandler;
 }

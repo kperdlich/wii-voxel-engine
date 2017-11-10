@@ -52,7 +52,7 @@ bool BasicButton::MouseOver()
     {
         m_texture->SetVisible(!mouseOver);
         m_highlightTexture->SetVisible(mouseOver);
-        Engine::Get().GetSceneHandler().GetCurrentScene().GetTextureHandler().SetSpriteCashDirty(true);
+        Engine::Get().GetSceneHandler().GetCurrentScene().GetSpriteStageManager().SetSpriteCashDirty(true);
         m_mouseOver = mouseOver;
     }
 

@@ -50,6 +50,8 @@ public:
     void DestroyAll();    
     bool FindSprite(std::string key) const;
 
+    Sprite* Add(Sprite* sprite);
+
     const Sprite* GetSprite(std::string key) const;
 
     std::vector<const Sprite*>& GetSpriteRenderList();
