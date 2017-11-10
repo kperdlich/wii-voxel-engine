@@ -21,7 +21,7 @@
 #define _SWITCHTOINGAMECOMMAND_H_
 
 #include "../BasicCommand.h"
-#include "../../Controller.h"
+#include "../../Engine.h"
 
 class SwitchToInGameCommand: public BasicCommand {
 public:

@@ -21,7 +21,7 @@
 #define _SWITCHTOMAINMENUCOMMAND_H_
 
 #include "../BasicCommand.h"
-#include "../../Controller.h"
+#include "../../Engine.h"
 
 class SwitchToMainMenuCommand: public BasicCommand {
 public:

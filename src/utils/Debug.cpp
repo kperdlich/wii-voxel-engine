@@ -59,7 +59,7 @@ char* Debug::GetNextLogBuffer()
     return m_logs[++m_logIndex];
 }
 
-void Debug::Log(char* format, ...)
+void Debug::Log(const char* format, ...)
 {    
     va_list args;
     va_start(args, format);
@@ -75,7 +75,7 @@ void Debug::Print()
     uint32_t y = DEBUG_LINE;
     for (char i = 0; i <= m_logIndex; i++)
 	{
-        GRRLIB_PrintfTTF( 0, y, Controller::GetInstance().GetFontHandler().GetNativFontByID( DEFAULT_FONT_ID ), m_logs[i], DEFAULT_FONT_SIZE, m_logOverflow ? GRRLIB_RED : GRRLIB_WHITE );
+        GRRLIB_PrintfTTF( 0, y, Engine::Get().GetFontHandler().GetNativFontByID( DEFAULT_FONT_ID ), m_logs[i], DEFAULT_FONT_SIZE, m_logOverflow ? GRRLIB_RED : GRRLIB_WHITE );
 
         if ( m_logIndex > DEBUG_STRINGS )
 		{

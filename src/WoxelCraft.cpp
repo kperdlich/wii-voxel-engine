@@ -18,10 +18,10 @@
 ***/
 
 
-#include "Controller.h"
+#include "Engine.h"
 
 int main( int argc, char **argv )
 {
-    Controller::GetInstance().Start();
+    Engine::Get().Start();
     return 0;
 }

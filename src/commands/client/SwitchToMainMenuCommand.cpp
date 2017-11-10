@@ -29,5 +29,5 @@ SwitchToMainMenuCommand::~SwitchToMainMenuCommand() {
 }
 
 void SwitchToMainMenuCommand::ExecuteCommand() {
-	Controller::GetInstance().GetSceneHandler().LoadScene( MAIN_MENU_ID );
+	Engine::Get().GetSceneHandler().LoadScene( MAIN_MENU_ID );
 }

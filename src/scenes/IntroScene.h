@@ -23,7 +23,7 @@
 
 #include "Basic2DScene.h"
 
-class Controller;
+class Engine;
 
 class CIntroScene : public Basic2DScene
 {

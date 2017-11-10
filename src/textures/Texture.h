@@ -28,13 +28,16 @@
 
 class Texture : public BasicTexture
 {
-
-public:
+protected:
     Texture(float x, float y, TextureLoadingData textureData) : BasicTexture(x, y, textureData) {}
+
+public:    
     virtual ~Texture() {}
 
     virtual void Load() override;
     virtual void Unload() override;
+
+    static Texture* Create(const uint8_t* textureData, uint32_t textureSize);
 
     virtual uint32_t GetWidth() const override;
     virtual uint32_t GetHeight() const override;	

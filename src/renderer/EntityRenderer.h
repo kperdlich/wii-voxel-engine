@@ -21,7 +21,7 @@
 #define _ENTITYRENDERER_H_
 
 #include "../entity/Entity.h"
-#include "../textures/TextureHandler.h"
+#include "../textures/SpriteStageManager.h"
 #include "../textures/Texture.h"
 
 class Entity;
@@ -34,7 +34,7 @@ public:
     void SetTexture( Texture* texture );
     Texture* GetTexture() const;
 protected:
-	TextureHandler& GetTextureHandler();
+	SpriteStageManager& GetTextureHandler();
 	Texture* m_entityTexture;
 	Entity* m_Entity;
 };

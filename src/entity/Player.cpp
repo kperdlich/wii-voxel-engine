@@ -40,7 +40,7 @@ CPlayer::~CPlayer()
 
 void CPlayer::Update(float deltaSeconds)
 {
-    WiiPad* pad = Controller::GetInstance().GetInputHandler().GetPadByID( WII_PAD_0 );
+    WiiPad* pad = Engine::Get().GetInputHandler().GetPadByID( WII_PAD_0 );
 
 	u32 padButtonHeld = pad->ButtonsHeld();
 	u32 padButtonDown = pad->ButtonsDown();
@@ -49,7 +49,7 @@ void CPlayer::Update(float deltaSeconds)
 	auto pChunk = m_pWorld->GetChunkByWorldPosition( m_position );
 	if ( pChunk )
     {		
-        Debug::GetInstance().Log( "Current Chunk: %d/%d/%d", (uint32_t) pChunk->GetCenterPosition().GetX(), (uint32_t) pChunk->GetCenterPosition().GetY(), (uint32_t) pChunk->GetCenterPosition().GetZ()  );
+        LOG( "Current Chunk: %d/%d/%d", (uint32_t) pChunk->GetCenterPosition().GetX(), (uint32_t) pChunk->GetCenterPosition().GetY(), (uint32_t) pChunk->GetCenterPosition().GetZ()  );
 	}
 #endif
 
@@ -101,7 +101,7 @@ void CPlayer::Update(float deltaSeconds)
 	// todo move to non-player related place
 	if ( padButtonDown & WPAD_BUTTON_HOME)
 	{
-        Controller::GetInstance().End();
+        Engine::Get().End();
 	}
 
 	UpdateInventory();
@@ -110,7 +110,7 @@ void CPlayer::Update(float deltaSeconds)
 
 void CPlayer::UpdateInventory()
 {
-    WiiPad* pad = Controller::GetInstance().GetInputHandler().GetPadByID( WII_PAD_0 );
+    WiiPad* pad = Engine::Get().GetInputHandler().GetPadByID( WII_PAD_0 );
 
 	u32 padButtonHeld = pad->ButtonsHeld();
 	u32 padButtonDown = pad->ButtonsDown();

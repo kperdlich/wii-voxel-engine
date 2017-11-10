@@ -29,5 +29,5 @@ SwitchToIntroCommand::~SwitchToIntroCommand() {
 }
 
 void SwitchToIntroCommand::ExecuteCommand() {
-	Controller::GetInstance().GetSceneHandler().LoadScene( INTRO_SCENE_ID );
+	Engine::Get().GetSceneHandler().LoadScene( INTRO_SCENE_ID );
 }

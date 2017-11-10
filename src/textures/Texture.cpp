@@ -114,6 +114,14 @@ void Texture::Unload()
     m_height = 0;
 }
 
+Texture *Texture::Create(const uint8_t *textureData, uint32_t textureSize)
+{
+    TextureLoadingData txLoadingData = { textureData, textureSize };
+    Texture* texture = new Texture( 0, 0, txLoadingData);
+    texture->Load();
+    return texture;
+}
+
 uint32_t Texture::GetWidth() const
 {
    return m_width;
@@ -133,18 +141,18 @@ void Texture::PrintTPLInfo()
     {
         // basic tlp info's
         const TPL_Header* header = reinterpret_cast<const TPL_Header*>(m_textureData.pTextureData);
-        Debug::GetInstance().Log("magic %04x", header->magic );
-        Debug::GetInstance().Log("texCount %d", header->texCount );
-        Debug::GetInstance().Log("headerSize %d", header->headerSize );
+        LOG("magic %04x", header->magic );
+        LOG("texCount %d", header->texCount );
+        LOG("headerSize %d", header->headerSize );
 
         const TPL_Texture* texture = reinterpret_cast<const TPL_Texture*> ((m_textureData.pTextureData + sizeof(TPL_Header) + sizeof(TPL_Addr)));
-        Debug::GetInstance().Log("Height %d", texture->height );
-        Debug::GetInstance().Log("Width %d", texture->width );
-        Debug::GetInstance().Log("Format %d", texture->format );
-        Debug::GetInstance().Log("Maxlod %d", texture->maxLod );
-        Debug::GetInstance().Log("EdgeLod %d", texture->edgeLod );
-        Debug::GetInstance().Log("MinFilt %d", texture->minFilt );
-        Debug::GetInstance().Log("MagFilt %d", texture->magFilt );
+        LOG("Height %d", texture->height );
+        LOG("Width %d", texture->width );
+        LOG("Format %d", texture->format );
+        LOG("Maxlod %d", texture->maxLod );
+        LOG("EdgeLod %d", texture->edgeLod );
+        LOG("MinFilt %d", texture->minFilt );
+        LOG("MagFilt %d", texture->magFilt );
     }
 #endif
 }

@@ -21,7 +21,7 @@
 #define _SWITCHTOINTROCOMMAND_H_
 
 #include "../BasicCommand.h"
-#include "../../Controller.h"
+#include "../../Engine.h"
 
 class SwitchToIntroCommand: public BasicCommand {
 public:

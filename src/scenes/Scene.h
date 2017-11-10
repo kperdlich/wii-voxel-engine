@@ -20,7 +20,7 @@
 #ifndef _SCENE_H_
 #define _SCENE_H_
 
-#include "../textures/TextureHandler.h"
+#include "../textures/SpriteStageManager.h"
 #include "../renderer/Renderer.h"
 
 class Scene {
@@ -32,11 +32,11 @@ public:
 	virtual void Unload();
 	virtual void Draw();
     virtual void Update(float deltaSeconds);
-	virtual TextureHandler& GetTextureHandler() const;
+	virtual SpriteStageManager& GetTextureHandler() const;
 	virtual Renderer& GetRenderer() const;
 
 protected:
-	TextureHandler *m_TextureHandler;
+	SpriteStageManager *m_TextureHandler;
 	Renderer *m_Renderer;
 
 

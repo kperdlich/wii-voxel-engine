@@ -33,13 +33,13 @@
 
 void BlockManager::LoadBlocks()
 {
-    Texture* pDirtTexture = m_pTextureHandler->CreateTexture(Dirt_tpl, Dirt_tpl_size, BLOCK_TEXTURE_DIRT );
-    Texture* pGrassTexture = m_pTextureHandler->CreateTexture(Grass_tpl, Grass_tpl_size, BLOCK_TEXTURE_GRASS );
-    Texture* pGrassSideTexture = m_pTextureHandler->CreateTexture(Grass_Side_tpl, Grass_Side_tpl_size, BLOCK_TEXTURE_GRASS_SIDE );
-    Texture* pStoneTexture = m_pTextureHandler->CreateTexture(Stone_tpl, Stone_tpl_size, BLOCK_TEXTURE_STONE );
-    Texture* pWoodTexture = m_pTextureHandler->CreateTexture(Wood_tpl, Wood_tpl_size, BLOCK_TEXTURE_WOOD );
-    Texture* pLeafTexture = m_pTextureHandler->CreateTexture(Leaf_tpl, Leaf_tpl_size, BLOCK_TEXTURE_LEAF );
-    Texture* pTreeTexture = m_pTextureHandler->CreateTexture(Tree_tpl, Tree_tpl_size, BLOCK_TEXTURE_TREE );   
+    const Texture* pDirtTexture       =    AddToTextureList(Texture::Create(Dirt_tpl, Dirt_tpl_size ));
+    const Texture* pGrassTexture      =    AddToTextureList(Texture::Create(Grass_tpl, Grass_tpl_size ));
+    const Texture* pGrassSideTexture  =    AddToTextureList(Texture::Create(Grass_Side_tpl, Grass_Side_tpl_size ));
+    const Texture* pStoneTexture      =    AddToTextureList(Texture::Create(Stone_tpl, Stone_tpl_size));
+    const Texture* pWoodTexture       =    AddToTextureList(Texture::Create(Wood_tpl, Wood_tpl_size ));
+    const Texture* pLeafTexture       =    AddToTextureList( Texture::Create(Leaf_tpl, Leaf_tpl_size ));
+    const Texture* pTreeTexture       =    AddToTextureList(Texture::Create(Tree_tpl, Tree_tpl_size ));
 
     std::map<const Texture*, std::vector<EBlockFaces>> dirtTextureMap =
     {
@@ -147,12 +147,15 @@ void BlockManager::UnloadBlocks()
 	}
 
 	m_blocks.clear();
+
+    for (auto texture : m_textures)
+    {
+        delete texture;
+    }
 }
 
 
-BlockManager::BlockManager( TextureHandler& ptextureHandler) {
-	m_pTextureHandler = &ptextureHandler;
-}
+BlockManager::BlockManager() {}
 
 BlockManager::~BlockManager() {}
 
@@ -166,4 +169,10 @@ Block* BlockManager::GetBlockByType(const BlockType type)
 	}
 
     return nullptr;
+}
+
+const Texture* BlockManager::AddToTextureList(const Texture *texture)
+{
+    m_textures.push_back(texture);
+    return texture;
 }

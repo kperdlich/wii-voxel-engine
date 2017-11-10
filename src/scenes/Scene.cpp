@@ -22,7 +22,7 @@
 
 Scene::Scene()
 {
-    m_TextureHandler = new TextureHandler();
+    m_TextureHandler = new SpriteStageManager();
 }
 
 
@@ -37,7 +37,7 @@ void Scene::Load() {
 
 void Scene::Unload()
 {
-    m_TextureHandler->DestroyAllTextures();
+    m_TextureHandler->DestroyAll();
 }
 
 void Scene::Draw() {
@@ -45,7 +45,7 @@ void Scene::Draw() {
 
 void Scene::Update(float deltaSeconds) {}
 
-TextureHandler& Scene::GetTextureHandler() const
+SpriteStageManager& Scene::GetTextureHandler() const
 {
 	return *m_TextureHandler;
 }

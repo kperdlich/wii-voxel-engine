@@ -24,19 +24,10 @@
 #include <vector>
 #include "Block.h"
 #include "../../renderer/BlockRenderer.h"
-#include "../../textures/TextureHandler.h"
 #include "../../utils/Vector3.h"
 
 #define BLOCK_SIZE_HALF .25f
 #define BLOCK_SIZE BLOCK_SIZE_HALF * 2
-
-#define BLOCK_TEXTURE_DIRT "BLOCK_TEXTURE_DIRT"
-#define BLOCK_TEXTURE_GRASS "BLOCK_TEXTURE_GRASS"
-#define BLOCK_TEXTURE_GRASS_SIDE "BLOCK_TEXTURE_GRASS_SIDE"
-#define BLOCK_TEXTURE_STONE "BLOCK_TEXTURE_STONE"
-#define BLOCK_TEXTURE_WOOD "BLOCK_TEXTURE_WOOD"
-#define BLOCK_TEXTURE_LEAF "BLOCK_TEXTURE_LEAF"
-#define BLOCK_TEXTURE_TREE "BLOCK_TEXTURE_TREE"
 
 enum BlockType {
 
@@ -50,7 +41,7 @@ enum BlockType {
 
 class BlockManager {
 public:
-	BlockManager(TextureHandler& ptextureHandler);
+    BlockManager();
 	virtual ~BlockManager();
 	void LoadBlocks();
 	void UnloadBlocks();
@@ -59,9 +50,11 @@ public:
 
 private:
 
+    const Texture* AddToTextureList(const Texture* texture);
+
 	std::map<BlockType, Block*> m_blocks;
 	std::map<BlockType, std::vector<Vector3*> > m_mBlockRenderList;
-	TextureHandler* m_pTextureHandler;
+    std::vector<const Texture*> m_textures;
 	BlockRenderer* m_blockRenderer;
 
 };

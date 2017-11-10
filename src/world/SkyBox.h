@@ -21,7 +21,7 @@
 #define SRC_WORLD_CSKYBOX_H_
 
 #include "../textures/Texture.h"
-#include "../Controller.h"
+#include "../Engine.h"
 
 
 class SkyBox {

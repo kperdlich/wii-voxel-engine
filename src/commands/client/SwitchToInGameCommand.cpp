@@ -25,5 +25,5 @@ SwitchToInGameCommand::~SwitchToInGameCommand() {}
 
 void SwitchToInGameCommand::ExecuteCommand()
 {
-	Controller::GetInstance().GetSceneHandler().LoadScene( IN_GAME_ID );
+	Engine::Get().GetSceneHandler().LoadScene( IN_GAME_ID );
 }

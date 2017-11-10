@@ -18,7 +18,7 @@
 ***/
 
 #include "Cursor.h"
-#include "../Controller.h"
+#include "../Engine.h"
 #include "../utils/Debug.h"
 
 
@@ -33,10 +33,10 @@ Cursor::~Cursor() {}
 
 void Cursor::Update() {
 
-	WiiPad* pad = Controller::GetInstance().GetInputHandler().GetPadByID( WII_PAD_0 );
+	WiiPad* pad = Engine::Get().GetInputHandler().GetPadByID( WII_PAD_0 );
 
 #ifdef DEBUG
-   Debug::GetInstance().Log( "Cursor x: %d y: %d", (int)pad->GetX(), (int) pad->GetY() );
+   LOG( "Cursor x: %d y: %d", (int)pad->GetX(), (int) pad->GetY() );
 #endif
 
 	SetX( pad->GetX());

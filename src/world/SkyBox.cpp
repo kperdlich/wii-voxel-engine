@@ -41,14 +41,18 @@
 
 SkyBox::SkyBox()
 {
-    for ( uint8_t i = 0; i < 6; i++)
-	{
-        m_pSkyBoxTextures[i] = nullptr;
-	}
+
 }
 
 SkyBox::~SkyBox()
 {
+    for ( uint8_t i = 0; i < 6; i++)
+    {
+        delete m_pSkyBoxTextures[i];
+        m_pSkyBoxTextures[i] = nullptr;
+    }
+
+
     if ( m_displayListSize > 0 )
 	{
 		free(m_pDispList);
@@ -59,14 +63,12 @@ SkyBox::~SkyBox()
 
 void SkyBox::Init()
 {
-    auto textureHandler = Controller::GetInstance().GetSceneHandler().GetCurrentScene().GetTextureHandler();
-
-    m_pSkyBoxTextures[SKY_FRONT] = textureHandler.CreateTexture(SkyBox_Front_png, SkyBox_Front_png_size, "SKY_FRONT");
-    m_pSkyBoxTextures[SKY_RIGHT] = textureHandler.CreateTexture(SkyBox_Right_png, SkyBox_Right_png_size, "SKY_RIGHT");
-    m_pSkyBoxTextures[SKY_LEFT] = textureHandler.CreateTexture(SkyBox_Left_png, SkyBox_Left_png_size, "SKY_LEFT");
-    m_pSkyBoxTextures[SKY_BACK] = textureHandler.CreateTexture(SkyBox_Back_png, SkyBox_Back_png_size, "SKY_BACK");
-    m_pSkyBoxTextures[SKY_UP] = textureHandler.CreateTexture(SkyBox_Top_png, SkyBox_Top_png_size, "SKY_UP");
-    m_pSkyBoxTextures[SKY_DOWN] = textureHandler.CreateTexture(SkyBox_Bottom_png, SkyBox_Bottom_png_size, "SKY_DOWN");
+    m_pSkyBoxTextures[SKY_FRONT] = Texture::Create(SkyBox_Front_png, SkyBox_Front_png_size);
+    m_pSkyBoxTextures[SKY_RIGHT] = Texture::Create(SkyBox_Right_png, SkyBox_Right_png_size);
+    m_pSkyBoxTextures[SKY_LEFT]  = Texture::Create(SkyBox_Left_png, SkyBox_Left_png_size);
+    m_pSkyBoxTextures[SKY_BACK]  = Texture::Create(SkyBox_Back_png, SkyBox_Back_png_size);
+    m_pSkyBoxTextures[SKY_UP]    = Texture::Create(SkyBox_Top_png, SkyBox_Top_png_size);
+    m_pSkyBoxTextures[SKY_DOWN]  = Texture::Create(SkyBox_Bottom_png, SkyBox_Bottom_png_size);
 
 	CreateSkyBox();
 }

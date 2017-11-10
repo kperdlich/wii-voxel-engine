@@ -43,7 +43,7 @@ typedef struct ChunkPositionComparer
 
 class GameWorld {
 public:
-	GameWorld( class Basic3DScene* pScene );
+    GameWorld();
 	virtual ~GameWorld();
 	void GenerateWorld();
 	void Draw();
@@ -61,11 +61,10 @@ public:
 	const PerlinNoise& GetNoise() const;
 
 private:
-	bool ChunkInFov( Vector3& chunkPosition, Vector3& playerPosition, uint32_t fov);
+    bool ChunkInFov( const Vector3& chunkPosition, const Vector3& playerPosition, uint32_t fov);
 	void DrawFocusOnSelectedCube();
 
 private:
-	class Basic3DScene* m_pScene;
 	BlockManager* m_blockManager;
     std::map<const class Vector3*, class Chunk*, ChunkPositionComparer> m_ChunkMap;
 

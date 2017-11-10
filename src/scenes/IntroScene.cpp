@@ -71,14 +71,14 @@ void CIntroScene::Update(float deltaSeconds)
 	}
 	else
 	{
-        Controller::GetInstance().GetBasicCommandHandler().ExecuteCommand( SwitchToMainMenuCommand::Name() );
+        Engine::Get().GetBasicCommandHandler().ExecuteCommand( SwitchToMainMenuCommand::Name() );
 	}
 
 
-    WiiPad* pad = Controller::GetInstance().GetInputHandler().GetPadByID( WII_PAD_0 );
+    WiiPad* pad = Engine::Get().GetInputHandler().GetPadByID( WII_PAD_0 );
 	if ( pad->ButtonsDown() & WPAD_BUTTON_RIGHT)
 	{
-        Controller::GetInstance().GetBasicCommandHandler().ExecuteCommand( SwitchToMainMenuCommand::Name() );
+        Engine::Get().GetBasicCommandHandler().ExecuteCommand( SwitchToMainMenuCommand::Name() );
     }
 }
 

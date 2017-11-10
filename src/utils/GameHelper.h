@@ -23,7 +23,7 @@
 #include <stdarg.h>
 #include <ogc/lwp_watchdog.h>
 
-#include "../Controller.h"
+#include "../Engine.h"
 #include "../core/grrlib.h"
 #include "../font/FontHandler.h"
 #include "../utils/ColorHelper.h"

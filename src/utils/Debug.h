@@ -21,10 +21,12 @@
 #define _DEBUG_H_
 
 #include <vector>
-#include "../Controller.h"
+#include "../Engine.h"
 
 #define DEBUG_LINE 200
 #define DEFAULT_DEBUG_INDEX -1
+
+#define LOG(format, ...) Debug::GetInstance().Log(format, __VA_ARGS__)
 
 class Debug {
 
@@ -41,7 +43,7 @@ private:
 public:
 	Debug();
 	virtual ~Debug();
-    void Log(char* format, ...);
+    void Log(const char* format, ...);
 	void Print();
     void Reset();
     void Destroy();

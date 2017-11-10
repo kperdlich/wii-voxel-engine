@@ -18,7 +18,7 @@
 ***/
 
 #include "EntityRenderer.h"
-#include "../Controller.h"
+#include "../Engine.h"
 
 EntityRenderer::EntityRenderer( Entity* entity ) : m_Entity(entity) {
 
@@ -40,7 +40,7 @@ Texture* EntityRenderer::GetTexture() const
 
 void EntityRenderer::Render() const {}
 
-TextureHandler& EntityRenderer::GetTextureHandler()
+SpriteStageManager& EntityRenderer::GetTextureHandler()
 {
-	return Controller::GetInstance().GetSceneHandler().GetCurrentScene().GetTextureHandler();
+	return Engine::Get().GetSceneHandler().GetCurrentScene().GetTextureHandler();
 }

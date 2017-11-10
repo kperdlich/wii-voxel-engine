@@ -29,9 +29,9 @@
 
 
 
-GameWorld::GameWorld( Basic3DScene* pScene ) : m_pScene(pScene)
+GameWorld::GameWorld()
 {
-    m_blockManager = new BlockManager( pScene->GetTextureHandler() );
+    m_blockManager = new BlockManager();
 	m_blockManager->LoadBlocks();
 
     srand (time(nullptr));
@@ -84,13 +84,13 @@ void GameWorld::Draw()
 	uint32_t chunksInFrustrum = 0;
 #endif
 
-	auto playerPosition = m_pScene->GetEntityHandler().GetPlayer()->GetPosition();
+    auto& playerPosition = static_cast<Basic3DScene&>(Engine::Get().GetSceneHandler().GetCurrentScene()).GetEntityHandler().GetPlayer()->GetPosition();
 
     Frustrum::Instance().CalculateFrustum();
 
-    for( auto chunkEntry : m_ChunkMap)
+    for( auto& chunkEntry : m_ChunkMap)
 	{
-		auto chunk = chunkEntry.second;
+        auto& chunk = chunkEntry.second;
 #ifdef DEBUG
 		displayListSize += chunk->GetDisplayListSize();
 		blocks += chunk->GetAmountOfBlocks();
@@ -134,18 +134,18 @@ void GameWorld::Draw()
 
 	// todo boost the performance of debug logs
 #ifdef DEBUG    
-    Debug::GetInstance().Log( "Rendered Chunks: %d/%d", chunksInFrustrum, m_ChunkMap.size() );
-    Debug::GetInstance().Log( "Seed: %d", m_pNoise->RandomSeed() );
+    LOG( "Rendered Chunks: %d/%d", chunksInFrustrum, m_ChunkMap.size() );
+    LOG( "Seed: %d", m_pNoise->RandomSeed() );
 
-    //Debug::GetInstance().Log( "DisplayList size (MB): %d", displayListSize / 1024 / 1024 );
+    //LOG( "DisplayList size (MB): %d", displayListSize / 1024 / 1024 );
 
-    //Debug::GetInstance().Log( "Blocks: %" PRId64 "/%" PRId64, activeBlocks, blocks );
+    //LOG( "Blocks: %" PRId64 "/%" PRId64, activeBlocks, blocks );
 
-    //Debug::GetInstance().Log(  "Faces: %" PRId64 "/%" PRId64, activeFaces, faces );
+    //LOG(  "Faces: %" PRId64 "/%" PRId64, activeFaces, faces );
 #endif
 }
 
-bool GameWorld::ChunkInFov( Vector3& chunkPosition, Vector3& playerPosition, uint32_t fov)
+bool GameWorld::ChunkInFov( const Vector3& chunkPosition, const Vector3& playerPosition, uint32_t fov)
 {
 	return (std::abs(chunkPosition.GetX() - playerPosition.GetX()) < CHUNK_BLOCK_SIZE_X * fov) &&
 			(std::abs(chunkPosition.GetZ() - playerPosition.GetZ()) < CHUNK_BLOCK_SIZE_Z * fov);
