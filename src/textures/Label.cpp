@@ -17,7 +17,7 @@
  *
 ***/
 
-#include "LabelSprite.h"
+#include "Label.h"
 
 Label::Label( const char* text, float x, float y, TextureLoadingData textureData, GRRLIB_ttfFont* font, uint32_t fontSize, uint32_t color )
     : Sprite(x, y, textureData), m_text( text ), m_font( font ), m_fontSize( fontSize ), m_textColor( color ) {}

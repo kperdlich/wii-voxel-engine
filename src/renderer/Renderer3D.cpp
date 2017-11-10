@@ -19,8 +19,6 @@
 
 #include "Renderer3D.h"
 #include "MasterRenderer.h"
-#include "../core/grrlib.h"
-#include "../textures/Texture.h"
 
 Renderer3D::Renderer3D() {}
 
@@ -28,7 +26,7 @@ Renderer3D::~Renderer3D() {}
 
 void Renderer3D::DrawSprite( const Sprite* sprite ) const
 {	
-    MasterRenderer::DrawSprite( *sprite, sprite->GetX(), sprite->GetY(), 0, 1, 1, sprite->GetColor() );
+    MasterRenderer::DrawSprite(*sprite);
 }
 
 void Renderer3D::DrawEntity(const Entity* entity) const

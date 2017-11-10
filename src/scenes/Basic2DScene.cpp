@@ -21,7 +21,7 @@
 
 Basic2DScene::Basic2DScene()
 {
-	m_Renderer = new Renderer2D();
+    m_Renderer = new Renderer();
 }
 
 Basic2DScene::~Basic2DScene() {
@@ -32,7 +32,7 @@ void Basic2DScene::Draw()
     auto sprites = m_TextureHandler->GetSpriteRenderList();
     for (auto it = sprites.begin(); it != sprites.end(); it++)
     {
-        Get2DRenderer().Draw( (**it) );
+        m_Renderer->Draw( (**it) );
     }
 }
 
@@ -52,10 +52,7 @@ void Basic2DScene::Unload()
     Scene::Unload();
 
 }
-Renderer2D& Basic2DScene::Get2DRenderer()
-{
-	return static_cast<Renderer2D&>(*m_Renderer);
-}
+
 
 void Basic2DScene::Update(float deltaSeconds) {
 	for (uint32_t i = 0; i < m_elements.size(); i++)

@@ -21,13 +21,14 @@
 #define _RENDERER_H_
 
 #include "../utils/ColorHelper.h"
+#include "../textures/Sprite.h"
 
 class Renderer
 {
 public:
 	Renderer();
 	virtual ~Renderer();
-    virtual void Draw() const;
+    virtual void Draw( const Sprite& sprite);
 };
 
 

@@ -22,8 +22,6 @@
 
 #include "../core/grrlib.h"
 #include "BasicTexture.h"
-#include <ogc/gx.h>
-
 
 
 class Texture : public BasicTexture

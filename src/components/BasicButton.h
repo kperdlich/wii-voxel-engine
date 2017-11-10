@@ -22,7 +22,7 @@
 
 #include "UiTextureElement.h"
 #include "../textures/Texture.h"
-#include "../textures/LabelSprite.h"
+#include "../textures/Label.h"
 
 #define BUTTON_LABEL_DISTANCE 3
 

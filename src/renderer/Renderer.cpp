@@ -18,13 +18,30 @@
 ***/
 
 #include "Renderer.h"
+#include "MasterRenderer.h"
+#include "../textures/Label.h"
 
-Renderer::Renderer() {
-}
+Renderer::Renderer() {}
 
-Renderer::~Renderer() {
-}
+Renderer::~Renderer() {}
 
-void Renderer::Draw() const {
+void Renderer::Draw( const Sprite& sprite)
+{
+    switch( sprite.GetTextureType() )
+    {
+        case SPRITE:
+        {
+            MasterRenderer::DrawSprite(sprite);
+            break;
+        }
+        case LABEL:
+        {
+            Label label = static_cast<const Label&>(sprite);
+            GRRLIB_PrintfTTF( label.GetX(), label.GetY(), &label.GetFont(), label.GetText(), label.GetFontSize(), label.GetTextColor() );
+            break;
+        }
+        default:
+            break;
+    }
 }
 

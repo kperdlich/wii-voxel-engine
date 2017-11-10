@@ -104,7 +104,7 @@ const Sprite *SpriteStageManager::GetSprite(std::string key) const
     return nullptr;
 }
 
-std::vector<const Sprite*> SpriteStageManager::GetSpriteRenderList()
+std::vector<const Sprite*>& SpriteStageManager::GetSpriteRenderList()
 {
     if ( m_spriteCashDirty )
     {

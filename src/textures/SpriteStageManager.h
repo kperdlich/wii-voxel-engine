@@ -23,7 +23,7 @@
 #include "../core/grrlib.h"
 #include "../textures/Texture.h"
 #include "../textures/Sprite.h"
-#include "../textures/LabelSprite.h"
+#include "../textures/Label.h"
 #include <unordered_map>
 #include <map>
 #include <vector>
@@ -52,7 +52,7 @@ public:
 
     const Sprite* GetSprite(std::string key) const;
 
-    std::vector<const Sprite*> GetSpriteRenderList(); 
+    std::vector<const Sprite*>& GetSpriteRenderList();
 
     uint32_t SpriteCount() const
     {

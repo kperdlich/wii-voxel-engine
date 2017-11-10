@@ -114,9 +114,30 @@ public:
         return m_pTextureObject;
     }
 
+    float GetScaleX() const
+    {
+        return m_scaleX;
+    }
+
+    void SetScaleX(float scaleX)
+    {
+        m_scaleX = scaleX;
+    }
+
+    float GetScaleY() const
+    {
+        return m_scaleY;
+    }
+
+    void SetScaleY(float scaleY)
+    {
+        m_scaleX = scaleY;
+    }
+
 protected:
-	float m_x, m_y;
-    float m_width, m_height;    	
+    float m_x, m_y;
+    float m_width, m_height;
+    float m_scaleX = 1.0f, m_scaleY = 1.0f;
     uint32_t m_color;
     TextureLoadingData m_textureLoadingData;
     bool m_bTextureLoaded = false;

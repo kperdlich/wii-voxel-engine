@@ -90,7 +90,7 @@ void Basic3DScene::Draw()
     auto sprites = m_TextureHandler->GetSpriteRenderList();
     for (auto it = sprites.begin(); it != sprites.end(); it++)
     {
-        Get3DRenderer().DrawSprite((*it) );
+        m_Renderer->Draw(**it);
     }
 }
 

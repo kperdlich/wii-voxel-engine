@@ -99,8 +99,6 @@ src/renderer/MasterRenderer.cpp
 src/renderer/MasterRenderer.h
 src/renderer/Renderer.cpp
 src/renderer/Renderer.h
-src/renderer/Renderer2D.cpp
-src/renderer/Renderer2D.h
 src/renderer/Renderer3D.cpp
 src/renderer/Renderer3D.h
 src/scenes/Basic2DScene.cpp
@@ -119,8 +117,9 @@ src/scenes/SceneHandler.cpp
 src/scenes/SceneHandler.h
 src/textures/BasicTexture.cpp
 src/textures/BasicTexture.h
-src/textures/LabelSprite.cpp
-src/textures/LabelSprite.h
+src/textures/Label.cpp
+src/textures/Label.h
+src/textures/Sprite.cpp
 src/textures/Sprite.h
 src/textures/SpriteStageManager.cpp
 src/textures/SpriteStageManager.h

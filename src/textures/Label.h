@@ -17,8 +17,8 @@
  *
 ***/
 
-#ifndef _LABELSPRITE_H_
-#define _LABELSPRITE_H_
+#ifndef _LABEL_H_
+#define _LABEL_H_
 
 #include "../core/grrlib.h"
 #include "Sprite.h"
@@ -46,4 +46,4 @@ private:
     uint32_t m_textColor = 0;
 };
 
-#endif /* _LABELSPRITE_H_ */
+#endif /* _LABEL_H_ */

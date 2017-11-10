@@ -14,7 +14,7 @@ public:
     static size_t GetDisplayListSizeForFaces(uint32_t faces);
     static void SetGraphicsMode(bool bTexturemode, bool bNormalMode);
     static void LoadTexture(const Texture& texture, uint8_t textureMapSlot = GX_TEXMAP0);
-    static void DrawSprite(const Sprite& sprite, float xpos, float ypos, float degrees, float scaleX, float scaleY, uint32_t color);
+    static void DrawSprite(const Sprite& sprite);
 };
 
 #endif // MASTERRENDERER_H

@@ -21,9 +21,9 @@
 #define _BASIC2DSCENE_H_
 
 #include <vector>
-#include "../components/UiElement.h"
 #include "Scene.h"
-#include "../renderer/Renderer2D.h"
+#include "../components/UiElement.h"
+
 
 class Basic2DScene: public Scene {
 public:
@@ -35,8 +35,6 @@ public:
     virtual void Update(float deltaSeconds) override;
 
 protected:
-	Renderer2D& Get2DRenderer();
-
 	std::vector<UiElement*> m_elements;
 
 };
