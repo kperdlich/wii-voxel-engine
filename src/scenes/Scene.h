@@ -20,7 +20,7 @@
 #ifndef _SCENE_H_
 #define _SCENE_H_
 
-#include "../textures/SpriteStageManager.h"
+#include "../renderer/SpriteStageManager.h"
 #include "../renderer/Renderer.h"
 
 class Scene {
@@ -38,8 +38,6 @@ public:
 protected:
     SpriteStageManager *m_spriteStageManager;
     Renderer *m_renderer;
-
-
 };
 
 

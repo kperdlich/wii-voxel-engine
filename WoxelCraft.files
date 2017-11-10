@@ -101,6 +101,8 @@ src/renderer/Renderer.cpp
 src/renderer/Renderer.h
 src/renderer/Renderer3D.cpp
 src/renderer/Renderer3D.h
+src/renderer/SpriteStageManager.cpp
+src/renderer/SpriteStageManager.h
 src/scenes/Basic2DScene.cpp
 src/scenes/Basic2DScene.h
 src/scenes/Basic3DScene.cpp
