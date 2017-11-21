@@ -20,17 +20,9 @@
 #ifndef _BASICTEXTURE_H_
 #define _BASICTEXTURE_H_
 
+#include "IDrawable.h"
 #include "../core/grrlib.h"
 #include "../utils/ColorHelper.h"
-
-enum ETextureType {
-	INVALID,
-    TEXTURE,
-	SPRITE,
-	SPRITE_SHEET,
-	TILE,
-	LABEL
-};
 
 typedef struct
 {
@@ -38,7 +30,7 @@ typedef struct
     uint32_t textureSize;
 } TextureLoadingData;
 
-class BasicTexture {
+class BasicTexture : public IDrawable {
 public:
     BasicTexture(float x, float y, TextureLoadingData textureData);
     virtual ~BasicTexture();
@@ -46,29 +38,24 @@ public:
     virtual void Load();
     virtual void Unload();
 
-    float GetX() const
+    float GetX() const override
     {
         return m_x;
     }
 
-    void SetX(float x)
+    void SetX(float x) override
     {
         m_x = x;
     }
 
-    float GetY() const
+    float GetY() const override
     {
         return m_y;
     }
 
-    void SetY(float y)
+    void SetY(float y) override
     {
         m_y = y;
-    }
-
-    virtual ETextureType GetTextureType() const
-    {
-        return INVALID;
     }
 
     void SetColor(uint32_t color)

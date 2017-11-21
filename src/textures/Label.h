@@ -21,33 +21,111 @@
 #define _LABEL_H_
 
 #include "../core/grrlib.h"
-#include "Sprite.h"
+#include "IDrawable.h"
+#include "ISprite.h"
+#include <string>
 
-class Label: public Sprite {
+class Label : public IDrawable, public ISprite {
 private:
-    Label( const std::string& text, float x, float y, TextureLoadingData textureData, GRRLIB_ttfFont* font, uint32_t fontSize, uint32_t color);    
+    Label( const std::string& text, float x, float y, GRRLIB_ttfFont* font, uint32_t fontSize, uint32_t color);
 
 public:
-    virtual ~Label();
+    ~Label();
     static Label* Create(std::string text, GRRLIB_ttfFont* font, std::string searchName, uint16_t sortingLayer = 0);
 
-    virtual ETextureType GetTextureType() const override;
+    float GetX() const override
+    {
+        return m_x;
+    }
 
-    GRRLIB_ttfFont& GetFont() const;
-    const std::string& GetText() const;
-    uint32_t GetFontSize() const;
-    uint32_t GetTextColor() const;
+    void SetX(float x) override
+    {
+        m_x = x;
+    }
 
-    virtual bool IsVisible() const override;
+    float GetY() const override
+    {
+        return m_y;
+    }
 
-    void SetFontSize(uint32_t fontSize);
-    void SetTextColor(uint32_t textColor);
+    void SetY(float y) override
+    {
+        m_y = y;
+    }
 
-private:
+    GRRLIB_ttfFont& GetFont() const
+    {
+        return *m_font;
+    }
+
+    const std::string& GetText() const
+    {
+        return m_text;
+    }
+
+    uint32_t GetFontSize() const
+    {
+        return m_fontSize;
+    }
+
+    uint32_t GetTextColor() const
+    {
+        return m_textColor;
+    }
+
+    void SetFontSize(uint32_t fontSize)
+    {
+        m_fontSize = fontSize;
+    }
+
+    void SetTextColor(u32 textColor)
+    {
+        m_textColor = textColor;
+    }
+
+    void SetSortingLayerIndex(uint16_t index) override
+    {
+        m_sortingLayerIndex = index;
+    }
+
+    uint16_t GetSortingLayerIndex() const override
+    {
+        return m_sortingLayerIndex;
+    }
+
+    const std::string& GetName() const override
+    {
+        return m_name;
+    }
+
+    void SetName(const std::string& name) override
+    {
+        m_name = name;
+    }
+
+    bool IsVisible() const override
+    {
+        return true;
+    }
+
+    void SetVisible(bool value) override
+    {
+
+    }
+
+    ESpriteType GetType() const override
+    {
+        return ESpriteType::LABEL;
+    }
+
+protected:
     std::string m_text;
+    std::string m_name;
+    uint16_t m_sortingLayerIndex = 0;
 	GRRLIB_ttfFont* m_font;
     uint32_t m_fontSize = 0;
     uint32_t m_textColor = 0;
+    float m_x, m_y;
 };
 
 #endif /* _LABEL_H_ */

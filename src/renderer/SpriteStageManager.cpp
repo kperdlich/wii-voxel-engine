@@ -39,13 +39,13 @@ bool SpriteStageManager::FindSprite(const std::string& name ) const
 }
 
 
-Sprite* SpriteStageManager::Add(Sprite *sprite)
+ISprite* SpriteStageManager::Add(ISprite *sprite)
 {
     m_spriteAtlas.insert(std::make_pair(sprite->GetName(), sprite));
     return sprite;
 }
 
-bool SpriteStageManager::Remove(const Sprite& sprite)
+bool SpriteStageManager::Remove(const ISprite& sprite)
 {
     auto spriteAtlasIt = m_spriteAtlas.find(sprite.GetName());
     if (spriteAtlasIt != m_spriteAtlas.end())
@@ -58,7 +58,7 @@ bool SpriteStageManager::Remove(const Sprite& sprite)
     return false;
 }
 
-const Sprite *SpriteStageManager::GetSprite(const std::string& key) const
+const ISprite* SpriteStageManager::GetSprite(const std::string& key) const
 {
     auto spriteAtlasIt = m_spriteAtlas.find(key);
     if (spriteAtlasIt != m_spriteAtlas.end())
@@ -69,21 +69,21 @@ const Sprite *SpriteStageManager::GetSprite(const std::string& key) const
     return nullptr;
 }
 
-std::vector<const Sprite*>& SpriteStageManager::GetSpriteRenderList()
+std::vector<const ISprite*>& SpriteStageManager::GetSpriteRenderList()
 {
     if ( m_spriteCashDirty )
     {
         m_spriteRenderCash.clear();
         for ( auto it = m_spriteAtlas.begin(); it != m_spriteAtlas.end(); it++)
         {
-            Sprite* sprite = it->second;
+            ISprite* sprite = it->second;
             if (sprite->IsVisible())
             {
                 m_spriteRenderCash.push_back(sprite);
             }
         }
 
-        std::sort(m_spriteRenderCash.begin(), m_spriteRenderCash.end(), [](const Sprite* a, const Sprite* b) { return a->GetSortingLayerIndex() < b->GetSortingLayerIndex(); });
+        std::sort(m_spriteRenderCash.begin(), m_spriteRenderCash.end(), [](const ISprite* a, const ISprite* b) { return a->GetSortingLayerIndex() < b->GetSortingLayerIndex(); });
         m_spriteCashDirty = false;
     }
 

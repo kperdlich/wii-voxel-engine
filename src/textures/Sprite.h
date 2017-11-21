@@ -21,9 +21,10 @@
 #define SPRITE_H
 
 #include "BasicTexture.h"
+#include "ISprite.h"
 #include <string>
 
-class Sprite : public BasicTexture
+class Sprite : public BasicTexture, public ISprite
 {
 protected:
     Sprite( float x, float y, TextureLoadingData textureData );
@@ -33,37 +34,37 @@ public:
 
     static Sprite* Create(const uint8_t *pSpriteData, uint32_t spriteSize, std::string searchName, uint16_t sortingLayer = 0);
 
-    virtual ETextureType GetTextureType() const override
+    ESpriteType GetType() const override
     {
-        return SPRITE;
+        return ESpriteType::SPRITE;
     }
 
-    virtual bool IsVisible() const
+    bool IsVisible() const override
     {
         return m_bVisible && m_bTextureLoaded;
     }
 
-    virtual void SetVisible(bool value)
+    void SetVisible(bool value) override
     {
         m_bVisible = value;
     }
 
-    void SetSortingLayerIndex(uint16_t index)
+    void SetSortingLayerIndex(uint16_t index) override
     {
         m_sortingLayerIndex = index;
     }
 
-    uint16_t GetSortingLayerIndex() const
+    uint16_t GetSortingLayerIndex() const override
     {
         return m_sortingLayerIndex;
     }
 
-    const std::string& GetName() const
+    const std::string& GetName() const override
     {
         return m_name;
     }
 
-    void SetName(const std::string& name)
+    void SetName(const std::string& name) override
     {
         m_name = name;
     }

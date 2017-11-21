@@ -119,6 +119,8 @@ src/scenes/SceneHandler.cpp
 src/scenes/SceneHandler.h
 src/textures/BasicTexture.cpp
 src/textures/BasicTexture.h
+src/textures/IDrawable.h
+src/textures/ISprite.h
 src/textures/Label.cpp
 src/textures/Label.h
 src/textures/Sprite.cpp

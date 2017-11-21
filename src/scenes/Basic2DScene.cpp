@@ -32,7 +32,7 @@ void Basic2DScene::Draw()
     auto sprites = m_spriteStageManager->GetSpriteRenderList();
     for (auto it = sprites.begin(); it != sprites.end(); it++)
     {
-        m_renderer->Draw( (*it) );
+        m_renderer->Draw( (**it) );
     }
 }
 

@@ -40,12 +40,7 @@ public:
     virtual uint32_t GetWidth() const override;
     virtual uint32_t GetHeight() const override;	
 
-    void PrintTPLInfo();
-
-    virtual ETextureType GetTextureType() const override
-    {
-        return TEXTURE;
-    }
+    void PrintTPLInfo();  
 
 protected:
     void* m_pTPLTextureData = nullptr;

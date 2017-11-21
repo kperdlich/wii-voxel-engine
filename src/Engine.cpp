@@ -52,6 +52,13 @@ void Engine::Start()
         m_pSceneHandler->Update(m_millisecondsLastFrame / 1000.0f);
         m_pSceneHandler->DrawScene();
 
+        WiiPad* pad = m_pInputHandler->GetPadByID( WII_PAD_0 );
+        u32 padButtonDown = pad->ButtonsDown();
+        if ( padButtonDown & WPAD_BUTTON_HOME)
+        {
+            End();
+        }
+
         PrintFps( 500, 25, m_pFontHandler->GetNativFontByID( DEFAULT_FONT_ID ), DEFAULT_FONT_SIZE, GRRLIB_YELLOW );
 
 #ifdef DEBUG

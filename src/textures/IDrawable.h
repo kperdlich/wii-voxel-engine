@@ -1,6 +1,6 @@
 /***
  *
- * Copyright (C) 2016 DaeFennek
+ * Copyright (C) 2017 DaeFennek
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,13 +17,18 @@
  *
 ***/
 
-#include "Hotbar.h"
+#ifndef IDRAWABLE_H
+#define IDRAWABLE_H
 
-Hotbar::Hotbar( const char* name, Sprite* sprite ) : UiTextureElement(0, 0, name, sprite )
+
+class IDrawable
 {
-    sprite->SetX( (rmode->viWidth / 2) - (m_sprite->GetWidth() / 2) );
-    sprite->SetY( rmode->viHeight - m_sprite->GetHeight() );
-}
+public:    
+    virtual float GetX() const = 0;
+    virtual void SetX(float x) = 0;
 
-Hotbar::~Hotbar() {
-}
+    virtual float GetY() const = 0;
+    virtual void SetY(float y) = 0;
+};
+
+#endif // IDRAWABLE_H

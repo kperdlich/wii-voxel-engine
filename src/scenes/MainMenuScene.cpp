@@ -70,7 +70,7 @@ void MainMenuScene::Load()
 	logo->SetY( 60 );
 	m_elements.push_back( logo );
 
-	CreateMainMenuButtonList();
+    CreateMainMenuButtonList();
 
     m_elements.push_back( new Cursor( MMS_CURSOR , Sprite::Create(Cursor_png, Cursor_png_size, MMS_CURSOR, CURSOR_SORTING_LAYER )));
 }
@@ -84,7 +84,6 @@ void MainMenuScene::Draw()
 void MainMenuScene::Update(float deltaSeconds)
 {
     Basic2DScene::Update(deltaSeconds);
-
 #ifdef DEBUG
     WiiPad* pad = Engine::Get().GetInputHandler().GetPadByID( WII_PAD_0 );
 	if ( pad->ButtonsDown() & WPAD_BUTTON_LEFT)
@@ -108,6 +107,7 @@ void MainMenuScene::CreateMainMenuButtonList()
     delete startButtonTexture;
 
 	List* btnList = new List( xPos, yPos, sizeBetweenBtns );
+
     btnList->AddComponent( CreateDefaultMainMenuButton( MMS_BUTTON_SINGLEPLAYER, "Singleplayer", [] (BasicButton* clickedButton) { Engine::Get().GetBasicCommandHandler().ExecuteCommand(SwitchToInGameCommand::Name()); }));
     btnList->AddComponent( CreateDefaultMainMenuButton( MMS_BUTTON_MULTIPLAYER, "Multiplayer", nullptr ));
     btnList->AddComponent( CreateDefaultMainMenuButton( MMS_BUTTON_OPTION, "Option", nullptr ));
@@ -123,10 +123,10 @@ BasicButton* MainMenuScene::CreateDefaultMainMenuButton( const char* buttonName,
     auto pdefaultButtonTexture = Sprite::Create(BasicButtonBig_png, BasicButtonBig_png_size, buttonName, COMPONENTS_SORTING_LAYER);
 
     std::string searchNamehighlight = std::string(buttonName).append(HIGHLIGHT_TAG);
-    auto pHighlightButtonTexture = Sprite::Create(BasicButtonBigHighlight_png, BasicButtonBigHighlight_png_size, searchNamehighlight.c_str(), COMPONENTS_SORTING_LAYER);
+    auto pHighlightButtonTexture = Sprite::Create(BasicButtonBigHighlight_png, BasicButtonBigHighlight_png_size, searchNamehighlight, COMPONENTS_SORTING_LAYER);
 
     std::string searchLabel = std::string(buttonName).append(LABEL_TAG);
-    auto pButtonLabel = Label::Create(buttontext, fontHandler.GetNativFontByID( DEFAULT_MINECRAFT_FONT_ID ), searchLabel.c_str(), LABEL_SORTING_LAYER);
+    auto pButtonLabel = Label::Create(buttontext, fontHandler.GetNativFontByID( DEFAULT_MINECRAFT_FONT_ID ), searchLabel, LABEL_SORTING_LAYER);
 
 	return new BasicButton( 0, 0, buttonName, pdefaultButtonTexture, pHighlightButtonTexture, pButtonLabel, clickCallback );
 }

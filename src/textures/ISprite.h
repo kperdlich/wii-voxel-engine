@@ -1,6 +1,6 @@
 /***
  *
- * Copyright (C) 2016 DaeFennek
+ * Copyright (C) 2017 DaeFennek
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,13 +17,32 @@
  *
 ***/
 
-#include "Hotbar.h"
+#ifndef ISPRITE_H
+#define ISPRITE_H
 
-Hotbar::Hotbar( const char* name, Sprite* sprite ) : UiTextureElement(0, 0, name, sprite )
+#include "IDrawable.h"
+#include <string>
+
+
+enum class ESpriteType {
+    SPRITE  = 0,
+    LABEL   = 1
+};
+
+class ISprite
 {
-    sprite->SetX( (rmode->viWidth / 2) - (m_sprite->GetWidth() / 2) );
-    sprite->SetY( rmode->viHeight - m_sprite->GetHeight() );
-}
+public:
 
-Hotbar::~Hotbar() {
-}
+    virtual bool IsVisible() const = 0;
+    virtual void SetVisible(bool value) = 0;
+
+    virtual void SetSortingLayerIndex(uint16_t index) = 0;
+    virtual uint16_t GetSortingLayerIndex() const = 0;
+
+    virtual const std::string& GetName() const = 0;
+    virtual void SetName(const std::string& name) = 0;
+
+    virtual ESpriteType GetType() const = 0;
+};
+
+#endif // ISPRITE_H

@@ -42,8 +42,7 @@ void CPlayer::Update(float deltaSeconds)
 {
     WiiPad* pad = Engine::Get().GetInputHandler().GetPadByID( WII_PAD_0 );
 
-	u32 padButtonHeld = pad->ButtonsHeld();
-	u32 padButtonDown = pad->ButtonsDown();
+    u32 padButtonDown = pad->ButtonsDown();
 
 #ifdef DEBUG
 	auto pChunk = m_pWorld->GetChunkByWorldPosition( m_position );
@@ -96,13 +95,7 @@ void CPlayer::Update(float deltaSeconds)
 	if ( padButtonDown & WPAD_BUTTON_A)
 	{
 		m_pWorld->AddBlockAtWorldPosition(focusedBlockPos, BlockType::DIRT );
-	}
-
-	// todo move to non-player related place
-	if ( padButtonDown & WPAD_BUTTON_HOME)
-	{
-        Engine::Get().End();
-	}
+	}	
 
 	UpdateInventory();
 

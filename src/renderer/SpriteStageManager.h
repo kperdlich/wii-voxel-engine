@@ -21,9 +21,7 @@
 #define _SPRITESTAGEMANAGER_H_
 
 #include "../core/grrlib.h"
-#include "../textures/Texture.h"
-#include "../textures/Sprite.h"
-#include "../textures/Label.h"
+#include "../textures/ISprite.h"
 #include <unordered_map>
 #include <map>
 #include <vector>
@@ -33,9 +31,9 @@ class SpriteStageManager {
 
 private:
 
-    std::vector<const Sprite*> m_spriteRenderCash;
+    std::vector<const ISprite*> m_spriteRenderCash;
     bool m_spriteCashDirty = true;
-    std::unordered_map<std::string, Sprite*> m_spriteAtlas;
+    std::unordered_map<std::string, ISprite*> m_spriteAtlas;
 
 public:
     SpriteStageManager() {}
@@ -44,12 +42,12 @@ public:
     void Clear();    
     bool FindSprite(const std::string& name) const;
 
-    Sprite* Add(Sprite* sprite);
-    bool Remove(const Sprite& sprite);
+    ISprite* Add(ISprite* sprite);
+    bool Remove(const ISprite& sprite);
 
-    const Sprite* GetSprite(const std::string& key) const;
+    const ISprite* GetSprite(const std::string& key) const;
 
-    std::vector<const Sprite*>& GetSpriteRenderList();
+    std::vector<const ISprite*>& GetSpriteRenderList();
 
     uint32_t SpriteCount() const
     {
