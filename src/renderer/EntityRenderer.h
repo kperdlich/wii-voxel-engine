@@ -20,7 +20,6 @@
 #ifndef _ENTITYRENDERER_H_
 #define _ENTITYRENDERER_H_
 
-#include "../entity/Entity.h"
 #include "../renderer/SpriteStageManager.h"
 #include "../textures/Texture.h"
 

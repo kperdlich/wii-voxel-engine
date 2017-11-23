@@ -30,18 +30,15 @@ protected:
     Texture(float x, float y, TextureLoadingData textureData) : BasicTexture(x, y, textureData) {}
 
 public:    
-    virtual ~Texture() {}
+    ~Texture() {}
 
-    virtual void Load() override;
-    virtual void Unload() override;
+    void Load() override;
+    void Unload() override;
 
     static Texture* Create(const uint8_t* textureData, uint32_t textureSize);
 
-    virtual uint32_t GetWidth() const override;
-    virtual uint32_t GetHeight() const override;	
-
-    void PrintTPLInfo();  
-
+    uint32_t GetWidth() const override;
+    uint32_t GetHeight() const override;
 protected:
     void* m_pTPLTextureData = nullptr;
 

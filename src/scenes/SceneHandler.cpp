@@ -29,14 +29,19 @@ SceneHandler::SceneHandler() {}
 /**
  * delete all scenes
  */
-SceneHandler::~SceneHandler() {
-    for ( uint32_t i = 0; i < m_Scenes.size(); i++ )
-	{
-		m_Scenes[i]->Unload();
-		delete m_Scenes[i];
+SceneHandler::~SceneHandler()
+{
+    LOG("Try destroy SceneHandler");
+    for ( uint32_t i = 0; i < m_scenes.size(); i++ )
+	{       
+        if ( m_scenes[i]->IsLoaded() )
+        {
+            m_scenes[i]->Unload();
+        }
+        delete m_scenes[i];
 	}
-
-	m_Scenes.clear();
+    m_scenes.clear();
+    LOG("SceneHandler destroyed");
 }
 
 
@@ -48,18 +53,20 @@ void SceneHandler::Init() {
 	 * 2. Main menue
 	 * 3. Ingame
 	 */
-    m_Scenes.push_back( new IntroScene() );
-    m_Scenes.push_back( new MainMenuScene() );
-    m_Scenes.push_back( new InGameScene() );
+    m_scenes.push_back( new IntroScene() );
+    m_scenes.push_back( new MainMenuScene() );
+    m_scenes.push_back( new InGameScene() );
 	// ..
+
+    LOG("SceneHandler initialized");
 }
 
-void SceneHandler::LoadScene( int index )
+void SceneHandler::LoadScene( int32_t index )
 {
-    if ( index != m_CurrentSceneIndex && index != m_NextSceneIndex && index > INVALID_SCENE)
+    if ( index != m_currentSceneIndex && index != m_nextSceneIndex && index > INVALID_SCENE)
 	{
 		m_bLoadNextScene = true;
-        m_NextSceneIndex = index;
+        m_nextSceneIndex = index;
 	}
 }
 
@@ -75,14 +82,18 @@ void SceneHandler::Update(float deltaSeconds)
 	{
 		m_bLoadNextScene = false;
 
-        if ( m_NextSceneIndex < m_Scenes.size() && m_NextSceneIndex >= 0)
+        if ( m_nextSceneIndex < m_scenes.size() && m_nextSceneIndex >= 0)
 		{
-            if ( m_CurrentSceneIndex > INVALID_SCENE )
+            if ( m_currentSceneIndex > INVALID_SCENE )
 			{
+                LOG("Try unload Scene: %d", m_currentSceneIndex);
 				GetCurrentScene().Unload();
+                LOG("Unloaded Scene: %d", m_currentSceneIndex);
 			}
-            m_CurrentSceneIndex = m_NextSceneIndex;
+            m_currentSceneIndex = m_nextSceneIndex;
+            LOG("Try loading Scene: %d", m_currentSceneIndex);
 			GetCurrentScene().Load();
+            LOG("Loaded Scene: %d", m_currentSceneIndex);
 		}
 	}
 
@@ -91,5 +102,5 @@ void SceneHandler::Update(float deltaSeconds)
 
 Scene& SceneHandler::GetCurrentScene()
 {
-    return *m_Scenes[m_CurrentSceneIndex];
+    return *m_scenes[m_currentSceneIndex];
 }

@@ -27,13 +27,13 @@
 class SkyBox {
 public:
     SkyBox();
-    virtual ~SkyBox();
+    ~SkyBox();
 	void Render();
 	void Init();
+    void Clear();
 
 private:
-	void CreateSkyBox();
-
+	void CreateSkyBox();    
     Texture* m_pSkyBoxTextures[6];
 	uint32_t m_displayListSize = 0;
     void* m_pDispList = nullptr;

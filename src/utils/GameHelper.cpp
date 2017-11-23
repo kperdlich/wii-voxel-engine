@@ -20,9 +20,6 @@
 
 #include "GameHelper.h"
 
-static char* GameName =  "WoxelCraft";
-static char* BuildVersion = "0.0.7";
-
 static uint8_t fps = 0;
 
 uint8_t CalculateFrameRate()
@@ -52,7 +49,7 @@ void PrintFps(uint32_t x, uint32_t y, GRRLIB_ttfFont* font, uint32_t fontSize, c
 
 void PrintGameVersion(uint32_t x, uint32_t y, GRRLIB_ttfFont* font, uint32_t fontSize, const u32 color)
 {
-	char buffer[sizeof(GameName) + sizeof(BuildVersion) + 2];
-	sprintf(buffer, "%s %s", GameName, BuildVersion);
+    char buffer[20];
+    sprintf(buffer, "%s %s", GAME_NAME, BUILD_VERSION);
 	GRRLIB_PrintfTTF( x, y, font, buffer, fontSize, color );
 }

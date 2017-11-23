@@ -19,6 +19,7 @@
 
 
 #include "FontHandler.h"
+#include "../utils/Debug.h"
 
 FontHandler::FontHandler() {
 }
@@ -33,9 +34,11 @@ FontHandler::~FontHandler() {
 	m_fonts.clear();
 }
 
-void FontHandler::Init() {
+void FontHandler::Init()
+{
 	CreateFont( FreeMonoBold_ttf, FreeMonoBold_ttf_size );
 	CreateFont( Minecraft_ttf, Minecraft_ttf_size );
+    LOG("Fonts loaded");
 }
 
 void FontHandler::CreateFont( const u8* file_base, s32 file_size ) {

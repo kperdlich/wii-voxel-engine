@@ -26,7 +26,7 @@
 class Camera {
 public:
 	Camera();
-	virtual ~Camera();
+    ~Camera();
 	void Init();
 
 	void AttachTo(class Entity& entity);

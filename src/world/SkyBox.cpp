@@ -44,22 +44,7 @@ SkyBox::SkyBox()
 
 }
 
-SkyBox::~SkyBox()
-{
-    for ( uint8_t i = 0; i < 6; i++)
-    {
-        delete m_pSkyBoxTextures[i];
-        m_pSkyBoxTextures[i] = nullptr;
-    }
-
-
-    if ( m_displayListSize > 0 )
-	{
-		free(m_pDispList);
-        m_displayListSize = 0;
-        m_pDispList = nullptr;
-	}
-}
+SkyBox::~SkyBox() {}
 
 void SkyBox::Init()
 {
@@ -70,7 +55,23 @@ void SkyBox::Init()
     m_pSkyBoxTextures[SKY_UP]    = Texture::Create(SkyBox_Top_png, SkyBox_Top_png_size);
     m_pSkyBoxTextures[SKY_DOWN]  = Texture::Create(SkyBox_Bottom_png, SkyBox_Bottom_png_size);
 
-	CreateSkyBox();
+	CreateSkyBox();    
+}
+
+void SkyBox::Clear()
+{
+    for ( uint8_t i = 0; i < 6; i++)
+    {
+        delete m_pSkyBoxTextures[i];
+        m_pSkyBoxTextures[i] = nullptr;
+    }
+
+    if ( m_displayListSize > 0 )
+    {
+        free(m_pDispList);
+        m_displayListSize = 0;
+        m_pDispList = nullptr;
+    }
 }
 
 void SkyBox::CreateSkyBox()

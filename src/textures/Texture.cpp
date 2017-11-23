@@ -128,30 +128,3 @@ uint32_t Texture::GetHeight() const
 {
    return m_height;
 }
-
-
-void Texture::PrintTPLInfo()
-{
-
-#ifdef DEBUG
-    if ( IsTplTexture())
-    {
-        // basic tlp info's
-        const TPL_Header* header = reinterpret_cast<const TPL_Header*>(m_textureData.pTextureData);
-        LOG("magic %04x", header->magic );
-        LOG("texCount %d", header->texCount );
-        LOG("headerSize %d", header->headerSize );
-
-        const TPL_Texture* texture = reinterpret_cast<const TPL_Texture*> ((m_textureData.pTextureData + sizeof(TPL_Header) + sizeof(TPL_Addr)));
-        LOG("Height %d", texture->height );
-        LOG("Width %d", texture->width );
-        LOG("Format %d", texture->format );
-        LOG("Maxlod %d", texture->maxLod );
-        LOG("EdgeLod %d", texture->edgeLod );
-        LOG("MinFilt %d", texture->minFilt );
-        LOG("MagFilt %d", texture->magFilt );
-    }
-#endif
-}
-
-

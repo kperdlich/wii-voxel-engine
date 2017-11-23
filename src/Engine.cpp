@@ -19,8 +19,9 @@
 
 
 #include "Engine.h"
+#include "utils/GameHelper.h"
+#include "utils/Filesystem.h"
 #include "utils/Debug.h"
-
 
 Engine::Engine()
 {
@@ -62,13 +63,7 @@ void Engine::Start()
         PrintFps( 500, 25, m_pFontHandler->GetNativFontByID( DEFAULT_FONT_ID ), DEFAULT_FONT_SIZE, GRRLIB_YELLOW );
 
 #ifdef DEBUG
-        PrintGameVersion(0, 25, m_pFontHandler->GetNativFontByID( DEFAULT_FONT_ID ), DEFAULT_FONT_SIZE, GRRLIB_WHITE );
-
-        LOG("Resolution x: %d y: %d", rmode->viWidth, rmode->viHeight);
-        LOG( "Loaded Sprites in scene: %d", GetSpriteStageManager().SpriteCount() );
-
-        Debug::GetInstance().Print();
-        Debug::GetInstance().Reset();
+        PrintGameVersion(0, 25, m_pFontHandler->GetNativFontByID( DEFAULT_FONT_ID ), DEFAULT_FONT_SIZE, GRRLIB_WHITE );       
 #endif
 
         GRRLIB_Render();
@@ -82,11 +77,12 @@ void Engine::Start()
     delete m_pInputHandler;
     delete m_pFontHandler;
 
-#ifdef DEBUG	
-    Debug::GetInstance().Destroy();
-#endif
-
 	GRRLIB_Exit();
+    LOG("Graphics System uninitialized");
+
+#ifdef DEBUG
+    Debug::GetInstance().Release();
+#endif
 }
 
 void Engine::End()
@@ -95,10 +91,16 @@ void Engine::End()
 }
 
 void Engine::Init()
-{
+{    
+    FileSystem::Init();
+    Debug::GetInstance().Init();
+
+    LOG("****** %s %s ******", GAME_NAME, BUILD_VERSION);
 
 	GRRLIB_Init();
-	GRRLIB_Settings.antialias = true;
+    GRRLIB_Settings.antialias = true;
+    LOG("Graphics System initialized");
+    LOG("Resolution x: %d y: %d", rmode->viWidth, rmode->viHeight);
 
     m_pFontHandler->Init();
     m_pInputHandler->Init();

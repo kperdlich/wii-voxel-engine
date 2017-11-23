@@ -1,6 +1,6 @@
 /***
  *
- * Copyright (C) 2016 DaeFennek
+ * Copyright (C) 2017 DaeFennek
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,19 +17,18 @@
  *
 ***/
 
-#ifndef _RENDERER_H_
-#define _RENDERER_H_
+#ifndef FILESYSTEM_H
+#define FILESYSTEM_H
 
-#include "../utils/ColorHelper.h"
-#include "../textures/ISprite.h"
 
-class Renderer
+class FileSystem
 {
 public:
-	Renderer();
-	virtual ~Renderer();
-    virtual void Draw(const ISprite& sprite);
+
+    static void Init();
+    static void Test();
+
+
 };
 
-
-#endif /* _RENDERER_H_ */
+#endif // FILESYSTEM_H

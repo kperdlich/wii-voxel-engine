@@ -28,7 +28,7 @@ public:
 	SwitchToMainMenuCommand();
 	virtual ~SwitchToMainMenuCommand();
 	void ExecuteCommand() override;
-	static const char* Name() { return "SwitchToMainMenuCommand"; };
+    static const char* Name() { return "SwitchToMainMenuCommand"; }
 };
 
 #endif /* _SWITCHTOMAINMENUCOMMAND_H_ */

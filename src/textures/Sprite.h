@@ -34,6 +34,8 @@ public:
 
     static Sprite* Create(const uint8_t *pSpriteData, uint32_t spriteSize, std::string searchName, uint16_t sortingLayer = 0);
 
+    void Render() const override;
+
     ESpriteType GetType() const override
     {
         return ESpriteType::SPRITE;

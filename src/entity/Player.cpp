@@ -44,15 +44,6 @@ void CPlayer::Update(float deltaSeconds)
 
     u32 padButtonDown = pad->ButtonsDown();
 
-#ifdef DEBUG
-	auto pChunk = m_pWorld->GetChunkByWorldPosition( m_position );
-	if ( pChunk )
-    {		
-        LOG( "Current Chunk: %d/%d/%d", (uint32_t) pChunk->GetCenterPosition().GetX(), (uint32_t) pChunk->GetCenterPosition().GetY(), (uint32_t) pChunk->GetCenterPosition().GetZ()  );
-	}
-#endif
-
-
 	if ( pad->GetY() <= 15.0f )
 	{
         Rotate( Vector3( -ROTATION_SPEED * deltaSeconds, 0, 0 )); // top

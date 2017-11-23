@@ -36,4 +36,9 @@ Label *Label::Create(std::string text, GRRLIB_ttfFont *font, std::string searchN
     return label;
 }
 
+void Label::Render() const
+{
+    GRRLIB_PrintfTTF( m_x, m_y, m_font, m_text.c_str(), m_fontSize, m_textColor );
+}
+
 

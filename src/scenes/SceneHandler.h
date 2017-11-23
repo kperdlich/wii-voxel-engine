@@ -32,16 +32,16 @@ class SceneHandler
 {
 
 private:
-    std::vector<Scene*> m_Scenes;
-    int m_CurrentSceneIndex = INVALID_SCENE;
+    std::vector<Scene*> m_scenes;
+    int32_t m_currentSceneIndex = INVALID_SCENE;
 	bool m_bLoadNextScene = false;
-    int m_NextSceneIndex = INVALID_SCENE;
+    int32_t m_nextSceneIndex = INVALID_SCENE;
 
 public:
     SceneHandler();
     ~SceneHandler();
 	void Init();
-	void LoadScene(int index );	
+    void LoadScene(int32_t index );
 	void DrawScene();
     void Update(float deltaSeconds);
     Scene& GetCurrentScene();

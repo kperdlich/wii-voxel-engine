@@ -97,10 +97,6 @@ src/renderer/EntityRenderer.cpp
 src/renderer/EntityRenderer.h
 src/renderer/MasterRenderer.cpp
 src/renderer/MasterRenderer.h
-src/renderer/Renderer.cpp
-src/renderer/Renderer.h
-src/renderer/Renderer3D.cpp
-src/renderer/Renderer3D.h
 src/renderer/SpriteStageManager.cpp
 src/renderer/SpriteStageManager.h
 src/scenes/Basic2DScene.cpp
@@ -132,6 +128,8 @@ src/textures/Texture.h
 src/utils/ColorHelper.h
 src/utils/Debug.cpp
 src/utils/Debug.h
+src/utils/Filesystem.cpp
+src/utils/Filesystem.h
 src/utils/GameHelper.cpp
 src/utils/GameHelper.h
 src/utils/MathHelper.cpp

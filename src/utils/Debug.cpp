@@ -18,47 +18,10 @@
 ***/
 
 #include "Debug.h"
-#include <stdio.h>
 
-#define DEBUG_STRINGS 25
-#define CHARS_PER_DEBUG_STRING 50 // should always be enough for debug logs
-
-#ifdef DEBUG
-
-Debug::Debug()
+void Debug::Init()
 {
-    AllocateDebugBuffer();
-}
-
-Debug::~Debug()
-{
-
-}
-
-void Debug::AllocateDebugBuffer()
-{
-    for ( uint32_t i = 0; i < DEBUG_STRINGS; i++)
-    {
-        m_logs.push_back(new char[CHARS_PER_DEBUG_STRING]);
-    }
-}
-
-void Debug::DestroyDebugBuffer()
-{
-    for ( uint32_t i = 0; i < DEBUG_STRINGS; i++)
-    {
-        delete[] m_logs[i];
-    }
-}
-
-char* Debug::GetNextLogBuffer()
-{
-    if ( m_logIndex == DEBUG_STRINGS - 1)
-    {
-        m_logIndex = DEFAULT_DEBUG_INDEX;
-        m_logOverflow = true;
-    }
-    return m_logs[++m_logIndex];
+    m_file.open("Log.txt");
 }
 
 void Debug::Log(const char* format, ...)
@@ -66,40 +29,15 @@ void Debug::Log(const char* format, ...)
     va_list args;
     va_start(args, format);
 
-    char* pBuffer = GetNextLogBuffer();
-    vsprintf(pBuffer, format, args);
+    char buffer[200];
+    vsprintf(buffer, format, args);
 
     va_end(args);
+
+    m_file << buffer << std::endl;    
 }
 
-void Debug::Print()
+void Debug::Release()
 {
-    uint32_t y = DEBUG_LINE;
-    for (char i = 0; i <= m_logIndex; i++)
-	{
-        GRRLIB_PrintfTTF( 0, y, Engine::Get().GetFontHandler().GetNativFontByID( DEFAULT_FONT_ID ), m_logs[i], DEFAULT_FONT_SIZE, m_logOverflow ? GRRLIB_RED : GRRLIB_WHITE );
-
-        if ( m_logIndex > DEBUG_STRINGS )
-		{
-			y = DEBUG_LINE;
-		}
-		else
-		{
-			y += 10;
-        }
-    }
+    m_file.close();
 }
-
-void Debug::Reset()
-{
-    m_logIndex = DEFAULT_DEBUG_INDEX;
-}
-
-void Debug::Destroy()
-{
-    DestroyDebugBuffer();
-}
-
-#endif
-
-

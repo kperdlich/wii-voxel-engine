@@ -1,6 +1,6 @@
 /***
  *
- * Copyright (C) 2016 DaeFennek
+ * Copyright (C) 2017 DaeFennek
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,18 +17,17 @@
  *
 ***/
 
-#ifndef _RENDERER3D_H_
-#define _RENDERER3D_H_
 
-#include "Renderer.h"
-#include "../textures/BasicTexture.h"
-#include "../entity/Entity.h"
+#include <fat.h>
+#include <iostream>
+#include <fstream>
+#include <assert.h>
 
-class Renderer3D: public Renderer {
-public:
-	Renderer3D();
-	virtual ~Renderer3D();    
-    void DrawEntity(const class Entity* entity) const;
-};
+#include "Filesystem.h"
+#include "Debug.h"
 
-#endif /* _RENDERER3D_H_ */
+
+void FileSystem::Init()
+{
+    assert(fatInitDefault());
+}

@@ -18,24 +18,30 @@
 ***/
 
 #include "InputHandler.h"
+#include "../utils/Debug.h"
 
 InputHandler::InputHandler() {
 }
 
-InputHandler::~InputHandler() {
+InputHandler::~InputHandler()
+{
     for (uint32_t i = 0; i < m_pads.size(); i++)
 	{
 		delete m_pads[i];
 	}
 }
 
-void InputHandler::Init() {
+void InputHandler::Init()
+{
 	WPAD_Init();
 	m_pads.push_back( new WiiPad( WPAD_CHAN_0 ) ); // only one because of singleplayer ;)
+
+    LOG("Wiipad initialized");
 }
 
 
-void InputHandler::Update() {
+void InputHandler::Update()
+{
 	WPAD_SetVRes(0, 640, 480);
 	WPAD_ScanPads();
     for (uint32_t i = 0; i < m_pads.size(); i++)
@@ -44,7 +50,8 @@ void InputHandler::Update() {
 	}
 }
 
-WiiPad* InputHandler::GetPadByID(uint32_t padID) {
+WiiPad* InputHandler::GetPadByID(uint32_t padID)
+{
 	if ( padID >= 0 && padID < m_pads.size() )
 	{
 		return m_pads[ padID ];

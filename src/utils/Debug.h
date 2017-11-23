@@ -20,14 +20,11 @@
 #ifndef _DEBUG_H_
 #define _DEBUG_H_
 
-#include <vector>
+#include <fstream>
 #include "../Engine.h"
 
-#define DEBUG_LINE 200
-#define DEFAULT_DEBUG_INDEX -1
-
 #ifdef DEBUG
-    #define LOG(format, ...) Debug::GetInstance().Log(format, __VA_ARGS__)
+    #define LOG(format,...) Debug::GetInstance().Log(format, ##__VA_ARGS__)
 #else
     #define LOG(format, ...)
 #endif
@@ -38,31 +35,22 @@
 class Debug {
 
 private:
-    std::vector<char*> m_logs;
-    signed char m_logIndex = DEFAULT_DEBUG_INDEX;
-    bool m_logOverflow = false;
+    std::ofstream m_file;
+public:	
+    Debug() {}
 
-private:
-    void AllocateDebugBuffer();
-    void DestroyDebugBuffer();
-    char* GetNextLogBuffer();
-
-public:
-	Debug();
-	virtual ~Debug();
+    void Init();
     void Log(const char* format, ...);
-	void Print();
-    void Reset();
-    void Destroy();
+    void Release();
 
-	static Debug& GetInstance()
-	{
+    static Debug& GetInstance()
+    {
         static Debug s_instance;
         return s_instance;
-	}
+    }
 
-	Debug(Debug const&)	  = delete;
-	void operator=(Debug const&) = delete;    
+    Debug(Debug const&)	  = delete;
+    void operator=(Debug const&) = delete;
 };
 
 #endif

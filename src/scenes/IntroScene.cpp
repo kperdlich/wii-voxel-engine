@@ -45,13 +45,12 @@ IntroScene::~IntroScene() {
 
 
 void IntroScene::Load()
-{
-    Basic2DScene::Load();
+{    
 	m_BackgroundAlpha = 255;
     auto logoSprite = Sprite::Create(WoxelCraft_png, WoxelCraft_png_size, IS_LOGO);
     m_elements.push_back( new UiTextureElement( (rmode->viWidth / 2) - (logoSprite->GetWidth() / 2), (rmode->viHeight / 2) - ( logoSprite->GetHeight() / 2 ), IS_LOGO, logoSprite));
+    Basic2DScene::Load();
 }
-
 
 void IntroScene::Update(float deltaSeconds)
 {
@@ -74,12 +73,13 @@ void IntroScene::Update(float deltaSeconds)
         Engine::Get().GetBasicCommandHandler().ExecuteCommand( SwitchToMainMenuCommand::Name() );
 	}
 
-
+#ifdef DEBUG
     WiiPad* pad = Engine::Get().GetInputHandler().GetPadByID( WII_PAD_0 );
 	if ( pad->ButtonsDown() & WPAD_BUTTON_RIGHT)
 	{
         Engine::Get().GetBasicCommandHandler().ExecuteCommand( SwitchToMainMenuCommand::Name() );
     }
+#endif
 }
 
 void IntroScene::Draw()

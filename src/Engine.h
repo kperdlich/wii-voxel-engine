@@ -30,10 +30,13 @@
 #include "font/FontHandler.h"
 #include "commands/BasicCommandHandler.h"
 
-#define DEFAULT_FONT_ID 0
-#define DEFAULT_MINECRAFT_FONT_ID 1
+#define GAME_NAME                   "WoxelCraft"
+#define BUILD_VERSION               "0.0.7"
 
-//#define DEBUG
+#define DEFAULT_FONT_ID             0
+#define DEFAULT_MINECRAFT_FONT_ID   1
+
+#define DEBUG
 
 class Engine {
 

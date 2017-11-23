@@ -42,8 +42,6 @@ void InGameScene::Update(float deltaSeconds)
 
 void InGameScene::Load()
 {
-    Basic3DScene::Load();
-
     m_uiElements.push_back( new Hotbar( IGS_HUD_HOTBAR, Sprite::Create(Hotbar_png, Hotbar_png_size, IGS_HUD_HOTBAR)) );
     m_uiElements.push_back( new Cursor( IGS_HUD_CROSSHAIR, Sprite::Create(Crosshair_png, Crosshair_png_size, IGS_HUD_CROSSHAIR)) );
 
@@ -51,6 +49,14 @@ void InGameScene::Load()
 	m_pGameWorld->GenerateWorld();
 
     InitEntities();
+
+    Basic3DScene::Load();
+}
+
+void InGameScene::Unload()
+{
+    delete m_pGameWorld;
+    Basic3DScene::Unload();
 }
 
 
@@ -59,10 +65,6 @@ void InGameScene::Draw()
     Basic3DScene::Draw();   
 
 #ifdef DEBUG
-    CPlayer* player = static_cast<CPlayer*>(m_entityHandler->GetPlayer());
-    LOG( "Player Position: x:%d, y:%d, z:%d", static_cast<int>(player->GetPosition().GetX()), static_cast<int>(player->GetPosition().GetY()), static_cast<int>(player->GetPosition().GetZ()) );
-    LOG( "Player Rotation: x:%d, y:%d, z:%d", static_cast<int>(player->GetRotation().GetX()), static_cast<int>(player->GetRotation().GetY()), static_cast<int>(player->GetRotation().GetZ()) );
-
     /*
     GRRLIB_SetLightAmbient(0x404040FF);
     GRRLIB_SetLightSpot(0, (guVector){ 10.0f, 0.0f, 10.0f }, (guVector){  0.0f, 0.0f, 0.0f }, 1.0f, 3.0f, 1.0f, 1.0f, 0.0f, 0.0f, GRRLIB_RED);

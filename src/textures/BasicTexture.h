@@ -94,7 +94,7 @@ public:
 
     /**
      * @brief GetTextureObject
-     * @return Returns null if texture not loaded otherwise a pointer to the initalized GXTexObj
+     * @return Returns null if texture not loaded otherwise a pointer to the initialized GXTexObj
      */
     GXTexObj* GetTextureObject() const
     {

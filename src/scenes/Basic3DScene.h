@@ -21,7 +21,6 @@
 #define _BASIC3DSCENE_H_
 
 #include "Scene.h"
-#include "../renderer/Renderer3D.h"
 #include "../components/UiElement.h"
 #include "../entity/EntityHandler.h"
 #include "../world/Camera.h"
@@ -40,15 +39,12 @@ public:
 
 	class EntityHandler& GetEntityHandler();
 
-
-
-protected:
-	class Renderer3D& Get3DRenderer();
-	class EntityHandler* m_entityHandler;
-	std::vector<UiElement*> m_uiElements;
-	class Camera* m_mainCamera;
-    class GameWorld* m_pGameWorld;
-	class SkyBox* m_pSkyBox;
+protected:	
+    std::vector<UiElement*> m_uiElements;
+    class EntityHandler* m_entityHandler    = nullptr;
+    class Camera* m_mainCamera              = nullptr;
+    class GameWorld* m_pGameWorld           = nullptr;
+    class SkyBox* m_skyBox                 = nullptr;
 };
 
 #endif /* _BASIC3DSCENE_H_ */

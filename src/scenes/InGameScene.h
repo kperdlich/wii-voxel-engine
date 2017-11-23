@@ -29,6 +29,7 @@ public:
     virtual ~InGameScene();
     void Update(float deltaSeconds) override;
 	void Load() override;
+    void Unload() override;
 	void Draw() override;
 protected:
 	void InitEntities();

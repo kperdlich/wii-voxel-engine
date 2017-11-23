@@ -62,8 +62,7 @@ MainMenuScene::~MainMenuScene() {
 }
 
 void MainMenuScene::Load()
-{
-    Basic2DScene::Load();
+{    
     m_elements.push_back( new UiTextureElement( MMS_CLASSIC_BACKGROUND , Sprite::Create(ClassicBackgroundSprite_png, ClassicBackgroundSprite_png_size, MMS_CLASSIC_BACKGROUND, BACKGROUND_SORTING_LAYER )));
     UiTextureElement* logo = new UiTextureElement( MMS_LOGO , Sprite::Create(WoxelCraft_png, WoxelCraft_png_size, MMS_LOGO, COMPONENTS_SORTING_LAYER));
 	logo->SetX( (rmode->viWidth / 2) - (logo->GetWidth() / 2) );
@@ -73,6 +72,7 @@ void MainMenuScene::Load()
     CreateMainMenuButtonList();
 
     m_elements.push_back( new Cursor( MMS_CURSOR , Sprite::Create(Cursor_png, Cursor_png_size, MMS_CURSOR, CURSOR_SORTING_LAYER )));
+    Basic2DScene::Load();
 }
 
 void MainMenuScene::Draw()
@@ -112,7 +112,7 @@ void MainMenuScene::CreateMainMenuButtonList()
     btnList->AddComponent( CreateDefaultMainMenuButton( MMS_BUTTON_MULTIPLAYER, "Multiplayer", nullptr ));
     btnList->AddComponent( CreateDefaultMainMenuButton( MMS_BUTTON_OPTION, "Option", nullptr ));
     btnList->AddComponent( CreateDefaultMainMenuButton( MMS_BUTTON_EXIT, "Exit", [] (BasicButton* clickedButton) { Engine::Get().End(); }));
-	m_elements.push_back(btnList);
+    m_elements.push_back(btnList);
 }
 
 

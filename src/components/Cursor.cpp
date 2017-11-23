@@ -31,14 +31,9 @@ Cursor::Cursor( const char* name, Sprite* sprite ) : UiTextureElement( 0, 0, nam
 
 Cursor::~Cursor() {}
 
-void Cursor::Update() {
-
-	WiiPad* pad = Engine::Get().GetInputHandler().GetPadByID( WII_PAD_0 );
-
-#ifdef DEBUG
-   LOG( "Cursor x: %d y: %d", (int)pad->GetX(), (int) pad->GetY() );
-#endif
-
+void Cursor::Update()
+{
+    WiiPad* pad = Engine::Get().GetInputHandler().GetPadByID( WII_PAD_0 );
 	SetX( pad->GetX());
 	SetY( pad->GetY());
 }

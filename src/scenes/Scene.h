@@ -21,7 +21,6 @@
 #define _SCENE_H_
 
 #include "../renderer/SpriteStageManager.h"
-#include "../renderer/Renderer.h"
 
 class Scene {
 
@@ -32,12 +31,19 @@ public:
 	virtual void Unload();
 	virtual void Draw();
     virtual void Update(float deltaSeconds);
-	virtual SpriteStageManager& GetSpriteStageManager() const;
-	virtual Renderer& GetRenderer() const;
+	virtual SpriteStageManager& GetSpriteStageManager() const;	
+
+    bool IsLoaded() const
+    {
+        return m_bLoaded;
+    }
+
+private:
+    bool m_bLoaded = false;
 
 protected:
     SpriteStageManager *m_spriteStageManager;
-    Renderer *m_renderer;
+
 };
 
 

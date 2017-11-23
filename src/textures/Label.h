@@ -33,6 +33,8 @@ public:
     ~Label();
     static Label* Create(std::string text, GRRLIB_ttfFont* font, std::string searchName, uint16_t sortingLayer = 0);
 
+    void Render() const override;
+
     float GetX() const override
     {
         return m_x;

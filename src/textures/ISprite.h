@@ -36,6 +36,8 @@ public:
     virtual bool IsVisible() const = 0;
     virtual void SetVisible(bool value) = 0;
 
+    virtual void Render() const = 0;
+
     virtual void SetSortingLayerIndex(uint16_t index) = 0;
     virtual uint16_t GetSortingLayerIndex() const = 0;
 

@@ -26,26 +26,24 @@
 #define FIELD_OF_VIEW 90.0f
 
 Basic3DScene::Basic3DScene()
-{
-    m_renderer = new Renderer3D();
+{    
 	m_entityHandler = new EntityHandler();
 	m_mainCamera = new Camera();
-    m_pSkyBox = new SkyBox();
+    m_skyBox = new SkyBox();
 }
 
 Basic3DScene::~Basic3DScene()
-{
-	delete m_pGameWorld;
+{	
 	delete m_entityHandler;
 	delete m_mainCamera;
-	delete m_pSkyBox;
+    delete m_skyBox;
 }
 
 void Basic3DScene::Load()
-{
-    Scene::Load();
+{    
 	m_mainCamera->Init();
-	m_pSkyBox->Init();
+    m_skyBox->Init();
+    Scene::Load();
 }
 
 void Basic3DScene::Draw()
@@ -64,7 +62,7 @@ void Basic3DScene::Draw()
 	GRRLIB_ObjectViewEnd();
 
     MasterRenderer::SetGraphicsMode(true, false);
-	m_pSkyBox->Render();
+    m_skyBox->Render();
     MasterRenderer::SetGraphicsMode(true, true);
 
 	GRRLIB_ObjectViewBegin();
@@ -77,20 +75,20 @@ void Basic3DScene::Draw()
 
 	m_pGameWorld->Draw();
 
-	for (auto it = m_entityHandler->GetEntities()->begin(); it != m_entityHandler->GetEntities()->end(); ++it)
+    /*for (auto it = m_entityHandler->GetEntities()->begin(); it != m_entityHandler->GetEntities()->end(); ++it)
 	{
 		if (it->second->IsVisible())
 		{
-			Get3DRenderer().DrawEntity( it->second );
+            Get3DRenderer().DrawEntity( it->second );
 		}
-	}
+    }*/
 
     GRRLIB_2dMode();
 
     auto sprites = m_spriteStageManager->GetSpriteRenderList();
     for (auto it = sprites.begin(); it != sprites.end(); it++)
     {
-        m_renderer->Draw(**it);
+        (*it)->Render();
     }
 }
 
@@ -100,11 +98,6 @@ void Basic3DScene::Update(float deltaSeconds)
 	{
 		m_uiElements[i]->Update();
 	}
-}
-
-Renderer3D& Basic3DScene::Get3DRenderer()
-{
-    return static_cast<Renderer3D&>(*m_renderer);
 }
 
 EntityHandler& Basic3DScene::GetEntityHandler()
@@ -121,5 +114,6 @@ void Basic3DScene::Unload()
 
 	m_uiElements.clear();
 	m_entityHandler->Clear();
+    m_skyBox->Clear();
     Scene::Unload();
 }

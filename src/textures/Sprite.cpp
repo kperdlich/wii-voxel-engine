@@ -19,7 +19,7 @@
 
 #include "Sprite.h"
 #include "../Engine.h"
-
+#include "../renderer/MasterRenderer.h"
 
 Sprite::Sprite(float x, float y, TextureLoadingData textureData) : BasicTexture(x, y, textureData), m_bVisible(true) { }
 
@@ -37,4 +37,9 @@ Sprite* Sprite::Create(const uint8_t *spriteData, uint32_t spriteSize, std::stri
     sprite->Load();
     Engine::Get().GetSpriteStageManager().Add(sprite);
     return sprite;
+}
+
+void Sprite::Render() const
+{
+    MasterRenderer::DrawSprite(*this);
 }
