@@ -137,12 +137,14 @@ src/utils/MathHelper.h
 src/utils/TileHelper.h
 src/utils/Vector3.cpp
 src/utils/Vector3.h
+src/utils/threadpool.h
 src/world/Camera.cpp
 src/world/Camera.h
 src/world/Frustrum.cpp
 src/world/Frustrum.h
 src/world/GameWorld.cpp
 src/world/GameWorld.h
+src/world/ISerializable.h
 src/world/PerlinNoise.cpp
 src/world/PerlinNoise.h
 src/world/SkyBox.cpp
@@ -153,6 +155,8 @@ src/world/blocks/BlockManager.cpp
 src/world/blocks/BlockManager.h
 src/world/chunk/Chunk.cpp
 src/world/chunk/Chunk.h
+src/world/chunk/Chunkserializer.cpp
+src/world/chunk/Chunkserializer.h
 src/world/hud/Hotbar.cpp
 src/world/hud/Hotbar.h
 src/world/hud/Hud.cpp

@@ -47,7 +47,7 @@ void BlockRenderer::Draw()
         auto pTexture = textureIt->first;
         auto textureFaces = textureIt->second;
 
-        MasterRenderer::LoadTexture(*pTexture);
+        pTexture->Bind();
 
         for ( auto textureFaceIt = textureFaces.begin();  textureFaceIt != textureFaces.end(); ++textureFaceIt )
         {

@@ -23,7 +23,8 @@
 #include <stdint.h>
 #include "../utils/MathHelper.h"
 
-typedef struct BlockFaceVisibiltyVO {
+struct BlockFaceVisibiltyVO
+{
     bool bLeftFace = false;
     bool bRightFace = false;
     bool bFrontFace = false;
@@ -31,11 +32,12 @@ typedef struct BlockFaceVisibiltyVO {
     bool bTopFace = false;
     bool bBottomFace = false;
     uint32_t faces = 0;
-} BlockFaceVisibiltyVO;
+};
 
-typedef struct BlockRenderVO {
+struct BlockRenderVO
+{
     BlockFaceVisibiltyVO* pFaceVO = nullptr;
     Vector3* pBlockPosition = nullptr;
-} BlockRenderVO;
+};
 
 #endif /* _BLOCKRENDERHELPER_H_ */

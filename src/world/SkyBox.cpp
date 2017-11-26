@@ -84,7 +84,7 @@ void SkyBox::CreateSkyBox()
 
 	GX_SetCullMode(GX_CULL_BACK);
 
-    MasterRenderer::LoadTexture(*m_pSkyBoxTextures[SKY_RIGHT]);
+    m_pSkyBoxTextures[SKY_RIGHT]->Bind();
 	GX_Begin(GX_QUADS, GX_VTXFMT0, 4);
 		GX_Position3f32(PLAYER_DISTANCE,PLAYER_DISTANCE,0);
 		GX_Color1u32(0xFFFFFFFF);
@@ -100,7 +100,7 @@ void SkyBox::CreateSkyBox()
 		GX_TexCoord2f32(0,1);
 	GX_End();
 
-    MasterRenderer::LoadTexture(*m_pSkyBoxTextures[SKY_FRONT]);
+    m_pSkyBoxTextures[SKY_FRONT]->Bind();
 	GX_Begin(GX_QUADS, GX_VTXFMT0, 4);
 		GX_Position3f32(0,PLAYER_DISTANCE,0);
 		GX_Color1u32(0xFFFFFFFF);
@@ -117,7 +117,7 @@ void SkyBox::CreateSkyBox()
 	GX_End();
 
 
-    MasterRenderer::LoadTexture(*m_pSkyBoxTextures[SKY_UP]);
+    m_pSkyBoxTextures[SKY_UP]->Bind();
 	GX_Begin(GX_QUADS, GX_VTXFMT0, 4);
 		GX_Position3f32(0,PLAYER_DISTANCE,0);
 		GX_Color1u32(0xFFFFFFFF);
@@ -135,7 +135,7 @@ void SkyBox::CreateSkyBox()
 
 	GX_SetCullMode(GX_CULL_FRONT);
 
-    MasterRenderer::LoadTexture(*m_pSkyBoxTextures[SKY_LEFT]);
+    m_pSkyBoxTextures[SKY_LEFT]->Bind();
 	GX_Begin(GX_QUADS, GX_VTXFMT0, 4);
 		GX_Position3f32(0,PLAYER_DISTANCE,0);
 		GX_Color1u32(0xFFFFFFFF);
@@ -151,7 +151,7 @@ void SkyBox::CreateSkyBox()
 		GX_TexCoord2f32(0,1);
 	GX_End();
 
-    MasterRenderer::LoadTexture(*m_pSkyBoxTextures[SKY_BACK]);
+    m_pSkyBoxTextures[SKY_BACK]->Bind();
 	GX_Begin(GX_QUADS, GX_VTXFMT0, 4);
 		GX_Position3f32(0,PLAYER_DISTANCE,PLAYER_DISTANCE);
 		GX_Color1u32(0xFFFFFFFF);
@@ -167,7 +167,7 @@ void SkyBox::CreateSkyBox()
 		GX_TexCoord2f32(0,1);
 	GX_End();
 
-    MasterRenderer::LoadTexture(*m_pSkyBoxTextures[SKY_DOWN]);
+    m_pSkyBoxTextures[SKY_DOWN]->Bind();
 	GX_Begin(GX_QUADS, GX_VTXFMT0, 4);
 		GX_Position3f32(0,0,0);
 		GX_Color1u32(0xFFFFFFFF);

@@ -20,18 +20,18 @@
 
 #include "Texture.h"
 
-typedef struct {
+struct TPL_Header{
     uint32_t	magic;
     uint32_t	texCount;
     uint32_t	headerSize;
-} TPL_Header;
+};
 
-typedef struct {
+struct TPL_Addr{
     uint32_t	textureOffs;
     uint32_t	tlutOffs;
-} TPL_Addr;
+};
 
-typedef struct {
+struct TPL_Texture{
     uint16_t	height;
     uint16_t	width;
     uint32_t	format;
@@ -45,7 +45,7 @@ typedef struct {
     uint8_t     minLod;
     uint8_t     maxLod;
     uint8_t     unpacked;
-} TPL_Texture;
+};
 
 void Texture::LoadTPLTexture()
 {
@@ -117,6 +117,11 @@ Texture *Texture::Create(const uint8_t *textureData, uint32_t textureSize)
     Texture* texture = new Texture( 0, 0, txLoadingData);
     texture->Load();
     return texture;
+}
+
+void Texture::Bind(uint8_t textureMapSlot) const
+{
+    GX_LoadTexObj(m_textureObject, textureMapSlot);
 }
 
 uint32_t Texture::GetWidth() const

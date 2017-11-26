@@ -28,18 +28,18 @@
 #include "../scenes/Basic3DScene.h"
 #include "../utils/MathHelper.h"
 
-#define CHUNK_AMOUNT_X 50
-#define CHUNK_AMOUNT_Z 50
+#define CHUNK_AMOUNT_X 20
+#define CHUNK_AMOUNT_Z 20
 
 #define CHUNK_PLAYER_FOV 7 // how many chunks the player can see
 
-typedef struct ChunkPositionComparer
+struct ChunkPositionComparer
 {
-	bool operator()(const class Vector3* s1, const class Vector3* s2) const
+    bool operator()(const Vector3& s1, const Vector3& s2) const
 	{
-	    return s1->GetX() < s2->GetX() || (s1->GetX() == s2->GetX() && s1->GetZ() < s2->GetZ());
+        return s1.GetX() < s2.GetX() || (s1.GetX() == s2.GetX() && s1.GetZ() < s2.GetZ());
 	}
-} ChunkPositionComparer;
+};
 
 class GameWorld {
 public:
@@ -56,7 +56,7 @@ public:
 	void UpdateFocusedBlockByWorldPosition( const Vector3& blockPosition );
 	BlockType GetBlockByWorldPosition(const Vector3& worldPosition);
 	Vector3 GetBlockPositionByWorldPosition(const Vector3& worldPosition);
-	Vector3 GetNewPlayerPosition( const Vector3& playerWorldPosition );
+	Vector3 GetNewPlayerPosition( const Vector3& playerWorldPosition );   
 
 	const PerlinNoise& GetNoise() const;
 
@@ -64,14 +64,14 @@ private:
     bool ChunkInFov( const Vector3& chunkPosition, const Vector3& playerPosition, uint32_t fov);
 	void DrawFocusOnSelectedCube();
 
-private:
-	BlockManager* m_blockManager;
-    std::map<const class Vector3*, class Chunk*, ChunkPositionComparer> m_ChunkMap;
+private:	
+    std::map<const Vector3, class Chunk*, ChunkPositionComparer> m_chunkMap;
 
 	Vector3 m_SelectedBlockPosition;
-	bool m_bHasSelectedBlock = false;	
+    bool m_bHasSelectedBlock            = false;
 
-	PerlinNoise* m_pNoise;
+    BlockManager* m_blockManager        = nullptr;
+    PerlinNoise* m_pNoise               = nullptr;
 
 };
 

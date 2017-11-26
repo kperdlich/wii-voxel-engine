@@ -29,14 +29,14 @@
 #define BLOCK_SIZE_HALF .25f
 #define BLOCK_SIZE BLOCK_SIZE_HALF * 2
 
-enum BlockType {
+enum class BlockType : unsigned short {
 
-	AIR,
-	DIRT,
-    GRASS,
-    STONE,
-    WOOD,
-    LEAF
+    AIR     = 0,
+    DIRT    = 1,
+    GRASS   = 2,
+    STONE   = 3,
+    WOOD    = 4,
+    LEAF    = 5
 };
 
 class BlockManager {

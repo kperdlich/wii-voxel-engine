@@ -21,6 +21,7 @@
 #define _CHUNK_H_
 
 #include <stdint.h>
+#include <string>
 #include "../GameWorld.h"
 #include "../../renderer/BlockRenderHelper.h"
 #include "../../utils/Vector3.h"
@@ -40,15 +41,22 @@ struct Vec3i {
 	uint32_t m_x, m_y, m_z;
 };
 
+struct BlockChangeData
+{
+    BlockType Type;
+    Vec3i BlockPosition;
+    Vector3 ChunkPosition;
+};
+
 class Chunk {
 public:
 
     Chunk(class GameWorld &gameWorld);
     virtual ~Chunk();
 
-	void Init(Vector3& position);
+    void Init(const Vector3& position);
 	void RebuildDisplayList();
-	void Render();
+    void Render();
 
 	bool IsDirty();
 	void SetDirty(bool dirty);
@@ -66,10 +74,18 @@ public:
 	void AddBlockByWorldPosition(const Vector3& blockPosition, BlockType type);
 	Vector3 GetBlockPositionByWorldPosition(const Vector3& worldPosition) const;
 	BlockType GetBlockTypeByWorldPosition(const Vector3& worldPosition) const;
-	Vector3 ValidatePhysicalPosition(const Vector3& position) const;
+	Vector3 ValidatePhysicalPosition(const Vector3& position) const;        
+
+    void CopyBlocks(BlockType*** blockBuffer) const;
+
+    BlockType*** GetBlocks() const
+    {
+        return m_blocks;
+    }
+
 
 private:
-	void CreateDisplayList(size_t sizeOfDisplayList);
+    void CreateDisplayList(size_t sizeOfDisplayList);
 	void FinishDisplayList();
 	bool AddBlockToRenderList(BlockType type, const BlockRenderVO& blockRenderVO);
 	void RemoveBlock(const Vector3& position);
@@ -78,29 +94,29 @@ private:
 	bool IsBlockVisible(uint32_t iX, uint32_t iY, uint32_t iZ, BlockFaceVisibiltyVO* &pFaceVO );
 	Vec3i GetLocalBlockPositionByWorldPosition(const Vector3& blockWorldPosition) const;
 	Vector3 LocalPositionToGlobalPosition(const Vec3i& localPosition) const;
+
     void CreateTrees();
+    void BlockListUpdated(const BlockChangeData* data);
 
+private:    
+    bool m_bIsDirty             = false;
+    bool m_bNeighbourUpdate     = false;
+    uint32_t m_displayListSize  = 0;
+    void* m_pDispList           = nullptr;
 
+    uint32_t m_amountOfBlocks   = 0;
+    uint32_t m_amountOfFaces    = 0;
 
-private:
-    bool m_isDirty;
-	bool m_bNeighbourUpdate = false;
-    uint32_t m_displayListSize = 0;
-    void* m_pDispList = nullptr;
+    Vector3 m_centerPosition;
 
-    uint32_t m_amountOfBlocks = 0;
-    uint32_t m_amountOfFaces = 0;
-
-	Vector3* m_pCenterPosition;
-
-	BlockType*** m_pBlocks;
+    BlockType*** m_blocks;
 	std::map<BlockType, std::vector<const BlockRenderVO*> > m_mBlockRenderList;
 	class GameWorld* m_pWorldManager;
 
-    Chunk* m_pChunkLeft = nullptr;
-    Chunk* m_pChunkRight = nullptr;
-    Chunk* m_pChunkFront = nullptr;
-    Chunk* m_pChunkBack = nullptr;
+    Chunk* m_pChunkLeft         = nullptr;
+    Chunk* m_pChunkRight        = nullptr;
+    Chunk* m_pChunkFront        = nullptr;
+    Chunk* m_pChunkBack         = nullptr;
 };
 
 

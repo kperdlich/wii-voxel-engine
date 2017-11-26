@@ -33,7 +33,6 @@ public:
 	double GetZ() const;
 	void SetZ(double z);
 
-
 	static Vector3 Forward();
 	static Vector3 Backward();
 	static Vector3 Left();

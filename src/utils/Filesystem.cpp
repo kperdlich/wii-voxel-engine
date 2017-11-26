@@ -19,8 +19,9 @@
 
 
 #include <fat.h>
+#include <dirent.h>
+#include <sys/unistd.h>
 #include <iostream>
-#include <fstream>
 #include <assert.h>
 
 #include "Filesystem.h"
@@ -30,4 +31,29 @@
 void FileSystem::Init()
 {
     assert(fatInitDefault());
+}
+
+bool FileSystem::CreateDirectory(const std::string& directoryPath)
+{
+    if (!directoryPath.empty())
+    {
+        return (mkdir(directoryPath.c_str(), ACCESSPERMS) == 0);
+    }
+
+    return false;
+}
+
+bool FileSystem::DirectoryExist(const std::string& directoryPath)
+{
+    /*if( !directoryPath.empty() )
+    {
+        if( access(directoryPath.c_str(), 0) == 0 )
+        {
+            struct stat status;
+            stat( directoryPath.c_str(), &status );
+            if( status.st_mode & S_IFDIR )
+                return true;
+        }
+    }*/
+    return false;
 }

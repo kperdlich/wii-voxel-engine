@@ -41,11 +41,6 @@ void MasterRenderer::SetGraphicsMode(bool bTexturemode, bool bNormalMode)
         GX_SetTevOp(GX_TEVSTAGE0, GX_PASSCLR);
 }
 
-void MasterRenderer::LoadTexture(const Texture& texture, uint8_t textureMapSlot /*= GX_TEXMAP0*/)
-{
-   GX_LoadTexObj(texture.GetTextureObject(), textureMapSlot);
-}
-
 
 // GRRLIB stuff ..
 extern  GRRLIB_drawSettings  GRRLIB_Settings;

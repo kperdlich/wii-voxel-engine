@@ -20,8 +20,10 @@
 #ifndef _TEXTURE_H_
 #define _TEXTURE_H_
 
+#include <gccore.h>
 #include "../core/grrlib.h"
 #include "BasicTexture.h"
+
 
 
 class Texture : public BasicTexture
@@ -36,6 +38,8 @@ public:
     void Unload() override;
 
     static Texture* Create(const uint8_t* textureData, uint32_t textureSize);
+
+    void Bind(uint8_t textureMapSlot = GX_TEXMAP0) const;
 
     uint32_t GetWidth() const override;
     uint32_t GetHeight() const override;

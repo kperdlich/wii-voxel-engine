@@ -20,14 +20,15 @@
 #ifndef FILESYSTEM_H
 #define FILESYSTEM_H
 
+#include <fstream>
+#include <string>
 
 class FileSystem
 {
 public:
-
     static void Init();
-    static void Test();
-
+    static bool CreateDirectory(const std::string& directoryPath);
+    static bool DirectoryExist(const std::string& directoryPath);
 
 };
 

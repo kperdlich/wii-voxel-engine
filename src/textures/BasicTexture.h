@@ -24,11 +24,11 @@
 #include "../core/grrlib.h"
 #include "../utils/ColorHelper.h"
 
-typedef struct
+struct TextureLoadingData
 {
     const uint8_t* textureData;
     uint32_t textureSize;
-} TextureLoadingData;
+};
 
 class BasicTexture : public IDrawable {
 public:

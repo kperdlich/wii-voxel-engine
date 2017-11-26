@@ -92,8 +92,12 @@ void Engine::End()
 
 void Engine::Init()
 {    
+    SYS_SetResetCallback([]() { Engine::Get().End(); });
+    SYS_SetPowerCallback([]() { Engine::Get().End(); });
+
     FileSystem::Init();
     Debug::GetInstance().Init();
+    ThreadPool::Init();
 
     LOG("****** %s %s ******", GAME_NAME, BUILD_VERSION);
 

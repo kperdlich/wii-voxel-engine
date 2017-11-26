@@ -26,13 +26,13 @@
 #include "Frustrum.h"
 #include "../renderer/MasterRenderer.h"
 #include "../utils/Debug.h"
-
+#include "../utils/Filesystem.h"
 
 
 GameWorld::GameWorld()
 {    
     m_blockManager = new BlockManager();
-	m_blockManager->LoadBlocks();
+	m_blockManager->LoadBlocks();    
 
     srand (time(nullptr));
     m_pNoise = new PerlinNoise(.25, .15625, 1.5, 6.0, rand());    
@@ -41,13 +41,12 @@ GameWorld::GameWorld()
 GameWorld::~GameWorld()
 {
     LOG("Destroy world");
-
-    for (auto chunkEntry : m_ChunkMap)
+    for (auto chunkEntry : m_chunkMap)
 	{
-		delete chunkEntry.first;
+        //delete chunkEntry.first;
 		delete chunkEntry.second;
 	}
-    m_ChunkMap.clear();
+    m_chunkMap.clear();    
 
 	m_blockManager->UnloadBlocks();
 	delete m_blockManager;
@@ -64,18 +63,18 @@ void GameWorld::GenerateWorld()
 		for ( uint32_t z = 0; z < CHUNK_AMOUNT_Z; z++)
 		{
             auto pChunk = new Chunk(*this);
-			auto pPosition = new Vector3((CHUNK_BLOCK_SIZE_X * x) + (CHUNK_BLOCK_SIZE_X / 2), CHUNK_BLOCK_SIZE_Y / 2, (CHUNK_BLOCK_SIZE_Z * z) + (CHUNK_BLOCK_SIZE_Z / 2));
-            m_ChunkMap.insert(std::pair<Vector3*, Chunk*>( pPosition, pChunk ));
-			pChunk->Init( *pPosition );
+            Vector3 position((CHUNK_BLOCK_SIZE_X * x) + (CHUNK_BLOCK_SIZE_X / 2), CHUNK_BLOCK_SIZE_Y / 2, (CHUNK_BLOCK_SIZE_Z * z) + (CHUNK_BLOCK_SIZE_Z / 2));
+            m_chunkMap.insert(std::pair<Vector3, Chunk*>(position, pChunk ));
+            pChunk->Init( position );
 		}
 	}
 
-    for (auto chunkEntry : m_ChunkMap)
+    for (auto& chunkEntry : m_chunkMap)
 	{
 		chunkEntry.second->UpdateChunkNeighbors();
-	}
+    }
 
-      LOG("World created with %d chunks", m_ChunkMap.size());
+    LOG("World created with %d chunks", m_chunkMap.size());
 }
 
 
@@ -85,10 +84,10 @@ void GameWorld::Draw()
 
     //Frustrum::Instance().CalculateFrustum();
 
-    for( auto& chunkEntry : m_ChunkMap)
+    for( auto& chunkEntry : m_chunkMap)
 	{
-        auto& chunk = chunkEntry.second;
-		auto chunkPosition = chunk->GetCenterPosition();		
+        Chunk* chunk = chunkEntry.second;
+        auto& chunkPosition = chunk->GetCenterPosition();
 
         if ( ChunkInFov(chunkPosition, playerPosition, CHUNK_PLAYER_FOV) )
         {
@@ -97,7 +96,6 @@ void GameWorld::Draw()
                 chunk->RebuildDisplayList();
             }
             chunk->Render();
-
         }
         else
         {
@@ -121,8 +119,8 @@ BlockManager& GameWorld::GetBlockManager()
 
 Chunk* GameWorld::GetChunkAt(const Vector3& centerPosition) const
 {
-    auto chunkIt = m_ChunkMap.find(&centerPosition);
-    if (chunkIt != m_ChunkMap.end())
+    auto chunkIt = m_chunkMap.find(centerPosition);
+    if (chunkIt != m_chunkMap.end())
 	{
 		return chunkIt->second;
 	}
@@ -201,7 +199,7 @@ Vector3 GameWorld::GetNewPlayerPosition( const Vector3& playerWorldPosition )
 		return pChunk->ValidatePhysicalPosition(playerWorldPosition);
 	}
 
-	return playerWorldPosition;
+    return playerWorldPosition;
 }
 
 void GameWorld::DrawFocusOnSelectedCube()
@@ -218,5 +216,3 @@ const PerlinNoise& GameWorld::GetNoise() const
 {
 	return *m_pNoise;
 }
-
-
