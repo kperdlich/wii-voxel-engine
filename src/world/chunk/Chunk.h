@@ -55,6 +55,7 @@ public:
     virtual ~Chunk();
 
     void Init(const Vector3& position);
+    void Clear();
 	void RebuildDisplayList();
     void Render();
 

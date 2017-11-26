@@ -33,19 +33,7 @@ Chunk::Chunk(class GameWorld& gameWorld) : m_bIsDirty(true)
 
 Chunk::~Chunk()
 {
-	DeleteDisplayList();
-	ClearBlockRenderList();
-
-	for (int x = 0; x < CHUNK_SIZE_X; ++x)
-	{
-		for (int y = 0; y < CHUNK_SIZE_Y; ++y)
-		{
-            delete [] m_blocks[x][y];
-		}
-
-        delete [] m_blocks[x];
-	}
-    delete [] m_blocks;
+    Clear();
 }
 
 void Chunk::Init(const Vector3& position)
@@ -100,6 +88,23 @@ void Chunk::Init(const Vector3& position)
 	}
 
     CreateTrees();
+}
+
+void Chunk::Clear()
+{
+    DeleteDisplayList();
+    ClearBlockRenderList();
+
+    for (int x = 0; x < CHUNK_SIZE_X; ++x)
+    {
+        for (int y = 0; y < CHUNK_SIZE_Y; ++y)
+        {
+            delete [] m_blocks[x][y];
+        }
+
+        delete [] m_blocks[x];
+    }
+    delete [] m_blocks;
 }
 
 void Chunk::CreateTrees()
@@ -474,7 +479,7 @@ void Chunk::RemoveBlockByWorldPosition(const Vector3& blockPosition)
     if ( m_blocks[vec.m_x][vec.m_y][vec.m_z] != BlockType::AIR)
     {
         m_blocks[vec.m_x][vec.m_y][vec.m_z] = BlockType::AIR;
-        BlockListUpdated( new BlockChangeData { BlockType::AIR, vec });
+        BlockListUpdated( new BlockChangeData { BlockType::AIR, vec, m_centerPosition });
     }
 }
 
@@ -485,14 +490,15 @@ void Chunk::AddBlockByWorldPosition(const Vector3& blockPosition, BlockType type
     if ( m_blocks[vec.m_x][vec.m_y][vec.m_z] == BlockType::AIR)
 	{
          m_blocks[vec.m_x][vec.m_y][vec.m_z] = type;
-         BlockListUpdated( new BlockChangeData { type, vec } );
+         BlockListUpdated( new BlockChangeData { type, vec, m_centerPosition } );
 	}
 }
 
 void Chunk::BlockListUpdated(const BlockChangeData* data)
 {
     m_bIsDirty = true;
-    ChunkSerializer::Serialize(*this, data);
+    //ChunkSerializer::Serialize(*this, data);
+    ChunkSerializer::Deserialize("World/156_4_132.dat", nullptr);
 }
 
 Vec3i Chunk::GetLocalBlockPositionByWorldPosition(const Vector3& blockWorldPosition) const

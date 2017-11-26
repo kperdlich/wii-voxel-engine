@@ -65,7 +65,10 @@ private:
 	void DrawFocusOnSelectedCube();
 
 private:	
-    std::map<const Vector3, class Chunk*, ChunkPositionComparer> m_chunkMap;
+    std::map<const Vector3, class Chunk*, ChunkPositionComparer> m_chunkMap; // todo remove
+
+    //std::map<const Vector3, class Chunk*, ChunkPositionComparer> m_chunkMap;
+    //std::map<const Vector3, class Chunk*, ChunkPositionComparer> m_chunkMap;
 
 	Vector3 m_SelectedBlockPosition;
     bool m_bHasSelectedBlock            = false;

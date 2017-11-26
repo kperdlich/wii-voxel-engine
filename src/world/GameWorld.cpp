@@ -72,7 +72,7 @@ void GameWorld::GenerateWorld()
     for (auto& chunkEntry : m_chunkMap)
 	{
 		chunkEntry.second->UpdateChunkNeighbors();
-    }
+    }    
 
     LOG("World created with %d chunks", m_chunkMap.size());
 }

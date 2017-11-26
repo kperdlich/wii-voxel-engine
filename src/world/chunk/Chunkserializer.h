@@ -28,16 +28,6 @@
 #include "../blocks/BlockManager.h"
 
 
-struct ChunkSerializeData
-{
-    BlockType*** BlockData = nullptr;
-    Vector3 ChunkCenter;
-    bool Available = true;
-    lwp_t Thread;
-
-    ChunkSerializeData(BlockType*** blockData = nullptr) : BlockData(blockData){ }
-};
-
 class ChunkSerializer
 {
 public:
@@ -48,13 +38,7 @@ public:
     static void Serialize(const class Chunk& chunk, const struct BlockChangeData* data);
     static void Deserialize(const std::string& filepath, Chunk* chunk);
 
-    std::vector<ChunkSerializeData>& GetChunkCash()
-    {
-        return m_serializeChunkCash;
-    }
-
 private:
-    std::vector<ChunkSerializeData> m_serializeChunkCash;
     bool m_bInitalized = false;
 };
 

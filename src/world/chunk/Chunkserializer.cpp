@@ -19,7 +19,8 @@
 
 #include <fstream>
 #include <sstream>
-#include<iostream>
+#include <iostream>
+#include <stdlib.h>
 #include "Chunkserializer.h"
 #include "../../utils/Filesystem.h"
 #include "../../utils/threadpool.h"
@@ -88,16 +89,47 @@ void ChunkSerializer::Serialize(const Chunk &chunk, const BlockChangeData* data)
 void ChunkSerializer::Deserialize(const std::string &filepath, Chunk *chunk)
 {
     // todo fill chunk from file
+    Vector3 chunkCenterPos;
     std::ifstream fstream;
     fstream.open(filepath);
     if (fstream.is_open())
     {
+        chunk->Clear();
         std::string line;
-        while (!fstream.eof())
+        if (fstream.good())
         {
+            std::getline(fstream, line, ';');
+            chunkCenterPos.SetX(std::atof(line.c_str()));
+            std::getline(fstream, line, ';');
+            chunkCenterPos.SetY(std::atof(line.c_str()));
             std::getline(fstream, line);
+            chunkCenterPos.SetZ(std::atof(line.c_str()));
 
+            LOG("Header %f %f %f", chunkCenterPos.GetX(), chunkCenterPos.GetY(), chunkCenterPos.GetZ());
+            chunk->Init(chunkCenterPos);
         }
+
+        auto blocks = chunk->GetBlocks();
+        size_t posX, posY, posZ, posValue;
+        while (std::getline(fstream, line))
+        {
+            posX        = line.find("X");
+            posY        = line.find("Y");
+            posZ        = line.find("Z");
+            posValue    = line.find(":");
+
+            uint32_t x      = std::atoi(line.substr(posX+1, posY - posX).c_str());
+            uint32_t y      = std::atoi(line.substr(posY+1, posZ - posY).c_str());
+            uint32_t z      = std::atoi(line.substr(posZ+1, posValue - posZ).c_str());
+            uint32_t value  = std::atoi(line.substr(posValue+1).c_str());
+
+            blocks[x][y][z] = value;
+
+            LOG("Line %s", line.c_str());
+            LOG("Line %d %d %d %d", x, y, z, value);
+        }
+
+        chunk->SetDirty(true);
     }
 
     fstream.close();
@@ -134,17 +166,16 @@ void* SerializeChunkData(void* data)
         search << ":";
 
         size_t pos;
-        while(file.good())
+        std::string line;
+        while(std::getline(file,line))
         {
-            std::string line;
-            std::getline(file,line); // get line from file
-            LOG("Line: %s : SearchLine %s", line.c_str(), search.str().c_str());
-            pos=line.find(search.str()); // search
-            if(pos!=std::string::npos) // string::npos is returned if string is not found
+            pos=line.find(search.str());
+            if(pos!=std::string::npos)
             {
                 search << static_cast<unsigned short>(blockData->Type);
                 search << '\n';
                 line.replace(pos, search.str().length(), search.str());
+                LOG("Replace File %s -> Line: %s : SearchLine %s", filename.str().c_str(), line.c_str(), search.str().c_str());
                 serialized = true;
                 break;                
             }
@@ -158,6 +189,7 @@ void* SerializeChunkData(void* data)
             stream << "X" << blockData->BlockPosition.m_x << "Y" << blockData->BlockPosition.m_y << "Z" << blockData->BlockPosition.m_z << ":" << static_cast<unsigned short>(blockData->Type) << '\n';
             stream.flush();
             stream.close();
+            LOG("Add Line into file %s", filename.str().c_str());
         }
     }
     else
@@ -169,6 +201,7 @@ void* SerializeChunkData(void* data)
 
         stream.flush();
         stream.close();
+        LOG("Create File %s", filename.str().c_str());
     }
 
     thread->CleanUp<BlockChangeData>();
