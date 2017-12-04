@@ -37,7 +37,7 @@ SOURCES		:=	src \
  				src/gfx GRRLIB_addon
 DATA		:=	data \
 				fonts \
-				sprites
+				assets
 INCLUDES	:=
 
 #---------------------------------------------------------------------------------
