@@ -34,9 +34,10 @@ public:
     ChunkSerializer();
     ~ChunkSerializer();
 
-    void Init();
     static void Serialize(const class Chunk& chunk, const struct BlockChangeData* data);
-    static void Deserialize(const std::string& filepath, Chunk* chunk);
+    static void Deserialize(ChunkLoadingData* data);
+    static std::string GetFilePath(const Vector3& chunkPosition);
+
 
 private:
     bool m_bInitalized = false;

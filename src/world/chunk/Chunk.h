@@ -27,14 +27,14 @@
 #include "../../utils/Vector3.h"
 
 #define CHUNK_SIZE_X 16
-#define CHUNK_SIZE_Y 16
+#define CHUNK_SIZE_Y 128
 #define CHUNK_SIZE_Z 16
 
 #define CHUNK_BLOCK_SIZE_X (BLOCK_SIZE * CHUNK_SIZE_X)
 #define CHUNK_BLOCK_SIZE_Y (BLOCK_SIZE * CHUNK_SIZE_Y)
 #define CHUNK_BLOCK_SIZE_Z (BLOCK_SIZE * CHUNK_SIZE_Z)
 
-#define STONE_LEVEL 2
+#define STONE_LEVEL 50
 #define TREE_HIGHT 6
 
 struct Vec3i {
@@ -54,7 +54,8 @@ public:
     Chunk(class GameWorld &gameWorld);
     virtual ~Chunk();
 
-    void Init(const Vector3& position);
+    void Init();
+    void Build();
     void Clear();
 	void RebuildDisplayList();
     void Render();
@@ -75,15 +76,15 @@ public:
 	void AddBlockByWorldPosition(const Vector3& blockPosition, BlockType type);
 	Vector3 GetBlockPositionByWorldPosition(const Vector3& worldPosition) const;
 	BlockType GetBlockTypeByWorldPosition(const Vector3& worldPosition) const;
-	Vector3 ValidatePhysicalPosition(const Vector3& position) const;        
-
-    void CopyBlocks(BlockType*** blockBuffer) const;
+    Vector3 GetPhysicalPosition(const Vector3& position) const;
 
     BlockType*** GetBlocks() const
     {
         return m_blocks;
     }
 
+
+    void SetCenterPosition(const Vector3 &centerPosition);
 
 private:
     void CreateDisplayList(size_t sizeOfDisplayList);

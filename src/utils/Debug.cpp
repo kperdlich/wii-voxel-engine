@@ -25,7 +25,7 @@ void Debug::Init()
 }
 
 void Debug::Log(const char* format, ...)
-{    
+{
     va_list args;
     va_start(args, format);
 
@@ -34,7 +34,7 @@ void Debug::Log(const char* format, ...)
 
     va_end(args);
 
-    m_file << buffer << std::endl;    
+    m_file << buffer << std::endl;
 }
 
 void Debug::Release()

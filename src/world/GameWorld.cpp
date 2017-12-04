@@ -27,64 +27,71 @@
 #include "../renderer/MasterRenderer.h"
 #include "../utils/Debug.h"
 #include "../utils/Filesystem.h"
+#include "chunk/chunkserializer.h"
 
 
 GameWorld::GameWorld()
 {    
     m_blockManager = new BlockManager();
-	m_blockManager->LoadBlocks();    
+    m_blockManager->LoadBlocks();
+
+    m_chunkLoader = new ChunkLoader();
 
     srand (time(nullptr));
-    m_pNoise = new PerlinNoise(.25, .15625, 1.5, 6.0, rand());    
+    m_pNoise = new PerlinNoise(.25, .1, .5, 6.0, rand());
 }
 
 GameWorld::~GameWorld()
 {
-    LOG("Destroy world");
-    for (auto chunkEntry : m_chunkMap)
-	{
-        //delete chunkEntry.first;
-		delete chunkEntry.second;
-	}
-    m_chunkMap.clear();    
+    LOG("Destroy world");    
+    m_chachedChunkMap.clear();
+
+    delete m_chunkLoader;
 
 	m_blockManager->UnloadBlocks();
 	delete m_blockManager;
-	delete m_pNoise;
-
-    LOG("World successfully destroyed");
+	delete m_pNoise;    
 }
 
 void GameWorld::GenerateWorld()
 {
-    LOG("Create World");
-	for ( uint32_t x = 0; x < CHUNK_AMOUNT_X; x++)
+    auto& playerPosition = static_cast<Basic3DScene&>(Engine::Get().GetSceneHandler().GetCurrentScene()).GetEntityHandler().GetPlayer()->GetPosition();
+    m_chunkLoader->Init(playerPosition, this);   
+    /*for ( uint32_t x = 0; x < CHUNK_AMOUNT_X; x++)
 	{
 		for ( uint32_t z = 0; z < CHUNK_AMOUNT_Z; z++)
 		{
             auto pChunk = new Chunk(*this);
             Vector3 position((CHUNK_BLOCK_SIZE_X * x) + (CHUNK_BLOCK_SIZE_X / 2), CHUNK_BLOCK_SIZE_Y / 2, (CHUNK_BLOCK_SIZE_Z * z) + (CHUNK_BLOCK_SIZE_Z / 2));
-            m_chunkMap.insert(std::pair<Vector3, Chunk*>(position, pChunk ));
-            pChunk->Init( position );
-		}
-	}
+            m_chachedChunkMap.insert(std::pair<Vector3, Chunk*>(position, pChunk ));
+            pChunk->Init();
+            pChunk->Build(position);
+        }
+	}    
 
-    for (auto& chunkEntry : m_chunkMap)
+    for (auto& chunkEntry : m_chachedChunkMap)
 	{
 		chunkEntry.second->UpdateChunkNeighbors();
-    }    
-
-    LOG("World created with %d chunks", m_chunkMap.size());
+    }*/    
 }
 
 
 void GameWorld::Draw()
 {
     auto& playerPosition = static_cast<Basic3DScene&>(Engine::Get().GetSceneHandler().GetCurrentScene()).GetEntityHandler().GetPlayer()->GetPosition();
+    auto loadedChunks = m_chunkLoader->GetLoadedChunks();
+    for( auto& chunk : loadedChunks)
+    {        
+        if (chunk->IsDirty())
+        {             
+            chunk->RebuildDisplayList();            
+        }
+        chunk->Render();
+    }
+    m_chunkLoader->UpdateChunksBy(playerPosition);    
+    DrawFocusOnSelectedCube();
 
-    //Frustrum::Instance().CalculateFrustum();
-
-    for( auto& chunkEntry : m_chunkMap)
+    /*for( auto& chunkEntry : m_chachedChunkMap)
 	{
         Chunk* chunk = chunkEntry.second;
         auto& chunkPosition = chunk->GetCenterPosition();
@@ -101,9 +108,8 @@ void GameWorld::Draw()
         {
             chunk->DeleteDisplayList();
         }
-	}
-
-	DrawFocusOnSelectedCube();
+    }
+    DrawFocusOnSelectedCube();*/
 }
 
 bool GameWorld::ChunkInFov( const Vector3& chunkPosition, const Vector3& playerPosition, uint32_t fov)
@@ -119,27 +125,17 @@ BlockManager& GameWorld::GetBlockManager()
 
 Chunk* GameWorld::GetChunkAt(const Vector3& centerPosition) const
 {
-    auto chunkIt = m_chunkMap.find(centerPosition);
-    if (chunkIt != m_chunkMap.end())
-	{
-		return chunkIt->second;
-	}
-    return nullptr;
+    return m_chunkLoader->GetChunkFromCash(centerPosition);
 }
 
-Chunk* GameWorld::GetChunkByWorldPosition(const Vector3& worldPosition)
+Chunk* GameWorld::GetCashedChunkByWorldPosition(const Vector3& worldPosition)
 {
-	uint32_t x = worldPosition.GetX() / CHUNK_BLOCK_SIZE_X;
-	uint32_t z = worldPosition.GetZ() / CHUNK_BLOCK_SIZE_Z;
-
-	Vector3 chunkCenterPosition((x * CHUNK_BLOCK_SIZE_X) + (CHUNK_BLOCK_SIZE_X / 2), CHUNK_BLOCK_SIZE_Y / 2, (z * CHUNK_BLOCK_SIZE_Z) + (CHUNK_BLOCK_SIZE_Z / 2));
-
-	return GetChunkAt(chunkCenterPosition);
+    return m_chunkLoader->GetCashedChunkByWorldPosition(worldPosition);
 }
 
 void GameWorld::RemoveBlockByWorldPosition(const Vector3& blockPosition)
 {
-	auto pChunk = GetChunkByWorldPosition(blockPosition);
+    auto pChunk = GetCashedChunkByWorldPosition(blockPosition);
 	if ( pChunk )
 	{
 		pChunk->RemoveBlockByWorldPosition( blockPosition );
@@ -147,7 +143,7 @@ void GameWorld::RemoveBlockByWorldPosition(const Vector3& blockPosition)
 }
 void GameWorld::AddBlockAtWorldPosition(const Vector3& blockPosition, BlockType type)
 {
-	auto pChunk = GetChunkByWorldPosition(blockPosition);
+    auto pChunk = GetCashedChunkByWorldPosition(blockPosition);
 	if ( pChunk )
 	{
 		pChunk->AddBlockByWorldPosition(blockPosition, type );
@@ -156,7 +152,7 @@ void GameWorld::AddBlockAtWorldPosition(const Vector3& blockPosition, BlockType 
 
 void GameWorld::UpdateFocusedBlockByWorldPosition( const Vector3& blockPosition )
 {
-	auto pChunk = GetChunkByWorldPosition(blockPosition);
+    auto pChunk = GetCashedChunkByWorldPosition(blockPosition);
 	if ( pChunk )
 	{
 		m_SelectedBlockPosition = pChunk->GetBlockPositionByWorldPosition( blockPosition );
@@ -170,7 +166,7 @@ void GameWorld::UpdateFocusedBlockByWorldPosition( const Vector3& blockPosition 
 
 Vector3 GameWorld::GetBlockPositionByWorldPosition(const Vector3& worldPosition)
 {
-	auto pChunk = GetChunkByWorldPosition(worldPosition);
+    auto pChunk = GetCashedChunkByWorldPosition(worldPosition);
 	if ( pChunk )
 	{
 		return pChunk->GetBlockPositionByWorldPosition(worldPosition);
@@ -181,7 +177,7 @@ Vector3 GameWorld::GetBlockPositionByWorldPosition(const Vector3& worldPosition)
 
 BlockType GameWorld::GetBlockByWorldPosition(const Vector3& worldPosition)
 {
-	auto pChunk = GetChunkByWorldPosition(worldPosition);
+    auto pChunk = GetCashedChunkByWorldPosition(worldPosition);
 	if ( pChunk )
 	{
 		return pChunk->GetBlockTypeByWorldPosition(worldPosition);
@@ -190,13 +186,12 @@ BlockType GameWorld::GetBlockByWorldPosition(const Vector3& worldPosition)
 	return BlockType::AIR;
 }
 
-// todo replace param vector with floats
 Vector3 GameWorld::GetNewPlayerPosition( const Vector3& playerWorldPosition )
 {
-	auto pChunk = GetChunkByWorldPosition(playerWorldPosition);
+    auto pChunk = GetCashedChunkByWorldPosition(playerWorldPosition);
 	if ( pChunk )
-	{
-		return pChunk->ValidatePhysicalPosition(playerWorldPosition);
+    {
+        return pChunk->GetPhysicalPosition(playerWorldPosition);
 	}
 
     return playerWorldPosition;

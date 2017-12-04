@@ -63,7 +63,7 @@ void Engine::Start()
         PrintFps( 500, 25, m_pFontHandler->GetNativFontByID( DEFAULT_FONT_ID ), DEFAULT_FONT_SIZE, GRRLIB_YELLOW );
 
 #ifdef DEBUG
-        PrintGameVersion(0, 25, m_pFontHandler->GetNativFontByID( DEFAULT_FONT_ID ), DEFAULT_FONT_SIZE, GRRLIB_WHITE );       
+        PrintGameVersion(0, 25, m_pFontHandler->GetNativFontByID( DEFAULT_FONT_ID ), DEFAULT_FONT_SIZE, GRRLIB_WHITE );
 #endif
 
         GRRLIB_Render();
@@ -76,6 +76,9 @@ void Engine::Start()
     delete m_pSceneHandler;
     delete m_pInputHandler;
     delete m_pFontHandler;
+
+    ThreadPool::Join();
+    ThreadPool::CleanUp();
 
 	GRRLIB_Exit();
     LOG("Graphics System uninitialized");

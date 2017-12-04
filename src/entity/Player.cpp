@@ -22,7 +22,7 @@
 #include "../utils/Debug.h"
 
 #define ROTATION_SPEED 50.0f
-#define MOVEMENT_SPEED 5.0f
+#define MOVEMENT_SPEED 3.5f
 #define PITCH_MAX 90.0f
 
 
@@ -62,19 +62,20 @@ void CPlayer::Update(float deltaSeconds)
         Rotate( Vector3( 0, ROTATION_SPEED * deltaSeconds, 0 )); // left
 	}
 
-    float playerY = m_position.GetY();
+    double playerY = m_position.GetY();       
 
     Move(-(pad->GetNunchukAngleX()), -(pad->GetNunchukAngleY()), deltaSeconds);
 
 	// shity physics
     Vector3 blockPositionUnderPlayer(m_position.GetX() + BLOCK_SIZE_HALF, playerY, m_position.GetZ() + BLOCK_SIZE_HALF);
-	Vector3 newPosition = m_pWorld->GetNewPlayerPosition(blockPositionUnderPlayer);
-	m_position.SetY(newPosition.GetY() + (2 * BLOCK_SIZE));
+    Vector3 newPosition = m_pWorld->GetNewPlayerPosition(blockPositionUnderPlayer);
 
+	m_position.SetY(newPosition.GetY() + (2 * BLOCK_SIZE));
 
     Vector3 focusedBlockPos = MathHelper::CalculateNewWorldPositionByRotation(m_rotation,
                                 Vector3(m_position.GetX() + BLOCK_SIZE_HALF, m_position.GetY(), m_position.GetZ() + BLOCK_SIZE_HALF),
-                                -2*BLOCK_SIZE);
+                                -2*BLOCK_SIZE);    
+
 
 	m_pWorld->UpdateFocusedBlockByWorldPosition(focusedBlockPos);
 
@@ -102,15 +103,13 @@ void CPlayer::UpdateInventory()
 
 	if ( padButtonDown & WPAD_BUTTON_LEFT)
 	{
-
+        // todo implement
 	}
 
 	if ( padButtonDown & WPAD_BUTTON_RIGHT )
 	{
-
+        // todo implement
 	}
-
-
 }
 
 void CPlayer::Move(float x, float y, float deltaSeconds)

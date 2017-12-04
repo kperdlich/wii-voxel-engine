@@ -39,8 +39,9 @@ public:
 	static Vector3 CalculateNewWorldPositionByRotation( float rotation, const Vector3& currentWorldPosition, float direction );
 
 	static double Clamp(double value, double minValue, double maxValue);
-	inline static double Min(double value1, double value2 );
-	inline static double Max(double value1, double value2 );
+    static double Min(double value1, double value2 );
+    static double Max(double value1, double value2 );
+    static double Mod(double x, double y);
 };
 
 #endif /* _MATHHELPER_H_ */

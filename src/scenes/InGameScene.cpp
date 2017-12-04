@@ -46,9 +46,8 @@ void InGameScene::Load()
     m_uiElements.push_back( new Cursor( IGS_HUD_CROSSHAIR, Sprite::Create(Crosshair_png, Crosshair_png_size, IGS_HUD_CROSSHAIR)) );
 
     m_pGameWorld = new GameWorld();
-	m_pGameWorld->GenerateWorld();
-
     InitEntities();
+    m_pGameWorld->GenerateWorld();
 
     Basic3DScene::Load();
 }
@@ -90,8 +89,8 @@ void InGameScene::Draw()
 void InGameScene::InitEntities()
 {
     CPlayer* pPlayer = new CPlayer();
-	pPlayer->SetPosition(Vector3(10.0f, CHUNK_BLOCK_SIZE_Y, 10.0f));
-	pPlayer->SetRotation(Vector3(10.0f, 225.0f, .0f));
+    pPlayer->SetPosition(Vector3(10.0f, CHUNK_BLOCK_SIZE_Y, 10.0f));
+    pPlayer->SetRotation(Vector3(10.0f, 225.0f, .0f));
 	pPlayer->SetWorld(m_pGameWorld);
 	m_mainCamera->AttachTo(*pPlayer);
 	m_entityHandler->AddEntity(pPlayer);

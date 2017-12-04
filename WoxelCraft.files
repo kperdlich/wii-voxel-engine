@@ -157,6 +157,8 @@ src/world/chunk/Chunk.cpp
 src/world/chunk/Chunk.h
 src/world/chunk/Chunkserializer.cpp
 src/world/chunk/Chunkserializer.h
+src/world/chunk/chunkloader.cpp
+src/world/chunk/chunkloader.h
 src/world/hud/Hotbar.cpp
 src/world/hud/Hotbar.h
 src/world/hud/Hud.cpp

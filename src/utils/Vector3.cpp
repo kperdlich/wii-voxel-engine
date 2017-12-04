@@ -78,7 +78,7 @@ Vector3 Vector3::Left()
 
 Vector3 Vector3::Right()
 {
-	return Vector3( -1, 0, 0 );
+    return Vector3( -1, 0, 0 );
 }
 
 Vector3& Vector3::operator+=(const Vector3& vec)
@@ -105,7 +105,12 @@ Vector3& Vector3::operator+=(const Vector3& vec)
 	m_y += vec.m_y;
 	m_z += vec.m_z;
 
-	return *this;
+    return *this;
+}
+
+Vector3 operator-(const Vector3 &lvec, const Vector3 &rvec)
+{
+    return Vector3(lvec.m_x - rvec.m_x, lvec.m_y - rvec.m_y, lvec.m_z - rvec.m_z);
 }
 
 Vector3 operator+(const Vector3& lvec, const Vector3& rvec )

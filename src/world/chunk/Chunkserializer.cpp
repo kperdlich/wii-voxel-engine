@@ -26,50 +26,14 @@
 #include "../../utils/threadpool.h"
 #include "../../utils/Debug.h"
 
-void* SerializeChunkData(void* data);
+void* SerializeChunk(void* data);
+void* DeserializeChunk(void* data);
 
 ChunkSerializer::ChunkSerializer() {}
 
 ChunkSerializer::~ChunkSerializer()
 {
-    /*if (!m_bInitalized)
-        return;
 
-    for (auto& chunk : m_serializeChunkCash)
-    {
-        auto blockData = chunk.BlockData;
-
-        for (int x = 0; x < CHUNK_SIZE_X; ++x)
-        {
-            for (int y = 0; y < CHUNK_SIZE_Y; ++y)
-            {
-                delete [] blockData[x][y];
-            }
-
-            delete [] blockData[x];
-        }
-        delete [] blockData;
-    }*/
-}
-
-void ChunkSerializer::Init()
-{
-    /*LWP_MutexInit(&s_mutex, false);
-    for ( uint32_t i = 0; i < 14; i++)
-    {
-        BlockType*** blockData = new BlockType**[CHUNK_SIZE_X]();
-        for (uint32_t x = 0; x < CHUNK_SIZE_X; x++)
-        {
-            blockData[x] = new BlockType*[CHUNK_SIZE_Y]();
-            for (uint32_t y = 0; y < CHUNK_SIZE_Y; y++)
-            {
-                blockData[x][y] = new BlockType[CHUNK_SIZE_Z]();
-            }
-        }
-        m_serializeChunkCash.emplace_back( ChunkSerializeData{ blockData } );
-    }
-
-    m_bInitalized = true;*/
 }
 
 void ChunkSerializer::Serialize(const Chunk &chunk, const BlockChangeData* data)
@@ -78,17 +42,53 @@ void ChunkSerializer::Serialize(const Chunk &chunk, const BlockChangeData* data)
     if ( thread )
     {
         thread->Data = (void*)data;
-        thread->Create( SerializeChunkData, nullptr, 0, 120);
+        thread->Create( SerializeChunk, nullptr, 0, 128);
     }
     else
     {
+        // todo handle
         LOG("No free thread in pool");
     }
 }
 
-void ChunkSerializer::Deserialize(const std::string &filepath, Chunk *chunk)
+void ChunkSerializer::Deserialize(ChunkLoadingData* data)
 {
-    // todo fill chunk from file
+    Thread* thread = ThreadPool::GetThread();
+    if ( thread )
+    {
+        thread->Data = (void*) data;
+        thread->Create( DeserializeChunk, nullptr, 0, 128);
+    }
+    else
+    {
+        // todo handle
+        LOG("No free thread in pool");
+    }
+}
+
+std::string ChunkSerializer::GetFilePath(const Vector3& chunkPosition)
+{
+    std::ostringstream filename;
+    filename << "World/";
+    filename << chunkPosition.GetX();
+    filename << '_';
+    filename << chunkPosition.GetY();
+    filename << '_';
+    filename << chunkPosition.GetZ();
+    filename << ".dat";
+    return filename.str();
+}
+
+
+void* DeserializeChunk(void* data)
+{
+    auto thread = static_cast<Thread*>(data);
+    auto chunkLoadingData = static_cast<ChunkLoadingData*>(thread->Data);
+    auto chunk = chunkLoadingData->ChunkObj;
+    const auto& filepath = chunkLoadingData->Filepath;
+
+    uint32_t startTime = ticks_to_millisecs(gettime());
+    LWP_MutexLock(chunkLoadingData->Mutex);
     Vector3 chunkCenterPos;
     std::ifstream fstream;
     fstream.open(filepath);
@@ -105,8 +105,7 @@ void ChunkSerializer::Deserialize(const std::string &filepath, Chunk *chunk)
             std::getline(fstream, line);
             chunkCenterPos.SetZ(std::atof(line.c_str()));
 
-            LOG("Header %f %f %f", chunkCenterPos.GetX(), chunkCenterPos.GetY(), chunkCenterPos.GetZ());
-            chunk->Init(chunkCenterPos);
+            //LOG("Header %f %f %f", chunkCenterPos.GetX(), chunkCenterPos.GetY(), chunkCenterPos.GetZ());           
         }
 
         auto blocks = chunk->GetBlocks();
@@ -121,37 +120,34 @@ void ChunkSerializer::Deserialize(const std::string &filepath, Chunk *chunk)
             uint32_t x      = std::atoi(line.substr(posX+1, posY - posX).c_str());
             uint32_t y      = std::atoi(line.substr(posY+1, posZ - posY).c_str());
             uint32_t z      = std::atoi(line.substr(posZ+1, posValue - posZ).c_str());
-            uint32_t value  = std::atoi(line.substr(posValue+1).c_str());
+            uint16_t value  = std::atoi(line.substr(posValue+1).c_str());
 
-            blocks[x][y][z] = value;
-
-            LOG("Line %s", line.c_str());
-            LOG("Line %d %d %d %d", x, y, z, value);
-        }
-
-        chunk->SetDirty(true);
-    }
+            blocks[x][y][z] = BlockType(value);
+        }        
+    }    
 
     fstream.close();
+
+    startTime = ticks_to_millisecs(gettime()) - startTime;
+    //LOG("DeserializationTime: %d", startTime);
+
+    chunkLoadingData->LoadingDone = true;
+    LWP_MutexUnlock(chunkLoadingData->Mutex);
+
+    thread->Release();
+
+    return nullptr;
 }
 
-
-void* SerializeChunkData(void* data)
+void* SerializeChunk(void* data)
 {
     auto thread = static_cast<Thread*>(data);
     auto blockData = static_cast<const BlockChangeData*>(thread->Data);
 
-    std::ostringstream filename;
-    filename << "World/";
-    filename << blockData->ChunkPosition.GetX();
-    filename << '_';
-    filename << blockData->ChunkPosition.GetY();
-    filename << '_';
-    filename << blockData->ChunkPosition.GetZ();
-    filename << ".dat";
+    std::string filename = ChunkSerializer::GetFilePath(blockData->ChunkPosition);
 
     std::ifstream file;
-    file.open(filename.str());
+    file.open(filename);
     bool serialized = false;
 
     if (file.is_open())
@@ -175,7 +171,7 @@ void* SerializeChunkData(void* data)
                 search << static_cast<unsigned short>(blockData->Type);
                 search << '\n';
                 line.replace(pos, search.str().length(), search.str());
-                LOG("Replace File %s -> Line: %s : SearchLine %s", filename.str().c_str(), line.c_str(), search.str().c_str());
+                LOG("Replace File %s -> Line: %s : SearchLine %s", filename.c_str(), line.c_str(), search.str().c_str());
                 serialized = true;
                 break;                
             }
@@ -185,23 +181,23 @@ void* SerializeChunkData(void* data)
 
         if(!serialized)
         {
-            std::ofstream stream(filename.str(), std::ios_base::app | std::ios_base::out);
+            std::ofstream stream(filename, std::ios_base::app | std::ios_base::out);
             stream << "X" << blockData->BlockPosition.m_x << "Y" << blockData->BlockPosition.m_y << "Z" << blockData->BlockPosition.m_z << ":" << static_cast<unsigned short>(blockData->Type) << '\n';
             stream.flush();
             stream.close();
-            LOG("Add Line into file %s", filename.str().c_str());
+            LOG("Add Line into file %s", filename.c_str());
         }
     }
     else
     {        
-        std::ofstream stream(filename.str());
+        std::ofstream stream(filename);
 
         stream << blockData->ChunkPosition.GetX() << ';' << blockData->ChunkPosition.GetY() << ';' << blockData->ChunkPosition.GetZ() << '\n';
         stream << "X" << blockData->BlockPosition.m_x << "Y" << blockData->BlockPosition.m_y << "Z" << blockData->BlockPosition.m_z << ":" << static_cast<unsigned short>(blockData->Type) << '\n';
 
         stream.flush();
         stream.close();
-        LOG("Create File %s", filename.str().c_str());
+        LOG("Create File %s", filename.c_str());
     }
 
     thread->CleanUp<BlockChangeData>();

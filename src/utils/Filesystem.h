@@ -29,7 +29,7 @@ public:
     static void Init();
     static bool CreateDirectory(const std::string& directoryPath);
     static bool DirectoryExist(const std::string& directoryPath);
-
+    static bool FileExist(const std::string& filePath);
 };
 
 #endif // FILESYSTEM_H

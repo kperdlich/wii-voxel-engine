@@ -45,15 +45,13 @@ bool FileSystem::CreateDirectory(const std::string& directoryPath)
 
 bool FileSystem::DirectoryExist(const std::string& directoryPath)
 {
-    /*if( !directoryPath.empty() )
-    {
-        if( access(directoryPath.c_str(), 0) == 0 )
-        {
-            struct stat status;
-            stat( directoryPath.c_str(), &status );
-            if( status.st_mode & S_IFDIR )
-                return true;
-        }
-    }*/
+    // todo implement
     return false;
+}
+
+bool FileSystem::FileExist(const std::string &filePath)
+{
+    std::ifstream fstream;
+    fstream.open(filePath);
+    return fstream.is_open();
 }

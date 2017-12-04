@@ -27,9 +27,10 @@
 #include "../renderer/BlockRenderer.h"
 #include "../scenes/Basic3DScene.h"
 #include "../utils/MathHelper.h"
+#include "chunk/chunkloader.h"
 
-#define CHUNK_AMOUNT_X 20
-#define CHUNK_AMOUNT_Z 20
+#define CHUNK_AMOUNT_X 7
+#define CHUNK_AMOUNT_Z 7
 
 #define CHUNK_PLAYER_FOV 7 // how many chunks the player can see
 
@@ -50,7 +51,7 @@ public:
 
 	class BlockManager& GetBlockManager();
 	class Chunk* GetChunkAt(const Vector3& centerPosition) const;
-	class Chunk* GetChunkByWorldPosition(const Vector3& worldPosition);
+    class Chunk* GetCashedChunkByWorldPosition(const Vector3& worldPosition);
 	void RemoveBlockByWorldPosition(const Vector3& blockPosition);
 	void AddBlockAtWorldPosition(const Vector3& blockPosition, BlockType type);
 	void UpdateFocusedBlockByWorldPosition( const Vector3& blockPosition );
@@ -58,17 +59,16 @@ public:
 	Vector3 GetBlockPositionByWorldPosition(const Vector3& worldPosition);
 	Vector3 GetNewPlayerPosition( const Vector3& playerWorldPosition );   
 
-	const PerlinNoise& GetNoise() const;
+	const PerlinNoise& GetNoise() const;    
 
 private:
     bool ChunkInFov( const Vector3& chunkPosition, const Vector3& playerPosition, uint32_t fov);
 	void DrawFocusOnSelectedCube();
 
 private:	
-    std::map<const Vector3, class Chunk*, ChunkPositionComparer> m_chunkMap; // todo remove
+    std::map<const Vector3, class Chunk*, ChunkPositionComparer> m_chachedChunkMap;
 
-    //std::map<const Vector3, class Chunk*, ChunkPositionComparer> m_chunkMap;
-    //std::map<const Vector3, class Chunk*, ChunkPositionComparer> m_chunkMap;
+    class ChunkLoader* m_chunkLoader;
 
 	Vector3 m_SelectedBlockPosition;
     bool m_bHasSelectedBlock            = false;

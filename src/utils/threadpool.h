@@ -27,6 +27,7 @@
 
 static mutex_t s_mutex;
 
+
 struct Thread
 {
     lwp_t ThreadID;
@@ -67,7 +68,7 @@ public:
     }
 
     static Thread* GetThread()
-    {
+    {        
         LWP_MutexLock(s_mutex);
 
         for ( unsigned int i = 0; i < THREAD_POOL_SIZE; i++ )
@@ -84,6 +85,19 @@ public:
         return nullptr;
     }
 
+    static void CleanUp()
+    {
+        LWP_MutexDestroy(s_mutex);
+    }
+
+    static void Join()
+    {
+        for ( unsigned int i = 0; i < THREAD_POOL_SIZE; i++ )
+        {
+            if(!s_threads[i].Available)
+                LWP_JoinThread(s_threads[i].ThreadID, nullptr);
+        }
+    }
 
 };
 
