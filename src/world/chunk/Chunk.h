@@ -22,31 +22,11 @@
 
 #include <stdint.h>
 #include <string>
+#include "chunkdata.h"
 #include "../GameWorld.h"
 #include "../../renderer/BlockRenderHelper.h"
 #include "../../utils/Vector3.h"
 
-#define CHUNK_SIZE_X 16
-#define CHUNK_SIZE_Y 128
-#define CHUNK_SIZE_Z 16
-
-#define CHUNK_BLOCK_SIZE_X (BLOCK_SIZE * CHUNK_SIZE_X)
-#define CHUNK_BLOCK_SIZE_Y (BLOCK_SIZE * CHUNK_SIZE_Y)
-#define CHUNK_BLOCK_SIZE_Z (BLOCK_SIZE * CHUNK_SIZE_Z)
-
-#define STONE_LEVEL 50
-#define TREE_HIGHT 6
-
-struct Vec3i {
-	uint32_t m_x, m_y, m_z;
-};
-
-struct BlockChangeData
-{
-    BlockType Type;
-    Vec3i BlockPosition;
-    Vector3 ChunkPosition;
-};
 
 class Chunk {
 public:
@@ -98,7 +78,7 @@ private:
 	Vector3 LocalPositionToGlobalPosition(const Vec3i& localPosition) const;
 
     void CreateTrees();
-    void BlockListUpdated(const BlockChangeData* data);
+    void BlockListUpdated(const BlockChangeData &data);
 
 private:    
     bool m_bIsDirty             = false;

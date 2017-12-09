@@ -20,11 +20,17 @@
 #include <string>
 #include <algorithm>
 #include "chunkloader.h"
+#include "Chunk.h"
 #include "chunkserializer.h"
 #include "../../utils/Filesystem.h"
 #include "../../utils/Debug.h"
 
 ChunkLoader::ChunkLoader()
+{
+
+}
+
+ChunkLoader::~ChunkLoader()
 {
 
 }
@@ -52,12 +58,17 @@ void ChunkLoader::UpdateChunksBy(const Vector3 &position)
         UpdateLoadedChunkNeighbors();
     }
 
-    CopyLoadedChunks();
+    //CopyLoadedChunks();
 }
 
 Chunk* ChunkLoader::GetCashedChunkByWorldPosition(const Vector3& worldPosition)
 {
     return GetChunkFromCash(GetChunkPositionByWorldPosition(worldPosition));
+}
+
+void ChunkLoader::Serialize(const BlockChangeData& data)
+{
+    m_serializer.Serialize(data);
 }
 
  std::vector<Chunk *>::iterator ChunkLoader::GetCashedChunkIterator(const Vector3 &chunkPosition)
@@ -146,7 +157,7 @@ void ChunkLoader::LoadChunks(const Vector3 &chunkPosition)
             chunk->Build();
             chunk->SetDirty(true);
             std::string filename = ChunkSerializer::GetFilePath(position);
-            if ( FileSystem::FileExist(filename))
+            /*if ( FileSystem::FileExist(filename))
             {
                 ChunkLoadingData* chunkLoadingData = new ChunkLoadingData();
                 chunkLoadingData->ChunkObj = chunk;
@@ -154,12 +165,13 @@ void ChunkLoader::LoadChunks(const Vector3 &chunkPosition)
                 chunkLoadingData->LoadingDone = false;
                 LWP_MutexInit(&chunkLoadingData->Mutex, false);
                 m_chunkLoadingCash.push_back(chunkLoadingData);
-                ChunkSerializer::Deserialize(chunkLoadingData);
+                m_serializer->Deserialize(chunkLoadingData);
+                //ChunkSerializer::Deserialize(chunkLoadingData);
             }
             else
-            {
+            {*/
                 tmpChunkCash.push_back(chunk);
-            }
+            //}
         }
     }
 
@@ -176,7 +188,7 @@ void ChunkLoader::LoadChunks(const Vector3 &chunkPosition)
 
 void ChunkLoader::CopyLoadedChunks()
 {
-    if(m_chunkLoadingCash.empty())
+    /*if(m_chunkLoadingCash.empty())
         return;
 
     for (auto iter = m_chunkLoadingCash.begin(); iter != m_chunkLoadingCash.end(); )
@@ -191,12 +203,7 @@ void ChunkLoader::CopyLoadedChunks()
                 data->ChunkObj->SetDirty(true);
                 m_loadedChunks.push_back(data->ChunkObj);
                 LWP_MutexUnlock(data->Mutex);
-                LWP_MutexDestroy(data->Mutex);
-
-                /*double x = data->ChunkObj->GetCenterPosition().GetX();
-                double y = data->ChunkObj->GetCenterPosition().GetY();
-                double z = data->ChunkObj->GetCenterPosition().GetZ();*/
-                //LOG("Copyied %f %f %f", x, y, z);
+                LWP_MutexDestroy(data->Mutex);               
 
                 delete data;
                 iter = m_chunkLoadingCash.erase(iter);
@@ -216,7 +223,7 @@ void ChunkLoader::CopyLoadedChunks()
     }
 
     if(m_chunkLoadingCash.empty())
-        UpdateLoadedChunkNeighbors();
+        UpdateLoadedChunkNeighbors();*/
 }
 
 Chunk* ChunkLoader::GetChunkFromCash(const Vector3 &chunkPosition)

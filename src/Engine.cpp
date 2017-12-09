@@ -77,8 +77,7 @@ void Engine::Start()
     delete m_pInputHandler;
     delete m_pFontHandler;
 
-    ThreadPool::Join();
-    ThreadPool::CleanUp();
+    ThreadPool::Destroy();
 
 	GRRLIB_Exit();
     LOG("Graphics System uninitialized");

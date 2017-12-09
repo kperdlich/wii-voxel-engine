@@ -134,6 +134,7 @@ src/utils/GameHelper.cpp
 src/utils/GameHelper.h
 src/utils/MathHelper.cpp
 src/utils/MathHelper.h
+src/utils/SafeQueue.h
 src/utils/TileHelper.h
 src/utils/Vector3.cpp
 src/utils/Vector3.h
@@ -155,8 +156,12 @@ src/world/blocks/BlockManager.cpp
 src/world/blocks/BlockManager.h
 src/world/chunk/Chunk.cpp
 src/world/chunk/Chunk.h
+src/world/chunk/ChunkChangeData.h
 src/world/chunk/Chunkserializer.cpp
 src/world/chunk/Chunkserializer.h
+src/world/chunk/SerializationJob.cpp
+src/world/chunk/SerializationJob.h
+src/world/chunk/chunkdata.h
 src/world/chunk/chunkloader.cpp
 src/world/chunk/chunkloader.h
 src/world/hud/Hotbar.cpp

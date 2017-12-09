@@ -25,7 +25,6 @@
 #include "../commands/client/SwitchToMainMenuCommand.h"
 
 #include "../utils/Debug.h"
-#include "BlockCSS_png.h"
 #include "ClassicBackgroundSprite_png.h"
 #include "WoxelCraft_png.h"
 

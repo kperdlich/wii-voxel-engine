@@ -23,9 +23,8 @@
 #include <vector>
 #include <string>
 #include <gccore.h>
-#include "Chunk.h"
-#include "../../utils/Vector3.h"
-#include "../blocks/BlockManager.h"
+#include "chunkdata.h"
+#include "SerializationJob.h"
 
 
 class ChunkSerializer
@@ -34,13 +33,14 @@ public:
     ChunkSerializer();
     ~ChunkSerializer();
 
-    static void Serialize(const class Chunk& chunk, const struct BlockChangeData* data);
-    static void Deserialize(ChunkLoadingData* data);
+    void Serialize(const struct BlockChangeData& data);
+    void Deserialize(class ChunkLoadingData* data);
     static std::string GetFilePath(const Vector3& chunkPosition);
 
 
-private:
-    bool m_bInitalized = false;
+private:    
+    SerializationJob m_serializationJob;
+
 };
 
 #endif // CHUNKSERIALIZER_H

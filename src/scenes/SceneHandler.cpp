@@ -82,7 +82,7 @@ void SceneHandler::Update(float deltaSeconds)
 	{
 		m_bLoadNextScene = false;
 
-        if ( m_nextSceneIndex < m_scenes.size() && m_nextSceneIndex >= 0)
+        if ( m_nextSceneIndex < ((int32_t)m_scenes.size()) && m_nextSceneIndex >= 0)
 		{
             if ( m_currentSceneIndex > INVALID_SCENE )
 			{

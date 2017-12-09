@@ -25,36 +25,115 @@
 
 #define THREAD_POOL_SIZE 5
 
-static mutex_t s_mutex;
-
-
-struct Thread
+class Thread
 {
-    lwp_t ThreadID;
-    bool Available = true;
-    void* Data;
+public:
+    Thread()
+    {
+        LWP_MutexInit(&m_mutex, false);
+    }
 
     int Create(void* (*entry)(void *),void *stackbase,u32 stack_size,u8 prio)
     {
-        return LWP_CreateThread(&ThreadID, entry, this, stackbase, stack_size, prio);
+        return LWP_CreateThread(&m_threadID, entry, this, stackbase, stack_size, prio);
     }
 
-
-    template<class T>
-    void CleanUp()
+    bool Stop()
     {
-        delete (T*)Data;
+        Lock();
+        bool val = m_bStop;
+        Unlock();
+        return val;
+    }
+
+    void Lock()
+    {
+        LWP_MutexLock(m_mutex);
+    }
+
+    void Unlock()
+    {
+        LWP_MutexUnlock(m_mutex);
+    }
+
+    bool TryReserve()
+    {
+        bool bfound = false;
+        Lock();
+        if (m_bAvailable)
+        {
+            bfound = true;
+            m_bAvailable = false;
+        }
+        Unlock();
+        return bfound;
     }
 
     void Release()
-    {
-        LWP_MutexLock(s_mutex);
-        Available = true;
-        LWP_MutexUnlock(s_mutex);
+    {        
+        Lock();
+        bool available = m_bAvailable;
+        Unlock();
+
+        if (!available)
+        {
+            Lock();
+            m_bStop = true;
+            Unlock();
+
+            if ( IsSuspended() )
+            {
+                Resume();
+            }
+            LWP_JoinThread(m_threadID, nullptr);
+
+            Lock();
+            m_bAvailable = true;
+            m_bStop = false;
+            Unlock();
+        }
     }
 
+    void Destroy()
+    {
+        Release();
+        LWP_MutexDestroy(m_mutex);
+    }
+
+    bool IsSuspended()
+    {
+        return LWP_ThreadIsSuspended(m_threadID);
+    }
+
+    void Resume()
+    {
+        LWP_ResumeThread(m_threadID);
+    }
+
+    void Suspend()
+    {
+        LWP_SuspendThread(m_threadID);
+    }
+
+    void* Data()
+    {
+        return m_data;
+    }
+
+    void SetData(void* data)
+    {
+        m_data = data;
+    }
+
+private:
+    lwp_t m_threadID;
+    bool m_bAvailable = true;
+    bool m_bStop = false;
+    void* m_data = nullptr;
+    mutex_t m_mutex;
 };
 
+static lwpq_t s_thread_queue;
 static Thread s_threads[THREAD_POOL_SIZE];
 
 class ThreadPool
@@ -63,40 +142,36 @@ class ThreadPool
 public:
 
     static void Init()
-    {
-         LWP_MutexInit(&s_mutex, false);
+    {         
+         LWP_InitQueue(&s_thread_queue);
     }
 
     static Thread* GetThread()
-    {        
-        LWP_MutexLock(s_mutex);
-
+    {
         for ( unsigned int i = 0; i < THREAD_POOL_SIZE; i++ )
         {
-            if (s_threads[i].Available)
+            Thread& thread = s_threads[i];
+            if(thread.TryReserve())
             {
-                s_threads[i].Available = false;
-                LWP_MutexUnlock(s_mutex);
-                return &s_threads[i];
+                return &thread;
             }
         }
-
-        LWP_MutexUnlock(s_mutex);
         return nullptr;
     }
 
-    static void CleanUp()
-    {
-        LWP_MutexDestroy(s_mutex);
-    }
-
-    static void Join()
+    static void Destroy()
     {
         for ( unsigned int i = 0; i < THREAD_POOL_SIZE; i++ )
         {
-            if(!s_threads[i].Available)
-                LWP_JoinThread(s_threads[i].ThreadID, nullptr);
+            s_threads[i].Destroy();
         }
+
+        LWP_CloseQueue(s_thread_queue);
+    }
+
+    static const lwpq_t& GetThreadQueue()
+    {
+        return s_thread_queue;
     }
 
 };

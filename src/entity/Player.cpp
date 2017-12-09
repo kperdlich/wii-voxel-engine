@@ -68,7 +68,7 @@ void CPlayer::Update(float deltaSeconds)
 
 	// shity physics
     Vector3 blockPositionUnderPlayer(m_position.GetX() + BLOCK_SIZE_HALF, playerY, m_position.GetZ() + BLOCK_SIZE_HALF);
-    Vector3 newPosition = m_pWorld->GetNewPlayerPosition(blockPositionUnderPlayer);
+    Vector3 newPosition = m_pWorld->GetPhysicalPlayerPosition(blockPositionUnderPlayer);
 
 	m_position.SetY(newPosition.GetY() + (2 * BLOCK_SIZE));
 

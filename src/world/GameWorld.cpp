@@ -28,14 +28,13 @@
 #include "../utils/Debug.h"
 #include "../utils/Filesystem.h"
 #include "chunk/chunkserializer.h"
+#include "chunk/Chunk.h"
 
 
 GameWorld::GameWorld()
 {    
     m_blockManager = new BlockManager();
-    m_blockManager->LoadBlocks();
-
-    m_chunkLoader = new ChunkLoader();
+    m_blockManager->LoadBlocks();    
 
     srand (time(nullptr));
     m_pNoise = new PerlinNoise(.25, .1, .5, 6.0, rand());
@@ -43,11 +42,6 @@ GameWorld::GameWorld()
 
 GameWorld::~GameWorld()
 {
-    LOG("Destroy world");    
-    m_chachedChunkMap.clear();
-
-    delete m_chunkLoader;
-
 	m_blockManager->UnloadBlocks();
 	delete m_blockManager;
 	delete m_pNoise;    
@@ -56,30 +50,14 @@ GameWorld::~GameWorld()
 void GameWorld::GenerateWorld()
 {
     auto& playerPosition = static_cast<Basic3DScene&>(Engine::Get().GetSceneHandler().GetCurrentScene()).GetEntityHandler().GetPlayer()->GetPosition();
-    m_chunkLoader->Init(playerPosition, this);   
-    /*for ( uint32_t x = 0; x < CHUNK_AMOUNT_X; x++)
-	{
-		for ( uint32_t z = 0; z < CHUNK_AMOUNT_Z; z++)
-		{
-            auto pChunk = new Chunk(*this);
-            Vector3 position((CHUNK_BLOCK_SIZE_X * x) + (CHUNK_BLOCK_SIZE_X / 2), CHUNK_BLOCK_SIZE_Y / 2, (CHUNK_BLOCK_SIZE_Z * z) + (CHUNK_BLOCK_SIZE_Z / 2));
-            m_chachedChunkMap.insert(std::pair<Vector3, Chunk*>(position, pChunk ));
-            pChunk->Init();
-            pChunk->Build(position);
-        }
-	}    
-
-    for (auto& chunkEntry : m_chachedChunkMap)
-	{
-		chunkEntry.second->UpdateChunkNeighbors();
-    }*/    
+    m_chunkLoader.Init(playerPosition, this);
 }
 
 
 void GameWorld::Draw()
 {
     auto& playerPosition = static_cast<Basic3DScene&>(Engine::Get().GetSceneHandler().GetCurrentScene()).GetEntityHandler().GetPlayer()->GetPosition();
-    auto loadedChunks = m_chunkLoader->GetLoadedChunks();
+    auto loadedChunks = m_chunkLoader.GetLoadedChunks();
     for( auto& chunk : loadedChunks)
     {        
         if (chunk->IsDirty())
@@ -88,34 +66,8 @@ void GameWorld::Draw()
         }
         chunk->Render();
     }
-    m_chunkLoader->UpdateChunksBy(playerPosition);    
+    m_chunkLoader.UpdateChunksBy(playerPosition);
     DrawFocusOnSelectedCube();
-
-    /*for( auto& chunkEntry : m_chachedChunkMap)
-	{
-        Chunk* chunk = chunkEntry.second;
-        auto& chunkPosition = chunk->GetCenterPosition();
-
-        if ( ChunkInFov(chunkPosition, playerPosition, CHUNK_PLAYER_FOV) )
-        {
-            if ( chunk->IsDirty() )
-            {
-                chunk->RebuildDisplayList();
-            }
-            chunk->Render();
-        }
-        else
-        {
-            chunk->DeleteDisplayList();
-        }
-    }
-    DrawFocusOnSelectedCube();*/
-}
-
-bool GameWorld::ChunkInFov( const Vector3& chunkPosition, const Vector3& playerPosition, uint32_t fov)
-{
-	return (std::abs(chunkPosition.GetX() - playerPosition.GetX()) < CHUNK_BLOCK_SIZE_X * fov) &&
-			(std::abs(chunkPosition.GetZ() - playerPosition.GetZ()) < CHUNK_BLOCK_SIZE_Z * fov);
 }
 
 BlockManager& GameWorld::GetBlockManager()
@@ -123,14 +75,14 @@ BlockManager& GameWorld::GetBlockManager()
 	return *m_blockManager;
 }
 
-Chunk* GameWorld::GetChunkAt(const Vector3& centerPosition) const
+Chunk* GameWorld::GetChunkAt(const Vector3& centerPosition)
 {
-    return m_chunkLoader->GetChunkFromCash(centerPosition);
+    return m_chunkLoader.GetChunkFromCash(centerPosition);
 }
 
 Chunk* GameWorld::GetCashedChunkByWorldPosition(const Vector3& worldPosition)
 {
-    return m_chunkLoader->GetCashedChunkByWorldPosition(worldPosition);
+    return m_chunkLoader.GetCashedChunkByWorldPosition(worldPosition);
 }
 
 void GameWorld::RemoveBlockByWorldPosition(const Vector3& blockPosition)
@@ -186,7 +138,7 @@ BlockType GameWorld::GetBlockByWorldPosition(const Vector3& worldPosition)
 	return BlockType::AIR;
 }
 
-Vector3 GameWorld::GetNewPlayerPosition( const Vector3& playerWorldPosition )
+Vector3 GameWorld::GetPhysicalPlayerPosition( const Vector3& playerWorldPosition )
 {
     auto pChunk = GetCashedChunkByWorldPosition(playerWorldPosition);
 	if ( pChunk )
@@ -209,5 +161,10 @@ void GameWorld::DrawFocusOnSelectedCube()
 
 const PerlinNoise& GameWorld::GetNoise() const
 {
-	return *m_pNoise;
+    return *m_pNoise;
+}
+
+void GameWorld::Serialize(const BlockChangeData& data)
+{
+    m_chunkLoader.Serialize(data);
 }

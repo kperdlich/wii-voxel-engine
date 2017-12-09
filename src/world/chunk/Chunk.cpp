@@ -479,7 +479,7 @@ void Chunk::RemoveBlockByWorldPosition(const Vector3& blockPosition)
     if ( m_blocks[vec.m_x][vec.m_y][vec.m_z] != BlockType::AIR)
     {
         m_blocks[vec.m_x][vec.m_y][vec.m_z] = BlockType::AIR;
-        BlockListUpdated( new BlockChangeData { BlockType::AIR, vec, m_centerPosition });
+        BlockListUpdated( BlockChangeData { BlockType::AIR, vec, m_centerPosition });
     }
 }
 
@@ -490,14 +490,14 @@ void Chunk::AddBlockByWorldPosition(const Vector3& blockPosition, BlockType type
     if ( m_blocks[vec.m_x][vec.m_y][vec.m_z] == BlockType::AIR)
 	{
          m_blocks[vec.m_x][vec.m_y][vec.m_z] = type;
-         BlockListUpdated( new BlockChangeData { type, vec, m_centerPosition } );
+         BlockListUpdated( BlockChangeData { type, vec, m_centerPosition } );
 	}
 }
 
-void Chunk::BlockListUpdated(const BlockChangeData* data)
+void Chunk::BlockListUpdated(const BlockChangeData& data)
 {
     m_bIsDirty = true;
-    ChunkSerializer::Serialize(*this, data);
+    m_pWorldManager->Serialize(data);
 }
 
 void Chunk::SetCenterPosition(const Vector3 &centerPosition)

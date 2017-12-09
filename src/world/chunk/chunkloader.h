@@ -21,31 +21,28 @@
 #define CHUNKLOADER_H
 
 #include <vector>
-#include "../GameWorld.h"
-#include "Chunk.h"
 #include "../../utils/Vector3.h"
+#include "chunkdata.h"
+#include "chunkserializer.h"
 
 #define CHUNK_MAP_CASH_X 5
 #define CHUNK_MAP_CASH_Y 5
 
-struct ChunkLoadingData
-{
-    std::string Filepath;
-    mutex_t Mutex;
-    bool LoadingDone = false;
-    class Chunk* ChunkObj;
-};
+
 
 class ChunkLoader
 {
 public:
     ChunkLoader();
-    void Init(const Vector3 &position, GameWorld* world);
+    ~ChunkLoader();
+    void Init(const Vector3 &position, class GameWorld* world);
     const std::vector<class Chunk*>& GetLoadedChunks();
     void UpdateChunksBy(const Vector3& position);
     class Chunk* GetChunkFromCash( const Vector3& chunkPosition);
     void CopyLoadedChunks();
     class Chunk* GetCashedChunkByWorldPosition(const Vector3& worldPosition);
+
+    void Serialize(const BlockChangeData& data);
 
 private:
 
@@ -60,7 +57,8 @@ private:
     std::vector<class Chunk*> m_loadedChunks;
     std::vector<ChunkLoadingData*> m_chunkLoadingCash;
     Vector3 m_lastUpdateChunkPos;
-    GameWorld* m_world;
+    class GameWorld* m_world;
+    ChunkSerializer m_serializer;
 
 };
 
