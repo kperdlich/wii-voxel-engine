@@ -30,7 +30,7 @@ class BlockRenderer {
 public:
 	BlockRenderer();
 	virtual ~BlockRenderer();
-    void Prepare(std::vector<const BlockRenderVO*> *positionList, const Block& block);
+    void Prepare(std::vector<BlockRenderVO> *positionList, const Block& block);
     void Draw();
 	void Finish();
     static void DrawFocusOnSelectedCube(const Vector3& blockWorldPosition, float blockSizeToCenter);
@@ -38,7 +38,7 @@ public:
 private:
     const Block* m_pBlock;
 	float m_renderBlockSize = 0.0f;
-	std::vector<const BlockRenderVO*>* m_positions;
+    std::vector<BlockRenderVO>* m_positions;
 
 
 };

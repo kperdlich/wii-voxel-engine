@@ -69,16 +69,16 @@ public:
 private:
     void CreateDisplayList(size_t sizeOfDisplayList);
 	void FinishDisplayList();
-	bool AddBlockToRenderList(BlockType type, const BlockRenderVO& blockRenderVO);
+    bool AddBlockToRenderList(BlockType type, const BlockRenderVO &blockRenderVO);
 	void RemoveBlock(const Vector3& position);
 	void ClearBlockRenderList();
 	void BuildBlockRenderList();
-	bool IsBlockVisible(uint32_t iX, uint32_t iY, uint32_t iZ, BlockFaceVisibiltyVO* &pFaceVO );
+    bool IsBlockVisible(uint32_t iX, uint32_t iY, uint32_t iZ, BlockRenderVO & blockRenderVO );
 	Vec3i GetLocalBlockPositionByWorldPosition(const Vector3& blockWorldPosition) const;
 	Vector3 LocalPositionToGlobalPosition(const Vec3i& localPosition) const;
 
     void CreateTrees();
-    void BlockListUpdated(const BlockChangeData &data);
+    void BlockListUpdated(const BlockChangeData& data);
 
 private:    
     bool m_bIsDirty             = false;
@@ -92,7 +92,7 @@ private:
     Vector3 m_centerPosition;
 
     BlockType*** m_blocks;
-	std::map<BlockType, std::vector<const BlockRenderVO*> > m_mBlockRenderList;
+    std::map<BlockType, std::vector<BlockRenderVO> > m_mBlockRenderList;
 	class GameWorld* m_pWorldManager;
 
     Chunk* m_pChunkLeft         = nullptr;

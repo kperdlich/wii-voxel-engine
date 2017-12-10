@@ -113,7 +113,7 @@ void* DeserializeChunk(void* data)
             uint32_t x      = std::atoi(line.substr(posX+1, posY - posX).c_str());
             uint32_t y      = std::atoi(line.substr(posY+1, posZ - posY).c_str());
             uint32_t z      = std::atoi(line.substr(posZ+1, posValue - posZ).c_str());
-            uint16_t value  = std::atoi(line.substr(posValue+1).c_str());
+            uint8_t value   = std::atoi(line.substr(posValue+1).c_str());
 
             blocks[x][y][z] = BlockType(value);
         }        

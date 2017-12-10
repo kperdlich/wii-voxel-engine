@@ -21,14 +21,9 @@
 #define CHUNKLOADER_H
 
 #include <vector>
-#include "../../utils/Vector3.h"
 #include "chunkdata.h"
 #include "chunkserializer.h"
-
-#define CHUNK_MAP_CASH_X 5
-#define CHUNK_MAP_CASH_Y 5
-
-
+#include "../../utils/Vector3.h"
 
 class ChunkLoader
 {

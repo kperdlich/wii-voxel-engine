@@ -23,8 +23,11 @@
 #include "../blocks/BlockManager.h"
 #include "../../utils/Vector3.h"
 
+#define CHUNK_MAP_CASH_X 5
+#define CHUNK_MAP_CASH_Y 5
+
 #define CHUNK_SIZE_X 16
-#define CHUNK_SIZE_Y 64
+#define CHUNK_SIZE_Y 128
 #define CHUNK_SIZE_Z 16
 
 #define CHUNK_BLOCK_SIZE_X (BLOCK_SIZE * CHUNK_SIZE_X)
@@ -34,8 +37,11 @@
 #define STONE_LEVEL 50
 #define TREE_HIGHT 6
 
-struct Vec3i {
-    uint32_t m_x, m_y, m_z;
+struct Vec3i
+{
+    uint32_t X;
+    uint32_t Y;
+    uint32_t Z;
 };
 
 struct BlockChangeData
@@ -50,7 +56,7 @@ struct ChunkLoadingData
     std::string Filepath;
     mutex_t Mutex;
     bool LoadingDone = false;
-    class Chunk* ChunkObj;
+    class Chunk* ChunkObj = nullptr;
 };
 
 

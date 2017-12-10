@@ -26,7 +26,6 @@
 #include "Chunk.h"
 #include "../../utils/Debug.h"
 
-
 void* QueueJob(void* data)
 {
     Thread* thread = static_cast<Thread*>(data);
@@ -59,11 +58,11 @@ void* QueueJob(void* data)
           {
               std::ostringstream search;
               search << "X";
-              search << blockData.BlockPosition.m_x;
+              search << blockData.BlockPosition.X;
               search << "Y";
-              search << blockData.BlockPosition.m_y;
+              search << blockData.BlockPosition.Y;
               search << "Z";
-              search << blockData.BlockPosition.m_z;
+              search << blockData.BlockPosition.Z;
               search << ":";
 
               size_t pos;
@@ -87,7 +86,7 @@ void* QueueJob(void* data)
               if(!serialized)
               {
                   std::ofstream stream(filename, std::ios_base::app | std::ios_base::out);
-                  stream << "X" << blockData.BlockPosition.m_x << "Y" << blockData.BlockPosition.m_y << "Z" << blockData.BlockPosition.m_z << ":" << static_cast<unsigned short>(blockData.Type) << '\n';
+                  stream << "X" << blockData.BlockPosition.X << "Y" << blockData.BlockPosition.Y << "Z" << blockData.BlockPosition.Z << ":" << static_cast<unsigned short>(blockData.Type) << '\n';
                   stream.flush();
                   stream.close();
                   LOG("Add Line into file %s", filename.c_str());
@@ -98,7 +97,7 @@ void* QueueJob(void* data)
               std::ofstream stream(filename);
 
               stream << blockData.ChunkPosition.GetX() << ';' << blockData.ChunkPosition.GetY() << ';' << blockData.ChunkPosition.GetZ() << '\n';
-              stream << "X" << blockData.BlockPosition.m_x << "Y" << blockData.BlockPosition.m_y << "Z" << blockData.BlockPosition.m_z << ":" << static_cast<unsigned short>(blockData.Type) << '\n';
+              stream << "X" << blockData.BlockPosition.X << "Y" << blockData.BlockPosition.Y << "Z" << blockData.BlockPosition.Z << ":" << static_cast<unsigned short>(blockData.Type) << '\n';
 
               stream.flush();
               stream.close();

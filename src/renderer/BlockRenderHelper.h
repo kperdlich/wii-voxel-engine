@@ -23,21 +23,18 @@
 #include <stdint.h>
 #include "../utils/MathHelper.h"
 
-struct BlockFaceVisibiltyVO
-{
-    bool bLeftFace = false;
-    bool bRightFace = false;
-    bool bFrontFace = false;
-    bool bBackFace = false;
-    bool bTopFace = false;
-    bool bBottomFace = false;
-    uint32_t faces = 0;
-};
+#define LEFT_FACE   0x01
+#define RIGHT_FACE  (LEFT_FACE  << 1)
+#define FRONT_FACE  (RIGHT_FACE << 1)
+#define BACK_FACE   (FRONT_FACE << 1)
+#define TOP_FACE    (BACK_FACE  << 1)
+#define BOTTOM_FACE (TOP_FACE   << 1)
 
 struct BlockRenderVO
-{
-    BlockFaceVisibiltyVO* pFaceVO = nullptr;
-    Vector3* pBlockPosition = nullptr;
+{    
+    uint8_t FaceMask = 0;
+    uint32_t Faces = 0;
+    Vector3 BlockPosition;
 };
 
 #endif /* _BLOCKRENDERHELPER_H_ */

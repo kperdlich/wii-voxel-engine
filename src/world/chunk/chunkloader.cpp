@@ -147,7 +147,7 @@ void ChunkLoader::LoadChunks(const Vector3 &chunkPosition)
         if ( cashedChunk )
         {
             RemoveChunkFromCash(position);
-            tmpChunkCash.push_back(cashedChunk);
+            tmpChunkCash.push_back(cashedChunk);            
         }
         else
         {
@@ -156,8 +156,8 @@ void ChunkLoader::LoadChunks(const Vector3 &chunkPosition)
             chunk->Init();
             chunk->Build();
             chunk->SetDirty(true);
-            std::string filename = ChunkSerializer::GetFilePath(position);
-            /*if ( FileSystem::FileExist(filename))
+            /*std::string filename = ChunkSerializer::GetFilePath(position);
+            if ( FileSystem::FileExist(filename))
             {
                 ChunkLoadingData* chunkLoadingData = new ChunkLoadingData();
                 chunkLoadingData->ChunkObj = chunk;

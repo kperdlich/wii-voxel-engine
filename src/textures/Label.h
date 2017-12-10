@@ -30,7 +30,7 @@ private:
     Label( const std::string& text, float x, float y, GRRLIB_ttfFont* font, uint32_t fontSize, uint32_t color);
 
 public:
-    ~Label();
+    virtual ~Label();
     static Label* Create(std::string text, GRRLIB_ttfFont* font, std::string searchName, uint16_t sortingLayer = 0);
 
     void Render() const override;

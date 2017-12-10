@@ -29,7 +29,7 @@
 #define BLOCK_SIZE_HALF .25f
 #define BLOCK_SIZE BLOCK_SIZE_HALF * 2
 
-enum class BlockType : unsigned short {
+enum class BlockType : unsigned char {
 
     AIR     = 0,
     DIRT    = 1,

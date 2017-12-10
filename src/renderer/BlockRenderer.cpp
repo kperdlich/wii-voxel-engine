@@ -25,7 +25,7 @@ BlockRenderer::BlockRenderer() {}
 BlockRenderer::~BlockRenderer() {}
 
 
-void BlockRenderer::Prepare(std::vector<const BlockRenderVO*> *positionList, const Block& block)
+void BlockRenderer::Prepare(std::vector<BlockRenderVO> *positionList, const Block& block)
 {
     m_pBlock = &block;
     m_positions = positionList;
@@ -55,8 +55,8 @@ void BlockRenderer::Draw()
 
             for(auto it = m_positions->begin(); it != m_positions->end(); ++it)
             {
-                Vector3& blockPosition = *(*it)->pBlockPosition;
-                BlockFaceVisibiltyVO& blockRenderVO = *(*it)->pFaceVO;
+                const Vector3& blockPosition = it->BlockPosition;
+                const uint8_t faceMask = it->FaceMask;
 
                 // see http://www.matrix44.net/cms/wp-content/uploads/2011/03/ogl_coord_object_space_cube.png
                 guVector vertices[8] =
@@ -72,7 +72,7 @@ void BlockRenderer::Draw()
 
                 };
 
-                if ( blockRenderVO.bFrontFace && currentTextureFace == EBlockFaces::Front )
+                if ( (faceMask & FRONT_FACE) && currentTextureFace == EBlockFaces::Front )
                 {
                     GX_Begin(GX_QUADS, GX_VTXFMT0, 4);
                         // front side
@@ -95,7 +95,7 @@ void BlockRenderer::Draw()
                     GX_End();
                 }
 
-                if ( blockRenderVO.bBackFace && currentTextureFace == EBlockFaces::Back)
+                if ( (faceMask & BACK_FACE) && currentTextureFace == EBlockFaces::Back)
                 {
                     GX_Begin(GX_QUADS, GX_VTXFMT0, 4);
                         // back side
@@ -118,7 +118,7 @@ void BlockRenderer::Draw()
                     GX_End();
                 }
 
-                if ( blockRenderVO.bRightFace && currentTextureFace == EBlockFaces::Right )
+                if ( (faceMask & RIGHT_FACE) && currentTextureFace == EBlockFaces::Right )
                 {
                     GX_Begin(GX_QUADS, GX_VTXFMT0, 4);
                         // right side
@@ -141,7 +141,7 @@ void BlockRenderer::Draw()
                     GX_End();
                 }
 
-                if ( blockRenderVO.bLeftFace && currentTextureFace == EBlockFaces::Left )
+                if ( (faceMask & LEFT_FACE) && currentTextureFace == EBlockFaces::Left )
                 {
                     GX_Begin(GX_QUADS, GX_VTXFMT0, 4);
                         // left side
@@ -164,7 +164,7 @@ void BlockRenderer::Draw()
                     GX_End();
                 }
 
-                if ( blockRenderVO.bTopFace && currentTextureFace == EBlockFaces::Top)
+                if ( (faceMask & TOP_FACE) && currentTextureFace == EBlockFaces::Top)
                 {
                     GX_Begin(GX_QUADS, GX_VTXFMT0, 4);
                         // top side
@@ -187,7 +187,7 @@ void BlockRenderer::Draw()
                     GX_End();
                 }
 
-                if ( blockRenderVO.bBottomFace && currentTextureFace == EBlockFaces::Bottom)
+                if ( (faceMask & BOTTOM_FACE) && currentTextureFace == EBlockFaces::Bottom)
                 {
                     GX_Begin(GX_QUADS, GX_VTXFMT0, 4);
                         // bottom side
