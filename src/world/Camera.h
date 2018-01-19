@@ -25,8 +25,7 @@
 
 class Camera {
 public:
-	Camera();
-    ~Camera();
+	Camera();    
 	void Init();
 
 	void AttachTo(class Entity& entity);

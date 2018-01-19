@@ -22,7 +22,7 @@
 
 #include "utils/GameHelper.h"
 #include "utils/ColorHelper.h"
-#include "utils/threadpool.h"
+#include "utils/Threadpool.h"
 #include "commands/client/SwitchToIntroCommand.h"
 #include "commands/client/SwitchToMainMenuCommand.h"
 

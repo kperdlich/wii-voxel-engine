@@ -27,7 +27,6 @@
 #include "../renderer/MasterRenderer.h"
 #include "../utils/Debug.h"
 #include "../utils/Filesystem.h"
-#include "chunk/chunkserializer.h"
 #include "chunk/Chunk.h"
 
 
@@ -37,14 +36,13 @@ GameWorld::GameWorld()
     m_blockManager->LoadBlocks();    
 
     srand (time(nullptr));
-    m_pNoise = new PerlinNoise(.25, .1, .5, 6.0, rand());
+    m_noise.Set(.10, .1, .5, 6.0, rand());
 }
 
 GameWorld::~GameWorld()
 {
 	m_blockManager->UnloadBlocks();
-	delete m_blockManager;
-	delete m_pNoise;    
+	delete m_blockManager;	
 }
 
 void GameWorld::GenerateWorld()
@@ -57,7 +55,7 @@ void GameWorld::GenerateWorld()
 void GameWorld::Draw()
 {
     auto& playerPosition = static_cast<Basic3DScene&>(Engine::Get().GetSceneHandler().GetCurrentScene()).GetEntityHandler().GetPlayer()->GetPosition();
-    auto loadedChunks = m_chunkLoader.GetLoadedChunks();
+    auto& loadedChunks = m_chunkLoader.GetLoadedChunks();
     for( auto& chunk : loadedChunks)
     {        
         if (chunk->IsDirty())
@@ -65,7 +63,7 @@ void GameWorld::Draw()
             chunk->RebuildDisplayList();            
         }
         chunk->Render();
-    }
+    }    
     m_chunkLoader.UpdateChunksBy(playerPosition);
     DrawFocusOnSelectedCube();
 }
@@ -75,7 +73,7 @@ BlockManager& GameWorld::GetBlockManager()
 	return *m_blockManager;
 }
 
-Chunk* GameWorld::GetChunkAt(const Vector3& centerPosition)
+Chunk* GameWorld::GetCashedChunkAt(const Vector3& centerPosition)
 {
     return m_chunkLoader.GetChunkFromCash(centerPosition);
 }
@@ -159,9 +157,9 @@ void GameWorld::DrawFocusOnSelectedCube()
     }
 }
 
-const PerlinNoise& GameWorld::GetNoise() const
+PerlinNoise GameWorld::GetNoise() const
 {
-    return *m_pNoise;
+    return m_noise;
 }
 
 void GameWorld::Serialize(const BlockChangeData& data)

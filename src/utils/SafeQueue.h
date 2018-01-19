@@ -23,49 +23,40 @@
 #include <queue>
 #include <ogcsys.h>
 #include <gccore.h>
+#include "Mutex.h"
 
 
 template<class T>
 class SafeQueue
 {
-public:
-    SafeQueue()
-    {
-        LWP_MutexInit(&m_mutex, false);
-    }
-
-    ~SafeQueue()
-    {
-         LWP_MutexDestroy(m_mutex);
-    }
-
+public:  
     T Pop()
     {
-        LWP_MutexLock(m_mutex);
+        m_mutex.Lock();
         T val = m_queue.front();
         m_queue.pop();
-        LWP_MutexUnlock(m_mutex);
+        m_mutex.Unlock();
         return val;
     }
 
     void Push(const T& value)
     {
-        LWP_MutexLock(m_mutex);
+        m_mutex.Lock();
         m_queue.push(value);
-        LWP_MutexUnlock(m_mutex);
+        m_mutex.Unlock();
     }
 
     bool IsEmpty()
     {
-        LWP_MutexLock(m_mutex);
+        m_mutex.Lock();
         bool bIsEmpty = m_queue.empty();
-        LWP_MutexUnlock(m_mutex);
+        m_mutex.Unlock();
         return bIsEmpty;
     }
 
 private:
     std::queue<T> m_queue;
-    mutex_t m_mutex;
+    Mutex m_mutex;
 };
 
 #endif // SAFEQUEUE_H

@@ -22,11 +22,11 @@
 
 #include <stdint.h>
 #include <string>
-#include "chunkdata.h"
+#include "ChunkData.h"
 #include "../GameWorld.h"
 #include "../../renderer/BlockRenderHelper.h"
 #include "../../utils/Vector3.h"
-
+#include "../../utils/Mutex.h"
 
 class Chunk {
 public:
@@ -38,9 +38,9 @@ public:
     void Build();
     void Clear();
 	void RebuildDisplayList();
-    void Render();
+    void Render();    
 
-	bool IsDirty();
+    bool IsDirty() const;
 	void SetDirty(bool dirty);
 
 	uint32_t GetDisplayListSize() const;
@@ -51,7 +51,9 @@ public:
 
 	const Vector3& GetCenterPosition() const;
 
-	void UpdateChunkNeighbors();
+    void SetChunkNeighbors();
+    bool NeighborsLoaded();
+
 	void RemoveBlockByWorldPosition(const Vector3& blockPosition);
 	void AddBlockByWorldPosition(const Vector3& blockPosition, BlockType type);
 	Vector3 GetBlockPositionByWorldPosition(const Vector3& worldPosition) const;
@@ -63,8 +65,18 @@ public:
         return m_blocks;
     }
 
+    std::string GetFilePath() const;
 
     void SetCenterPosition(const Vector3 &centerPosition);
+
+    void SetLoaded(bool value);
+
+    bool IsLoaded();
+
+    inline bool HasDisplayList() const
+    {
+        return m_pDispList;
+    }
 
 private:
     void CreateDisplayList(size_t sizeOfDisplayList);
@@ -80,7 +92,10 @@ private:
     void CreateTrees();
     void BlockListUpdated(const BlockChangeData& data);
 
-private:    
+private:
+    Mutex m_mutex;
+
+    bool m_bLoadingDone         = false;
     bool m_bIsDirty             = false;
     bool m_bNeighbourUpdate     = false;
     uint32_t m_displayListSize  = 0;

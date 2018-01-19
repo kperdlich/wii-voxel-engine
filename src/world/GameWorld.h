@@ -21,7 +21,7 @@
 #define _GAMEWORLD_H_
 
 #include <map>
-#include "chunk/chunkloader.h"
+#include "chunk/ChunkManager.h"
 #include "blocks/BlockManager.h"
 #include "PerlinNoise.h"
 #include "../renderer/BlockRenderer.h"
@@ -36,7 +36,7 @@ public:
 	void Draw();
 
 	class BlockManager& GetBlockManager();
-    class Chunk* GetChunkAt(const Vector3& centerPosition);
+    class Chunk* GetCashedChunkAt(const Vector3& centerPosition);
     class Chunk* GetCashedChunkByWorldPosition(const Vector3& worldPosition);
 	void RemoveBlockByWorldPosition(const Vector3& blockPosition);
 	void AddBlockAtWorldPosition(const Vector3& blockPosition, BlockType type);
@@ -44,7 +44,7 @@ public:
 	BlockType GetBlockByWorldPosition(const Vector3& worldPosition);
 	Vector3 GetBlockPositionByWorldPosition(const Vector3& worldPosition);
     Vector3 GetPhysicalPlayerPosition( const Vector3& playerWorldPosition );
-	const PerlinNoise& GetNoise() const;    
+    PerlinNoise GetNoise() const;
     void Serialize(const struct BlockChangeData& data);
 
 
@@ -53,13 +53,13 @@ private:
 
 private:	   
 
-    ChunkLoader m_chunkLoader;
+    ChunkManager m_chunkLoader;
 
 	Vector3 m_SelectedBlockPosition;
     bool m_bHasSelectedBlock            = false;
 
     BlockManager* m_blockManager        = nullptr;
-    PerlinNoise* m_pNoise               = nullptr;
+    PerlinNoise m_noise;
 
 };
 

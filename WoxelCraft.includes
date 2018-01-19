@@ -17,3 +17,4 @@ src/world
 src/world/blocks
 src/world/chunk
 src/world/hud
+src/world/chunk/jobs

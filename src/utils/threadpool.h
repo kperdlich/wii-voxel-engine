@@ -20,159 +20,27 @@
 #ifndef THREADPOOL_H
 #define THREADPOOL_H
 
+#include "Mutex.h"
 #include <ogcsys.h>
 #include <gccore.h>
+#include "Thread.h"
 
 #define THREAD_POOL_SIZE 5
-
-class Thread
-{
-public:
-    Thread()
-    {
-        LWP_MutexInit(&m_mutex, false);
-    }
-
-    int Create(void* (*entry)(void *),void *stackbase,u32 stack_size,u8 prio)
-    {
-        return LWP_CreateThread(&m_threadID, entry, this, stackbase, stack_size, prio);
-    }
-
-    bool Stop()
-    {
-        Lock();
-        bool val = m_bStop;
-        Unlock();
-        return val;
-    }
-
-    void Lock()
-    {
-        LWP_MutexLock(m_mutex);
-    }
-
-    void Unlock()
-    {
-        LWP_MutexUnlock(m_mutex);
-    }
-
-    bool TryReserve()
-    {
-        bool bfound = false;
-        Lock();
-        if (m_bAvailable)
-        {
-            bfound = true;
-            m_bAvailable = false;
-        }
-        Unlock();
-        return bfound;
-    }
-
-    void Release()
-    {        
-        Lock();
-        bool available = m_bAvailable;
-        Unlock();
-
-        if (!available)
-        {
-            Lock();
-            m_bStop = true;
-            Unlock();
-
-            if ( IsSuspended() )
-            {
-                Resume();
-            }
-            LWP_JoinThread(m_threadID, nullptr);
-
-            Lock();
-            m_bAvailable = true;
-            m_bStop = false;
-            Unlock();
-        }
-    }
-
-    void Destroy()
-    {
-        Release();
-        LWP_MutexDestroy(m_mutex);
-    }
-
-    bool IsSuspended()
-    {
-        return LWP_ThreadIsSuspended(m_threadID);
-    }
-
-    void Resume()
-    {
-        LWP_ResumeThread(m_threadID);
-    }
-
-    void Suspend()
-    {
-        LWP_SuspendThread(m_threadID);
-    }
-
-    void* Data()
-    {
-        return m_data;
-    }
-
-    void SetData(void* data)
-    {
-        m_data = data;
-    }
-
-private:
-    lwp_t m_threadID;
-    bool m_bAvailable = true;
-    bool m_bStop = false;
-    void* m_data = nullptr;
-    mutex_t m_mutex;
-};
-
-static lwpq_t s_thread_queue;
-static Thread s_threads[THREAD_POOL_SIZE];
 
 class ThreadPool
 {
 
+private:
+    static lwpq_t s_thread_queue;
+    static Thread s_threads[THREAD_POOL_SIZE];
+
 public:
 
-    static void Init()
-    {         
-         LWP_InitQueue(&s_thread_queue);
-    }
+    static void             Init();
+    static Thread*          GetThread();
+    static void             Destroy();
+    static const lwpq_t&    GetThreadQueue();
 
-    static Thread* GetThread()
-    {
-        for ( unsigned int i = 0; i < THREAD_POOL_SIZE; i++ )
-        {
-            Thread& thread = s_threads[i];
-            if(thread.TryReserve())
-            {
-                return &thread;
-            }
-        }
-        return nullptr;
-    }
-
-    static void Destroy()
-    {
-        for ( unsigned int i = 0; i < THREAD_POOL_SIZE; i++ )
-        {
-            s_threads[i].Destroy();
-        }
-
-        LWP_CloseQueue(s_thread_queue);
-    }
-
-    static const lwpq_t& GetThreadQueue()
-    {
-        return s_thread_queue;
-    }
 
 };
 
