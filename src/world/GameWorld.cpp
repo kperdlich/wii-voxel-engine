@@ -35,8 +35,7 @@ GameWorld::GameWorld()
     m_blockManager = new BlockManager();
     m_blockManager->LoadBlocks();    
 
-    srand (time(nullptr));
-    m_noise.Set(.10, .1, .5, 6.0, rand());
+    SetSeed();
 }
 
 GameWorld::~GameWorld()
@@ -155,6 +154,34 @@ void GameWorld::DrawFocusOnSelectedCube()
         BlockRenderer::DrawFocusOnSelectedCube( m_SelectedBlockPosition, BLOCK_SIZE_HALF );
         MasterRenderer::SetGraphicsMode(true, true);
     }
+}
+
+void GameWorld::SetSeed()
+{
+    srand (time(nullptr));
+    int seed = rand();
+
+    if (FileSystem::FileExist(SEED_FILE))
+    {
+        std::ifstream file;
+        file.open(SEED_FILE);
+        if (file.is_open())
+        {
+            std::string line;
+            std::getline(file, line);
+            seed = std::atoi(line.c_str());
+            file.close();
+        }
+    }
+    else
+    {
+        std::ofstream stream(SEED_FILE);
+        stream << seed << '\n';
+        stream.flush();
+        stream.close();
+    }
+
+    m_noise.Set(.10, .1, .5, 6.0, seed);
 }
 
 PerlinNoise GameWorld::GetNoise() const

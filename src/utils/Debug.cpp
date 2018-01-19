@@ -21,7 +21,7 @@
 
 void Debug::Init()
 {
-    m_file.open("Log.txt");
+    m_file.open(LOG_FILE);
 }
 
 void Debug::Log(const char* format, ...)

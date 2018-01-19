@@ -50,6 +50,7 @@ public:
 
 private:    
 	void DrawFocusOnSelectedCube();
+    void SetSeed();
 
 private:	   
 

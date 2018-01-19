@@ -21,6 +21,7 @@
 #include <fat.h>
 #include <dirent.h>
 #include <sys/unistd.h>
+#include <sys/stat.h>
 #include <iostream>
 #include <assert.h>
 
@@ -31,6 +32,9 @@
 void FileSystem::Init()
 {
     assert(fatInitDefault());
+
+    if (!DirectoryExist(WORLD_PATH))
+        CreateDirectory(WORLD_PATH);
 }
 
 bool FileSystem::CreateDirectory(const std::string& directoryPath)
@@ -45,8 +49,8 @@ bool FileSystem::CreateDirectory(const std::string& directoryPath)
 
 bool FileSystem::DirectoryExist(const std::string& directoryPath)
 {
-    // todo implement
-    return false;
+    struct stat sb;
+    return stat(directoryPath.c_str(), &sb) == 0 && S_ISDIR(sb.st_mode);
 }
 
 bool FileSystem::FileExist(const std::string &filePath)

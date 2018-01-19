@@ -554,7 +554,7 @@ Vector3 Chunk::GetPhysicalPosition(const Vector3& position) const
 std::string Chunk::GetFilePath() const
 {
     std::ostringstream filename;
-    filename << "World/";
+    filename << WORLD_PATH "/";
     filename << m_centerPosition.GetX();
     filename << '_';
     filename << m_centerPosition.GetY();
