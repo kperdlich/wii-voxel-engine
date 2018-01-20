@@ -191,8 +191,8 @@ void ChunkManager::LoadChunks(const Vector3 &chunkPosition)
 
 std::vector<Vector3> ChunkManager::GetChunkMapAround(const Vector3 &chunkPosition) const
 {
-    double x = chunkPosition.GetX() - (2*CHUNK_BLOCK_SIZE_X);
-    double z = chunkPosition.GetZ() + (2*CHUNK_BLOCK_SIZE_X);
+    double x = chunkPosition.GetX() - ((CHUNK_MAP_CASH_X/2)*CHUNK_BLOCK_SIZE_X);
+    double z = chunkPosition.GetZ() + ((CHUNK_MAP_CASH_Y/2)*CHUNK_BLOCK_SIZE_Z);
 
     std::vector<Vector3> chunkMap;
 
