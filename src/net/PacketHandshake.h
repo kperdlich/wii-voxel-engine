@@ -40,7 +40,7 @@ protected:
         usernameAndHost+= ':';
         usernameAndHost.append(ToString<uint16_t>(m_Port));
 
-        session.SendUShort((uint16_t)usernameAndHost.length());
+        session.SendShort((int16_t)usernameAndHost.length());
         session.SendString(usernameAndHost);
     }
 

@@ -31,8 +31,8 @@ public:
 protected:
     void SendContent(const Session& session) override
     {
-        session.SendUInt((uint32_t)SERVER_PROTOCOL_VERSION);
-        session.SendUShort((uint16_t)m_PlayerName.length());
+        session.SendInt((int32_t)SERVER_PROTOCOL_VERSION);
+        session.SendShort((int16_t)m_PlayerName.length());
         session.SendString(m_PlayerName);
         for(uint32_t i = 0; i < 13; ++i)
              session.SendByte(0x00);

@@ -36,19 +36,19 @@ void Session::Update()
     // todo send keepAlive packet
 }
 
-void Session::SendUInt(uint32_t value) const
+void Session::SendInt(int32_t value) const
 {
-    m_Socket.Write((const char*)&value, sizeof(uint32_t));
+    m_Socket.Write((const char*)&value, sizeof(value));
 }
 
 void Session::SendByte(char byte) const
 {
-    m_Socket.Write(&byte, 1);
+    m_Socket.Write(&byte, sizeof(byte));
 }
 
-void Session::SendUShort(uint16_t value) const
+void Session::SendShort(int16_t value) const
 {
-    m_Socket.Write((const char*)&value, sizeof(uint16_t));
+    m_Socket.Write((const char*)&value, sizeof(value));
 }
 
 void Session::SendString(const std::string &value) const
