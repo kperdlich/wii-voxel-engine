@@ -26,8 +26,6 @@
 
 #include "net/PacketHandshake.h"
 #include "net/PacketLogin.h"
-#include "net/PacketKeepAlive.h"
-
 
 Engine::Engine()
 {
@@ -63,10 +61,7 @@ void Engine::Start()
 
         m_pInputHandler->Update();        
         m_pSceneHandler->Update(m_millisecondsLastFrame / 1000.0f);
-        m_pSceneHandler->DrawScene();
-
-        //PacketKeepAlive kal;
-        //kal.Send();
+        m_pSceneHandler->DrawScene();       
 
         WiiPad* pad = m_pInputHandler->GetPadByID( WII_PAD_0 );
         u32 padButtonDown = pad->ButtonsDown();

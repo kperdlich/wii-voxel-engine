@@ -20,6 +20,7 @@
 #ifndef _ENGINE_H_
 #define _ENGINE_H_
 
+#include "globals.h"
 #include "utils/GameHelper.h"
 #include "utils/ColorHelper.h"
 #include "utils/Threadpool.h"
@@ -30,23 +31,6 @@
 #include "scenes/SceneHandler.h"
 #include "font/FontHandler.h"
 #include "commands/BasicCommandHandler.h"
-
-#define GAME_NAME                   "WoxelCraft"
-#define BUILD_VERSION               "0.0.7"
-
-#define DEFAULT_FONT_ID             0
-#define DEFAULT_MINECRAFT_FONT_ID   1
-
-#define FILE_PATH   "/apps/WoxelCraft"
-#define WORLD_PATH  FILE_PATH "/world"
-
-#define LOG_FILE    FILE_PATH "/Log.txt"
-#define SEED_FILE   WORLD_PATH "/Seed.dat"
-
-
-#define DEBUG
-
-
 
 class Engine {
 

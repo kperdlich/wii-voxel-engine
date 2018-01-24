@@ -4,8 +4,6 @@
 #include "Packet.h"
 #include "Session.h"
 
-#define SERVER_PROTOCOL_VERSION     29
-
 class NetworkManager
 {
 private:
@@ -14,7 +12,6 @@ public:
     void Init();
     void Connect(const std::string& ip, uint16_t port);
     void Close();
-    void Send(const PacketData &packet);
 
     static NetworkManager& Get()
     {
@@ -25,6 +22,11 @@ public:
     inline bool Initialized()
     {
         return m_bInitialized;
+    }
+
+    inline const Session& GetSession()
+    {
+        return m_Session;
     }
 
     NetworkManager(NetworkManager const&) = delete;

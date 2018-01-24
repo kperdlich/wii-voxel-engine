@@ -29,10 +29,3 @@ void NetworkManager::Close()
     if (m_bInitialized)
         m_Session.Close();
 }
-
-
-void NetworkManager::Send(const PacketData &packet)
-{
-    if (m_bInitialized)
-        m_Session.Send(packet.Data, packet.Size);
-}

@@ -2,9 +2,11 @@
 #include "NetworkManager.h"
 
 void Packet::Send()
-{
-    BuildPacket();
-    NetworkManager::Get().Send(m_Data);
-    free(m_Data.Data);
-    m_Data.Data = nullptr;
+{    
+    const Session& session = NetworkManager::Get().GetSession();
+    if(session.IsRunning())
+    {
+        session.SendByte(m_ID);
+        SendContent(session);
+    }
 }

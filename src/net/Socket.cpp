@@ -50,13 +50,13 @@ void Socket::Disconnect()
     }
 }
 
-void Socket::Write(const char* data, size_t size)
+void Socket::Write(const char* data, size_t size) const
 {
     while(size > 0)
         size -= net_write(m_Socked, data, size);
 }
 
-int32_t Socket::Read(void* data, size_t size)
+int32_t Socket::Read(void* data, size_t size) const
 {
     return net_read(m_Socked, data, size);
 }

@@ -2,24 +2,20 @@
 #define PACKET_H
 
 #include <cstdio>
+#include "Session.h"
 
-struct PacketData
-{
-    char* Data;
-    size_t Size;
-};
+
 
 class Packet
 {
 public:
     Packet(unsigned char id) : m_ID(id) {}
     virtual ~Packet() {}
-    void Send();    
-
+    void Send();
 protected:
-    virtual void BuildPacket() = 0;
+    virtual void SendContent(const Session& session) = 0;
     unsigned char m_ID;
-    PacketData m_Data;
+
 };
 
 #endif // PACKET_H

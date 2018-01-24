@@ -12,9 +12,8 @@ public:
        m_PlayerName(playerName), m_IP(ip), m_Port(port), Packet(0x02) {}    
 protected:
 
-    void BuildPacket() override
+    void SendContent(const Session& session) override
     {
-        uint32_t size = 0;
         std::string usernameAndHost;
         usernameAndHost.append(m_PlayerName);
         usernameAndHost+= ';';
@@ -22,17 +21,8 @@ protected:
         usernameAndHost+= ':';
         usernameAndHost.append(ToString<uint16_t>(m_Port));
 
-        uint16_t len = usernameAndHost.length();
-        size = 1 + (len * 2) + sizeof(uint16_t);
-        char* data = (char*) malloc(size);
-
-        data[0] = m_ID;
-        (*(uint16_t*)&data[1]) = len;
-
-        WriteNetworkString(data, usernameAndHost.c_str(), len, 3);
-
-        m_Data.Size = size;
-        m_Data.Data = data;
+        session.SendUShort((uint16_t)usernameAndHost.length());
+        session.SendString(usernameAndHost);
     }
 
 private:
