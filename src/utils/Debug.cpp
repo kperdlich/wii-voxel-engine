@@ -19,6 +19,8 @@
 
 #include "Debug.h"
 
+std::ofstream Debug::m_file;
+
 void Debug::Init()
 {
     m_file.open(LOG_FILE);

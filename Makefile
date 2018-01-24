@@ -25,6 +25,7 @@ SOURCES		:=	src \
 				src/commands \
 				src/commands/client \
 				src/components \
+				src/net \
 				src/renderer \
 				src/scenes \
 				src/entity \

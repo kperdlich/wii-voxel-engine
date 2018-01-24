@@ -24,7 +24,7 @@
 #include "../Engine.h"
 
 #ifdef DEBUG
-    #define LOG(format,...) Debug::GetInstance().Log(format, ##__VA_ARGS__)
+    #define LOG(format,...) Debug::Log(format, ##__VA_ARGS__)
 #else
     #define LOG(format, ...)
 #endif
@@ -33,19 +33,19 @@
 class Debug {
 
 private:
-    std::ofstream m_file;
+    static std::ofstream m_file;
 public:	
     Debug() {}
 
-    void Init();
-    void Log(const char* format, ...);
-    void Release();
+    static void Init();
+    static void Log(const char* format, ...);
+    static void Release();
 
-    static Debug& GetInstance()
+    /*static Debug& GetInstance()
     {
         static Debug s_instance;
         return s_instance;
-    }
+    }*/
 
     Debug(Debug const&)	  = delete;
     void operator=(Debug const&) = delete;

@@ -21,7 +21,13 @@
 #include "Engine.h"
 #include "utils/GameHelper.h"
 #include "utils/Filesystem.h"
+#include "net/NetworkManager.h"
 #include "utils/Debug.h"
+
+#include "net/PacketHandshake.h"
+#include "net/PacketLogin.h"
+#include "net/PacketKeepAlive.h"
+
 
 Engine::Engine()
 {
@@ -43,6 +49,12 @@ void Engine::Start()
 
     m_pBasicCommandHandler->ExecuteCommand( SwitchToIntroCommand::Name() );
 
+    NetworkManager::Get().Connect("192.168.178.27", 25565);
+    PacketHandshake hs("DaeFennek", "192.168.178.27", 25565);
+    PacketLogin l("DaeFennek");
+    hs.Send();
+    l.Send();
+
     while( m_bRunning )
     {
         uint32_t startFrameTime = ticks_to_millisecs(gettime());
@@ -52,6 +64,9 @@ void Engine::Start()
         m_pInputHandler->Update();        
         m_pSceneHandler->Update(m_millisecondsLastFrame / 1000.0f);
         m_pSceneHandler->DrawScene();
+
+        //PacketKeepAlive kal;
+        //kal.Send();
 
         WiiPad* pad = m_pInputHandler->GetPadByID( WII_PAD_0 );
         u32 padButtonDown = pad->ButtonsDown();
@@ -72,6 +87,8 @@ void Engine::Start()
         m_millisecondsLastFrame = ticks_to_millisecs(gettime()) - startFrameTime;
 	}
 
+    NetworkManager::Get().Close();
+
     delete m_pBasicCommandHandler;
     delete m_pSceneHandler;
     delete m_pInputHandler;
@@ -83,7 +100,7 @@ void Engine::Start()
     LOG("Graphics System uninitialized");
 
 #ifdef DEBUG
-    Debug::GetInstance().Release();
+    Debug::Release();
 #endif
 }
 
@@ -98,10 +115,11 @@ void Engine::Init()
     SYS_SetPowerCallback([]() { Engine::Get().End(); });
 
     FileSystem::Init();
-    Debug::GetInstance().Init();
-    ThreadPool::Init();
+    Debug::Init();
+    ThreadPool::Init();  
 
     LOG("****** %s %s ******", GAME_NAME, BUILD_VERSION);
+    NetworkManager::Get().Init();
 
 	GRRLIB_Init();
     GRRLIB_Settings.antialias = true;
