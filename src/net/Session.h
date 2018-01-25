@@ -31,11 +31,14 @@ public:
     void Close();
     void Update();
 
-    void SendInt(int32_t value) const;
-    void SendShort(int16_t value) const;
-    void SendByte(char byte) const;
     void SendString(const std::string& value) const;
     void Send(const char* data, size_t size) const;
+
+    template<typename T>
+    void Send(T value) const
+    {
+         m_Socket.Write((const char*)&value, sizeof(value));
+    }
 
     inline bool IsRunning() const
     {

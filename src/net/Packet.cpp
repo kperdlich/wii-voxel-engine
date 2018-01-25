@@ -25,7 +25,7 @@ void Packet::Send()
     const Session& session = NetworkManager::Get().GetSession();
     if(session.IsRunning())
     {
-        session.SendByte(m_ID);
+        session.Send<char>(m_ID);
         SendContent(session);
     }
 }

@@ -1,4 +1,3 @@
-#ifndef PACKETHANDSHAKE_H
 /***
  *
  * Copyright (C) 2018 DaeFennek
@@ -18,6 +17,7 @@
  *
 ***/
 
+#ifndef PACKETHANDSHAKE_H
 #define PACKETHANDSHAKE_H
 
 #include "Packet.h"
@@ -40,7 +40,7 @@ protected:
         usernameAndHost+= ':';
         usernameAndHost.append(ToString<uint16_t>(m_Port));
 
-        session.SendShort((int16_t)usernameAndHost.length());
+        session.Send<int16_t>((int16_t)usernameAndHost.length());
         session.SendString(usernameAndHost);
     }
 

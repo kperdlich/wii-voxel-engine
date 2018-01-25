@@ -29,7 +29,7 @@ public:
 protected:
     void SendContent(const Session& session) override
     {
-        session.SendInt(m_ID);
+        session.Send<int32_t>(m_ID);
     }
 private:
     int32_t m_ID = 0;
