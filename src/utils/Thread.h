@@ -1,100 +1,52 @@
+/***
+ *
+ * Copyright (C) 2018 DaeFennek
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+***/
+
 #ifndef THREAD_H
 #define THREAD_H
 
-#include "Mutex.h"
 #include <ogcsys.h>
 #include <gccore.h>
+#include "Mutex.h"
+#include "Debug.h"
 
-class Thread
+class Thread        
 {
 public:
-
-    int Create(void* (*entry)(void *),void *stackbase,u32 stack_size,u8 prio)
-    {
-        return LWP_CreateThread(&m_threadID, entry, this, stackbase, stack_size, prio);
-    }
-
-    bool Stop()
-    {
-        m_mutex.Lock();
-        bool val = m_bStop;
-        m_mutex.Unlock();
-        return val;
-    }
-
-    bool TryReserve()
-    {
-        bool bfound = false;
-        m_mutex.Lock();
-        if (m_bAvailable)
-        {
-            bfound = true;
-            m_bAvailable = false;
-        }
-        m_mutex.Unlock();
-        return bfound;
-    }
-
-    void Release()
-    {
-        m_mutex.Lock();
-        bool available = m_bAvailable;
-        m_mutex.Unlock();
-
-        if (!available)
-        {
-            m_mutex.Lock();
-            m_bStop = true;
-            m_mutex.Unlock();
-
-            if ( IsSuspended() )
-            {
-                Resume();
-            }
-            LWP_JoinThread(m_threadID, nullptr);
-
-            m_mutex.Lock();
-            m_bAvailable = true;
-            m_bStop = false;
-            m_mutex.Unlock();
-        }
-    }
-
-    void Destroy()
-    {
-        Release();
-    }
-
-    bool IsSuspended()
-    {
-        return LWP_ThreadIsSuspended(m_threadID);
-    }
-
-    void Resume()
-    {
-        LWP_ResumeThread(m_threadID);
-    }
-
-    void Suspend()
-    {
-        LWP_SuspendThread(m_threadID);
-    }
-
-    void* Data()
-    {
-        return m_data;
-    }
-
-    void SetData(void* data)
-    {
-        m_data = data;
-    }
+    virtual ~Thread() {}
+    int Start();
+    bool IsStopped();
+    void Stop();
+    bool IsSuspended();
+    void Resume();
+    void Suspend();
 
 private:
-    lwp_t m_threadID;
-    bool m_bAvailable = true;
-    bool m_bStop = false;
-    void* m_data = nullptr;
+    int Create(void* (*entry)(void *), void *stackbase, u32 stack_size, u8 prio);
+    static void* ThreadEntry(void* args);
+
+protected:
+    virtual void PreExecute() = 0;
+    virtual void Execute() = 0;
+
+private:
+    lwp_t m_threadID;   
+    bool m_bStop = false;    
     Mutex m_mutex;
 };
 

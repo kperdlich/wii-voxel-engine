@@ -149,13 +149,12 @@ src/utils/MathHelper.cpp
 src/utils/MathHelper.h
 src/utils/SafeQueue.h
 src/utils/Stringhelper.h
+src/utils/Thread.cpp
 src/utils/Thread.h
 src/utils/TileHelper.h
 src/utils/Vector3.cpp
 src/utils/Vector3.h
 src/utils/mutex.h
-src/utils/threadpool.cpp
-src/utils/threadpool.h
 src/world/Camera.cpp
 src/world/Camera.h
 src/world/Frustrum.cpp
@@ -181,7 +180,9 @@ src/world/chunk/ChunkManager.cpp
 src/world/chunk/ChunkManager.h
 src/world/chunk/SerializationJob.cpp
 src/world/chunk/SerializationJob.h
+src/world/chunk/jobs/ChunkLoaderJob.cpp
 src/world/chunk/jobs/ChunkLoaderJob.h
+src/world/chunk/jobs/SerializationJob.cpp
 src/world/chunk/jobs/SerializationJob.h
 src/world/hud/Hotbar.cpp
 src/world/hud/Hotbar.h

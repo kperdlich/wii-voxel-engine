@@ -22,6 +22,7 @@ SOURCES		:=	src \
 				src/world/hud \
 				src/world/blocks \
 				src/world/chunk \
+				src/world/chunk/jobs \
 				src/commands \
 				src/commands/client \
 				src/components \

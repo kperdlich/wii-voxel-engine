@@ -89,8 +89,6 @@ void Engine::Start()
     delete m_pInputHandler;
     delete m_pFontHandler;
 
-    ThreadPool::Destroy();
-
 	GRRLIB_Exit();
     LOG("Graphics System uninitialized");
 
@@ -110,8 +108,7 @@ void Engine::Init()
     SYS_SetPowerCallback([]() { Engine::Get().End(); });
 
     FileSystem::Init();
-    Debug::Init();
-    ThreadPool::Init();  
+    Debug::Init();    
 
     LOG("****** %s %s ******", GAME_NAME, BUILD_VERSION);
     NetworkManager::Get().Init();

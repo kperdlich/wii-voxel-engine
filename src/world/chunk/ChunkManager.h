@@ -22,7 +22,8 @@
 
 #include <vector>
 #include "chunkdata.h"
-#include "../../utils/Job.h"
+#include "jobs/SerializationJob.h"
+#include "jobs/ChunkLoaderJob.h"
 #include "../../utils/Vector3.h"
 
 class ChunkManager
@@ -54,8 +55,10 @@ private:
     Vector3 m_lastUpdateChunkPos;
     class GameWorld* m_world;
 
-    Job<BlockChangeData> m_serializationJob;
-    Job<ChunkLoadingData> m_loaderJob;
+    //Job<BlockChangeData> m_serializationJob;
+    SerializationJob m_serializationJob;
+    ChunkLoaderJob m_loaderJob;
+    //Job<ChunkLoadingData> m_loaderJob;
 };
 
 #endif // CHUNKMANAGER_H

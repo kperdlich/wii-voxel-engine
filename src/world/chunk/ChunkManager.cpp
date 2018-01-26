@@ -40,8 +40,8 @@ ChunkManager::~ChunkManager()
 void ChunkManager::Init(const Vector3 &position, GameWorld *world)
 {
     m_world = world;
-    m_serializationJob.Start(QueueJob);
-    m_loaderJob.Start(LoadChunkJob);
+    m_serializationJob.Start();
+    m_loaderJob.Start();
 
     Vector3 currentChunkPos = GetChunkPositionByWorldPosition(position);
     const auto& chunkMap = GetChunkMapAround(currentChunkPos);
