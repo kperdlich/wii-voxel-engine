@@ -34,13 +34,21 @@ enum EBlockFaces
     Bottom
 };
 
-class Block {
-public:
-    Block();
-    Block( float size, std::map<const Texture*, std::vector<EBlockFaces>> textureMap);
-    virtual ~Block();
-	float GetSize() const;
-    const std::map<const Texture*, std::vector<EBlockFaces>>& GetTextures() const;
+class Block
+{
+public:    
+    Block( float size, const std::map<const Texture*, std::vector<EBlockFaces>>& textureMap)
+        : m_size(size), m_textureMap(textureMap){}
+
+    inline const std::map<const Texture*, std::vector<EBlockFaces>>& GetTextures() const
+    {
+        return m_textureMap;
+    }
+
+    inline float GetSize() const
+    {
+        return m_size;
+    }
 
 protected:
 	float m_size; // the size from the middle point to each axis   

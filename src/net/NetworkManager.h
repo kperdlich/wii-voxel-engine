@@ -1,5 +1,3 @@
-#ifndef NETWORKMANAGER_H
-#define NETWORKMANAGER_H
 /***
  *
  * Copyright (C) 2018 DaeFennek
@@ -18,6 +16,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
 ***/
+
+#ifndef NETWORKMANAGER_H
+#define NETWORKMANAGER_H
 
 #include "Packet.h"
 #include "ServerConnection.h"

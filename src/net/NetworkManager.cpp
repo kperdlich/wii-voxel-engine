@@ -1,5 +1,3 @@
-#include <network.h>
-#include "NetworkManager.h"
 /***
  *
  * Copyright (C) 2018 DaeFennek
@@ -19,6 +17,8 @@
  *
 ***/
 
+#include <network.h>
+#include "NetworkManager.h"
 #include "PacketHandshake.h"
 #include "../utils/Debug.h"
 #include "../utils/Thread.h"

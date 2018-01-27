@@ -169,7 +169,6 @@ src/world/PerlinNoise.cpp
 src/world/PerlinNoise.h
 src/world/SkyBox.cpp
 src/world/SkyBox.h
-src/world/blocks/Block.cpp
 src/world/blocks/Block.h
 src/world/blocks/BlockManager.cpp
 src/world/blocks/BlockManager.h
