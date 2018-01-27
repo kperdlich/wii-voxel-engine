@@ -21,18 +21,37 @@
 #define PACKETKEEPALIVE_H
 
 #include "Packet.h"
+#include "PacketGlobals.h"
 
 class PacketKeepAlive : public Packet
 {
 public:
-    PacketKeepAlive(int32_t id = 0) : Packet(PACKET_KEEP_ALIVE), m_ID(id) {}
-protected:
-    void SendContent(const Session& session) override
+    PacketKeepAlive(int32_t id = 0) : Packet(PACKET_KEEP_ALIVE), m_KeepAliveID(id) {}
+
+    void Read(const Session &session) override
     {
-        session.Send<int32_t>(m_ID);
+        m_KeepAliveID = session.Read<int32_t>();
     }
+
+    void Action() const override
+    {
+        // send id back to server
+        Send();
+    }
+
+    Packet* CreateInstance() const override
+    {
+        return new PacketKeepAlive();
+    }
+
+protected:
+    void SendContent(const Session& session) const override
+    {
+        session.Send<int32_t>(m_KeepAliveID);
+    }
+
 private:
-    int32_t m_ID = 0;
+    int32_t m_KeepAliveID = 0;
 };
 
 #endif // PACKETKEEPALIVE_H

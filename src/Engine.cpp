@@ -48,12 +48,10 @@ void Engine::Start()
     m_pBasicCommandHandler->ExecuteCommand( SwitchToIntroCommand::Name() );
 
     NetworkManager::Get().Connect("192.168.178.27", 25565);
-    PacketHandshake hs("DaeFennek", "192.168.178.27", 25565);
-    PacketLogin l("DaeFennek");
+    PacketHandshake hs("DaeFennek", "192.168.178.27", 25565);    
     hs.Send();
-    l.Send();
 
-    while( m_bRunning )
+    while(m_bRunning)
     {
         uint32_t startFrameTime = ticks_to_millisecs(gettime());
 
@@ -61,6 +59,7 @@ void Engine::Start()
 
         m_pInputHandler->Update();        
         m_pSceneHandler->Update(m_millisecondsLastFrame / 1000.0f);
+        NetworkManager::Get().Update();
         m_pSceneHandler->DrawScene();       
 
         WiiPad* pad = m_pInputHandler->GetPadByID( WII_PAD_0 );
@@ -82,7 +81,7 @@ void Engine::Start()
         m_millisecondsLastFrame = ticks_to_millisecs(gettime()) - startFrameTime;
 	}
 
-    NetworkManager::Get().Close();
+    NetworkManager::Get().Destroy();
 
     delete m_pBasicCommandHandler;
     delete m_pSceneHandler;

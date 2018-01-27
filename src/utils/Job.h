@@ -39,25 +39,21 @@ public:
     }
 
 protected:
-    void PreExecute() override
-    {
+    virtual void PreExecute() override
+    {        
         while(true)
         {
             if (m_queue.IsEmpty())
             {
-                if(IsStopped())
-                {
+                if(IsStopped())                
                     break;
-                }
-                else
-                {
-                    LWP_SuspendThread(LWP_GetSelf());
-                }
-           }
-           else
-           {
+                else                
+                    Suspend();
+            }
+            else
+            {
                 Execute();
-           }
+            }
         }
     }
 

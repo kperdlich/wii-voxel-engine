@@ -20,34 +20,54 @@
 #ifndef PACKETHANDSHAKE_H
 #define PACKETHANDSHAKE_H
 
-#include "Packet.h"
 #include <string>
+#include "Packet.h"
+#include "PacketGlobals.h"
+#include "PacketLogin.h"
+#include "../utils/Debug.h"
 #include "../utils/stringhelper.h"
 
 class PacketHandshake : public Packet
 {
 public:
-    PacketHandshake(std::string playerName, std::string ip, uint16_t port ) :
-       m_PlayerName(playerName), m_IP(ip), m_Port(port), Packet(PACKET_HANDSHAKE) {}
-protected:
-
-    void SendContent(const Session& session) override
+    PacketHandshake() : Packet(PACKET_HANDSHAKE) {}
+    PacketHandshake(const std::string& playerName, const std::string& ip, uint16_t port ) : Packet(PACKET_HANDSHAKE)
     {
-        std::string usernameAndHost;
-        usernameAndHost.append(m_PlayerName);
-        usernameAndHost+= ';';
-        usernameAndHost.append(m_IP);
-        usernameAndHost+= ':';
-        usernameAndHost.append(ToString<uint16_t>(m_Port));
+        m_String.clear();
+        m_String.append(playerName);
+        m_String+= ';';
+        m_String.append(ip);
+        m_String+= ':';
+        m_String.append(ToString<uint16_t>(port));
+    }
 
-        session.Send<int16_t>((int16_t)usernameAndHost.length());
-        session.SendString(usernameAndHost);
+    void Read(const Session& session) override
+    {
+        m_String = session.ReadString();
+        LOG("Got Server Handshake '%s'", m_String.c_str());
+    }
+
+     void Action() const override
+     {
+         // todo implement
+         PacketLogin l("DaeFennek");
+         l.Send();
+     }
+
+     Packet* CreateInstance() const override
+     {
+        return new PacketHandshake();
+     }
+
+protected:
+    void SendContent(const Session& session) const override
+    {
+        session.Send<int16_t>((int16_t)m_String.length());
+        session.SendString(m_String);
     }
 
 private:
-    std::string m_PlayerName;
-    std::string m_IP;
-    uint16_t m_Port;
+    std::string m_String;
 };
 
 #endif // PACKETHANDSHAKE_H

@@ -49,3 +49,20 @@ void Session::Send(const char *data, size_t size) const
 {
     m_Socket.Write(data, size);
 }
+
+int32_t Session::Read(void *data, size_t size) const
+{
+    return m_Socket.Read(data, size);
+}
+
+std::string Session::ReadString() const
+{
+    std::string str;
+    int16_t len = Read<int16_t>();
+    for(int16_t i = 0; i < len; ++i)
+    {
+        Read<char>(); // 0x00
+        str+=Read<char>();
+    }
+    return str;
+}

@@ -93,9 +93,12 @@ src/net/NetworkManager.cpp
 src/net/NetworkManager.h
 src/net/Packet.cpp
 src/net/Packet.h
+src/net/PacketGlobals.h
 src/net/PacketHandshake.h
 src/net/PacketKeepAlive.h
 src/net/PacketLogin.h
+src/net/ServerConnection.cpp
+src/net/ServerConnection.h
 src/net/Session.cpp
 src/net/Session.h
 src/net/Socket.cpp

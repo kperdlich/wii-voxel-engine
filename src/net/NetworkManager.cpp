@@ -29,22 +29,35 @@ void NetworkManager::Init()
     m_bInitialized = if_config(m_LocalIP, m_Gateway, m_Netmask, true, 5) >= 0;
     if (m_bInitialized)
     {
-        LOG("network configured, ip: %s, gw: %s, mask %s", m_LocalIP, m_Gateway, m_Netmask);        
+        LOG("Network configured, ip: %s, gw: %s, mask %s", m_LocalIP, m_Gateway, m_Netmask);
     }
     else
     {
-        LOG("network configuration failed!");
+        ERROR("Network configuration failed!");
     }
 }
 
 void NetworkManager::Connect(const std::string &ip, uint16_t port)
 {
     if (m_bInitialized)
-        m_Session.Connect(ip, port);
+        m_ServerConnection.Connect(ip, port);
 }
 
-void NetworkManager::Close()
+void NetworkManager::Destroy()
 {
     if (m_bInitialized)
-        m_Session.Close();
+        m_ServerConnection.Destroy();
+}
+
+void NetworkManager::Update()
+{
+    for(uint16_t i = 0; i < 5; ++i)
+    {
+        Packet* p = m_ServerConnection.PopPacket();
+        if (p)
+        {
+            p->Action();
+            delete p;
+        }
+    }
 }

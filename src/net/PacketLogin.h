@@ -22,23 +22,55 @@
 
 #include <string>
 #include "Packet.h"
+#include "PacketGlobals.h"
 #include "../globals.h"
 
 class PacketLogin : public Packet
 {
 public:
-    PacketLogin(const std::string playerName) : Packet(PACKET_LOGIN), m_PlayerName(playerName) {}
-protected:
-    void SendContent(const Session& session) override
+    PacketLogin() : Packet(PACKET_LOGIN) {}
+    PacketLogin(const std::string playerName) : Packet(PACKET_LOGIN), m_PlayerName(playerName), m_ProtocolVersion(SERVER_PROTOCOL_VERSION) {}
+
+    void Read(const Session &session) override
     {
-        session.Send<int32_t>((int32_t)SERVER_PROTOCOL_VERSION);
+        m_ProtocolVersion = session.Read<int32_t>();
+        session.Read<int16_t>(); // read unused empty string
+        m_LevelType     = session.ReadString();
+        m_ServerMode    = session.Read<int32_t>();
+        m_Dimension     = session.Read<int32_t>();
+        m_Difficulty    = session.Read<char>();
+        m_Vanilla       = session.Read<unsigned char>();
+        m_MaxPlayers    = session.Read<unsigned char>();
+    }
+
+    void Action() const override
+    {
+        // todo implement
+    }
+
+    Packet* CreateInstance() const override
+    {
+       return new PacketLogin();
+    }
+
+protected:
+    void SendContent(const Session& session) const override
+    {
+        session.Send<int32_t>(m_ProtocolVersion);
         session.Send<int16_t>((int16_t)m_PlayerName.length());
         session.SendString(m_PlayerName);
         for(uint32_t i = 0; i < 13; ++i)
              session.Send<char>(0x00);
     }
 private:
+    int32_t m_ProtocolVersion;
     std::string m_PlayerName;
+    std::string m_LevelType;
+    int32_t m_ServerMode;
+    int32_t m_Dimension;
+    char m_Difficulty;
+    unsigned char m_Vanilla;
+    unsigned char m_MaxPlayers;
 };
 
 #endif // PACKETLOGIN_H

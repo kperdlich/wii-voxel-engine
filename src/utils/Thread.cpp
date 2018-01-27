@@ -25,7 +25,7 @@ int Thread::Create(void *(*entry)(void *), void *stackbase, u32 stack_size, u8 p
     int32_t ret = LWP_CreateThread(&m_threadID, entry, this, stackbase, stack_size, prio);
     if (ret < 0)
     {
-        LOG("Thread: Couldn't create Thread!");
+        ERROR("Thread: Couldn't create Thread!");
     }
 
     return ret;
@@ -36,7 +36,6 @@ void* Thread::ThreadEntry(void *args)
     static_cast<Thread*>(args)->PreExecute();
     return nullptr;
 }
-
 
 int Thread::Start()
 {
@@ -64,7 +63,6 @@ void Thread::Stop()
     LWP_JoinThread(m_threadID, nullptr);
 
     m_mutex.Lock();
-
     m_bStop = false;
     m_mutex.Unlock();
 }

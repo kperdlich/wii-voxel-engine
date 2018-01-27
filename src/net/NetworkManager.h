@@ -20,7 +20,7 @@
 ***/
 
 #include "Packet.h"
-#include "Session.h"
+#include "ServerConnection.h"
 
 class NetworkManager
 {
@@ -29,7 +29,8 @@ private:
 public:
     void Init();
     void Connect(const std::string& ip, uint16_t port);
-    void Close();
+    void Destroy();
+    void Update();
 
     static NetworkManager& Get()
     {
@@ -37,14 +38,14 @@ public:
         return s_instance;
     }
 
-    inline bool Initialized()
+    inline bool Initialized() const
     {
         return m_bInitialized;
     }
 
-    inline const Session& GetSession()
+    inline const Session& GetSession() const
     {
-        return m_Session;
+        return m_ServerConnection.GetSession();
     }
 
     NetworkManager(NetworkManager const&) = delete;
@@ -56,7 +57,7 @@ private:
     char m_Netmask[16];
     bool m_bInitialized = false;
 
-    Session m_Session;    
+    ServerConnection m_ServerConnection;    
 };
 
 #endif // NETWORKMANAGER_H

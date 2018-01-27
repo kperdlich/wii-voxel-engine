@@ -33,7 +33,7 @@ bool Socket::Connect(const std::string &host, uint16_t port)
     m_Socked = net_socket (AF_INET, SOCK_STREAM, IPPROTO_IP);
     if ( m_Socked < 0)
     {
-        LOG("Failed creating socket!");
+        ERROR("Failed creating socket!");
         return false;
     }
 
@@ -48,14 +48,14 @@ bool Socket::Connect(const std::string &host, uint16_t port)
     server.sin_len = sizeof(struct sockaddr_in);
     memcpy((char*) &server.sin_addr, &addr.s_addr, sizeof(struct in_addr));
 
-    s32 bindingState = net_connect(m_Socked, (struct sockaddr*) &server, sizeof (server));
+    int32_t bindingState = net_connect(m_Socked, (struct sockaddr*) &server, sizeof (server));
     if ( bindingState < 0)
     {
-        LOG("Socket failed to connect!");
+        ERROR("Socket failed to connect!");
         return false;
     }
 
-    LOG("Socket connected!");
+    LOG("Socket connected to %s:%d", host.c_str(), port);
     m_bConnected = true;
     return true;
 }

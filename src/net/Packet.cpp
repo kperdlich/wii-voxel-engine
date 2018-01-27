@@ -20,7 +20,7 @@
 #include "Packet.h"
 #include "NetworkManager.h"
 
-void Packet::Send()
+void Packet::Send() const
 {    
     const Session& session = NetworkManager::Get().GetSession();
     if(session.IsRunning())

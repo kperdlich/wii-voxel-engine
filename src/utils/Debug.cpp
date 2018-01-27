@@ -18,15 +18,17 @@
 ***/
 
 #include "Debug.h"
+#include "Mutex.h"
 
-std::ofstream Debug::m_file;
+std::ofstream Debug::s_file;
+Mutex Debug::s_mutex;
 
 void Debug::Init()
 {
-    m_file.open(LOG_FILE);
+    s_file.open(LOG_FILE);
 }
 
-void Debug::Log(const char* format, ...)
+void Debug::Log(const ELogType &logType, const char* format, ...)
 {
     va_list args;
     va_start(args, format);
@@ -36,10 +38,24 @@ void Debug::Log(const char* format, ...)
 
     va_end(args);
 
-    m_file << buffer << std::endl;
+    s_mutex.Lock();
+    switch (logType)
+    {
+    case ELogType::INFO:
+        s_file << "[INFO] ";
+        break;
+    case ELogType::WARNING:
+        s_file << "[WARNING] ";
+        break;
+    case ELogType::ERROR:
+        s_file << "[ERROR] ";
+        break;
+    }
+    s_file << buffer << std::endl;
+    s_mutex.Unlock();
 }
 
 void Debug::Release()
 {
-    m_file.close();
+    s_file.close();
 }

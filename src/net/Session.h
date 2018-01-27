@@ -33,6 +33,16 @@ public:
 
     void SendString(const std::string& value) const;
     void Send(const char* data, size_t size) const;
+    int32_t Read(void *data, size_t size) const;
+    std::string ReadString() const;
+
+    template<typename T>
+    T Read() const
+    {
+        T value;
+        m_Socket.Read(&value, sizeof(T));
+        return value;
+    }
 
     template<typename T>
     void Send(T value) const

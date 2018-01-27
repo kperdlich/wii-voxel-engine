@@ -21,31 +21,37 @@
 #define _DEBUG_H_
 
 #include <fstream>
+#include "Mutex.h"
 #include "../Engine.h"
 
 #ifdef DEBUG
-    #define LOG(format,...) Debug::Log(format, ##__VA_ARGS__)
+    #define LOG(format,...)     Debug::Log(ELogType::INFO, format, ##__VA_ARGS__)
+    #define WARNING(format,...) Debug::Log(ELogType::WARNING, format, ##__VA_ARGS__)
+    #define ERROR(format,...)   Debug::Log(ELogType::ERROR, format, ##__VA_ARGS__)
 #else
     #define LOG(format, ...)
+    #define WARNING(format,...)
+    #define ERROR(format,...)
 #endif
 
+enum class ELogType : unsigned char
+{
+    INFO    = 0,
+    WARNING = 1,
+    ERROR   = 2
+};
 
 class Debug {
 
 private:
-    static std::ofstream m_file;
-public:	
     Debug() {}
+    static Mutex s_mutex;
+    static std::ofstream s_file;
 
+public:
     static void Init();
-    static void Log(const char* format, ...);
-    static void Release();
-
-    /*static Debug& GetInstance()
-    {
-        static Debug s_instance;
-        return s_instance;
-    }*/
+    static void Log(const ELogType& logType, const char* format, ...);
+    static void Release();   
 
     Debug(Debug const&)	  = delete;
     void operator=(Debug const&) = delete;
