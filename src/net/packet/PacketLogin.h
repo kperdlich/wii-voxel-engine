@@ -23,7 +23,7 @@
 #include <string>
 #include "Packet.h"
 #include "PacketGlobals.h"
-#include "../globals.h"
+#include "../../globals.h"
 
 class PacketLogin : public Packet
 {

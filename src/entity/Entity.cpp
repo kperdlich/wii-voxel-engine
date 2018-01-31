@@ -68,7 +68,7 @@ const EntityRenderer* Entity::GetRenderer() const
 	return m_entityRenderer;
 }
 
-void Entity::SetPosition( Vector3 position )
+void Entity::SetPosition(const Vector3 &position )
 {
 	m_position = position;
 }
@@ -78,7 +78,7 @@ const Vector3& Entity::GetPosition() const
 	return m_position;
 }
 
-void Entity::SetRotation( Vector3 rotation )
+void Entity::SetRotation( const Vector3& rotation )
 {
 	m_rotation = rotation;
 }

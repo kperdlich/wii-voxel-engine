@@ -31,11 +31,6 @@ void Session::Close()
     m_Socket.Disconnect();
 }
 
-void Session::Update()
-{
-    // todo send keepAlive packet
-}
-
 void Session::SendString(const std::string &value) const
 {
     for(uint32_t i = 0; i < value.length(); ++i)

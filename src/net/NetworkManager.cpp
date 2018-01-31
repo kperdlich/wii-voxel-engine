@@ -19,7 +19,7 @@
 
 #include <network.h>
 #include "NetworkManager.h"
-#include "PacketHandshake.h"
+#include "packet/PacketHandshake.h"
 #include "../utils/Debug.h"
 #include "../utils/Thread.h"
 #include "../utils/SafeQueue.h"
@@ -51,6 +51,9 @@ void NetworkManager::Destroy()
 
 void NetworkManager::Update()
 {
+    if(!m_bInitialized)
+        return;
+
     for(uint16_t i = 0; i < 5; ++i)
     {
         Packet* p = m_ServerConnection.PopPacket();

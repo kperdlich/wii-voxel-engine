@@ -46,14 +46,14 @@ GameWorld::~GameWorld()
 
 void GameWorld::GenerateWorld()
 {
-    auto& playerPosition = static_cast<Basic3DScene&>(Engine::Get().GetSceneHandler().GetCurrentScene()).GetEntityHandler().GetPlayer()->GetPosition();
+    auto& playerPosition = static_cast<Basic3DScene*>(Engine::Get().GetSceneHandler().GetCurrentScene())->GetEntityHandler().GetPlayer()->GetPosition();
     m_chunkLoader.Init(playerPosition, this);
 }
 
 
 void GameWorld::Draw()
 {
-    auto& playerPosition = static_cast<Basic3DScene&>(Engine::Get().GetSceneHandler().GetCurrentScene()).GetEntityHandler().GetPlayer()->GetPosition();
+    auto& playerPosition = static_cast<Basic3DScene*>(Engine::Get().GetSceneHandler().GetCurrentScene())->GetEntityHandler().GetPlayer()->GetPosition();
     auto& loadedChunks = m_chunkLoader.GetLoadedChunks();
     for( auto& chunk : loadedChunks)
     {        

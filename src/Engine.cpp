@@ -24,8 +24,8 @@
 #include "net/NetworkManager.h"
 #include "utils/Debug.h"
 
-#include "net/PacketHandshake.h"
-#include "net/PacketLogin.h"
+#include "net/packet/PacketHandshake.h"
+#include "net/packet/PacketLogin.h"
 
 Engine::Engine()
 {
@@ -45,11 +45,7 @@ void Engine::Start()
 
 	Init();
 
-    m_pBasicCommandHandler->ExecuteCommand( SwitchToIntroCommand::Name() );
-
-    NetworkManager::Get().Connect("192.168.178.27", 25565);
-    PacketHandshake hs("DaeFennek", "192.168.178.27", 25565);    
-    hs.Send();
+    m_pBasicCommandHandler->ExecuteCommand( SwitchToIntroCommand::Name() );    
 
     while(m_bRunning)
     {
@@ -145,5 +141,5 @@ BasicCommandHandler& Engine::GetBasicCommandHandler()
 
 SpriteStageManager& Engine::GetSpriteStageManager()
 {
-    return GetSceneHandler().GetCurrentScene().GetSpriteStageManager();
+    return GetSceneHandler().GetCurrentScene()->GetSpriteStageManager();
 }

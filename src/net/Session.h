@@ -28,8 +28,7 @@ class Session
 public:
     Session(){}
     bool Connect(const std::string& ip, uint16_t port);
-    void Close();
-    void Update();
+    void Close();   
 
     void SendString(const std::string& value) const;
     void Send(const char* data, size_t size) const;

@@ -18,7 +18,7 @@
 ***/
 
 #include "Packet.h"
-#include "NetworkManager.h"
+#include "../NetworkManager.h"
 
 void Packet::Send() const
 {    

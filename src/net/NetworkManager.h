@@ -20,7 +20,7 @@
 #ifndef NETWORKMANAGER_H
 #define NETWORKMANAGER_H
 
-#include "Packet.h"
+#include "packet/Packet.h"
 #include "ServerConnection.h"
 
 class NetworkManager

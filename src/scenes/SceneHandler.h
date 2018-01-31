@@ -44,7 +44,7 @@ public:
     void LoadScene(int32_t index );
 	void DrawScene();
     void Update(float deltaSeconds);
-    Scene& GetCurrentScene();
+    Scene *GetCurrentScene();
 
 };
 

@@ -24,6 +24,8 @@
 #include "Hotbar_png.h"
 #include "Crosshair_png.h"
 #include "../entity/Player.h"
+#include "../net/NetworkManager.h"
+#include "../net/packet/PacketHandshake.h"
 
 #define IGS_HUD_HOTBAR "IGS_HUD_HOTBAR"
 #define IGS_HUD_CROSSHAIR "IGS_HUD_CROSSHAIR"
@@ -48,6 +50,11 @@ void InGameScene::Load()
     m_pGameWorld = new GameWorld();
     InitEntities();
     m_pGameWorld->GenerateWorld();
+
+    // todo move to multiplayer scene
+    NetworkManager::Get().Connect("192.168.178.27", 25565);
+    PacketHandshake hs("DaeFennek", "192.168.178.27", 25565);
+    hs.Send();
 
     Basic3DScene::Load();
 }

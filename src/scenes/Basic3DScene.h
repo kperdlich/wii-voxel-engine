@@ -37,7 +37,7 @@ public:
     virtual void Draw() override;
     virtual void Update(float deltaSeconds) override;
 
-	class EntityHandler& GetEntityHandler();
+    class EntityHandler& GetEntityHandler();
 
 protected:	
     std::vector<UiElement*> m_uiElements;

@@ -37,7 +37,7 @@ public:
     }
 
 private:
-    int32_t m_Socked;
+    int32_t m_Socket;
     bool m_bConnected = false;
 };
 

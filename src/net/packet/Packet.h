@@ -17,11 +17,25 @@
  *
 ***/
 
-#ifndef PACKGLOBALS_H
-#define PACKGLOBALS_H
+#ifndef PACKET_H
+#define PACKET_H
 
-#define PACKET_KEEP_ALIVE   0x00
-#define PACKET_LOGIN        0x01
-#define PACKET_HANDSHAKE    0x02
+#include <cstdio>
+#include "../Session.h"
 
-#endif // PACKGLOBALS_H
+class Packet
+{
+public:
+    Packet(unsigned char id) : m_ID(id) {}
+    virtual ~Packet() {}
+    void Send() const;
+    virtual void Read(const Session& session) = 0;
+    virtual void Action() const = 0;
+    virtual Packet* CreateInstance() const = 0;
+protected:
+    virtual void SendContent(const Session& session) const = 0;
+    char m_ID;
+
+};
+
+#endif // PACKET_H

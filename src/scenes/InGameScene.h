@@ -22,7 +22,6 @@
 
 #include "Basic3DScene.h"
 
-
 class InGameScene: public Basic3DScene {
 public:
     InGameScene();
@@ -31,6 +30,12 @@ public:
 	void Load() override;
     void Unload() override;
 	void Draw() override;
+
+    inline class GameWorld* GetWorld() const
+    {
+        return m_pGameWorld;
+    }
+
 protected:
 	void InitEntities();
 

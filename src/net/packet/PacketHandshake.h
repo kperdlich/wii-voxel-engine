@@ -24,8 +24,8 @@
 #include "Packet.h"
 #include "PacketGlobals.h"
 #include "PacketLogin.h"
-#include "../utils/Debug.h"
-#include "../utils/stringhelper.h"
+#include "../../utils/Debug.h"
+#include "../../utils/stringhelper.h"
 
 class PacketHandshake : public Packet
 {
