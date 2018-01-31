@@ -20,3 +20,4 @@ src/world/hud
 src/world/chunk/jobs
 src/net
 F:/devkitPro/libogc/include
+src/net/packet
