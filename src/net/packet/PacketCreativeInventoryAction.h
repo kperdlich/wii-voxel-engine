@@ -12,7 +12,7 @@ public:
     void Read(const Session &session) override
     {
         m_Slot = session.Read<int16_t>();
-        // todo add slot
+        ReadSlotData(m_SlotData, session);
     }
     void Action() const override
     {
@@ -28,7 +28,7 @@ protected:
     }
 
     int16_t m_Slot = 0;
-    // todo add slot
+    SlotData m_SlotData;
 };
 
 #endif // PACKETCREATIVEINVENTORYACTION_H

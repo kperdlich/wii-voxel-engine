@@ -35,11 +35,20 @@ public:
     void Move(float x, float y, float deltaTime);
 	void Rotate( const Vector3& rotation );
 
-private:
-	void UpdateInventory();
+    inline bool IsPlayerSpawned()
+    {
+        return m_bPlayerSpawned;
+    }
+
+    inline void SetPlayerSpawned(bool value)
+    {
+        m_bPlayerSpawned = value;
+    }
 
 private:
+	void UpdateInventory();
     PlayerInventory* m_pInventory;
+    bool m_bPlayerSpawned = false;
 
 
 };

@@ -120,15 +120,15 @@ void ServerConnection::InitPacketMap()
     s_PacketMap[PACKET_PLAYER_LOOK] = new PacketPlayerLook();
     s_PacketMap[PACKET_PLAYER_POSITION_AND_LOOK] = new PacketPlayerPositionAndLook();
     s_PacketMap[PACKET_PLAYER_DIGGING] = new PacketPlayerDigging();
-    s_PacketMap[PACKET_PLAYER_BLOCK_PLACEMENT] = new PacketPlayerBlockPlacement();
+    //s_PacketMap[PACKET_PLAYER_BLOCK_PLACEMENT] = new PacketPlayerBlockPlacement();
     s_PacketMap[PACKET_HELD_ITEM_CHANGE] = new PacketHeldItemChange();
     s_PacketMap[PACKET_USE_BED] = new PacketUseBed();
     s_PacketMap[PACKET_ANIMATION] = new PacketAnimation();
     s_PacketMap[PACKET_ENTITY_ACTION] = new PacketEntityAction();
     s_PacketMap[PACKET_SPAWN_NAMED_ENTITY] = new PacketSpawnNamedEntity();
     s_PacketMap[PACKET_COLLECT_ITEM] = new PacketCollectItem();
-    s_PacketMap[PACKET_SPAWN_OBJECT] = new PacketSpawnObject();
-    s_PacketMap[PACKET_SPAWN_MOB] = new PacketSpawnMob();
+    //s_PacketMap[PACKET_SPAWN_OBJECT] = new PacketSpawnObject();
+    //s_PacketMap[PACKET_SPAWN_MOB] = new PacketSpawnMob();
     s_PacketMap[PACKET_SPAWN_PAINTING] = new PacketSpawnPainting();
     s_PacketMap[PACKET_SPAWN_EXPERIENCE_ORB] = new PacketSpawnExperienceOrb();
     s_PacketMap[PACKET_ENTITY_VELOCITY] = new PacketEntityVelocity();
@@ -141,11 +141,11 @@ void ServerConnection::InitPacketMap()
     s_PacketMap[PACKET_ENTITY_HEAD_LOOK] = new PacketEntityHeadLook();
     s_PacketMap[PACKET_ENTITY_STATUS] = new PacketEntityStatus();
     s_PacketMap[PACKET_ATTACH_ENTITY] = new PacketAttachEntity();
-    s_PacketMap[PACKET_ENTITY_METADATA] = new PacketEntityMetadata();
+    //s_PacketMap[PACKET_ENTITY_METADATA] = new PacketEntityMetadata();
     s_PacketMap[PACKET_ENTITY_EFFECT] = new PacketEntityEffect();
     s_PacketMap[PACKET_REMOVE_ENTITY_EFFECT] = new PacketRemoveEntityEffect();
     s_PacketMap[PACKET_SET_EXPERIENCE] = new PacketSetExperience();
-    s_PacketMap[PACKET_CHUNK_DATA] = new PacketChunkData();
+    //s_PacketMap[PACKET_CHUNK_DATA] = new PacketChunkData();
     s_PacketMap[PACKET_MULTI_BLOCK_CHANGE] = new PacketMultiBlockChange();
     s_PacketMap[PACKET_BLOCK_CHANGE] = new PacketBlockChange();
     s_PacketMap[PACKET_BLOCK_ACTION] = new PacketBlockAction();
@@ -155,7 +155,7 @@ void ServerConnection::InitPacketMap()
     s_PacketMap[PACKET_THUNDERBOLT] = new PacketThunderbolt();
     s_PacketMap[PACKET_OPEN_WINDOW] = new PacketOpenWindow();
     s_PacketMap[PACKET_CLOSE_WINDOW] = new PacketCloseWindow();
-    s_PacketMap[PACKET_CLICK_WINDOW] = new PacketClickWindow();
+    //s_PacketMap[PACKET_CLICK_WINDOW] = new PacketClickWindow();
     s_PacketMap[PACKET_SET_SLOT] = new PacketSetSlot();
     s_PacketMap[PACKET_SET_WINDOW_ITEMS] = new PacketSetWindowItems();
     s_PacketMap[PACKET_UPDATE_WINDOW_PROPERTY] = new PacketUpdateWindowProperty();
@@ -228,7 +228,7 @@ void ServerConnection::Execute()
 {
     char packetID = m_Session.Read<char>();
     Packet* p = CreatePacketByID(packetID);
-    if (p)
+    if (p && packetID != PACKET_DISCONNECT)
     {
         LOG("Parse packetID %d", packetID);
         p->Read(m_Session);
@@ -236,7 +236,12 @@ void ServerConnection::Execute()
     }
     else
     {
-        ERROR("Couldn't find or create instance of packetID %d. Stop Packet reader!", packetID);
-        Suspend(); // todo remove when all packets are implemented
+        //m_Session.Close();
+        if (packetID == PACKET_DISCONNECT)
+            ERROR("Disconnected by server. Stop Packet reader");
+        else
+            ERROR("Couldn't find/create instance of packetID %d. Stop Packet reader", packetID);
+
+        Suspend();
     }
 }

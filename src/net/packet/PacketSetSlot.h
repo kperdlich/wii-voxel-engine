@@ -1,6 +1,7 @@
 #ifndef PACKETSETSLOT_H
 #define PACKETSETSLOT_H
 
+#include <vector>
 #include "Packet.h"
 #include "PacketGlobals.h"
 
@@ -13,7 +14,7 @@ public:
     {
         m_WindowID = session.Read<char>();
         m_Slot = session.Read<int16_t>();
-        // todo add slot data
+        ReadSlotData(m_SlotData, session);
 
     }
     void Action() const override
@@ -31,7 +32,7 @@ protected:
 
     char m_WindowID = 0;
     int16_t m_Slot = 0;
-    // todo add slot data
+    SlotData m_SlotData;
 };
 
 #endif // PACKETSETSLOT_H

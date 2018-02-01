@@ -64,6 +64,7 @@ void Socket::Disconnect()
 {
     if (m_bConnected)
     {
+        m_bConnected = false;
         net_close(m_Socket);
         LOG("Socket closed connection!");
     }

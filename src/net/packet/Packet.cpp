@@ -19,12 +19,14 @@
 
 #include "Packet.h"
 #include "../NetworkManager.h"
+#include "../../utils/Debug.h"
 
 void Packet::Send() const
 {    
     const Session& session = NetworkManager::Get().GetSession();
     if(session.IsRunning())
     {
+        LOG("Send Packet: %d", m_ID);
         session.Send<char>(m_ID);
         SendContent(session);
     }

@@ -21,8 +21,9 @@ public:
     }
     void Action() const override
     {
-
+        Send();
     }
+
     Packet *CreateInstance() const override
     {
         return new PacketPlayerPositionAndLook();
@@ -31,7 +32,13 @@ public:
 protected:
     void SendContent(const Session &session) const override
     {
-
+        session.Send<double>(m_X);
+        session.Send<double>(m_Y);
+        session.Send<double>(m_Stance);
+        session.Send<double>(m_Z);
+        session.Send<float>(m_Yaw);
+        session.Send<float>(m_Pitch);
+        session.Send<bool>(m_bOnGround);
     }
 
     double m_X = 0, m_Stance = 0, m_Y = 0, m_Z = 0;

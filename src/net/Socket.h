@@ -34,7 +34,7 @@ public:
     inline bool IsConnected() const
     {
         return m_bConnected;
-    }
+    }   
 
 private:
     int32_t m_Socket;
