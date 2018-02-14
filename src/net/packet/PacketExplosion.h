@@ -25,7 +25,7 @@ public:
          session.Read(m_Records, m_RecordCount * (sizeof(char) * 3));
      }
 
-     void Action() const override
+     void Action() override
      {
      }
      Packet *CreateInstance() const override

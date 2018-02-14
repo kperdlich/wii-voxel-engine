@@ -17,7 +17,7 @@ public:
         m_Z = session.Read<int32_t>();
         m_Count = session.Read<int16_t>();
     }
-    void Action() const override
+    void Action() override
     {
 
     }

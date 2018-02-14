@@ -19,7 +19,7 @@ public:
         m_Pitch = session.Read<float>();
         m_bOnGround = session.Read<bool>();
     }
-    void Action() const override
+    void Action() override
     {
         Send();
     }

@@ -14,7 +14,7 @@ public:
         m_Reason = session.ReadString();
     }
 
-    void Action() const override
+    void Action() override
     {        
 
     }

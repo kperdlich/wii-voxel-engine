@@ -23,7 +23,7 @@ public:
         m_Roll = session.Read<char>();
     }
 
-    void Action() const override
+    void Action() override
     {
 
     }

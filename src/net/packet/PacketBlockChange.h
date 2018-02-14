@@ -18,7 +18,7 @@ public:
         m_BlockMetadata = session.Read<char>();
     }
 
-    void Action() const override
+    void Action() override
     {
     }
 

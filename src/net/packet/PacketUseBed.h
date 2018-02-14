@@ -17,7 +17,7 @@ public:
         m_Y = session.Read<char>();
         m_Z = session.Read<int32_t>();
     }
-    void Action() const override
+    void Action() override
     {
 
     }

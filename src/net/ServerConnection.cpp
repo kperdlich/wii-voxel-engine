@@ -145,7 +145,7 @@ void ServerConnection::InitPacketMap()
     s_PacketMap[PACKET_ENTITY_EFFECT] = new PacketEntityEffect();
     s_PacketMap[PACKET_REMOVE_ENTITY_EFFECT] = new PacketRemoveEntityEffect();
     s_PacketMap[PACKET_SET_EXPERIENCE] = new PacketSetExperience();
-    //s_PacketMap[PACKET_CHUNK_DATA] = new PacketChunkData();
+    s_PacketMap[PACKET_CHUNK_DATA] = new PacketChunkData();
     s_PacketMap[PACKET_MULTI_BLOCK_CHANGE] = new PacketMultiBlockChange();
     s_PacketMap[PACKET_BLOCK_CHANGE] = new PacketBlockChange();
     s_PacketMap[PACKET_BLOCK_ACTION] = new PacketBlockAction();

@@ -47,7 +47,7 @@ public:
         LOG("Got Server Handshake '%s'", m_String.c_str());
     }
 
-     void Action() const override
+     void Action() override
      {
          // todo implement
          PacketLogin l("DaeFennek");

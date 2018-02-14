@@ -20,7 +20,7 @@ public:
         m_Text4 = session.ReadString();
     }
 
-    void Action() const override
+    void Action() override
     {
     }
     Packet *CreateInstance() const override

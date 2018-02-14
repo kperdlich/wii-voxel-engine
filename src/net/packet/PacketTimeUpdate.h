@@ -14,7 +14,7 @@ public:
         m_time = session.Read<int64_t>();
     }
 
-    void Action() const override
+    void Action() override
     {
         // todo implement
     }

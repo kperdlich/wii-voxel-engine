@@ -14,7 +14,7 @@ public:
         m_CollectedID = session.Read<int32_t>();
         m_CollectorID = session.Read<int32_t>();
     }
-    void Action() const override
+    void Action() override
     {
 
     }

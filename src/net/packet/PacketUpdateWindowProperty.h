@@ -15,7 +15,7 @@ public:
         m_Property = session.Read<int16_t>();
         m_Value = session.Read<int16_t>();
     }
-    void Action() const override
+    void Action() override
     {
     }
     Packet *CreateInstance() const override

@@ -19,7 +19,7 @@ public:
         m_Custom2 = session.Read<int32_t>();
         m_Custom3 = session.Read<int32_t>();
     }
-    void Action() const override
+    void Action() override
     {
     }
     Packet *CreateInstance() const override

@@ -16,7 +16,7 @@ public:
 
     }
 
-    void Action() const override
+    void Action() override
     {
     }
     Packet *CreateInstance() const override

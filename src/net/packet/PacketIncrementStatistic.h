@@ -14,7 +14,7 @@ public:
         m_StatisticID = session.Read<int32_t>();
         m_Amount = session.Read<char>();
     }
-    void Action() const override
+    void Action() override
     {
     }
     Packet *CreateInstance() const override

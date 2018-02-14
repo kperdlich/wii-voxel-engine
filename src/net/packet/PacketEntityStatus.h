@@ -15,7 +15,7 @@ public:
         m_EntityStatus = session.Read<char>();
     }
 
-    void Action() const override
+    void Action() override
     {
     }
 

@@ -17,7 +17,7 @@ public:
         m_DZ = session.Read<char>();
     }
 
-    void Action() const override
+    void Action() override
     {
     }
     Packet *CreateInstance() const override

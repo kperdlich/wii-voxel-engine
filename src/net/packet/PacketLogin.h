@@ -43,7 +43,7 @@ public:
         m_MaxPlayers    = session.Read<unsigned char>();
     }
 
-    void Action() const override
+    void Action() override
     {
         // todo implement
     }

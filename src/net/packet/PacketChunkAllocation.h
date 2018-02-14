@@ -19,7 +19,7 @@ public:
         m_bMode =   session.Read<bool>();
     }
 
-    void Action() const override
+    void Action() override
     {
         GameWorld* world = dynamic_cast<InGameScene*>(Engine::Get().GetSceneHandler().GetCurrentScene())->GetWorld();
         if (world)

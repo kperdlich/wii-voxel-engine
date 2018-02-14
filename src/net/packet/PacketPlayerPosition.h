@@ -11,7 +11,7 @@ class PacketPlayerPosition : public Packet
 public:
 
    PacketPlayerPosition(double x, double y, double z, double stance, bool onGround) :
-       m_X(x), m_Y(y), m_Z(z), m_Stance(stance), m_bOnGround(onGround), Packet(PACKET_PLAYER_POSITION) {}
+       Packet(PACKET_PLAYER_POSITION), m_X(x), m_Y(y), m_Z(z), m_Stance(stance), m_bOnGround(onGround) {}
 
    PacketPlayerPosition() : Packet(PACKET_PLAYER_POSITION) {}
 
@@ -19,7 +19,7 @@ public:
    {
 
    }
-   void Action() const override
+   void Action() override
    {
 
    }

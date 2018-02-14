@@ -18,7 +18,7 @@ public:
         m_Byte_2 = session.Read<char>();
     }
 
-    void Action() const override
+    void Action() override
     {
     }
 

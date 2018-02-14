@@ -33,7 +33,7 @@ public:
         m_KeepAliveID = session.Read<int32_t>();
     }
 
-    void Action() const override
+    void Action() override
     {
         // send id back to server
         Send();

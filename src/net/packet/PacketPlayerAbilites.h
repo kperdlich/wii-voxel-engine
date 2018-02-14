@@ -18,7 +18,7 @@ public:
         m_bInstantDestroy = session.Read<bool>();
     }
 
-    void Action() const override
+    void Action() override
     {
         // todo implement
     }

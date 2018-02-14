@@ -18,7 +18,7 @@ public:
         m_LevelType = session.ReadString();
     }
 
-    void Action() const override
+    void Action() override
     {
 
     }

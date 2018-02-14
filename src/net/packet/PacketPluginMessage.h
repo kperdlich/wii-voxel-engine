@@ -22,7 +22,7 @@ public:
         m_Data = malloc(m_Length);
         session.Read(m_Data, m_Length);
     }
-    void Action() const override
+    void Action() override
     {
     }
     Packet *CreateInstance() const override

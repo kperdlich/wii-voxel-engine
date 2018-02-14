@@ -15,7 +15,7 @@ public:
         m_bOnline = session.Read<bool>();
         m_Ping = session.Read<int16_t>();
     }
-    void Action() const override
+    void Action() override
     {
     }
     Packet *CreateInstance() const override

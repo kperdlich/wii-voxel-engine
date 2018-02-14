@@ -22,7 +22,7 @@ public:
          ReadSlotData(m_SlotData, m_Count, session);
      }
 
-     void Action() const override
+     void Action() override
      {
      }
      Packet *CreateInstance() const override

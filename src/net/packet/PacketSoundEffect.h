@@ -18,7 +18,7 @@ public:
         m_Data = session.Read<int32_t>();
 
     }
-    void Action() const override
+    void Action() override
     {
     }
     Packet *CreateInstance() const override

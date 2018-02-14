@@ -14,7 +14,7 @@ public:
         m_EID = session.Read<int32_t>();
         m_Animation = session.Read<char>();
     }
-    void Action() const override
+    void Action() override
     {
 
     }

@@ -14,7 +14,7 @@ public:
         m_chatMessage = session.ReadString();
      }
 
-     void Action() const override
+     void Action() override
      {
         // todo implement
      }

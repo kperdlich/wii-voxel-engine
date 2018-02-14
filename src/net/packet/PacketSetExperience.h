@@ -15,7 +15,7 @@ public:
         m_Level = session.Read<uint16_t>();
         m_TotalExperience = session.Read<uint16_t>();
     }
-    void Action() const override
+    void Action() override
     {
     }
     Packet* CreateInstance() const override

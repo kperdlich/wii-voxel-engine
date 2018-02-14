@@ -15,7 +15,7 @@ public:
         m_GameMode = session.Read<char>();
     }
 
-    void Action() const override
+    void Action() override
     {
     }
 

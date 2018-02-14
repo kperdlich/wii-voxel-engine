@@ -14,7 +14,7 @@ public:
     void Read(const Session &session) override
     {
     }
-    void Action() const override
+    void Action() override
     {
     }
     Packet *CreateInstance() const override

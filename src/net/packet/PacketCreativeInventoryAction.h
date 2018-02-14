@@ -14,7 +14,7 @@ public:
         m_Slot = session.Read<int16_t>();
         ReadSlotData(m_SlotData, session);
     }
-    void Action() const override
+    void Action() override
     {
     }
     Packet *CreateInstance() const override

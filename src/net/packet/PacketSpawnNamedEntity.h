@@ -20,7 +20,7 @@ public:
         m_Pitch = session.Read<char>();
         m_CurrentItem = session.Read<int16_t>();
     }
-    void Action() const override
+    void Action() override
     {
 
     }

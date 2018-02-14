@@ -21,7 +21,7 @@ public:
         m_HeadYaw = session.Read<char>();
         // todo read metadata
     }
-    void Action() const override
+    void Action() override
     {
 
     }

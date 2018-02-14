@@ -41,7 +41,7 @@ public:
     virtual ~Packet() {}
     void Send() const;
     virtual void Read(const Session& session) = 0;
-    virtual void Action() const = 0;
+    virtual void Action() = 0;
     virtual Packet* CreateInstance() const = 0;
 protected:
     virtual void SendContent(const Session& session) const = 0;

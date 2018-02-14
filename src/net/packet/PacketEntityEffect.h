@@ -16,7 +16,7 @@ public:
         m_Amplifier = session.Read<char>();
         m_Duration = session.Read<int16_t>();
     }
-    void Action() const override
+    void Action() override
     {
     }
     Packet *CreateInstance() const override

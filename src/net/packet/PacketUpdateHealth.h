@@ -15,7 +15,7 @@ public:
         m_Food = session.Read<int16_t>();
         m_FoodSaturation = session.Read<float>();
     }
-    void Action() const override
+    void Action() override
     {
 
     }

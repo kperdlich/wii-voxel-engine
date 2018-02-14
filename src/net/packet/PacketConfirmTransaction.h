@@ -15,7 +15,7 @@ public:
          m_ActionNumber = session.Read<uint16_t>();
          m_bAccepted = session.Read<bool>();
      }
-     void Action() const override
+     void Action() override
      {
      }
      Packet *CreateInstance() const override

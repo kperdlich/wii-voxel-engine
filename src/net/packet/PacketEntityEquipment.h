@@ -16,7 +16,7 @@ public:
         m_ItemID = session.Read<int16_t>();
         m_Damage = session.Read<int16_t>();
     }
-    void Action() const override
+    void Action() override
     {
 
     }

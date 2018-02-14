@@ -14,7 +14,7 @@ public:
         m_WindowID = session.Read<char>();
     }
 
-    void Action() const override
+    void Action() override
     {
     }
 

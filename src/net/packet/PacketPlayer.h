@@ -9,13 +9,13 @@
 class PacketPlayer : public Packet
 {
 public:
-    PacketPlayer(bool onGround = false) : m_bOnGround(onGround), Packet(PACKET_PLAYER) {}
+    PacketPlayer(bool onGround = false) : Packet(PACKET_PLAYER), m_bOnGround(onGround) {}
 
     void Read(const Session &session) override
     {
 
     }
-    void Action() const override
+    void Action() override
     {
 
     }
@@ -30,7 +30,7 @@ protected:
         session.Send<bool>(m_bOnGround);
     }
 
-    bool m_bOnGround = false;
+    bool m_bOnGround;
 };
 
 #endif // PACKETPLAYER_H

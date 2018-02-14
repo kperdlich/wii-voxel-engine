@@ -17,7 +17,7 @@ public:
         m_Y = session.Read<int32_t>();
         m_Z = session.Read<int32_t>();
     }
-    void Action() const override
+    void Action() override
     {
     }
     Packet *CreateInstance() const override
