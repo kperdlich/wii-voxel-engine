@@ -57,7 +57,7 @@ public:
             m_AddBitMap, m_CompressedSize);
 
         GameWorld* world = static_cast<InGameScene*>(Engine::Get().GetSceneHandler().GetCurrentScene())->GetWorld();
-        Chunk* c = world->GetCashedChunkAt(Vec2i(m_X * CHUNK_BLOCK_SIZE_X, m_Z * CHUNK_BLOCK_SIZE_Z));
+        Chunk* c = world->GetCashedChunkAt(Vec2i(m_X, m_Z));
 
         if(c)
         {

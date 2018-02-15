@@ -75,8 +75,8 @@ void Chunk::Build()
             }
 
             double xWorld, zWorld;
-            xWorld = (m_Position.X + (x * BLOCK_SIZE));
-            zWorld = (m_Position.Y + (z * BLOCK_SIZE));
+            xWorld = (CHUNK_GLOBAL_X(m_Position.X) + (x * BLOCK_SIZE));
+            zWorld = (CHUNK_GLOBAL_Z(m_Position.Y) + (z * BLOCK_SIZE));
 
             double noise = pn.GetHeight(xWorld, zWorld);
             uint32_t height = (uint32_t) MathHelper::Clamp((CHUNK_SIZE_Y * noise) + CHUNK_MIN_GROUND, CHUNK_MIN_GROUND, CHUNK_SIZE_Y);
@@ -111,14 +111,12 @@ void Chunk::Clear()
 }
 
 void Chunk::CreateTrees()
-{
-    //srand (time(NULL));
-    uint32_t x = 6;//2 + (rand() % (CHUNK_SIZE_X - 4)); // value range 2 - 14
-    //srand (time(NULL));
-    uint32_t z = 8;// + (rand() % (CHUNK_SIZE_Z - 4));
+{    
+    uint32_t x = 6;
+    uint32_t z = 8;
 
-    double xWorld = (m_Position.X + (x * BLOCK_SIZE));
-    double zWorld = (m_Position.Y + (z * BLOCK_SIZE));
+    double xWorld = (CHUNK_GLOBAL_X(m_Position.X) + (x * BLOCK_SIZE));
+    double zWorld = (CHUNK_GLOBAL_Z(m_Position.Y) + (z * BLOCK_SIZE));
 
     double noise = m_pWorldManager->GetNoise().GetHeight(xWorld, zWorld);
 
@@ -158,10 +156,10 @@ void Chunk::CreateTrees()
 
 void Chunk::SetChunkNeighbors()
 {
-    Vec2i leftChunkPos(m_Position.X - CHUNK_BLOCK_SIZE_X, m_Position.Y);
-    Vec2i rightChunkPos(m_Position.X + CHUNK_BLOCK_SIZE_X, m_Position.Y);
-    Vec2i frontChunkPos(m_Position.X, m_Position.Y + CHUNK_BLOCK_SIZE_Z);
-    Vec2i backChunkPos(m_Position.X, m_Position.Y - CHUNK_BLOCK_SIZE_X);
+    Vec2i leftChunkPos(m_Position.X - 1, m_Position.Y);
+    Vec2i rightChunkPos(m_Position.X + 1, m_Position.Y);
+    Vec2i frontChunkPos(m_Position.X, m_Position.Y + 1);
+    Vec2i backChunkPos(m_Position.X, m_Position.Y - 1);
 
     m_pChunkLeft  =  m_pWorldManager->GetCashedChunkAt(leftChunkPos);
     m_pChunkRight =  m_pWorldManager->GetCashedChunkAt(rightChunkPos);
@@ -354,7 +352,7 @@ void Chunk::BuildBlockRenderList()
 			for ( uint32_t z = 0; z < CHUNK_SIZE_Z; z++)
 			{                
                 BlockRenderVO renderVO;
-                if ( IsBlockVisible(x, y, z, renderVO))
+                if (IsBlockVisible(x, y, z, renderVO))
 				{
                     AddBlockToRenderList(m_blocks[x][y][z], renderVO);
                     m_amountOfBlocks++;
@@ -563,13 +561,9 @@ std::string Chunk::GetFilePath() const
 
 Vector3 Chunk::LocalPositionToGlobalPosition(const Vec3i& localPosition) const
 {
-    /*Vector3 vec( (double)(m_centerPosition.GetX() - (CHUNK_BLOCK_SIZE_X / 2) + (double)(localPosition.X * BLOCK_SIZE)),
-            (double)(m_centerPosition.GetY() - (CHUNK_BLOCK_SIZE_Y / 2) + (double)(localPosition.Y * BLOCK_SIZE)),
-            (double)(m_centerPosition.GetZ() - (CHUNK_BLOCK_SIZE_Z / 2) + (double)(localPosition.Z * BLOCK_SIZE)));*/
-
-    Vector3 vec((double)(m_Position.X + (localPosition.X * BLOCK_SIZE)),
+    Vector3 vec((double)(CHUNK_GLOBAL_X(m_Position.X) + (localPosition.X * BLOCK_SIZE)),
                 (double)(localPosition.Y * BLOCK_SIZE),
-                (double)(m_Position.Y + (localPosition.Z * BLOCK_SIZE)));
+                (double)(CHUNK_GLOBAL_Z(m_Position.Y) + (localPosition.Z * BLOCK_SIZE)));
 
     return vec;
 }

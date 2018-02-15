@@ -25,7 +25,7 @@
 #include "../utils/SafeQueue.h"
 
 void NetworkManager::Init()
-{
+{    
     m_bInitialized = if_config(m_LocalIP, m_Gateway, m_Netmask, true, 5) >= 0;
     if (m_bInitialized)
     {

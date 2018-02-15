@@ -123,8 +123,8 @@ void ChunkManager::SetChunkNeighbors()
 
 Vec2i ChunkManager::GetChunkPositionByWorldPosition(const Vector3 &worldPosition)
 {
-    int32_t x = (int32_t) (std::floor(worldPosition.GetX() / CHUNK_BLOCK_SIZE_X) * CHUNK_BLOCK_SIZE_X);
-    int32_t z = (int32_t) (std::floor(worldPosition.GetZ() / CHUNK_BLOCK_SIZE_Z) * CHUNK_BLOCK_SIZE_X);
+    int32_t x = (int32_t) (std::floor(worldPosition.GetX() / CHUNK_BLOCK_SIZE_X));
+    int32_t z = (int32_t) (std::floor(worldPosition.GetZ() / CHUNK_BLOCK_SIZE_Z));
     return Vec2i(x, z);
 }
 
@@ -185,8 +185,8 @@ void ChunkManager::LoadChunks(const Vec2i &chunkPosition)
 
 std::vector<Vec2i> ChunkManager::GetChunkMapAround(const Vec2i &chunkPosition) const
 {
-    double x = chunkPosition.X - ((CHUNK_MAP_CASH_X/2)*CHUNK_BLOCK_SIZE_X);
-    double z = chunkPosition.Y + ((CHUNK_MAP_CASH_Y/2)*CHUNK_BLOCK_SIZE_Z);
+    int32_t x = chunkPosition.X - (CHUNK_MAP_CASH_X/2);
+    int32_t z = chunkPosition.Y + (CHUNK_MAP_CASH_Y/2);
 
     std::vector<Vec2i> chunkMap;
 
@@ -194,7 +194,7 @@ std::vector<Vec2i> ChunkManager::GetChunkMapAround(const Vec2i &chunkPosition) c
     {
         for (uint32_t j = 0; j < CHUNK_MAP_CASH_Y; j++)
         {
-            chunkMap.emplace_back(Vec2i(x+(i*CHUNK_BLOCK_SIZE_X), z-(j*CHUNK_BLOCK_SIZE_Z)));
+            chunkMap.emplace_back(Vec2i(x+i, z-j));
         }
     }
 
@@ -203,10 +203,10 @@ std::vector<Vec2i> ChunkManager::GetChunkMapAround(const Vec2i &chunkPosition) c
 
 bool ChunkManager::IsCloseToChunk(const Vec2i& chunkPosition, const Vec2i& position) const
 {
-    return ( chunkPosition.X - (CHUNK_BLOCK_SIZE_X) >= position.X ||
-             chunkPosition.X + (CHUNK_BLOCK_SIZE_X) <= position.X ||
-             chunkPosition.Y - (CHUNK_BLOCK_SIZE_Z) >= position.Y ||
-             chunkPosition.Y + (CHUNK_BLOCK_SIZE_Z) <= position.Y);
+    return ( (chunkPosition.X - 1) >= position.X ||
+             (chunkPosition.X + 1) <= position.X ||
+             (chunkPosition.Y - 1) >= position.Y ||
+             (chunkPosition.Y + 1) <= position.Y);
 }
 
 Chunk* ChunkManager::GetChunkFromCash(const Vec2i &position)
