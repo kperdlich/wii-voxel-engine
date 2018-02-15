@@ -230,7 +230,7 @@ void ServerConnection::Execute()
     Packet* p = CreatePacketByID(packetID);
     if (p && packetID != PACKET_DISCONNECT)
     {
-        LOG("Parse packetID %d", packetID);
+        LOG("Parse packetID %x", packetID);
         p->Read(m_Session);
         m_queue.Push(p);
     }
@@ -240,7 +240,9 @@ void ServerConnection::Execute()
         if (packetID == PACKET_DISCONNECT)
             ERROR("Disconnected by server. Stop Packet reader");
         else
-            ERROR("Couldn't find/create instance of packetID %d. Stop Packet reader", packetID);
+            ERROR("Couldn't find/create instance of packetID %x. Stop Packet reader", packetID);
+
+        Engine::Get().End();
 
         Suspend();
     }

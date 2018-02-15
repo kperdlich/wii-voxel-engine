@@ -35,7 +35,7 @@ GameWorld::GameWorld()
     m_blockManager = new BlockManager();
     m_blockManager->LoadBlocks();    
 
-    SetSeed();
+    ReadSeed();
 }
 
 GameWorld::~GameWorld()
@@ -72,7 +72,7 @@ BlockManager& GameWorld::GetBlockManager()
 	return *m_blockManager;
 }
 
-Chunk* GameWorld::GetCashedChunkAt(const Vector3& centerPosition)
+Chunk* GameWorld::GetCashedChunkAt(const Vec2i& centerPosition)
 {
     return m_chunkLoader.GetChunkFromCash(centerPosition);
 }
@@ -135,15 +135,15 @@ BlockType GameWorld::GetBlockByWorldPosition(const Vector3& worldPosition)
 	return BlockType::AIR;
 }
 
-Vector3 GameWorld::GetPhysicalPlayerPosition( const Vector3& playerWorldPosition )
+double GameWorld::GetPlayerHeight( const Vector3& playerWorldPosition )
 {
     auto pChunk = GetCashedChunkByWorldPosition(playerWorldPosition);
 	if ( pChunk )
     {
-        return pChunk->GetPhysicalPosition(playerWorldPosition);
+        return pChunk->GetPhysicalHeight(playerWorldPosition);
 	}
 
-    return playerWorldPosition;
+    return playerWorldPosition.GetY();
 }
 
 void GameWorld::DrawFocusOnSelectedCube()
@@ -156,9 +156,9 @@ void GameWorld::DrawFocusOnSelectedCube()
     }
 }
 
-void GameWorld::SetSeed()
+void GameWorld::ReadSeed()
 {
-    srand (time(nullptr));
+    srand(time(nullptr));
     int seed = rand();
 
     if (FileSystem::FileExist(SEED_FILE))

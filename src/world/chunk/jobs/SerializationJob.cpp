@@ -82,7 +82,7 @@ void SerializationJob::Execute()
     else
     {
         std::ofstream stream(filename);
-        stream << blockData.ChunkPosition.GetX() << ';' << blockData.ChunkPosition.GetY() << ';' << blockData.ChunkPosition.GetZ() << '\n';
+        stream << blockData.ChunkPosition.X << ';' << blockData.ChunkPosition.Y << '\n';
         stream << "X" << blockData.BlockPosition.X << "Y" << blockData.BlockPosition.Y << "Z" << blockData.BlockPosition.Z << ":" << static_cast<unsigned short>(blockData.Type) << '\n';
         stream.flush();
         stream.close();

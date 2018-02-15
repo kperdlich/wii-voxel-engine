@@ -75,8 +75,8 @@ void Chunk::Build()
             }
 
             double xWorld, zWorld;
-            xWorld = (m_centerPosition.GetX() - (CHUNK_BLOCK_SIZE_X / 2) + (x * BLOCK_SIZE));
-            zWorld = (m_centerPosition.GetZ() - (CHUNK_BLOCK_SIZE_Z / 2) + (z * BLOCK_SIZE));
+            xWorld = (m_Position.X + (x * BLOCK_SIZE));
+            zWorld = (m_Position.Y + (z * BLOCK_SIZE));
 
             double noise = pn.GetHeight(xWorld, zWorld);
             uint32_t height = (uint32_t) MathHelper::Clamp((CHUNK_SIZE_Y * noise) + CHUNK_MIN_GROUND, CHUNK_MIN_GROUND, CHUNK_SIZE_Y);
@@ -117,8 +117,8 @@ void Chunk::CreateTrees()
     //srand (time(NULL));
     uint32_t z = 8;// + (rand() % (CHUNK_SIZE_Z - 4));
 
-    double xWorld = (m_centerPosition.GetX() - (CHUNK_BLOCK_SIZE_X / 2) + (x * BLOCK_SIZE));
-    double zWorld = (m_centerPosition.GetZ() - (CHUNK_BLOCK_SIZE_Z / 2) + (z * BLOCK_SIZE));
+    double xWorld = (m_Position.X + (x * BLOCK_SIZE));
+    double zWorld = (m_Position.Y + (z * BLOCK_SIZE));
 
     double noise = m_pWorldManager->GetNoise().GetHeight(xWorld, zWorld);
 
@@ -158,10 +158,10 @@ void Chunk::CreateTrees()
 
 void Chunk::SetChunkNeighbors()
 {
-    Vector3 leftChunkPos(m_centerPosition.GetX() - CHUNK_BLOCK_SIZE_X, m_centerPosition.GetY(), m_centerPosition.GetZ());
-    Vector3 rightChunkPos(m_centerPosition.GetX() + CHUNK_BLOCK_SIZE_X, m_centerPosition.GetY(), m_centerPosition.GetZ());
-    Vector3 frontChunkPos(m_centerPosition.GetX(), m_centerPosition.GetY(), m_centerPosition.GetZ() + CHUNK_BLOCK_SIZE_Z);
-    Vector3 backChunkPos(m_centerPosition.GetX(), m_centerPosition.GetY(), m_centerPosition.GetZ() - CHUNK_BLOCK_SIZE_X);
+    Vec2i leftChunkPos(m_Position.X - CHUNK_BLOCK_SIZE_X, m_Position.Y);
+    Vec2i rightChunkPos(m_Position.X + CHUNK_BLOCK_SIZE_X, m_Position.Y);
+    Vec2i frontChunkPos(m_Position.X, m_Position.Y + CHUNK_BLOCK_SIZE_Z);
+    Vec2i backChunkPos(m_Position.X, m_Position.Y - CHUNK_BLOCK_SIZE_X);
 
     m_pChunkLeft  =  m_pWorldManager->GetCashedChunkAt(leftChunkPos);
     m_pChunkRight =  m_pWorldManager->GetCashedChunkAt(rightChunkPos);
@@ -334,9 +334,8 @@ bool Chunk::IsBlockVisible(uint32_t iX, uint32_t iY, uint32_t iZ, BlockRenderVO&
 	}
 
     if (blockRenderVO.Faces > 0)
-    {
-        const Vector3& worldBlockPos = LocalPositionToGlobalPosition(Vec3i{ iX, iY, iZ });
-        blockRenderVO.BlockPosition = Vector3(worldBlockPos.GetX(), worldBlockPos.GetY(), worldBlockPos.GetZ());
+    {        
+        blockRenderVO.BlockPosition = LocalPositionToGlobalPosition(Vec3i{ iX, iY, iZ });
         return true;
     }
 
@@ -414,9 +413,9 @@ uint64_t Chunk::GetAmountOfFaces() const
     return m_amountOfFaces;
 }
 
-const Vector3& Chunk::GetCenterPosition() const
+const Vec2i &Chunk::GetPosition() const
 {
-    return m_centerPosition;
+    return m_Position;
 }
 
 void Chunk::DeleteDisplayList()
@@ -462,7 +461,7 @@ void Chunk::RemoveBlockByWorldPosition(const Vector3& blockPosition)
     if ( m_blocks[vec.X][vec.Y][vec.Z] != BlockType::AIR)
     {
         m_blocks[vec.X][vec.Y][vec.Z] = BlockType::AIR;
-        BlockListUpdated( BlockChangeData { GetFilePath(), BlockType::AIR, vec, m_centerPosition });
+        BlockListUpdated( BlockChangeData { GetFilePath(), BlockType::AIR, vec, m_Position });
     }
 }
 
@@ -473,7 +472,7 @@ void Chunk::AddBlockByWorldPosition(const Vector3& blockPosition, BlockType type
     if ( m_blocks[vec.X][vec.Y][vec.Z] == BlockType::AIR)
 	{
          m_blocks[vec.X][vec.Y][vec.Z] = type;
-         BlockListUpdated( BlockChangeData { GetFilePath(), type, vec, m_centerPosition } );
+         BlockListUpdated( BlockChangeData { GetFilePath(), type, vec, m_Position } );
 	}
 }
 
@@ -483,9 +482,9 @@ void Chunk::BlockListUpdated(const BlockChangeData& data)
     m_pWorldManager->Serialize(data);
 }
 
-void Chunk::SetCenterPosition(const Vector3 &centerPosition)
+void Chunk::SetPosition(const Vec2i &position)
 {
-    m_centerPosition = centerPosition;
+    m_Position = position;
 }
 
 void Chunk::SetLoaded(bool value)
@@ -527,14 +526,14 @@ BlockType Chunk::GetBlockTypeByWorldPosition(const Vector3& worldPosition) const
     return m_blocks[vec.X][vec.Y][vec.Z];
 }
 
-Vector3 Chunk::GetPhysicalPosition(const Vector3& position) const
+double Chunk::GetPhysicalHeight(const Vector3& position) const
 {
-    Vector3 pos = GetBlockPositionByWorldPosition(position);
+    Vector3 pos = GetBlockPositionByWorldPosition(position);    
     double currentPos = CHUNK_BLOCK_SIZE_Y - (BLOCK_SIZE);
 	bool bValidated = false;
 	do
 	{
-		pos.SetY(currentPos);
+        pos.SetY(currentPos);
         bValidated = (GetBlockTypeByWorldPosition(pos) != BlockType::AIR) || (currentPos == 0);
         /*  quick physics fix for the tree update
          *  Player shouldn't jump higher than blocksize
@@ -544,31 +543,33 @@ Vector3 Chunk::GetPhysicalPosition(const Vector3& position) const
             double distance = position.GetY() - currentPos;
             bValidated = distance > (-BLOCK_SIZE);
         }
-		currentPos -= BLOCK_SIZE;
+        currentPos -= BLOCK_SIZE;
 
-	} while(!bValidated);
+	} while(!bValidated);    
 
-    return pos;
+    return pos.GetY();
 }
 
 std::string Chunk::GetFilePath() const
 {
     std::ostringstream filename;
     filename << WORLD_PATH "/";
-    filename << m_centerPosition.GetX();
+    filename << m_Position.X;
     filename << '_';
-    filename << m_centerPosition.GetY();
-    filename << '_';
-    filename << m_centerPosition.GetZ();
+    filename << m_Position.Y;
     filename << ".dat";
     return filename.str();
 }
 
 Vector3 Chunk::LocalPositionToGlobalPosition(const Vec3i& localPosition) const
 {
-    Vector3 vec( (double)(m_centerPosition.GetX() - (CHUNK_BLOCK_SIZE_X / 2) + (double)(localPosition.X * BLOCK_SIZE)),
+    /*Vector3 vec( (double)(m_centerPosition.GetX() - (CHUNK_BLOCK_SIZE_X / 2) + (double)(localPosition.X * BLOCK_SIZE)),
             (double)(m_centerPosition.GetY() - (CHUNK_BLOCK_SIZE_Y / 2) + (double)(localPosition.Y * BLOCK_SIZE)),
-            (double)(m_centerPosition.GetZ() - (CHUNK_BLOCK_SIZE_Z / 2) + (double)(localPosition.Z * BLOCK_SIZE)));
+            (double)(m_centerPosition.GetZ() - (CHUNK_BLOCK_SIZE_Z / 2) + (double)(localPosition.Z * BLOCK_SIZE)));*/
+
+    Vector3 vec((double)(m_Position.X + (localPosition.X * BLOCK_SIZE)),
+                (double)(localPosition.Y * BLOCK_SIZE),
+                (double)(m_Position.Y + (localPosition.Z * BLOCK_SIZE)));
 
     return vec;
 }

@@ -24,12 +24,14 @@ public:
         GameWorld* world = dynamic_cast<InGameScene*>(Engine::Get().GetSceneHandler().GetCurrentScene())->GetWorld();
         if (world)
         {
-            Chunk* c = world->GetCashedChunkByWorldPosition(Vector3((double)(m_x * CHUNK_SIZE_X), CHUNK_BLOCK_SIZE_Y / 2, (double) (m_y * CHUNK_SIZE_Z)));
+            LOG("Allocate chunk %d, %d Mode:%d", m_x, m_y, m_bMode);
+
+            /*Chunk* c = world->GetCashedChunkByWorldPosition(Vector3((double)(m_x * CHUNK_SIZE_X), CHUNK_BLOCK_SIZE_Y / 2, (double) (m_y * CHUNK_SIZE_Z)));
             if(c)
             {
                 LOG("Found chunk for X:%d; Y:%d; Chunk: X:%f Y:%f Z:%f", m_x, m_y,
                         c->GetCenterPosition().GetX(), c->GetCenterPosition().GetY(), c->GetCenterPosition().GetZ());
-            }
+            }*/
         }
         else
         {

@@ -73,15 +73,7 @@ void Basic3DScene::Draw()
 	GRRLIB_ObjectViewRotate( 0, 0, m_mainCamera->GetWorldAngleZ());
 	GRRLIB_ObjectViewEnd();
 
-	m_pGameWorld->Draw();
-
-    /*for (auto it = m_entityHandler->GetEntities()->begin(); it != m_entityHandler->GetEntities()->end(); ++it)
-	{
-		if (it->second->IsVisible())
-		{
-            Get3DRenderer().DrawEntity( it->second );
-		}
-    }*/
+	m_pGameWorld->Draw();   
 
     GRRLIB_2dMode();
 

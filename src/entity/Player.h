@@ -23,6 +23,7 @@
 #include "Entity.h"
 #include "../world/Camera.h"
 #include "../utils/Vector3.h"
+#include "../utils/Debug.h"
 #include "PlayerInventory.h"
 #include "IEquipable.h"
 
@@ -33,7 +34,13 @@ public:
     void Update(float deltaSeconds);
 	void AddToInventory(IEquipable& item);
     void Move(float x, float y, float deltaTime);
-	void Rotate( const Vector3& rotation );
+	void Rotate( const Vector3& rotation );    
+
+    void SetPosition( const Vector3& position ) override
+    {
+        Entity::SetPosition(position);
+        LOG("Updated player pos: %f, %f, %f", position.GetX(), position.GetY(), position.GetZ());
+    }
 
     inline bool IsPlayerSpawned()
     {
@@ -42,13 +49,26 @@ public:
 
     inline void SetPlayerSpawned(bool value)
     {
-        m_bPlayerSpawned = value;
+        m_LastPlayerServerUpdate = ticks_to_millisecs(gettime());
+        m_bPlayerSpawned = value;        
+    }
+
+    inline bool IsOnTheGround() const
+    {
+        return m_bOnTheGround;
+    }
+
+    inline void SetOnTheGround(bool value)
+    {
+        m_bOnTheGround = value;
     }
 
 private:
-	void UpdateInventory();
+    void UpdateInventory();
     PlayerInventory* m_pInventory;
-    bool m_bPlayerSpawned = false;
+    bool m_bPlayerSpawned = false, m_bOnTheGround = false;
+
+    uint64_t m_LastPlayerServerUpdate;
 
 
 };

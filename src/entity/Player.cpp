@@ -20,9 +20,10 @@
 #include "Player.h"
 #include "../utils/MathHelper.h"
 #include "../utils/Debug.h"
+#include "../net/packet/PacketPlayer.h"
 
-#define ROTATION_SPEED 50.0f
-#define MOVEMENT_SPEED 3.5f
+#define ROTATION_SPEED 70.0f
+#define MOVEMENT_SPEED 6.5f
 #define PITCH_MAX 90.0f
 
 
@@ -30,7 +31,7 @@ CPlayer::CPlayer()
 {
 	m_entityRenderer = new EntityRenderer(this);
     m_pInventory = new PlayerInventory();
-	SetPlayer(true);
+	SetPlayer(true);    
 }
 
 CPlayer::~CPlayer()
@@ -68,9 +69,9 @@ void CPlayer::Update(float deltaSeconds)
 
 	// shity physics
     Vector3 blockPositionUnderPlayer(m_position.GetX() + BLOCK_SIZE_HALF, playerY, m_position.GetZ() + BLOCK_SIZE_HALF);
-    Vector3 newPosition = m_pWorld->GetPhysicalPlayerPosition(blockPositionUnderPlayer);
+    double newHeight = m_pWorld->GetPlayerHeight(blockPositionUnderPlayer);
 
-	m_position.SetY(newPosition.GetY() + (2 * BLOCK_SIZE));
+    m_position.SetY(newHeight + (2 * BLOCK_SIZE));
 
     Vector3 focusedBlockPos = MathHelper::CalculateNewWorldPositionByRotation(m_rotation,
                                 Vector3(m_position.GetX() + BLOCK_SIZE_HALF, m_position.GetY(), m_position.GetZ() + BLOCK_SIZE_HALF),
@@ -81,7 +82,7 @@ void CPlayer::Update(float deltaSeconds)
 
 	if ( padButtonDown & WPAD_BUTTON_B)
 	{
-		m_pWorld->RemoveBlockByWorldPosition( focusedBlockPos );
+        m_pWorld->RemoveBlockByWorldPosition(focusedBlockPos);
 	}
 
 	if ( padButtonDown & WPAD_BUTTON_A)
@@ -91,6 +92,13 @@ void CPlayer::Update(float deltaSeconds)
 
 	UpdateInventory();
 
+
+    if (m_bPlayerSpawned && (m_LastPlayerServerUpdate - ticks_to_millisecs(gettime())) > 50)
+    {
+        PacketPlayer p(m_bOnTheGround);
+        p.Send();
+        m_LastPlayerServerUpdate = ticks_to_millisecs(gettime());
+    }
 }
 
 void CPlayer::UpdateInventory()
@@ -114,10 +122,10 @@ void CPlayer::UpdateInventory()
 
 void CPlayer::Move(float x, float y, float deltaSeconds)
 {
-	if ( y != 0.0f)
-	{
-		m_position = MathHelper::CalculateNewWorldPositionByRotation(
-					m_rotation.GetY(),
+    if ( y != 0.0f)
+    {
+        m_position = MathHelper::CalculateNewWorldPositionByRotation(
+                    m_rotation.GetY(),
 					m_position,
                     y * MOVEMENT_SPEED * deltaSeconds);
 	}

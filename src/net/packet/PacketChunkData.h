@@ -53,25 +53,28 @@ public:
         free(m_CompressedData);
         m_CompressedData = nullptr;
 
-        LOG("Unzip chunk X:%d Z:%d", m_X, m_Z);
+        LOG("Chunk Data X:%d Z:%d m_bGroundUpCon:%d, m_PrimaryBitMap:%d, m_AddBitMap:%d, m_CompressedSize:%d, ", m_X, m_Z, m_bGroundUpCon, m_PrimaryBitMap,
+            m_AddBitMap, m_CompressedSize);
 
         GameWorld* world = static_cast<InGameScene*>(Engine::Get().GetSceneHandler().GetCurrentScene())->GetWorld();
-        Chunk* c = world->GetCashedChunkByWorldPosition(Vector3(m_X * 16.0, CHUNK_BLOCK_SIZE_Y / 2, m_Z * 16.0));
+        Chunk* c = world->GetCashedChunkAt(Vec2i(m_X * CHUNK_BLOCK_SIZE_X, m_Z * CHUNK_BLOCK_SIZE_Z));
 
         if(c)
         {
             BlockType*** blocks = c->GetBlocks();
-            for (uint32_t i = 0; i < 16; ++i)
+            uint32_t index = 0;
+
+            for (uint32_t i = 0; i < 16; i++)
             {
                 if (m_PrimaryBitMap & 1 << i)
                 {
-                    for(uint32_t x = 0; x < 16; ++x)
+                    for (uint32_t x = 0; x < 16; x++)
                     {
-                        for(uint32_t y = 0; y < 16; ++y)
+                        for (uint32_t y = 0; y < 16; y++)
                         {
-                            for(uint32_t z = 0; z < 16; ++z)
+                            for (uint32_t z = 0; z < 16; z++)
                             {
-                                blocks[x][y*i][z] = cdata[i*(x+y+z)] > 5 ? BlockType::DIRT : BlockType(cdata[i*(x+y+z)]);
+                                blocks[x][y*i][z] = BlockType(cdata[index++]);
                             }
                         }
                     }
@@ -80,9 +83,7 @@ public:
             c->SetDirty(true);
         }
 
-
         free(cdata);
-
     }
 
     Packet *CreateInstance() const override

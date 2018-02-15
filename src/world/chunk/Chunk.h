@@ -49,7 +49,7 @@ public:
 
 	void DeleteDisplayList();
 
-	const Vector3& GetCenterPosition() const;
+    const Vec2i& GetPosition() const;
 
     void SetChunkNeighbors();
     bool NeighborsLoaded();
@@ -58,7 +58,7 @@ public:
 	void AddBlockByWorldPosition(const Vector3& blockPosition, BlockType type);
 	Vector3 GetBlockPositionByWorldPosition(const Vector3& worldPosition) const;
 	BlockType GetBlockTypeByWorldPosition(const Vector3& worldPosition) const;
-    Vector3 GetPhysicalPosition(const Vector3& position) const;
+    double GetPhysicalHeight(const Vector3& position) const;
 
     BlockType*** GetBlocks() const
     {
@@ -67,7 +67,7 @@ public:
 
     std::string GetFilePath() const;
 
-    void SetCenterPosition(const Vector3 &centerPosition);
+    void SetPosition(const Vec2i &position);
 
     void SetLoaded(bool value);
 
@@ -104,7 +104,7 @@ private:
     uint32_t m_amountOfBlocks   = 0;
     uint32_t m_amountOfFaces    = 0;
 
-    Vector3 m_centerPosition;
+    Vec2i m_Position;
 
     BlockType*** m_blocks;
     std::map<BlockType, std::vector<BlockRenderVO> > m_mBlockRenderList;

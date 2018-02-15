@@ -31,7 +31,7 @@ void ChunkLoaderJob::Execute()
 
     //chunk->Build();
 
-    Vector3 chunkCenterPos;
+    Vec2i chunkPos;
     std::ifstream fstream;
     fstream.open(filepath);
     if (fstream.is_open())
@@ -40,11 +40,9 @@ void ChunkLoaderJob::Execute()
         if (fstream.good())
         {
             std::getline(fstream, line, ';');
-            chunkCenterPos.SetX(std::atof(line.c_str()));
+            chunkPos.X = std::atof(line.c_str());
             std::getline(fstream, line, ';');
-            chunkCenterPos.SetY(std::atof(line.c_str()));
-            std::getline(fstream, line);
-            chunkCenterPos.SetZ(std::atof(line.c_str()));
+            chunkPos.Y = std::atof(line.c_str());
         }
 
         auto blocks = chunk->GetBlocks();

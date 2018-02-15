@@ -40,7 +40,7 @@ private:
     class FontHandler*  m_pFontHandler;
     class BasicCommandHandler* m_pBasicCommandHandler;
     bool m_bRunning = false;
-    uint32_t m_millisecondsLastFrame = 0;
+    uint64_t m_millisecondsLastFrame = 0;
 
 public:
     ~Engine();

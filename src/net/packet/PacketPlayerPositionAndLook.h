@@ -3,6 +3,9 @@
 
 #include "Packet.h"
 #include "PacketGlobals.h"
+#include "../../Engine.h"
+#include "../../entity/Player.h"
+#include "../../scenes/Basic3DScene.h"
 
 class PacketPlayerPositionAndLook : public Packet
 {
@@ -21,6 +24,20 @@ public:
     }
     void Action() override
     {
+        Basic3DScene* scene = dynamic_cast<Basic3DScene*>(Engine::Get().GetSceneHandler().GetCurrentScene());
+        if (scene && scene->GetEntityHandler().GetPlayer())
+        {
+            CPlayer* p = static_cast<CPlayer*>(scene->GetEntityHandler().GetPlayer());
+            p->SetOnTheGround(m_bOnGround);
+            p->SetPosition(Vector3(m_X, m_Y, m_Z));
+
+            if (!p->IsPlayerSpawned())
+                p->SetPlayerSpawned(true);
+        }
+        else
+        {
+            ERROR("Scene or player not initialized");
+        }
         Send();
     }
 

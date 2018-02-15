@@ -49,7 +49,7 @@ void Engine::Start()
 
     while(m_bRunning)
     {
-        uint32_t startFrameTime = ticks_to_millisecs(gettime());
+        uint64_t startFrameTime = ticks_to_millisecs(gettime());
 
         GRRLIB_SetBackgroundColour(0x00, 0x00, 0x00, 0xFF);
 

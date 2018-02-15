@@ -36,21 +36,21 @@ public:
 	void Draw();
 
 	class BlockManager& GetBlockManager();
-    class Chunk* GetCashedChunkAt(const Vector3& centerPosition);
+    class Chunk* GetCashedChunkAt(const Vec2i &centerPosition);
     class Chunk* GetCashedChunkByWorldPosition(const Vector3& worldPosition);
 	void RemoveBlockByWorldPosition(const Vector3& blockPosition);
 	void AddBlockAtWorldPosition(const Vector3& blockPosition, BlockType type);
 	void UpdateFocusedBlockByWorldPosition( const Vector3& blockPosition );
 	BlockType GetBlockByWorldPosition(const Vector3& worldPosition);
 	Vector3 GetBlockPositionByWorldPosition(const Vector3& worldPosition);
-    Vector3 GetPhysicalPlayerPosition( const Vector3& playerWorldPosition );
+    double GetPlayerHeight( const Vector3& playerWorldPosition );
     PerlinNoise GetNoise() const;
     void Serialize(const struct BlockChangeData& data);
 
 
 private:    
 	void DrawFocusOnSelectedCube();
-    void SetSeed();
+    void ReadSeed();
 
 private:	   
 
