@@ -38,7 +38,9 @@ public:
     void Build();
     void Clear();
 	void RebuildDisplayList();
-    void Render();    
+    void Render();
+
+    void SetToAir();
 
     bool IsDirty() const;
 	void SetDirty(bool dirty);

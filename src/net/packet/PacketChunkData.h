@@ -39,8 +39,8 @@ public:
 
     void Action() override
     {
-        int32_t sections = 0;
-        const int32_t sectionSize = 4096+(3*2048);
+        uint32_t sections = 0;
+        const int32_t sectionSize = 4096+(4*2048);
 
         for(uint32_t i = 0; i < 16; ++i)
             sections += m_PrimaryBitMap >> i & 1;
@@ -51,36 +51,38 @@ public:
 
         unsigned char* cdata = Zip::Decompress(m_CompressedData, m_CompressedSize, size);
         free(m_CompressedData);
-        m_CompressedData = nullptr;
-
-        LOG("Chunk Data X:%d Z:%d m_bGroundUpCon:%d, m_PrimaryBitMap:%d, m_AddBitMap:%d, m_CompressedSize:%d, ", m_X, m_Z, m_bGroundUpCon, m_PrimaryBitMap,
-            m_AddBitMap, m_CompressedSize);
+        m_CompressedData = nullptr;      
 
         GameWorld* world = static_cast<InGameScene*>(Engine::Get().GetSceneHandler().GetCurrentScene())->GetWorld();
         Chunk* c = world->GetCashedChunkAt(Vec2i(m_X, m_Z));
 
         if(c)
         {
-            BlockType*** blocks = c->GetBlocks();
-            uint32_t index = 0;
+            /*LOG("Found Chunk Data X:%d Z:%d m_bGroundUpCon:%d, m_PrimaryBitMap:%d, m_AddBitMap:%d, m_CompressedSize:%d, ", m_X, m_Z, m_bGroundUpCon, m_PrimaryBitMap,
+                m_AddBitMap, m_CompressedSize);*/
 
-            for (uint32_t i = 0; i < 16; i++)
+            c->SetToAir();
+            BlockType*** blocks = c->GetBlocks();
+
+            for (uint32_t i = 0; i < sections; ++i)
             {
                 if (m_PrimaryBitMap & 1 << i)
-                {
-                    for (uint32_t x = 0; x < 16; x++)
+                {                    
+                    for(int j = 0; j < 4096; ++j)
                     {
-                        for (uint32_t y = 0; y < 16; y++)
-                        {
-                            for (uint32_t z = 0; z < 16; z++)
-                            {
-                                blocks[x][y*i][z] = BlockType(cdata[index++]);
-                            }
-                        }
+                        int32_t x = j & 0x0F;
+                        int32_t y = i*16 + j >> 8;
+                        int32_t z = (j & 0xF0) >> 4;
+                        unsigned char data = cdata[j];
+                        blocks[x][y][z] = data > 5 ? BlockType::DIRT : BlockType(data);
                     }
-                }
+                }               
             }
             c->SetDirty(true);
+        }
+        else
+        {
+            ERROR("Couldn't find Chunk Data X:%d Z:%d", m_X, m_Z);
         }
 
         free(cdata);

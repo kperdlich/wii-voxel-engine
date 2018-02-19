@@ -75,7 +75,7 @@ void CPlayer::Update(float deltaSeconds)
 
     Vector3 focusedBlockPos = MathHelper::CalculateNewWorldPositionByRotation(m_rotation,
                                 Vector3(m_position.GetX() + BLOCK_SIZE_HALF, m_position.GetY(), m_position.GetZ() + BLOCK_SIZE_HALF),
-                                -2*BLOCK_SIZE);    
+                                -2*BLOCK_SIZE);
 
 
 	m_pWorld->UpdateFocusedBlockByWorldPosition(focusedBlockPos);

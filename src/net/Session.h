@@ -32,7 +32,7 @@ public:
 
     void SendString(const std::string& value) const;
     void Send(const char* data, size_t size) const;
-    int32_t Read(void *data, size_t size) const;
+    void Read(void *data, size_t size) const;
     std::string ReadString() const;
 
     template<typename T>

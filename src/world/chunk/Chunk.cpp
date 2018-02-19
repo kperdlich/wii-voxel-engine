@@ -192,6 +192,20 @@ void Chunk::Render()
     }
 }
 
+void Chunk::SetToAir()
+{
+    for ( uint32_t x = 0; x < CHUNK_SIZE_X; x++)
+    {
+        for ( uint32_t z = 0; z < CHUNK_SIZE_Z; z++)
+        {
+            for ( uint32_t y = 0; y < CHUNK_SIZE_Y; y++)
+            {
+                m_blocks[x][y][z] = BlockType::AIR;
+            }
+        }
+    }
+}
+
 bool Chunk::AddBlockToRenderList(BlockType type, const BlockRenderVO& blockRenderVO)
 {
 	bool bSuccessful = false;

@@ -62,7 +62,7 @@ const std::vector<Chunk*> ChunkManager::GetLoadedChunks() const
     std::vector<Chunk*> loadedChunks;
     for (Chunk* cc : m_chunkCash)
     {
-        if(cc->IsLoaded() || cc->HasDisplayList())
+        if (cc->IsLoaded() || cc->HasDisplayList())
         {
             loadedChunks.push_back(cc);
         }
@@ -76,7 +76,7 @@ void ChunkManager::UpdateChunksBy(const Vector3 &position)
     for (auto it = m_chunkLoadingStage.begin(); it != m_chunkLoadingStage.end(); )
     {
         Chunk* c = (*it);
-        if(c->IsLoaded() && c->NeighborsLoaded())
+        if (c->IsLoaded() && c->NeighborsLoaded())
         {
             c->SetDirty(true);
             it = m_chunkLoadingStage.erase(it);
@@ -90,7 +90,7 @@ void ChunkManager::UpdateChunksBy(const Vector3 &position)
 
     Vec2i currentChunkPos = GetChunkPositionByWorldPosition(position);
 
-    if ( currentChunkPos != m_lastUpdateChunkPos )
+    if (currentChunkPos != m_lastUpdateChunkPos)
     {        
         LoadChunks(currentChunkPos);               
     }

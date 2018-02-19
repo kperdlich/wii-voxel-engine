@@ -72,11 +72,12 @@ void Socket::Disconnect()
 
 void Socket::Write(const char* data, size_t size) const
 {
-    while(size > 0)
+    while(size > 0 && m_bConnected)
         size -= net_write(m_Socket, data, size);
 }
 
-int32_t Socket::Read(void* data, size_t size) const
+void Socket::Read(void* data, size_t size) const
 {
-    return net_read(m_Socket, data, size);
+    while(size > 0 && m_bConnected)
+        size -= net_read(m_Socket, data, size);
 }

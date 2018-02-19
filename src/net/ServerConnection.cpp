@@ -240,10 +240,17 @@ void ServerConnection::Execute()
         if (packetID == PACKET_DISCONNECT)
             ERROR("Disconnected by server. Stop Packet reader");
         else
+        {
+            /*char buffer[20];
+            buffer[19] = '\0';
+            for (uint16_t i = 0; i < 19; ++i)
+                buffer[i] = m_Session.Read<char>();*/
+
             ERROR("Couldn't find/create instance of packetID %x. Stop Packet reader", packetID);
+            //ERROR("Data: %s", buffer);
+        }
 
         Engine::Get().End();
-
         Suspend();
     }
 }

@@ -33,7 +33,7 @@ void Session::Close()
 
 void Session::SendString(const std::string &value) const
 {
-    for(uint32_t i = 0; i < value.length(); ++i)
+    for (uint32_t i = 0; i < value.length(); ++i)
     {
         Send<char>(0x00);
         Send<char>(value[i]);
@@ -45,16 +45,16 @@ void Session::Send(const char *data, size_t size) const
     m_Socket.Write(data, size);
 }
 
-int32_t Session::Read(void *data, size_t size) const
+void Session::Read(void *data, size_t size) const
 {
-    return m_Socket.Read(data, size);
+    m_Socket.Read(data, size);
 }
 
 std::string Session::ReadString() const
 {
     std::string str;
     int16_t len = Read<int16_t>();
-    for(int16_t i = 0; i < len; ++i)
+    for (int16_t i = 0; i < len; ++i)
     {
         Read<char>(); // 0x00
         str+=Read<char>();
