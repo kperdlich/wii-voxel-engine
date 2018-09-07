@@ -29,8 +29,6 @@ void ChunkLoaderJob::Execute()
     Chunk* chunk = chunkData.ChunkObj;
     const std::string& filepath = chunkData.Filepath;
 
-    //chunk->Build();
-
     Vec2i chunkPos;
     std::ifstream fstream;
     fstream.open(filepath);

@@ -10,24 +10,22 @@ class Zip
 private:
     Zip();
 public:
-    static unsigned char* Decompress(unsigned char* compressedData, size_t compressedSize, size_t decompressedSize)
+    static size_t Decompress(unsigned char* inputData, size_t compressedSize, unsigned char* outputData, size_t decompressedSize)
     {
-        unsigned char* decompressedData = (unsigned char*) malloc(decompressedSize);
-
         z_stream infstream;
         infstream.zalloc = Z_NULL;
         infstream.zfree = Z_NULL;
         infstream.opaque = Z_NULL;
         infstream.avail_in = (uInt) compressedSize;
-        infstream.next_in = (Bytef *) compressedData;
+        infstream.next_in = (Bytef *) inputData;
         infstream.avail_out = (uInt)decompressedSize;
-        infstream.next_out = (Bytef*) decompressedData;
+        infstream.next_out = (Bytef*) outputData;
 
         inflateInit(&infstream);
         inflate(&infstream, Z_NO_FLUSH);
         inflateEnd(&infstream);
 
-        return decompressedData;
+        return infstream.total_out;
     }
 };
 

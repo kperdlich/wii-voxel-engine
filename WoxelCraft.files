@@ -250,6 +250,8 @@ src/world/chunk/SerializationJob.cpp
 src/world/chunk/SerializationJob.h
 src/world/chunk/jobs/ChunkLoaderJob.cpp
 src/world/chunk/jobs/ChunkLoaderJob.h
+src/world/chunk/jobs/ChunkLoaderMultiplayer.cpp
+src/world/chunk/jobs/ChunkLoaderMultiplayer.h
 src/world/chunk/jobs/SerializationJob.cpp
 src/world/chunk/jobs/SerializationJob.h
 src/world/hud/Hotbar.cpp

@@ -473,7 +473,7 @@ void Chunk::RemoveBlockByWorldPosition(const Vector3& blockPosition)
     if ( m_blocks[vec.X][vec.Y][vec.Z] != BlockType::AIR)
     {
         m_blocks[vec.X][vec.Y][vec.Z] = BlockType::AIR;
-        BlockListUpdated( BlockChangeData { GetFilePath(), BlockType::AIR, vec, m_Position });
+        BlockListUpdated( BlockChangeData { GetFilePath(m_Position), BlockType::AIR, vec, m_Position });
     }
 }
 
@@ -484,7 +484,7 @@ void Chunk::AddBlockByWorldPosition(const Vector3& blockPosition, BlockType type
     if ( m_blocks[vec.X][vec.Y][vec.Z] == BlockType::AIR)
 	{
          m_blocks[vec.X][vec.Y][vec.Z] = type;
-         BlockListUpdated( BlockChangeData { GetFilePath(), type, vec, m_Position } );
+         BlockListUpdated( BlockChangeData { GetFilePath(m_Position), type, vec, m_Position } );
 	}
 }
 
@@ -562,13 +562,13 @@ double Chunk::GetPhysicalHeight(const Vector3& position) const
     return pos.GetY();
 }
 
-std::string Chunk::GetFilePath() const
+std::string Chunk::GetFilePath(const Vec2i &position)
 {
     std::ostringstream filename;
     filename << WORLD_PATH "/";
-    filename << m_Position.X;
+    filename << position.X;
     filename << '_';
-    filename << m_Position.Y;
+    filename << position.Y;
     filename << ".dat";
     return filename.str();
 }

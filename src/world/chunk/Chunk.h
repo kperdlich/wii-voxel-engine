@@ -67,7 +67,7 @@ public:
         return m_blocks;
     }
 
-    std::string GetFilePath() const;
+    static std::string GetFilePath(const Vec2i &position);
 
     void SetPosition(const Vec2i &position);
 

@@ -172,10 +172,10 @@ void ChunkManager::LoadChunks(const Vec2i &chunkPosition)
         const Vec2i& cPos = chunkMap.back();
         chunk->SetPosition(cPos);
         chunk->SetLoaded(false);
-        m_chunkLoadingStage.push_back(chunk);
-        chunk->Build();
+        m_chunkLoadingStage.push_back(chunk);        
+        chunk->SetToAir();
         chunkMap.pop_back();
-        m_loaderJob.Add(ChunkLoadingData { chunk->GetFilePath(), chunk});
+        m_loaderJob.Add(ChunkLoadingData { Chunk::GetFilePath(chunk->GetPosition()), chunk});
     }
 
     chunkPreCashed.clear();

@@ -1,6 +1,8 @@
 #ifndef PACKETCHUNKDATA_H
 #define PACKETCHUNKDATA_H
 
+#include <iostream>
+#include <stdlib.h>
 #include "Packet.h"
 #include "PacketGlobals.h"
 #include "../../utils/Zip.h"
@@ -10,6 +12,7 @@
 #include "../../scenes/InGameScene.h"
 #include "../../world/GameWorld.h"
 #include "../../world/chunk/Chunk.h"
+
 
 // todo implement
 
@@ -39,8 +42,20 @@ public:
 
     void Action() override
     {
-        uint32_t sections = 0;
-        const int32_t sectionSize = 4096+(4*2048);
+        std::ofstream stream(Chunk::GetFilePath(Vec2i(m_X, m_Z)), std::ios::out | std::ios::binary);
+        stream.write((const char*)&m_X, sizeof(m_X));
+        stream.write((const char*)&m_Z, sizeof(m_Z));
+        stream.write((const char*)&m_bGroundUpCon, sizeof(m_bGroundUpCon));
+        stream.write((const char*)&m_PrimaryBitMap, sizeof(m_PrimaryBitMap));
+        stream.write((const char*)&m_AddBitMap, sizeof(m_AddBitMap));
+        stream.write((const char*)&m_CompressedSize, sizeof(m_CompressedSize));
+        stream.write((const char*)&m_UnusedInt, sizeof(m_UnusedInt));
+        stream.write((const char*)m_CompressedData, m_CompressedSize);
+        stream.flush();
+        stream.close();
+
+        /*uint32_t sections = 0;
+        const int32_t sectionSize = 4096+(3*2048);
 
         for(uint32_t i = 0; i < 16; ++i)
             sections += m_PrimaryBitMap >> i & 1;
@@ -49,7 +64,14 @@ public:
         if(m_bGroundUpCon)
             size += 256;
 
-        unsigned char* cdata = Zip::Decompress(m_CompressedData, m_CompressedSize, size);
+        LOG("Found Chunk Data X:%d Z:%d m_bGroundUpCon:%d, m_PrimaryBitMap:%d, m_AddBitMap:%d, m_CompressedSize:%d, ", m_X, m_Z, m_bGroundUpCon, m_PrimaryBitMap,
+                        m_AddBitMap, m_CompressedSize);
+
+        unsigned char* cdata = (unsigned char*) malloc(size);
+        size_t s = Zip::Decompress(m_CompressedData, m_CompressedSize, cdata, size);
+        if (s != size)
+            ERROR("Uncompressed size is different: Got: %d, Expected: %d", s, size);
+
         free(m_CompressedData);
         m_CompressedData = nullptr;      
 
@@ -58,13 +80,9 @@ public:
 
         if(c)
         {
-            /*LOG("Found Chunk Data X:%d Z:%d m_bGroundUpCon:%d, m_PrimaryBitMap:%d, m_AddBitMap:%d, m_CompressedSize:%d, ", m_X, m_Z, m_bGroundUpCon, m_PrimaryBitMap,
-                m_AddBitMap, m_CompressedSize);*/
-
-            c->SetToAir();
             BlockType*** blocks = c->GetBlocks();
-
-            for (uint32_t i = 0; i < sections; ++i)
+            c->SetToAir();
+            for (uint32_t i = 0; i < 16; ++i)
             {
                 if (m_PrimaryBitMap & 1 << i)
                 {                    
@@ -79,13 +97,10 @@ public:
                 }               
             }
             c->SetDirty(true);
-        }
-        else
-        {
-            ERROR("Couldn't find Chunk Data X:%d Z:%d", m_X, m_Z);
-        }
+            c->SetLoaded(true);
+        }       
 
-        free(cdata);
+        free(cdata);*/
     }
 
     Packet *CreateInstance() const override
