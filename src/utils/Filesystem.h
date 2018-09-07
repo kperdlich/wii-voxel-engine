@@ -23,6 +23,10 @@
 #include <fstream>
 #include <string>
 
+#ifndef ACCESSPERMS
+#define ACCESSPERMS (S_IRWXU|S_IRWXG|S_IRWXO)
+#endif
+
 class FileSystem
 {
 public:
