@@ -12,11 +12,11 @@ class PacketChunkAllocation : public Packet
 public:
     PacketChunkAllocation() : Packet(PACKET_CHUNK_ALLOCATION) {}
 
-    void Read(const Session& session) override
+    void Read(const Socket& socket) override
     {
-        m_x     =   session.Read<int32_t>();
-        m_y     =   session.Read<int32_t>();
-        m_bMode =   session.Read<bool>();
+        m_x     =   socket.Read<int32_t>();
+        m_y     =   socket.Read<int32_t>();
+        m_bMode =   socket.Read<bool>();
     }
 
     void Action() override
@@ -45,7 +45,7 @@ public:
     }
 
 protected:
-    void SendContent(const Session &session) const override {}
+    void SendContent(const Socket &socket) const override {}
     int32_t m_x = 0, m_y = 0;
     bool m_bMode = false;
 };

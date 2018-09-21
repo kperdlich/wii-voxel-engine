@@ -9,15 +9,15 @@ class PacketUpdateTileEntity : public Packet
 public:
     PacketUpdateTileEntity() : Packet(PACKET_UPDATE_TILE_ENTITY) {}
 
-    void Read(const Session &session) override
+    void Read(const Socket &socket) override
     {
-        m_X = session.Read<int32_t>();
-        m_Y = session.Read<int16_t>();
-        m_Z = session.Read<int32_t>();
-        m_Action= session.Read<char>();
-        m_Custom1 = session.Read<int32_t>();
-        m_Custom2 = session.Read<int32_t>();
-        m_Custom3 = session.Read<int32_t>();
+        m_X = socket.Read<int32_t>();
+        m_Y = socket.Read<int16_t>();
+        m_Z = socket.Read<int32_t>();
+        m_Action= socket.Read<char>();
+        m_Custom1 = socket.Read<int32_t>();
+        m_Custom2 = socket.Read<int32_t>();
+        m_Custom3 = socket.Read<int32_t>();
     }
     void Action() override
     {
@@ -28,7 +28,7 @@ public:
     }
 
 protected:
-    void SendContent(const Session &session) const override
+    void SendContent(const Socket &socket) const override
     {
     }
 

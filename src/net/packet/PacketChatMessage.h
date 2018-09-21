@@ -9,9 +9,9 @@ class PacketChatMessage : public Packet
 public:
      PacketChatMessage() : Packet(PACKET_CHAT_MESSAGE) {}
 
-     void Read(const Session &session) override
+     void Read(const Socket &socket) override
      {
-        m_chatMessage = session.ReadString();
+        m_chatMessage = socket.ReadString();
      }
 
      void Action() override
@@ -26,7 +26,7 @@ public:
 
 protected:
      std::string m_chatMessage;
-     void SendContent(const Session &session) const override
+     void SendContent(const Socket &socket) const override
      {
          // todo implement
      }

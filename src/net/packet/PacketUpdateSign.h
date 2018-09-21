@@ -9,15 +9,15 @@ class PacketUpdateSign : public Packet
 public:
     PacketUpdateSign() : Packet(PACKET_UPDATE_SIGN) {}
 
-    void Read(const Session &session) override
+    void Read(const Socket &socket) override
     {
-        m_X = session.Read<int32_t>();
-        m_Y = session.Read<int16_t>();
-        m_Z = session.Read<int32_t>();
-        m_Text1 = session.ReadString();
-        m_Text2 = session.ReadString();
-        m_Text3 = session.ReadString();
-        m_Text4 = session.ReadString();
+        m_X = socket.Read<int32_t>();
+        m_Y = socket.Read<int16_t>();
+        m_Z = socket.Read<int32_t>();
+        m_Text1 = socket.ReadString();
+        m_Text2 = socket.ReadString();
+        m_Text3 = socket.ReadString();
+        m_Text4 = socket.ReadString();
     }
 
     void Action() override
@@ -29,7 +29,7 @@ public:
     }
 
 protected:
-    void SendContent(const Session &session) const override
+    void SendContent(const Socket &socket) const override
     {
     }
 

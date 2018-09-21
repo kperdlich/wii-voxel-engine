@@ -9,12 +9,12 @@ class PacketEntityVelocity : public Packet
 public:
     PacketEntityVelocity() : Packet(PACKET_ENTITY_VELOCITY) {}
 
-    void Read(const Session &session) override
+    void Read(const Socket &socket) override
     {
-        m_EID = session.Read<int32_t>();
-        m_VelocityX = session.Read<int16_t>();
-        m_VelocityY = session.Read<int16_t>();
-        m_VelocityZ = session.Read<int16_t>();
+        m_EID = socket.Read<int32_t>();
+        m_VelocityX = socket.Read<int16_t>();
+        m_VelocityY = socket.Read<int16_t>();
+        m_VelocityZ = socket.Read<int16_t>();
     }
     void Action() override
     {
@@ -25,7 +25,7 @@ public:
     }
 
 protected:
-    void SendContent(const Session &session) const override
+    void SendContent(const Socket &socket) const override
     {
     }
 

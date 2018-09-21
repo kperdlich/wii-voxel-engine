@@ -9,9 +9,9 @@ class PacketTimeUpdate : public Packet
 public:
     PacketTimeUpdate() : Packet(PACKET_TIME_UPDATE) {}
 
-    void Read(const Session &session) override
+    void Read(const Socket &socket) override
     {
-        m_time = session.Read<int64_t>();
+        m_time = socket.Read<int64_t>();
     }
 
     void Action() override
@@ -26,7 +26,7 @@ public:
 
 protected:
     int64_t m_time = 0;
-    void SendContent(const Session &session) const override {}
+    void SendContent(const Socket &socket) const override {}
 };
 
 #endif // PACKETTIMEUPDATE_H

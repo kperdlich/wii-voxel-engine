@@ -23,11 +23,11 @@
 
 void Packet::Send() const
 {    
-    const Session& session = NetworkManager::Get().GetSession();
-    if(session.IsRunning())
+    const Socket& socket = NetworkManager::Get().GetSocket();
+    if(socket.IsConnected())
     {
         LOG("Send Packet: %d", m_ID);
-        session.Send<char>(m_ID);
-        SendContent(session);
+        socket.Send<char>(m_ID);
+        SendContent(socket);
     }
 }

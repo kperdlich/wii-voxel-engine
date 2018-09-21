@@ -9,10 +9,10 @@ class PacketAttachEntity : public Packet
 public:
     PacketAttachEntity() : Packet(PACKET_ATTACH_ENTITY) {}
 
-    void Read(const Session &session) override
+    void Read(const Socket &socket) override
     {
-        m_EID = session.Read<int32_t>();
-        m_VehicleID = session.Read<int32_t>();
+        m_EID = socket.Read<int32_t>();
+        m_VehicleID = socket.Read<int32_t>();
     }
 
     void Action() override
@@ -24,7 +24,7 @@ public:
     }
 
 protected:
-    void SendContent(const Session &session) const override
+    void SendContent(const Socket &socket) const override
     {
     }
 

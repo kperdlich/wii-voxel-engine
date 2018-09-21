@@ -9,14 +9,14 @@ class PacketSpawnObject : public Packet
 public:
     PacketSpawnObject() : Packet(PACKET_SPAWN_OBJECT) {}
 
-    void Read(const Session &session) override
+    void Read(const Socket &socket) override
     {
-        m_EID = session.Read<int32_t>();
-        m_Type = session.Read<char>();
-        m_X = session.Read<int32_t>();
-        m_Y = session.Read<int32_t>();
-        m_Z = session.Read<int32_t>();
-        m_AdditionalData = session.Read<int32_t>();
+        m_EID = socket.Read<int32_t>();
+        m_Type = socket.Read<char>();
+        m_X = socket.Read<int32_t>();
+        m_Y = socket.Read<int32_t>();
+        m_Z = socket.Read<int32_t>();
+        m_AdditionalData = socket.Read<int32_t>();
     }
     void Action() override
     {
@@ -28,7 +28,7 @@ public:
     }
 
 protected:
-    void SendContent(const Session &session) const override
+    void SendContent(const Socket &socket) const override
     {
 
     }

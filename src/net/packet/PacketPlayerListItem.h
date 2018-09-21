@@ -9,11 +9,11 @@ class PacketPlayerListItem : public Packet
 public:
     PacketPlayerListItem() : Packet(PACKET_PLAYER_LIST_ITEM) {}
 
-    void Read(const Session &session) override
+    void Read(const Socket &socket) override
     {
-        m_PlayerName = session.ReadString();
-        m_bOnline = session.Read<bool>();
-        m_Ping = session.Read<int16_t>();
+        m_PlayerName = socket.ReadString();
+        m_bOnline = socket.Read<bool>();
+        m_Ping = socket.Read<int16_t>();
     }
     void Action() override
     {
@@ -24,7 +24,7 @@ public:
     }
 
 protected:
-    void SendContent(const Session &session) const override
+    void SendContent(const Socket &socket) const override
     {
     }
 

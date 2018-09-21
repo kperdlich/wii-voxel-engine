@@ -9,13 +9,13 @@ class PacketSoundEffect : public Packet
 public:
     PacketSoundEffect() : Packet(PACKET_SOUND_EFFECT) {}
 
-    void Read(const Session &session) override
+    void Read(const Socket &socket) override
     {
-        m_EID = session.Read<int32_t>();
-        m_X = session.Read<int32_t>();
-        m_Y = session.Read<char>();
-        m_Z = session.Read<int32_t>();
-        m_Data = session.Read<int32_t>();
+        m_EID = socket.Read<int32_t>();
+        m_X = socket.Read<int32_t>();
+        m_Y = socket.Read<char>();
+        m_Z = socket.Read<int32_t>();
+        m_Data = socket.Read<int32_t>();
 
     }
     void Action() override
@@ -27,7 +27,7 @@ public:
     }
 
 protected:
-    void SendContent(const Session &session) const override
+    void SendContent(const Socket &socket) const override
     {
     }
 

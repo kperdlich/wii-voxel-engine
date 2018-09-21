@@ -9,9 +9,9 @@ class PacketDisconnect : public Packet
 public:
     PacketDisconnect() : Packet(PACKET_DISCONNECT) {}
 
-    void Read(const Session &session) override
+    void Read(const Socket &socket) override
     {
-        m_Reason = session.ReadString();
+        m_Reason = socket.ReadString();
     }
 
     void Action() override
@@ -25,7 +25,7 @@ public:
     }
 
 protected:
-    void SendContent(const Session &session) const override
+    void SendContent(const Socket &socket) const override
     {
     }
 

@@ -9,11 +9,11 @@ class PacketConfirmTransaction : public Packet
 public:
      PacketConfirmTransaction() : Packet(PACKET_CONFIRM_TRANSACTION) {}
 
-     void Read(const Session &session) override
+     void Read(const Socket &socket) override
      {
-         m_WindowID = session.Read<char>();
-         m_ActionNumber = session.Read<uint16_t>();
-         m_bAccepted = session.Read<bool>();
+         m_WindowID = socket.Read<char>();
+         m_ActionNumber = socket.Read<uint16_t>();
+         m_bAccepted = socket.Read<bool>();
      }
      void Action() override
      {
@@ -24,7 +24,7 @@ public:
      }
 
 protected:
-     void SendContent(const Session &session) const override
+     void SendContent(const Socket &socket) const override
      {
      }
 

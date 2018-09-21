@@ -9,11 +9,11 @@ class PacketSetExperience : public Packet
 public:
     PacketSetExperience() : Packet(PACKET_SET_EXPERIENCE) {}
 
-    void Read(const Session &session) override
+    void Read(const Socket &socket) override
     {
-        m_ExperienceBar = session.Read<float>();
-        m_Level = session.Read<uint16_t>();
-        m_TotalExperience = session.Read<uint16_t>();
+        m_ExperienceBar = socket.Read<float>();
+        m_Level = socket.Read<uint16_t>();
+        m_TotalExperience = socket.Read<uint16_t>();
     }
     void Action() override
     {
@@ -24,7 +24,7 @@ public:
     }
 
 protected:
-    void SendContent(const Session &session) const override
+    void SendContent(const Socket &socket) const override
     {
     }
 

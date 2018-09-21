@@ -9,12 +9,12 @@ class PacketEntityEquipment : public Packet
 public:
     PacketEntityEquipment() : Packet(PACKET_ENTITY_EQUIPMENT) {}
 
-    void Read(const Session &session) override
+    void Read(const Socket &socket) override
     {
-        m_EID = session.Read<int32_t>();
-        m_Slot = session.Read<int16_t>();
-        m_ItemID = session.Read<int16_t>();
-        m_Damage = session.Read<int16_t>();
+        m_EID = socket.Read<int32_t>();
+        m_Slot = socket.Read<int16_t>();
+        m_ItemID = socket.Read<int16_t>();
+        m_Damage = socket.Read<int16_t>();
     }
     void Action() override
     {
@@ -30,7 +30,7 @@ protected:
     int16_t m_Slot = 0, m_ItemID = 0, m_Damage = 0;
 
 
-    void SendContent(const Session &session) const override
+    void SendContent(const Socket &socket) const override
     {
 
     }

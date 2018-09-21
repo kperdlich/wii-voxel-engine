@@ -15,12 +15,12 @@ public:
             free(m_Data);
     }
 
-    void Read(const Session &session) override
+    void Read(const Socket &socket) override
     {
-        m_Channel = session.ReadString();
-        m_Length = session.Read<int16_t>();
+        m_Channel = socket.ReadString();
+        m_Length = socket.Read<int16_t>();
         m_Data = malloc(m_Length);
-        session.Read(m_Data, m_Length);
+        socket.Read(m_Data, m_Length);
     }
     void Action() override
     {
@@ -31,7 +31,7 @@ public:
     }
 
 protected:
-    void SendContent(const Session &session) const override
+    void SendContent(const Socket &socket) const override
     {
     }
 

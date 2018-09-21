@@ -9,10 +9,10 @@ class PacketCollectItem : public Packet
 public:
     PacketCollectItem() : Packet(PACKET_COLLECT_ITEM) {}
 
-    void Read(const Session &session) override
+    void Read(const Socket &socket) override
     {
-        m_CollectedID = session.Read<int32_t>();
-        m_CollectorID = session.Read<int32_t>();
+        m_CollectedID = socket.Read<int32_t>();
+        m_CollectorID = socket.Read<int32_t>();
     }
     void Action() override
     {
@@ -24,7 +24,7 @@ public:
     }
 
 protected:
-    void SendContent(const Session &session) const override
+    void SendContent(const Socket &socket) const override
     {
 
     }

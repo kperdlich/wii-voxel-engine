@@ -21,7 +21,7 @@
 #define SERVERCONNECTION_H
 
 #include <map>
-#include "Session.h"
+#include "Socket.h"
 #include "../utils/Thread.h"
 #include "../utils/SafeQueue.h"
 
@@ -32,9 +32,9 @@ public:
     bool Connect(const std::string& ip, uint16_t port);
     void Destroy();
 
-    inline const Session& GetSession() const
+    inline const Socket& GetSocket() const
     {
-        return m_Session;
+        return m_socket;
     }
 
     inline class Packet* PopPacket()
@@ -53,7 +53,7 @@ protected:
     void Execute() override;
     void PreExecute() override;
 private:
-    Session m_Session;
+    Socket m_socket;
     SafeQueue<class Packet*> m_queue;
     static std::map<unsigned char, class Packet*> s_PacketMap;
 };

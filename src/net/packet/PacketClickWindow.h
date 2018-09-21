@@ -11,7 +11,7 @@ class PacketClickWindow : public Packet
 public:
     PacketClickWindow() : Packet(PACKET_CLICK_WINDOW) {}
 
-    void Read(const Session &session) override
+    void Read(const Socket &socket) override
     {
 
     }
@@ -25,7 +25,7 @@ public:
     }
 
 protected:
-    void SendContent(const Session &session) const override
+    void SendContent(const Socket &socket) const override
     {
     }
 

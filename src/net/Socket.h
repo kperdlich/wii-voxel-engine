@@ -30,15 +30,35 @@ public:
     void Disconnect();
     void Write(const char* data, size_t size) const;
     void Read(void *data, size_t size) const;
+    void SendStringAsUtf16(const std::string& value) const;
+    void SendString(const std::string &value) const;
+    void Send(const char* data, size_t size) const;
+    std::string ReadString() const;
+    template<typename T>
+    T Read() const
+    {
+        T value;
+        Read(&value, sizeof(T));
+        return value;
+    }
+
+    template<typename T>
+    void Send(T value) const
+    {
+         Write((const char*)&value, sizeof(value));
+    }
 
     inline bool IsConnected() const
     {
         return m_bConnected;
-    }   
+    }
 
 private:
     int32_t m_Socket;
     bool m_bConnected = false;
+    std::string m_IP;
+    uint16_t m_Port;
+
 };
 
 #endif // SOCKET_H

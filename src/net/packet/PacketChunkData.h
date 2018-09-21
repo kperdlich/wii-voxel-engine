@@ -27,22 +27,22 @@ public:
 
     }
 
-    void Read(const Session &session) override
+    void Read(const Socket &socket) override
     {
-        m_X = session.Read<int32_t>();
-        m_Z = session.Read<int32_t>();
-        m_bGroundUpCon = session.Read<bool>();
-        m_PrimaryBitMap = session.Read<uint16_t>();
-        m_AddBitMap = session.Read<uint16_t>();
-        m_CompressedSize = session.Read<int32_t>();
-        m_UnusedInt = session.Read<int32_t>();
+        m_X = socket.Read<int32_t>();
+        m_Z = socket.Read<int32_t>();
+        m_bGroundUpCon = socket.Read<bool>();
+        m_PrimaryBitMap = socket.Read<uint16_t>();
+        m_AddBitMap = socket.Read<uint16_t>();
+        m_CompressedSize = socket.Read<int32_t>();
+        m_UnusedInt = socket.Read<int32_t>();
         m_CompressedData = (unsigned char*) malloc(m_CompressedSize);
-        session.Read(m_CompressedData, m_CompressedSize);
+        socket.Read(m_CompressedData, m_CompressedSize);
     }
 
     void Action() override
     {
-        std::ofstream stream(Chunk::GetFilePath(Vec2i(m_X, m_Z)), std::ios::out | std::ios::binary);
+        /*std::ofstream stream(Chunk::GetFilePath(Vec2i(m_X, m_Z)), std::ios::out | std::ios::binary);
         stream.write((const char*)&m_X, sizeof(m_X));
         stream.write((const char*)&m_Z, sizeof(m_Z));
         stream.write((const char*)&m_bGroundUpCon, sizeof(m_bGroundUpCon));
@@ -52,7 +52,7 @@ public:
         stream.write((const char*)&m_UnusedInt, sizeof(m_UnusedInt));
         stream.write((const char*)m_CompressedData, m_CompressedSize);
         stream.flush();
-        stream.close();
+        stream.close();*/
 
         /*uint32_t sections = 0;
         const int32_t sectionSize = 4096+(3*2048);
@@ -109,7 +109,7 @@ public:
     }
 
 protected:
-    void SendContent(const Session &session) const override
+    void SendContent(const Socket &socket) const override
     {
     }
 

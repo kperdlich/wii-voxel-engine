@@ -31,16 +31,16 @@ public:
     PacketLogin() : Packet(PACKET_LOGIN) {}
     PacketLogin(const std::string playerName) : Packet(PACKET_LOGIN), m_PlayerName(playerName), m_ProtocolVersion(SERVER_PROTOCOL_VERSION) {}
 
-    void Read(const Session &session) override
+    void Read(const Socket &socket) override
     {
-        m_ProtocolVersion = session.Read<int32_t>();
-        session.Read<int16_t>(); // read unused empty string
-        m_LevelType     = session.ReadString();
-        m_ServerMode    = session.Read<int32_t>();
-        m_Dimension     = session.Read<int32_t>();
-        m_Difficulty    = session.Read<char>();
-        m_Vanilla       = session.Read<unsigned char>();
-        m_MaxPlayers    = session.Read<unsigned char>();
+        m_ProtocolVersion = socket.Read<int32_t>();
+        socket.Read<int16_t>(); // read unused empty string
+        m_LevelType     = socket.ReadString();
+        m_ServerMode    = socket.Read<int32_t>();
+        m_Dimension     = socket.Read<int32_t>();
+        m_Difficulty    = socket.Read<char>();
+        m_Vanilla       = socket.Read<unsigned char>();
+        m_MaxPlayers    = socket.Read<unsigned char>();
     }
 
     void Action() override
@@ -54,13 +54,13 @@ public:
     }
 
 protected:
-    void SendContent(const Session& session) const override
+    void SendContent(const Socket& socket) const override
     {
-        session.Send<int32_t>(m_ProtocolVersion);
-        session.Send<int16_t>((int16_t)m_PlayerName.length());
-        session.SendString(m_PlayerName);
+        socket.Send<int32_t>(m_ProtocolVersion);
+        socket.Send<int16_t>((int16_t)m_PlayerName.length());
+        socket.SendStringAsUtf16(m_PlayerName);
         for(uint32_t i = 0; i < 13; ++i)
-             session.Send<char>(0x00);
+             socket.Send<char>(0x00);
     }
 private:
     int32_t m_ProtocolVersion;

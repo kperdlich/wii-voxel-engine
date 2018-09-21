@@ -12,15 +12,15 @@ class PacketPlayerPositionAndLook : public Packet
 public:
     PacketPlayerPositionAndLook() : Packet(PACKET_PLAYER_POSITION_AND_LOOK) {}
 
-    void Read(const Session &session) override
+    void Read(const Socket &socket) override
     {
-        m_X = session.Read<double>();
-        m_Stance = session.Read<double>();
-        m_Y = session.Read<double>();
-        m_Z = session.Read<double>();
-        m_Yaw = session.Read<float>();
-        m_Pitch = session.Read<float>();
-        m_bOnGround = session.Read<bool>();
+        m_X = socket.Read<double>();
+        m_Stance = socket.Read<double>();
+        m_Y = socket.Read<double>();
+        m_Z = socket.Read<double>();
+        m_Yaw = socket.Read<float>();
+        m_Pitch = socket.Read<float>();
+        m_bOnGround = socket.Read<bool>();
     }
     void Action() override
     {
@@ -47,15 +47,15 @@ public:
     }
 
 protected:
-    void SendContent(const Session &session) const override
+    void SendContent(const Socket &socket) const override
     {
-        session.Send<double>(m_X);
-        session.Send<double>(m_Y);
-        session.Send<double>(m_Stance);
-        session.Send<double>(m_Z);
-        session.Send<float>(m_Yaw);
-        session.Send<float>(m_Pitch);
-        session.Send<bool>(m_bOnGround);
+        socket.Send<double>(m_X);
+        socket.Send<double>(m_Y);
+        socket.Send<double>(m_Stance);
+        socket.Send<double>(m_Z);
+        socket.Send<float>(m_Yaw);
+        socket.Send<float>(m_Pitch);
+        socket.Send<bool>(m_bOnGround);
     }
 
     double m_X = 0, m_Stance = 0, m_Y = 0, m_Z = 0;

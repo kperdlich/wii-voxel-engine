@@ -29,7 +29,8 @@ Socket::~Socket()
 bool Socket::Connect(const std::string &host, uint16_t port)
 {
     m_bConnected = false;
-
+    m_IP = host;
+    m_Port = port;
     m_Socket = net_socket (AF_INET, SOCK_STREAM, IPPROTO_IP);
     if ( m_Socket < 0)
     {
@@ -80,4 +81,35 @@ void Socket::Read(void* data, size_t size) const
 {
     while(size > 0 && m_bConnected)
         size -= net_read(m_Socket, data, size);
+}
+
+void Socket::SendStringAsUtf16(const std::string &value) const
+{
+    for (uint32_t i = 0; i < value.length(); ++i)
+    {
+        Send<char>(0x00);
+        Send<char>(value[i]);
+    }
+}
+
+void Socket::SendString(const std::string &value) const
+{
+    Send(value.c_str(), value.length());
+}
+
+void Socket::Send(const char *data, size_t size) const
+{
+    Write(data, size);
+}
+
+std::string Socket::ReadString() const
+{
+    std::string str;
+    int16_t len = Read<int16_t>();
+    for (int16_t i = 0; i < len; ++i)
+    {
+        Read<char>(); // 0x00
+        str+=Read<char>();
+    }
+    return str;
 }

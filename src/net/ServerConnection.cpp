@@ -198,7 +198,7 @@ void ServerConnection::DestroyQueue()
 
 bool ServerConnection::Connect(const std::string &ip, uint16_t port)
 {
-    if (m_Session.Connect(ip, port))
+    if (m_socket.Connect(ip, port))
     {
         return Start() == 0;
     }
@@ -207,8 +207,8 @@ bool ServerConnection::Connect(const std::string &ip, uint16_t port)
 
 void ServerConnection::Destroy()
 {
-    m_Session.Close();
-    Stop();    
+    Stop();
+    m_socket.Disconnect();
     DestroyPacketMap();
     DestroyQueue();
 }
@@ -226,17 +226,17 @@ void ServerConnection::PreExecute()
 
 void ServerConnection::Execute()
 {
-    char packetID = m_Session.Read<char>();
+    char packetID = m_socket.Read<char>();
     Packet* p = CreatePacketByID(packetID);
     if (p && packetID != PACKET_DISCONNECT)
     {
         LOG("Parse packetID %x", packetID);
-        p->Read(m_Session);
+        p->Read(m_socket);
         m_queue.Push(p);
     }
     else
     {
-        //m_Session.Close();
+        //m_Socket.Close();
         if (packetID == PACKET_DISCONNECT)
             ERROR("Disconnected by server. Stop Packet reader");
         else
@@ -244,7 +244,7 @@ void ServerConnection::Execute()
             /*char buffer[20];
             buffer[19] = '\0';
             for (uint16_t i = 0; i < 19; ++i)
-                buffer[i] = m_Session.Read<char>();*/
+                buffer[i] = m_Socket.Read<char>();*/
 
             ERROR("Couldn't find/create instance of packetID %x. Stop Packet reader", packetID);
             //ERROR("Data: %s", buffer);

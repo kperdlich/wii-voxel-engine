@@ -44,9 +44,9 @@ public:
         return m_bInitialized;
     }
 
-    inline const Session& GetSession() const
+    inline const Socket& GetSocket() const
     {
-        return m_ServerConnection.GetSession();
+        return m_ServerConnection.GetSocket();
     }
 
     NetworkManager(NetworkManager const&) = delete;

@@ -9,12 +9,12 @@ class PacketOpenWindow : public Packet
 public:
     PacketOpenWindow() : Packet(PACKET_OPEN_WINDOW) {}
 
-    void Read(const Session &session) override
+    void Read(const Socket &socket) override
     {
-        m_WindowID = session.Read<char>();
-        m_InventoryType = session.Read<char>();
-        m_WindowTitle = session.ReadString();
-        m_NumberOfSlots = session.Read<char>();
+        m_WindowID = socket.Read<char>();
+        m_InventoryType = socket.Read<char>();
+        m_WindowTitle = socket.ReadString();
+        m_NumberOfSlots = socket.Read<char>();
     }
 
     void Action() override
@@ -27,7 +27,7 @@ public:
     }
 
 protected:
-    void SendContent(const Session &session) const override
+    void SendContent(const Socket &socket) const override
     {
     }
 

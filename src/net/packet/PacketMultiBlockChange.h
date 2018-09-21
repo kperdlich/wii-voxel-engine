@@ -17,14 +17,14 @@ public:
             free(m_Data);
     }
 
-    void Read(const Session &session) override
+    void Read(const Socket &socket) override
     {
-        m_ChunkX = session.Read<int32_t>();
-        m_ChunkZ = session.Read<int32_t>();
-        m_RecordCount = session.Read<int16_t>();
-        m_DataSize = session.Read<int32_t>();
+        m_ChunkX = socket.Read<int32_t>();
+        m_ChunkZ = socket.Read<int32_t>();
+        m_RecordCount = socket.Read<int16_t>();
+        m_DataSize = socket.Read<int32_t>();
         m_Data = malloc(m_DataSize);
-        session.Read(m_Data, m_DataSize);
+        socket.Read(m_Data, m_DataSize);
     }
 
     void Action() override
@@ -36,7 +36,7 @@ public:
     }
 
 protected:
-    void SendContent(const Session &session) const override
+    void SendContent(const Socket &socket) const override
     {
     }
 

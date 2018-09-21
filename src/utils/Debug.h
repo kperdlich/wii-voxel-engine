@@ -22,6 +22,7 @@
 
 #include <fstream>
 #include "Mutex.h"
+#include "../net/Socket.h"
 #include "../Engine.h"
 
 #ifdef DEBUG
@@ -47,10 +48,14 @@ private:
     Debug() {}
     static Mutex s_mutex;
     static std::ofstream s_file;
+    static Socket s_socket;
+    static bool s_bLogAlwaysToServer;
 
 public:
     static void Init();
+    static void InitServer(bool bLogAlwaysToServer);
     static void Log(const ELogType& logType, const char* format, ...);
+    static void LogServer(const char* format, ...);
     static void Release();   
 
     Debug(Debug const&)	  = delete;

@@ -107,6 +107,7 @@ void Engine::Init()
 
     LOG("****** %s %s ******", GAME_NAME, BUILD_VERSION);
     NetworkManager::Get().Init();
+    Debug::InitServer(true);
 
 	GRRLIB_Init();
     GRRLIB_Settings.antialias = true;

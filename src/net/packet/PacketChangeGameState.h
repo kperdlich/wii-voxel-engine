@@ -9,10 +9,10 @@ class PacketChangeGameState : public Packet
 public:
     PacketChangeGameState() : Packet(PACKET_CHANGE_GAME_STATE) {}
 
-    void Read(const Session &session) override
+    void Read(const Socket &socket) override
     {
-        m_Reason = session.Read<char>();
-        m_GameMode = session.Read<char>();
+        m_Reason = socket.Read<char>();
+        m_GameMode = socket.Read<char>();
     }
 
     void Action() override
@@ -25,7 +25,7 @@ public:
     }
 
 protected:
-    void SendContent(const Session &session) const override
+    void SendContent(const Socket &socket) const override
     {
     }
 

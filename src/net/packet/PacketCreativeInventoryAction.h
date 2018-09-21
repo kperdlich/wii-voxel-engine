@@ -9,10 +9,10 @@ class PacketCreativeInventoryAction : public Packet
 public:
     PacketCreativeInventoryAction() : Packet(PACKET_CREATIVE_INVENTORY_ACTION) {}
 
-    void Read(const Session &session) override
+    void Read(const Socket &socket) override
     {
-        m_Slot = session.Read<int16_t>();
-        ReadSlotData(m_SlotData, session);
+        m_Slot = socket.Read<int16_t>();
+        ReadSlotData(m_SlotData, socket);
     }
     void Action() override
     {
@@ -23,7 +23,7 @@ public:
     }
 
 protected:
-    void SendContent(const Session &session) const override
+    void SendContent(const Socket &socket) const override
     {
     }
 

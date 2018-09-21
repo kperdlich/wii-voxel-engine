@@ -11,7 +11,7 @@ public:
 
     // Packet interface
 public:
-    void Read(const Session &session) override
+    void Read(const Socket &socket) override
     {
     }
     void Action() override
@@ -23,7 +23,7 @@ public:
     }
 
 protected:
-    void SendContent(const Session &session) const override
+    void SendContent(const Socket &socket) const override
     {
     }
 };

@@ -15,7 +15,7 @@ public:
 
    PacketPlayerPosition() : Packet(PACKET_PLAYER_POSITION) {}
 
-   void Read(const Session &session) override
+   void Read(const Socket &socket) override
    {
 
    }
@@ -29,13 +29,13 @@ public:
    }
 
 protected:
-   void SendContent(const Session &session) const override
+   void SendContent(const Socket &socket) const override
    {
-        session.Send<double>(m_X);
-        session.Send<double>(m_Y);
-        session.Send<double>(m_Stance);
-        session.Send<double>(m_Z);
-        session.Send<bool>(m_bOnGround);
+        socket.Send<double>(m_X);
+        socket.Send<double>(m_Y);
+        socket.Send<double>(m_Stance);
+        socket.Send<double>(m_Z);
+        socket.Send<bool>(m_bOnGround);
    }
 
    double m_X, m_Y, m_Z, m_Stance;

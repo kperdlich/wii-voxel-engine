@@ -41,9 +41,9 @@ public:
         m_String.append(ToString<uint16_t>(port));
     }
 
-    void Read(const Session& session) override
+    void Read(const Socket& socket) override
     {
-        m_String = session.ReadString();
+        m_String = socket.ReadString();
         LOG("Got Server Handshake '%s'", m_String.c_str());
     }
 
@@ -60,10 +60,10 @@ public:
      }
 
 protected:
-    void SendContent(const Session& session) const override
+    void SendContent(const Socket& socket) const override
     {
-        session.Send<int16_t>((int16_t)m_String.length());
-        session.SendString(m_String);
+        socket.Send<int16_t>((int16_t)m_String.length());
+        socket.SendStringAsUtf16(m_String);
     }
 
 private:

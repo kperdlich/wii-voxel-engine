@@ -9,13 +9,13 @@ class PacketBlockChange : public Packet
 public:
     PacketBlockChange() : Packet(PACKET_BLOCK_CHANGE) {}
 
-    void Read(const Session &session) override
+    void Read(const Socket &socket) override
     {
-        m_X = session.Read<int32_t>();
-        m_Y = session.Read<char>();
-        m_Z = session.Read<int32_t>();
-        m_BlockType = session.Read<char>();
-        m_BlockMetadata = session.Read<char>();
+        m_X = socket.Read<int32_t>();
+        m_Y = socket.Read<char>();
+        m_Z = socket.Read<int32_t>();
+        m_BlockType = socket.Read<char>();
+        m_BlockMetadata = socket.Read<char>();
     }
 
     void Action() override
@@ -28,7 +28,7 @@ public:
     }
 
 protected:
-    void SendContent(const Session &session) const override
+    void SendContent(const Socket &socket) const override
     {
     }
 

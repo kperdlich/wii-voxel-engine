@@ -9,10 +9,10 @@ class PacketEntityHeadLook : public Packet
 public:
     PacketEntityHeadLook() : Packet(PACKET_ENTITY_HEAD_LOOK) {}
 
-    void Read(const Session &session) override
+    void Read(const Socket &socket) override
     {
-        m_EID = session.Read<int32_t>();
-        m_HeadYaw = session.Read<char>();
+        m_EID = socket.Read<int32_t>();
+        m_HeadYaw = socket.Read<char>();
     }
 
     void Action() override
@@ -25,7 +25,7 @@ public:
     }
 
 protected:
-    void SendContent(const Session &session) const override
+    void SendContent(const Socket &socket) const override
     {
     }
 

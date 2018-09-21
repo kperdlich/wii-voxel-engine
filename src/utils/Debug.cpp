@@ -22,10 +22,18 @@
 
 std::ofstream Debug::s_file;
 Mutex Debug::s_mutex;
+Socket Debug::s_socket;
+bool Debug::s_bLogAlwaysToServer = false;
 
 void Debug::Init()
 {
     s_file.open(LOG_FILE);
+}
+
+void Debug::InitServer(bool bLogAlwaysToServer = false)
+{
+    s_socket.Connect("192.168.0.129", 5000);
+    s_bLogAlwaysToServer = bLogAlwaysToServer;
 }
 
 void Debug::Log(const ELogType &logType, const char* format, ...)
@@ -38,24 +46,46 @@ void Debug::Log(const ELogType &logType, const char* format, ...)
 
     va_end(args);
 
-    s_mutex.Lock();
+    std::string msg;
     switch (logType)
     {
     case ELogType::INFO:
-        s_file << "[INFO] ";
+        msg += "[INFO] ";
         break;
     case ELogType::WARNING:
-        s_file << "[WARNING] ";
+        msg += "[WARNING] ";
         break;
     case ELogType::ERROR:
-        s_file << "[ERROR] ";
+        msg += "[ERROR] ";
         break;
     }
-    s_file << buffer << std::endl;
+    msg += buffer;
+
+    if (s_bLogAlwaysToServer) {
+        s_socket.SendString(msg);
+    }
+
+    s_mutex.Lock();
+    s_file << msg << std::endl;
     s_mutex.Unlock();
+}
+
+void Debug::LogServer(const char* format, ...)
+{
+    va_list args;
+    va_start(args, format);
+
+    char buffer[200];
+    vsprintf(buffer, format, args);
+
+    va_end(args);
+
+    s_socket.SendString(buffer);
 }
 
 void Debug::Release()
 {
     s_file.close();
+    if (s_socket.IsConnected())
+        s_socket.Disconnect();
 }

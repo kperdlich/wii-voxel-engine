@@ -9,10 +9,10 @@ class PacketIncrementStatistic : public Packet
 public:
     PacketIncrementStatistic() : Packet(PACKET_INCREMENT_STATISTICS) {}
 
-    void Read(const Session &session) override
+    void Read(const Socket &socket) override
     {
-        m_StatisticID = session.Read<int32_t>();
-        m_Amount = session.Read<char>();
+        m_StatisticID = socket.Read<int32_t>();
+        m_Amount = socket.Read<char>();
     }
     void Action() override
     {
@@ -23,7 +23,7 @@ public:
     }
 
 protected:
-    void SendContent(const Session &session) const override
+    void SendContent(const Socket &socket) const override
     {
     }
 

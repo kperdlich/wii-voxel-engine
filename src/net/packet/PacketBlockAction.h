@@ -9,13 +9,13 @@ class PacketBlockAction : public Packet
 public:
     PacketBlockAction() : Packet(PACKET_BLOCK_ACTION) {}
 
-    void Read(const Session &session) override
+    void Read(const Socket &socket) override
     {
-        m_X = session.Read<int32_t>();
-        m_Y = session.Read<int32_t>();
-        m_Z = session.Read<int32_t>();
-        m_Byte_1 = session.Read<char>();
-        m_Byte_2 = session.Read<char>();
+        m_X = socket.Read<int32_t>();
+        m_Y = socket.Read<int32_t>();
+        m_Z = socket.Read<int32_t>();
+        m_Byte_1 = socket.Read<char>();
+        m_Byte_2 = socket.Read<char>();
     }
 
     void Action() override
@@ -28,7 +28,7 @@ public:
     }
 
 protected:
-    void SendContent(const Session &session) const override
+    void SendContent(const Socket &socket) const override
     {
     }
 

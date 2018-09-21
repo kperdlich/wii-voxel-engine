@@ -23,7 +23,7 @@
 #include <cstring>
 #include <vector>
 #include <cstdio>
-#include "../Session.h"
+#include "../Socket.h"
 
 struct SlotData
 {
@@ -40,32 +40,32 @@ public:
     Packet(unsigned char id) : m_ID(id) {}
     virtual ~Packet() {}
     void Send() const;
-    virtual void Read(const Session& session) = 0;
+    virtual void Read(const Socket& socket) = 0;
     virtual void Action() = 0;
     virtual Packet* CreateInstance() const = 0;
 protected:
-    virtual void SendContent(const Session& session) const = 0;
+    virtual void SendContent(const Socket& socket) const = 0;
 
-    void ReadSlotData(std::vector<SlotData>& slotData, int16_t count, const Session& session) const
+    void ReadSlotData(std::vector<SlotData>& slotData, int16_t count, const Socket& socket) const
     {
         slotData.clear();
         SlotData data;
         for (int16_t i = 0; i < count; ++i)
         {
-            ReadSlotData(data, session);
+            ReadSlotData(data, socket);
             slotData.emplace_back(data);
         }
     }
 
-    void ReadSlotData(SlotData& data, const Session& session) const
+    void ReadSlotData(SlotData& data, const Socket& socket) const
     {
         memset(&data, 0, sizeof(data));
-        data.BlockID = session.Read<int16_t>();
+        data.BlockID = socket.Read<int16_t>();
         if (data.BlockID != -1)
         {
-            data.ItemCount = session.Read<char>();
-            data.ItemDamage = session.Read<int16_t>();
-            data.NBT = session.Read<char>(); // todo handle nbt correctly
+            data.ItemCount = socket.Read<char>();
+            data.ItemDamage = socket.Read<int16_t>();
+            data.NBT = socket.Read<char>(); // todo handle nbt correctly
         }
     }
 

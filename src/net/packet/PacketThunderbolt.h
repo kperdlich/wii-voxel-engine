@@ -9,13 +9,13 @@ class PacketThunderbolt : public Packet
 public:
     PacketThunderbolt() : Packet(PACKET_THUNDERBOLT) {}
 
-    void Read(const Session &session) override
+    void Read(const Socket &socket) override
     {
-        m_EID = session.Read<int32_t>();
-        m_Unkown = session.Read<char>();
-        m_X = session.Read<int32_t>();
-        m_Y = session.Read<int32_t>();
-        m_Z = session.Read<int32_t>();
+        m_EID = socket.Read<int32_t>();
+        m_Unkown = socket.Read<char>();
+        m_X = socket.Read<int32_t>();
+        m_Y = socket.Read<int32_t>();
+        m_Z = socket.Read<int32_t>();
     }
     void Action() override
     {
@@ -26,7 +26,7 @@ public:
     }
 
 protected:
-    void SendContent(const Session &session) const override
+    void SendContent(const Socket &socket) const override
     {
     }
 

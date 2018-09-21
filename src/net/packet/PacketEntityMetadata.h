@@ -9,9 +9,9 @@ class PacketEntityMetadata : public Packet
 public:
     PacketEntityMetadata() : Packet(PACKET_ENTITY_METADATA) {}
 
-    void Read(const Session &session) override
+    void Read(const Socket &socket) override
     {
-        m_EID = session.Read<int32_t>();
+        m_EID = socket.Read<int32_t>();
         // todo implement metadata
     }
     void Action() override
@@ -23,7 +23,7 @@ public:
     }
 
 protected:
-    void SendContent(const Session &session) const override
+    void SendContent(const Socket &socket) const override
     {
     }
 

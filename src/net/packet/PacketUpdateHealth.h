@@ -9,11 +9,11 @@ class PacketUpdateHealth : public Packet
 public:
     PacketUpdateHealth() : Packet(PACKET_UPDATE_HEALTH) {}
 
-    void Read(const Session &session) override
+    void Read(const Socket &socket) override
     {
-        m_Health = session.Read<int16_t>();
-        m_Food = session.Read<int16_t>();
-        m_FoodSaturation = session.Read<float>();
+        m_Health = socket.Read<int16_t>();
+        m_Food = socket.Read<int16_t>();
+        m_FoodSaturation = socket.Read<float>();
     }
     void Action() override
     {
@@ -28,7 +28,7 @@ protected:
     int16_t m_Health = 0, m_Food = 0;
     float m_FoodSaturation = 0.0f;
 
-    void SendContent(const Session &session) const override
+    void SendContent(const Socket &socket) const override
     {
 
     }

@@ -11,7 +11,7 @@ class PacketPlayerLook : public Packet
 public:
     PacketPlayerLook() : Packet(PACKET_PLAYER_LOOK) {}
 
-    void Read(const Session &session) override
+    void Read(const Socket &socket) override
     {
     }
 
@@ -25,7 +25,7 @@ public:
     }
 
 protected:
-    void SendContent(const Session &session) const override
+    void SendContent(const Socket &socket) const override
     {
 
     }

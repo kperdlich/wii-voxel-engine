@@ -15,11 +15,11 @@ public:
          m_SlotData.clear();
      }
 
-     void Read(const Session &session) override
+     void Read(const Socket &socket) override
      {
-         m_WindowID = session.Read<char>();
-         m_Count = session.Read<int16_t>();
-         ReadSlotData(m_SlotData, m_Count, session);
+         m_WindowID = socket.Read<char>();
+         m_Count = socket.Read<int16_t>();
+         ReadSlotData(m_SlotData, m_Count, socket);
      }
 
      void Action() override
@@ -31,7 +31,7 @@ public:
      }
 
 protected:
-     void SendContent(const Session &session) const override
+     void SendContent(const Socket &socket) const override
      {
      }
 

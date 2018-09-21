@@ -11,7 +11,7 @@ class PacketPlayer : public Packet
 public:
     PacketPlayer(bool onGround = false) : Packet(PACKET_PLAYER), m_bOnGround(onGround) {}
 
-    void Read(const Session &session) override
+    void Read(const Socket &socket) override
     {
 
     }
@@ -25,9 +25,9 @@ public:
     }
 
 protected:
-    void SendContent(const Session &session) const override
+    void SendContent(const Socket &socket) const override
     {
-        session.Send<bool>(m_bOnGround);
+        socket.Send<bool>(m_bOnGround);
     }
 
     bool m_bOnGround;

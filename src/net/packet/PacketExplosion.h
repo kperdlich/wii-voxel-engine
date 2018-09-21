@@ -14,15 +14,15 @@ public:
              free(m_Records);
      }
 
-     void Read(const Session &session) override
+     void Read(const Socket &socket) override
      {
-         m_X = session.Read<double>();
-         m_Y = session.Read<double>();
-         m_Z = session.Read<double>();
-         m_Radius = session.Read<float>();
-         m_RecordCount = session.Read<int32_t>();
+         m_X = socket.Read<double>();
+         m_Y = socket.Read<double>();
+         m_Z = socket.Read<double>();
+         m_Radius = socket.Read<float>();
+         m_RecordCount = socket.Read<int32_t>();
          m_Records = malloc(m_RecordCount * (sizeof(char) * 3));
-         session.Read(m_Records, m_RecordCount * (sizeof(char) * 3));
+         socket.Read(m_Records, m_RecordCount * (sizeof(char) * 3));
      }
 
      void Action() override
@@ -34,7 +34,7 @@ public:
      }
 
 protected:
-     void SendContent(const Session &session) const override
+     void SendContent(const Socket &socket) const override
      {
      }
 

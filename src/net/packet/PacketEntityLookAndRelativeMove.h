@@ -9,14 +9,14 @@ class PacketEntityLookAndRelativeMove : public Packet
 public:
     PacketEntityLookAndRelativeMove() : Packet(PACKET_ENTITY_LOOK_RELATIVE_MOVE) {}
 
-    void Read(const Session &session) override
+    void Read(const Socket &socket) override
     {
-        m_EID = session.Read<int32_t>();
-        m_DX = session.Read<char>();
-        m_DY = session.Read<char>();
-        m_DZ = session.Read<char>();
-        m_Yaw = session.Read<char>();
-        m_Pitch = session.Read<char>();
+        m_EID = socket.Read<int32_t>();
+        m_DX = socket.Read<char>();
+        m_DY = socket.Read<char>();
+        m_DZ = socket.Read<char>();
+        m_Yaw = socket.Read<char>();
+        m_Pitch = socket.Read<char>();
     }
 
     void Action() override
@@ -28,7 +28,7 @@ public:
     }
 
 protected:
-    void SendContent(const Session &session) const override
+    void SendContent(const Socket &socket) const override
     {
     }
 

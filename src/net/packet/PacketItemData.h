@@ -15,13 +15,13 @@ public:
             free(m_Text);
     }
 
-    void Read(const Session &session) override
+    void Read(const Socket &socket) override
     {
-        m_ItemType = session.Read<int16_t>();
-        m_ItemID = session.Read<int16_t>();
-        m_TextLength = session.Read<unsigned char>();
+        m_ItemType = socket.Read<int16_t>();
+        m_ItemID = socket.Read<int16_t>();
+        m_TextLength = socket.Read<unsigned char>();
         m_Text = (char*) malloc(m_TextLength);
-        session.Read(m_Text, m_TextLength);
+        socket.Read(m_Text, m_TextLength);
     }
 
     void Action() override
@@ -33,7 +33,7 @@ public:
     }
 
 protected:
-    void SendContent(const Session &session) const override
+    void SendContent(const Socket &socket) const override
     {
     }
 

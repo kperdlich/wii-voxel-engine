@@ -9,13 +9,13 @@ class PacketRespawn : public Packet
 public:
     PacketRespawn() : Packet(PACKET_RESPAWN) {}
 
-    void Read(const Session &session) override
+    void Read(const Socket &socket) override
     {
-        m_Dimension = session.Read<int32_t>();
-        m_Difficulty = session.Read<char>();
-        m_CreativeMode = session.Read<char>();
-        m_WorldHeight = session.Read<int16_t>();
-        m_LevelType = session.ReadString();
+        m_Dimension = socket.Read<int32_t>();
+        m_Difficulty = socket.Read<char>();
+        m_CreativeMode = socket.Read<char>();
+        m_WorldHeight = socket.Read<int16_t>();
+        m_LevelType = socket.ReadString();
     }
 
     void Action() override
@@ -29,7 +29,7 @@ public:
     }
 
 protected:
-    void SendContent(const Session &session) const override
+    void SendContent(const Socket &socket) const override
     {
 
     }

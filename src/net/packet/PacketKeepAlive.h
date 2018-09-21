@@ -28,9 +28,9 @@ class PacketKeepAlive : public Packet
 public:
     PacketKeepAlive(int32_t id = 0) : Packet(PACKET_KEEP_ALIVE), m_KeepAliveID(id) {}
 
-    void Read(const Session &session) override
+    void Read(const Socket &socket) override
     {
-        m_KeepAliveID = session.Read<int32_t>();
+        m_KeepAliveID = socket.Read<int32_t>();
     }
 
     void Action() override
@@ -45,9 +45,9 @@ public:
     }
 
 protected:
-    void SendContent(const Session& session) const override
+    void SendContent(const Socket& socket) const override
     {
-        session.Send<int32_t>(m_KeepAliveID);
+        socket.Send<int32_t>(m_KeepAliveID);
     }
 
 private:
