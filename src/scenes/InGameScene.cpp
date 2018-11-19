@@ -52,8 +52,8 @@ void InGameScene::Load()
     m_pGameWorld->GenerateWorld();
 
     // todo move to multiplayer scene
-    NetworkManager::Get().Connect("192.168.0.129", 25565);
-    PacketHandshake hs("DaeFennek", "192.168.0.129", 25565);
+    NetworkManager::Get().Connect("127.0.0.1", 25565);
+    PacketHandshake hs("DaeFennek", "127.0.0.1", 25565);
     hs.Send();
 
     Basic3DScene::Load();

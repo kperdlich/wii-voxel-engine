@@ -32,7 +32,7 @@ void Debug::Init()
 
 void Debug::InitServer(bool bLogAlwaysToServer = false)
 {
-    s_socket.Connect("192.168.0.129", 5000);
+    s_socket.Connect("127.0.0.1", 5000);
     s_bLogAlwaysToServer = bLogAlwaysToServer;
 }
 
