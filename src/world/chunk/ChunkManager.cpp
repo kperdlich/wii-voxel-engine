@@ -51,10 +51,12 @@ void ChunkManager::Init(const Vector3 &position, GameWorld *world)
         Chunk* chunk = new Chunk(*m_world);
         chunk->Init();
         chunk->SetPosition(pos);
+        //chunk->Build();
+        chunk->SetLoaded(false);
         m_chunkCash.push_back(chunk);
     }
 
-    LoadChunks(currentChunkPos);
+    //LoadChunks(currentChunkPos);
 }
 
 const std::vector<Chunk*> ChunkManager::GetLoadedChunks() const
@@ -140,6 +142,7 @@ void ChunkManager::DestroyChunkCash()
 
 void ChunkManager::LoadChunks(const Vec2i &chunkPosition)
 {    
+
     auto chunkMap = GetChunkMapAround(chunkPosition);
     std::vector<Chunk*> chunkPreCashed;
 
@@ -171,11 +174,14 @@ void ChunkManager::LoadChunks(const Vec2i &chunkPosition)
 
         const Vec2i& cPos = chunkMap.back();
         chunk->SetPosition(cPos);
-        chunk->SetLoaded(false);
-        m_chunkLoadingStage.push_back(chunk);        
+        chunk->SetLoaded(false);        
         chunk->SetToAir();
+        //chunk->Build();
+        //chunk->SetDirty(true);
+        //m_chunkLoadingStage.push_back(chunk);
+
         chunkMap.pop_back();
-        m_loaderJob.Add(ChunkLoadingData { Chunk::GetFilePath(chunk->GetPosition()), chunk});
+        //m_loaderJob.Add(ChunkLoadingData { Chunk::GetFilePath(chunk->GetPosition()), chunk});
     }
 
     chunkPreCashed.clear();

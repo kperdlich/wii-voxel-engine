@@ -25,9 +25,10 @@
 
 void SerializationJob::Execute()
 {
+
     const BlockChangeData& blockData = m_queue.Pop();
     const std::string& filename = blockData.Filepath;
-
+    /*
     std::ifstream file;
     file.open(filename);
     bool bReplaced = false;
@@ -87,5 +88,5 @@ void SerializationJob::Execute()
         stream.flush();
         stream.close();
         //LOG("Create File %s", filename.c_str());
-    }
+    }*/
 }

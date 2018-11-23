@@ -32,11 +32,11 @@
 enum class BlockType : unsigned char
 {
     AIR     = 0,
-    STONE   = 1,
+    STONE   = 4,
     GRASS   = 2,
     DIRT    = 3,
-    WOOD    = 4,
-    LEAF    = 5
+    WOOD    = 17,
+    LEAF    = 18
 };
 
 class BlockManager {

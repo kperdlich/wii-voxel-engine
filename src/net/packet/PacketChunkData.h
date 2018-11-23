@@ -54,7 +54,9 @@ public:
         stream.flush();
         stream.close();*/
 
-        /*uint32_t sections = 0;
+        //return; // TODO REMOVE WHEN IMPLEMENTED SECTION DISPLAY LIST
+
+        uint32_t sections = 0;
         const int32_t sectionSize = 4096+(3*2048);
 
         for(uint32_t i = 0; i < 16; ++i)
@@ -64,8 +66,8 @@ public:
         if(m_bGroundUpCon)
             size += 256;
 
-        LOG("Found Chunk Data X:%d Z:%d m_bGroundUpCon:%d, m_PrimaryBitMap:%d, m_AddBitMap:%d, m_CompressedSize:%d, ", m_X, m_Z, m_bGroundUpCon, m_PrimaryBitMap,
-                        m_AddBitMap, m_CompressedSize);
+        /*LOG("Received Chunk Data X:%d Z:%d m_bGroundUpCon:%d, m_PrimaryBitMap:%d, m_AddBitMap:%d, m_CompressedSize:%d, ", m_X, m_Z, m_bGroundUpCon, m_PrimaryBitMap,
+                        m_AddBitMap, m_CompressedSize);*/
 
         unsigned char* cdata = (unsigned char*) malloc(size);
         size_t s = Zip::Decompress(m_CompressedData, m_CompressedSize, cdata, size);
@@ -73,34 +75,68 @@ public:
             ERROR("Uncompressed size is different: Got: %d, Expected: %d", s, size);
 
         free(m_CompressedData);
-        m_CompressedData = nullptr;      
+        m_CompressedData = nullptr;
 
         GameWorld* world = static_cast<InGameScene*>(Engine::Get().GetSceneHandler().GetCurrentScene())->GetWorld();
         Chunk* c = world->GetCashedChunkAt(Vec2i(m_X, m_Z));
-
         if(c)
         {
+            LOG("Receiced cashed Chunk Data X:%d Z:%d m_bGroundUpCon:%d, m_PrimaryBitMap:%d, m_AddBitMap:%d, m_CompressedSize:%d, ", m_X, m_Z, m_bGroundUpCon, m_PrimaryBitMap,
+                                    m_AddBitMap, m_CompressedSize);
+            // TODO create sections in chunk first before working more on parsing the shit ..
             BlockType*** blocks = c->GetBlocks();
-            c->SetToAir();
             for (uint32_t i = 0; i < 16; ++i)
             {
                 if (m_PrimaryBitMap & 1 << i)
-                {                    
-                    for(int j = 0; j < 4096; ++j)
+                {
+                    for (int ix = 0; ix < 16; ++ix)
                     {
-                        int32_t x = j & 0x0F;
-                        int32_t y = i*16 + j >> 8;
-                        int32_t z = (j & 0xF0) >> 4;
-                        unsigned char data = cdata[j];
-                        blocks[x][y][z] = data > 5 ? BlockType::DIRT : BlockType(data);
-                    }
-                }               
-            }
-            c->SetDirty(true);
-            c->SetLoaded(true);
-        }       
+                        for (int iy = 0; iy < 16; ++iy)
+                        {
+                            for (int iz = 0; iz < 16; ++iz)
+                            {
+                                unsigned char block = (cdata[(iz * 16 * 16) + (iy * 16) + ix + (i * 16 * 16 * 16)]);
+                                BlockType* blockPtr = &blocks[ix][iy + (i * 16)][iz];
 
-        free(cdata);*/
+                                switch(block)
+                                {
+                                case 0:
+                                    *blockPtr = BlockType::AIR;
+                                    break;
+                                case 2:
+                                    *blockPtr = BlockType::GRASS;
+                                    break;
+                                case 3:
+                                    *blockPtr = BlockType::DIRT;
+                                    break;
+                                case 4:
+                                    *blockPtr = BlockType::STONE;
+                                    break;
+                                case 5:
+                                    *blockPtr = BlockType::WOOD;
+                                    break;
+                                case 17:
+                                    *blockPtr = BlockType::WOOD;
+                                    break;
+                                case 18:
+                                    *blockPtr = BlockType::LEAF;
+                                    break;
+                                default:
+                                    *blockPtr = BlockType::DIRT;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    c->SetDirty(true);
+                    c->SetLoaded(true);
+                    c->RebuildDisplayList();
+                }
+            }
+        }
+
+        free(cdata);
+        LOG("DONE Parsing chunk");
     }
 
     Packet *CreateInstance() const override

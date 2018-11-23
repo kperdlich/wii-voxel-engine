@@ -24,10 +24,12 @@
 #include <inttypes.h>
 #include "GameWorld.h"
 #include "Frustrum.h"
+
 #include "../renderer/MasterRenderer.h"
 #include "../utils/Debug.h"
 #include "../utils/Filesystem.h"
 #include "chunk/Chunk.h"
+#include "Camera.h"
 
 
 GameWorld::GameWorld()
@@ -50,11 +52,18 @@ void GameWorld::GenerateWorld()
     m_chunkLoader.Init(playerPosition, this);
 }
 
+static int value = 0;
 
 void GameWorld::Draw()
 {
+    WiiPad* pad = Engine::Get().GetInputHandler().GetPadByID( WII_PAD_0 );
+
+    if ( pad->ButtonsHeld() & WPAD_BUTTON_DOWN)
+        value++;
+
     auto& playerPosition = static_cast<Basic3DScene*>(Engine::Get().GetSceneHandler().GetCurrentScene())->GetEntityHandler().GetPlayer()->GetPosition();
     auto& loadedChunks = m_chunkLoader.GetLoadedChunks();
+    //const Camera* mainCamera = ((Basic3DScene*)Engine::Get().GetSceneHandler().GetCurrentScene())->GetCamera();
     for( auto& chunk : loadedChunks)
     {        
         if (chunk->IsDirty())
@@ -62,7 +71,8 @@ void GameWorld::Draw()
             chunk->RebuildDisplayList();            
         }
         chunk->Render();
-    }    
+    }
+
     m_chunkLoader.UpdateChunksBy(playerPosition);
     DrawFocusOnSelectedCube();
 }

@@ -10,7 +10,7 @@ void ChunkLoaderMultiplayer::Execute()
     const ChunkLoadingData& chunkData = m_queue.Pop();
     Chunk* chunk = chunkData.ChunkObj;
     const std::string& filepath = chunkData.Filepath;
-
+    /*
     std::ifstream fstream(filepath, std::ios::in | std::ios::binary);
     if (fstream.is_open())
     {
@@ -73,5 +73,5 @@ void ChunkLoaderMultiplayer::Execute()
     else
     {
         ERROR("Couldn find file: %s", filepath.c_str());
-    }
+    }*/
 }

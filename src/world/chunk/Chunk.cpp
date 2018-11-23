@@ -228,122 +228,49 @@ bool Chunk::AddBlockToRenderList(BlockType type, const BlockRenderVO& blockRende
 
 bool Chunk::IsBlockVisible(uint32_t iX, uint32_t iY, uint32_t iZ, BlockRenderVO& blockRenderVO)
 {
-    bool bIsAir = m_blocks[iX][iY][iZ] == BlockType::AIR;
+    bool bIsAir = m_blocks[iX][iY][iZ] == BlockType::AIR;    
 
-	if ( iX == 0 )
-	{
-		if (bIsAir)
-		{
-            if ( !m_bNeighbourUpdate && m_pChunkLeft && m_pChunkLeft->m_blocks[CHUNK_SIZE_X -1][iY][iZ] != BlockType::AIR)
-			{
-				m_pChunkLeft->SetDirty(true); //rebuild neighbour
-				m_pChunkLeft->m_bNeighbourUpdate = true;
-			}
-		}
-        else if ( /*!m_pChunkLeft || */(m_pChunkLeft && m_pChunkLeft->m_blocks[CHUNK_SIZE_X -1][iY][iZ] == BlockType::AIR))
-		{
-            blockRenderVO.FaceMask |= LEFT_FACE;
-            blockRenderVO.Faces++;
-		}
-	}
+    if (bIsAir)
+        return false;
 
-	if ( iX == CHUNK_SIZE_X -1 )
-	{
-		if (bIsAir)
-		{
-            if ( !m_bNeighbourUpdate && m_pChunkRight && m_pChunkRight->m_blocks[0][iY][iZ] != BlockType::AIR)
-			{
-				m_pChunkRight->SetDirty(true); //rebuild neighbour
-				m_pChunkRight->m_bNeighbourUpdate = true;
-			}
-		}
-        else if ( /*!m_pChunkRight || */(m_pChunkRight && m_pChunkRight->m_blocks[0][iY][iZ] == BlockType::AIR))
-		{
-            blockRenderVO.FaceMask |= RIGHT_FACE;
-            blockRenderVO.Faces++;
-		}
-	}
+     BlockType top = iY == CHUNK_SIZE_Y -1 ? BlockType::AIR : m_blocks[iX][iY+1][iZ];
+     BlockType bottom = iY == 0 ? BlockType::AIR : m_blocks[iX][iY-1][iZ];
+     BlockType north = iZ == CHUNK_SIZE_Z -1 ? BlockType::AIR : m_blocks[iX][iY][iZ+1];
+     BlockType south = iZ == 0 ? BlockType::AIR : m_blocks[iX][iY][iZ-1];
+     BlockType east = iX == CHUNK_SIZE_X-1 ? BlockType::AIR : m_blocks[iX+1][iY][iZ];
+     BlockType west = iX == 0 ? BlockType::AIR : m_blocks[iX-1][iY][iZ];
 
-	if ( iZ == 0 )
-	{
-		if (bIsAir)
-		{
-            if ( !m_bNeighbourUpdate && m_pChunkBack && m_pChunkBack->m_blocks[iX][iY][CHUNK_SIZE_Z -1] != BlockType::AIR)
-			{
-				m_pChunkBack->SetDirty(true); //rebuild neighbour
-				m_pChunkBack->m_bNeighbourUpdate = true;
-			}
-		}
-        else if (/*!m_pChunkBack || */(m_pChunkBack && m_pChunkBack->m_blocks[iX][iY][CHUNK_SIZE_Z -1] == BlockType::AIR))
-		{
-            blockRenderVO.FaceMask |= BACK_FACE;
-            blockRenderVO.Faces++;
-		}
-	}
+    if (top == BlockType::AIR)
+    {
+        blockRenderVO.FaceMask |= TOP_FACE;
+        blockRenderVO.Faces++;
+    }
 
-	if (iZ == CHUNK_SIZE_Z -1 )
-	{
-		if (bIsAir)
-		{
-            if ( !m_bNeighbourUpdate && m_pChunkFront && m_pChunkFront->m_blocks[iX][iY][0] != BlockType::AIR)
-			{
-				m_pChunkFront->SetDirty(true); //rebuild neighbour
-				m_pChunkFront->m_bNeighbourUpdate = true;
-			}
-		}
-        else if ( /*!m_pChunkFront || */(m_pChunkFront && m_pChunkFront->m_blocks[iX][iY][0] == BlockType::AIR))
-		{
-            blockRenderVO.FaceMask |= FRONT_FACE;
-            blockRenderVO.Faces++;
-		}
-	}
-
-	if ( !bIsAir )
-	{
-		if ( iY == CHUNK_SIZE_Y -1 )
-		{
-            blockRenderVO.FaceMask |= TOP_FACE;
-            blockRenderVO.Faces++;
-		}
-
-		 // Check all 6 block faces if neighbor is air
-        if ( iX + 1 <= CHUNK_SIZE_X -1 && m_blocks[iX + 1][iY][iZ] == BlockType::AIR)
-		{
-            blockRenderVO.FaceMask |= RIGHT_FACE;
-            blockRenderVO.Faces++;
-		}
-
-        if ( iX > 0 && m_blocks[iX - 1][iY][iZ] == BlockType::AIR)
-		{
-            blockRenderVO.FaceMask |= LEFT_FACE;
-            blockRenderVO.Faces++;
-		}
-
-        if ( iY + 1 <= CHUNK_SIZE_Y -1 && m_blocks[iX][iY + 1][iZ] == BlockType::AIR)
-		{
-            blockRenderVO.FaceMask |= TOP_FACE;
-            blockRenderVO.Faces++;
-		}
-
-
-        if (iY > 0 && m_blocks[iX][iY - 1][iZ] == BlockType::AIR)
-		{
-            blockRenderVO.FaceMask |= BOTTOM_FACE;
-            blockRenderVO.Faces++;
-		}
-
-        if ( iZ + 1 <= CHUNK_SIZE_Z -1 && m_blocks[iX][iY][iZ + 1] == BlockType::AIR)
-		{
-            blockRenderVO.FaceMask |= FRONT_FACE;
-            blockRenderVO.Faces++;
-		}
-
-        if ( iZ > 0 && m_blocks[iX][iY][iZ - 1] == BlockType::AIR)
-		{
-            blockRenderVO.FaceMask |= BACK_FACE;
-            blockRenderVO.Faces++;
-        }
-	}
+    if (bottom == BlockType::AIR)
+    {
+        blockRenderVO.FaceMask |= BOTTOM_FACE;
+        blockRenderVO.Faces++;
+    }
+    if (north == BlockType::AIR)
+    {
+        blockRenderVO.FaceMask |= FRONT_FACE;
+        blockRenderVO.Faces++;
+    }
+    if (south == BlockType::AIR)
+    {
+        blockRenderVO.FaceMask |= BACK_FACE;
+        blockRenderVO.Faces++;
+    }
+    if (east == BlockType::AIR)
+    {
+        blockRenderVO.FaceMask |= RIGHT_FACE;
+        blockRenderVO.Faces++;
+    }
+    if (west == BlockType::AIR)
+    {
+        blockRenderVO.FaceMask |= LEFT_FACE;
+        blockRenderVO.Faces++;
+    }
 
     if (blockRenderVO.Faces > 0)
     {        

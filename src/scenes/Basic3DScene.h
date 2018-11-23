@@ -37,6 +37,11 @@ public:
     virtual void Draw() override;
     virtual void Update(float deltaSeconds) override;
 
+    inline const class Camera* GetCamera() const
+    {
+        return m_mainCamera;
+    }
+
     class EntityHandler& GetEntityHandler();
 
 protected:	

@@ -96,7 +96,7 @@ void InGameScene::Draw()
 void InGameScene::InitEntities()
 {
     CPlayer* pPlayer = new CPlayer();
-    pPlayer->SetPosition(Vector3(10.0f, CHUNK_BLOCK_SIZE_Y, 10.0f));
+    pPlayer->SetPosition(Vector3(17.5, 5.59375, 928.5));
     pPlayer->SetRotation(Vector3(10.0f, 225.0f, .0f));
 	pPlayer->SetWorld(m_pGameWorld);
 	m_mainCamera->AttachTo(*pPlayer);

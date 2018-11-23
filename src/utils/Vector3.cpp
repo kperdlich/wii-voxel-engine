@@ -20,11 +20,9 @@
 #include "Vector3.h"
 #include <altivec.h>
 
+Vector3::Vector3( const Vector3& vec) : m_x(vec.GetX()), m_y(vec.GetY()), m_z(vec.GetZ()) {}
 
-Vector3::Vector3( double x, double y, double z ) : m_x(x), m_y(y), m_z(z) {
-
-
-}
+Vector3::Vector3( double x, double y, double z ) : m_x(x), m_y(y), m_z(z) {}
 
 Vector3::Vector3() : m_x(0), m_y(0), m_z(0) {
 }

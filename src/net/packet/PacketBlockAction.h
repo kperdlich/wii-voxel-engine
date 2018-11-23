@@ -12,7 +12,7 @@ public:
     void Read(const Socket &socket) override
     {
         m_X = socket.Read<int32_t>();
-        m_Y = socket.Read<int32_t>();
+        m_Y = socket.Read<int16_t>();
         m_Z = socket.Read<int32_t>();
         m_Byte_1 = socket.Read<char>();
         m_Byte_2 = socket.Read<char>();
