@@ -85,7 +85,7 @@ public:
                                     m_AddBitMap, m_CompressedSize);
             // TODO create sections in chunk first before working more on parsing the shit ..
             BlockType*** blocks = c->GetBlocks();
-            for (uint32_t i = 0; i < 16; ++i)
+            for (uint32_t i = 0; i < 8; ++i) // todo change to 16
             {
                 if (m_PrimaryBitMap & 1 << i)
                 {
@@ -96,7 +96,7 @@ public:
                             for (int iz = 0; iz < 16; ++iz)
                             {
                                 unsigned char block = (cdata[(iz * 16 * 16) + (iy * 16) + ix + (i * 16 * 16 * 16)]);
-                                BlockType* blockPtr = &blocks[ix][iy + (i * 16)][iz];
+                                BlockType* blockPtr = &blocks[ix][ iz + (i * 16)][iy];
 
                                 switch(block)
                                 {
