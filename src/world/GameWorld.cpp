@@ -199,7 +199,7 @@ PerlinNoise GameWorld::GetNoise() const
     return m_noise;
 }
 
-void GameWorld::Serialize(const BlockChangeData& data)
+void GameWorld::Serialize(const CompressedChunkData& data)
 {
     m_chunkLoader.Serialize(data);
 }

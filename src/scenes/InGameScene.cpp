@@ -30,7 +30,6 @@
 #define IGS_HUD_HOTBAR "IGS_HUD_HOTBAR"
 #define IGS_HUD_CROSSHAIR "IGS_HUD_CROSSHAIR"
 
-
 InGameScene::InGameScene() {}
 
 InGameScene::~InGameScene() {}
@@ -52,8 +51,8 @@ void InGameScene::Load()
     m_pGameWorld->GenerateWorld();
 
     // todo move to multiplayer scene
-    NetworkManager::Get().Connect("127.0.0.1", 25565);
-    PacketHandshake hs("DaeFennek", "127.0.0.1", 25565);
+    NetworkManager::Get().Connect("192.168.0.143", 25565);
+    PacketHandshake hs("DaeFennek", "192.168.0.143", 25565);
     hs.Send();
 
     Basic3DScene::Load();
@@ -95,8 +94,8 @@ void InGameScene::Draw()
 
 void InGameScene::InitEntities()
 {
-    CPlayer* pPlayer = new CPlayer();
-    pPlayer->SetPosition(Vector3(17.5, 5.59375, 928.5));
+    CPlayer* pPlayer = new CPlayer();    
+    pPlayer->SetPosition(Vector3(-189.5,74.5, 248.5));
     pPlayer->SetRotation(Vector3(10.0f, 225.0f, .0f));
 	pPlayer->SetWorld(m_pGameWorld);
 	m_mainCamera->AttachTo(*pPlayer);

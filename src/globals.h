@@ -21,6 +21,7 @@
 #define GLOBALS_H
 
 #define DEBUG
+#define DOLPHIN
 
 #define GAME_NAME                   "WoxelCraft"
 #define BUILD_VERSION               "0.0.8"
@@ -30,10 +31,17 @@
 #define DEFAULT_FONT_ID             0
 #define DEFAULT_MINECRAFT_FONT_ID   1
 
-#define FILE_PATH   "/apps/WoxelCraft"
+#define FILE_PATH   "apps/WoxelCraft"
 #define WORLD_PATH  FILE_PATH "/world"
 
 #define LOG_FILE    FILE_PATH "/Log.txt"
 #define SEED_FILE   WORLD_PATH "/Seed.dat"
+
+
+#ifdef DOLPHIN
+    #define SERVER_IP "127.0.0.1"
+#else
+    #define SERVER_IP "192.168.0.143"
+#endif
 
 #endif // GLOBALS_H

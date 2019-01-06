@@ -230,7 +230,7 @@ void ServerConnection::Execute()
     Packet* p = CreatePacketByID(packetID);
     if (p && packetID != PACKET_DISCONNECT)
     {
-        LOG("Parse packetID %x", packetID);
+        //LOG("Parse packetID %x", packetID);
         p->Read(m_socket);
         m_queue.Push(p);
     }

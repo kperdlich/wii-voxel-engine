@@ -63,6 +63,7 @@ void Chunk::Init()
 
 void Chunk::Build()
 {
+    /*
     PerlinNoise pn = m_pWorldManager->GetNoise();
 
     for ( uint32_t x = 0; x < CHUNK_SIZE_X; x++)
@@ -99,7 +100,7 @@ void Chunk::Build()
         }
     }
 
-    CreateTrees();
+    CreateTrees();*/
 }
 
 
@@ -112,7 +113,7 @@ void Chunk::Clear()
 
 void Chunk::CreateTrees()
 {    
-    uint32_t x = 6;
+    /*uint32_t x = 6;
     uint32_t z = 8;
 
     double xWorld = (CHUNK_GLOBAL_X(m_Position.X) + (x * BLOCK_SIZE));
@@ -151,7 +152,7 @@ void Chunk::CreateTrees()
                 m_blocks[x][y+i][z] = BlockType::WOOD;
             }
         }
-    }
+    }*/
 }
 
 void Chunk::SetChunkNeighbors()
@@ -418,7 +419,7 @@ void Chunk::AddBlockByWorldPosition(const Vector3& blockPosition, BlockType type
 void Chunk::BlockListUpdated(const BlockChangeData& data)
 {
     m_bIsDirty = true;
-    m_pWorldManager->Serialize(data);
+
 }
 
 void Chunk::SetPosition(const Vec2i &position)
@@ -466,7 +467,7 @@ BlockType Chunk::GetBlockTypeByWorldPosition(const Vector3& worldPosition) const
 }
 
 double Chunk::GetPhysicalHeight(const Vector3& position) const
-{
+{    
     Vector3 pos = GetBlockPositionByWorldPosition(position);    
     double currentPos = CHUNK_BLOCK_SIZE_Y - (BLOCK_SIZE);
 	bool bValidated = false;
@@ -477,14 +478,16 @@ double Chunk::GetPhysicalHeight(const Vector3& position) const
         /*  quick physics fix for the tree update
          *  Player shouldn't jump higher than blocksize
          */
-        if (bValidated)
+        /*if (bValidated)
         {
             double distance = position.GetY() - currentPos;
             bValidated = distance > (-BLOCK_SIZE);
-        }
+        }*/
         currentPos -= BLOCK_SIZE;
 
 	} while(!bValidated);    
+
+    //LOG("Current Player Height: %f", pos.GetY());
 
     return pos.GetY();
 }

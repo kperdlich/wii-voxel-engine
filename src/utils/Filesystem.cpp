@@ -18,13 +18,16 @@
 ***/
 
 
+
 #include <fat.h>
 #include <dirent.h>
 #include <sys/unistd.h>
 #include <sys/stat.h>
+#include <unistd.h>
+#include <fstream>
 #include <iostream>
+#include <stdlib.h>
 #include <assert.h>
-
 #include "Filesystem.h"
 #include "Debug.h"
 
@@ -58,4 +61,16 @@ bool FileSystem::FileExist(const std::string &filePath)
     std::ifstream fstream;
     fstream.open(filePath);
     return fstream.is_open();
+}
+
+void FileSystem::Write(const std::string &file, const char* data, size_t size)
+{
+    std::ofstream stream(file);
+    stream.write(data, size);
+    stream.close();
+}
+
+int FileSystem::RemoveDirectory(const std::string& directoryPath)
+{
+    return rmdir(directoryPath.c_str());
 }

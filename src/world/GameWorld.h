@@ -45,7 +45,7 @@ public:
 	Vector3 GetBlockPositionByWorldPosition(const Vector3& worldPosition);
     double GetPlayerHeight( const Vector3& playerWorldPosition );
     PerlinNoise GetNoise() const;
-    void Serialize(const struct BlockChangeData& data);
+    void Serialize(const CompressedChunkData& data);
 
 
 private:    

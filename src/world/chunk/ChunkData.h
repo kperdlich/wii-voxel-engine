@@ -27,7 +27,7 @@
 #define CHUNK_MAP_CASH_Y 5
 
 #define CHUNK_SIZE_X 16
-#define CHUNK_SIZE_Y 128
+#define CHUNK_SIZE_Y 256
 #define CHUNK_SIZE_Z 16
 
 #define CHUNK_MIN_GROUND 20
@@ -66,6 +66,13 @@ struct Vec2i
     }
 };
 
+struct CompressedChunkData
+{
+    unsigned char*  Data;
+    size_t          Size;
+    int32_t         X, Z;
+};
+
 struct BlockChangeData
 {
     std::string Filepath;
@@ -76,7 +83,6 @@ struct BlockChangeData
 
 struct ChunkLoadingData
 {
-    std::string     Filepath;
     class Chunk*    ChunkObj;
 };
 

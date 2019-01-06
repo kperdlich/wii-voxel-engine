@@ -20,7 +20,6 @@
 #include <string>
 #include <algorithm>
 #include "ChunkManager.h"
-#include "ChunkData.h"
 #include "chunkdata.h"
 #include "../../utils/Job.h"
 #include "Chunk.h"
@@ -35,6 +34,10 @@ ChunkManager::~ChunkManager()
     m_loaderJob.Stop();
     m_serializationJob.Stop();
     DestroyChunkCash();
+
+    int value = FileSystem::RemoveDirectory(WORLD_PATH);
+    if (value != 0)
+        LOG("Couldn't not delete directory /world! Errorcode: %d", value);
 }
 
 void ChunkManager::Init(const Vector3 &position, GameWorld *world)
@@ -53,6 +56,7 @@ void ChunkManager::Init(const Vector3 &position, GameWorld *world)
         chunk->SetPosition(pos);
         //chunk->Build();
         chunk->SetLoaded(false);
+        chunk->SetToAir();
         m_chunkCash.push_back(chunk);
     }
 
@@ -64,7 +68,7 @@ const std::vector<Chunk*> ChunkManager::GetLoadedChunks() const
     std::vector<Chunk*> loadedChunks;
     for (Chunk* cc : m_chunkCash)
     {
-        if (cc->IsLoaded() || cc->HasDisplayList())
+        if (cc->IsLoaded() /*|| cc->HasDisplayList()*/)
         {
             loadedChunks.push_back(cc);
         }
@@ -78,7 +82,7 @@ void ChunkManager::UpdateChunksBy(const Vector3 &position)
     for (auto it = m_chunkLoadingStage.begin(); it != m_chunkLoadingStage.end(); )
     {
         Chunk* c = (*it);
-        if (c->IsLoaded() && c->NeighborsLoaded())
+        if (c->IsLoaded()/* && c->NeighborsLoaded()*/)
         {
             c->SetDirty(true);
             it = m_chunkLoadingStage.erase(it);
@@ -103,7 +107,7 @@ Chunk* ChunkManager::GetCashedChunkByWorldPosition(const Vector3& worldPosition)
     return GetChunkFromCash(GetChunkPositionByWorldPosition(worldPosition));
 }
 
-void ChunkManager::Serialize(const BlockChangeData& data)
+void ChunkManager::Serialize(const CompressedChunkData& data)
 {
     m_serializationJob.Add(data);
 }
@@ -141,8 +145,7 @@ void ChunkManager::DestroyChunkCash()
 }
 
 void ChunkManager::LoadChunks(const Vec2i &chunkPosition)
-{    
-
+{
     auto chunkMap = GetChunkMapAround(chunkPosition);
     std::vector<Chunk*> chunkPreCashed;
 
@@ -162,7 +165,7 @@ void ChunkManager::LoadChunks(const Vec2i &chunkPosition)
     }
 
     for(uint32_t i = 0; i < m_chunkCash.size(); ++i)
-    {        
+    {
         Chunk* chunk = m_chunkCash[i];
 
         auto it = std::find_if(chunkPreCashed.begin(), chunkPreCashed.end(), [&chunk]( const Chunk* cashedChunk){
@@ -174,14 +177,11 @@ void ChunkManager::LoadChunks(const Vec2i &chunkPosition)
 
         const Vec2i& cPos = chunkMap.back();
         chunk->SetPosition(cPos);
-        chunk->SetLoaded(false);        
-        chunk->SetToAir();
-        //chunk->Build();
-        //chunk->SetDirty(true);
-        //m_chunkLoadingStage.push_back(chunk);
-
+        chunk->SetLoaded(false);
+        m_chunkLoadingStage.push_back(chunk);
         chunkMap.pop_back();
-        //m_loaderJob.Add(ChunkLoadingData { Chunk::GetFilePath(chunk->GetPosition()), chunk});
+        m_loaderJob.Add(ChunkLoadingData {chunk});
+        LOG("Added Chunk to loading stage");
     }
 
     chunkPreCashed.clear();

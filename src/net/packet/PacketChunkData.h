@@ -3,10 +3,12 @@
 
 #include <iostream>
 #include <stdlib.h>
+#include <sstream>
 #include "Packet.h"
 #include "PacketGlobals.h"
 #include "../../utils/Zip.h"
 #include "../../utils/Debug.h"
+#include "../../utils/Filesystem.h"
 #include "../../utils/Vector3.h"
 #include "../../Engine.h"
 #include "../../scenes/InGameScene.h"
@@ -24,7 +26,7 @@ public:
     {
         if (m_CompressedData)
             free(m_CompressedData);
-
+        m_CompressedData = nullptr;
     }
 
     void Read(const Socket &socket) override
@@ -42,20 +44,30 @@ public:
 
     void Action() override
     {
-        /*std::ofstream stream(Chunk::GetFilePath(Vec2i(m_X, m_Z)), std::ios::out | std::ios::binary);
+        std::ostringstream filename;
+        filename << WORLD_PATH "/";
+        filename << m_X;
+        filename << '_';
+        filename << m_Z;
+        filename << ".data";
+
+        std::ofstream stream(filename.str(), std::ios::out | std::ios::binary);
         stream.write((const char*)&m_X, sizeof(m_X));
         stream.write((const char*)&m_Z, sizeof(m_Z));
         stream.write((const char*)&m_bGroundUpCon, sizeof(m_bGroundUpCon));
         stream.write((const char*)&m_PrimaryBitMap, sizeof(m_PrimaryBitMap));
         stream.write((const char*)&m_AddBitMap, sizeof(m_AddBitMap));
         stream.write((const char*)&m_CompressedSize, sizeof(m_CompressedSize));
-        stream.write((const char*)&m_UnusedInt, sizeof(m_UnusedInt));
+        //stream.write((const char*)&m_UnusedInt, sizeof(m_UnusedInt));
         stream.write((const char*)m_CompressedData, m_CompressedSize);
-        stream.flush();
-        stream.close();*/
+        stream.close();
+
+        free(m_CompressedData);
+        m_CompressedData = nullptr;
 
         //return; // TODO REMOVE WHEN IMPLEMENTED SECTION DISPLAY LIST
 
+        /*
         uint32_t sections = 0;
         const int32_t sectionSize = 4096+(3*2048);
 
@@ -64,16 +76,12 @@ public:
 
         size_t size = sections * sectionSize;
         if(m_bGroundUpCon)
-            size += 256;
-
-        /*LOG("Received Chunk Data X:%d Z:%d m_bGroundUpCon:%d, m_PrimaryBitMap:%d, m_AddBitMap:%d, m_CompressedSize:%d, ", m_X, m_Z, m_bGroundUpCon, m_PrimaryBitMap,
-                        m_AddBitMap, m_CompressedSize);*/
+            size += 256;       
 
         unsigned char* cdata = (unsigned char*) malloc(size);
         size_t s = Zip::Decompress(m_CompressedData, m_CompressedSize, cdata, size);
         if (s != size)
-            ERROR("Uncompressed size is different: Got: %d, Expected: %d", s, size);
-
+            ERROR("Uncompressed size is different: Got: %d, Expected: %d", s, size);        
         free(m_CompressedData);
         m_CompressedData = nullptr;
 
@@ -81,11 +89,12 @@ public:
         Chunk* c = world->GetCashedChunkAt(Vec2i(m_X, m_Z));
         if(c)
         {
+
             LOG("Receiced cashed Chunk Data X:%d Z:%d m_bGroundUpCon:%d, m_PrimaryBitMap:%d, m_AddBitMap:%d, m_CompressedSize:%d, ", m_X, m_Z, m_bGroundUpCon, m_PrimaryBitMap,
                                     m_AddBitMap, m_CompressedSize);
-            // TODO create sections in chunk first before working more on parsing the shit ..
+            // TODO create sections in chunk first before working more on parsing this shit ..
             BlockType*** blocks = c->GetBlocks();
-            for (uint32_t i = 0; i < 8; ++i) // todo change to 16
+            for (uint32_t i = 0; i < 16; ++i) // todo change to 16
             {
                 if (m_PrimaryBitMap & 1 << i)
                 {
@@ -136,7 +145,7 @@ public:
         }
 
         free(cdata);
-        LOG("DONE Parsing chunk");
+        //LOG("DONE Parsing chunk");*/
     }
 
     Packet *CreateInstance() const override

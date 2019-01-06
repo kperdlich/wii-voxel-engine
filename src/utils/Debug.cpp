@@ -32,7 +32,7 @@ void Debug::Init()
 
 void Debug::InitServer(bool bLogAlwaysToServer = false)
 {
-    s_socket.Connect("127.0.0.1", 5000);
+    s_socket.Connect("192.168.0.143", 5000);
     s_bLogAlwaysToServer = bLogAlwaysToServer;
 }
 
@@ -61,8 +61,11 @@ void Debug::Log(const ELogType &logType, const char* format, ...)
     }
     msg += buffer;
 
-    if (s_bLogAlwaysToServer) {
+    if (s_bLogAlwaysToServer)
+    {
         s_socket.SendString(msg);
+        char terminator = '\n';
+        s_socket.Send(&terminator, 1);
     }
 
     s_mutex.Lock();

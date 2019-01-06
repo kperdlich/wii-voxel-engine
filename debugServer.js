@@ -8,9 +8,13 @@ const server = net.createServer((socket) => {
     console.log("[+] " + socket.name + " connected");
     socket.on("data", (data) => {
         buffer += data;
-        if (buffer.indexOf('\0') < 0) {
-            const lines = buffer.split('\0');
-            lines.forEach(line => console.log("[+] Received: " + line))            
+        if (buffer.indexOf('\n') != -1) {
+            const lines = buffer.split('\n');			
+            lines.forEach(line => {
+                if (line.length > 0) {
+                    console.log("[+] Received: " + line)           
+                }								    
+			});
             buffer = '';
         } 
     });

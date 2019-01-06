@@ -23,7 +23,7 @@
 #include "../chunkdata.h"
 #include "../../../utils/Job.h"
 
-class SerializationJob : public Job<BlockChangeData>
+class SerializationJob : public Job<CompressedChunkData>
 {
 protected:
     void Execute() override;

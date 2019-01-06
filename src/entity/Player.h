@@ -38,8 +38,7 @@ public:
 
     void SetPosition( const Vector3& position ) override
     {
-        Entity::SetPosition(position);
-        LOG("Updated player pos: %f, %f, %f", position.GetX(), position.GetY(), position.GetZ());
+        Entity::SetPosition(position);        
     }
 
     inline bool IsPlayerSpawned()
@@ -51,6 +50,7 @@ public:
     {
         m_LastPlayerServerUpdate = ticks_to_millisecs(gettime());
         m_bPlayerSpawned = value;        
+        LOG("Spawned player pos: %f, %f, %f", m_position.GetX(), m_position.GetY(), m_position.GetZ());
     }
 
     inline bool IsOnTheGround() const

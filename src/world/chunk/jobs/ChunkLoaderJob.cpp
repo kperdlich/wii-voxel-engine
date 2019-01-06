@@ -28,8 +28,9 @@ void ChunkLoaderJob::Execute()
 
     const ChunkLoadingData& chunkData = m_queue.Pop();
     Chunk* chunk = chunkData.ChunkObj;
-    const std::string& filepath = chunkData.Filepath;
     /*
+    const std::string& filepath = chunkData.Filepath;
+
     Vec2i chunkPos;
     std::ifstream fstream;
     fstream.open(filepath);

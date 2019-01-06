@@ -20,7 +20,6 @@
 #ifndef FILESYSTEM_H
 #define FILESYSTEM_H
 
-#include <fstream>
 #include <string>
 
 #ifndef ACCESSPERMS
@@ -34,6 +33,8 @@ public:
     static bool CreateDirectory(const std::string& directoryPath);
     static bool DirectoryExist(const std::string& directoryPath);
     static bool FileExist(const std::string& filePath);
+    static void Write(const std::string& file, const char* data, size_t size);
+    static int RemoveDirectory(const std::string& directoryPath);
 };
 
 #endif // FILESYSTEM_H

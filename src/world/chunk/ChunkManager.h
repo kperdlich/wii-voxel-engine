@@ -38,7 +38,7 @@ public:
     class Chunk* GetCashedChunkByWorldPosition(const Vector3 &worldPosition);
 
 
-    void Serialize(const BlockChangeData& data);    
+    void Serialize(const CompressedChunkData& data);
 
 private:
 
