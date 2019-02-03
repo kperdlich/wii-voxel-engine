@@ -478,11 +478,11 @@ double Chunk::GetPhysicalHeight(const Vector3& position) const
         /*  quick physics fix for the tree update
          *  Player shouldn't jump higher than blocksize
          */
-        /*if (bValidated)
+        if (bValidated)
         {
             double distance = position.GetY() - currentPos;
             bValidated = distance > (-BLOCK_SIZE);
-        }*/
+        }
         currentPos -= BLOCK_SIZE;
 
 	} while(!bValidated);    

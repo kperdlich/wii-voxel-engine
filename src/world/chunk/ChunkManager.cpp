@@ -209,10 +209,12 @@ std::vector<Vec2i> ChunkManager::GetChunkMapAround(const Vec2i &chunkPosition) c
 
 bool ChunkManager::IsCloseToChunk(const Vec2i& chunkPosition, const Vec2i& position) const
 {
-    return ( (chunkPosition.X - 1) >= position.X ||
-             (chunkPosition.X + 1) <= position.X ||
-             (chunkPosition.Y - 1) >= position.Y ||
-             (chunkPosition.Y + 1) <= position.Y);
+    return ( (chunkPosition.X == position.X) ||
+             (chunkPosition.Y == position.Y) ||
+             (chunkPosition.X - 1) == position.X ||
+             (chunkPosition.X + 1) == position.X ||
+             (chunkPosition.Y - 1) == position.Y ||
+             (chunkPosition.Y + 1) == position.Y);
 }
 
 Chunk* ChunkManager::GetChunkFromCash(const Vec2i &position)
