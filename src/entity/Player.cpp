@@ -20,12 +20,13 @@
 #include "Player.h"
 #include "../utils/MathHelper.h"
 #include "../utils/Debug.h"
-#include "../net/packet/PacketPlayer.h"
+#include "../net/packet/PacketPlayerPosition.h"
 
 #define ROTATION_SPEED 70.0f
-#define MOVEMENT_SPEED 6.5f
+#define MOVEMENT_SPEED 4.0f
 #define PITCH_MAX 90.0f
 
+constexpr float MAX_JUMP_HIGHT = 1.3f;
 
 CPlayer::CPlayer()
 {
@@ -70,8 +71,12 @@ void CPlayer::Update(float deltaSeconds)
 	// shity physics
     Vector3 blockPositionUnderPlayer(m_position.GetX() + BLOCK_SIZE_HALF, playerY, m_position.GetZ() + BLOCK_SIZE_HALF);
     double newHeight = m_pWorld->GetPlayerHeight(blockPositionUnderPlayer);
+    double newPlayerHeadPos = newHeight + (2 * BLOCK_SIZE);
+    double playerHeadDelta =  newPlayerHeadPos - playerY;
 
-    m_position.SetY(newHeight + (2 * BLOCK_SIZE));
+    // FIXME will be disconnected by server if we move to a chunk pos before its loaded
+    if (newHeight > 1.0)
+        m_position.SetY(newPlayerHeadPos);
 
     Vector3 focusedBlockPos = MathHelper::CalculateNewWorldPositionByRotation(m_rotation,
                                 Vector3(m_position.GetX() + BLOCK_SIZE_HALF, m_position.GetY(), m_position.GetZ() + BLOCK_SIZE_HALF),
@@ -85,17 +90,70 @@ void CPlayer::Update(float deltaSeconds)
         m_pWorld->RemoveBlockByWorldPosition(focusedBlockPos);
 	}
 
-	if ( padButtonDown & WPAD_BUTTON_A)
+    if ( padButtonDown & WPAD_NUNCHUK_BUTTON_Z)
 	{
 		m_pWorld->AddBlockAtWorldPosition(focusedBlockPos, BlockType::DIRT );
 	}	
 
+
+    if ((padButtonDown & WPAD_BUTTON_A) && !m_bIsPlayerJumping)
+    {
+        // jump
+        m_bIsPlayerJumping = true;
+    }
+
+    if (m_bIsPlayerJumping)
+    {
+        static float direction = 1.0f;
+        m_playerJumpOffset += (MAX_JUMP_HIGHT * deltaSeconds) * direction * 4.0f;
+        m_playerJumpOffset = MathHelper::Clamp(m_playerJumpOffset, 0.0f, MAX_JUMP_HIGHT);
+        if (m_playerJumpOffset == MAX_JUMP_HIGHT)
+            direction *= -1;
+        if (m_playerJumpOffset == 0.0f)
+        {
+            m_bIsPlayerJumping = false;
+            direction = 1.0f;
+        }
+        m_position.SetY(m_position.GetY() + m_playerJumpOffset);
+    }
+
 	UpdateInventory();
 
 
-    if (m_bPlayerSpawned && (m_LastPlayerServerUpdate - ticks_to_millisecs(gettime())) > 50)
+    if (m_bPlayerSpawned && (m_LastPlayerServerUpdate - ticks_to_millisecs(gettime())) > 10)
     {
-        PacketPlayer p(m_bOnTheGround);
+        static double stanceOffset = .3, headOffset = BLOCK_SIZE, xOffset = 0.0, yOffset = .7;
+        WiiPad* pad = Engine::Get().GetInputHandler().GetPadByID( WII_PAD_0 );
+        u32 padButtonHeld = pad->ButtonsHeld();
+        u32 padButtonDown = pad->ButtonsDown();
+
+        if ( padButtonDown & WPAD_BUTTON_LEFT)
+        {            
+            xOffset -= 0.01;
+        }
+
+        if ( padButtonDown & WPAD_BUTTON_RIGHT )
+        {
+            xOffset += 0.01;
+        }
+
+        if ( padButtonDown & WPAD_BUTTON_UP)
+        {
+            yOffset += 0.01;
+        }
+
+        if ( padButtonDown & WPAD_BUTTON_DOWN )
+        {
+            yOffset -= 0.01;
+        }
+
+        LOG("OffsetX: %f, OffsetY: %f", xOffset, yOffset);
+
+        double serverPlayerY =m_position.GetY() - headOffset;
+        double serverPlayerStance = (m_position.GetY() - headOffset + stanceOffset);
+        //double serverPlayerY = playerHeadDelta > 0 ? m_position.GetY() : m_position.GetY() - headOffset;
+        //double serverPlayerStance = playerHeadDelta > 0 ? m_position.GetY() + stanceOffset : (m_position.GetY() - headOffset + stanceOffset);
+        PacketPlayerPosition p{m_position.GetX() +xOffset, serverPlayerY, m_position.GetZ() + yOffset, serverPlayerStance, m_bOnTheGround};
         p.Send();
         m_LastPlayerServerUpdate = ticks_to_millisecs(gettime());
     }
@@ -103,21 +161,7 @@ void CPlayer::Update(float deltaSeconds)
 
 void CPlayer::UpdateInventory()
 {
-    WiiPad* pad = Engine::Get().GetInputHandler().GetPadByID( WII_PAD_0 );
 
-	u32 padButtonHeld = pad->ButtonsHeld();
-	u32 padButtonDown = pad->ButtonsDown();
-
-
-	if ( padButtonDown & WPAD_BUTTON_LEFT)
-	{
-        // todo implement
-	}
-
-	if ( padButtonDown & WPAD_BUTTON_RIGHT )
-	{
-        // todo implement
-	}
 }
 
 void CPlayer::Move(float x, float y, float deltaSeconds)

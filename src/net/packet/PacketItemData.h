@@ -12,7 +12,7 @@ public:
     ~PacketItemData()
     {
         if (m_Text)
-            free(m_Text);
+            delete [] m_Text;
     }
 
     void Read(const Socket &socket) override
@@ -20,7 +20,7 @@ public:
         m_ItemType = socket.Read<int16_t>();
         m_ItemID = socket.Read<int16_t>();
         m_TextLength = socket.Read<unsigned char>();
-        m_Text = (char*) malloc(m_TextLength);
+        m_Text = new char[m_TextLength];
         socket.Read(m_Text, m_TextLength);
     }
 

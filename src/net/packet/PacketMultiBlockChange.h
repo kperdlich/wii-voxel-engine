@@ -14,7 +14,7 @@ public:
     ~PacketMultiBlockChange()
     {
         if (m_Data)
-            free(m_Data);
+            delete [] m_Data;
     }
 
     void Read(const Socket &socket) override
@@ -23,7 +23,7 @@ public:
         m_ChunkZ = socket.Read<int32_t>();
         m_RecordCount = socket.Read<int16_t>();
         m_DataSize = socket.Read<int32_t>();
-        m_Data = malloc(m_DataSize);
+        m_Data = new unsigned char[m_DataSize];
         socket.Read(m_Data, m_DataSize);
     }
 

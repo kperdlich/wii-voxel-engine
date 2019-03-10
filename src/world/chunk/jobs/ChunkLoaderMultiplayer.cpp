@@ -18,8 +18,10 @@ void ChunkLoaderMultiplayer::Execute()
     filename << chunk->GetPosition().Y;
     filename << ".data";
 
-    std::ifstream fstream(filename.str(), std::ios::in | std::ios::binary);
-    if (fstream.is_open())
+    LOG("Try load chunk %s", filename.str().c_str());
+
+    std::ifstream fstream(filename.str(), std::ios::in | std::ios::binary);    
+    if (fstream)
     {
         int32_t x = 0, z = 0;
         bool bGroundUpCon = false;
@@ -33,7 +35,7 @@ void ChunkLoaderMultiplayer::Execute()
         fstream.read((char*)&primaryBitMap, sizeof(primaryBitMap));
         fstream.read((char*)&addBitMap, sizeof(addBitMap));
         fstream.read((char*)&compressedSize, sizeof(compressedSize));
-        compressedData = (unsigned char*) malloc(compressedSize);
+        compressedData = new unsigned char[compressedSize];
         fstream.read((char*)compressedData, compressedSize);
         fstream.close();
 
@@ -47,18 +49,18 @@ void ChunkLoaderMultiplayer::Execute()
         if(bGroundUpCon)
             size += 256;
 
-        unsigned char* cdata = (unsigned char*) malloc(size);
+        unsigned char* cdata = new unsigned char[size];
         size_t s = Zip::Decompress(compressedData, compressedSize, cdata, size);
         if (s != size)
         {
             ERROR("Uncompressed size is different: Got: %d, Expected: %d, Chunk: %d %d, CompressedSize: %d, primaryBitMap: %d",
                   s, size, x, z, compressedSize, primaryBitMap);
-            free(compressedData);
-            free(cdata);
+            delete [] compressedData;
+            delete [] cdata;
             return;
         }
 
-        free(compressedData);
+        delete [] compressedData;
         compressedData = nullptr;
 
         // TODO create sections in chunk first before working more on parsing this shit ..
@@ -111,10 +113,10 @@ void ChunkLoaderMultiplayer::Execute()
                 //chunk->RebuildDisplayList();
             }
         }
-        free(cdata);
+        delete [] cdata;
     }
     else
     {
-        LOG("Found no chunk file");
+        WARNING("Found no chunk file for %d %d", chunk->GetPosition().X, chunk->GetPosition().Y);
     }
 }

@@ -12,14 +12,14 @@ public:
     ~PacketPluginMessage()
     {
         if(m_Data)
-            free(m_Data);
+            delete [] m_Data;
     }
 
     void Read(const Socket &socket) override
     {
         m_Channel = socket.ReadString();
         m_Length = socket.Read<int16_t>();
-        m_Data = malloc(m_Length);
+        m_Data = new char[m_Length];
         socket.Read(m_Data, m_Length);
     }
     void Action() override

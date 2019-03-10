@@ -98,6 +98,8 @@ void ChunkManager::UpdateChunksBy(const Vector3 &position)
 
     if (currentChunkPos != m_lastUpdateChunkPos)
     {        
+        LOG("PlayerPos: %f %f %f, ChunkPos: %d %d", position.GetX(), position.GetY(), position.GetZ(),
+            currentChunkPos.X, currentChunkPos.Y);
         LoadChunks(currentChunkPos);               
     }
 }
@@ -129,8 +131,11 @@ void ChunkManager::SetChunkNeighbors()
 
 Vec2i ChunkManager::GetChunkPositionByWorldPosition(const Vector3 &worldPosition)
 {
+    // todo current player position + current chunk position to debug server
     int32_t x = (int32_t) (std::floor(worldPosition.GetX() / CHUNK_BLOCK_SIZE_X));
     int32_t z = (int32_t) (std::floor(worldPosition.GetZ() / CHUNK_BLOCK_SIZE_Z));
+    //LOG("worldPosition: %d %d %d, chunkPos: %d %d", (int32_t)worldPosition.GetX(), (int32_t)worldPosition.GetY(), (int32_t)worldPosition.GetZ(),
+    //    x, z);
     return Vec2i(x, z);
 }
 
@@ -147,6 +152,7 @@ void ChunkManager::DestroyChunkCash()
 void ChunkManager::LoadChunks(const Vec2i &chunkPosition)
 {
     auto chunkMap = GetChunkMapAround(chunkPosition);
+
     std::vector<Chunk*> chunkPreCashed;
 
     for(auto it = chunkMap.begin(); it != chunkMap.end();)
@@ -178,6 +184,7 @@ void ChunkManager::LoadChunks(const Vec2i &chunkPosition)
         const Vec2i& cPos = chunkMap.back();
         chunk->SetPosition(cPos);
         chunk->SetLoaded(false);
+        chunk->SetToAir();
         m_chunkLoadingStage.push_back(chunk);
         chunkMap.pop_back();
         m_loaderJob.Add(ChunkLoadingData {chunk});

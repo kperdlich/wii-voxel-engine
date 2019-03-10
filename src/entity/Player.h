@@ -46,11 +46,14 @@ public:
         return m_bPlayerSpawned;
     }
 
+    inline void SetStance(double value) {  m_Stance = value; }
+    inline double Stance() const {  return m_Stance; }
+
     inline void SetPlayerSpawned(bool value)
     {
         m_LastPlayerServerUpdate = ticks_to_millisecs(gettime());
         m_bPlayerSpawned = value;        
-        LOG("Spawned player pos: %f, %f, %f", m_position.GetX(), m_position.GetY(), m_position.GetZ());
+        LOG("Spawned player pos: %f, %f, %f Stance: %f", m_position.GetX(), m_position.GetY(), m_position.GetZ(), m_Stance);
     }
 
     inline bool IsOnTheGround() const
@@ -66,7 +69,9 @@ public:
 private:
     void UpdateInventory();
     PlayerInventory* m_pInventory;
-    bool m_bPlayerSpawned = false, m_bOnTheGround = false;
+    bool m_bPlayerSpawned = false, m_bOnTheGround = false, m_bIsPlayerJumping = false;
+    float m_playerJumpOffset = 0.0f;
+    double m_Stance = 0.1;    
 
     uint64_t m_LastPlayerServerUpdate;
 

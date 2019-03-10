@@ -1,2 +1,2 @@
-SETX /m WIILOAD tcp:192.168.0.143
+SETX /m WIILOAD tcp:192.168.0.115
 pause

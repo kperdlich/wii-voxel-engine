@@ -11,7 +11,7 @@ public:
      ~PacketExplosion()
      {
          if(m_Records)
-             free(m_Records);
+             delete [] m_Records;
      }
 
      void Read(const Socket &socket) override
@@ -21,7 +21,7 @@ public:
          m_Z = socket.Read<double>();
          m_Radius = socket.Read<float>();
          m_RecordCount = socket.Read<int32_t>();
-         m_Records = malloc(m_RecordCount * (sizeof(char) * 3));
+         m_Records = new char[m_RecordCount * (sizeof(char) * 3)];
          socket.Read(m_Records, m_RecordCount * (sizeof(char) * 3));
      }
 

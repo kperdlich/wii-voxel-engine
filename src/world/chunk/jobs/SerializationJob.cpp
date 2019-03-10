@@ -32,5 +32,5 @@ void SerializationJob::Execute()
     filename << chunkData.Z;
     filename << ".data";
     FileSystem::Write(filename.str(),  reinterpret_cast<char*>(chunkData.Data), chunkData.Size);
-    free(chunkData.Data);*/
+    del (chunkData.Data);*/
 }

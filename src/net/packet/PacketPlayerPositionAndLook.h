@@ -27,9 +27,11 @@ public:
         Basic3DScene* scene = dynamic_cast<Basic3DScene*>(Engine::Get().GetSceneHandler().GetCurrentScene());
         if (scene && scene->GetEntityHandler().GetPlayer())
         {
+            LOG("Server Player Pos update!");
             CPlayer* p = static_cast<CPlayer*>(scene->GetEntityHandler().GetPlayer());
             p->SetOnTheGround(m_bOnGround);
             p->SetPosition(Vector3(m_X, m_Y, m_Z));
+            p->SetStance(m_Y+1.0);
 
             if (!p->IsPlayerSpawned())
                 p->SetPlayerSpawned(true);

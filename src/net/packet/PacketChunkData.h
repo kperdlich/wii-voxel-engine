@@ -25,7 +25,7 @@ public:
     ~PacketChunkData()
     {
         if (m_CompressedData)
-            free(m_CompressedData);
+            delete [] m_CompressedData;
         m_CompressedData = nullptr;
     }
 
@@ -38,12 +38,14 @@ public:
         m_AddBitMap = socket.Read<uint16_t>();
         m_CompressedSize = socket.Read<int32_t>();
         m_UnusedInt = socket.Read<int32_t>();
-        m_CompressedData = (unsigned char*) malloc(m_CompressedSize);
+        m_CompressedData = new unsigned char[m_CompressedSize];
         socket.Read(m_CompressedData, m_CompressedSize);
     }
 
     void Action() override
     {
+        return;
+
         std::ostringstream filename;
         filename << WORLD_PATH "/";
         filename << m_X;
@@ -62,10 +64,8 @@ public:
         stream.write((const char*)m_CompressedData, m_CompressedSize);
         stream.close();
 
-        free(m_CompressedData);
+        delete [] m_CompressedData;
         m_CompressedData = nullptr;
-
-        //return; // TODO REMOVE WHEN IMPLEMENTED SECTION DISPLAY LIST
 
         /*
         uint32_t sections = 0;
