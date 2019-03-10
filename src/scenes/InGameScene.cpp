@@ -99,5 +99,6 @@ void InGameScene::InitEntities()
     pPlayer->SetRotation(Vector3(10.0f, 225.0f, .0f));
 	pPlayer->SetWorld(m_pGameWorld);
 	m_mainCamera->AttachTo(*pPlayer);
+    m_mainCamera->SetCameraOffset(BLOCK_SIZE);
 	m_entityHandler->AddEntity(pPlayer);
 }

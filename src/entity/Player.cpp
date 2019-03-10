@@ -27,6 +27,8 @@
 #define PITCH_MAX 90.0f
 
 constexpr float MAX_JUMP_HIGHT = 1.3f;
+constexpr float PLAYER_GRAVITY = 4.0f;
+
 
 CPlayer::CPlayer()
 {
@@ -64,22 +66,63 @@ void CPlayer::Update(float deltaSeconds)
         Rotate( Vector3( 0, ROTATION_SPEED * deltaSeconds, 0 )); // left
 	}
 
-    double playerY = m_position.GetY();       
+    const double playerY = m_position.GetY();
 
-    Move(-(pad->GetNunchukAngleX()), -(pad->GetNunchukAngleY()), deltaSeconds);
+    Vector3 newPlayerPos = Move(-(pad->GetNunchukAngleX()), -(pad->GetNunchukAngleY()), deltaSeconds);
+    newPlayerPos.SetY(playerY);
 
 	// shity physics
-    Vector3 blockPositionUnderPlayer(m_position.GetX() + BLOCK_SIZE_HALF, playerY, m_position.GetZ() + BLOCK_SIZE_HALF);
-    double newHeight = m_pWorld->GetPlayerHeight(blockPositionUnderPlayer);
-    double newPlayerHeadPos = newHeight + (2 * BLOCK_SIZE);
-    double playerHeadDelta =  newPlayerHeadPos - playerY;
+    if (m_bPlayerSpawned)
+    {
+        const Vector3 blockPositionBeneathPlayer(newPlayerPos.GetX() + BLOCK_SIZE_HALF, newPlayerPos.GetY() - BLOCK_SIZE_HALF , newPlayerPos.GetZ() + BLOCK_SIZE_HALF);
+        const BlockType blockTypeBeneathPlayer = m_pWorld->GetBlockByWorldPosition(blockPositionBeneathPlayer);
+        const Vector3 blockPositionNewPlayerDirection(newPlayerPos.GetX() + BLOCK_SIZE_HALF, newPlayerPos.GetY() , newPlayerPos.GetZ() + BLOCK_SIZE_HALF);
+        const BlockType blockTypeNewPlayerDirection = m_pWorld->GetBlockByWorldPosition(blockPositionNewPlayerDirection);
 
-    // FIXME will be disconnected by server if we move to a chunk pos before its loaded
-    if (newHeight > 1.0)
-        m_position.SetY(newPlayerHeadPos);
+        if (blockTypeNewPlayerDirection == BlockType::AIR)
+            m_position = newPlayerPos;
+
+        if (blockTypeBeneathPlayer == BlockType::AIR && !m_bIsPlayerJumping)
+        {
+            m_position.SetY(m_position.GetY() - (PLAYER_GRAVITY * deltaSeconds));
+        }
+
+        if (m_bIsPlayerJumping)
+        {
+            static float direction = 1.0f;
+            float jumpImpulse = (MAX_JUMP_HIGHT * deltaSeconds) * direction * PLAYER_GRAVITY;
+            if (m_playerJumpOffset + jumpImpulse >= MAX_JUMP_HIGHT)
+            {
+                direction *= -1;
+                jumpImpulse = MAX_JUMP_HIGHT - m_playerJumpOffset;
+            }
+            else if (m_playerJumpOffset + jumpImpulse <= 0.0f)
+            {
+                m_bIsPlayerJumping = false;
+                direction = 1.0f;
+                jumpImpulse = -m_playerJumpOffset;
+            }
+            m_playerJumpOffset += jumpImpulse;
+            const Vector3 blockPositionUnderPlayer(m_position.GetX() + BLOCK_SIZE_HALF, m_position.GetY(), m_position.GetZ() + BLOCK_SIZE_HALF);
+            const BlockType blockType = m_pWorld->GetBlockByWorldPosition(blockPositionUnderPlayer);
+            if (blockType == BlockType::AIR)
+            {
+                m_position.SetY(m_position.GetY() + jumpImpulse);
+            }
+            else
+            {
+                const Vector3 newPlayerPos = m_pWorld->GetBlockPositionByWorldPosition(blockPositionUnderPlayer);
+                m_position.SetY(newPlayerPos.GetY() + BLOCK_SIZE);
+                m_bIsPlayerJumping = false;
+                direction = 1.0f;
+                m_playerJumpOffset = .0;
+            }
+
+        }
+    }
 
     Vector3 focusedBlockPos = MathHelper::CalculateNewWorldPositionByRotation(m_rotation,
-                                Vector3(m_position.GetX() + BLOCK_SIZE_HALF, m_position.GetY(), m_position.GetZ() + BLOCK_SIZE_HALF),
+                                Vector3(m_position.GetX() + BLOCK_SIZE_HALF, m_position.GetY() + BLOCK_SIZE, m_position.GetZ() + BLOCK_SIZE_HALF),
                                 -2*BLOCK_SIZE);
 
 
@@ -100,21 +143,6 @@ void CPlayer::Update(float deltaSeconds)
     {
         // jump
         m_bIsPlayerJumping = true;
-    }
-
-    if (m_bIsPlayerJumping)
-    {
-        static float direction = 1.0f;
-        m_playerJumpOffset += (MAX_JUMP_HIGHT * deltaSeconds) * direction * 4.0f;
-        m_playerJumpOffset = MathHelper::Clamp(m_playerJumpOffset, 0.0f, MAX_JUMP_HIGHT);
-        if (m_playerJumpOffset == MAX_JUMP_HIGHT)
-            direction *= -1;
-        if (m_playerJumpOffset == 0.0f)
-        {
-            m_bIsPlayerJumping = false;
-            direction = 1.0f;
-        }
-        m_position.SetY(m_position.GetY() + m_playerJumpOffset);
     }
 
 	UpdateInventory();
@@ -147,14 +175,14 @@ void CPlayer::Update(float deltaSeconds)
             yOffset -= 0.01;
         }
 
-        LOG("OffsetX: %f, OffsetY: %f", xOffset, yOffset);
+        //LOG("OffsetX: %f, OffsetY: %f", xOffset, yOffset);
 
         double serverPlayerY =m_position.GetY() - headOffset;
         double serverPlayerStance = (m_position.GetY() - headOffset + stanceOffset);
         //double serverPlayerY = playerHeadDelta > 0 ? m_position.GetY() : m_position.GetY() - headOffset;
         //double serverPlayerStance = playerHeadDelta > 0 ? m_position.GetY() + stanceOffset : (m_position.GetY() - headOffset + stanceOffset);
         PacketPlayerPosition p{m_position.GetX() +xOffset, serverPlayerY, m_position.GetZ() + yOffset, serverPlayerStance, m_bOnTheGround};
-        p.Send();
+        //p.Send();
         m_LastPlayerServerUpdate = ticks_to_millisecs(gettime());
     }
 }
@@ -164,11 +192,12 @@ void CPlayer::UpdateInventory()
 
 }
 
-void CPlayer::Move(float x, float y, float deltaSeconds)
+Vector3 CPlayer::Move(float x, float y, float deltaSeconds)
 {
+    Vector3 pos{m_position};
     if ( y != 0.0f)
     {
-        m_position = MathHelper::CalculateNewWorldPositionByRotation(
+        pos = MathHelper::CalculateNewWorldPositionByRotation(
                     m_rotation.GetY(),
 					m_position,
                     y * MOVEMENT_SPEED * deltaSeconds);
@@ -187,11 +216,12 @@ void CPlayer::Move(float x, float y, float deltaSeconds)
 			strafeValue = 90;
 		}
 
-		m_position = MathHelper::CalculateNewWorldPositionByRotation(
+        pos = MathHelper::CalculateNewWorldPositionByRotation(
 					m_rotation.GetY() + strafeValue,
-					m_position,
+                    pos,
                     fabs(x) * MOVEMENT_SPEED * deltaSeconds);
 	}
+    return pos;
 }
 
 

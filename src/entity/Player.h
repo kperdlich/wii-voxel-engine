@@ -21,7 +21,6 @@
 #define _PLAYER_H_
 
 #include "Entity.h"
-#include "../world/Camera.h"
 #include "../utils/Vector3.h"
 #include "../utils/Debug.h"
 #include "PlayerInventory.h"
@@ -33,7 +32,7 @@ public:
     virtual ~CPlayer();
     void Update(float deltaSeconds);
 	void AddToInventory(IEquipable& item);
-    void Move(float x, float y, float deltaTime);
+    class Vector3 Move(float x, float y, float deltaTime);
 	void Rotate( const Vector3& rotation );    
 
     void SetPosition( const Vector3& position ) override
@@ -71,7 +70,7 @@ private:
     PlayerInventory* m_pInventory;
     bool m_bPlayerSpawned = false, m_bOnTheGround = false, m_bIsPlayerJumping = false;
     float m_playerJumpOffset = 0.0f;
-    double m_Stance = 0.1;    
+    double m_Stance = 0.1;
 
     uint64_t m_LastPlayerServerUpdate;
 
