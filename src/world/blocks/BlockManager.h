@@ -26,8 +26,8 @@
 #include "../../renderer/BlockRenderer.h"
 #include "../../utils/Vector3.h"
 
-#define BLOCK_SIZE_HALF .5f
-#define BLOCK_SIZE BLOCK_SIZE_HALF * 2
+constexpr float BLOCK_SIZE_HALF = .5;
+constexpr float BLOCK_SIZE = BLOCK_SIZE_HALF * 2;
 
 enum class BlockType : unsigned char
 {

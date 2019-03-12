@@ -68,7 +68,7 @@ public:
 private:
     void UpdateInventory();
     PlayerInventory* m_pInventory;
-    bool m_bPlayerSpawned = false, m_bOnTheGround = false, m_bIsPlayerJumping = false;
+    bool m_bPlayerSpawned = false, m_bOnTheGround = false, m_bIsPlayerJumping = false,  m_bIsFalling = false;
     float m_playerJumpOffset = 0.0f;
     double m_Stance = 0.1;
 

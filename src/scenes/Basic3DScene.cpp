@@ -23,7 +23,7 @@
 
 #define MIN_DIST 0.1f
 #define MAX_DIST 200.0f
-#define FIELD_OF_VIEW 90.0f
+#define FIELD_OF_VIEW 70.0f
 
 Basic3DScene::Basic3DScene()
 {    

@@ -17,16 +17,18 @@
  *
 ***/
 
+#include <cmath>
 #include "Player.h"
 #include "../utils/MathHelper.h"
 #include "../utils/Debug.h"
+#include "../physics/collision/AABB.h"
 #include "../net/packet/PacketPlayerPosition.h"
 
 #define ROTATION_SPEED 70.0f
 #define MOVEMENT_SPEED 4.0f
 #define PITCH_MAX 90.0f
 
-constexpr float MAX_JUMP_HIGHT = 1.3f;
+constexpr float MAX_JUMP_HEIGHT = 1.3f;
 constexpr float PLAYER_GRAVITY = 4.0f;
 
 
@@ -71,53 +73,127 @@ void CPlayer::Update(float deltaSeconds)
     Vector3 newPlayerPos = Move(-(pad->GetNunchukAngleX()), -(pad->GetNunchukAngleY()), deltaSeconds);
     newPlayerPos.SetY(playerY);
 
-	// shity physics
     if (m_bPlayerSpawned)
     {
-        const Vector3 blockPositionBeneathPlayer(newPlayerPos.GetX() + BLOCK_SIZE_HALF, newPlayerPos.GetY() - BLOCK_SIZE_HALF , newPlayerPos.GetZ() + BLOCK_SIZE_HALF);
+        const Vector3 blockPositionBeneathPlayer(newPlayerPos.GetX() + BLOCK_SIZE_HALF, newPlayerPos.GetY() - BLOCK_SIZE_HALF, newPlayerPos.GetZ() + BLOCK_SIZE_HALF);
         const BlockType blockTypeBeneathPlayer = m_pWorld->GetBlockByWorldPosition(blockPositionBeneathPlayer);
-        const Vector3 blockPositionNewPlayerDirection(newPlayerPos.GetX() + BLOCK_SIZE_HALF, newPlayerPos.GetY() , newPlayerPos.GetZ() + BLOCK_SIZE_HALF);
+        const Vector3 blockPositionNewPlayerDirection(newPlayerPos.GetX() + BLOCK_SIZE_HALF, newPlayerPos.GetY(), newPlayerPos.GetZ() + BLOCK_SIZE_HALF);
         const BlockType blockTypeNewPlayerDirection = m_pWorld->GetBlockByWorldPosition(blockPositionNewPlayerDirection);
+        const BlockType blockTypeNewPlayerDirectionHead = m_pWorld->GetBlockByWorldPosition({blockPositionNewPlayerDirection.GetX(), blockPositionNewPlayerDirection.GetY() + BLOCK_SIZE, blockPositionNewPlayerDirection.GetZ()});
 
-        if (blockTypeNewPlayerDirection == BlockType::AIR)
+        if (blockTypeNewPlayerDirection == BlockType::AIR && blockTypeNewPlayerDirectionHead == BlockType::AIR)
             m_position = newPlayerPos;
-
-        if (blockTypeBeneathPlayer == BlockType::AIR && !m_bIsPlayerJumping)
+        else
         {
-            m_position.SetY(m_position.GetY() - (PLAYER_GRAVITY * deltaSeconds));
+            const Vector3& worldBlockPos = m_pWorld->GetBlockPositionByWorldPosition(blockPositionNewPlayerDirection);
+            const AABB footblockAABB = { { worldBlockPos.GetX() - BLOCK_SIZE_HALF,
+                                           worldBlockPos.GetY() - BLOCK_SIZE_HALF,
+                                           worldBlockPos.GetZ() - BLOCK_SIZE_HALF },
+                                         { worldBlockPos.GetX() + BLOCK_SIZE_HALF,
+                                           worldBlockPos.GetY() + BLOCK_SIZE_HALF,
+                                           worldBlockPos.GetZ() + BLOCK_SIZE_HALF
+                                         }
+                                       };
+            const AABB headblockAABB = { {  worldBlockPos.GetX() - BLOCK_SIZE_HALF,
+                                            worldBlockPos.GetY() - BLOCK_SIZE_HALF + BLOCK_SIZE,
+                                            worldBlockPos.GetZ() - BLOCK_SIZE_HALF},
+                                         {  worldBlockPos.GetX() + BLOCK_SIZE_HALF,
+                                            worldBlockPos.GetY() + BLOCK_SIZE_HALF + BLOCK_SIZE,
+                                            worldBlockPos.GetZ() + BLOCK_SIZE_HALF
+                                         }
+                                       };
+            const AABB playerAABB = { { newPlayerPos.GetX(), newPlayerPos.GetY(), newPlayerPos.GetZ()},
+                                     { newPlayerPos.GetX(), newPlayerPos.GetY() + 1.62, newPlayerPos.GetZ()}
+                                   };
+
+
+            if (!playerAABB.CoolidesWith(footblockAABB) && !playerAABB.CoolidesWith(headblockAABB))
+            {
+                 m_position = newPlayerPos;
+            }
+            else
+            {
+
+                float deltaX = std::abs(newPlayerPos.GetX() - worldBlockPos.GetX());
+                float deltaZ = std::abs(newPlayerPos.GetZ() - worldBlockPos.GetZ());
+
+                if (deltaX > deltaZ)
+                {
+                    //m_position.SetZ(MathHelper::Min(newPlayerPos.GetZ(), worldBlockPos.GetZ() + BLOCK_SIZE_HALF));
+                    if (newPlayerPos.GetX() < worldBlockPos.GetX())
+                    {
+                        m_position.SetX(MathHelper::Min(m_position.GetX(), worldBlockPos.GetX() - BLOCK_SIZE_HALF));
+                    }
+                    else
+                    {
+                        m_position.SetX(MathHelper::Max(m_position.GetX(), worldBlockPos.GetX() + BLOCK_SIZE_HALF));
+                    }
+                }
+                else
+                {
+                    //m_position.SetX(MathHelper::Min(newPlayerPos.GetX(), worldBlockPos.GetX() + BLOCK_SIZE_HALF));
+                    if (newPlayerPos.GetZ() < worldBlockPos.GetZ())
+                    {
+                        m_position.SetZ(MathHelper::Min(m_position.GetZ(), worldBlockPos.GetZ() - BLOCK_SIZE_HALF));
+                    }
+                    else
+                    {
+                        m_position.SetZ(MathHelper::Max(m_position.GetZ(), worldBlockPos.GetZ() + BLOCK_SIZE_HALF));
+                    }
+                }
+            }
         }
 
-        if (m_bIsPlayerJumping)
+        if (!m_bIsPlayerJumping)
+        {
+            if (blockTypeBeneathPlayer == BlockType::AIR)
+            {
+                m_bIsFalling = true;
+                LOG("Player falling!");
+                m_position.SetY(m_position.GetY() - (PLAYER_GRAVITY * deltaSeconds));
+            }
+            else
+            {
+                const Vector3& newPos = m_pWorld->GetBlockPositionByWorldPosition(blockPositionBeneathPlayer);
+                m_position.SetY(newPos.GetY() + BLOCK_SIZE);
+                m_bIsFalling = false;
+            }
+        }
+        else
         {
             static float direction = 1.0f;
-            float jumpImpulse = (MAX_JUMP_HIGHT * deltaSeconds) * direction * PLAYER_GRAVITY;
-            if (m_playerJumpOffset + jumpImpulse >= MAX_JUMP_HIGHT)
+            float jumpImpulse = (MAX_JUMP_HEIGHT * deltaSeconds) * direction * PLAYER_GRAVITY;
+            if (m_playerJumpOffset + jumpImpulse >= MAX_JUMP_HEIGHT)
             {
                 direction *= -1;
-                jumpImpulse = MAX_JUMP_HIGHT - m_playerJumpOffset;
+                jumpImpulse = MAX_JUMP_HEIGHT - m_playerJumpOffset;
             }
             else if (m_playerJumpOffset + jumpImpulse <= 0.0f)
             {
                 m_bIsPlayerJumping = false;
                 direction = 1.0f;
                 jumpImpulse = -m_playerJumpOffset;
-            }
-            m_playerJumpOffset += jumpImpulse;
-            const Vector3 blockPositionUnderPlayer(m_position.GetX() + BLOCK_SIZE_HALF, m_position.GetY(), m_position.GetZ() + BLOCK_SIZE_HALF);
-            const BlockType blockType = m_pWorld->GetBlockByWorldPosition(blockPositionUnderPlayer);
-            if (blockType == BlockType::AIR)
-            {
-                m_position.SetY(m_position.GetY() + jumpImpulse);
+                m_position.SetY(newPlayerPos.GetY() + jumpImpulse);
+                m_playerJumpOffset = 0.0;
             }
             else
             {
-                const Vector3 newPlayerPos = m_pWorld->GetBlockPositionByWorldPosition(blockPositionUnderPlayer);
-                m_position.SetY(newPlayerPos.GetY() + BLOCK_SIZE);
-                m_bIsPlayerJumping = false;
-                direction = 1.0f;
-                m_playerJumpOffset = .0;
+                m_playerJumpOffset += jumpImpulse;
+                const Vector3 blockPositionUnderPlayer(m_position.GetX() + BLOCK_SIZE_HALF, m_position.GetY(), m_position.GetZ() + BLOCK_SIZE_HALF);
+                const BlockType blockType = m_pWorld->GetBlockByWorldPosition(blockPositionUnderPlayer);
+                if (blockType == BlockType::AIR)
+                {
+                    m_position.SetY(m_position.GetY() + jumpImpulse);
+                }
+                else
+                {
+                    const Vector3 newPlayerPos = m_pWorld->GetBlockPositionByWorldPosition(blockPositionUnderPlayer);
+                    m_position.SetY(newPlayerPos.GetY() + BLOCK_SIZE);
+                    m_bIsPlayerJumping = false;
+                    direction = 1.0f;
+                    m_playerJumpOffset = .0;
+                }
             }
-
         }
     }
 
@@ -126,19 +202,16 @@ void CPlayer::Update(float deltaSeconds)
                                 -2*BLOCK_SIZE);
 
 
-	m_pWorld->UpdateFocusedBlockByWorldPosition(focusedBlockPos);
+    m_pWorld->UpdateFocusedBlockByWorldPosition(focusedBlockPos);
 
 	if ( padButtonDown & WPAD_BUTTON_B)
 	{
         m_pWorld->RemoveBlockByWorldPosition(focusedBlockPos);
 	}
-
     if ( padButtonDown & WPAD_NUNCHUK_BUTTON_Z)
 	{
 		m_pWorld->AddBlockAtWorldPosition(focusedBlockPos, BlockType::DIRT );
 	}	
-
-
     if ((padButtonDown & WPAD_BUTTON_A) && !m_bIsPlayerJumping)
     {
         // jump
@@ -148,41 +221,13 @@ void CPlayer::Update(float deltaSeconds)
 	UpdateInventory();
 
 
-    if (m_bPlayerSpawned && (m_LastPlayerServerUpdate - ticks_to_millisecs(gettime())) > 10)
+    if (m_bPlayerSpawned && (m_LastPlayerServerUpdate - ticks_to_millisecs(gettime())) > 700)
     {
-        static double stanceOffset = .3, headOffset = BLOCK_SIZE, xOffset = 0.0, yOffset = .7;
-        WiiPad* pad = Engine::Get().GetInputHandler().GetPadByID( WII_PAD_0 );
-        u32 padButtonHeld = pad->ButtonsHeld();
-        u32 padButtonDown = pad->ButtonsDown();
-
-        if ( padButtonDown & WPAD_BUTTON_LEFT)
-        {            
-            xOffset -= 0.01;
-        }
-
-        if ( padButtonDown & WPAD_BUTTON_RIGHT )
-        {
-            xOffset += 0.01;
-        }
-
-        if ( padButtonDown & WPAD_BUTTON_UP)
-        {
-            yOffset += 0.01;
-        }
-
-        if ( padButtonDown & WPAD_BUTTON_DOWN )
-        {
-            yOffset -= 0.01;
-        }
-
-        //LOG("OffsetX: %f, OffsetY: %f", xOffset, yOffset);
-
-        double serverPlayerY =m_position.GetY() - headOffset;
-        double serverPlayerStance = (m_position.GetY() - headOffset + stanceOffset);
-        //double serverPlayerY = playerHeadDelta > 0 ? m_position.GetY() : m_position.GetY() - headOffset;
-        //double serverPlayerStance = playerHeadDelta > 0 ? m_position.GetY() + stanceOffset : (m_position.GetY() - headOffset + stanceOffset);
-        PacketPlayerPosition p{m_position.GetX() +xOffset, serverPlayerY, m_position.GetZ() + yOffset, serverPlayerStance, m_bOnTheGround};
-        //p.Send();
+        double stanceOffset = m_bIsFalling || m_bIsPlayerJumping ? 0.2 : 1.62;        
+        double serverPlayerY =m_position.GetY();
+        double serverPlayerStance = (m_position.GetY() + stanceOffset);        
+        PacketPlayerPosition p{m_position.GetX(), serverPlayerY, m_position.GetZ(), serverPlayerStance, m_bOnTheGround};
+        p.Send();
         m_LastPlayerServerUpdate = ticks_to_millisecs(gettime());
     }
 }

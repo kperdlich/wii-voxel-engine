@@ -24,14 +24,13 @@
 
 class AABB {
 public:
-	AABB(Vector3& vecMin, Vector3& vecMax);
-	virtual ~AABB();
+        AABB(const Vector3& vecMin, const Vector3& vecMax);
 
-	Vector3& GetMin();
-	Vector3& GetMax();
+        Vector3 GetMin() const;
+        Vector3 GetMax() const;
 
-	bool CoolidesWith( AABB& box );
-	bool CoolidesWith( Vector3& vecPoint);
+        bool CoolidesWith( const AABB& box ) const;
+        bool CoolidesWith( const Vector3& vecPoint) const;
 
 private:
 	Vector3 m_vecMin, m_vecMax;

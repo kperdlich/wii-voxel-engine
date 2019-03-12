@@ -19,18 +19,14 @@
 
 #include "AABB.h"
 
-AABB::AABB(Vector3& vecMin, Vector3& vecMax) : m_vecMin(vecMin), m_vecMax(vecMax)
+AABB::AABB(const Vector3& vecMin, const Vector3& vecMax) : m_vecMin(vecMin), m_vecMax(vecMax)
 {
 
 
 }
 
-AABB::~AABB()
-{
 
-}
-
-bool AABB::CoolidesWith( AABB& box )
+bool AABB::CoolidesWith(const AABB& box) const
 {
 	return(m_vecMax.GetX() > box.GetMin().GetX() &&
 	    m_vecMin.GetX() < box.GetMax().GetX() &&
@@ -40,7 +36,7 @@ bool AABB::CoolidesWith( AABB& box )
 	    m_vecMin.GetZ() < box.GetMax().GetZ());
 }
 
-bool AABB::CoolidesWith( Vector3& vecPoint)
+bool AABB::CoolidesWith(const Vector3& vecPoint) const
 {
 	 if(vecPoint.GetX() > m_vecMin.GetX() && vecPoint.GetX() < m_vecMax.GetX() &&
 			 vecPoint.GetY() > m_vecMin.GetY() && vecPoint.GetY() < m_vecMax.GetY() &&
@@ -52,12 +48,12 @@ bool AABB::CoolidesWith( Vector3& vecPoint)
 	return false;
 }
 
-Vector3& AABB::GetMin()
+Vector3 AABB::GetMin() const
 {
 	return m_vecMin;
 }
 
-Vector3& AABB::GetMax()
+Vector3 AABB::GetMax() const
 {
 	return m_vecMax;
 }
