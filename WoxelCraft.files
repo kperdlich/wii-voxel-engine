@@ -177,6 +177,8 @@ src/renderer/MasterRenderer.cpp
 src/renderer/MasterRenderer.h
 src/renderer/SpriteStageManager.cpp
 src/renderer/SpriteStageManager.h
+src/renderer/displaylist.cpp
+src/renderer/displaylist.h
 src/scenes/Basic2DScene.cpp
 src/scenes/Basic2DScene.h
 src/scenes/Basic3DScene.cpp

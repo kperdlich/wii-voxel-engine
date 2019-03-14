@@ -145,16 +145,6 @@ BlockType GameWorld::GetBlockByWorldPosition(const Vector3& worldPosition)
 	return BlockType::AIR;
 }
 
-double GameWorld::GetPlayerHeight( const Vector3& playerWorldPosition )
-{
-    auto pChunk = GetCashedChunkByWorldPosition(playerWorldPosition);
-	if ( pChunk )
-    {
-        return pChunk->GetPhysicalHeight(playerWorldPosition);
-	}
-
-    return playerWorldPosition.GetY();
-}
 
 void GameWorld::DrawFocusOnSelectedCube()
 {    

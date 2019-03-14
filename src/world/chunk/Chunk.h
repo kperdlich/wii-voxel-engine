@@ -25,6 +25,7 @@
 #include "ChunkData.h"
 #include "../GameWorld.h"
 #include "../../renderer/BlockRenderHelper.h"
+#include "../../renderer/displaylist.h"
 #include "../../utils/Vector3.h"
 #include "../../utils/Mutex.h"
 
@@ -60,7 +61,6 @@ public:
 	void AddBlockByWorldPosition(const Vector3& blockPosition, BlockType type);
 	Vector3 GetBlockPositionByWorldPosition(const Vector3& worldPosition) const;
 	BlockType GetBlockTypeByWorldPosition(const Vector3& worldPosition) const;
-    double GetPhysicalHeight(const Vector3& position) const;
 
     BlockType*** GetBlocks() const
     {
@@ -75,10 +75,7 @@ public:
 
     bool IsLoaded();
 
-    inline bool HasDisplayList() const
-    {
-        return m_pDispList;
-    }
+    bool HasDisplayList() const;
 
 private:
     void CreateDisplayList(size_t sizeOfDisplayList);
@@ -98,10 +95,12 @@ private:
     Mutex m_mutex;
 
     bool m_bLoadingDone         = false;
-    bool m_bIsDirty             = false;
+    //bool m_bIsDirty             = false;
     bool m_bNeighbourUpdate     = false;
-    uint32_t m_displayListSize  = 0;
-    void* m_pDispList           = nullptr;
+    //uint32_t m_displayListSize  = 0;
+    //void* m_pDispList           = nullptr;
+
+    DisplayList m_displayList;
 
     uint32_t m_amountOfBlocks   = 0;
     uint32_t m_amountOfFaces    = 0;

@@ -26,7 +26,7 @@
 #include "../../renderer/BlockRenderer.h"
 #include "../../utils/Debug.h"
 
-Chunk::Chunk(class GameWorld& gameWorld) : m_bIsDirty(false)
+Chunk::Chunk(class GameWorld& gameWorld)
 {
 	m_pWorldManager = &gameWorld;
 }
@@ -187,10 +187,7 @@ bool Chunk::NeighborsLoaded()
 
 void Chunk::Render()
 {
-    if ( m_displayListSize > 0 )
-	{
-        GX_CallDispList(m_pDispList, m_displayListSize);
-    }
+    m_displayList.Render();
 }
 
 void Chunk::SetToAir()
@@ -313,34 +310,27 @@ void Chunk::ClearBlockRenderList()
 
 void Chunk::CreateDisplayList(size_t sizeOfDisplayList)
 {
-    m_pDispList = memalign(32, sizeOfDisplayList);
-    memset(m_pDispList, 0, sizeOfDisplayList);
-    DCInvalidateRange(m_pDispList, sizeOfDisplayList);
-    GX_BeginDispList(m_pDispList, sizeOfDisplayList);
+    m_displayList.Begin(sizeOfDisplayList);
 }
 
 void Chunk::FinishDisplayList()
 {
-    m_displayListSize = GX_EndDispList();
-    m_bIsDirty = false;
-    // Update display list size to the size returned by GX_EndDispList() to save memory
-    realloc(m_pDispList, m_displayListSize);
+    m_displayList.End();
 }
-
 
 bool Chunk::IsDirty() const
 {
-    return m_bIsDirty;
+    return m_displayList.IsDirty();
 }
 
 void Chunk::SetDirty(bool dirty)
 {
-    m_bIsDirty = dirty;
+    m_displayList.SetDirty(dirty);
 }
 
 uint32_t Chunk::GetDisplayListSize() const
 {
-    return m_displayListSize;
+    return m_displayList.GetDisplayListSize();
 }
 
 uint64_t Chunk::GetAmountOfBlocks() const
@@ -360,13 +350,7 @@ const Vec2i &Chunk::GetPosition() const
 
 void Chunk::DeleteDisplayList()
 {
-    if ( m_displayListSize > 0 )
-	{
-        free(m_pDispList);
-        m_displayListSize = 0;
-        m_pDispList = nullptr;
-        m_bIsDirty = true;
-	}
+    m_displayList.Clear();
 }
 
 void Chunk::RebuildDisplayList()
@@ -418,8 +402,7 @@ void Chunk::AddBlockByWorldPosition(const Vector3& blockPosition, BlockType type
 
 void Chunk::BlockListUpdated(const BlockChangeData& data)
 {
-    m_bIsDirty = true;
-
+    m_displayList.SetDirty(true);
 }
 
 void Chunk::SetPosition(const Vec2i &position)
@@ -440,6 +423,11 @@ bool Chunk::IsLoaded()
     bool bLoaded = m_bLoadingDone;
     m_mutex.Unlock();
     return bLoaded;
+}
+
+bool Chunk::HasDisplayList() const
+{
+    return !m_displayList.IsEmpty();
 }
 
 Vec3i Chunk::GetLocalBlockPositionByWorldPosition(const Vector3& blockWorldPosition) const
@@ -466,31 +454,6 @@ BlockType Chunk::GetBlockTypeByWorldPosition(const Vector3& worldPosition) const
     return m_blocks[vec.X][vec.Y][vec.Z];
 }
 
-double Chunk::GetPhysicalHeight(const Vector3& position) const
-{    
-    Vector3 pos = GetBlockPositionByWorldPosition(position);    
-    double currentPos = CHUNK_BLOCK_SIZE_Y - (BLOCK_SIZE);
-	bool bValidated = false;
-	do
-	{
-        pos.SetY(currentPos);
-        bValidated = (GetBlockTypeByWorldPosition(pos) != BlockType::AIR) || (currentPos == 0);
-        /*  quick physics fix for the tree update
-         *  Player shouldn't jump higher than blocksize
-         */
-        if (bValidated)
-        {
-            double distance = position.GetY() - currentPos;
-            bValidated = distance > (-BLOCK_SIZE);
-        }
-        currentPos -= BLOCK_SIZE;
-
-	} while(!bValidated);    
-
-    //LOG("Current Player Height: %f", pos.GetY());
-
-    return pos.GetY();
-}
 
 std::string Chunk::GetFilePath(const Vec2i &position)
 {

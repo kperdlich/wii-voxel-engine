@@ -39,10 +39,7 @@
 #define PLAYER_DISTANCE 120.0f
 #define SKYBOX_FACES 6
 
-SkyBox::SkyBox()
-{
-
-}
+SkyBox::SkyBox() {}
 
 SkyBox::~SkyBox() {}
 
@@ -66,21 +63,12 @@ void SkyBox::Clear()
         m_pSkyBoxTextures[i] = nullptr;
     }
 
-    if ( m_displayListSize > 0 )
-    {
-        free(m_pDispList);
-        m_displayListSize = 0;
-        m_pDispList = nullptr;
-    }
+    m_displayList.Clear();
 }
 
 void SkyBox::CreateSkyBox()
 {
-    size_t size = MasterRenderer::GetDisplayListSizeForFaces(SKYBOX_FACES);
-	m_pDispList = memalign(32, size);
-	memset(m_pDispList, 0, size);
-	DCInvalidateRange(m_pDispList, size);
-	GX_BeginDispList(m_pDispList, size);
+    m_displayList.Begin(MasterRenderer::GetDisplayListSizeForFaces(SKYBOX_FACES));
 
 	GX_SetCullMode(GX_CULL_BACK);
 
@@ -185,17 +173,11 @@ void SkyBox::CreateSkyBox()
 
 	GX_SetCullMode(GX_CULL_BACK);
 
-    m_displayListSize = GX_EndDispList();
-    realloc(m_pDispList, m_displayListSize);
+    m_displayList.End();
 }
-
-
 
 void SkyBox::Render()
 {
-    if ( m_displayListSize > 0 )
-	{
-        GX_CallDispList(m_pDispList, m_displayListSize);
-	}
+    m_displayList.Render();
 }
 

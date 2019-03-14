@@ -43,7 +43,6 @@ public:
 	void UpdateFocusedBlockByWorldPosition( const Vector3& blockPosition );
 	BlockType GetBlockByWorldPosition(const Vector3& worldPosition);
 	Vector3 GetBlockPositionByWorldPosition(const Vector3& worldPosition);
-    double GetPlayerHeight( const Vector3& playerWorldPosition );
     PerlinNoise GetNoise() const;
     void Serialize(const CompressedChunkData& data);
 
