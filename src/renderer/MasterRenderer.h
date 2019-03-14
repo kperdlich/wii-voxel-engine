@@ -14,6 +14,8 @@ public:
     static size_t GetDisplayListSizeForFaces(uint32_t faces);
     static void SetGraphicsMode(bool bTexturemode, bool bNormalMode);    
     static void DrawSprite(const Sprite& sprite);
+    static void EnableFog();
+    static void DisableFog();
 };
 
 #endif // MASTERRENDERER_H

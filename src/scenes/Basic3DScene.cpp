@@ -62,6 +62,7 @@ void Basic3DScene::Draw()
 	GRRLIB_ObjectViewEnd();
 
     MasterRenderer::SetGraphicsMode(true, false);
+    MasterRenderer::EnableFog();
     m_skyBox->Render();
     MasterRenderer::SetGraphicsMode(true, true);
 
@@ -73,7 +74,7 @@ void Basic3DScene::Draw()
 	GRRLIB_ObjectViewRotate( 0, 0, m_mainCamera->GetWorldAngleZ());
 	GRRLIB_ObjectViewEnd();
 
-	m_pGameWorld->Draw();   
+	m_pGameWorld->Draw();
 
     GRRLIB_2dMode();
 
