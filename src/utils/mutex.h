@@ -20,7 +20,6 @@
 #ifndef MUTEX_H
 #define MUTEX_H
 
-#include <ogcsys.h>
 #include <gccore.h>
 
 class Mutex
@@ -36,15 +35,7 @@ public:
         LWP_MutexDestroy(m_mutex);
     }
 
-    void Lock()
-    {
-        LWP_MutexLock(m_mutex);
-    }
-
-    void Unlock()
-    {
-        LWP_MutexUnlock(m_mutex);
-    }
+    friend class lock_guard;
 
 private:
     mutex_t m_mutex;

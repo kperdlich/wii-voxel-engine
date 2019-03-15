@@ -25,6 +25,7 @@
 #include "../../renderer/MasterRenderer.h"
 #include "../../renderer/BlockRenderer.h"
 #include "../../utils/Debug.h"
+#include "../../utils/lockguard.h"
 
 Chunk::Chunk(class GameWorld& gameWorld)
 {
@@ -206,22 +207,22 @@ void Chunk::SetToAir()
 
 bool Chunk::AddBlockToRenderList(BlockType type, const BlockRenderVO& blockRenderVO)
 {
-	bool bSuccessful = false;
-	auto blockRenderListIt = m_mBlockRenderList.find(type);
+    bool bSuccessful = false;
+    auto blockRenderListIt = m_mBlockRenderList.find(type);
 	if (blockRenderListIt != m_mBlockRenderList.end())
 	{
         blockRenderListIt->second.emplace_back(blockRenderVO);
-		bSuccessful = true;
-	}
+        bSuccessful = true;
+    }
 	else
 	{
         std::vector<BlockRenderVO> blockList;
         blockList.emplace_back(blockRenderVO);
         m_mBlockRenderList.insert(std::pair<BlockType, std::vector<BlockRenderVO> >(type, blockList ));
-		bSuccessful = true;
-	}
+        bSuccessful = true;
+    }
 
-	return bSuccessful;
+    return bSuccessful;
 }
 
 bool Chunk::IsBlockVisible(uint32_t iX, uint32_t iY, uint32_t iZ, BlockRenderVO& blockRenderVO)
@@ -361,7 +362,7 @@ void Chunk::RebuildDisplayList()
 	BuildBlockRenderList();    
 
 	DeleteDisplayList();
-    CreateDisplayList( MasterRenderer::GetDisplayListSizeForFaces(m_amountOfFaces) );
+    CreateDisplayList(MasterRenderer::GetDisplayListSizeForFaces(m_amountOfFaces));
 
     for(auto it = m_mBlockRenderList.begin(); it != m_mBlockRenderList.end(); ++it)
 	{
@@ -412,16 +413,14 @@ void Chunk::SetPosition(const Vec2i &position)
 
 void Chunk::SetLoaded(bool value)
 {
-    m_mutex.Lock();
-    m_bLoadingDone = value;
-    m_mutex.Unlock();
+    lock_guard guard(m_mutex);
+    m_bLoadingDone = value;    
 }
 
 bool Chunk::IsLoaded()
 {
-    m_mutex.Lock();
+    lock_guard guard(m_mutex);
     bool bLoaded = m_bLoadingDone;
-    m_mutex.Unlock();
     return bLoaded;
 }
 

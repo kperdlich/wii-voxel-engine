@@ -96,10 +96,7 @@ private:
 
     bool m_bLoadingDone         = false;
     //bool m_bIsDirty             = false;
-    bool m_bNeighbourUpdate     = false;
-    //uint32_t m_displayListSize  = 0;
-    //void* m_pDispList           = nullptr;
-
+    bool m_bNeighbourUpdate     = false;    
     DisplayList m_displayList;
 
     uint32_t m_amountOfBlocks   = 0;

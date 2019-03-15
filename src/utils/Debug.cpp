@@ -19,9 +19,10 @@
 
 #include "Debug.h"
 #include "Mutex.h"
+#include "lockguard.h"
 
 std::ofstream Debug::s_file;
-Mutex Debug::s_mutex;
+Mutex Debug::s_fileMutex;
 Socket Debug::s_socket;
 bool Debug::s_bLogAlwaysToServer = false;
 
@@ -68,9 +69,8 @@ void Debug::Log(const ELogType &logType, const char* format, ...)
         s_socket.Send(&terminator, 1);
     }
 
-    s_mutex.Lock();
-    s_file << msg << std::endl;
-    s_mutex.Unlock();
+    lock_guard guard(s_fileMutex);
+    s_file << msg << std::endl;    
 }
 
 void Debug::LogServer(const char* format, ...)

@@ -46,7 +46,7 @@ class Debug {
 
 private:
     Debug() {}
-    static Mutex s_mutex;
+    static Mutex s_fileMutex;
     static std::ofstream s_file;
     static Socket s_socket;
     static bool s_bLogAlwaysToServer;

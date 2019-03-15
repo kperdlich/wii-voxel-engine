@@ -36,7 +36,6 @@ private:
 	void CreateSkyBox();    
     Texture* m_pSkyBoxTextures[6];	
     DisplayList m_displayList;
-
 };
 
 #endif /* SRC_WORLD_CSKYBOX_H_ */

@@ -19,6 +19,7 @@
 
 #include "Thread.h"
 #include "Debug.h"
+#include "lockguard.h"
 
 int Thread::Create(void *(*entry)(void *), void *stackbase, u32 stack_size, u8 prio)
 {
@@ -44,17 +45,16 @@ int Thread::Start()
 
 bool Thread::IsStopped()
 {
-    m_mutex.Lock();
+    lock_guard guard(m_mutex);
     bool val = m_bStop;
-    m_mutex.Unlock();
     return val;
 }
 
 void Thread::Stop()
 {
-    m_mutex.Lock();
+    lock_guard guard(m_mutex);
     m_bStop = true;
-    m_mutex.Unlock();
+    guard.Release();
 
     if (IsSuspended())
     {
@@ -62,9 +62,8 @@ void Thread::Stop()
     }
     LWP_JoinThread(m_threadID, nullptr);
 
-    m_mutex.Lock();
+    guard.Lock();
     m_bStop = false;
-    m_mutex.Unlock();
 }
 
 bool Thread::IsSuspended()

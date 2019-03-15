@@ -223,6 +223,8 @@ src/utils/TileHelper.h
 src/utils/Vector3.cpp
 src/utils/Vector3.h
 src/utils/Zip.h
+src/utils/lockguard.cpp
+src/utils/lockguard.h
 src/utils/mutex.h
 src/world/Camera.cpp
 src/world/Camera.h
