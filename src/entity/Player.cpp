@@ -149,7 +149,6 @@ void CPlayer::Update(float deltaSeconds)
             if (blockTypeBeneathPlayer == BlockType::AIR)
             {
                 m_bIsFalling = true;
-                LOG("Player falling!");
                 m_position.SetY(m_position.GetY() - (PLAYER_GRAVITY * deltaSeconds));
             }
             else
@@ -214,17 +213,16 @@ void CPlayer::Update(float deltaSeconds)
 	}	
     if ((padButtonDown & WPAD_BUTTON_A) && !m_bIsPlayerJumping)
     {
-        // jump
         m_bIsPlayerJumping = true;
     }
 
 	UpdateInventory();
 
 
-    if (m_bPlayerSpawned && (m_LastPlayerServerUpdate - ticks_to_millisecs(gettime())) > 700)
+    if (m_bPlayerSpawned && (m_LastPlayerServerUpdate - ticks_to_millisecs(gettime())) > 50)
     {
-        double stanceOffset = m_bIsFalling || m_bIsPlayerJumping ? 0.2 : 1.62;        
-        double serverPlayerY =m_position.GetY();
+        double stanceOffset = m_bIsFalling || m_bIsPlayerJumping ? 0.3 : 1.62;
+        double serverPlayerY = m_position.GetY();
         double serverPlayerStance = (m_position.GetY() + stanceOffset);        
         PacketPlayerPosition p{m_position.GetX(), serverPlayerY, m_position.GetZ(), serverPlayerStance, m_bOnTheGround};
         p.Send();

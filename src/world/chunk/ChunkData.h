@@ -68,9 +68,13 @@ struct Vec2i
 
 struct CompressedChunkData
 {
-    unsigned char*  Data;
-    size_t          Size;
-    int32_t         X, Z;
+    int32_t m_X;
+    int32_t m_Z;
+    bool m_bGroundUpCon;
+    uint16_t m_PrimaryBitMap;
+    uint16_t m_AddBitMap;
+    int32_t m_CompressedSize;
+    unsigned char* m_CompressedData;
 };
 
 struct BlockChangeData

@@ -28,7 +28,7 @@ public:
         if (scene && scene->GetEntityHandler().GetPlayer())
         {
             CPlayer* p = static_cast<CPlayer*>(scene->GetEntityHandler().GetPlayer());
-            //p->SetPosition(Vector3(m_x, m_y, m_z));
+            p->SetPosition(Vector3(m_x, m_y, m_z));
         }
         else
         {

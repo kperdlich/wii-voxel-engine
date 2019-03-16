@@ -78,6 +78,7 @@ void Engine::Start()
             CalculateFrameRate();
 
             m_millisecondsLastFrame = ticks_to_millisecs(gettime()) - startFrameTime;
+            LOG("Frame Time: %f s", m_millisecondsLastFrame / 1000.0f);
         }
 
         NetworkManager::Get().Destroy();

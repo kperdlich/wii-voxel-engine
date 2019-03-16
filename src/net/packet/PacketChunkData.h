@@ -14,6 +14,7 @@
 #include "../../scenes/InGameScene.h"
 #include "../../world/GameWorld.h"
 #include "../../world/chunk/Chunk.h"
+#include "../../world/chunk/chunkdata.h"
 
 
 // todo implement
@@ -24,29 +25,33 @@ public:
     PacketChunkData() : Packet(PACKET_CHUNK_DATA) {}
     ~PacketChunkData()
     {
-        if (m_CompressedData)
-            delete [] m_CompressedData;
-        m_CompressedData = nullptr;
+        //if (m_CompressedData)
+        //    delete [] m_CompressedData;
+        //m_CompressedData = nullptr;
     }
 
     void Read(const Socket &socket) override
     {
-        m_X = socket.Read<int32_t>();
-        m_Z = socket.Read<int32_t>();
-        m_bGroundUpCon = socket.Read<bool>();
-        m_PrimaryBitMap = socket.Read<uint16_t>();
-        m_AddBitMap = socket.Read<uint16_t>();
-        m_CompressedSize = socket.Read<int32_t>();
-        m_UnusedInt = socket.Read<int32_t>();
-        m_CompressedData = new unsigned char[m_CompressedSize];
-        socket.Read(m_CompressedData, m_CompressedSize);
+        m_chunkData.m_X = socket.Read<int32_t>();
+        m_chunkData.m_Z = socket.Read<int32_t>();
+        m_chunkData.m_bGroundUpCon = socket.Read<bool>();
+        m_chunkData.m_PrimaryBitMap = socket.Read<uint16_t>();
+        m_chunkData.m_AddBitMap = socket.Read<uint16_t>();
+        m_chunkData.m_CompressedSize = socket.Read<int32_t>();
+        socket.Read<int32_t>();
+        m_chunkData.m_CompressedData = new unsigned char[m_chunkData.m_CompressedSize]; // this will be managed in the Serialize job!
+        socket.Read(m_chunkData.m_CompressedData, m_chunkData.m_CompressedSize);
     }
 
     void Action() override
     {
+        //LOG("Received chunk %d, %d", m_chunkData.m_X, m_chunkData.m_Z);
+        //delete [] m_chunkData.m_CompressedData;
+        //m_chunkData.m_CompressedData = nullptr;
+        static_cast<InGameScene*>(Engine::Get().GetSceneHandler().GetCurrentScene())->GetWorld()->Serialize(m_chunkData);
         return;
 
-        std::ostringstream filename;
+        /*std::ostringstream filename;
         filename << WORLD_PATH "/";
         filename << m_X;
         filename << '_';
@@ -65,7 +70,7 @@ public:
         stream.close();
 
         delete [] m_CompressedData;
-        m_CompressedData = nullptr;
+        m_CompressedData = nullptr;*/
 
         /*
         uint32_t sections = 0;
@@ -158,11 +163,12 @@ protected:
     {
     }
 
-    int32_t m_X = 0, m_Z = 0;
+    CompressedChunkData m_chunkData;
+    /*int32_t m_X = 0, m_Z = 0;
     bool m_bGroundUpCon = false;
     uint16_t m_PrimaryBitMap = 0, m_AddBitMap = 0;
     int32_t m_CompressedSize = 0, m_UnusedInt = 0;
-    unsigned char* m_CompressedData = nullptr;
+    unsigned char* m_CompressedData = nullptr;*/
 
 
 };

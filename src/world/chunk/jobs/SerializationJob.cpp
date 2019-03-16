@@ -21,10 +21,36 @@
 #include <sstream>
 #include "SerializationJob.h"
 #include "../../../utils/Filesystem.h"
+#include "../../../utils/clock.h"
 
 void SerializationJob::Execute()
 {
+    Clock clock;
+    clock.Start();
     const CompressedChunkData& chunkData = m_queue.Pop();
+
+    std::ostringstream filename;
+    filename << WORLD_PATH "/";
+    filename << chunkData.m_X;
+    filename << '_';
+    filename << chunkData.m_Z;
+    filename << ".data";
+
+    std::ofstream stream(filename.str(), std::ios::out | std::ios::binary);
+    stream.write((const char*)&chunkData.m_X, sizeof(chunkData.m_X));
+    stream.write((const char*)&chunkData.m_Z, sizeof(chunkData.m_Z));
+    stream.write((const char*)&chunkData.m_bGroundUpCon, sizeof(chunkData.m_bGroundUpCon));
+    stream.write((const char*)&chunkData.m_PrimaryBitMap, sizeof(chunkData.m_PrimaryBitMap));
+    stream.write((const char*)&chunkData.m_AddBitMap, sizeof(chunkData.m_AddBitMap));
+    stream.write((const char*)&chunkData.m_CompressedSize, sizeof(chunkData.m_CompressedSize));
+    stream.write((const char*)chunkData.m_CompressedData, chunkData.m_CompressedSize);
+    stream.close();
+
+    delete [] chunkData.m_CompressedData;
+    clock.Stop();
+    //LOG("Serialize Chunk took %fs", clock.GetSecs());
+
+
     /*std::ostringstream filename;
     filename << WORLD_PATH "/";
     filename << chunkData.X;

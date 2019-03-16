@@ -5,9 +5,12 @@
 #include "../Chunk.h"
 #include "../chunkdata.h"
 #include "../../../utils/Zip.h"
+#include "../../../utils/Clock.h"
 
 void ChunkLoaderMultiplayer::Execute()
 {
+    Clock clock;
+    clock.Start();
     const ChunkLoadingData& chunkData = m_queue.Pop();
     Chunk* chunk = chunkData.ChunkObj;
 
@@ -18,7 +21,7 @@ void ChunkLoaderMultiplayer::Execute()
     filename << chunk->GetPosition().Y;
     filename << ".data";
 
-    LOG("Try load chunk %s", filename.str().c_str());
+    //LOG("Try load chunk %s", filename.str().c_str());
 
     std::ifstream fstream(filename.str(), std::ios::in | std::ios::binary);    
     if (fstream)
@@ -114,6 +117,8 @@ void ChunkLoaderMultiplayer::Execute()
             }
         }
         delete [] cdata;
+        clock.Stop();
+        LOG("ChunkLoader took %fs to load %d %d", clock.GetSecs(), chunk->GetPosition().X, chunk->GetPosition().Y);
     }
     else
     {

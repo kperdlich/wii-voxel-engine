@@ -18,18 +18,18 @@
 ***/
 
 
-
+#include "Filesystem.h"
+#include "Debug.h"
 #include <fat.h>
 #include <dirent.h>
-#include <sys/unistd.h>
 #include <sys/stat.h>
 #include <unistd.h>
 #include <fstream>
 #include <iostream>
 #include <stdlib.h>
 #include <assert.h>
-#include "Filesystem.h"
-#include "Debug.h"
+#include <stdio.h>
+#include <string.h>
 
 
 void FileSystem::Init()
@@ -72,5 +72,51 @@ void FileSystem::Write(const std::string &file, const char* data, size_t size)
 
 int FileSystem::RemoveDirectory(const std::string& directoryPath)
 {
-    return rmdir(directoryPath.c_str());
+    return RemoveDirectory(directoryPath.c_str());
+}
+
+int FileSystem::RemoveDirectory(const char *directoryPath)
+{
+    DIR* pdir = opendir(directoryPath);
+    if (pdir != nullptr)
+    {
+        while(true)
+        {
+            struct dirent* pent = readdir(pdir);
+            if(pent == nullptr)
+                break;
+
+            if(strcmp(".", pent->d_name) != 0 && strcmp("..", pent->d_name) != 0)
+            {
+                char dnbuf[260];
+                sprintf(dnbuf, "%s/%s", directoryPath, pent->d_name);
+
+                struct stat statbuf;
+                stat(dnbuf, &statbuf);
+
+                if(S_ISDIR(statbuf.st_mode))
+                {
+                    LOG("%s <DIR>\n", dnbuf);
+                    RemoveDirectory(dnbuf);
+                }
+                else
+                {
+                    LOG("Deleting %s (%d)\n", dnbuf, (int)statbuf.st_size);
+                    RemoveFile(dnbuf);
+                }
+            }
+        }
+        closedir(pdir);
+    }
+    return rmdir(directoryPath);
+}
+
+int FileSystem::RemoveFile(const std::string &filePath)
+{
+    return RemoveFile(filePath.c_str());
+}
+
+int FileSystem::RemoveFile(const char *filePath)
+{
+    return unlink(filePath);
 }

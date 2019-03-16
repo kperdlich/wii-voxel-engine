@@ -18,6 +18,7 @@
 ***/
 
 #include <string>
+#include <errno.h>
 #include <algorithm>
 #include "ChunkManager.h"
 #include "chunkdata.h"
@@ -28,6 +29,7 @@
 #include "../GameWorld.h"
 #include "../../utils/Filesystem.h"
 #include "../../utils/Debug.h"
+#include "../../utils/clock.h"
 
 ChunkManager::~ChunkManager()
 {
@@ -36,8 +38,10 @@ ChunkManager::~ChunkManager()
     DestroyChunkCash();
 
     int value = FileSystem::RemoveDirectory(WORLD_PATH);
-    if (value != 0)
-        LOG("Couldn't not delete directory /world! Errorcode: %d", value);
+    if (value == -1)
+    {
+        LOG("Couldn't not delete directory /world! Error: %s", strerror(errno));
+    }
 }
 
 void ChunkManager::Init(const Vector3 &position, GameWorld *world)
@@ -78,7 +82,9 @@ const std::vector<Chunk*> ChunkManager::GetLoadedChunks() const
 }
 
 void ChunkManager::UpdateChunksBy(const Vector3 &position)
-{
+{    
+    Clock clock;
+    clock.Start();
     for (auto it = m_chunkLoadingStage.begin(); it != m_chunkLoadingStage.end(); )
     {
         Chunk* c = (*it);
@@ -86,7 +92,7 @@ void ChunkManager::UpdateChunksBy(const Vector3 &position)
         {
             c->SetDirty(true);
             it = m_chunkLoadingStage.erase(it);
-            LOG("Loaded chunk: %d %d", c->GetPosition().X, c->GetPosition().Y);
+            //LOG("Loaded chunk: %d %d", c->GetPosition().X, c->GetPosition().Y);
         }
         else
         {
@@ -98,10 +104,13 @@ void ChunkManager::UpdateChunksBy(const Vector3 &position)
 
     if (currentChunkPos != m_lastUpdateChunkPos)
     {        
-        LOG("PlayerPos: %f %f %f, ChunkPos: %d %d", position.GetX(), position.GetY(), position.GetZ(),
+        LOG("   PlayerPos: %f %f %f, ChunkPos: %d %d", position.GetX(), position.GetY(), position.GetZ(),
             currentChunkPos.X, currentChunkPos.Y);
         LoadChunks(currentChunkPos);               
     }
+    clock.Stop();
+    if (clock.GetSecs() > 0.0f)
+        LOG("   UpdateChunksBy took %f s", clock.GetSecs());
 }
 
 Chunk* ChunkManager::GetCashedChunkByWorldPosition(const Vector3& worldPosition)
@@ -151,6 +160,8 @@ void ChunkManager::DestroyChunkCash()
 
 void ChunkManager::LoadChunks(const Vec2i &chunkPosition)
 {
+    Clock clock;
+    clock.Start();
     auto chunkMap = GetChunkMapAround(chunkPosition);
 
     std::vector<Chunk*> chunkPreCashed;
@@ -188,12 +199,14 @@ void ChunkManager::LoadChunks(const Vec2i &chunkPosition)
         m_chunkLoadingStage.push_back(chunk);
         chunkMap.pop_back();
         m_loaderJob.Add(ChunkLoadingData {chunk});
-        LOG("Added Chunk to loading stage");
+        //LOG("Added Chunk to loading stage");
     }
 
     chunkPreCashed.clear();
     m_lastUpdateChunkPos = chunkPosition;
     SetChunkNeighbors();
+    clock.Stop();
+    LOG("       LoadChunks took %f s", clock.GetSecs());
 }
 
 std::vector<Vec2i> ChunkManager::GetChunkMapAround(const Vec2i &chunkPosition) const

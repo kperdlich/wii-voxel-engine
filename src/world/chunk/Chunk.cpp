@@ -26,6 +26,7 @@
 #include "../../renderer/BlockRenderer.h"
 #include "../../utils/Debug.h"
 #include "../../utils/lockguard.h"
+#include "../../utils/clock.h"
 
 Chunk::Chunk(class GameWorld& gameWorld)
 {
@@ -356,6 +357,8 @@ void Chunk::DeleteDisplayList()
 
 void Chunk::RebuildDisplayList()
 {
+    Clock clock;
+    clock.Start();
 	BlockRenderer blockRenderer;
 
 	ClearBlockRenderList();        
@@ -367,7 +370,7 @@ void Chunk::RebuildDisplayList()
     for(auto it = m_mBlockRenderList.begin(); it != m_mBlockRenderList.end(); ++it)
 	{
         Block* pBlockToRender = m_pWorldManager->GetBlockManager().GetBlockByType(it->first);
-        blockRenderer.Prepare( &it->second, *pBlockToRender);
+        blockRenderer.Prepare(&it->second, *pBlockToRender);
         blockRenderer.Draw();
 	}
 
@@ -377,6 +380,8 @@ void Chunk::RebuildDisplayList()
 	ClearBlockRenderList();
 
 	m_bNeighbourUpdate = false;
+    clock.Stop();
+    //LOG("Rebuilding DisplayList took %f s for chunk %f %f", clock.GetSecs(), m_Position.X, m_Position.Y);
 }
 
 void Chunk::RemoveBlockByWorldPosition(const Vector3& blockPosition)
@@ -419,8 +424,13 @@ void Chunk::SetLoaded(bool value)
 
 bool Chunk::IsLoaded()
 {
+    Clock clock;
+    clock.Start();
     lock_guard guard(m_mutex);
     bool bLoaded = m_bLoadingDone;
+    clock.Stop();
+    if (clock.GetSecs() > 0.0)
+        LOG("lock_guard took %f s", clock.GetSecs());
     return bLoaded;
 }
 
