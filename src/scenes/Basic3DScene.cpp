@@ -76,6 +76,11 @@ void Basic3DScene::Draw()
 
 	m_pGameWorld->Draw();
 
+    Render2D();
+}
+
+void Basic3DScene::Render2D() const
+{
     GRRLIB_2dMode();
 
     auto sprites = m_spriteStageManager->GetSpriteRenderList();
@@ -95,17 +100,22 @@ void Basic3DScene::Update(float deltaSeconds)
 
 EntityHandler& Basic3DScene::GetEntityHandler()
 {
-	return *m_entityHandler;
+    return *m_entityHandler;
+}
+
+void Basic3DScene::ClearUiElements()
+{
+    for (uint32_t i = 0; i < m_uiElements.size(); i++)
+    {
+        delete m_uiElements[i];
+    }
+
+    m_uiElements.clear();
 }
 
 void Basic3DScene::Unload()
 {
-    for (uint32_t i = 0; i < m_uiElements.size(); i++)
-	{
-		delete m_uiElements[i];
-	}
-
-	m_uiElements.clear();
+    ClearUiElements();
 	m_entityHandler->Clear();
     m_skyBox->Clear();
     Scene::Unload();

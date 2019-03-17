@@ -25,6 +25,7 @@
 #include "net/NetworkManager.h"
 #include "utils/Debug.h"
 
+#include "event/eventmanager.h"
 #include "net/packet/PacketHandshake.h"
 #include "net/packet/PacketLogin.h"
 
@@ -59,7 +60,9 @@ void Engine::Start()
             m_pInputHandler->Update();
             m_pSceneHandler->Update(m_millisecondsLastFrame / 1000.0f);
             NetworkManager::Get().Update();
+            EventManager::PullEvents();
             m_pSceneHandler->DrawScene();
+
 
             WiiPad* pad = m_pInputHandler->GetPadByID( WII_PAD_0 );
             u32 padButtonDown = pad->ButtonsDown();
@@ -78,7 +81,7 @@ void Engine::Start()
             CalculateFrameRate();
 
             m_millisecondsLastFrame = ticks_to_millisecs(gettime()) - startFrameTime;
-            LOG("Frame Time: %f s", m_millisecondsLastFrame / 1000.0f);
+            //LOG("Frame Time: %f s", m_millisecondsLastFrame / 1000.0f);
         }
 
         NetworkManager::Get().Destroy();

@@ -23,6 +23,8 @@
 #include "ChunkManager.h"
 #include "chunkdata.h"
 #include "../../utils/Job.h"
+#include "../../event/eventmanager.h"
+#include "../../event/event.h"
 #include "Chunk.h"
 #include "jobs/ChunkLoaderJob.h"
 #include "jobs/SerializationJob.h"
@@ -35,13 +37,7 @@ ChunkManager::~ChunkManager()
 {
     m_loaderJob.Stop();
     m_serializationJob.Stop();
-    DestroyChunkCash();
-
-    int value = FileSystem::RemoveDirectory(WORLD_PATH);
-    if (value == -1)
-    {
-        LOG("Couldn't not delete directory /world! Error: %s", strerror(errno));
-    }
+    DestroyChunkCash();   
 }
 
 void ChunkManager::Init(const Vector3 &position, GameWorld *world)
@@ -121,6 +117,9 @@ Chunk* ChunkManager::GetCashedChunkByWorldPosition(const Vector3& worldPosition)
 void ChunkManager::Serialize(const CompressedChunkData& data)
 {
     m_serializationJob.Add(data);
+    uint32_t queueCount = m_serializationJob.GetQueueCount();
+    if (queueCount > 3 && m_serializationJob.GetQueueCount() < 10)
+        EventManager::Dispatch(EVENT_RECEIVED_CHUNKS_FROM_SERVER);
 }
 
 std::vector<Chunk *>::iterator ChunkManager::GetCashedChunkIterator(const Vec2i &chunkPosition)

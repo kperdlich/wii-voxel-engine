@@ -22,6 +22,8 @@
 #include "SerializationJob.h"
 #include "../../../utils/Filesystem.h"
 #include "../../../utils/clock.h"
+#include "../../../event/eventmanager.h"
+#include "../../../event/event.h"
 
 void SerializationJob::Execute()
 {
@@ -48,7 +50,10 @@ void SerializationJob::Execute()
 
     delete [] chunkData.m_CompressedData;
     clock.Stop();
-    //LOG("Serialize Chunk took %fs", clock.GetSecs());
+    LOG("Serialize Chunk took %fs", clock.GetSecs());
+
+    if (m_queue.GetCount() == 0)
+        EventManager::Dispatch(EVENT_SERIALIZED_ALL_CHUNKS);
 
 
     /*std::ostringstream filename;

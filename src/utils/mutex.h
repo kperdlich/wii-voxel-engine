@@ -27,7 +27,7 @@ class Mutex
 public:
     Mutex()
     {
-        LWP_MutexInit(&m_mutex, false);
+        LWP_MutexInit(&m_mutex, true);
     }
 
     ~Mutex()

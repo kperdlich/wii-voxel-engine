@@ -19,6 +19,8 @@
 
 #include <cmath>
 #include "Player.h"
+#include "../event/eventmanager.h"
+#include "../event/event.h"
 #include "../utils/MathHelper.h"
 #include "../utils/Debug.h"
 #include "../physics/collision/AABB.h"
@@ -36,12 +38,14 @@ CPlayer::CPlayer()
 {
 	m_entityRenderer = new EntityRenderer(this);
     m_pInventory = new PlayerInventory();
-	SetPlayer(true);    
+    SetPlayer(true);
+    EventManager::AddListener(this, EVENT_SEND_PLAYER_INFO_TO_SERVER);
 }
 
 CPlayer::~CPlayer()
 {
     delete m_pInventory;
+    EventManager::RemoveListener(this, EVENT_SEND_PLAYER_INFO_TO_SERVER);
 }
 
 void CPlayer::Update(float deltaSeconds)
@@ -217,17 +221,7 @@ void CPlayer::Update(float deltaSeconds)
     }
 
 	UpdateInventory();
-
-
-    if (m_bPlayerSpawned && (m_LastPlayerServerUpdate - ticks_to_millisecs(gettime())) > 50)
-    {
-        double stanceOffset = m_bIsFalling || m_bIsPlayerJumping ? 0.3 : 1.62;
-        double serverPlayerY = m_position.GetY();
-        double serverPlayerStance = (m_position.GetY() + stanceOffset);        
-        PacketPlayerPosition p{m_position.GetX(), serverPlayerY, m_position.GetZ(), serverPlayerStance, m_bOnTheGround};
-        p.Send();
-        m_LastPlayerServerUpdate = ticks_to_millisecs(gettime());
-    }
+    SendUpdateToServer();
 }
 
 void CPlayer::UpdateInventory()
@@ -290,6 +284,29 @@ void CPlayer::Rotate( const Vector3& rotation )
 
 	m_rotation += rotation;
     m_rotation.SetX(MathHelper::Clamp(m_rotation.GetX(), -PITCH_MAX, PITCH_MAX));
+}
+
+void CPlayer::SendUpdateToServer()
+{
+    if (m_bPlayerSpawned && (m_LastPlayerServerUpdate - ticks_to_millisecs(gettime())) > 50)
+    {
+        double stanceOffset = m_bIsFalling || m_bIsPlayerJumping ? 0.3 : 1.62;
+        double serverPlayerY = m_position.GetY();
+        double serverPlayerStance = (m_position.GetY() + stanceOffset);
+        PacketPlayerPosition p{m_position.GetX(), serverPlayerY, m_position.GetZ(), serverPlayerStance, m_bOnTheGround};
+        p.Send();
+        m_LastPlayerServerUpdate = ticks_to_millisecs(gettime());
+    }
+}
+
+void CPlayer::OnEvent(Event event)
+{
+    switch (event.ID)
+    {
+        case EVENT_SEND_PLAYER_INFO_TO_SERVER:
+            SendUpdateToServer();
+            break;
+    }
 }
 
 void CPlayer::AddToInventory(IEquipable& item)

@@ -24,7 +24,6 @@
 #include "chunkdata.h"
 #include "jobs/SerializationJob.h"
 #include "jobs/ChunkLoaderMultiplayer.h"
-//#include "jobs/ChunkLoaderJob.h"
 #include "../../utils/Vector3.h"
 
 class ChunkManager
@@ -61,8 +60,8 @@ private:
 
     SerializationJob m_serializationJob;
     ChunkLoaderMultiplayer m_loaderJob;
-    //ChunkLoaderJob m_loaderJob;
 
+    friend class GameWorld;
 };
 
 #endif // CHUNKMANAGER_H

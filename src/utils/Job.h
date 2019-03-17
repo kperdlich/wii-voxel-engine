@@ -37,6 +37,10 @@ public:
             Resume();
         }
     }
+    uint32_t GetQueueCount()
+    {
+        return m_queue.GetCount();
+    }
 
 protected:
     virtual void PreExecute() override

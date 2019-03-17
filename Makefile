@@ -37,6 +37,7 @@ SOURCES		:=	src \
 				src/input \
 				src/physics \
 				src/physics/collision \
+				src/event \
  				src/gfx GRRLIB_addon
 DATA		:=	data \
 				fonts \

@@ -51,6 +51,18 @@ public:
         return bIsEmpty;
     }
 
+    uint32_t GetCount()
+    {
+        lock_guard guard(m_mutex);
+        uint32_t count = m_queue.size();
+        return count;
+    }
+
+    Mutex& GetMutex()
+    {
+        return m_mutex;
+    }
+
 private:
     std::queue<T> m_queue;
     Mutex m_mutex;

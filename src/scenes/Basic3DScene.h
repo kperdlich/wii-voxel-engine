@@ -42,9 +42,17 @@ public:
         return m_mainCamera;
     }
 
+    inline class GameWorld* GetWorld() const
+    {
+        return m_pGameWorld;
+    }
+
     class EntityHandler& GetEntityHandler();
 
 protected:	
+    void Render2D() const;
+    void ClearUiElements();
+
     std::vector<UiElement*> m_uiElements;
     class EntityHandler* m_entityHandler    = nullptr;
     class Camera* m_mainCamera              = nullptr;

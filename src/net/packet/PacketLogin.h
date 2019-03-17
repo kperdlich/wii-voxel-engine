@@ -23,6 +23,8 @@
 #include <string>
 #include "Packet.h"
 #include "PacketGlobals.h"
+#include "../../event/event.h"
+#include "../../event/eventmanager.h"
 #include "../../globals.h"
 
 class PacketLogin : public Packet
@@ -45,7 +47,7 @@ public:
 
     void Action() override
     {
-        // todo implement
+        EventManager::Dispatch(EVENT_SERVER_CONNECTED);
     }
 
     Packet* CreateInstance() const override

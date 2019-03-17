@@ -12,6 +12,8 @@
 #include "../../utils/Vector3.h"
 #include "../../Engine.h"
 #include "../../scenes/InGameScene.h"
+#include "../../event/event.h"
+#include "../../event/eventmanager.h"
 #include "../../world/GameWorld.h"
 #include "../../world/chunk/Chunk.h"
 #include "../../world/chunk/chunkdata.h"
@@ -48,7 +50,7 @@ public:
         //LOG("Received chunk %d, %d", m_chunkData.m_X, m_chunkData.m_Z);
         //delete [] m_chunkData.m_CompressedData;
         //m_chunkData.m_CompressedData = nullptr;
-        static_cast<InGameScene*>(Engine::Get().GetSceneHandler().GetCurrentScene())->GetWorld()->Serialize(m_chunkData);
+        static_cast<InGameScene*>(Engine::Get().GetSceneHandler().GetCurrentScene())->GetWorld()->Serialize(m_chunkData);        
         return;
 
         /*std::ostringstream filename;

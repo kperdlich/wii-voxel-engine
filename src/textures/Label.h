@@ -40,10 +40,7 @@ public:
         return m_x;
     }
 
-    void SetX(float x) override
-    {
-        m_x = x;
-    }
+    void SetX(float x) override;
 
     float GetY() const override
     {
@@ -60,6 +57,8 @@ public:
         return *m_font;
     }
 
+    void SetText(const std::string& text);
+
     const std::string& GetText() const
     {
         return m_text;
@@ -75,10 +74,7 @@ public:
         return m_textColor;
     }
 
-    void SetFontSize(uint32_t fontSize)
-    {
-        m_fontSize = fontSize;
-    }
+    void SetFontSize(uint32_t fontSize);
 
     void SetTextColor(u32 textColor)
     {
@@ -120,14 +116,21 @@ public:
         return ESpriteType::LABEL;
     }
 
+    inline bool GetCentered() const { return m_bCenteredX; }
+    void SetCenteredX(bool value);
+
 protected:
+
+    void UpdateCenteredX();
+
     std::string m_text;
     std::string m_name;
     uint16_t m_sortingLayerIndex = 0;
-	GRRLIB_ttfFont* m_font;
+    GRRLIB_ttfFont* m_font;
     uint32_t m_fontSize = 0;
     uint32_t m_textColor = 0;
     float m_x, m_y;
+    bool m_bCenteredX = false;
 };
 
 #endif /* _LABEL_H_ */

@@ -36,15 +36,17 @@ public:
 	void Draw();
 
 	class BlockManager& GetBlockManager();
-    class Chunk* GetCashedChunkAt(const Vec2i &centerPosition);
-    class Chunk* GetCashedChunkByWorldPosition(const Vector3& worldPosition);
+        class Chunk* GetCashedChunkAt(const Vec2i &centerPosition);
+        class Chunk* GetCashedChunkByWorldPosition(const Vector3& worldPosition);
 	void RemoveBlockByWorldPosition(const Vector3& blockPosition);
 	void AddBlockAtWorldPosition(const Vector3& blockPosition, BlockType type);
 	void UpdateFocusedBlockByWorldPosition( const Vector3& blockPosition );
 	BlockType GetBlockByWorldPosition(const Vector3& worldPosition);
 	Vector3 GetBlockPositionByWorldPosition(const Vector3& worldPosition);
-    PerlinNoise GetNoise() const;
-    void Serialize(const CompressedChunkData& data);
+        PerlinNoise GetNoise() const;
+        void Serialize(const CompressedChunkData& data);
+
+        uint32_t GetSerializationQueueCount();
 
 
 private:    

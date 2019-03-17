@@ -21,12 +21,13 @@
 #define _PLAYER_H_
 
 #include "Entity.h"
+#include "../event/eventlistener.h"
 #include "../utils/Vector3.h"
 #include "../utils/Debug.h"
 #include "PlayerInventory.h"
 #include "IEquipable.h"
 
-class CPlayer: public Entity {
+class CPlayer: public Entity, public IEventListener {
 public:
     CPlayer();
     virtual ~CPlayer();
@@ -34,6 +35,7 @@ public:
 	void AddToInventory(IEquipable& item);
     class Vector3 Move(float x, float y, float deltaTime);
 	void Rotate( const Vector3& rotation );    
+    virtual void OnEvent(Event event) override;
 
     void SetPosition( const Vector3& position ) override
     {
@@ -65,16 +67,15 @@ public:
         m_bOnTheGround = value;
     }
 
+    void SendUpdateToServer();
+
 private:
     void UpdateInventory();
     PlayerInventory* m_pInventory;
     bool m_bPlayerSpawned = false, m_bOnTheGround = false, m_bIsPlayerJumping = false,  m_bIsFalling = false;
     float m_playerJumpOffset = 0.0f;
     double m_Stance = 0.1;
-
     uint64_t m_LastPlayerServerUpdate;
-
-
 };
 
 #endif /* _PLAYER_H_ */

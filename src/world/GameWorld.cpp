@@ -39,7 +39,7 @@ GameWorld::GameWorld()
     m_blockManager = new BlockManager();
     m_blockManager->LoadBlocks();    
 
-    ReadSeed();
+    //ReadSeed();
 }
 
 GameWorld::~GameWorld()
@@ -63,7 +63,7 @@ void GameWorld::Draw()
     auto& playerPosition = static_cast<Basic3DScene*>(Engine::Get().GetSceneHandler().GetCurrentScene())->GetEntityHandler().GetPlayer()->GetPosition();
     auto& loadedChunks = m_chunkLoader.GetLoadedChunks();
     //const Camera* mainCamera = ((Basic3DScene*)Engine::Get().GetSceneHandler().GetCurrentScene())->GetCamera();
-    for( auto& chunk : loadedChunks)
+    for (auto& chunk : loadedChunks)
     {        
         if (chunk->IsDirty())
         {             
@@ -195,4 +195,9 @@ PerlinNoise GameWorld::GetNoise() const
 void GameWorld::Serialize(const CompressedChunkData& data)
 {
     m_chunkLoader.Serialize(data);
+}
+
+uint32_t GameWorld::GetSerializationQueueCount()
+{
+    return m_chunkLoader.m_serializationJob.GetQueueCount();
 }
