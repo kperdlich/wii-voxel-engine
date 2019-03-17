@@ -122,7 +122,9 @@ void Engine::Init()
 
     LOG("****** %s %s ******", GAME_NAME, BUILD_VERSION);
     NetworkManager::Get().Init();
+#ifdef DEBUG
     Debug::InitServer(true);
+#endif
 
 	GRRLIB_Init();
     GRRLIB_Settings.antialias = true;
