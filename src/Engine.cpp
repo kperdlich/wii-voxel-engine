@@ -71,10 +71,10 @@ void Engine::Start()
                 End();
             }
 
-            PrintFps( 500, 25, m_pFontHandler->GetNativFontByID( DEFAULT_FONT_ID ), DEFAULT_FONT_SIZE, GRRLIB_YELLOW );
+            PrintFps( 500, 25, m_pFontHandler->GetNativFontByID(DEFAULT_MINECRAFT_FONT_ID), DEFAULT_FONT_SIZE, GRRLIB_YELLOW);
 
     #ifdef DEBUG
-            PrintGameVersion(0, 25, m_pFontHandler->GetNativFontByID( DEFAULT_FONT_ID ), DEFAULT_FONT_SIZE, GRRLIB_WHITE );
+            PrintGameVersion(0, 25, m_pFontHandler->GetNativFontByID(DEFAULT_MINECRAFT_FONT_ID), DEFAULT_FONT_SIZE, GRRLIB_WHITE);
     #endif
 
             GRRLIB_Render();

@@ -12,7 +12,7 @@ WorldLoader::WorldLoader(const char* name, Sprite* sprite) : UiTextureElement(0,
     m_state(EWorldLoaderState::CHECK_WORLD_CASH), m_nextState(EWorldLoaderState::CHECK_WORLD_CASH)
 {
     m_pStateLabel = Label::Create("",
-                                  Engine::Get().GetFontHandler().GetNativFontByID(DEFAULT_FONT_ID),
+                                  Engine::Get().GetFontHandler().GetNativFontByID(DEFAULT_MINECRAFT_FONT_ID),
                                   "WorldLoaderStateLabel",
                                   1);
     m_pStateLabel->SetY(rmode->viHeight / 2);    

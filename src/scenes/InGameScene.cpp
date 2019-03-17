@@ -30,7 +30,7 @@
 #include "../textures/Sprite.h"
 #include "Hotbar_png.h"
 #include "Crosshair_png.h"
-#include "ClassicBackgroundSprite_png.h"
+#include "LoadingBackground_png.h"
 
 #define IGS_HUD_HOTBAR "IGS_HUD_HOTBAR"
 #define IGS_HUD_CROSSHAIR "IGS_HUD_CROSSHAIR"
@@ -58,7 +58,8 @@ void InGameScene::Load()
     m_pGameWorld->GenerateWorld();
 
     EventManager::AddListener(this, EVENT_PREPARE_WORLD);    
-    m_pWorldLoader = new WorldLoader(IGS_LOADING_SCREEN, Sprite::Create(ClassicBackgroundSprite_png, ClassicBackgroundSprite_png_size, IGS_LOADING_SCREEN, 0));
+    m_pWorldLoader = new WorldLoader(IGS_LOADING_SCREEN,
+                                     Sprite::Create(LoadingBackground_png, LoadingBackground_png_size, IGS_LOADING_SCREEN, 0));
     m_uiElements.push_back(m_pWorldLoader);    
 }
 
