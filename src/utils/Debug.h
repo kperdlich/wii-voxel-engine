@@ -21,14 +21,23 @@
 #define _DEBUG_H_
 
 #include <fstream>
+#include <assert.h>
 #include "Mutex.h"
 #include "../net/Socket.h"
 #include "../Engine.h"
 
 #ifdef DEBUG
+    #define ASSERT(expression)  if (!(expression)) \
+                                    ERROR("Assertion failed: %s, file %s, line %d", #expression, __FILE__, __LINE__); \
+                                assert(expression);
+#else
+    #define ASSERT(expression)
+#endif
+
+#ifdef DEBUG
     #define LOG(format,...)     Debug::Log(ELogType::INFO, format, ##__VA_ARGS__)
     #define WARNING(format,...) Debug::Log(ELogType::WARNING, format, ##__VA_ARGS__)
-    #define ERROR(format,...)   Debug::Log(ELogType::ERROR, format, ##__VA_ARGS__)
+    #define ERROR(format,...)   Debug::Log(ELogType::ERROR, format, ##__VA_ARGS__)    
 #else
     #define LOG(format, ...)
     #define WARNING(format,...)

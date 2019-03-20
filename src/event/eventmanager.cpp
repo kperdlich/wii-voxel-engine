@@ -23,10 +23,8 @@ void EventManager::AddListener(IEventListener *listener, uint32_t eventId)
 
 void EventManager::RemoveListener(IEventListener *listener, uint32_t eventId)
 {
-    auto listenerEvent = s_eventListeners.find(eventId);
-    if (listenerEvent == s_eventListeners.end())
-        ERROR("EventManager::RemoveListener: assert failed listenerEvent != s_eventListeners.end()");
-    assert(listenerEvent != s_eventListeners.end());
+    auto listenerEvent = s_eventListeners.find(eventId);    
+    ASSERT(listenerEvent != s_eventListeners.end());
     for (auto listenerEventIt = listenerEvent->second.begin(); listenerEventIt != listenerEvent->second.end(); ++listenerEventIt)
     {
         if ((*listenerEventIt) == listener)
@@ -49,10 +47,8 @@ void EventManager::PullEvents()
     while (!s_eventQueue.IsEmpty())
     {
         const Event event = s_eventQueue.Pop();
-        auto listenerEvent = s_eventListeners.find(event.ID);
-        if (listenerEvent == s_eventListeners.end())
-            ERROR("EventManager::PullEvents: assert failed listenerEvent != s_eventListeners.end()");
-        assert(listenerEvent != s_eventListeners.end());
+        auto listenerEvent = s_eventListeners.find(event.ID);        
+        ASSERT(listenerEvent != s_eventListeners.end());
         for (IEventListener* listener : listenerEvent->second)
         {
             listener->OnEvent(event);
