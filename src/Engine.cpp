@@ -18,6 +18,7 @@
 ***/
 
 
+#include <string>
 #include <exception>
 #include "Engine.h"
 #include "utils/GameHelper.h"
@@ -96,15 +97,14 @@ void Engine::Start()
     }
     catch(const std::exception& ex)
     {
-        ERROR("Engine crashed: %s", ex.what());
+        ERROR("Engine Exception: %s", ex.what());
     }
     catch(...)
     {
         ERROR("Unkown Engine crash!");
     }
-#ifdef DEBUG
+
     Debug::Release();
-#endif
 }
 
 void Engine::End()
@@ -119,11 +119,14 @@ void Engine::Init()
 
     FileSystem::Init();
     Debug::Init();    
+    m_iniConfig.Parse(CONFIG_FILE);
 
     LOG("****** %s %s ******", GAME_NAME, BUILD_VERSION);
     NetworkManager::Get().Init();
-#ifdef DEBUG
-    Debug::InitServer(true);
+#ifdef DEBUG    
+    const std::string& debugHost = m_iniConfig.GetValue<std::string>("DebugServer", "Host");
+    uint16_t debugPort = m_iniConfig.GetValue<uint16_t>("DebugServer", "Port");
+    Debug::InitServer(debugHost, debugPort, true);
 #endif
 
 	GRRLIB_Init();

@@ -1,6 +1,7 @@
 #include "worldloader.h"
 #include "../textures/Label.h"
 #include "../utils/Filesystem.h"
+#include "../utils/iniconfig.h"
 #include "../net/NetworkManager.h"
 #include "../net/packet/PacketHandshake.h"
 #include "../event/eventmanager.h"
@@ -47,8 +48,11 @@ void WorldLoader::Update()
             m_pStateLabel->SetText("Connecting to the server...");
             EventManager::AddListener(this, EVENT_SERVER_CONNECTED);
             EventManager::AddListener(this, EVENT_SERVER_CONNECTION_FAILED);
-            NetworkManager::Get().Connect("192.168.0.143", 25565);
-            PacketHandshake hs("DaeFennek", "192.168.0.143", 25565);
+            const std::string& host = Engine::Get().GetIniConfig().GetValue<std::string>("GameServer", "Host");
+            const std::string& playerName = Engine::Get().GetIniConfig().GetValue<std::string>("GameServer", "PlayerName");
+            const uint16_t port = Engine::Get().GetIniConfig().GetValue<uint16_t>("GameServer", "Port");
+            NetworkManager::Get().Connect(host, port);
+            PacketHandshake hs(playerName, host, port);
             hs.Send();
             m_nextState = EWorldLoaderState::WAIT_FOR_SERVER_LOGIN;
             break;

@@ -424,13 +424,8 @@ void Chunk::SetLoaded(bool value)
 
 bool Chunk::IsLoaded()
 {
-    Clock clock;
-    clock.Start();
     lock_guard guard(m_mutex);
-    bool bLoaded = m_bLoadingDone;
-    clock.Stop();
-    if (clock.GetSecs() > 0.0)
-        LOG("lock_guard took %f s", clock.GetSecs());
+    bool bLoaded = m_bLoadingDone;    
     return bLoaded;
 }
 

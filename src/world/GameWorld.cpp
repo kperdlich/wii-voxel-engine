@@ -54,15 +54,12 @@ void GameWorld::GenerateWorld()
     m_chunkLoader.Init(playerPosition, this);
 }
 
-static int value = 0;
-
 void GameWorld::Draw()
 {
-    Clock clockRender, clockUpdate;
-    clockRender.Start();
+    //Clock clockRender, clockUpdate;
+    //clockRender.Start();
     auto& playerPosition = static_cast<Basic3DScene*>(Engine::Get().GetSceneHandler().GetCurrentScene())->GetEntityHandler().GetPlayer()->GetPosition();
     auto& loadedChunks = m_chunkLoader.GetLoadedChunks();
-    //const Camera* mainCamera = ((Basic3DScene*)Engine::Get().GetSceneHandler().GetCurrentScene())->GetCamera();
     for (auto& chunk : loadedChunks)
     {        
         if (chunk->IsDirty())
@@ -71,13 +68,13 @@ void GameWorld::Draw()
         }
         chunk->Render();
     }
-    clockRender.Stop();
-    clockUpdate.Start();
+    //clockRender.Stop();
+    //clockUpdate.Start();
     m_chunkLoader.UpdateChunksBy(playerPosition);
     DrawFocusOnSelectedCube();
-    clockUpdate.Stop();
-    if (clockUpdate.GetSecs() > 0.0f || clockRender.GetSecs() > 0.0f)
-        LOG("World Chunk Update: %f s, Render %f s", clockUpdate.GetSecs(), clockRender.GetSecs());
+    //clockUpdate.Stop();
+    //if (clockUpdate.GetSecs() > 0.0f || clockRender.GetSecs() > 0.0f)
+        //LOG("World Chunk Update: %f s, Render %f s", clockUpdate.GetSecs(), clockRender.GetSecs());
 }
 
 BlockManager& GameWorld::GetBlockManager()
@@ -134,7 +131,7 @@ Vector3 GameWorld::GetBlockPositionByWorldPosition(const Vector3& worldPosition)
 		return pChunk->GetBlockPositionByWorldPosition(worldPosition);
 	}
 
-	return Vector3(0,0,0);
+    return Vector3();
 }
 
 BlockType GameWorld::GetBlockByWorldPosition(const Vector3& worldPosition)

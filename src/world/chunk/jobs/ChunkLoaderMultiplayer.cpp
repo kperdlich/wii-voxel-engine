@@ -66,9 +66,8 @@ void ChunkLoaderMultiplayer::Execute()
         delete [] compressedData;
         compressedData = nullptr;
 
-        // TODO create sections in chunk first before working more on parsing this shit ..
         BlockType*** blocks = chunk->GetBlocks();
-        for (uint32_t i = 0; i < 16; ++i) // todo change to 16
+        for (uint32_t i = 0; i < 16; ++i)
         {
             if (primaryBitMap & 1 << i)
             {
@@ -85,6 +84,9 @@ void ChunkLoaderMultiplayer::Execute()
                             {
                             case 0:
                                 *blockPtr = BlockType::AIR;
+                                break;
+                            case 1:
+                                *blockPtr = BlockType::STONE;
                                 break;
                             case 2:
                                 *blockPtr = BlockType::GRASS;
@@ -104,6 +106,9 @@ void ChunkLoaderMultiplayer::Execute()
                             case 18:
                                 *blockPtr = BlockType::LEAF;
                                 break;
+                            case 31:
+                                *blockPtr = BlockType::AIR;
+                                break;
                             default:
                                 *blockPtr = BlockType::DIRT;
                                 break;
@@ -118,7 +123,7 @@ void ChunkLoaderMultiplayer::Execute()
         }
         delete [] cdata;
         clock.Stop();
-        LOG("ChunkLoader took %fs to load %d %d", clock.GetSecs(), chunk->GetPosition().X, chunk->GetPosition().Y);
+        //LOG("ChunkLoader took %fs to load %d %d", clock.GetSecs(), chunk->GetPosition().X, chunk->GetPosition().Y);
     }
     else
     {

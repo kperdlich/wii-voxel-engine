@@ -23,6 +23,7 @@
 #include "globals.h"
 #include "utils/GameHelper.h"
 #include "utils/ColorHelper.h"
+#include "utils/iniconfig.h"
 #include "commands/client/SwitchToIntroCommand.h"
 #include "commands/client/SwitchToMainMenuCommand.h"
 
@@ -39,6 +40,7 @@ private:
     class InputHandler* m_pInputHandler;
     class FontHandler*  m_pFontHandler;
     class BasicCommandHandler* m_pBasicCommandHandler;
+    IniConfig m_iniConfig;
     bool m_bRunning = false;
     uint64_t m_millisecondsLastFrame = 0;
 
@@ -52,7 +54,8 @@ public:
     class InputHandler& GetInputHandler();
     class FontHandler& GetFontHandler();
     class BasicCommandHandler& GetBasicCommandHandler();
-    class SpriteStageManager& GetSpriteStageManager();
+    class SpriteStageManager& GetSpriteStageManager();        
+    inline IniConfig& GetIniConfig() { return m_iniConfig; }
 
     static Engine& Get()
 	{
@@ -62,6 +65,8 @@ public:
 
     Engine(Engine const&)	  = delete;
     void operator=(Engine const&) = delete;
+private:
+    void ParseIniFile();
 
 };
 

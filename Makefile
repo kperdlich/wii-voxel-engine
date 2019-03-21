@@ -56,7 +56,7 @@ CORE := src/core
 #---------------------------------------------------------------------------------
 
 CFLAGS	= -g -O2 -maltivec -mcpu=750 -mrvl -Wall $(MACHDEP) $(INCLUDE)
-CXXFLAGS =-std=c++11 $(CFLAGS)
+CXXFLAGS =-std=c++14 $(CFLAGS)
 
 LDFLAGS	=	-g $(MACHDEP) -mrvl -Wl,-Map,$(notdir $@).map
 

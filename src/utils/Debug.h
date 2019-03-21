@@ -62,7 +62,7 @@ private:
 
 public:
     static void Init();
-    static void InitServer(bool bLogAlwaysToServer);
+    static void InitServer(const std::string& host, uint16_t port, bool bLogAlwaysToServer);
     static void Log(const ELogType& logType, const char* format, ...);
     static void LogServer(const char* format, ...);
     static void Release();   

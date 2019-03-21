@@ -79,8 +79,7 @@ const std::vector<Chunk*> ChunkManager::GetLoadedChunks() const
 
 void ChunkManager::UpdateChunksBy(const Vector3 &position)
 {    
-    Clock clock;
-    clock.Start();
+
     for (auto it = m_chunkLoadingStage.begin(); it != m_chunkLoadingStage.end(); )
     {
         Chunk* c = (*it);
@@ -99,14 +98,9 @@ void ChunkManager::UpdateChunksBy(const Vector3 &position)
     Vec2i currentChunkPos = GetChunkPositionByWorldPosition(position);
 
     if (currentChunkPos != m_lastUpdateChunkPos)
-    {        
-        LOG("   PlayerPos: %f %f %f, ChunkPos: %d %d", position.GetX(), position.GetY(), position.GetZ(),
-            currentChunkPos.X, currentChunkPos.Y);
+    {                
         LoadChunks(currentChunkPos);               
-    }
-    clock.Stop();
-    if (clock.GetSecs() > 0.0f)
-        LOG("   UpdateChunksBy took %f s", clock.GetSecs());
+    }    
 }
 
 Chunk* ChunkManager::GetCashedChunkByWorldPosition(const Vector3& worldPosition)
@@ -137,19 +131,16 @@ void ChunkManager::SetChunkNeighbors()
     }
 }
 
-Vec2i ChunkManager::GetChunkPositionByWorldPosition(const Vector3 &worldPosition)
-{
-    // todo current player position + current chunk position to debug server
+Vec2i ChunkManager::GetChunkPositionByWorldPosition(const Vector3 &worldPosition) const
+{    
     int32_t x = (int32_t) (std::floor(worldPosition.GetX() / CHUNK_BLOCK_SIZE_X));
-    int32_t z = (int32_t) (std::floor(worldPosition.GetZ() / CHUNK_BLOCK_SIZE_Z));
-    //LOG("worldPosition: %d %d %d, chunkPos: %d %d", (int32_t)worldPosition.GetX(), (int32_t)worldPosition.GetY(), (int32_t)worldPosition.GetZ(),
-    //    x, z);
+    int32_t z = (int32_t) (std::floor(worldPosition.GetZ() / CHUNK_BLOCK_SIZE_Z));   
     return Vec2i(x, z);
 }
 
 void ChunkManager::DestroyChunkCash()
 {
-    for ( auto it = m_chunkCash.begin(); it != m_chunkCash.end(); it++)
+    for (auto it = m_chunkCash.begin(); it != m_chunkCash.end(); it++)
     {
         delete (*it);
     }
@@ -159,13 +150,10 @@ void ChunkManager::DestroyChunkCash()
 
 void ChunkManager::LoadChunks(const Vec2i &chunkPosition)
 {
-    Clock clock;
-    clock.Start();
     auto chunkMap = GetChunkMapAround(chunkPosition);
-
     std::vector<Chunk*> chunkPreCashed;
 
-    for(auto it = chunkMap.begin(); it != chunkMap.end();)
+    for (auto it = chunkMap.begin(); it != chunkMap.end();)
     {
         Vec2i pos = (*it);
         Chunk* chunk = GetChunkFromCash(pos);
@@ -180,11 +168,11 @@ void ChunkManager::LoadChunks(const Vec2i &chunkPosition)
         }
     }
 
-    for(uint32_t i = 0; i < m_chunkCash.size(); ++i)
+    for (uint32_t i = 0; i < m_chunkCash.size(); ++i)
     {
         Chunk* chunk = m_chunkCash[i];
 
-        auto it = std::find_if(chunkPreCashed.begin(), chunkPreCashed.end(), [&chunk]( const Chunk* cashedChunk){
+        auto it = std::find_if(chunkPreCashed.begin(), chunkPreCashed.end(), [&chunk](const Chunk* cashedChunk){
                 return cashedChunk->GetPosition() == chunk->GetPosition();
         });
 
@@ -198,14 +186,11 @@ void ChunkManager::LoadChunks(const Vec2i &chunkPosition)
         m_chunkLoadingStage.push_back(chunk);
         chunkMap.pop_back();
         m_loaderJob.Add(ChunkLoadingData {chunk});
-        //LOG("Added Chunk to loading stage");
     }
 
     chunkPreCashed.clear();
     m_lastUpdateChunkPos = chunkPosition;
     SetChunkNeighbors();
-    clock.Stop();
-    LOG("       LoadChunks took %f s", clock.GetSecs());
 }
 
 std::vector<Vec2i> ChunkManager::GetChunkMapAround(const Vec2i &chunkPosition) const

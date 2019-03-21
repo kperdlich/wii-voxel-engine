@@ -47,15 +47,15 @@ protected:
     {        
         while(true)
         {
+            if (IsStopped())
+                break;
+
             if (m_queue.IsEmpty())
             {
-                if(IsStopped())                
-                    break;
-                else                
-                    Suspend();
+                Suspend();
             }
             else
-            {
+            {                
                 Execute();
             }
         }

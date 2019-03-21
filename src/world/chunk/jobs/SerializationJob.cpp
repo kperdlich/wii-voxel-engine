@@ -50,18 +50,8 @@ void SerializationJob::Execute()
 
     delete [] chunkData.m_CompressedData;
     clock.Stop();
-    LOG("Serialize Chunk took %fs", clock.GetSecs());
+    LOG("Serialize Chunk %d %d took %fs", chunkData.m_X, chunkData.m_Z, clock.GetSecs());
 
     if (m_queue.GetCount() == 0)
-        EventManager::Dispatch(EVENT_SERIALIZED_ALL_CHUNKS);
-
-
-    /*std::ostringstream filename;
-    filename << WORLD_PATH "/";
-    filename << chunkData.X;
-    filename << '_';
-    filename << chunkData.Z;
-    filename << ".data";
-    FileSystem::Write(filename.str(),  reinterpret_cast<char*>(chunkData.Data), chunkData.Size);
-    del (chunkData.Data);*/
+        EventManager::Dispatch(EVENT_SERIALIZED_ALL_CHUNKS);   
 }

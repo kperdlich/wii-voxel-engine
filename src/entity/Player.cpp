@@ -25,6 +25,7 @@
 #include "../utils/Debug.h"
 #include "../physics/collision/AABB.h"
 #include "../net/packet/PacketPlayerPosition.h"
+#include "../renderer/MasterRenderer.h"
 
 #define ROTATION_SPEED 70.0f
 #define MOVEMENT_SPEED 4.0f
@@ -202,16 +203,16 @@ void CPlayer::Update(float deltaSeconds)
 
     Vector3 focusedBlockPos = MathHelper::CalculateNewWorldPositionByRotation(m_rotation,
                                 Vector3(m_position.GetX() + BLOCK_SIZE_HALF, m_position.GetY() + BLOCK_SIZE, m_position.GetZ() + BLOCK_SIZE_HALF),
-                                -2*BLOCK_SIZE);
+                                -2 * BLOCK_SIZE);
 
 
     m_pWorld->UpdateFocusedBlockByWorldPosition(focusedBlockPos);
 
-	if ( padButtonDown & WPAD_BUTTON_B)
+    if (padButtonDown & WPAD_BUTTON_B)
 	{
         m_pWorld->RemoveBlockByWorldPosition(focusedBlockPos);
 	}
-    if ( padButtonDown & WPAD_NUNCHUK_BUTTON_Z)
+    if (padButtonDown & WPAD_NUNCHUK_BUTTON_Z)
 	{
 		m_pWorld->AddBlockAtWorldPosition(focusedBlockPos, BlockType::DIRT );
 	}	

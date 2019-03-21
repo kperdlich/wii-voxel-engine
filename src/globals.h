@@ -20,7 +20,7 @@
 #ifndef GLOBALS_H
 #define GLOBALS_H
 
-#define DEBUG
+//#define DEBUG
 #define DOLPHIN
 
 #define GAME_NAME                   "WoxelCraft"
@@ -36,12 +36,6 @@
 
 #define LOG_FILE    FILE_PATH "/Log.txt"
 #define SEED_FILE   WORLD_PATH "/Seed.dat"
-
-
-#ifdef DOLPHIN
-    #define SERVER_IP "127.0.0.1"
-#else
-    #define SERVER_IP "192.168.0.143"
-#endif
+#define CONFIG_FILE FILE_PATH "/Game.ini"
 
 #endif // GLOBALS_H

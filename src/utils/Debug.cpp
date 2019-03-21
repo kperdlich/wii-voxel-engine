@@ -31,9 +31,9 @@ void Debug::Init()
     s_file.open(LOG_FILE);
 }
 
-void Debug::InitServer(bool bLogAlwaysToServer = false)
+void Debug::InitServer(const std::string &host, uint16_t port, bool bLogAlwaysToServer = false)
 {
-    s_socket.Connect("192.168.0.143", 5000);
+    s_socket.Connect(host, port);
     s_bLogAlwaysToServer = bLogAlwaysToServer;
 }
 

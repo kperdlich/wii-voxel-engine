@@ -43,7 +43,7 @@ private:
 
     std::vector<Chunk*>::iterator GetCashedChunkIterator(const Vec2i &chunkPosition);
 
-    Vec2i GetChunkPositionByWorldPosition(const Vector3 &worldPosition);
+    Vec2i GetChunkPositionByWorldPosition(const Vector3 &worldPosition) const;
     void SetChunkNeighbors();   
     void DestroyChunkCash();
     void LoadChunks(const Vec2i& chunkPosition);

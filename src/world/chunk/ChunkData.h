@@ -23,14 +23,12 @@
 #include "../blocks/BlockManager.h"
 #include "../../utils/Vector3.h"
 
-#define CHUNK_MAP_CASH_X 3
-#define CHUNK_MAP_CASH_Y 3
+#define CHUNK_MAP_CASH_X 5
+#define CHUNK_MAP_CASH_Y 5
 
 #define CHUNK_SIZE_X 16
 #define CHUNK_SIZE_Y 256
 #define CHUNK_SIZE_Z 16
-
-#define CHUNK_MIN_GROUND 20
 
 #define CHUNK_BLOCK_SIZE_X (BLOCK_SIZE * CHUNK_SIZE_X)
 #define CHUNK_BLOCK_SIZE_Y (BLOCK_SIZE * CHUNK_SIZE_Y)
@@ -38,9 +36,6 @@
 
 #define CHUNK_GLOBAL_X(value) value * CHUNK_BLOCK_SIZE_X
 #define CHUNK_GLOBAL_Z(value) value * CHUNK_BLOCK_SIZE_Z
-
-#define STONE_LEVEL 20
-#define TREE_HIGHT 6
 
 struct Vec3i
 {
