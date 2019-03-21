@@ -157,7 +157,7 @@ void ChunkManager::LoadChunks(const Vec2i &chunkPosition)
     {
         Vec2i pos = (*it);
         Chunk* chunk = GetChunkFromCash(pos);
-        if (chunk && chunk->IsLoaded() && IsCloseToChunk(chunkPosition, pos))
+        if (chunk && chunk->IsLoaded())
         {
             chunkPreCashed.push_back(chunk);
             it = chunkMap.erase(it);
@@ -213,12 +213,13 @@ std::vector<Vec2i> ChunkManager::GetChunkMapAround(const Vec2i &chunkPosition) c
 
 bool ChunkManager::IsCloseToChunk(const Vec2i& chunkPosition, const Vec2i& position) const
 {
-    return ( (chunkPosition.X == position.X) ||
-             (chunkPosition.Y == position.Y) ||
-             (chunkPosition.X - 1) == position.X ||
-             (chunkPosition.X + 1) == position.X ||
-             (chunkPosition.Y - 1) == position.Y ||
-             (chunkPosition.Y + 1) == position.Y);
+    const auto& chunkPosList = GetChunkMapAround(chunkPosition);
+    for (const Vec2i& pos : chunkPosList)
+    {
+        if (pos == position)
+            return true;
+    }
+    return false;
 }
 
 Chunk* ChunkManager::GetChunkFromCash(const Vec2i &position)

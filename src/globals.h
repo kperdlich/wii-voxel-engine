@@ -20,7 +20,7 @@
 #ifndef GLOBALS_H
 #define GLOBALS_H
 
-//#define DEBUG
+#define DEBUG
 #define DOLPHIN
 
 #define GAME_NAME                   "WoxelCraft"
