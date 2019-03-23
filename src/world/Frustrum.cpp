@@ -19,6 +19,8 @@
 
 #include "Frustrum.h"
 #include <math.h>
+#include "../utils/matrix4x4.h"
+#include "../utils/Debug.h"
 #include "../core/grrlib.h"
 
 extern Mtx	_GRR_view;
@@ -94,8 +96,29 @@ void Frustrum::CalculateFrustum()
     proj[14] = _projectionMtx[3][2];
     proj[15] = _projectionMtx[3][3];
 
-	Mtx44 mv;
-	guMtxConcat(_ObjTransformationMtx, _GRR_view, mv );
+    /**
+     * View Matrix
+     *  11: 1 12: 0 13: 0 14: 0
+        21: 0 22: 1 23: 0 24: 0
+        31: 0 32: 0 33: 1 34: 0.1
+        41: 0 42: 0 43: 0 44: 0
+     */
+
+    /**
+        _ObjTransformationMtx
+        11: -0.707107 	12: 0 			13: 0.707107 	14: -315.062
+        21: 0.122788 	22: 0.984808 	23: 0.122788 	24: -79.6138
+        31: -0.696364 	32: 0.173648 	33: -0.696364 	34: 40.7966
+        41: 0 			42: 0 			43: 0 			44: 0
+     */
+
+    Mtx mv;
+    guMtxConcat(_ObjTransformationMtx, _GRR_view, mv);
+
+    Matrix4x4 matrix44(_ObjTransformationMtx);
+    LOG("%s", matrix44.ToString().c_str());
+
+    return;
 
 	modl[0] = mv[0][0];
 	modl[1] = mv[0][1];

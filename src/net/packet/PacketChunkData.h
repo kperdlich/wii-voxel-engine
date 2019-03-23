@@ -42,6 +42,7 @@ public:
         m_chunkData.m_CompressedSize = socket.Read<int32_t>();
         socket.Read<int32_t>();
         m_chunkData.m_CompressedData = new unsigned char[m_chunkData.m_CompressedSize]; // this will be managed in the Serialize job!
+        ASSERT(m_chunkData.m_CompressedData != nullptr);
         socket.Read(m_chunkData.m_CompressedData, m_chunkData.m_CompressedSize);
     }
 

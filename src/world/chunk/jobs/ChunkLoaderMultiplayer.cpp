@@ -5,12 +5,10 @@
 #include "../Chunk.h"
 #include "../chunkdata.h"
 #include "../../../utils/Zip.h"
-#include "../../../utils/Clock.h"
+#include "../../../utils/Filesystem.h"
 
 void ChunkLoaderMultiplayer::Execute()
 {
-    Clock clock;
-    clock.Start();
     const ChunkLoadingData& chunkData = m_queue.Pop();
     Chunk* chunk = chunkData.ChunkObj;
 
@@ -21,9 +19,7 @@ void ChunkLoaderMultiplayer::Execute()
     filename << chunk->GetPosition().Y;
     filename << ".data";
 
-    //LOG("Try load chunk %s", filename.str().c_str());
-
-    std::ifstream fstream(filename.str(), std::ios::in | std::ios::binary);    
+    std::ifstream fstream(filename.str(), std::ios::in | std::ios::binary);
     if (fstream)
     {
         int32_t x = 0, z = 0;
@@ -39,6 +35,7 @@ void ChunkLoaderMultiplayer::Execute()
         fstream.read((char*)&addBitMap, sizeof(addBitMap));
         fstream.read((char*)&compressedSize, sizeof(compressedSize));
         compressedData = new unsigned char[compressedSize];
+        ASSERT(compressedData != nullptr);
         fstream.read((char*)compressedData, compressedSize);
         fstream.close();
 
@@ -54,14 +51,7 @@ void ChunkLoaderMultiplayer::Execute()
 
         unsigned char* cdata = new unsigned char[size];
         size_t s = Zip::Decompress(compressedData, compressedSize, cdata, size);
-        if (s != size)
-        {
-            ERROR("Uncompressed size is different: Got: %d, Expected: %d, Chunk: %d %d, CompressedSize: %d, primaryBitMap: %d",
-                  s, size, x, z, compressedSize, primaryBitMap);
-            delete [] compressedData;
-            delete [] cdata;
-            return;
-        }
+        ASSERT(s == size);
 
         delete [] compressedData;
         compressedData = nullptr;
@@ -118,15 +108,13 @@ void ChunkLoaderMultiplayer::Execute()
                 }
                 chunk->SetDirty(true);
                 chunk->SetLoaded(true);
-                //chunk->RebuildDisplayList();
             }
         }
         delete [] cdata;
-        clock.Stop();
-        //LOG("ChunkLoader took %fs to load %d %d", clock.GetSecs(), chunk->GetPosition().X, chunk->GetPosition().Y);
     }
     else
     {
-        WARNING("Found no chunk file for %d %d", chunk->GetPosition().X, chunk->GetPosition().Y);
-    }    
+        WARNING("ChunkLoaderMultiplayer: Found no chunk file for %d %d", chunk->GetPosition().X, chunk->GetPosition().Y);
+        m_queue.Push(chunkData);
+    }
 }

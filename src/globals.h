@@ -21,7 +21,6 @@
 #define GLOBALS_H
 
 #define DEBUG
-#define DOLPHIN
 
 #define GAME_NAME                   "WoxelCraft"
 #define BUILD_VERSION               "0.0.8"

@@ -30,11 +30,16 @@ void NetworkManager::Init()
     if (m_bInitialized)
     {
         LOG("Network configured, ip: %s, gw: %s, mask %s", m_LocalIP, m_Gateway, m_Netmask);
+        int initStatus = net_init();
+        if (initStatus != 0)
+        {
+            ERROR("net_init failed!");
+        }
     }
     else
     {
         ERROR("Network configuration failed!");
-    }
+    }    
 }
 
 void NetworkManager::Connect(const std::string &ip, uint16_t port)
@@ -46,7 +51,10 @@ void NetworkManager::Connect(const std::string &ip, uint16_t port)
 void NetworkManager::Destroy()
 {
     if (m_bInitialized)
+    {
         m_ServerConnection.Destroy();
+        //net_deinit();
+    }
 }
 
 void NetworkManager::Update()
@@ -54,7 +62,7 @@ void NetworkManager::Update()
     if(!m_bInitialized)
         return;
 
-    for(uint16_t i = 0; i < 5; ++i)
+    for (uint16_t i = 0; i < 10; ++i)
     {
         Packet* p = m_ServerConnection.PopPacket();
         if (p)

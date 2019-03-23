@@ -127,7 +127,7 @@ void ServerConnection::InitPacketMap()
     s_PacketMap[PACKET_ENTITY_ACTION] = new PacketEntityAction();
     s_PacketMap[PACKET_SPAWN_NAMED_ENTITY] = new PacketSpawnNamedEntity();
     s_PacketMap[PACKET_COLLECT_ITEM] = new PacketCollectItem();
-    //s_PacketMap[PACKET_SPAWN_OBJECT] = new PacketSpawnObject();
+    s_PacketMap[PACKET_SPAWN_OBJECT] = new PacketSpawnObject();
     //s_PacketMap[PACKET_SPAWN_MOB] = new PacketSpawnMob();
     s_PacketMap[PACKET_SPAWN_PAINTING] = new PacketSpawnPainting();
     s_PacketMap[PACKET_SPAWN_EXPERIENCE_ORB] = new PacketSpawnExperienceOrb();

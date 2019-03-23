@@ -4,6 +4,7 @@
 #include <zlib.h>
 #include <cstdlib>
 #include <cstring>
+#include "Debug.h"
 
 class Zip
 {
@@ -16,15 +17,19 @@ public:
         infstream.zalloc = Z_NULL;
         infstream.zfree = Z_NULL;
         infstream.opaque = Z_NULL;
+        infstream.total_out = 0;
+        infstream.next_in = (Bytef*) inputData;
         infstream.avail_in = (uInt) compressedSize;
-        infstream.next_in = (Bytef *) inputData;
-        infstream.avail_out = (uInt)decompressedSize;
+        infstream.avail_out = (uInt)decompressedSize - infstream.total_out;
         infstream.next_out = (Bytef*) outputData;
 
-        inflateInit(&infstream);
-        inflate(&infstream, Z_NO_FLUSH);
-        inflateEnd(&infstream);
+        int initStatus = inflateInit(&infstream);
+        ASSERT(initStatus == Z_OK);
 
+        int status = inflate(&infstream, Z_FINISH);
+        ASSERT(status == Z_STREAM_END);
+
+        inflateEnd(&infstream);
         return infstream.total_out;
     }
 };

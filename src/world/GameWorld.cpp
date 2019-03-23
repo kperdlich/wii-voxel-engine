@@ -60,6 +60,7 @@ void GameWorld::Draw()
     //clockRender.Start();
     auto& playerPosition = static_cast<Basic3DScene*>(Engine::Get().GetSceneHandler().GetCurrentScene())->GetEntityHandler().GetPlayer()->GetPosition();
     auto& loadedChunks = m_chunkLoader.GetLoadedChunks();
+    //Frustrum::Instance().CalculateFrustum();
     for (auto& chunk : loadedChunks)
     {        
         if (chunk->IsDirty())

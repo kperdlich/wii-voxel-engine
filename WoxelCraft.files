@@ -396,9 +396,9 @@ src/utils/Debug.cpp
 src/utils/Debug.cpp
 src/utils/Debug.h
 src/utils/Debug.h
+src/utils/Filesystem.h
+src/utils/Filesystem.h
 src/utils/Filesystem.cpp
-src/utils/Filesystem.h
-src/utils/Filesystem.h
 src/utils/GameHelper.cpp
 src/utils/GameHelper.cpp
 src/utils/GameHelper.h
@@ -438,7 +438,10 @@ src/utils/lockguard.cpp
 src/utils/lockguard.cpp
 src/utils/lockguard.h
 src/utils/lockguard.h
+src/utils/matrix4x4.cpp
+src/utils/matrix4x4.h
 src/utils/mutex.h
+src/utils/vecint.h
 src/world/Camera.cpp
 src/world/Camera.cpp
 src/world/Camera.h

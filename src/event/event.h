@@ -10,8 +10,6 @@
 #define EVENT_SERVER_CONNECTION_FAILED      4
 #define EVENT_SEND_PLAYER_INFO_TO_SERVER    5
 
-
-
 struct Event
 {
     uint32_t ID;
