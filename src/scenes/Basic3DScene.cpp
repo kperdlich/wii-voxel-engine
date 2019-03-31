@@ -23,7 +23,7 @@
 
 #define MIN_DIST 0.1f
 #define MAX_DIST 200.0f
-#define FIELD_OF_VIEW 90.0f
+#define FIELD_OF_VIEW 70.0f
 
 Basic3DScene::Basic3DScene()
 {    
@@ -62,6 +62,7 @@ void Basic3DScene::Draw()
 	GRRLIB_ObjectViewEnd();
 
     MasterRenderer::SetGraphicsMode(true, false);
+    MasterRenderer::EnableFog();
     m_skyBox->Render();
     MasterRenderer::SetGraphicsMode(true, true);
 
@@ -75,14 +76,11 @@ void Basic3DScene::Draw()
 
 	m_pGameWorld->Draw();
 
-    /*for (auto it = m_entityHandler->GetEntities()->begin(); it != m_entityHandler->GetEntities()->end(); ++it)
-	{
-		if (it->second->IsVisible())
-		{
-            Get3DRenderer().DrawEntity( it->second );
-		}
-    }*/
+    Render2D();
+}
 
+void Basic3DScene::Render2D() const
+{
     GRRLIB_2dMode();
 
     auto sprites = m_spriteStageManager->GetSpriteRenderList();
@@ -102,17 +100,22 @@ void Basic3DScene::Update(float deltaSeconds)
 
 EntityHandler& Basic3DScene::GetEntityHandler()
 {
-	return *m_entityHandler;
+    return *m_entityHandler;
+}
+
+void Basic3DScene::ClearUiElements()
+{
+    for (uint32_t i = 0; i < m_uiElements.size(); i++)
+    {
+        delete m_uiElements[i];
+    }
+
+    m_uiElements.clear();
 }
 
 void Basic3DScene::Unload()
 {
-    for (uint32_t i = 0; i < m_uiElements.size(); i++)
-	{
-		delete m_uiElements[i];
-	}
-
-	m_uiElements.clear();
+    ClearUiElements();
 	m_entityHandler->Clear();
     m_skyBox->Clear();
     Scene::Unload();

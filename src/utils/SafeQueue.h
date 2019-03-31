@@ -24,7 +24,7 @@
 #include <ogcsys.h>
 #include <gccore.h>
 #include "Mutex.h"
-
+#include "lockguard.h"
 
 template<class T>
 class SafeQueue
@@ -32,26 +32,35 @@ class SafeQueue
 public:  
     T Pop()
     {
-        m_mutex.Lock();
+        lock_guard guard(m_mutex);
         T val = m_queue.front();
-        m_queue.pop();
-        m_mutex.Unlock();
+        m_queue.pop();        
         return val;
     }
 
     void Push(const T& value)
     {
-        m_mutex.Lock();
-        m_queue.push(value);
-        m_mutex.Unlock();
+        lock_guard guard(m_mutex);
+        m_queue.push(value);        
     }
 
     bool IsEmpty()
     {
-        m_mutex.Lock();
-        bool bIsEmpty = m_queue.empty();
-        m_mutex.Unlock();
+        lock_guard guard(m_mutex);
+        bool bIsEmpty = m_queue.empty();        
         return bIsEmpty;
+    }
+
+    uint32_t GetCount()
+    {
+        lock_guard guard(m_mutex);
+        uint32_t count = m_queue.size();
+        return count;
+    }
+
+    Mutex& GetMutex()
+    {
+        return m_mutex;
     }
 
 private:

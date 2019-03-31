@@ -106,4 +106,14 @@ void MasterRenderer::DrawSprite(const Sprite& sprite)
 
      GX_SetTevOp  (GX_TEVSTAGE0, GX_PASSCLR);
      GX_SetVtxDesc(GX_VA_TEX0,   GX_NONE);
- }
+}
+
+void MasterRenderer::EnableFog()
+{
+    GX_SetFog(GX_FOG_LIN, 20.0f, 30.0f, 0.1f, 200.0f, {192, 216, 255, 0});
+}
+
+void MasterRenderer::DisableFog()
+{
+    GX_SetFog(GX_FOG_NONE, 0, 1, 0.1, 1, {0, 0, 0, 0});
+}

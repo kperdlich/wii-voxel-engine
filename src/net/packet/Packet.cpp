@@ -1,6 +1,6 @@
 /***
  *
- * Copyright (C) 2016 DaeFennek
+ * Copyright (C) 2018 DaeFennek
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,30 +17,17 @@
  *
 ***/
 
-#include "Block.h"
+#include "Packet.h"
+#include "../NetworkManager.h"
+#include "../../utils/Debug.h"
 
-Block::Block() {
-
+void Packet::Send() const
+{    
+    const Socket& socket = NetworkManager::Get().GetSocket();
+    if(socket.IsConnected())
+    {
+        //LOG("Send Packet: %d", m_ID);
+        socket.Send<char>(m_ID);
+        SendContent(socket);
+    }
 }
-
-
-Block::Block( float size, std::map<const Texture*, std::vector<EBlockFaces>> textureMap ) : m_size(size), m_textureMap(textureMap)
-{
-
-}
-
-Block::~Block() {
-
-}
-
-
-const std::map<const Texture*, std::vector<EBlockFaces>>& Block::GetTextures() const
-{
-    return m_textureMap;
-}
-
-float Block::GetSize() const
-{
-	return m_size;
-}
-

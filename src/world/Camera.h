@@ -30,6 +30,8 @@ public:
 
 	void AttachTo(class Entity& entity);
 
+        inline void SetCameraOffset(double value) { m_cameraOffset = value; }
+
 	void SetWorldPosititon(Vector3 position);
 	void SetWorldAngle(Vector3 angle);
 
@@ -47,7 +49,6 @@ public:
 	double GetWorldScaleY() const;
 	double GetWorldScaleZ() const;
 
-
 private:
 	Vector3 m_cam,
 			 m_up,
@@ -55,6 +56,7 @@ private:
 			 m_worldPosition,
 			 m_worldAngle,
 			 m_wordScale;
+        double m_cameraOffset = .0;
 
     Entity* m_attachedToEntity = nullptr;
 };

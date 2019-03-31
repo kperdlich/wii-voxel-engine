@@ -33,13 +33,13 @@
 
 void BlockManager::LoadBlocks()
 {
-    const Texture* pDirtTexture       =    AddToTextureList(Texture::Create(Dirt_tpl, Dirt_tpl_size ));
-    const Texture* pGrassTexture      =    AddToTextureList(Texture::Create(Grass_tpl, Grass_tpl_size ));
-    const Texture* pGrassSideTexture  =    AddToTextureList(Texture::Create(Grass_Side_tpl, Grass_Side_tpl_size ));
+    const Texture* pDirtTexture       =    AddToTextureList(Texture::Create(Dirt_tpl, Dirt_tpl_size));
+    const Texture* pGrassTexture      =    AddToTextureList(Texture::Create(Grass_tpl, Grass_tpl_size));
+    const Texture* pGrassSideTexture  =    AddToTextureList(Texture::Create(Grass_Side_tpl, Grass_Side_tpl_size));
     const Texture* pStoneTexture      =    AddToTextureList(Texture::Create(Stone_tpl, Stone_tpl_size));
-    const Texture* pWoodTexture       =    AddToTextureList(Texture::Create(Wood_tpl, Wood_tpl_size ));
-    const Texture* pLeafTexture       =    AddToTextureList( Texture::Create(Leaf_tpl, Leaf_tpl_size ));
-    const Texture* pTreeTexture       =    AddToTextureList(Texture::Create(Tree_tpl, Tree_tpl_size ));
+    const Texture* pWoodTexture       =    AddToTextureList(Texture::Create(Wood_tpl, Wood_tpl_size));
+    const Texture* pLeafTexture       =    AddToTextureList(Texture::Create(Leaf_tpl, Leaf_tpl_size));
+    const Texture* pTreeTexture       =    AddToTextureList(Texture::Create(Tree_tpl, Tree_tpl_size));
 
     std::map<const Texture*, std::vector<EBlockFaces>> dirtTextureMap =
     {

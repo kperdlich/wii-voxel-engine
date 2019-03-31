@@ -18,3 +18,7 @@ src/world/blocks
 src/world/chunk
 src/world/hud
 src/world/chunk/jobs
+src/net
+src/event
+F:/devkitPro/libogc/include
+src/net/packet

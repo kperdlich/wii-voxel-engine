@@ -20,9 +20,9 @@
 #ifndef SRC_WORLD_CSKYBOX_H_
 #define SRC_WORLD_CSKYBOX_H_
 
+#include "../renderer/displaylist.h"
 #include "../textures/Texture.h"
 #include "../Engine.h"
-
 
 class SkyBox {
 public:
@@ -34,10 +34,8 @@ public:
 
 private:
 	void CreateSkyBox();    
-    Texture* m_pSkyBoxTextures[6];
-	uint32_t m_displayListSize = 0;
-    void* m_pDispList = nullptr;
-
+    Texture* m_pSkyBoxTextures[6];	
+    DisplayList m_displayList;
 };
 
 #endif /* SRC_WORLD_CSKYBOX_H_ */

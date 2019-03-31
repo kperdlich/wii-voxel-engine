@@ -53,25 +53,20 @@
 #define LABEL_SORTING_LAYER      2
 #define CURSOR_SORTING_LAYER     3
 
-MainMenuScene::MainMenuScene() {
-
-}
-
-MainMenuScene::~MainMenuScene() {
-
-}
-
 void MainMenuScene::Load()
 {    
-    m_elements.push_back( new UiTextureElement( MMS_CLASSIC_BACKGROUND , Sprite::Create(ClassicBackgroundSprite_png, ClassicBackgroundSprite_png_size, MMS_CLASSIC_BACKGROUND, BACKGROUND_SORTING_LAYER )));
-    UiTextureElement* logo = new UiTextureElement( MMS_LOGO , Sprite::Create(WoxelCraft_png, WoxelCraft_png_size, MMS_LOGO, COMPONENTS_SORTING_LAYER));
-	logo->SetX( (rmode->viWidth / 2) - (logo->GetWidth() / 2) );
-	logo->SetY( 60 );
+    m_elements.push_back(new UiTextureElement(MMS_CLASSIC_BACKGROUND,
+                                              Sprite::Create(ClassicBackgroundSprite_png, ClassicBackgroundSprite_png_size,
+                                                             MMS_CLASSIC_BACKGROUND, BACKGROUND_SORTING_LAYER)));
+    UiTextureElement* logo = new UiTextureElement(MMS_LOGO,
+                                                  Sprite::Create(WoxelCraft_png, WoxelCraft_png_size, MMS_LOGO, COMPONENTS_SORTING_LAYER));
+    logo->SetX((rmode->viWidth / 2) - (logo->GetWidth() / 2));
+    logo->SetY(60);
 	m_elements.push_back( logo );
 
     CreateMainMenuButtonList();
 
-    m_elements.push_back( new Cursor( MMS_CURSOR , Sprite::Create(Cursor_png, Cursor_png_size, MMS_CURSOR, CURSOR_SORTING_LAYER )));
+    m_elements.push_back(new Cursor(MMS_CURSOR, Sprite::Create(Cursor_png, Cursor_png_size, MMS_CURSOR, CURSOR_SORTING_LAYER)));
     Basic2DScene::Load();
 }
 
@@ -85,14 +80,14 @@ void MainMenuScene::Update(float deltaSeconds)
 {
     Basic2DScene::Update(deltaSeconds);
 #ifdef DEBUG
-    WiiPad* pad = Engine::Get().GetInputHandler().GetPadByID( WII_PAD_0 );
-	if ( pad->ButtonsDown() & WPAD_BUTTON_LEFT)
+    WiiPad* pad = Engine::Get().GetInputHandler().GetPadByID(WII_PAD_0);
+    if (pad->ButtonsDown() & WPAD_BUTTON_LEFT)
 	{
-        Engine::Get().GetBasicCommandHandler().ExecuteCommand( SwitchToIntroCommand::Name() );
+        Engine::Get().GetBasicCommandHandler().ExecuteCommand(SwitchToIntroCommand::Name());
 	}
-	else if ( pad->ButtonsDown() & WPAD_BUTTON_RIGHT )
+    else if (pad->ButtonsDown() & WPAD_BUTTON_RIGHT)
 	{
-        Engine::Get().GetBasicCommandHandler().ExecuteCommand( SwitchToInGameCommand::Name() );
+        Engine::Get().GetBasicCommandHandler().ExecuteCommand(SwitchToInGameCommand::Name());
     }
 #endif   
 
@@ -106,12 +101,24 @@ void MainMenuScene::CreateMainMenuButtonList()
 	int sizeBetweenBtns = startButtonTexture->GetHeight() + BUTTON_Y_DISTANCE;    
     delete startButtonTexture;
 
-	List* btnList = new List( xPos, yPos, sizeBetweenBtns );
+    List* btnList = new List(xPos, yPos, sizeBetweenBtns);
 
-    btnList->AddComponent( CreateDefaultMainMenuButton( MMS_BUTTON_SINGLEPLAYER, "Singleplayer", [] (BasicButton* clickedButton) { Engine::Get().GetBasicCommandHandler().ExecuteCommand(SwitchToInGameCommand::Name()); }));
-    btnList->AddComponent( CreateDefaultMainMenuButton( MMS_BUTTON_MULTIPLAYER, "Multiplayer", nullptr ));
-    btnList->AddComponent( CreateDefaultMainMenuButton( MMS_BUTTON_OPTION, "Option", nullptr ));
-    btnList->AddComponent( CreateDefaultMainMenuButton( MMS_BUTTON_EXIT, "Exit", [] (BasicButton* clickedButton) { Engine::Get().End(); }));
+    btnList->AddComponent(CreateDefaultMainMenuButton(MMS_BUTTON_SINGLEPLAYER, "Singleplayer",
+                                                      [] (BasicButton* clickedButton)
+                                                      {
+                                                        Engine::Get().GetBasicCommandHandler().ExecuteCommand(SwitchToInGameCommand::Name());
+                                                      }));
+    btnList->AddComponent(CreateDefaultMainMenuButton(MMS_BUTTON_MULTIPLAYER, "Multiplayer",
+                                                      [] (BasicButton* clickedButton)
+                                                      {
+                                                        Engine::Get().GetBasicCommandHandler().ExecuteCommand(SwitchToInGameCommand::Name());
+                                                      }));
+    btnList->AddComponent(CreateDefaultMainMenuButton(MMS_BUTTON_OPTION, "Option", nullptr ));
+    btnList->AddComponent(CreateDefaultMainMenuButton(MMS_BUTTON_EXIT, "Exit",
+                                                      [] (BasicButton* clickedButton)
+                                                      {
+                                                        Engine::Get().End();
+                                                      }));
     m_elements.push_back(btnList);
 }
 
@@ -126,8 +133,8 @@ BasicButton* MainMenuScene::CreateDefaultMainMenuButton( const char* buttonName,
     auto pHighlightButtonTexture = Sprite::Create(BasicButtonBigHighlight_png, BasicButtonBigHighlight_png_size, searchNamehighlight, COMPONENTS_SORTING_LAYER);
 
     std::string searchLabel = std::string(buttonName).append(LABEL_TAG);
-    auto pButtonLabel = Label::Create(buttontext, fontHandler.GetNativFontByID( DEFAULT_MINECRAFT_FONT_ID ), searchLabel, LABEL_SORTING_LAYER);
+    auto pButtonLabel = Label::Create(buttontext, fontHandler.GetNativFontByID(DEFAULT_MINECRAFT_FONT_ID), searchLabel, LABEL_SORTING_LAYER);
 
-	return new BasicButton( 0, 0, buttonName, pdefaultButtonTexture, pHighlightButtonTexture, pButtonLabel, clickCallback );
+    return new BasicButton(0, 0, buttonName, pdefaultButtonTexture, pHighlightButtonTexture, pButtonLabel, clickCallback);
 }
 

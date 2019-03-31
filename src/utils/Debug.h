@@ -21,31 +21,51 @@
 #define _DEBUG_H_
 
 #include <fstream>
+#include <assert.h>
+#include "Mutex.h"
+#include "../net/Socket.h"
 #include "../Engine.h"
 
 #ifdef DEBUG
-    #define LOG(format,...) Debug::GetInstance().Log(format, ##__VA_ARGS__)
+    #define ASSERT(expression)  if (!(expression)) \
+                                    ERROR("Assertion failed: %s, file %s, line %d", #expression, __FILE__, __LINE__); \
+                                assert(expression);
 #else
-    #define LOG(format, ...)
+    #define ASSERT(expression)
 #endif
 
+#ifdef DEBUG
+    #define LOG(format,...)     Debug::Log(ELogType::INFO, format, ##__VA_ARGS__)
+    #define WARNING(format,...) Debug::Log(ELogType::WARNING, format, ##__VA_ARGS__)
+    #define ERROR(format,...)   Debug::Log(ELogType::ERROR, format, ##__VA_ARGS__)    
+#else
+    #define LOG(format, ...)
+    #define WARNING(format,...)
+    #define ERROR(format,...)
+#endif
+
+enum class ELogType : unsigned char
+{
+    INFO    = 0,
+    WARNING = 1,
+    ERROR   = 2
+};
 
 class Debug {
 
 private:
-    std::ofstream m_file;
-public:	
     Debug() {}
+    static Mutex s_fileMutex;
+    static std::ofstream s_file;
+    static Socket s_socket;
+    static bool s_bLogAlwaysToServer;
 
-    void Init();
-    void Log(const char* format, ...);
-    void Release();
-
-    static Debug& GetInstance()
-    {
-        static Debug s_instance;
-        return s_instance;
-    }
+public:
+    static void Init();
+    static void InitServer(const std::string& host, uint16_t port, bool bLogAlwaysToServer);
+    static void Log(const ELogType& logType, const char* format, ...);
+    static void LogServer(const char* format, ...);
+    static void Release();   
 
     Debug(Debug const&)	  = delete;
     void operator=(Debug const&) = delete;

@@ -21,49 +21,48 @@
 #define JOB_H
 
 #include "Thread.h"
-#include "Threadpool.h"
 #include "SafeQueue.h"
-#include "Debug.h"
 
 template<class T>
-class Job
+class Job : public Thread
 {
 public:
+    virtual ~Job(){}
+
     void Add(const T& data)
     {
         m_queue.Push(data);
-        if (m_pThread->IsSuspended())
+        if (IsSuspended())
         {
-            m_pThread->Resume();
+            Resume();
         }
     }
-
-    void Start(void* (*entry)(void *))
+    uint32_t GetQueueCount()
     {
-        m_pThread = ThreadPool::GetThread();
-        if ( m_pThread )
+        return m_queue.GetCount();
+    }
+
+protected:
+    virtual void PreExecute() override
+    {        
+        while(true)
         {
-            m_pThread->SetData((void*)&m_queue);
-            m_pThread->Create(entry, nullptr, 0, 128);
-        }
-        else
-        {
-            // todo handle
-            LOG("Job: No free thread in pool!");
+            if (IsStopped())
+                break;
+
+            if (m_queue.IsEmpty())
+            {
+                Suspend();
+            }
+            else
+            {                
+                Execute();
+            }
         }
     }
 
-    void Stop()
-    {
-        if (m_pThread)
-        {
-            m_pThread->Release();
-        }
-    }
-
-private:
-    SafeQueue<T> m_queue;
-    Thread* m_pThread = nullptr;
+protected:
+    SafeQueue<T> m_queue;    
 };
 
 #endif // JOB_H

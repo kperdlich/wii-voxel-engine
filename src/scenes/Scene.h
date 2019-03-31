@@ -38,7 +38,7 @@ public:
         return m_bLoaded;
     }
 
-private:
+protected:
     bool m_bLoaded = false;
 
 protected:

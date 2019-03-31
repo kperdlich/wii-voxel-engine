@@ -1,0 +1,33 @@
+#ifndef PACKETDESTROYENTITY_H
+#define PACKETDESTROYENTITY_H
+
+
+#include "Packet.h"
+#include "PacketGlobals.h"
+
+class PacketDestroyEntity : public Packet
+{
+public:
+    PacketDestroyEntity() : Packet(PACKET_DESTROY_ENTITY) {}
+
+    void Read(const Socket &socket) override
+    {
+        m_EID = socket.Read<int32_t>();
+    }
+    void Action() override
+    {
+    }
+    Packet *CreateInstance() const override
+    {
+        return new PacketDestroyEntity();
+    }
+
+protected:
+    void SendContent(const Socket &socket) const override
+    {
+    }
+
+    int32_t m_EID = 0;
+};
+
+#endif // PACKETDESTROYENTITY_H

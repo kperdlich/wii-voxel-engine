@@ -26,17 +26,17 @@
 #include "../../renderer/BlockRenderer.h"
 #include "../../utils/Vector3.h"
 
-#define BLOCK_SIZE_HALF .25f
-#define BLOCK_SIZE BLOCK_SIZE_HALF * 2
+constexpr float BLOCK_SIZE_HALF = .5;
+constexpr float BLOCK_SIZE = BLOCK_SIZE_HALF * 2;
 
-enum class BlockType : unsigned char {
-
+enum class BlockType : unsigned char
+{
     AIR     = 0,
-    DIRT    = 1,
+    STONE   = 4,
     GRASS   = 2,
-    STONE   = 3,
-    WOOD    = 4,
-    LEAF    = 5
+    DIRT    = 3,
+    WOOD    = 17,
+    LEAF    = 18
 };
 
 class BlockManager {

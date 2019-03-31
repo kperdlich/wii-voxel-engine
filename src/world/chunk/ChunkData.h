@@ -21,29 +21,31 @@
 #define CHUNKCHANGEDATA_H
 
 #include "../blocks/BlockManager.h"
-#include "../../utils/Vector3.h"
+#include "../../utils/vecint.h"
 
 #define CHUNK_MAP_CASH_X 5
 #define CHUNK_MAP_CASH_Y 5
 
 #define CHUNK_SIZE_X 16
-#define CHUNK_SIZE_Y 128
+#define CHUNK_SIZE_Y 256
 #define CHUNK_SIZE_Z 16
-
-#define CHUNK_MIN_GROUND 20
 
 #define CHUNK_BLOCK_SIZE_X (BLOCK_SIZE * CHUNK_SIZE_X)
 #define CHUNK_BLOCK_SIZE_Y (BLOCK_SIZE * CHUNK_SIZE_Y)
 #define CHUNK_BLOCK_SIZE_Z (BLOCK_SIZE * CHUNK_SIZE_Z)
 
-#define STONE_LEVEL 20
-#define TREE_HIGHT 6
+#define CHUNK_GLOBAL_X(value) value * CHUNK_BLOCK_SIZE_X
+#define CHUNK_GLOBAL_Z(value) value * CHUNK_BLOCK_SIZE_Z
 
-struct Vec3i
+struct CompressedChunkData
 {
-    uint32_t X;
-    uint32_t Y;
-    uint32_t Z;
+    int32_t m_X;
+    int32_t m_Z;
+    bool m_bGroundUpCon;
+    uint16_t m_PrimaryBitMap;
+    uint16_t m_AddBitMap;
+    int32_t m_CompressedSize;
+    unsigned char* m_CompressedData;
 };
 
 struct BlockChangeData
@@ -51,12 +53,11 @@ struct BlockChangeData
     std::string Filepath;
     BlockType   Type;
     Vec3i       BlockPosition;
-    Vector3     ChunkPosition;
+    Vec2i       ChunkPosition;
 };
 
 struct ChunkLoadingData
 {
-    std::string     Filepath;
     class Chunk*    ChunkObj;
 };
 

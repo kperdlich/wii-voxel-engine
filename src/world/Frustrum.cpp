@@ -19,6 +19,8 @@
 
 #include "Frustrum.h"
 #include <math.h>
+#include "../utils/matrix4x4.h"
+#include "../utils/Debug.h"
 #include "../core/grrlib.h"
 
 extern Mtx	_GRR_view;
@@ -77,25 +79,46 @@ bool Frustrum::PointInFrustum(float x, float y, float z)
 
 void Frustrum::CalculateFrustum()
 {
-	proj[0] = _projectionMtx[0][0];
-	proj[1] = _projectionMtx[0][1];
-	proj[2] = _projectionMtx[0][2];
-	proj[3] = _projectionMtx[0][3];
-	proj[4] = _projectionMtx[1][0];
-	proj[5] = _projectionMtx[1][1];
-	proj[6] = _projectionMtx[1][2];
-	proj[7] = _projectionMtx[1][3];
-	proj[8] = _projectionMtx[2][0];
-	proj[9] = _projectionMtx[2][1];
-	proj[10] = _projectionMtx[2][2];
-	proj[11] = _projectionMtx[2][3];
-	proj[12] = _projectionMtx[3][0];
-	proj[13] = _projectionMtx[3][1];
-	proj[14] = _projectionMtx[3][2];
-	proj[15] = _projectionMtx[3][3];
+    proj[0] = _projectionMtx[0][0];
+    proj[1] = _projectionMtx[0][1];
+    proj[2] = _projectionMtx[0][2];
+    proj[3] = _projectionMtx[0][3];
+    proj[4] = _projectionMtx[1][0];
+    proj[5] = _projectionMtx[1][1];
+    proj[6] = _projectionMtx[1][2];
+    proj[7] = _projectionMtx[1][3];
+    proj[8] = _projectionMtx[2][0];
+    proj[9] = _projectionMtx[2][1];
+    proj[10] = _projectionMtx[2][2];
+    proj[11] = _projectionMtx[2][3];
+    proj[12] = _projectionMtx[3][0];
+    proj[13] = _projectionMtx[3][1];
+    proj[14] = _projectionMtx[3][2];
+    proj[15] = _projectionMtx[3][3];
 
-	Mtx44 mv;
-	guMtxConcat(_ObjTransformationMtx, _GRR_view, mv );
+    /**
+     * View Matrix
+     *  11: 1 12: 0 13: 0 14: 0
+        21: 0 22: 1 23: 0 24: 0
+        31: 0 32: 0 33: 1 34: 0.1
+        41: 0 42: 0 43: 0 44: 0
+     */
+
+    /**
+        _ObjTransformationMtx
+        11: -0.707107 	12: 0 			13: 0.707107 	14: -315.062
+        21: 0.122788 	22: 0.984808 	23: 0.122788 	24: -79.6138
+        31: -0.696364 	32: 0.173648 	33: -0.696364 	34: 40.7966
+        41: 0 			42: 0 			43: 0 			44: 0
+     */
+
+    Mtx mv;
+    guMtxConcat(_ObjTransformationMtx, _GRR_view, mv);
+
+    Matrix4x4 matrix44(_ObjTransformationMtx);
+    LOG("%s", matrix44.ToString().c_str());
+
+    return;
 
 	modl[0] = mv[0][0];
 	modl[1] = mv[0][1];

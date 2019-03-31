@@ -22,7 +22,8 @@
 
 #include <vector>
 #include "chunkdata.h"
-#include "../../utils/Job.h"
+#include "jobs/SerializationJob.h"
+#include "jobs/ChunkLoaderMultiplayer.h"
 #include "../../utils/Vector3.h"
 
 class ChunkManager
@@ -31,31 +32,36 @@ public:
     ~ChunkManager();
     void Init(const Vector3 &position, class GameWorld* world);
     const std::vector<Chunk *> GetLoadedChunks() const;
-    void UpdateChunksBy(const Vector3& position);
-    class Chunk* GetChunkFromCash( const Vector3& chunkPosition);    
-    class Chunk* GetCashedChunkByWorldPosition(const Vector3& worldPosition);    
+    void UpdateChunksBy(const Vector3 &position);
+    class Chunk* GetChunkFromCash(const Vec2i &position);
+    class Chunk* GetCashedChunkByWorldPosition(const Vector3 &worldPosition);
 
-    void Serialize(const BlockChangeData& data);    
+
+    void Serialize(const CompressedChunkData& data);
 
 private:
 
-    std::vector<Chunk*>::iterator GetCashedChunkIterator(const Vector3& chunkPosition);
-    Vector3 GetChunkPositionByWorldPosition(const Vector3& worldPosition);
+    std::vector<Chunk*>::iterator GetCashedChunkIterator(const Vec2i &chunkPosition);
+
+    Vec2i GetChunkPositionByWorldPosition(const Vector3 &worldPosition) const;
     void SetChunkNeighbors();   
     void DestroyChunkCash();
-    void LoadChunks(const Vector3& chunkPosition);
-    std::vector<Vector3> GetChunkMapAround(const Vector3& chunkPosition) const;
-    bool IsCloseToChunk(const Vector3 & chunkPosition, const Vector3 &position) const;
+    void LoadChunks(const Vec2i& chunkPosition);
+    std::vector<Vec2i> GetChunkMapAround(const Vec2i &chunkPosition) const;
+    bool IsCloseToChunk(const Vec2i &chunkPosition, const Vec2i &position) const;
 
 private:
     std::vector<class Chunk*> m_chunkCash;
     std::vector<class Chunk*> m_chunkLoadingStage;
 
-    Vector3 m_lastUpdateChunkPos;
+    Vec2i m_lastUpdateChunkPos;
     class GameWorld* m_world;
 
-    Job<BlockChangeData> m_serializationJob;
-    Job<ChunkLoadingData> m_loaderJob;
+
+    SerializationJob m_serializationJob;
+    ChunkLoaderMultiplayer m_loaderJob;
+
+    friend class GameWorld;
 };
 
 #endif // CHUNKMANAGER_H

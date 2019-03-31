@@ -27,8 +27,6 @@
 
 class MainMenuScene: public Basic2DScene {
 public:
-    MainMenuScene();
-    virtual ~MainMenuScene();
 	void Load() override;
 	void Draw() override;
     void Update(float deltaSeconds) override;

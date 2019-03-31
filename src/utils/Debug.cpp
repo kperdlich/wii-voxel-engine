@@ -18,13 +18,26 @@
 ***/
 
 #include "Debug.h"
+#include "Mutex.h"
+#include "lockguard.h"
+
+std::ofstream Debug::s_file;
+Mutex Debug::s_fileMutex;
+Socket Debug::s_socket;
+bool Debug::s_bLogAlwaysToServer = false;
 
 void Debug::Init()
 {
-    m_file.open(LOG_FILE);
+    s_file.open(LOG_FILE);
 }
 
-void Debug::Log(const char* format, ...)
+void Debug::InitServer(const std::string &host, uint16_t port, bool bLogAlwaysToServer = false)
+{
+    s_socket.Connect(host, port);
+    s_bLogAlwaysToServer = bLogAlwaysToServer;
+}
+
+void Debug::Log(const ELogType &logType, const char* format, ...)
 {
     va_list args;
     va_start(args, format);
@@ -34,10 +47,48 @@ void Debug::Log(const char* format, ...)
 
     va_end(args);
 
-    m_file << buffer << std::endl;
+    std::string msg;
+    switch (logType)
+    {
+    case ELogType::INFO:
+        msg += "[INFO] ";
+        break;
+    case ELogType::WARNING:
+        msg += "[WARNING] ";
+        break;
+    case ELogType::ERROR:
+        msg += "[ERROR] ";
+        break;
+    }
+    msg += buffer;
+
+    if (s_bLogAlwaysToServer)
+    {
+        s_socket.SendString(msg);
+        char terminator = '\n';
+        s_socket.Send(&terminator, 1);
+    }
+
+    lock_guard guard(s_fileMutex);
+    s_file << msg << std::endl;    
+}
+
+void Debug::LogServer(const char* format, ...)
+{
+    va_list args;
+    va_start(args, format);
+
+    char buffer[200];
+    vsprintf(buffer, format, args);
+
+    va_end(args);
+
+    s_socket.SendString(buffer);
 }
 
 void Debug::Release()
 {
-    m_file.close();
+    s_file.close();
+    if (s_socket.IsConnected())
+        s_socket.Disconnect();
 }

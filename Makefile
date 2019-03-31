@@ -22,9 +22,12 @@ SOURCES		:=	src \
 				src/world/hud \
 				src/world/blocks \
 				src/world/chunk \
+				src/world/chunk/jobs \
 				src/commands \
 				src/commands/client \
 				src/components \
+				src/net \
+				src/net/packet \
 				src/renderer \
 				src/scenes \
 				src/entity \
@@ -34,6 +37,7 @@ SOURCES		:=	src \
 				src/input \
 				src/physics \
 				src/physics/collision \
+				src/event \
  				src/gfx GRRLIB_addon
 DATA		:=	data \
 				fonts \
@@ -52,7 +56,7 @@ CORE := src/core
 #---------------------------------------------------------------------------------
 
 CFLAGS	= -g -O2 -maltivec -mcpu=750 -mrvl -Wall $(MACHDEP) $(INCLUDE)
-CXXFLAGS =-std=c++11 $(CFLAGS)
+CXXFLAGS =-std=c++14 $(CFLAGS)
 
 LDFLAGS	=	-g $(MACHDEP) -mrvl -Wl,-Map,$(notdir $@).map
 

@@ -18,10 +18,17 @@
 ***/
 
 
+#include <string>
+#include <exception>
 #include "Engine.h"
 #include "utils/GameHelper.h"
 #include "utils/Filesystem.h"
+#include "net/NetworkManager.h"
 #include "utils/Debug.h"
+
+#include "event/eventmanager.h"
+#include "net/packet/PacketHandshake.h"
+#include "net/packet/PacketLogin.h"
 
 Engine::Engine()
 {
@@ -39,52 +46,65 @@ void Engine::Start()
 {
     m_bRunning = true;
 
-	Init();
-
-    m_pBasicCommandHandler->ExecuteCommand( SwitchToIntroCommand::Name() );
-
-    while( m_bRunning )
+    try
     {
-        uint32_t startFrameTime = ticks_to_millisecs(gettime());
+        Init();
 
-        GRRLIB_SetBackgroundColour(0x00, 0x00, 0x00, 0xFF);
+        m_pBasicCommandHandler->ExecuteCommand( SwitchToIntroCommand::Name() );
 
-        m_pInputHandler->Update();        
-        m_pSceneHandler->Update(m_millisecondsLastFrame / 1000.0f);
-        m_pSceneHandler->DrawScene();
-
-        WiiPad* pad = m_pInputHandler->GetPadByID( WII_PAD_0 );
-        u32 padButtonDown = pad->ButtonsDown();
-        if ( padButtonDown & WPAD_BUTTON_HOME)
+        while(m_bRunning)
         {
-            End();
+            uint64_t startFrameTime = ticks_to_millisecs(gettime());
+
+            GRRLIB_SetBackgroundColour(0x00, 0x00, 0x00, 0xFF);
+
+            m_pInputHandler->Update();
+            m_pSceneHandler->Update(m_millisecondsLastFrame / 1000.0f);
+            NetworkManager::Get().Update();
+            EventManager::PullEvents();
+            m_pSceneHandler->DrawScene();
+
+
+            WiiPad* pad = m_pInputHandler->GetPadByID( WII_PAD_0 );
+            u32 padButtonDown = pad->ButtonsDown();
+            if ( padButtonDown & WPAD_BUTTON_HOME)
+            {
+                End();
+            }
+
+            PrintFps( 500, 25, m_pFontHandler->GetNativFontByID(DEFAULT_MINECRAFT_FONT_ID), DEFAULT_FONT_SIZE, GRRLIB_YELLOW);
+
+    #ifdef DEBUG
+            PrintGameVersion(0, 25, m_pFontHandler->GetNativFontByID(DEFAULT_MINECRAFT_FONT_ID), DEFAULT_FONT_SIZE, GRRLIB_WHITE);
+    #endif
+
+            GRRLIB_Render();
+            CalculateFrameRate();
+
+            m_millisecondsLastFrame = ticks_to_millisecs(gettime()) - startFrameTime;
+            //LOG("Frame Time: %f s", m_millisecondsLastFrame / 1000.0f);
         }
 
-        PrintFps( 500, 25, m_pFontHandler->GetNativFontByID( DEFAULT_FONT_ID ), DEFAULT_FONT_SIZE, GRRLIB_YELLOW );
+        NetworkManager::Get().Destroy();
 
-#ifdef DEBUG
-        PrintGameVersion(0, 25, m_pFontHandler->GetNativFontByID( DEFAULT_FONT_ID ), DEFAULT_FONT_SIZE, GRRLIB_WHITE );
-#endif
+        delete m_pBasicCommandHandler;
+        delete m_pSceneHandler;
+        delete m_pInputHandler;
+        delete m_pFontHandler;
 
-        GRRLIB_Render();
-        CalculateFrameRate();
+        GRRLIB_Exit();
+        LOG("Graphics System uninitialized");
+    }
+    catch(const std::exception& ex)
+    {
+        ERROR("Engine Exception: %s", ex.what());
+    }
+    catch(...)
+    {
+        ERROR("Unkown Engine crash!");
+    }
 
-        m_millisecondsLastFrame = ticks_to_millisecs(gettime()) - startFrameTime;
-	}
-
-    delete m_pBasicCommandHandler;
-    delete m_pSceneHandler;
-    delete m_pInputHandler;
-    delete m_pFontHandler;
-
-    ThreadPool::Destroy();
-
-	GRRLIB_Exit();
-    LOG("Graphics System uninitialized");
-
-#ifdef DEBUG
-    Debug::GetInstance().Release();
-#endif
+    Debug::Release();
 }
 
 void Engine::End()
@@ -98,10 +118,16 @@ void Engine::Init()
     SYS_SetPowerCallback([]() { Engine::Get().End(); });
 
     FileSystem::Init();
-    Debug::GetInstance().Init();
-    ThreadPool::Init();
+    Debug::Init();    
+    m_iniConfig.Parse(CONFIG_FILE);
 
     LOG("****** %s %s ******", GAME_NAME, BUILD_VERSION);
+    NetworkManager::Get().Init();
+#ifdef DEBUG    
+    const std::string& debugHost = m_iniConfig.GetValue<std::string>("DebugServer", "Host");
+    uint16_t debugPort = m_iniConfig.GetValue<uint16_t>("DebugServer", "Port");
+    Debug::InitServer(debugHost, debugPort, true);
+#endif
 
 	GRRLIB_Init();
     GRRLIB_Settings.antialias = true;
@@ -136,5 +162,5 @@ BasicCommandHandler& Engine::GetBasicCommandHandler()
 
 SpriteStageManager& Engine::GetSpriteStageManager()
 {
-    return GetSceneHandler().GetCurrentScene().GetSpriteStageManager();
+    return GetSceneHandler().GetCurrentScene()->GetSpriteStageManager();
 }

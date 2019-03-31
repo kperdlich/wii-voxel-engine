@@ -36,10 +36,10 @@ public:
     uint32_t GetId() const;
     void SetId( uint32_t id );
 
-	void SetPosition( Vector3 position );
-	const Vector3& GetPosition() const;
+    virtual void SetPosition( const Vector3& position );
+	const Vector3& GetPosition() const;   
 
-	void SetRotation( Vector3 position );
+    void SetRotation( const Vector3& position );
 	const Vector3& GetRotation() const;
 
 	void SetVisible(bool value);

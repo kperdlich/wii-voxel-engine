@@ -20,9 +20,10 @@
 #ifndef _ENGINE_H_
 #define _ENGINE_H_
 
+#include "globals.h"
 #include "utils/GameHelper.h"
 #include "utils/ColorHelper.h"
-#include "utils/Threadpool.h"
+#include "utils/iniconfig.h"
 #include "commands/client/SwitchToIntroCommand.h"
 #include "commands/client/SwitchToMainMenuCommand.h"
 
@@ -30,20 +31,6 @@
 #include "scenes/SceneHandler.h"
 #include "font/FontHandler.h"
 #include "commands/BasicCommandHandler.h"
-
-#define GAME_NAME                   "WoxelCraft"
-#define BUILD_VERSION               "0.0.7"
-
-#define DEFAULT_FONT_ID             0
-#define DEFAULT_MINECRAFT_FONT_ID   1
-
-#define FILE_PATH   "/apps/WoxelCraft"
-#define WORLD_PATH  FILE_PATH "/world"
-
-#define LOG_FILE    FILE_PATH "/Log.txt"
-#define SEED_FILE   WORLD_PATH "/Seed.dat"
-
-#define DEBUG
 
 class Engine {
 
@@ -53,8 +40,9 @@ private:
     class InputHandler* m_pInputHandler;
     class FontHandler*  m_pFontHandler;
     class BasicCommandHandler* m_pBasicCommandHandler;
+    IniConfig m_iniConfig;
     bool m_bRunning = false;
-    uint32_t m_millisecondsLastFrame = 0;
+    uint64_t m_millisecondsLastFrame = 0;
 
 public:
     ~Engine();
@@ -66,7 +54,8 @@ public:
     class InputHandler& GetInputHandler();
     class FontHandler& GetFontHandler();
     class BasicCommandHandler& GetBasicCommandHandler();
-    class SpriteStageManager& GetSpriteStageManager();
+    class SpriteStageManager& GetSpriteStageManager();        
+    inline IniConfig& GetIniConfig() { return m_iniConfig; }
 
     static Engine& Get()
 	{
@@ -76,6 +65,8 @@ public:
 
     Engine(Engine const&)	  = delete;
     void operator=(Engine const&) = delete;
+private:
+    void ParseIniFile();
 
 };
 

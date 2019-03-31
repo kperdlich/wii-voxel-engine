@@ -25,6 +25,7 @@
 #include "ChunkData.h"
 #include "../GameWorld.h"
 #include "../../renderer/BlockRenderHelper.h"
+#include "../../renderer/displaylist.h"
 #include "../../utils/Vector3.h"
 #include "../../utils/Mutex.h"
 
@@ -38,7 +39,9 @@ public:
     void Build();
     void Clear();
 	void RebuildDisplayList();
-    void Render();    
+    void Render();
+
+    void SetToAir();
 
     bool IsDirty() const;
 	void SetDirty(bool dirty);
@@ -49,7 +52,7 @@ public:
 
 	void DeleteDisplayList();
 
-	const Vector3& GetCenterPosition() const;
+    const Vec2i& GetPosition() const;
 
     void SetChunkNeighbors();
     bool NeighborsLoaded();
@@ -58,25 +61,21 @@ public:
 	void AddBlockByWorldPosition(const Vector3& blockPosition, BlockType type);
 	Vector3 GetBlockPositionByWorldPosition(const Vector3& worldPosition) const;
 	BlockType GetBlockTypeByWorldPosition(const Vector3& worldPosition) const;
-    Vector3 GetPhysicalPosition(const Vector3& position) const;
 
     BlockType*** GetBlocks() const
     {
         return m_blocks;
     }
 
-    std::string GetFilePath() const;
+    static std::string GetFilePath(const Vec2i &position);
 
-    void SetCenterPosition(const Vector3 &centerPosition);
+    void SetPosition(const Vec2i &position);
 
     void SetLoaded(bool value);
 
     bool IsLoaded();
 
-    inline bool HasDisplayList() const
-    {
-        return m_pDispList;
-    }
+    bool HasDisplayList() const;
 
 private:
     void CreateDisplayList(size_t sizeOfDisplayList);
@@ -96,15 +95,14 @@ private:
     Mutex m_mutex;
 
     bool m_bLoadingDone         = false;
-    bool m_bIsDirty             = false;
-    bool m_bNeighbourUpdate     = false;
-    uint32_t m_displayListSize  = 0;
-    void* m_pDispList           = nullptr;
+    //bool m_bIsDirty             = false;
+    bool m_bNeighbourUpdate     = false;    
+    DisplayList m_displayList;
 
     uint32_t m_amountOfBlocks   = 0;
     uint32_t m_amountOfFaces    = 0;
 
-    Vector3 m_centerPosition;
+    Vec2i m_Position;
 
     BlockType*** m_blocks;
     std::map<BlockType, std::vector<BlockRenderVO> > m_mBlockRenderList;

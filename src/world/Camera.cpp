@@ -35,7 +35,7 @@ double Camera::GetWorldPositionX() const
 
 double Camera::GetWorldPositionY() const
 {
-	return m_attachedToEntity->GetPosition().GetY();
+    return m_attachedToEntity->GetPosition().GetY() + m_cameraOffset;
 }
 
 double Camera::GetWorldPositionZ() const

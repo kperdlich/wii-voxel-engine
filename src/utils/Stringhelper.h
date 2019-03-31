@@ -1,6 +1,6 @@
 /***
  *
- * Copyright (C) 2017 DaeFennek
+ * Copyright (C) 2018 DaeFennek
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,31 +17,18 @@
  *
 ***/
 
-#ifndef THREADPOOL_H
-#define THREADPOOL_H
+#ifndef STRINGHELPER_H
+#define STRINGHELPER_H
 
-#include "Mutex.h"
-#include <ogcsys.h>
-#include <gccore.h>
-#include "Thread.h"
+#include <string>
+#include <sstream>
 
-#define THREAD_POOL_SIZE 5
-
-class ThreadPool
+template<typename T>
+std::string ToString(T value)
 {
+    std::stringstream ss;
+    ss << value;
+    return ss.str();
+}
 
-private:
-    static lwpq_t s_thread_queue;
-    static Thread s_threads[THREAD_POOL_SIZE];
-
-public:
-
-    static void             Init();
-    static Thread*          GetThread();
-    static void             Destroy();
-    static const lwpq_t&    GetThreadQueue();
-
-
-};
-
-#endif // THREADPOOL_H
+#endif // STRINGHELPER_H

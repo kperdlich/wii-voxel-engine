@@ -73,7 +73,7 @@ void SceneHandler::LoadScene( int32_t index )
 
 void SceneHandler::DrawScene()
 {
-	GetCurrentScene().Draw();
+    GetCurrentScene()->Draw();
 }
 
 void SceneHandler::Update(float deltaSeconds)
@@ -87,20 +87,20 @@ void SceneHandler::Update(float deltaSeconds)
             if ( m_currentSceneIndex > INVALID_SCENE )
 			{
                 LOG("Try unload Scene: %d", m_currentSceneIndex);
-				GetCurrentScene().Unload();
+                GetCurrentScene()->Unload();
                 LOG("Unloaded Scene: %d", m_currentSceneIndex);
 			}
             m_currentSceneIndex = m_nextSceneIndex;
             LOG("Try loading Scene: %d", m_currentSceneIndex);
-			GetCurrentScene().Load();
+            GetCurrentScene()->Load();
             LOG("Loaded Scene: %d", m_currentSceneIndex);
 		}
 	}
 
-    GetCurrentScene().Update(deltaSeconds);
+    GetCurrentScene()->Update(deltaSeconds);
 }
 
-Scene& SceneHandler::GetCurrentScene()
+Scene* SceneHandler::GetCurrentScene()
 {
-    return *m_scenes[m_currentSceneIndex];
+    return m_scenes[m_currentSceneIndex];
 }

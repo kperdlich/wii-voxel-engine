@@ -21,9 +21,11 @@
 #define _INGAMESCENE_H_
 
 #include "Basic3DScene.h"
+#include "../event/eventlistener.h"
+#include "../components/worldloader.h"
 
 
-class InGameScene: public Basic3DScene {
+class InGameScene: public Basic3DScene, public IEventListener {
 public:
     InGameScene();
     virtual ~InGameScene();
@@ -31,8 +33,11 @@ public:
 	void Load() override;
     void Unload() override;
 	void Draw() override;
+    virtual void OnEvent(Event event) override;    
+
 protected:
 	void InitEntities();
+    WorldLoader* m_pWorldLoader;
 
 };
 
