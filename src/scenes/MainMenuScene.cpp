@@ -108,7 +108,11 @@ void MainMenuScene::CreateMainMenuButtonList()
                                                       {
                                                         Engine::Get().GetBasicCommandHandler().ExecuteCommand(SwitchToInGameCommand::Name());
                                                       }));
-    btnList->AddComponent(CreateDefaultMainMenuButton(MMS_BUTTON_MULTIPLAYER, "Multiplayer", nullptr ));
+    btnList->AddComponent(CreateDefaultMainMenuButton(MMS_BUTTON_MULTIPLAYER, "Multiplayer",
+                                                      [] (BasicButton* clickedButton)
+                                                      {
+                                                        Engine::Get().GetBasicCommandHandler().ExecuteCommand(SwitchToInGameCommand::Name());
+                                                      }));
     btnList->AddComponent(CreateDefaultMainMenuButton(MMS_BUTTON_OPTION, "Option", nullptr ));
     btnList->AddComponent(CreateDefaultMainMenuButton(MMS_BUTTON_EXIT, "Exit",
                                                       [] (BasicButton* clickedButton)

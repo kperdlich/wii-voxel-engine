@@ -20,7 +20,7 @@
 #ifndef GLOBALS_H
 #define GLOBALS_H
 
-#define DEBUG
+//#define DEBUG
 
 #define GAME_NAME                   "WoxelCraft"
 #define BUILD_VERSION               "0.0.8"
