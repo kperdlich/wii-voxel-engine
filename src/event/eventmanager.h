@@ -1,5 +1,4 @@
-#ifndef EVENTMANAGER_H
-#define EVENTMANAGER_H
+#pragma once
 
 #include <unordered_map>
 #include <vector>
@@ -19,5 +18,3 @@ private:
     static std::unordered_map<uint32_t, std::vector<IEventListener*>> s_eventListeners;
     static SafeQueue<Event> s_eventQueue;
 };
-
-#endif // EVENTMANAGER_H

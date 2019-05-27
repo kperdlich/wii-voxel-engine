@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef _BLOCK_H_
-#define _BLOCK_H_
+#pragma once
 
 #include <vector>
 #include <map>
@@ -55,5 +54,3 @@ protected:
     std::map<const Texture*, std::vector<EBlockFaces>> m_textureMap;
 
 };
-
-#endif /* _BLOCK_H_ */

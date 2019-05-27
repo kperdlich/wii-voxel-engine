@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef THREAD_H
-#define THREAD_H
+#pragma once
 
 #include <ogcsys.h>
 #include <gccore.h>
@@ -49,6 +48,3 @@ private:
     bool m_bStop = false;    
     Mutex m_mutex;
 };
-
-
-#endif // THREAD_H

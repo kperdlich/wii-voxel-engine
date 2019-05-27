@@ -1,5 +1,4 @@
-#ifndef PACKETSETSLOT_H
-#define PACKETSETSLOT_H
+#pragma once
 
 #include <vector>
 #include "Packet.h"
@@ -34,5 +33,3 @@ protected:
     int16_t m_Slot = 0;
     SlotData m_SlotData;
 };
-
-#endif // PACKETSETSLOT_H

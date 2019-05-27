@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef _SCENEHANDLER_H_
-#define _SCENEHANDLER_H_
+#pragma once
 
 #include <vector>
 #include "Scene.h"
@@ -47,6 +46,3 @@ public:
     Scene *GetCurrentScene();
 
 };
-
-
-#endif /* _SCENEHANDLER_H_ */

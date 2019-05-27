@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef _WIIPAD_H_
-#define _WIIPAD_H_
+#pragma once
 
 #include <wiiuse/wpad.h>
 
@@ -43,5 +42,3 @@ public:
 	u32 ButtonsUp() const;
 	const WPADData* GetData() const;
 };
-
-#endif /* _WIIPAD_H_ */

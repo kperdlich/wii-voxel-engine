@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef CHUNKMANAGER_H
-#define CHUNKMANAGER_H
+#pragma once
 
 #include <vector>
 #include "chunkdata.h"
@@ -63,5 +62,3 @@ private:
 
     friend class GameWorld;
 };
-
-#endif // CHUNKMANAGER_H

@@ -1,5 +1,4 @@
-#ifndef PACKETPLAYERPOSITIONANDLOOK_H
-#define PACKETPLAYERPOSITIONANDLOOK_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -64,5 +63,3 @@ protected:
     bool m_bOnGround = false;
 
 };
-
-#endif // PACKETPLAYERPOSITIONANDLOOK_H

@@ -1,5 +1,4 @@
-#ifndef PACKETPLAYERPOSITION_H
-#define PACKETPLAYERPOSITION_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -41,5 +40,3 @@ protected:
    double m_X, m_Y, m_Z, m_Stance;
    bool m_bOnGround = false;
 };
-
-#endif // PACKETPLAYERPOSITION_H

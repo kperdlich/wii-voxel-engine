@@ -1,5 +1,4 @@
-#ifndef PACKETMULTIBLOCKCHANGE_H
-#define PACKETMULTIBLOCKCHANGE_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -45,5 +44,3 @@ protected:
     int32_t m_DataSize = 0;
     void* m_Data = nullptr;
 };
-
-#endif // PACKETMULTIBLOCKCHANGE_H

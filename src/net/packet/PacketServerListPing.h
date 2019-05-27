@@ -1,5 +1,4 @@
-#ifndef PACKETSERVERLISTPING_H
-#define PACKETSERVERLISTPING_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -28,4 +27,3 @@ protected:
     }
 };
 
-#endif // PACKETSERVERLISTPING_H

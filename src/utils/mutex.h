@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef MUTEX_H
-#define MUTEX_H
+#pragma once
 
 #include <gccore.h>
 
@@ -40,5 +39,3 @@ public:
 private:
     mutex_t m_mutex;
 };
-
-#endif // MUTEX_H

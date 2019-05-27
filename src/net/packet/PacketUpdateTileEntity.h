@@ -1,5 +1,4 @@
-#ifndef PACKETUPDATETILEENTITY_H
-#define PACKETUPDATETILEENTITY_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -37,5 +36,3 @@ protected:
     char m_Action = 0;
     int32_t m_Custom1 = 0, m_Custom2 = 0, m_Custom3 = 0;
 };
-
-#endif // PACKETUPDATETILEENTITY_H

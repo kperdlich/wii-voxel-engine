@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef _VECTOR3F_H_
-#define _VECTOR3F_H_
+#pragma once
 
 class Vector3 {
 public:
@@ -61,6 +60,3 @@ private:
 	double m_x, m_y, m_z;
 
 };
-
-
-#endif /* _VECTOR3F_H_ */

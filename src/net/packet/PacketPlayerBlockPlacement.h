@@ -1,5 +1,4 @@
-#ifndef PACKETPLAYERBLOCKPLACEMENT_H
-#define PACKETPLAYERBLOCKPLACEMENT_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -30,5 +29,3 @@ protected:
 
     }
 };
-
-#endif // PACKETPLAYERBLOCKPLACEMENT_H

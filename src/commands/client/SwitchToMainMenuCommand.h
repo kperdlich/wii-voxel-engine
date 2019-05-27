@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef _SWITCHTOMAINMENUCOMMAND_H_
-#define _SWITCHTOMAINMENUCOMMAND_H_
+#pragma once
 
 #include "../BasicCommand.h"
 #include "../../Engine.h"
@@ -30,5 +29,3 @@ public:
 	void ExecuteCommand() override;
     static const char* Name() { return "SwitchToMainMenuCommand"; }
 };
-
-#endif /* _SWITCHTOMAINMENUCOMMAND_H_ */

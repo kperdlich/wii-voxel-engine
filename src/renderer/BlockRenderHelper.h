@@ -17,8 +17,7 @@
  *
  ***/
 
-#ifndef _BLOCKRENDERHELPER_H_
-#define _BLOCKRENDERHELPER_H_
+#pragma once
 
 #include <stdint.h>
 #include "../utils/MathHelper.h"
@@ -36,5 +35,3 @@ struct BlockRenderVO
     uint32_t Faces = 0;
     Vector3 BlockPosition;
 };
-
-#endif /* _BLOCKRENDERHELPER_H_ */

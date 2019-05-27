@@ -1,6 +1,4 @@
-#ifndef PACKETDESTROYENTITY_H
-#define PACKETDESTROYENTITY_H
-
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -30,4 +28,3 @@ protected:
     int32_t m_EID = 0;
 };
 
-#endif // PACKETDESTROYENTITY_H

@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef PACKETKEEPALIVE_H
-#define PACKETKEEPALIVE_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -53,5 +52,3 @@ protected:
 private:
     int32_t m_KeepAliveID = 0;
 };
-
-#endif // PACKETKEEPALIVE_H

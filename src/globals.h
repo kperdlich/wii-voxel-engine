@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef GLOBALS_H
-#define GLOBALS_H
+#pragma once
 
 //#define DEBUG
 
@@ -36,5 +35,3 @@
 #define LOG_FILE    FILE_PATH "/Log.txt"
 #define SEED_FILE   WORLD_PATH "/Seed.dat"
 #define CONFIG_FILE FILE_PATH "/Game.ini"
-
-#endif // GLOBALS_H

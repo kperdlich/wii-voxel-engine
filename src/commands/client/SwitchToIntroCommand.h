@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef _SWITCHTOINTROCOMMAND_H_
-#define _SWITCHTOINTROCOMMAND_H_
+#pragma once
 
 #include "../BasicCommand.h"
 #include "../../Engine.h"
@@ -30,5 +29,3 @@ public:
 	void ExecuteCommand() override;
 	static const char* Name() { return "SwitchToIntroCommand"; };
 };
-
-#endif /* _SWITCHTOINTROCOMMAND_H_ */

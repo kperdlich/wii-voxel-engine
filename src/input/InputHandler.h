@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef _INPUTHANDLER_H_
-#define _INPUTHANDLER_H_
+#pragma once
 
 #include <vector>
 #include "../input/WiiPad.h"
@@ -42,5 +41,3 @@ public:
     WiiPad* GetPadByID( uint32_t padID );
 };
 
-
-#endif /* _INPUTHANDLER_H_ */

@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef _DEBUG_H_
-#define _DEBUG_H_
+#pragma once
 
 #include <fstream>
 #include <assert.h>
@@ -70,5 +69,3 @@ public:
     Debug(Debug const&)	  = delete;
     void operator=(Debug const&) = delete;
 };
-
-#endif /* _DEBUG_H_ */

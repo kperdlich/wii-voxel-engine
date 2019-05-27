@@ -1,5 +1,4 @@
-#ifndef PACKETCREATIVEINVENTORYACTION_H
-#define PACKETCREATIVEINVENTORYACTION_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -31,5 +30,4 @@ protected:
     SlotData m_SlotData;
 };
 
-#endif // PACKETCREATIVEINVENTORYACTION_H
 

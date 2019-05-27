@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef PACKETHANDSHAKE_H
-#define PACKETHANDSHAKE_H
+#pragma once
 
 #include <string>
 #include "Packet.h"
@@ -69,5 +68,3 @@ protected:
 private:
     std::string m_String;
 };
-
-#endif // PACKETHANDSHAKE_H

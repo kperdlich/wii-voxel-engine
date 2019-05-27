@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef _UIELEMENT_H_
-#define _UIELEMENT_H_
+#pragma once
 
 #include <stdint.h>
 
@@ -50,7 +49,3 @@ public:
     virtual uint32_t GetY() const;
     virtual void SetY(uint32_t y);
 };
-
-
-
-#endif /* _UIELEMENT_H_ */

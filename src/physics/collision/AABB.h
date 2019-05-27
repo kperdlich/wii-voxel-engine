@@ -19,8 +19,7 @@
 
 #include "../../utils/Vector3.h"
 
-#ifndef _CAABB_H_
-#define _CAABB_H_
+#pragma once
 
 class AABB {
 public:
@@ -36,5 +35,3 @@ private:
 	Vector3 m_vecMin, m_vecMax;
 
 };
-
-#endif /* _CAABB_H_ */

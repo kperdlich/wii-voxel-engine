@@ -17,13 +17,8 @@
  *
 ***/
 
-#ifndef _INTROSCENE_H_
-#define _INTROSCENE_H_
-
-
+#pragma once
 #include "Basic2DScene.h"
-
-class Engine;
 
 class IntroScene : public Basic2DScene
 {
@@ -37,6 +32,3 @@ public:
 private:
 	u32 m_BackgroundAlpha;
 };
-
-
-#endif /* _INTROSCENE_H_ */

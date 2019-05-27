@@ -17,15 +17,10 @@
  *
 ***/
 
-#ifndef _IHUDCOMPONENT_H_
-#define _IHUDCOMPONENT_H_
+#pragma once
 
 class IHudComponent {
 public:
 
 	virtual void Update() = 0;
-
-
 };
-
-#endif /* _IHUDCOMPONENT_H_ */

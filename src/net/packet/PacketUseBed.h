@@ -1,6 +1,4 @@
-#ifndef PACKETUSEBED_H
-#define PACKETUSEBED_H
-
+#pragma once
 #include "Packet.h"
 #include "PacketGlobals.h"
 
@@ -38,5 +36,3 @@ protected:
    char m_Y = 0;
    int32_t m_Z = 0;
 };
-
-#endif // PACKETUSEBED_H

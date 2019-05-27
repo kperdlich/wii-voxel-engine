@@ -1,5 +1,4 @@
-#ifndef PACKETSPAWNPAINTING_H
-#define PACKETSPAWNPAINTING_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -34,5 +33,3 @@ protected:
     std::string m_Title;
     int32_t m_X = 0, m_Y = 0, m_Z = 0, m_Direction = 0;
 };
-
-#endif // PACKETSPAWNPAINTING_H

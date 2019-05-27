@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef _COLORHELPER_H_
-#define _COLORHELPER_H_
+#pragma once
 
 // RGBA Colors
 #define GRRLIB_BLACK   0x000000FF
@@ -37,6 +36,3 @@
 #define GRRLIB_FUCHSIA 0xFF00FFFF
 #define GRRLIB_AQUA    0x00FFFFFF
 #define GRRLIB_WHITE   0xFFFFFFFF
-
-
-#endif /* _COLORHELPER_H_ */

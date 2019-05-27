@@ -1,5 +1,4 @@
-#ifndef PACKETUPDATESIGN_H
-#define PACKETUPDATESIGN_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -37,5 +36,3 @@ protected:
     int16_t m_Y = 0;
     std::string  m_Text1, m_Text2, m_Text3, m_Text4;
 };
-
-#endif // PACKETUPDATESIGN_H

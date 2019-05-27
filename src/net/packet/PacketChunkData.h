@@ -1,5 +1,4 @@
-#ifndef PACKETCHUNKDATA_H
-#define PACKETCHUNKDATA_H
+#pragma once
 
 #include <iostream>
 #include <stdlib.h>
@@ -175,5 +174,3 @@ protected:
 
 
 };
-
-#endif // PACKETCHUNKDATA_H

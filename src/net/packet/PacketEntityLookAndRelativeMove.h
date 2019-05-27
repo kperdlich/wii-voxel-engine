@@ -1,5 +1,4 @@
-#ifndef PACKETENTITYLOOKANDRELATIVEMOVE_H
-#define PACKETENTITYLOOKANDRELATIVEMOVE_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -36,5 +35,3 @@ protected:
     char m_Yaw = 0, m_Pitch = 0;
     char m_DX = 0, m_DY = 0, m_DZ = 0;
 };
-
-#endif // PACKETENTITYLOOKANDRELATIVEMOVE_H

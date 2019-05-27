@@ -1,5 +1,4 @@
-#ifndef LOCKGUARD_H
-#define LOCKGUARD_H
+#pragma once
 
 #include "Mutex.h"
 
@@ -14,5 +13,3 @@ private:
     Mutex& m_mutex;
     bool m_bReleased;
 };
-
-#endif // LOCKGUARD_H

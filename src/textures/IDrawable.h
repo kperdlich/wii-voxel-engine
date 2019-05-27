@@ -17,9 +17,7 @@
  *
 ***/
 
-#ifndef IDRAWABLE_H
-#define IDRAWABLE_H
-
+#pragma once
 
 class IDrawable
 {
@@ -30,5 +28,3 @@ public:
     virtual float GetY() const = 0;
     virtual void SetY(float y) = 0;
 };
-
-#endif // IDRAWABLE_H

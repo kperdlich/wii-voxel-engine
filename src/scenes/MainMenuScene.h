@@ -17,13 +17,9 @@
  *
 ***/
 
-#ifndef _MAINMENUSCENE_H_
-#define _MAINMENUSCENE_H_
-
-
+#pragma once
 #include "Basic2DScene.h"
 #include "../components/BasicButton.h"
-
 
 class MainMenuScene: public Basic2DScene {
 public:
@@ -35,5 +31,3 @@ private:
 	BasicButton* CreateDefaultMainMenuButton( const char* buttonName, const char* buttontext, void (*clickCallback) (BasicButton*));
 
 };
-
-#endif /* _MAINMENUSCENE_H_ */

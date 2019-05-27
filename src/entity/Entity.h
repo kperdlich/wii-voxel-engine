@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef _ENTITY_H_
-#define _ENTITY_H_
+#pragma once
 
 #include "../renderer/EntityRenderer.h"
 #include "../core/grrlib.h"
@@ -61,5 +60,3 @@ protected:
 	class GameWorld* m_pWorld;
 
 };
-
-#endif /* _ENTITY_H_ */

@@ -1,5 +1,4 @@
-#ifndef PACKETITEMDATA_H
-#define PACKETITEMDATA_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -42,4 +41,3 @@ protected:
     char* m_Text = nullptr;
 };
 
-#endif // PACKETITEMDATA_H

@@ -1,5 +1,4 @@
-#ifndef PACKETCHANGEGAMESTATE_H
-#define PACKETCHANGEGAMESTATE_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -33,4 +32,3 @@ protected:
 
 };
 
-#endif // PACKETCHANGEGAMESTATE_H

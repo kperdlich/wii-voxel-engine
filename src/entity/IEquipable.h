@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef _IEQUIPABLE_H_
-#define _IEQUIPABLE_H_
+#pragma once
 
 #include "../components/UiTextureElement.h"
 #include "Entity.h"
@@ -32,5 +31,3 @@ public:
 	virtual Entity& GetEntity() = 0;
 
 };
-
-#endif /* _IEQUIPABLE_H_ */

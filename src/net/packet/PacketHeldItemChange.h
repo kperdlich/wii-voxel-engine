@@ -1,5 +1,4 @@
-#ifndef PACKETHELDITEMCHANGE_H
-#define PACKETHELDITEMCHANGE_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -28,5 +27,3 @@ protected:
 
     }
 };
-
-#endif // PACKETHELDITEMCHANGE_H

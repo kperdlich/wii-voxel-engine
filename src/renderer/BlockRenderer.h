@@ -17,14 +17,11 @@
  *
 ***/
 
-#ifndef _BLOCKRENDERER_H_
-#define _BLOCKRENDERER_H_
-
+#pragma once
 #include <vector>
 #include "BlockRenderHelper.h"
 #include "../world/blocks/Block.h"
 #include "../textures/Texture.h"
-
 
 class BlockRenderer {
 public:
@@ -39,8 +36,4 @@ private:
     const Block* m_pBlock;
 	float m_renderBlockSize = 0.0f;
     std::vector<BlockRenderVO>* m_positions;
-
-
 };
-
-#endif /* _BLOCKRENDERER_H_ */

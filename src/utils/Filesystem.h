@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef FILESYSTEM_H
-#define FILESYSTEM_H
+#pragma once
 
 #include <string>
 
@@ -40,5 +39,3 @@ public:
     static int RemoveFile(const char* filePath);
 
 };
-
-#endif // FILESYSTEM_H

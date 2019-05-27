@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef _CPLAYERINVENTORY_H_
-#define _CPLAYERINVENTORY_H_
+#pragma once
 
 #include "IEquipable.h"
 
@@ -35,5 +34,3 @@ private:
 	std::vector<IEquipable*> m_pInventory;
     uint32_t m_inventoryIndex = 0;
 };
-
-#endif /* _CPLAYERINVENTORY_H_ */

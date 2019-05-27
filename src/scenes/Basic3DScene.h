@@ -17,8 +17,7 @@
  *
  ***/
 
-#ifndef _BASIC3DSCENE_H_
-#define _BASIC3DSCENE_H_
+#pragma once
 
 #include "Scene.h"
 #include "../components/UiElement.h"
@@ -59,5 +58,3 @@ protected:
     class GameWorld* m_pGameWorld           = nullptr;
     class SkyBox* m_skyBox                 = nullptr;
 };
-
-#endif /* _BASIC3DSCENE_H_ */

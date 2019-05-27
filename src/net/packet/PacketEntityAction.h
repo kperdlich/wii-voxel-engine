@@ -1,5 +1,4 @@
-#ifndef PACKETENTITYACTION_H
-#define PACKETENTITYACTION_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -30,5 +29,3 @@ protected:
 
     }
 };
-
-#endif // PACKETENTITYACTION_H

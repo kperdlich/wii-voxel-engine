@@ -1,5 +1,4 @@
-#ifndef PACKETPLAYERLOOK_H
-#define PACKETPLAYERLOOK_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -30,5 +29,3 @@ protected:
 
     }
 };
-
-#endif // PACKETPLAYERLOOK_H

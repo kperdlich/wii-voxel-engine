@@ -1,5 +1,4 @@
-#ifndef PACKETREMOVEENTITYEFFECT_H
-#define PACKETREMOVEENTITYEFFECT_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -33,4 +32,3 @@ protected:
     char m_EffectID = 0;
 };
 
-#endif // PACKETREMOVEENTITYEFFECT_H

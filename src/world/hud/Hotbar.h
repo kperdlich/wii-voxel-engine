@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef _CHOTBAR_H_
-#define _CHOTBAR_H_
+#pragma once
 
 #include "../../components/UiTextureElement.h"
 #include "../../textures/Sprite.h"
@@ -28,5 +27,3 @@ public:
     Hotbar( const char* name, Sprite* sprite);
     virtual ~Hotbar();
 };
-
-#endif /* _CHOTBAR_H_ */

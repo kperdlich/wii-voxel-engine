@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef NETWORKMANAGER_H
-#define NETWORKMANAGER_H
+#pragma once
 
 #include "packet/Packet.h"
 #include "ServerConnection.h"
@@ -60,5 +59,3 @@ private:
 
     ServerConnection m_ServerConnection;    
 };
-
-#endif // NETWORKMANAGER_H

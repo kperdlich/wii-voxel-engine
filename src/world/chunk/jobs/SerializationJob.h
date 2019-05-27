@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef SERIALIZATIONJOB_H
-#define SERIALIZATIONJOB_H
+#pragma once
 
 #include "../chunkdata.h"
 #include "../../../utils/Job.h"
@@ -28,5 +27,3 @@ class SerializationJob : public Job<CompressedChunkData>
 protected:
     void Execute() override;
 };
-
-#endif // SERIALIZATIONJOB_H

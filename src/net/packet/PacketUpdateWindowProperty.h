@@ -1,5 +1,4 @@
-#ifndef PACKETUPDATEWINDOWPROPERTY_H
-#define PACKETUPDATEWINDOWPROPERTY_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -32,5 +31,3 @@ protected:
     int16_t m_Property = 0, m_Value = 0;
 
 };
-
-#endif // PACKETUPDATEWINDOWPROPERTY_H

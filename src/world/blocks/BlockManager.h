@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef _BLOCKMANAGER_H_
-#define _BLOCKMANAGER_H_
+#pragma once
 
 #include <map>
 #include <vector>
@@ -58,5 +57,3 @@ private:
 	BlockRenderer* m_blockRenderer;
 
 };
-
-#endif /* _BLOCKMANAGER_H_ */

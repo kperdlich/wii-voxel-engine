@@ -1,5 +1,4 @@
-#ifndef PACKETSPAWNDROPPEDITEM_H
-#define PACKETSPAWNDROPPEDITEM_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -47,4 +46,3 @@ protected:
 
 };
 
-#endif // PACKETSPAWNDROPPEDITEM_H

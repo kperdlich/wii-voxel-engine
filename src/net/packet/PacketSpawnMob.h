@@ -1,5 +1,4 @@
-#ifndef PACKETSPAWNMOB_H
-#define PACKETSPAWNMOB_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -42,5 +41,3 @@ protected:
     char m_Yaw = 0, m_Pitch = 0, m_HeadYaw;
 
 };
-
-#endif // PACKETSPAWNMOB_H

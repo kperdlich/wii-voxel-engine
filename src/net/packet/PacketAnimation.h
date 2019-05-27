@@ -1,5 +1,4 @@
-#ifndef PACKETANIMATION_H
-#define PACKETANIMATION_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -34,4 +33,3 @@ protected:
     char m_Animation = 0;
 };
 
-#endif // PACKETANIMATION_H

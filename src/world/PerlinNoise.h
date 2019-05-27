@@ -23,8 +23,7 @@
  *
 ***/
 
-#ifndef SRC_WORLD_PERLINNOISE_H_
-#define SRC_WORLD_PERLINNOISE_H_
+#pragma once
 
 class PerlinNoise {
 public:
@@ -62,5 +61,3 @@ private:
     double persistence, frequency, amplitude;
     int octaves, randomseed;
 };
-
-#endif /* SRC_WORLD_PERLINNOISE_H_ */

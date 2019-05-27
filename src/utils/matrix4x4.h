@@ -1,5 +1,4 @@
-#ifndef MATRIX4X4_H
-#define MATRIX4X4_H
+#pragma once
 
 #include <string>
 #include <ogc/gu.h>
@@ -19,5 +18,3 @@ public:
     float _31, _32, _33, _34;
     float _41, _42, _43, _44;
 };
-
-#endif // MATRIX4X4_H

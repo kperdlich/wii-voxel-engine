@@ -1,5 +1,4 @@
-#ifndef IEVENTLISTENER_H
-#define IEVENTLISTENER_H
+#pragma once
 
 #include "event.h"
 
@@ -11,4 +10,3 @@ protected:
     virtual ~IEventListener() {}
 };
 
-#endif // IEVENTLISTENER_H

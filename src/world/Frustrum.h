@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef _CFRUSTRUM_H_
-#define _CFRUSTRUM_H_
+#pragma once
 
 class Frustrum {
 public:
@@ -62,5 +61,3 @@ private:
 
 
 };
-
-#endif /* _CFRUSTRUM_H_ */

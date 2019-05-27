@@ -1,5 +1,4 @@
-#ifndef INICONFIG_H
-#define INICONFIG_H
+#pragma once
 
 #include <string>
 #include "inipp.h"
@@ -20,7 +19,3 @@ public:
 private:
      inipp::Ini<char> m_iniFile;
 };
-
-
-#endif // INICONFIG_H
-

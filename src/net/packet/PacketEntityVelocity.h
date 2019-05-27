@@ -1,5 +1,4 @@
-#ifndef PACKETENTITYVELOCITY_H
-#define PACKETENTITYVELOCITY_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -32,5 +31,3 @@ protected:
     int32_t m_EID = 0;
     int16_t m_VelocityX = 0, m_VelocityY = 0, m_VelocityZ = 0;
 };
-
-#endif // PACKETENTITYVELOCITY_H

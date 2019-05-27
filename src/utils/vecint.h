@@ -1,5 +1,4 @@
-#ifndef VEC2_H
-#define VEC2_H
+#pragma once
 
 #include <stdint.h>
 
@@ -26,5 +25,3 @@ struct Vec2i
         return (X != vec.X) || (Y != vec.Y);
     }
 };
-
-#endif // VEC2_H

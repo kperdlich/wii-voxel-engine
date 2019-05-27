@@ -1,5 +1,4 @@
-#ifndef PACKETSPAWNPOSITION_H
-#define PACKETSPAWNPOSITION_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -45,5 +44,3 @@ protected:
     void SendContent(const Socket &socket) const override {}
     int32_t m_x = 0, m_y = 0, m_z = 0;
 };
-
-#endif // PACKETSPAWNPOSITION_H

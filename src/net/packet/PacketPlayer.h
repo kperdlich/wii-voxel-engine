@@ -1,5 +1,4 @@
-#ifndef PACKETPLAYER_H
-#define PACKETPLAYER_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -33,4 +32,3 @@ protected:
     bool m_bOnGround;
 };
 
-#endif // PACKETPLAYER_H

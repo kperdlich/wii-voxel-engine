@@ -1,5 +1,4 @@
-#ifndef PACKETENCHANTITEM_H
-#define PACKETENCHANTITEM_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -28,4 +27,3 @@ protected:
     }
 };
 
-#endif // PACKETENCHANTITEM_H

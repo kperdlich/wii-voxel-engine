@@ -1,5 +1,4 @@
-#ifndef PACKETENTITYEFFECT_H
-#define PACKETENTITYEFFECT_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -33,5 +32,3 @@ protected:
     char m_EffectID = 0, m_Amplifier = 0;
     int16_t m_Duration = 0;
 };
-
-#endif // PACKETENTITYEFFECT_H

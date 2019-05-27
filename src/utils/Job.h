@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef JOB_H
-#define JOB_H
+#pragma once
 
 #include "Thread.h"
 #include "SafeQueue.h"
@@ -64,5 +63,3 @@ protected:
 protected:
     SafeQueue<T> m_queue;    
 };
-
-#endif // JOB_H

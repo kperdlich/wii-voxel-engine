@@ -1,5 +1,4 @@
-#ifndef PLAYERABILITES_H
-#define PLAYERABILITES_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -39,5 +38,3 @@ protected:
     m_bCanfly = false,
     m_bInstantDestroy = false;
 };
-
-#endif // PLAYERABILITES_H

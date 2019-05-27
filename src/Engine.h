@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef _ENGINE_H_
-#define _ENGINE_H_
+#pragma once
 
 #include "globals.h"
 #include "utils/GameHelper.h"
@@ -69,5 +68,3 @@ private:
     void ParseIniFile();
 
 };
-
-#endif /* _ENGINE_H_ */

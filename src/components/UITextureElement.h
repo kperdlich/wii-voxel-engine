@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef _UITEXTUREELEMENT_H_
-#define _UITEXTUREELEMENT_H_
+#pragma once
 
 #include "UiElement.h"
 #include "../textures/Sprite.h"
@@ -40,4 +39,3 @@ protected:
         Sprite* m_sprite;
 };
 
-#endif /* _UITEXTUREELEMENT_H_ */

@@ -1,5 +1,4 @@
-#ifndef PACKETINCREMENTSTATISTIC_H
-#define PACKETINCREMENTSTATISTIC_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -30,5 +29,3 @@ protected:
    int32_t m_StatisticID = 0;
    char m_Amount = 0;
 };
-
-#endif // PACKETINCREMENTSTATISTIC_H

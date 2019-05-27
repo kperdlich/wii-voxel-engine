@@ -1,5 +1,4 @@
-#ifndef PACKETCOLLECTITEM_H
-#define PACKETCOLLECTITEM_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -32,4 +31,4 @@ protected:
     int32_t m_CollectedID = 0, m_CollectorID = 0;
 };
 
-#endif // PACKETCOLLECTITEM_H
+#pragma once

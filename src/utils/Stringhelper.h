@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef STRINGHELPER_H
-#define STRINGHELPER_H
+#pragma once
 
 #include <string>
 #include <sstream>
@@ -30,5 +29,3 @@ std::string ToString(T value)
     ss << value;
     return ss.str();
 }
-
-#endif // STRINGHELPER_H

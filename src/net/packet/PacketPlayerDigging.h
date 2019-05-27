@@ -1,5 +1,4 @@
-#ifndef PAKCETPLAYERDIGGING_H
-#define PAKCETPLAYERDIGGING_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -30,5 +29,3 @@ protected:
 
     }
 };
-
-#endif // PAKCETPLAYERDIGGING_H

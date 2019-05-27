@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef ISPRITE_H
-#define ISPRITE_H
+#pragma once
 
 #include "IDrawable.h"
 #include <string>
@@ -46,5 +45,3 @@ public:
 
     virtual ESpriteType GetType() const = 0;
 };
-
-#endif // ISPRITE_H

@@ -17,9 +17,7 @@
  *
 ***/
 
-#ifndef SOCKET_H
-#define SOCKET_H
-
+#pragma once
 #include <string>
 
 class Socket
@@ -60,5 +58,3 @@ private:
     uint16_t m_Port;
 
 };
-
-#endif // SOCKET_H

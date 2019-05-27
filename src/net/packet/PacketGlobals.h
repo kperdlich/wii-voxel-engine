@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef PACKGLOBALS_H
-#define PACKGLOBALS_H
+#pragma once
 
 #define PACKET_KEEP_ALIVE               0x00
 #define PACKET_LOGIN                    0x01
@@ -89,8 +88,3 @@
 #define PACKET_SERVER_LIST_PING         0xFE
 #define PACKET_DISCONNECT               0xFF
 
-
-
-
-
-#endif // PACKGLOBALS_H

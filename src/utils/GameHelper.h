@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef _GAMEHELPER_H_
-#define _GAMEHELPER_H_
+#pragma once
 
 #include <stdarg.h>
 #include <ogc/lwp_watchdog.h>
@@ -31,5 +30,3 @@
 uint8_t CalculateFrameRate();
 void PrintFps(uint32_t x, uint32_t y, GRRLIB_ttfFont* font, uint32_t fontSize, const u32 color );
 void PrintGameVersion(uint32_t x, uint32_t y, GRRLIB_ttfFont* font, uint32_t fontSize, const u32 color);
-
-#endif /* _GAMEHELPER_H_ */

@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef SERVERCONNECTION_H
-#define SERVERCONNECTION_H
+#pragma once
 
 #include <map>
 #include "Socket.h"
@@ -57,5 +56,3 @@ private:
     SafeQueue<class Packet*> m_queue;
     static std::map<unsigned char, class Packet*> s_PacketMap;
 };
-
-#endif // SERVERCONNECTION_H

@@ -1,5 +1,4 @@
-#ifndef PACKETSETEXPERIENCE_H
-#define PACKETSETEXPERIENCE_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -33,4 +32,3 @@ protected:
 
 };
 
-#endif // PACKETSETEXPERIENCE_H

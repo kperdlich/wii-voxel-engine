@@ -1,5 +1,4 @@
-#ifndef PACKETTIMEUPDATE_H
-#define PACKETTIMEUPDATE_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -28,5 +27,3 @@ protected:
     int64_t m_time = 0;
     void SendContent(const Socket &socket) const override {}
 };
-
-#endif // PACKETTIMEUPDATE_H

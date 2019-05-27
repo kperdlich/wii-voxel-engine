@@ -1,5 +1,4 @@
-#ifndef PACKETSPAWNNAMEDENTITY_H
-#define PACKETSPAWNNAMEDENTITY_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -43,5 +42,3 @@ protected:
 
 
 };
-
-#endif // PACKETSPAWNNAMEDENTITY_H

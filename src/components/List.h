@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef _LIST_H_
-#define _LIST_H_
+#pragma once
 
 #include "vector"
 #include "UiElement.h"
@@ -37,5 +36,3 @@ private:
 	std::vector<UiElement*> m_elements;
 	uint32_t m_sizeBetweenElements;
 };
-
-#endif /* _LIST_H_ */

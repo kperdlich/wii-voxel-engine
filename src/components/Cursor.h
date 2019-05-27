@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef _CURSOR_H_
-#define _CURSOR_H_
+#pragma once
 
 #include "UiTextureElement.h"
 
@@ -28,5 +27,3 @@ public:
 	virtual ~Cursor();
 	void Update();
 };
-
-#endif /* _CURSOR_H_ */

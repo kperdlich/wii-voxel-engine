@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef SAFEQUEUE_H
-#define SAFEQUEUE_H
+#pragma once
 
 #include <queue>
 #include <ogcsys.h>
@@ -67,5 +66,3 @@ private:
     std::queue<T> m_queue;
     Mutex m_mutex;
 };
-
-#endif // SAFEQUEUE_H

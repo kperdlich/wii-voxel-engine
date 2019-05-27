@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef _SCENE_H_
-#define _SCENE_H_
+#pragma once
 
 #include "../renderer/SpriteStageManager.h"
 
@@ -45,7 +44,3 @@ protected:
     SpriteStageManager *m_spriteStageManager;
 
 };
-
-
-
-#endif /* _SCENE_H_ */

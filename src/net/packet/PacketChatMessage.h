@@ -1,5 +1,4 @@
-#ifndef PACKETCHATMESSAGE_H
-#define PACKETCHATMESSAGE_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -31,5 +30,3 @@ protected:
          // todo implement
      }
 };
-
-#endif // PACKETCHATMESSAGE_H

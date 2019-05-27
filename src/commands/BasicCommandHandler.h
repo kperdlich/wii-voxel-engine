@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef _BASICCOMMANDHANDLER_H_
-#define _BASICCOMMANDHANDLER_H_
+#pragma once
 
 #include <map>
 #include "../utils/GameHelper.h"
@@ -36,5 +35,3 @@ public:
 	void ExecuteCommand( const char* commandName );
 	void Init();
 };
-
-#endif /* _BASICCOMMANDHANDLER_H_ */

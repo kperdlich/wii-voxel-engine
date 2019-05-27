@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef _MATHHELPER_H_
-#define _MATHHELPER_H_
+#pragma once
 
 #include <math.h>
 #include <cmath>
@@ -43,5 +42,3 @@ public:
     static double Max(double value1, double value2 );
     static double Mod(double x, double y);
 };
-
-#endif /* _MATHHELPER_H_ */

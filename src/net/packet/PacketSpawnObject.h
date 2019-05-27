@@ -1,5 +1,4 @@
-#ifndef PACKETSPAWNOBJECT_H
-#define PACKETSPAWNOBJECT_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -38,5 +37,3 @@ protected:
     int32_t m_X = 0, m_Y = 0, m_Z = 0;
     int32_t m_AdditionalData = 0;
 };
-
-#endif // PACKETSPAWNOBJECT_H

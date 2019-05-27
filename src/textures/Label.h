@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef _LABEL_H_
-#define _LABEL_H_
+#pragma once
 
 #include "../core/grrlib.h"
 #include "IDrawable.h"
@@ -132,5 +131,3 @@ protected:
     float m_x, m_y;
     bool m_bCenteredX = false;
 };
-
-#endif /* _LABEL_H_ */

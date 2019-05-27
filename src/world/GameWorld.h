@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef _GAMEWORLD_H_
-#define _GAMEWORLD_H_
+#pragma once
 
 #include <map>
 #include "chunk/ChunkManager.h"
@@ -64,5 +63,3 @@ private:
     PerlinNoise m_noise;
 
 };
-
-#endif /* _GAMEWORLD_H_ */

@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef _FONTHANDLER_H_
-#define _FONTHANDLER_H_
+#pragma once
 
 #include "../core/grrlib.h"
 #include <vector>
@@ -42,6 +41,3 @@ public:
     GRRLIB_ttfFont* GetNativFontByID( uint32_t id );
 
 };
-
-
-#endif /* _FONTHANDLER_H_ */

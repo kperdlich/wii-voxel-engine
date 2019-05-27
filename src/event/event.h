@@ -1,5 +1,4 @@
-#ifndef EVENT_H
-#define EVENT_H
+#pragma once
 
 #include <stdint.h>
 
@@ -15,5 +14,3 @@ struct Event
     uint32_t ID;
     void* Payload;
 };
-
-#endif // EVENT_H

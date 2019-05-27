@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef _CSWORD_H_
-#define _CSWORD_H_
+#pragma once
 
 #include "Entity.h"
 #include "IEquipable.h"
@@ -30,5 +29,3 @@ public:
 
 
 };
-
-#endif /* _CSWORD_H_ */

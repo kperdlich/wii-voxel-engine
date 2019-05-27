@@ -1,5 +1,4 @@
-#ifndef MASTERRENDERER_H
-#define MASTERRENDERER_H
+#pragma once
 
 #include "../textures/Texture.h"
 #include "../textures/Sprite.h"
@@ -17,5 +16,3 @@ public:
     static void EnableFog();
     static void DisableFog();
 };
-
-#endif // MASTERRENDERER_H

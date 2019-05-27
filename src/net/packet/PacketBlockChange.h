@@ -1,5 +1,4 @@
-#ifndef PACKETBLOCKCHANGE_H
-#define PACKETBLOCKCHANGE_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -36,4 +35,3 @@ protected:
     char m_Y = 0, m_BlockType = 0, m_BlockMetadata = 0;
 };
 
-#endif // PACKETBLOCKCHANGE_H

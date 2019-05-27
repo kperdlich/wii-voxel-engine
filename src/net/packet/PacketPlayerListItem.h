@@ -1,5 +1,4 @@
-#ifndef PACKETPLAYERLISTITEM_H
-#define PACKETPLAYERLISTITEM_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -33,4 +32,3 @@ protected:
     int16_t m_Ping = 0;
 };
 
-#endif // PACKETPLAYERLISTITEM_H

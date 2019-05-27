@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef _PLAYER_H_
-#define _PLAYER_H_
+#pragma once
 
 #include "Entity.h"
 #include "../event/eventlistener.h"
@@ -77,5 +76,3 @@ private:
     double m_Stance = 0.1;
     uint64_t m_LastPlayerServerUpdate;
 };
-
-#endif /* _PLAYER_H_ */

@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef SPRITE_H
-#define SPRITE_H
+#pragma once
 
 #include "BasicTexture.h"
 #include "ISprite.h"
@@ -76,7 +75,3 @@ protected:
     uint16_t m_sortingLayerIndex = 0;
     std::string m_name;
 };
-
-
-
-#endif // SPRITE_H

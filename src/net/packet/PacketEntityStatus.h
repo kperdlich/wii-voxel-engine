@@ -1,5 +1,4 @@
-#ifndef PACKETENTITYSTATUS_H
-#define PACKETENTITYSTATUS_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -32,5 +31,3 @@ protected:
     int32_t m_EID = 0;
     char m_EntityStatus = 0;
 };
-
-#endif // PACKETENTITYSTATUS_H

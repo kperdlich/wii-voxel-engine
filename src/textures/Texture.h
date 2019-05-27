@@ -17,14 +17,11 @@
  *
 ***/
 
-#ifndef _TEXTURE_H_
-#define _TEXTURE_H_
+#pragma once
 
 #include <gccore.h>
 #include "../core/grrlib.h"
 #include "BasicTexture.h"
-
-
 
 class Texture : public BasicTexture
 {
@@ -47,11 +44,7 @@ protected:
     void* m_pTPLTextureData = nullptr;
 
 private:
-
     void LoadTPLTexture();
     bool IsTPLTexture();
 
 };
-
-
-#endif /* _TEXTURE_H_ */

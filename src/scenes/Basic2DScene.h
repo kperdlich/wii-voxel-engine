@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef _BASIC2DSCENE_H_
-#define _BASIC2DSCENE_H_
+#pragma once
 
 #include <vector>
 #include "Scene.h"
@@ -38,5 +37,3 @@ protected:
 	std::vector<UiElement*> m_elements;
 
 };
-
-#endif /* _BASIC2DSCENE_H_ */

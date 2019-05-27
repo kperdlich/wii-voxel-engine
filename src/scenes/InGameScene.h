@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef _INGAMESCENE_H_
-#define _INGAMESCENE_H_
+#pragma once
 
 #include "Basic3DScene.h"
 #include "../event/eventlistener.h"
@@ -40,5 +39,3 @@ protected:
     WorldLoader* m_pWorldLoader;
 
 };
-
-#endif /* _INGAMESCENE_H_ */

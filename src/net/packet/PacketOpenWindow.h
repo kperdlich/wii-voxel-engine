@@ -1,5 +1,4 @@
-#ifndef PACKETOPENWINDOW_H
-#define PACKETOPENWINDOW_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -35,5 +34,3 @@ protected:
     std::string m_WindowTitle;
     char m_NumberOfSlots = 0;
 };
-
-#endif // PACKETOPENWINDOW_H

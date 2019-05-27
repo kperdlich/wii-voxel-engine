@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef _SPRITESTAGEMANAGER_H_
-#define _SPRITESTAGEMANAGER_H_
+#pragma once
 
 #include "../core/grrlib.h"
 #include "../textures/ISprite.h"
@@ -59,5 +58,3 @@ public:
         m_spriteCashDirty = value;
     }   
 };
-
-#endif /* _SPRITESTAGEMANAGER_H_ */

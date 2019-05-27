@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef _BASICBUTTON_H_
-#define _BASICBUTTON_H_
+#pragma once
 
 #include "UiTextureElement.h"
 #include "../textures/Texture.h"
@@ -51,5 +50,3 @@ private:
 	OnClickCallback m_clickCallback;
     bool m_mouseOver = false;
 };
-
-#endif /* _BASICBUTTON_H_ */

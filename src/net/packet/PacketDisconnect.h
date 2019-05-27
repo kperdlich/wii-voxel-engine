@@ -1,5 +1,4 @@
-#ifndef PACKETDISCONNECT_H
-#define PACKETDISCONNECT_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -31,5 +30,3 @@ protected:
 
     std::string m_Reason;
 };
-
-#endif // PACKETDISCONNECT_H

@@ -1,5 +1,4 @@
-#ifndef PACKETEXPLOSION_H
-#define PACKETEXPLOSION_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -41,7 +40,5 @@ protected:
      double m_X = 0, m_Y = 0, m_Z = 0;
      float m_Radius = 0.0f;
      int32_t m_RecordCount = 0;
-     void* m_Records = nullptr;
+     char* m_Records = nullptr;
 };
-
-#endif // PACKETEXPLOSION_H

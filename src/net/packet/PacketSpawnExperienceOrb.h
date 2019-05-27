@@ -1,5 +1,4 @@
-#ifndef PACKETSPAWNEXPERIENCEORB_H
-#define PACKETSPAWNEXPERIENCEORB_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -36,5 +35,3 @@ protected:
     int32_t m_EID = 0, m_X = 0, m_Y = 0, m_Z = 0;
     int16_t m_Count = 0;
 };
-
-#endif // PACKETSPAWNEXPERIENCEORB_H

@@ -1,5 +1,4 @@
-#ifndef PACKETCONFIRMTRANSACTION_H
-#define PACKETCONFIRMTRANSACTION_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -33,4 +32,3 @@ protected:
      bool m_bAccepted = false;
 };
 
-#endif // PACKETCONFIRMTRANSACTION_H

@@ -1,5 +1,4 @@
-#ifndef PACKETCHUNKALLOCATION_H
-#define PACKETCHUNKALLOCATION_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -34,4 +33,3 @@ protected:
     bool m_bMode = false;
 };
 
-#endif // PACKETCHUNKALLOCATION_H

@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef _ENTITYRENDERER_H_
-#define _ENTITYRENDERER_H_
+#pragma once
 
 #include "../renderer/SpriteStageManager.h"
 #include "../textures/Texture.h"
@@ -37,5 +36,3 @@ protected:
 	Texture* m_entityTexture;
 	Entity* m_Entity;
 };
-
-#endif /* _ENTITYRENDERER_H_ */

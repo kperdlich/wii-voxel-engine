@@ -1,5 +1,4 @@
-#ifndef PACKETCLICKWINDOW_H
-#define PACKETCLICKWINDOW_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -38,4 +37,3 @@ protected:
 
 };
 
-#endif // PACKETCLICKWINDOW_H

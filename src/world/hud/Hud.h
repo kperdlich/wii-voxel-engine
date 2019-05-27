@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef _CHUD_H_
-#define _CHUD_H_
+#pragma once
 
 #include <vector>
 #include "../../components/UiTextureElement.h"
@@ -34,10 +33,5 @@ public:
 
 protected:
 	PlayerInventoryHud* m_playerInventoryHud;
-
-
 	std::vector<UiTextureElement*> m_hudComponents;
-
 };
-
-#endif /* _CHUD_H_ */

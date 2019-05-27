@@ -1,5 +1,4 @@
-#ifndef PACKETATTACHENTITY_H
-#define PACKETATTACHENTITY_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -31,4 +30,3 @@ protected:
     int32_t m_EID = 0, m_VehicleID = 0;
 };
 
-#endif // PACKETATTACHENTITY_H

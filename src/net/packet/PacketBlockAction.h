@@ -1,5 +1,4 @@
-#ifndef PACKETBLOCKACTION_H
-#define PACKETBLOCKACTION_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -38,4 +37,3 @@ protected:
     char m_Byte_1 = 0, m_Byte_2 = 0;
 };
 
-#endif // PACKETBLOCKACTION_H

@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef _CHUNK_H_
-#define _CHUNK_H_
+#pragma once
 
 #include <stdint.h>
 #include <string>
@@ -113,7 +112,3 @@ private:
     Chunk* m_pChunkFront        = nullptr;
     Chunk* m_pChunkBack         = nullptr;
 };
-
-
-
-#endif /* _CHUNK_H_ */

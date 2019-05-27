@@ -1,5 +1,4 @@
-#ifndef CLOCK_H
-#define CLOCK_H
+#pragma once
 
 #include <stdint.h>
 
@@ -15,5 +14,3 @@ public:
 private:
     uint64_t m_milliSecs;
 };
-
-#endif // CLOCK_H

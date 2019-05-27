@@ -1,5 +1,4 @@
-#ifndef PACKETRESPAWN_H
-#define PACKETRESPAWN_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -41,4 +40,3 @@ protected:
 
 };
 
-#endif // PACKETRESPAWN_H

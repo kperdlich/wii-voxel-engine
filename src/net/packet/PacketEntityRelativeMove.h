@@ -1,5 +1,4 @@
-#ifndef PACKETENTITYRELATIVEMOVE_H
-#define PACKETENTITYRELATIVEMOVE_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -33,5 +32,3 @@ protected:
     int32_t m_EID=0;
     char m_DX = 0, m_DY = 0, m_DZ = 0;
 };
-
-#endif // PACKETENTITYRELATIVEMOVE_H

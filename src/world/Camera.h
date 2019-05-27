@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef _CAMERA_H_
-#define _CAMERA_H_
+#pragma once
 
 #include "../utils/Vector3.h"
 #include "../entity/Entity.h"
@@ -60,5 +59,3 @@ private:
 
     Entity* m_attachedToEntity = nullptr;
 };
-
-#endif /* _CAMERA_H_ */

@@ -1,5 +1,4 @@
-#ifndef PACKETPLUGINMESSAGE_H
-#define PACKETPLUGINMESSAGE_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -40,4 +39,3 @@ protected:
     void* m_Data = nullptr;
 };
 
-#endif // PACKETPLUGINMESSAGE_H

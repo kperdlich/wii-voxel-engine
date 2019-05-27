@@ -1,6 +1,4 @@
-#ifndef PACKETUSEENTITY_H
-#define PACKETUSEENTITY_H
-
+#pragma once
 #include "Packet.h"
 #include "PacketGlobals.h"
 
@@ -30,5 +28,3 @@ protected:
 
      }
 };
-
-#endif // PACKETUSEENTITY_H

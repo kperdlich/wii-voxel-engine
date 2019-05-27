@@ -1,5 +1,4 @@
-#ifndef PACKETENTITYHEADLOOK_H
-#define PACKETENTITYHEADLOOK_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -32,5 +31,3 @@ protected:
     int32_t m_EID = 0;
     char m_HeadYaw = 0;
 };
-
-#endif // PACKETENTITYHEADLOOK_H

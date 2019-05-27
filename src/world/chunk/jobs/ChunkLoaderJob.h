@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef CHUNKLOADERJOB_H
-#define CHUNKLOADERJOB_H
+#pragma once
 
 #include "../chunkdata.h"
 #include "../../../utils/Job.h"
@@ -28,5 +27,3 @@ class ChunkLoaderJob : public Job<ChunkLoadingData>
 protected:
     void Execute() override;
 };
-
-#endif // CHUNKLOADERJOB_H

@@ -1,5 +1,4 @@
-#ifndef DISPLAYLIST_H
-#define DISPLAYLIST_H
+#pragma once
 
 #include <stdint.h>
 #include <cstdlib>
@@ -22,6 +21,4 @@ private:
     uint32_t m_displayListSize  = 0;
     bool m_bIsDirty = true;
 };
-
-#endif // DISPLAYLIST_H
 

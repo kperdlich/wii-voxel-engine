@@ -1,5 +1,4 @@
-#ifndef PACKETTELEPORT_H
-#define PACKETTELEPORT_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -37,5 +36,3 @@ protected:
     int32_t m_X = 0, m_Y = 0, m_Z = 0;
     char m_Yaw = 0, m_Pitch = 0;
 };
-
-#endif // PACKETTELEPORT_H

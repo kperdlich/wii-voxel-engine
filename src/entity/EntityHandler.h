@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef _ENTITYHANDLER_H_
-#define _ENTITYHANDLER_H_
+#pragma once
 
 #include <map>
 #include "Entity.h"
@@ -42,5 +41,3 @@ private:
 	std::map<uint32_t, class Entity*> m_entityMap;
 	uint32_t GetNewID();
 };
-
-#endif /* _ENTITYHANDLER_H_ */

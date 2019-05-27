@@ -1,5 +1,4 @@
-#ifndef PACKETENTITYLOOK_H
-#define PACKETENTITYLOOK_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -34,6 +33,4 @@ protected:
     char m_Yaw = 0, m_Pitch = 0;
 
 };
-
-#endif // PACKETENTITYLOOK_H
 

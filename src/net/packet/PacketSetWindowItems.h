@@ -1,5 +1,4 @@
-#ifndef PACKETSETWINDOWITEMS_H
-#define PACKETSETWINDOWITEMS_H
+#pragma once
 
 #include <vector>
 #include "Packet.h"
@@ -39,5 +38,3 @@ protected:
      int16_t m_Count = 0;
      std::vector<SlotData> m_SlotData;
 };
-
-#endif // PACKETSETWINDOWITEMS_H

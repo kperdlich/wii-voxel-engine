@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef CHUNKCHANGEDATA_H
-#define CHUNKCHANGEDATA_H
+#pragma once
 
 #include "../blocks/BlockManager.h"
 #include "../../utils/vecint.h"
@@ -60,6 +59,3 @@ struct ChunkLoadingData
 {
     class Chunk*    ChunkObj;
 };
-
-
-#endif // CHUNKCHANGEDATA_H

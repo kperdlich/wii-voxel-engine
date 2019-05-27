@@ -1,5 +1,4 @@
-#ifndef PACKETCLOSEWINDOW_H
-#define PACKETCLOSEWINDOW_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -31,4 +30,3 @@ protected:
     char m_WindowID = 0;
 };
 
-#endif // PACKETCLOSEWINDOW_H

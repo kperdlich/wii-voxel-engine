@@ -1,5 +1,4 @@
-#ifndef PACKETUPDATEHEALTH_H
-#define PACKETUPDATEHEALTH_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -33,5 +32,3 @@ protected:
 
     }
 };
-
-#endif // PACKETUPDATEHEALTH_H

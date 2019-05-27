@@ -1,5 +1,4 @@
-#ifndef CHUNKLOADERMULTIPLAYER_H
-#define CHUNKLOADERMULTIPLAYER_H
+#pragma once
 
 #include "../chunkdata.h"
 #include "../../../utils/Job.h"
@@ -10,5 +9,3 @@ protected:
     void Execute() override;
 
 };
-
-#endif // CHUNKLOADERMULTIPLAYER_H

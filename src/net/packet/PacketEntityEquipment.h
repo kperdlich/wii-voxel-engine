@@ -1,5 +1,4 @@
-#ifndef PACKETENTITYEQUIPMENT_H
-#define PACKETENTITYEQUIPMENT_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -35,5 +34,3 @@ protected:
 
     }
 };
-
-#endif // PACKETENTITYEQUIPMENT_H

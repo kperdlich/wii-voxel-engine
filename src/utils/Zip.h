@@ -1,5 +1,4 @@
-#ifndef ZIP_H
-#define ZIP_H
+#pragma once
 
 #include <zlib.h>
 #include <cstdlib>
@@ -33,5 +32,3 @@ public:
         return infstream.total_out;
     }
 };
-
-#endif // ZIP_H

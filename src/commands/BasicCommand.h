@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef _BASICCOMMAND_H_
-#define _BASICCOMMAND_H_
+#pragma once
 
 class BasicCommand {
 public:
@@ -26,5 +25,3 @@ public:
 	virtual ~BasicCommand();
 	virtual void ExecuteCommand();
 };
-
-#endif /* _BASICCOMMAND_H_ */

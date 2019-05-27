@@ -1,5 +1,4 @@
-#ifndef PACKETSOUNDEFFECT_H
-#define PACKETSOUNDEFFECT_H
+#pragma once
 
 #include "Packet.h"
 #include "PacketGlobals.h"
@@ -37,5 +36,3 @@ protected:
     int32_t m_Z = 0;
     int32_t m_Data = 0;
 };
-
-#endif // PACKETSOUNDEFFECT_H

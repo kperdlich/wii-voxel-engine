@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef PACKETLOGIN_H
-#define PACKETLOGIN_H
+#pragma once
 
 #include <string>
 #include "Packet.h"
@@ -74,5 +73,3 @@ private:
     unsigned char m_Vanilla;
     unsigned char m_MaxPlayers;
 };
-
-#endif // PACKETLOGIN_H

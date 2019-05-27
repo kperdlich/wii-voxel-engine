@@ -1,5 +1,4 @@
-#ifndef WORLDLOADER_H
-#define WORLDLOADER_H
+#pragma once
 
 #include "UiTextureElement.h"
 #include "../event/eventlistener.h"
@@ -32,5 +31,3 @@ private:
     class Label* m_pStateLabel;
 
 };
-
-#endif // WORLDLOADER_H

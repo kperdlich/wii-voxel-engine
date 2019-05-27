@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef _CPLAYERINVENTORYHUD_H_
-#define _CPLAYERINVENTORYHUD_H_
+#pragma once
 
 #include "IHudComponent.h"
 
@@ -26,10 +25,5 @@ class PlayerInventoryHud: public IHudComponent {
 public:
 	PlayerInventoryHud();
 	virtual ~PlayerInventoryHud();
-
 	void Update();
-
-
 };
-
-#endif /* _CPLAYERINVENTORYHUD_H_ */

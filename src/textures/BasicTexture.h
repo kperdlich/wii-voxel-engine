@@ -17,8 +17,7 @@
  *
 ***/
 
-#ifndef _BASICTEXTURE_H_
-#define _BASICTEXTURE_H_
+#pragma once
 
 #include "IDrawable.h"
 #include "../core/grrlib.h"
@@ -131,5 +130,3 @@ protected:
     void* m_loadedTexture = nullptr;
     GXTexObj* m_textureObject = nullptr;
 };
-
-#endif /* _BASICTEXTURE_H_ */
