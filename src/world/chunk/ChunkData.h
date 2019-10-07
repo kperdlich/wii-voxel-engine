@@ -22,16 +22,16 @@
 #include "../blocks/BlockManager.h"
 #include "../../utils/vecint.h"
 
-#define CHUNK_MAP_CASH_X 5
-#define CHUNK_MAP_CASH_Y 5
+constexpr int32_t CHUNK_MAP_CASH_X = 5;
+constexpr int32_t CHUNK_MAP_CASH_Y = 5;
 
-#define CHUNK_SIZE_X 16
-#define CHUNK_SIZE_Y 256
-#define CHUNK_SIZE_Z 16
+constexpr int32_t CHUNK_SIZE_X = 16;
+constexpr int32_t CHUNK_SIZE_Y = 256;
+constexpr int32_t CHUNK_SIZE_Z = 16;
 
-#define CHUNK_BLOCK_SIZE_X (BLOCK_SIZE * CHUNK_SIZE_X)
-#define CHUNK_BLOCK_SIZE_Y (BLOCK_SIZE * CHUNK_SIZE_Y)
-#define CHUNK_BLOCK_SIZE_Z (BLOCK_SIZE * CHUNK_SIZE_Z)
+constexpr float CHUNK_BLOCK_SIZE_X (BLOCK_SIZE * CHUNK_SIZE_X);
+constexpr float CHUNK_BLOCK_SIZE_Y (BLOCK_SIZE * CHUNK_SIZE_Y);
+constexpr float CHUNK_BLOCK_SIZE_Z (BLOCK_SIZE * CHUNK_SIZE_Z);
 
 #define CHUNK_GLOBAL_X(value) value * CHUNK_BLOCK_SIZE_X
 #define CHUNK_GLOBAL_Z(value) value * CHUNK_BLOCK_SIZE_Z

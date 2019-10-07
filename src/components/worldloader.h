@@ -19,6 +19,11 @@ class WorldLoader : public UiTextureElement, public IEventListener
 {
 public:
     WorldLoader(const char* name, class Sprite* sprite);
+    WorldLoader(const WorldLoader&) = delete;
+    WorldLoader(WorldLoader&&) = delete;
+    void operator=(const WorldLoader&) = delete;
+    void operator=(WorldLoader&&) = delete;
+
     virtual void Load() override;
     virtual void Update() override;
     virtual void OnEvent(Event event) override;
@@ -26,8 +31,7 @@ public:
     inline EWorldLoaderState GetState() const { return m_state; }
 
 private:
-    EWorldLoaderState m_state;
-    EWorldLoaderState m_nextState;
     class Label* m_pStateLabel;
-
+    EWorldLoaderState m_state;
+    EWorldLoaderState m_nextState;    
 };

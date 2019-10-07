@@ -22,10 +22,10 @@
 #include <vector>
 #include "Scene.h"
 
-#define INVALID_SCENE -1
-#define INTRO_SCENE_ID 0
-#define MAIN_MENU_ID 1
-#define IN_GAME_ID 2
+constexpr int32_t INVALID_SCENE     = -1;
+constexpr int32_t INTRO_SCENE_ID    = 0;
+constexpr int32_t MAIN_MENU_ID      = 1;
+constexpr int32_t IN_GAME_ID        = 2;
 
 class SceneHandler
 {
@@ -38,7 +38,11 @@ private:
 
 public:
     SceneHandler();
-    ~SceneHandler();
+    ~SceneHandler();    
+    SceneHandler(const SceneHandler&) = delete;
+    SceneHandler(SceneHandler&&) = delete;
+    void operator=(const SceneHandler&) = delete;
+    void operator=(SceneHandler&&) = delete;
 	void Init();
     void LoadScene(int32_t index );
 	void DrawScene();

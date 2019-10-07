@@ -32,6 +32,10 @@ class Chunk {
 public:
 
     Chunk(class GameWorld &gameWorld);
+    Chunk(const Chunk&) = delete;
+    Chunk(Chunk&&) = delete;
+    void operator=(const Chunk&) = delete;
+    void operator=(Chunk&&) = delete;
     virtual ~Chunk();
 
     void Init();

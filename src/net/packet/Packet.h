@@ -36,8 +36,13 @@ struct SlotData
 class Packet
 {
 public:
-    Packet(unsigned char id) : m_ID(id) {}
+    explicit Packet(unsigned char id) : m_ID(id) {}
     virtual ~Packet() {}
+    Packet(const Packet&) = delete;
+    Packet(Packet&&) = delete;
+    void operator=(const Packet&) = delete;
+    void operator=(Packet&&) = delete;
+
     void Send() const;
     virtual void Read(const Socket& socket) = 0;
     virtual void Action() = 0;

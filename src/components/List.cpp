@@ -21,15 +21,10 @@
 #include "UiElement.h"
 #include "../utils/Debug.h"
 
-List::List(uint32_t x, uint32_t y, uint32_t sizeBetweenElements ) : UiElement(x, y, 0.f, 0.f, nullptr), m_sizeBetweenElements(sizeBetweenElements)
-{
+List::List(uint32_t x, uint32_t y, uint32_t sizeBetweenElements )
+    : UiElement(x, y, 0.f, 0.f, nullptr), m_sizeBetweenElements(sizeBetweenElements) {}
 
-}
-
-List::List( uint32_t sizeBetweenElements ) : List(0, 0, sizeBetweenElements)
-{
-
-}
+List::List(uint32_t sizeBetweenElements) : List(0, 0, sizeBetweenElements) {}
 
 List::~List()
 {

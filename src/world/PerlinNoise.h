@@ -31,6 +31,10 @@ public:
   // Constructor
     PerlinNoise();
     PerlinNoise(double _persistence, double _frequency, double _amplitude, int _octaves, int _randomseed);
+    PerlinNoise(const PerlinNoise&) = delete;
+    PerlinNoise(PerlinNoise&&) = delete;
+    void operator=(const PerlinNoise&) = delete;
+    void operator=(PerlinNoise&&) = delete;
 
   // Get Height
     double GetHeight(double x, double y) const;

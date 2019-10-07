@@ -26,6 +26,10 @@
 class SkyBox {
 public:
     SkyBox();
+    SkyBox(const SkyBox&) = delete;
+    SkyBox(SkyBox&&) = delete;
+    void operator=(const SkyBox&) = delete;
+    void operator=(SkyBox&&) = delete;
     ~SkyBox();
 	void Render();
 	void Init();

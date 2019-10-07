@@ -27,6 +27,10 @@ class PlayerInventory {
 public:
     PlayerInventory();
     virtual ~PlayerInventory();
+    PlayerInventory(const PlayerInventory&) = delete;
+    PlayerInventory(PlayerInventory&&) = delete;
+    void operator=(const PlayerInventory&) = delete;
+    void operator=(PlayerInventory&&) = delete;
 
 	bool AddToInventory(IEquipable& item);
 

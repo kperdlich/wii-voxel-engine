@@ -25,6 +25,11 @@
 class Camera {
 public:
 	Camera();    
+    Camera(const Camera&) = delete;
+    Camera(Camera&&) = delete;
+    void operator=(const Camera&) = delete;
+    void operator=(Camera&&) = delete;
+
 	void Init();
 
 	void AttachTo(class Entity& entity);

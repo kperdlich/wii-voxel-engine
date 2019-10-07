@@ -6,6 +6,12 @@
 class IniConfig
 {
 public:
+    IniConfig();
+    IniConfig(const IniConfig&) = delete;
+    IniConfig(IniConfig&&) = delete;
+    void operator=(const IniConfig&) = delete;
+    void operator=(IniConfig&&) = delete;
+
     void Parse(const std::string& file);
 
     template<typename T>

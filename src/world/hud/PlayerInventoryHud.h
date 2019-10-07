@@ -22,8 +22,12 @@
 #include "IHudComponent.h"
 
 class PlayerInventoryHud: public IHudComponent {
-public:
+public:   
 	PlayerInventoryHud();
+    PlayerInventoryHud(const PlayerInventoryHud&) = delete;
+    PlayerInventoryHud(PlayerInventoryHud&&) = delete;
+    void operator=(const PlayerInventoryHud&) = delete;
+    void operator=(PlayerInventoryHud&&) = delete;
 	virtual ~PlayerInventoryHud();
 	void Update();
 };

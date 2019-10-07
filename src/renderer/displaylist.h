@@ -6,7 +6,12 @@
 class DisplayList
 {
 public:
+    DisplayList();
     ~DisplayList();
+    DisplayList(const DisplayList&) = delete;
+    DisplayList(DisplayList&&) = delete;
+    void operator=(const DisplayList&) = delete;
+    void operator=(DisplayList&&) = delete;
     void Render() const;
     void Begin(size_t sizeOfDisplayList);
     void End();

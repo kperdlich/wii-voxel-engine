@@ -25,11 +25,11 @@
 class List : public UiElement {
 
 public:
+    explicit List(uint32_t sizeBetweenElements);
     List(uint32_t x, uint32_t y, uint32_t sizeBetweenElements );
-    List( uint32_t sizeBetweenElements );
-	virtual ~List();
-    virtual void Update() override;
+    virtual ~List() override;
 
+    virtual void Update() override;
 	void AddComponent(UiElement* element);
 
 private:

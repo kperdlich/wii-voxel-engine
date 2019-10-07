@@ -27,6 +27,10 @@ class Entity;
 class EntityRenderer {
 public:
 	EntityRenderer(Entity* entity);
+    EntityRenderer(const EntityRenderer&) = delete;
+    EntityRenderer(EntityRenderer&&) = delete;
+    void operator=(const EntityRenderer&) = delete;
+    void operator=(EntityRenderer&&) = delete;
 	virtual ~EntityRenderer();
 	virtual void Render() const;
     void SetTexture( Texture* texture );

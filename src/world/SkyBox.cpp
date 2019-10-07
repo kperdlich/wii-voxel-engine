@@ -28,16 +28,14 @@
 #include "SkyBox_Front_png.h"
 #include "SkyBox_Back_png.h"
 
-
-#define SKY_FRONT 0
-#define SKY_RIGHT 1
-#define SKY_LEFT 2
-#define SKY_BACK 3
-#define SKY_UP 4
-#define SKY_DOWN 5
-
-#define PLAYER_DISTANCE 120.0f
-#define SKYBOX_FACES 6
+constexpr uint8_t SKY_FRONT = 0;
+constexpr uint8_t SKY_RIGHT = 1;
+constexpr uint8_t SKY_LEFT = 2;
+constexpr uint8_t SKY_BACK = 3;
+constexpr uint8_t SKY_UP = 4;
+constexpr uint8_t SKY_DOWN = 5;
+constexpr float PLAYER_DISTANCE = 120.0f;
+constexpr uint8_t SKYBOX_FACES = 6;
 
 SkyBox::SkyBox() {}
 

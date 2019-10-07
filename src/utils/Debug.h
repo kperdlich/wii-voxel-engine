@@ -66,6 +66,8 @@ public:
     static void LogServer(const char* format, ...);
     static void Release();   
 
+    Debug(Debug&&) = delete;
+    void operator=(Debug&&) = delete;
     Debug(Debug const&)	  = delete;
     void operator=(Debug const&) = delete;
 };

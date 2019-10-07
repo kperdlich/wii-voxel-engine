@@ -19,6 +19,7 @@
 
 #pragma once
 
+#include <functional>
 #include <ogcsys.h>
 #include <gccore.h>
 #include "Mutex.h"
@@ -26,8 +27,15 @@
 
 class Thread        
 {
+    using ThreadEntryCallback = void*(*)(void *);
 public:
-    virtual ~Thread() {}
+    Thread();
+    virtual ~Thread();
+    Thread(const Thread&) = delete;
+    Thread(Thread&&) = delete;
+    void operator=(const Thread&) = delete;
+    void operator=(Thread&&) = delete;
+
     int Start();
     bool IsStopped();
     void Stop();
@@ -36,7 +44,7 @@ public:
     void Suspend();
 
 private:
-    int Create(void* (*entry)(void *), void *stackbase, u32 stack_size, u8 prio);
+    int Create(ThreadEntryCallback entryCallback, void *stackbase, u32 stack_size, u8 prio);
     static void* ThreadEntry(void* args);
 
 protected:

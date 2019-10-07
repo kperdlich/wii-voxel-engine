@@ -21,6 +21,8 @@
 #include <network.h>
 #include "../utils/Debug.h"
 
+Socket::Socket() {}
+
 Socket::~Socket()
 {
     Disconnect();

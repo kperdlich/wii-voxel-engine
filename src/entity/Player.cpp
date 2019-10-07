@@ -27,12 +27,11 @@
 #include "../net/packet/PacketPlayerPosition.h"
 #include "../renderer/MasterRenderer.h"
 
-#define ROTATION_SPEED 70.0f
-#define MOVEMENT_SPEED 4.0f
-#define PITCH_MAX 90.0f
-
+constexpr float ROTATION_SPEED  = 70.0f;
+constexpr float MOVEMENT_SPEED  = 4.0f;
+constexpr float PITCH_MAX       = 90.0f;
 constexpr float MAX_JUMP_HEIGHT = 1.3f;
-constexpr float PLAYER_GRAVITY = 4.0f;
+constexpr float PLAYER_GRAVITY  = 4.0f;
 
 
 CPlayer::CPlayer()

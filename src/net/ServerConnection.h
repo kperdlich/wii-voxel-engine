@@ -28,6 +28,11 @@ class ServerConnection : public Thread
 {
 public:
     ServerConnection();
+    ServerConnection(const ServerConnection&) = delete;
+    ServerConnection(ServerConnection&&) = delete;
+    void operator=(const ServerConnection&) = delete;
+    void operator=(ServerConnection&&) = delete;
+
     bool Connect(const std::string& ip, uint16_t port);
     void Destroy();
 

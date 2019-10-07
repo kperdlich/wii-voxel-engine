@@ -35,9 +35,13 @@ enum EBlockFaces
 
 class Block
 {
-public:    
+public:
     Block( float size, const std::map<const Texture*, std::vector<EBlockFaces>>& textureMap)
         : m_size(size), m_textureMap(textureMap){}
+    Block(const Block&) = delete;
+    Block(Block&&) = delete;
+    void operator=(const Block&) = delete;
+    void operator=(Block&&) = delete;
 
     inline const std::map<const Texture*, std::vector<EBlockFaces>>& GetTextures() const
     {

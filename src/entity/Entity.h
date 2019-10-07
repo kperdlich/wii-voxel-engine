@@ -52,11 +52,11 @@ public:
 	const EntityRenderer* GetRenderer() const;
 
 
-protected:
-	bool m_visible = true, m_isPlayer = false;
-	Vector3 m_position, m_rotation;
-    uint32_t m_id;
+protected:	
+	Vector3 m_position, m_rotation;    
 	EntityRenderer* m_entityRenderer;
 	class GameWorld* m_pWorld;
+    uint32_t m_id;
+    bool m_visible = true, m_isPlayer = false;
 
 };

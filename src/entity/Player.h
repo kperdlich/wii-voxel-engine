@@ -30,6 +30,11 @@ class CPlayer: public Entity, public IEventListener {
 public:
     CPlayer();
     virtual ~CPlayer();
+    CPlayer(const CPlayer&) = delete;
+    CPlayer(CPlayer&&) = delete;
+    void operator=(const CPlayer&) = delete;
+    void operator=(CPlayer&&) = delete;
+
     void Update(float deltaSeconds);
 	void AddToInventory(IEquipable& item);
     class Vector3 Move(float x, float y, float deltaTime);
@@ -71,8 +76,9 @@ public:
 private:
     void UpdateInventory();
     PlayerInventory* m_pInventory;
-    bool m_bPlayerSpawned = false, m_bOnTheGround = false, m_bIsPlayerJumping = false,  m_bIsFalling = false;
-    float m_playerJumpOffset = 0.0f;
     double m_Stance = 0.1;
     uint64_t m_LastPlayerServerUpdate;
+    float m_playerJumpOffset = 0.0f;
+    bool m_bPlayerSpawned = false, m_bOnTheGround = false, m_bIsPlayerJumping = false,  m_bIsFalling = false;
+
 };

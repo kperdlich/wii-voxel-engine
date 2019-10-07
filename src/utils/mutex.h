@@ -24,6 +24,11 @@
 class Mutex
 {
 public:
+    Mutex(const Mutex&) = delete;
+    Mutex(Mutex&&) = delete;
+    void operator=(const Mutex&) = delete;
+    void operator=(Mutex&&) = delete;
+
     Mutex()
     {
         LWP_MutexInit(&m_mutex, true);

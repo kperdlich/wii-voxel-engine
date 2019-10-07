@@ -29,6 +29,12 @@ template<class T>
 class SafeQueue
 {
 public:  
+    SafeQueue() {}
+    SafeQueue(const SafeQueue&) = delete;
+    SafeQueue(SafeQueue&&) = delete;
+    void operator=(const SafeQueue&) = delete;
+    void operator=(SafeQueue&&) = delete;
+
     T Pop()
     {
         lock_guard guard(m_mutex);

@@ -33,7 +33,10 @@ class BasicTexture : public IDrawable {
 public:
     BasicTexture(float x, float y, TextureLoadingData textureData);
     virtual ~BasicTexture();
-
+    BasicTexture(const BasicTexture&) = delete;
+    BasicTexture(BasicTexture&&) = delete;
+    void operator=(const BasicTexture&) = delete;
+    void operator=(BasicTexture&&) = delete;
     virtual void Load();
     virtual void Unload();
 

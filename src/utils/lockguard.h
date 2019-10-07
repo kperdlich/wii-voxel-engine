@@ -5,8 +5,13 @@
 class lock_guard
 {
 public:
-    lock_guard(Mutex& mutex);
+    explicit lock_guard(Mutex& mutex);
     ~lock_guard();
+    lock_guard(const lock_guard&) = delete;
+    lock_guard(lock_guard&&) = delete;
+    void operator=(const lock_guard&) = delete;
+    void operator=(lock_guard&&) = delete;
+
     void Release();
     void Lock();
 private:

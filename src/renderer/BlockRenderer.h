@@ -27,6 +27,10 @@ class BlockRenderer {
 public:
 	BlockRenderer();
 	virtual ~BlockRenderer();
+    BlockRenderer(const BlockRenderer&) = delete;
+    BlockRenderer(BlockRenderer&&) = delete;
+    void operator=(const BlockRenderer&) = delete;
+    void operator=(BlockRenderer&&) = delete;
     void Prepare(std::vector<BlockRenderVO> *positionList, const Block& block);
     void Draw();
 	void Finish();

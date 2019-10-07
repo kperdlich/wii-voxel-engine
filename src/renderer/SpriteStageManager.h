@@ -36,7 +36,11 @@ private:
 
 public:
     SpriteStageManager() {}
-    ~SpriteStageManager() {}   
+    ~SpriteStageManager() {}
+    SpriteStageManager(const SpriteStageManager&) = delete;
+    SpriteStageManager(SpriteStageManager&&) = delete;
+    void operator=(const SpriteStageManager&) = delete;
+    void operator=(SpriteStageManager&&) = delete;
 
     void Clear();    
     bool FindSprite(const std::string& name) const;

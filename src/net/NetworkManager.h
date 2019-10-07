@@ -48,8 +48,10 @@ public:
         return m_ServerConnection.GetSocket();
     }
 
-    NetworkManager(NetworkManager const&) = delete;
-    void operator=(NetworkManager const&) = delete;
+    NetworkManager(const NetworkManager&) = delete;
+    NetworkManager(NetworkManager&&) = delete;
+    void operator=(const NetworkManager&) = delete;
+    void operator=(NetworkManager&&) = delete;
 
 private:
     char m_LocalIP[16];

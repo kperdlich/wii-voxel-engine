@@ -32,7 +32,7 @@ protected:
     bool m_bVisible;
 
 public:
-	virtual ~UiElement();
+    virtual ~UiElement();
 	virtual void Load();
 	virtual void Update();
 

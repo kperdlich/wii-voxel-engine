@@ -6,6 +6,10 @@ class Clock
 {
 public:
     Clock();
+    Clock(const Clock&) = delete;
+    Clock(Clock&&) = delete;
+    void operator=(const Clock&) = delete;
+    void operator=(Clock&&) = delete;
     void Start();
     void Stop();
     uint64_t GetMilliSecs() const;

@@ -23,8 +23,8 @@
 #include <cmath>
 #include "Vector3.h"
 
-#define PI 3.14159265
-#define DEGREE_TO_RADIANS PI / 180
+constexpr double PI = 3.14159265;
+constexpr double DEGREE_TO_RADIANS = PI / 180;
 
 class MathHelper {
 
@@ -32,6 +32,11 @@ private:
 	MathHelper();
 public:
 	virtual ~MathHelper();
+    MathHelper(const MathHelper&) = delete;
+    MathHelper(MathHelper&&) = delete;
+    void operator=(const MathHelper&) = delete;
+    void operator=(MathHelper&&) = delete;
+
 	static Vector3 CalculateNewWorldPositionByRotation( const Vector3& rotation, const Vector3& currentWorldPosition, const Vector3& directionVector );
 	static Vector3 CalculateNewWorldPositionByRotation( const Vector3& rotation, const Vector3& currentWorldPosition, float direction );
 	static Vector3 CalculateNewWorldPositionByRotation( float rotation, const Vector3& currentWorldPosition, const Vector3& directionVector );

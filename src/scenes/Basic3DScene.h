@@ -29,6 +29,10 @@
 class Basic3DScene: public Scene {
 public:
     Basic3DScene();
+    Basic3DScene(const Basic3DScene&) = delete;
+    Basic3DScene(Basic3DScene&&) = delete;
+    void operator=(const Basic3DScene&) = delete;
+    void operator=(Basic3DScene&&) = delete;
     virtual ~Basic3DScene();
     virtual void Load() override;
     virtual void Unload() override;

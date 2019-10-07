@@ -27,7 +27,14 @@
 
 class FileSystem
 {
+private:
+    FileSystem() {}
 public:
+    FileSystem(const FileSystem&) = delete;
+    FileSystem(FileSystem&&) = delete;
+    void operator=(const FileSystem&) = delete;
+    void operator=(FileSystem&&) = delete;
+
     static void Init();
     static bool CreateDirectory(const std::string& directoryPath);
     static bool DirectoryExist(const std::string& directoryPath);

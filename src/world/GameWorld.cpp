@@ -185,11 +185,6 @@ void GameWorld::ReadSeed()
     m_noise.Set(.10, .1, .5, 6.0, seed);
 }
 
-PerlinNoise GameWorld::GetNoise() const
-{
-    return m_noise;
-}
-
 void GameWorld::Serialize(const CompressedChunkData& data)
 {
     m_chunkLoader.Serialize(data);

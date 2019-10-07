@@ -19,26 +19,32 @@
 
 #pragma once
 
+#include <functional>
+
 #include "UiTextureElement.h"
 #include "../textures/Texture.h"
 #include "../textures/Label.h"
 
-#define BUTTON_LABEL_DISTANCE 3
-
 class BasicButton: public UiTextureElement
 {
 public:
-	typedef void (*OnClickCallback)(BasicButton*);
+    using ButtonCallback = std::function<void(BasicButton*)>;
 
-    BasicButton( float x, float y, const char* name, Sprite* defaultTexture, Sprite* highlightTexture, Label* label, OnClickCallback clickCallback );
-	virtual ~BasicButton();
+    BasicButton(float x, float y, const char* name, Sprite* defaultTexture,
+                 Sprite* highlightTexture, Label* label, ButtonCallback clickCallback);
+    BasicButton(const BasicButton&) = delete;
+    BasicButton(BasicButton&&) = delete;
+    void operator=(const BasicButton&) = delete;
+    void operator=(BasicButton&&) = delete;
+    virtual ~BasicButton();
+
 	void Update();
     bool MouseOver();
     void CheckForClick();
 	void UpdateLabel();
 
 	void SetColor(u32 color);
-	void SetButtonCallback(OnClickCallback callback);
+    void SetButtonCallback(ButtonCallback callback);
 
     virtual void SetX(uint32_t x) override;
     virtual void SetY(uint32_t y) override;
@@ -47,6 +53,6 @@ public:
 private:
     Sprite* m_highlightTexture = nullptr;
     Label* m_label = nullptr;
-	OnClickCallback m_clickCallback;
+    ButtonCallback m_clickCallback;
     bool m_mouseOver = false;
 };

@@ -23,28 +23,32 @@
 #include "../utils/Debug.h"
 #include "../core/grrlib.h"
 
-BasicButton::BasicButton( float x, float y, const char* name, Sprite* defaultTexture, Sprite* highlightTexture, Label* label, OnClickCallback clickCallback  ) : m_label( label ), m_highlightTexture( highlightTexture ), m_clickCallback( clickCallback ), UiTextureElement( x, y, name, defaultTexture )
+constexpr int BUTTON_LABEL_DISTANCE = 3;
+
+BasicButton::BasicButton(float x, float y, const char* name, Sprite* defaultTexture,
+                          Sprite* highlightTexture, Label* label, ButtonCallback clickCallback)
+    : m_label(label), m_highlightTexture(highlightTexture), m_clickCallback(clickCallback), UiTextureElement(x, y, name, defaultTexture)
 {
-    m_sprite->SetX( x );
-    m_sprite->SetY( y );
-	m_highlightTexture->SetX( x );
-	m_highlightTexture->SetY( y );
+    m_sprite->SetX(x);
+    m_sprite->SetY(y);
+    m_highlightTexture->SetX(x);
+    m_highlightTexture->SetY(y);
 	m_highlightTexture->SetVisible(false);
 	UpdateLabel();
 }
 
 BasicButton::~BasicButton()
 {
-    if ( m_highlightTexture )
+    if (m_highlightTexture)
         delete m_highlightTexture;
-    if ( m_label )
+    if (m_label)
         delete m_label;
 }
 
 
 void BasicButton::Update()
 {
-    if ( MouseOver() )
+    if (MouseOver())
 	{
         CheckForClick();
 	}
@@ -52,9 +56,9 @@ void BasicButton::Update()
 
 bool BasicButton::MouseOver()
 {
-	WiiPad* pad = Engine::Get().GetInputHandler().GetPadByID( WII_PAD_0 );
+    WiiPad* pad = Engine::Get().GetInputHandler().GetPadByID(WII_PAD_0);
     bool mouseOver = GRRLIB_PtInRect(m_sprite->GetX(), m_sprite->GetY(), m_sprite->GetWidth(), m_sprite->GetHeight(), pad->GetX(), pad->GetY() );
-    if ( mouseOver != m_mouseOver )
+    if (mouseOver != m_mouseOver)
     {
         m_sprite->SetVisible(!mouseOver);
         m_highlightTexture->SetVisible(mouseOver);
@@ -67,9 +71,9 @@ bool BasicButton::MouseOver()
 
 void BasicButton::CheckForClick()
 {
-	WiiPad* pad = Engine::Get().GetInputHandler().GetPadByID( WII_PAD_0 );
+    WiiPad* pad = Engine::Get().GetInputHandler().GetPadByID(WII_PAD_0);
 
-	if ( (pad->ButtonsUp() & WPAD_BUTTON_A) && m_clickCallback )
+    if ((pad->ButtonsUp() & WPAD_BUTTON_A) && m_clickCallback)
 	{
 		m_clickCallback(this);
 	}
@@ -82,7 +86,7 @@ void BasicButton::SetColor(u32 color)
 
 }
 
-void BasicButton::SetButtonCallback(OnClickCallback callback)
+void BasicButton::SetButtonCallback(ButtonCallback callback)
 {
 	m_clickCallback = callback;
 }
@@ -91,7 +95,7 @@ void BasicButton::UpdateLabel()
 {
     uint32_t newFontSize = m_sprite->GetHeight() - (2*BUTTON_LABEL_DISTANCE);
 	m_label->SetFontSize( newFontSize );
-    m_label->SetY( m_sprite->GetY() + BUTTON_LABEL_DISTANCE );
+    m_label->SetY(m_sprite->GetY() + BUTTON_LABEL_DISTANCE);
 
     uint32_t textWidthInPixel = GRRLIB_WidthTTF(&m_label->GetFont(), m_label->GetText().c_str(), m_label->GetFontSize());
     m_label->SetX(m_sprite->GetX() + (( m_sprite->GetWidth() / 2) - (textWidthInPixel / 2)));

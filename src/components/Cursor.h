@@ -23,7 +23,11 @@
 
 class Cursor: public UiTextureElement {
 public:
-    Cursor( const char* name, Sprite* sprite );
+    Cursor(const char* name, Sprite* sprite);
+    Cursor(const Cursor&) = delete;
+    Cursor(Cursor&&) = delete;
+    void operator=(const Cursor&) = delete;
+    void operator=(Cursor&&) = delete;
 	virtual ~Cursor();
 	void Update();
 };

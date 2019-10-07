@@ -11,6 +11,12 @@ public:
     Matrix4x4(const Mtx& mtx);
     Matrix4x4(const Mtx44& mtx);
 
+    // Implement later!
+    Matrix4x4(const Matrix4x4&) = delete;
+    Matrix4x4(Matrix4x4&&) = delete;
+    void operator=(const Matrix4x4&) = delete;
+    void operator=(Matrix4x4&&) = delete;
+
     std::string ToString() const;
 
     float _11, _12, _13, _14;

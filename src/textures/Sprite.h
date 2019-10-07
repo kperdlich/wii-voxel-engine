@@ -71,7 +71,7 @@ public:
     }
 
 protected:
+    std::string m_name;
     bool m_bVisible = true;
     uint16_t m_sortingLayerIndex = 0;
-    std::string m_name;
 };

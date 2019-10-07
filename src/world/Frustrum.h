@@ -22,6 +22,10 @@
 class Frustrum {
 public:
 	Frustrum();
+    Frustrum(const Frustrum&) = delete;
+    Frustrum(Frustrum&&) = delete;
+    void operator=(const Frustrum&) = delete;
+    void operator=(Frustrum&&) = delete;
     ~Frustrum();
 
 	bool CubeInFrustum( float x1, float y1, float z1, float x2, float y2, float z2  );

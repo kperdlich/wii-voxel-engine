@@ -21,9 +21,9 @@
 #include "../renderer/MasterRenderer.h"
 #include "../utils/Debug.h"
 
-#define MIN_DIST 0.1f
-#define MAX_DIST 200.0f
-#define FIELD_OF_VIEW 70.0f
+constexpr float MIN_DIST = 0.1f;
+constexpr float MAX_DIST = 200.0f;
+constexpr float FIELD_OF_VIEW = 70.0f;
 
 Basic3DScene::Basic3DScene()
 {    

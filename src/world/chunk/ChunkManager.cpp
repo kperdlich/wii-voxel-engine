@@ -33,6 +33,8 @@
 #include "../../utils/Debug.h"
 #include "../../utils/clock.h"
 
+ChunkManager::ChunkManager() {}
+
 ChunkManager::~ChunkManager()
 {
     m_loaderJob.Stop();

@@ -33,9 +33,8 @@ protected:
     void SendContent(const Socket &socket) const override
     {
     }
-
     std::string m_Channel;
+    char* m_Data = nullptr;
     int16_t m_Length = 0;
-    void* m_Data = nullptr;
 };
 

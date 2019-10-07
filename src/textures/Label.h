@@ -30,6 +30,11 @@ private:
 
 public:
     virtual ~Label();
+    Label(const Label&) = delete;
+    Label(Label&&) = delete;
+    void operator=(const Label&) = delete;
+    void operator=(Label&&) = delete;
+
     static Label* Create(std::string text, GRRLIB_ttfFont* font, std::string searchName, uint16_t sortingLayer = 0);
 
     void Render() const override;

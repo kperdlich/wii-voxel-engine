@@ -21,9 +21,13 @@
 #include "Debug.h"
 #include "lockguard.h"
 
-int Thread::Create(void *(*entry)(void *), void *stackbase, u32 stack_size, u8 prio)
+Thread::Thread() {}
+
+Thread::~Thread() {}
+
+int Thread::Create(ThreadEntryCallback entryCallback, void *stackbase, u32 stack_size, u8 prio)
 {
-    int32_t ret = LWP_CreateThread(&m_threadID, entry, this, stackbase, stack_size, prio);
+    int32_t ret = LWP_CreateThread(&m_threadID, entryCallback, this, stackbase, stack_size, prio);
     if (ret < 0)
     {
         ERROR("Thread: Couldn't create Thread!");
@@ -37,6 +41,7 @@ void* Thread::ThreadEntry(void *args)
     static_cast<Thread*>(args)->PreExecute();
     return nullptr;
 }
+
 
 int Thread::Start()
 {

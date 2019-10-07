@@ -3,6 +3,8 @@
 #include <ogcsys.h>
 #include "displaylist.h"
 
+DisplayList::DisplayList() {}
+
 DisplayList::~DisplayList()
 {
     Clear();

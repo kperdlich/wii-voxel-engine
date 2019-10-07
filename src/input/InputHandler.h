@@ -22,20 +22,25 @@
 #include <vector>
 #include "../input/WiiPad.h"
 
-#define WII_PAD_0 0
-#define WII_PAD_1 1
-#define WII_PAD_2 2
-#define WII_PAD_3 3
+constexpr uint8_t WII_PAD_0 = 0;
+constexpr uint8_t WII_PAD_1 = 1;
+constexpr uint8_t WII_PAD_2 = 2;
+constexpr uint8_t WII_PAD_3 = 3;
 
 
 class InputHandler {
 
 private:
-	std::vector< WiiPad* > m_pads;
+    std::vector<WiiPad*> m_pads;
 
 public:
 	~InputHandler();
 	InputHandler();
+    InputHandler(const InputHandler&) = delete;
+    InputHandler(InputHandler&&) = delete;
+    void operator=(const InputHandler&) = delete;
+    void operator=(InputHandler&&) = delete;
+
 	void Init();
 	void Update();
     WiiPad* GetPadByID( uint32_t padID );

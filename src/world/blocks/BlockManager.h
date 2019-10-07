@@ -41,7 +41,12 @@ enum class BlockType : unsigned char
 class BlockManager {
 public:
     BlockManager();
+    BlockManager(const BlockManager&) = delete;
+    BlockManager(BlockManager&&) = delete;
+    void operator=(const BlockManager&) = delete;
+    void operator=(BlockManager&&) = delete;
 	virtual ~BlockManager();
+
 	void LoadBlocks();
 	void UnloadBlocks();
 

@@ -29,7 +29,7 @@ protected:
     Texture(float x, float y, TextureLoadingData textureData) : BasicTexture(x, y, textureData) {}
 
 public:    
-    ~Texture() {}
+    ~Texture() override {}
 
     void Load() override;
     void Unload() override;

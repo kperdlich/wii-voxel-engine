@@ -27,6 +27,10 @@
 class Basic2DScene: public Scene {
 public:
     Basic2DScene();
+    Basic2DScene(const Basic2DScene&) = delete;
+    Basic2DScene(Basic2DScene&&) = delete;
+    void operator=(const Basic2DScene&) = delete;
+    void operator=(Basic2DScene&&) = delete;
     virtual ~Basic2DScene();
 	virtual void Draw() override;
 	virtual void Load() override;

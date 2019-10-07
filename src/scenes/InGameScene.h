@@ -26,7 +26,7 @@
 
 class InGameScene: public Basic3DScene, public IEventListener {
 public:
-    InGameScene();
+    InGameScene();   
     virtual ~InGameScene();
     void Update(float deltaSeconds) override;
 	void Load() override;
@@ -37,5 +37,4 @@ public:
 protected:
 	void InitEntities();
     WorldLoader* m_pWorldLoader;
-
 };

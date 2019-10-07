@@ -3,6 +3,8 @@
 #include "iniconfig.h"
 #include "Debug.h"
 
+IniConfig::IniConfig() {}
+
 void IniConfig::Parse(const std::string& file)
 {
     std::ifstream iniFile(file);

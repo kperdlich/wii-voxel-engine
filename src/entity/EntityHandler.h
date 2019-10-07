@@ -26,6 +26,10 @@ class EntityHandler {
 public:
 	EntityHandler();
 	virtual ~EntityHandler();
+    EntityHandler(const EntityHandler&) = delete;
+    EntityHandler(EntityHandler&&) = delete;
+    void operator=(const EntityHandler&) = delete;
+    void operator=(EntityHandler&&) = delete;
 
 	class Entity* GetEntity(uint32_t id);
 	void AddEntity(class Entity* entity);

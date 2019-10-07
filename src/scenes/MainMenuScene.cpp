@@ -18,7 +18,6 @@
 ***/
 
 #include <string>
-
 #include "MainMenuScene.h"
 #include "../components/Cursor.h"
 #include "../components/UiTextureElement.h"
@@ -123,7 +122,7 @@ void MainMenuScene::CreateMainMenuButtonList()
 }
 
 
-BasicButton* MainMenuScene::CreateDefaultMainMenuButton( const char* buttonName, const char* buttontext, void (*clickCallback) (BasicButton*) )
+BasicButton* MainMenuScene::CreateDefaultMainMenuButton(const char* buttonName, const char* buttontext, std::function<void(BasicButton*)> clickCallback)
 {
     FontHandler& fontHandler = Engine::Get().GetFontHandler();
 

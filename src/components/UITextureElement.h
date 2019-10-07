@@ -27,6 +27,11 @@ public:
     UiTextureElement(uint32_t x, uint32_t y, const char* name, Sprite* tex);
     UiTextureElement(const char* name, Sprite* tex);
     virtual ~UiTextureElement();
+    UiTextureElement(const UiTextureElement&) = delete;
+    UiTextureElement(UiTextureElement&&) = delete;
+    void operator=(const UiTextureElement&) = delete;
+    void operator=(UiTextureElement&&) = delete;
+
 	void Load() override;
 
     virtual void SetColor(uint32_t color);

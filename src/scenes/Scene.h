@@ -26,6 +26,10 @@ class Scene {
 public:
     Scene();
     virtual ~Scene();
+    Scene(const Scene&) = delete;
+    Scene(Scene&&) = delete;
+    void operator=(const Scene&) = delete;
+    void operator=(Scene&&) = delete;
 	virtual void Load();
 	virtual void Unload();
 	virtual void Draw();

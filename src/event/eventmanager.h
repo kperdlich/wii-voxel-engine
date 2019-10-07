@@ -9,6 +9,11 @@
 class EventManager
 {
 public:
+    EventManager(const EventManager&) = delete;
+    EventManager(EventManager&&) = delete;
+    void operator=(const EventManager&) = delete;
+    void operator=(EventManager&&) = delete;
+
     static void AddListener(IEventListener* listener, uint32_t eventId);
     static void RemoveListener(IEventListener* listener, uint32_t eventId);
     static void Dispatch(uint32_t eventId, void* payload = nullptr);

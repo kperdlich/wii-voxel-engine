@@ -34,15 +34,6 @@
 
 #define LOGO_INDEX 0
 
-IntroScene::IntroScene()  {
-
-}
-
-IntroScene::~IntroScene() {
-
-}
-
-
 void IntroScene::Load()
 {    
 	m_BackgroundAlpha = 255;

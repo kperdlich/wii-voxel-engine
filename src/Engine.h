@@ -34,7 +34,7 @@
 class Engine {
 
 private:
-    Engine();
+    Engine();   
     class SceneHandler* m_pSceneHandler;
     class InputHandler* m_pInputHandler;
     class FontHandler*  m_pFontHandler;
@@ -62,6 +62,8 @@ public:
         return s_instance;
 	}
 
+    Engine(Engine&&) = delete;
+    void operator=(Engine&&) = delete;
     Engine(Engine const&)	  = delete;
     void operator=(Engine const&) = delete;
 private:

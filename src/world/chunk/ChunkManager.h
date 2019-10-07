@@ -28,6 +28,11 @@
 class ChunkManager
 {
 public:   
+    ChunkManager();
+    ChunkManager(const ChunkManager&) = delete;
+    ChunkManager(ChunkManager&&) = delete;
+    void operator=(const ChunkManager&) = delete;
+    void operator=(ChunkManager&&) = delete;
     ~ChunkManager();
     void Init(const Vector3 &position, class GameWorld* world);
     const std::vector<Chunk *> GetLoadedChunks() const;

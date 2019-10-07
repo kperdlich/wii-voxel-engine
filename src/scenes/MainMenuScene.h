@@ -18,6 +18,7 @@
 ***/
 
 #pragma once
+#include <functional>
 #include "Basic2DScene.h"
 #include "../components/BasicButton.h"
 
@@ -28,6 +29,6 @@ public:
     void Update(float deltaSeconds) override;
 private:
 	void CreateMainMenuButtonList();
-	BasicButton* CreateDefaultMainMenuButton( const char* buttonName, const char* buttontext, void (*clickCallback) (BasicButton*));
+    BasicButton* CreateDefaultMainMenuButton(const char* buttonName, const char* buttontext, std::function<void(BasicButton*)> clickCallback);
 
 };

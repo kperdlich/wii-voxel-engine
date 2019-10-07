@@ -143,8 +143,6 @@ src/entity/PlayerInventory.cpp
 src/entity/PlayerInventory.h
 src/entity/PlayerInventory.h
 src/entity/Sword.cpp
-src/entity/Sword.cpp
-src/entity/Sword.h
 src/entity/Sword.h
 src/font/FontHandler.cpp
 src/font/FontHandler.cpp

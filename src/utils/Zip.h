@@ -8,8 +8,13 @@
 class Zip
 {
 private:
-    Zip();
+    Zip() {};
 public:
+    Zip(const Zip&) = delete;
+    Zip(Zip&&) = delete;
+    void operator=(const Zip&) = delete;
+    void operator=(Zip&&) = delete;
+
     static size_t Decompress(unsigned char* inputData, size_t compressedSize, unsigned char* outputData, size_t decompressedSize)
     {
         z_stream infstream;

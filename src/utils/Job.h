@@ -26,7 +26,12 @@ template<class T>
 class Job : public Thread
 {
 public:
+    Job() {}
     virtual ~Job(){}
+    Job(const Job&) = delete;
+    Job(Job&&) = delete;
+    void operator=(const Job&) = delete;
+    void operator=(Job&&) = delete;
 
     void Add(const T& data)
     {

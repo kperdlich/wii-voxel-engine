@@ -23,7 +23,13 @@
 class Socket
 {
 public:
+    Socket();
     ~Socket();
+    Socket(const Socket&) = delete;
+    Socket(Socket&&) = delete;
+    void operator=(const Socket&) = delete;
+    void operator=(Socket&&) = delete;
+
     bool Connect(const std::string& host, uint16_t port);
     void Disconnect();
     void Write(const char* data, size_t size) const;
@@ -32,6 +38,7 @@ public:
     void SendString(const std::string &value) const;
     void Send(const char* data, size_t size) const;
     std::string ReadString() const;
+
     template<typename T>
     T Read() const
     {
