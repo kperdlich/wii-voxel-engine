@@ -17,7 +17,7 @@
  *
 ***/
 
-#include "Hotbar.h"
+#include "world/hud/Hotbar.h"
 
 Hotbar::Hotbar( const char* name, Sprite* sprite ) : UiTextureElement(0, 0, name, sprite )
 {

@@ -22,17 +22,14 @@
 #include <time.h>
 #include <string>
 #include <inttypes.h>
-#include "GameWorld.h"
-#include "Frustrum.h"
-
-#include "../renderer/MasterRenderer.h"
-#include "../utils/Debug.h"
-#include "../utils/Filesystem.h"
-#include "../utils/clock.h"
-#include "chunk/Chunk.h"
-#include "Camera.h"
-
-
+#include "world/GameWorld.h"
+#include "world/Frustrum.h"
+#include "renderer/MasterRenderer.h"
+#include "utils/Debug.h"
+#include "utils/Filesystem.h"
+#include "utils/clock.h"
+#include "world/chunk/Chunk.h"
+#include "world/Camera.h"
 
 GameWorld::GameWorld()
 {    

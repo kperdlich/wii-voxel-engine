@@ -18,11 +18,11 @@
 ***/
 
 
-#include "SceneHandler.h"
-#include "../scenes/IntroScene.h"
-#include "../scenes/MainMenuScene.h"
-#include "../scenes/InGameScene.h"
-#include "../utils/Debug.h"
+#include "scenes/SceneHandler.h"
+#include "scenes/IntroScene.h"
+#include "scenes/MainMenuScene.h"
+#include "scenes/InGameScene.h"
+#include "utils/Debug.h"
 
 SceneHandler::SceneHandler() {}
 

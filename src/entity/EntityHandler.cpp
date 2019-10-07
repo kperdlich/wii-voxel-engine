@@ -17,7 +17,7 @@
  *
 ***/
 
-#include "EntityHandler.h"
+#include "entity/EntityHandler.h"
 
 EntityHandler::EntityHandler() {
 

@@ -22,10 +22,10 @@
 #include <stdarg.h>
 #include <ogc/lwp_watchdog.h>
 
-#include "../Engine.h"
-#include "../core/grrlib.h"
-#include "../font/FontHandler.h"
-#include "../utils/ColorHelper.h"
+#include "Engine.h"
+#include "core/grrlib.h"
+#include "font/FontHandler.h"
+#include "utils/ColorHelper.h"
 
 uint8_t CalculateFrameRate();
 void PrintFps(uint32_t x, uint32_t y, GRRLIB_ttfFont* font, uint32_t fontSize, const u32 color );

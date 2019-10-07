@@ -17,7 +17,7 @@
  *
 ***/
 
-#include "AABB.h"
+#include "physics/collision/AABB.h"
 
 AABB::AABB(const Vector3& vecMin, const Vector3& vecMax) : m_vecMin(vecMin), m_vecMax(vecMax)
 {

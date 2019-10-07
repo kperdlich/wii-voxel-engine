@@ -19,8 +19,8 @@
 
 #pragma once
 
-#include "../BasicCommand.h"
-#include "../../Engine.h"
+#include "Engine.h"
+#include "commands/BasicCommand.h"
 
 class SwitchToIntroCommand: public BasicCommand {
 public:

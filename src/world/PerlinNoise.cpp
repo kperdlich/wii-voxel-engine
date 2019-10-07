@@ -17,7 +17,7 @@
  *
 ***/
 
-#include "PerlinNoise.h"
+#include "world/PerlinNoise.h"
 
 PerlinNoise::PerlinNoise()
 {

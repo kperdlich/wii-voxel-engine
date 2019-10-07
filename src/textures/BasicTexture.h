@@ -19,9 +19,9 @@
 
 #pragma once
 
-#include "IDrawable.h"
-#include "../core/grrlib.h"
-#include "../utils/ColorHelper.h"
+#include "textures/IDrawable.h"
+#include "core/grrlib.h"
+#include "utils/ColorHelper.h"
 
 struct TextureLoadingData
 {

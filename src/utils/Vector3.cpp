@@ -17,8 +17,7 @@
  *
 ***/
 
-#include "Vector3.h"
-#include <altivec.h>
+#include "utils/Vector3.h"
 
 Vector3::Vector3( const Vector3& vec) : m_x(vec.GetX()), m_y(vec.GetY()), m_z(vec.GetZ()) {}
 

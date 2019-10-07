@@ -21,9 +21,9 @@
 
 #include <map>
 #include <vector>
-#include "Block.h"
-#include "../../renderer/BlockRenderer.h"
-#include "../../utils/Vector3.h"
+#include "world/blocks/Block.h"
+#include "renderer/BlockRenderer.h"
+#include "utils/Vector3.h"
 
 constexpr float BLOCK_SIZE_HALF = .5;
 constexpr float BLOCK_SIZE = BLOCK_SIZE_HALF * 2;

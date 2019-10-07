@@ -17,7 +17,7 @@
  *
 ***/
 
-#include "SwitchToIntroCommand.h"
+#include "commands/client/SwitchToIntroCommand.h"
 
 SwitchToIntroCommand::SwitchToIntroCommand() {
 	// TODO Auto-generated constructor stub

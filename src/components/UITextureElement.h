@@ -19,14 +19,14 @@
 
 #pragma once
 
-#include "UiElement.h"
-#include "../textures/Sprite.h"
+#include "components/UiElement.h"
+#include "textures/Sprite.h"
 
 class UiTextureElement: public UiElement {
 public:
     UiTextureElement(uint32_t x, uint32_t y, const char* name, Sprite* tex);
     UiTextureElement(const char* name, Sprite* tex);
-    virtual ~UiTextureElement();
+    virtual ~UiTextureElement() override;
     UiTextureElement(const UiTextureElement&) = delete;
     UiTextureElement(UiTextureElement&&) = delete;
     void operator=(const UiTextureElement&) = delete;

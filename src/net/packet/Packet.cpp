@@ -17,9 +17,9 @@
  *
 ***/
 
-#include "Packet.h"
-#include "../NetworkManager.h"
-#include "../../utils/Debug.h"
+#include "net/packet/Packet.h"
+#include "net/NetworkManager.h"
+#include "utils/Debug.h"
 
 void Packet::Send() const
 {    

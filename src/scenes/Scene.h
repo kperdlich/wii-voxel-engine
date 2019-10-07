@@ -19,7 +19,7 @@
 
 #pragma once
 
-#include "../renderer/SpriteStageManager.h"
+#include "renderer/SpriteStageManager.h"
 
 class Scene {
 

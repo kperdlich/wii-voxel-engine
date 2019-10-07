@@ -19,9 +19,9 @@
 
 #pragma once
 #include <vector>
-#include "BlockRenderHelper.h"
-#include "../world/blocks/Block.h"
-#include "../textures/Texture.h"
+#include "renderer/BlockRenderHelper.h"
+#include "world/blocks/Block.h"
+#include "textures/Texture.h"
 
 class BlockRenderer {
 public:

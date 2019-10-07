@@ -20,8 +20,8 @@
 #pragma once
 
 #include <gccore.h>
-#include "../core/grrlib.h"
-#include "BasicTexture.h"
+#include "core/grrlib.h"
+#include "textures/BasicTexture.h"
 
 class Texture : public BasicTexture
 {

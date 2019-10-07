@@ -19,8 +19,8 @@
 
 #pragma once
 #include <functional>
-#include "Basic2DScene.h"
-#include "../components/BasicButton.h"
+#include "scenes/Basic2DScene.h"
+#include "components/BasicButton.h"
 
 class MainMenuScene: public Basic2DScene {
 public:

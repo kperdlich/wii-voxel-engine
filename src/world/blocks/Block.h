@@ -21,7 +21,7 @@
 
 #include <vector>
 #include <map>
-#include "../../textures/Texture.h"
+#include "textures/Texture.h"
 
 enum EBlockFaces
 {

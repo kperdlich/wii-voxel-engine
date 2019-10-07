@@ -19,8 +19,8 @@
 
 #pragma once
 
-#include "../renderer/SpriteStageManager.h"
-#include "../textures/Texture.h"
+#include "renderer/SpriteStageManager.h"
+#include "textures/Texture.h"
 
 class Entity;
 

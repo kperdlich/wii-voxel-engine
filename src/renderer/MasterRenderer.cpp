@@ -1,6 +1,6 @@
-#include "MasterRenderer.h"
 #include <gccore.h>
 #include <math.h>
+#include "renderer/MasterRenderer.h"
 
 MasterRenderer::MasterRenderer()
 {

@@ -23,7 +23,7 @@
 #include "chunkdata.h"
 #include "jobs/SerializationJob.h"
 #include "jobs/ChunkLoaderMultiplayer.h"
-#include "../../utils/Vector3.h"
+#include "utils/Vector3.h"
 
 class ChunkManager
 {

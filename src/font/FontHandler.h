@@ -19,8 +19,8 @@
 
 #pragma once
 
-#include "../core/grrlib.h"
 #include <vector>
+#include "core/grrlib.h"
 // Font
 #include "FreeMonoBold_ttf.h"
 #include "Minecraft_ttf.h"

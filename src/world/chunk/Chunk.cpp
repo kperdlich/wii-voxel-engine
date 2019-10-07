@@ -20,13 +20,13 @@
 
 #include <sstream>
 #include "Chunk.h"
-#include "../PerlinNoise.h"
-#include "../../utils/MathHelper.h"
-#include "../../renderer/MasterRenderer.h"
-#include "../../renderer/BlockRenderer.h"
-#include "../../utils/Debug.h"
-#include "../../utils/lockguard.h"
-#include "../../utils/clock.h"
+#include "world/PerlinNoise.h"
+#include "utils/MathHelper.h"
+#include "renderer/MasterRenderer.h"
+#include "renderer/BlockRenderer.h"
+#include "utils/Debug.h"
+#include "utils/lockguard.h"
+#include "utils/clock.h"
 
 Chunk::Chunk(class GameWorld& gameWorld)
 {

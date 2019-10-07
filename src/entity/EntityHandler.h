@@ -20,7 +20,7 @@
 #pragma once
 
 #include <map>
-#include "Entity.h"
+#include "entity/Entity.h"
 
 class EntityHandler {
 public:

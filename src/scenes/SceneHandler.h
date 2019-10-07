@@ -20,7 +20,7 @@
 #pragma once
 
 #include <vector>
-#include "Scene.h"
+#include "scenes/Scene.h"
 
 constexpr int32_t INVALID_SCENE     = -1;
 constexpr int32_t INTRO_SCENE_ID    = 0;

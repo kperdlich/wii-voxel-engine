@@ -22,8 +22,8 @@
 #include <queue>
 #include <ogcsys.h>
 #include <gccore.h>
-#include "Mutex.h"
-#include "lockguard.h"
+#include "utils/Mutex.h"
+#include "utils/lockguard.h"
 
 template<class T>
 class SafeQueue

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../chunkdata.h"
-#include "../../../utils/Job.h"
+#include "utils/Job.h"
+#include "world/chunk/chunkdata.h"
 
 class ChunkLoaderMultiplayer : public Job<ChunkLoadingData>
 {

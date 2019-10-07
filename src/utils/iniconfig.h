@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include "inipp.h"
+#include "utils/inipp.h"
 
 class IniConfig
 {

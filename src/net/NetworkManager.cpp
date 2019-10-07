@@ -18,11 +18,11 @@
 ***/
 
 #include <network.h>
-#include "NetworkManager.h"
-#include "packet/PacketHandshake.h"
-#include "../utils/Debug.h"
-#include "../utils/Thread.h"
-#include "../utils/SafeQueue.h"
+#include "net/NetworkManager.h"
+#include "net/packet/PacketHandshake.h"
+#include "utils/Debug.h"
+#include "utils/Thread.h"
+#include "utils/SafeQueue.h"
 
 void NetworkManager::Init()
 {    

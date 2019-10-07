@@ -19,8 +19,8 @@
 
 #pragma once
 
-#include "Thread.h"
-#include "SafeQueue.h"
+#include "utils/Thread.h"
+#include "utils/SafeQueue.h"
 
 template<class T>
 class Job : public Thread

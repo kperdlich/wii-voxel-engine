@@ -20,7 +20,7 @@
 #pragma once
 
 #include <vector>
-#include "../input/WiiPad.h"
+#include "input/WiiPad.h"
 
 constexpr uint8_t WII_PAD_0 = 0;
 constexpr uint8_t WII_PAD_1 = 1;

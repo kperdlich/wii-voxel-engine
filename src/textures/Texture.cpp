@@ -18,7 +18,7 @@
 ***/
 
 
-#include "Texture.h"
+#include "textures/Texture.h"
 
 struct TPL_Header{
     uint32_t	magic;

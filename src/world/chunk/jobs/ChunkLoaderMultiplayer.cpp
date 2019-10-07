@@ -1,11 +1,11 @@
 
 #include <iostream>
 #include <sstream>
-#include "ChunkLoaderMultiplayer.h"
-#include "../Chunk.h"
-#include "../chunkdata.h"
-#include "../../../utils/Zip.h"
-#include "../../../utils/Filesystem.h"
+#include "world/chunk/jobs/ChunkLoaderMultiplayer.h"
+#include "world/chunk/Chunk.h"
+#include "world/chunk/chunkdata.h"
+#include "utils/Zip.h"
+#include "utils/Filesystem.h"
 
 void ChunkLoaderMultiplayer::Execute()
 {

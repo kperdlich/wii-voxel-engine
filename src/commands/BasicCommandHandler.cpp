@@ -17,7 +17,7 @@
  *
 ***/
 
-#include "BasicCommandHandler.h"
+#include "commands/BasicCommandHandler.h"
 
 BasicCommandHandler::BasicCommandHandler() {
 

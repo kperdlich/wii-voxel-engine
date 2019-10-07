@@ -17,9 +17,9 @@
  *
 ***/
 
-#include "Debug.h"
-#include "Mutex.h"
-#include "lockguard.h"
+#include "utils/Debug.h"
+#include "utils/Mutex.h"
+#include "utils/lockguard.h"
 
 std::ofstream Debug::s_file;
 Mutex Debug::s_fileMutex;

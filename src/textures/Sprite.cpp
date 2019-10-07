@@ -17,9 +17,9 @@
  *
 ***/
 
-#include "Sprite.h"
-#include "../Engine.h"
-#include "../renderer/MasterRenderer.h"
+#include "Engine.h"
+#include "textures/Sprite.h"
+#include "renderer/MasterRenderer.h"
 
 Sprite::Sprite(float x, float y, TextureLoadingData textureData) : BasicTexture(x, y, textureData), m_bVisible(true) { }
 

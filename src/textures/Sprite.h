@@ -19,9 +19,9 @@
 
 #pragma once
 
-#include "BasicTexture.h"
-#include "ISprite.h"
 #include <string>
+#include "textures/BasicTexture.h"
+#include "textures/ISprite.h"
 
 class Sprite : public BasicTexture, public ISprite
 {

@@ -21,7 +21,7 @@
 
 #include <math.h>
 #include <cmath>
-#include "Vector3.h"
+#include "utils/Vector3.h"
 
 constexpr double PI = 3.14159265;
 constexpr double DEGREE_TO_RADIANS = PI / 180;

@@ -22,8 +22,8 @@
 #include <functional>
 #include <ogcsys.h>
 #include <gccore.h>
-#include "Mutex.h"
-#include "Debug.h"
+#include "utils/Mutex.h"
+#include "utils/Debug.h"
 
 class Thread        
 {

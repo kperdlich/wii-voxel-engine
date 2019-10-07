@@ -1,13 +1,13 @@
-#include "worldloader.h"
-#include "../textures/Label.h"
-#include "../utils/Filesystem.h"
-#include "../utils/iniconfig.h"
-#include "../net/NetworkManager.h"
-#include "../net/packet/PacketHandshake.h"
-#include "../event/eventmanager.h"
-#include "../event/event.h"
-#include "../scenes/Basic3DScene.h"
-#include "../Engine.h"
+#include "Engine.h"
+#include "components/worldloader.h"
+#include "textures/Label.h"
+#include "utils/Filesystem.h"
+#include "utils/iniconfig.h"
+#include "net/NetworkManager.h"
+#include "net/packet/PacketHandshake.h"
+#include "event/eventmanager.h"
+#include "event/event.h"
+#include "scenes/Basic3DScene.h"
 
 WorldLoader::WorldLoader(const char* name, Sprite* sprite) : UiTextureElement(0, 0, name, sprite),
     m_state(EWorldLoaderState::CHECK_WORLD_CASH), m_nextState(EWorldLoaderState::CHECK_WORLD_CASH)

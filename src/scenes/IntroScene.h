@@ -18,7 +18,7 @@
 ***/
 
 #pragma once
-#include "Basic2DScene.h"
+#include "scenes/Basic2DScene.h"
 
 class IntroScene : public Basic2DScene
 {

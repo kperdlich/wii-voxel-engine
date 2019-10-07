@@ -20,8 +20,8 @@
 #pragma once
 
 #include <vector>
-#include "Scene.h"
-#include "../components/UiElement.h"
+#include "scenes/Scene.h"
+#include "components/UiElement.h"
 
 
 class Basic2DScene: public Scene {

@@ -42,5 +42,5 @@ protected:
     int32_t m_ChunkX = 0, m_ChunkZ = 0;
     int16_t m_RecordCount = 0;
     int32_t m_DataSize = 0;
-    void* m_Data = nullptr;
+    unsigned char* m_Data = nullptr;
 };

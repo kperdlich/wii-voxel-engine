@@ -17,12 +17,12 @@
  *
 ***/
 
-#include "Label.h"
-#include "../Engine.h"
-#include "../core/grrlib.h"
+#include "Engine.h"
+#include "textures/Label.h"
+#include "core/grrlib.h"
 
 Label::Label(const std::string& text, float x, float y, GRRLIB_ttfFont* font, uint32_t fontSize, uint32_t color)
-    : m_x(x), m_y(y), m_text(text), m_font(font), m_fontSize(fontSize), m_textColor(color)
+    : m_text(text), m_font(font), m_fontSize(fontSize), m_textColor(color), m_x(x), m_y(y)
 {
 }
 

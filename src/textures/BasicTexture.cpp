@@ -17,10 +17,11 @@
  *
 ***/
 
-#include "BasicTexture.h"
-#include "../Engine.h"
+#include "Engine.h"
+#include "textures/BasicTexture.h"
 
-BasicTexture::BasicTexture(float x, float y, TextureLoadingData textureData) : m_x(x), m_y(y), m_textureLoadingData(textureData), m_color(GRRLIB_WHITE) { }
+BasicTexture::BasicTexture(float x, float y, TextureLoadingData textureData)
+    : m_x(x), m_y(y), m_color(GRRLIB_WHITE), m_textureLoadingData(textureData) { }
 
 BasicTexture::~BasicTexture()
 {
@@ -29,7 +30,7 @@ BasicTexture::~BasicTexture()
 
 void BasicTexture::Load()
 {
-    m_loadedTexture = GRRLIB_LoadTexture( m_textureLoadingData.textureData );
+    m_loadedTexture = GRRLIB_LoadTexture(m_textureLoadingData.textureData);
 
     if ( m_loadedTexture )
     {        

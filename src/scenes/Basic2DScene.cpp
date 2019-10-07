@@ -17,7 +17,7 @@
  *
 ***/
 
-#include "Basic2DScene.h"
+#include "scenes/Basic2DScene.h"
 
 Basic2DScene::Basic2DScene() {}
 

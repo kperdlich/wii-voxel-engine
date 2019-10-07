@@ -1,7 +1,7 @@
 #include <malloc.h>
 #include <cstring>
 #include <ogcsys.h>
-#include "displaylist.h"
+#include "renderer/displaylist.h"
 
 DisplayList::DisplayList() {}
 

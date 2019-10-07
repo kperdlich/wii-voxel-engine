@@ -17,7 +17,7 @@
  *
 ***/
 
-#include "PlayerInventoryHud.h"
+#include "world/hud/PlayerInventoryHud.h"
 
 PlayerInventoryHud::PlayerInventoryHud() {
 

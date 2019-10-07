@@ -22,7 +22,7 @@
 #include <cstring>
 #include <vector>
 #include <cstdio>
-#include "../Socket.h"
+#include "net/Socket.h"
 
 struct SlotData
 {

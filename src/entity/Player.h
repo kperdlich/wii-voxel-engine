@@ -19,12 +19,12 @@
 
 #pragma once
 
-#include "Entity.h"
-#include "../event/eventlistener.h"
-#include "../utils/Vector3.h"
-#include "../utils/Debug.h"
-#include "PlayerInventory.h"
-#include "IEquipable.h"
+#include "entity/Entity.h"
+#include "event/eventlistener.h"
+#include "utils/Vector3.h"
+#include "utils/Debug.h"
+#include "entity/PlayerInventory.h"
+#include "entity/IEquipable.h"
 
 class CPlayer: public Entity, public IEventListener {
 public:

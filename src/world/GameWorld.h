@@ -22,10 +22,10 @@
 #include <map>
 #include "chunk/ChunkManager.h"
 #include "blocks/BlockManager.h"
-#include "PerlinNoise.h"
-#include "../renderer/BlockRenderer.h"
-#include "../scenes/Basic3DScene.h"
-#include "../utils/MathHelper.h"
+#include "world/PerlinNoise.h"
+#include "renderer/BlockRenderer.h"
+#include "scenes/Basic3DScene.h"
+#include "utils/MathHelper.h"
 
 class GameWorld {
 public:

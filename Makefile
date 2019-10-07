@@ -42,7 +42,8 @@ SOURCES		:=	src \
 DATA		:=	data \
 				fonts \
 				assets
-INCLUDES	:=
+INCLUDES	:= src
+				
 
 #---------------------------------------------------------------------------------
 # path to .dol debugger

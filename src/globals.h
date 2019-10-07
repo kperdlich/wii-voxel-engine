@@ -19,7 +19,7 @@
 
 #pragma once
 
-//#define DEBUG
+#define DEBUG
 
 #define GAME_NAME                   "WoxelCraft"
 #define BUILD_VERSION               "0.0.8"

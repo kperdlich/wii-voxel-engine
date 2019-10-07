@@ -20,9 +20,9 @@
 #pragma once
 
 #include <map>
-#include "Socket.h"
-#include "../utils/Thread.h"
-#include "../utils/SafeQueue.h"
+#include "net/Socket.h"
+#include "utils/Thread.h"
+#include "utils/SafeQueue.h"
 
 class ServerConnection : public Thread
 {

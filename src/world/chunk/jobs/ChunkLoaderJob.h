@@ -19,8 +19,8 @@
 
 #pragma once
 
-#include "../chunkdata.h"
-#include "../../../utils/Job.h"
+#include "world/chunk/chunkdata.h"
+#include "utils/Job.h"
 
 class ChunkLoaderJob : public Job<ChunkLoadingData>
 {

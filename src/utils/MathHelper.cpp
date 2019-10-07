@@ -17,7 +17,7 @@
  *
 ***/
 
-#include "MathHelper.h"
+#include "utils/MathHelper.h"
 
 MathHelper::MathHelper() { }
 

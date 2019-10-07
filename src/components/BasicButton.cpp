@@ -18,16 +18,16 @@
 ***/
 
 #include <math.h>
-#include "BasicButton.h"
-#include "../Engine.h"
-#include "../utils/Debug.h"
-#include "../core/grrlib.h"
+#include "Engine.h"
+#include "components/BasicButton.h"
+#include "utils/Debug.h"
+#include "core/grrlib.h"
 
 constexpr int BUTTON_LABEL_DISTANCE = 3;
 
-BasicButton::BasicButton(float x, float y, const char* name, Sprite* defaultTexture,
+BasicButton::BasicButton(uint32_t x, uint32_t y, const char* name, Sprite* defaultTexture,
                           Sprite* highlightTexture, Label* label, ButtonCallback clickCallback)
-    : m_label(label), m_highlightTexture(highlightTexture), m_clickCallback(clickCallback), UiTextureElement(x, y, name, defaultTexture)
+    : UiTextureElement(x, y, name, defaultTexture), m_highlightTexture(highlightTexture), m_label(label), m_clickCallback(clickCallback)
 {
     m_sprite->SetX(x);
     m_sprite->SetY(y);

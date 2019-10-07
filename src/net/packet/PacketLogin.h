@@ -30,7 +30,8 @@ class PacketLogin : public Packet
 {
 public:
     PacketLogin() : Packet(PACKET_LOGIN) {}
-    PacketLogin(const std::string playerName) : Packet(PACKET_LOGIN), m_PlayerName(playerName), m_ProtocolVersion(SERVER_PROTOCOL_VERSION) {}
+    PacketLogin(const std::string playerName)
+        : Packet(PACKET_LOGIN), m_ProtocolVersion(SERVER_PROTOCOL_VERSION), m_PlayerName(playerName) {}
 
     void Read(const Socket &socket) override
     {

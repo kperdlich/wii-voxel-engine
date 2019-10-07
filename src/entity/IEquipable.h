@@ -19,8 +19,8 @@
 
 #pragma once
 
-#include "../components/UiTextureElement.h"
-#include "Entity.h"
+#include "entity/Entity.h"
+#include "components/UiTextureElement.h"
 
 class IEquipable {
 public:

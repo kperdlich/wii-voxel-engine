@@ -19,10 +19,10 @@
 
 #pragma once
 
-#include "../core/grrlib.h"
-#include "IDrawable.h"
-#include "ISprite.h"
 #include <string>
+#include "textures/IDrawable.h"
+#include "textures/ISprite.h"
+#include "core/grrlib.h"
 
 class Label : public IDrawable, public ISprite {
 private:

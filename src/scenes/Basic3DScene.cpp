@@ -17,9 +17,9 @@
  *
 ***/
 
-#include "Basic3DScene.h"
-#include "../renderer/MasterRenderer.h"
-#include "../utils/Debug.h"
+#include "scenes/Basic3DScene.h"
+#include "renderer/MasterRenderer.h"
+#include "utils/Debug.h"
 
 constexpr float MIN_DIST = 0.1f;
 constexpr float MAX_DIST = 200.0f;

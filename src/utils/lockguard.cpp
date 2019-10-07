@@ -1,6 +1,5 @@
-#include "lockguard.h"
-
 #include <gccore.h>
+#include "utils/lockguard.h"
 
 lock_guard::lock_guard(Mutex& mutex) : m_mutex(mutex), m_bReleased(true)
 {

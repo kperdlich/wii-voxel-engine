@@ -17,7 +17,7 @@
  *
 ***/
 
-#include "SwitchToInGameCommand.h"
+#include "commands/client/SwitchToInGameCommand.h"
 
 SwitchToInGameCommand::SwitchToInGameCommand() {}
 

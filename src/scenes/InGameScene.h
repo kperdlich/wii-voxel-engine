@@ -19,9 +19,9 @@
 
 #pragma once
 
-#include "Basic3DScene.h"
-#include "../event/eventlistener.h"
-#include "../components/worldloader.h"
+#include "scenes/Basic3DScene.h"
+#include "event/eventlistener.h"
+#include "components/worldloader.h"
 
 
 class InGameScene: public Basic3DScene, public IEventListener {

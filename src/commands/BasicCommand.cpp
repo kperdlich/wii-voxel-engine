@@ -17,7 +17,7 @@
  *
 ***/
 
-#include "BasicCommand.h"
+#include "commands/BasicCommand.h"
 
 BasicCommand::BasicCommand() {}
 

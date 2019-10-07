@@ -20,7 +20,7 @@
 #pragma once
 
 #include <stdint.h>
-#include "../utils/MathHelper.h"
+#include "utils/MathHelper.h"
 
 constexpr uint8_t LEFT_FACE   = 0x01;
 constexpr uint8_t RIGHT_FACE  = (LEFT_FACE  << 1);

@@ -17,7 +17,7 @@
  *
 ***/
 
-#include "../../utils/Vector3.h"
+#include "utils/Vector3.h"
 
 #pragma once
 

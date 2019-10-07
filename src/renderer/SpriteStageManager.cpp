@@ -20,8 +20,8 @@
 
 #include <functional>
 #include <algorithm>
-#include "SpriteStageManager.h"
-#include "../utils/Debug.h"
+#include "renderer/SpriteStageManager.h"
+#include "utils/Debug.h"
 
 
 void SpriteStageManager::Clear()

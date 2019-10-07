@@ -1,5 +1,5 @@
 #include <ogc/lwp_watchdog.h>
-#include "clock.h"
+#include "utils/clock.h"
 
 Clock::Clock() {}
 

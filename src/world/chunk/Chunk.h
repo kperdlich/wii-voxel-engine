@@ -22,11 +22,11 @@
 #include <stdint.h>
 #include <string>
 #include "ChunkData.h"
-#include "../GameWorld.h"
-#include "../../renderer/BlockRenderHelper.h"
-#include "../../renderer/displaylist.h"
-#include "../../utils/Vector3.h"
-#include "../../utils/Mutex.h"
+#include "world/GameWorld.h"
+#include "renderer/BlockRenderHelper.h"
+#include "renderer/displaylist.h"
+#include "utils/Vector3.h"
+#include "utils/Mutex.h"
 
 class Chunk {
 public:

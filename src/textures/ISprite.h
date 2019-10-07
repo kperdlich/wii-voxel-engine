@@ -19,8 +19,8 @@
 
 #pragma once
 
-#include "IDrawable.h"
 #include <string>
+#include "textures/IDrawable.h"
 
 
 enum class ESpriteType {

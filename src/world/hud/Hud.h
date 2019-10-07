@@ -20,9 +20,9 @@
 #pragma once
 
 #include <vector>
-#include "../../components/UiTextureElement.h"
-#include "Hotbar.h"
-#include "PlayerInventoryHud.h"
+#include "components/UiTextureElement.h"
+#include "world/hud/Hotbar.h"
+#include "world/hud/PlayerInventoryHud.h"
 
 class Hud {
 public:

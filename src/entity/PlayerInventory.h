@@ -19,7 +19,7 @@
 
 #pragma once
 
-#include "IEquipable.h"
+#include "entity/IEquipable.h"
 
 #define INVENTORY_MAX_SIZE 10
 

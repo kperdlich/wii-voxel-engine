@@ -17,8 +17,8 @@
  *
 ***/
 
-#include "BlockRenderer.h"
-#include "../renderer/MasterRenderer.h"
+#include "renderer/BlockRenderer.h"
+#include "renderer/MasterRenderer.h"
 
 BlockRenderer::BlockRenderer() {}
 
@@ -61,14 +61,14 @@ void BlockRenderer::Draw()
                 // see http://www.matrix44.net/cms/wp-content/uploads/2011/03/ogl_coord_object_space_cube.png
                 guVector vertices[8] =
                 {
-                        { blockPosition.GetX() - m_renderBlockSize, blockPosition.GetY() + m_renderBlockSize, blockPosition.GetZ() + m_renderBlockSize },// v1
-                        { blockPosition.GetX() - m_renderBlockSize, blockPosition.GetY() - m_renderBlockSize, blockPosition.GetZ() + m_renderBlockSize }, //v2
-                        { blockPosition.GetX() + m_renderBlockSize, blockPosition.GetY() - m_renderBlockSize, blockPosition.GetZ() + m_renderBlockSize }, //v3
-                        { blockPosition.GetX() + m_renderBlockSize, blockPosition.GetY() + m_renderBlockSize, blockPosition.GetZ() + m_renderBlockSize }, // v4
-                        { blockPosition.GetX() - m_renderBlockSize, blockPosition.GetY() + m_renderBlockSize, blockPosition.GetZ() - m_renderBlockSize }, //v5
-                        { blockPosition.GetX() + m_renderBlockSize, blockPosition.GetY() + m_renderBlockSize, blockPosition.GetZ() - m_renderBlockSize }, // v6
-                        { blockPosition.GetX() + m_renderBlockSize, blockPosition.GetY() - m_renderBlockSize, blockPosition.GetZ() - m_renderBlockSize }, // v7
-                        { blockPosition.GetX() - m_renderBlockSize, blockPosition.GetY() - m_renderBlockSize, blockPosition.GetZ() - m_renderBlockSize } // v8
+                        { (float) blockPosition.GetX() - m_renderBlockSize, (float) blockPosition.GetY() + m_renderBlockSize, (float) blockPosition.GetZ() + m_renderBlockSize },// v1
+                        { (float) blockPosition.GetX() - m_renderBlockSize, (float) blockPosition.GetY() - m_renderBlockSize, (float) blockPosition.GetZ() + m_renderBlockSize }, //v2
+                        { (float) blockPosition.GetX() + m_renderBlockSize, (float) blockPosition.GetY() - m_renderBlockSize, (float) blockPosition.GetZ() + m_renderBlockSize }, //v3
+                        { (float) blockPosition.GetX() + m_renderBlockSize, (float) blockPosition.GetY() + m_renderBlockSize, (float) blockPosition.GetZ() + m_renderBlockSize }, // v4
+                        { (float) blockPosition.GetX() - m_renderBlockSize, (float) blockPosition.GetY() + m_renderBlockSize, (float) blockPosition.GetZ() - m_renderBlockSize }, //v5
+                        { (float) blockPosition.GetX() + m_renderBlockSize, (float) blockPosition.GetY() + m_renderBlockSize, (float) blockPosition.GetZ() - m_renderBlockSize }, // v6
+                        { (float) blockPosition.GetX() + m_renderBlockSize, (float) blockPosition.GetY() - m_renderBlockSize, (float) blockPosition.GetZ() - m_renderBlockSize }, // v7
+                        { (float) blockPosition.GetX() - m_renderBlockSize, (float) blockPosition.GetY() - m_renderBlockSize, (float) blockPosition.GetZ() - m_renderBlockSize } // v8
 
                 };
 
@@ -219,15 +219,15 @@ void BlockRenderer::DrawFocusOnSelectedCube(const Vector3& blockWorldPosition, f
 	// see http://www.matrix44.net/cms/wp-content/uploads/2011/03/ogl_coord_object_space_cube.png
     guVector vertices[8] =
     {
-            { blockWorldPosition.GetX() - blockSizeToCenter, blockWorldPosition.GetY() + blockSizeToCenter, blockWorldPosition.GetZ() + blockSizeToCenter },// v1
-            { blockWorldPosition.GetX() - blockSizeToCenter, blockWorldPosition.GetY() - blockSizeToCenter, blockWorldPosition.GetZ() + blockSizeToCenter }, //v2
-            { blockWorldPosition.GetX() + blockSizeToCenter, blockWorldPosition.GetY() - blockSizeToCenter, blockWorldPosition.GetZ() + blockSizeToCenter }, //v3
-            { blockWorldPosition.GetX() + blockSizeToCenter, blockWorldPosition.GetY() + blockSizeToCenter, blockWorldPosition.GetZ() + blockSizeToCenter }, // v4
-            { blockWorldPosition.GetX() - blockSizeToCenter, blockWorldPosition.GetY() + blockSizeToCenter, blockWorldPosition.GetZ() - blockSizeToCenter }, //v5
-            { blockWorldPosition.GetX() + blockSizeToCenter, blockWorldPosition.GetY() + blockSizeToCenter, blockWorldPosition.GetZ() - blockSizeToCenter }, // v6
-            { blockWorldPosition.GetX() + blockSizeToCenter, blockWorldPosition.GetY() - blockSizeToCenter, blockWorldPosition.GetZ() - blockSizeToCenter }, // v7
-            { blockWorldPosition.GetX() - blockSizeToCenter, blockWorldPosition.GetY() - blockSizeToCenter, blockWorldPosition.GetZ() - blockSizeToCenter } // v8
-	};
+            { (float) blockWorldPosition.GetX() - blockSizeToCenter, (float) blockWorldPosition.GetY() + blockSizeToCenter, (float) blockWorldPosition.GetZ() + blockSizeToCenter },// v1
+            { (float) blockWorldPosition.GetX() - blockSizeToCenter, (float) blockWorldPosition.GetY() - blockSizeToCenter, (float) blockWorldPosition.GetZ() + blockSizeToCenter }, //v2
+            { (float) blockWorldPosition.GetX() + blockSizeToCenter, (float) blockWorldPosition.GetY() - blockSizeToCenter, (float) blockWorldPosition.GetZ() + blockSizeToCenter }, //v3
+            { (float) blockWorldPosition.GetX() + blockSizeToCenter, (float) blockWorldPosition.GetY() + blockSizeToCenter, (float) blockWorldPosition.GetZ() + blockSizeToCenter }, // v4
+            { (float) blockWorldPosition.GetX() - blockSizeToCenter, (float) blockWorldPosition.GetY() + blockSizeToCenter, (float) blockWorldPosition.GetZ() - blockSizeToCenter }, //v5
+            { (float) blockWorldPosition.GetX() + blockSizeToCenter, (float) blockWorldPosition.GetY() + blockSizeToCenter, (float) blockWorldPosition.GetZ() - blockSizeToCenter }, // v6
+            { (float) blockWorldPosition.GetX() + blockSizeToCenter, (float) blockWorldPosition.GetY() - blockSizeToCenter, (float) blockWorldPosition.GetZ() - blockSizeToCenter }, // v7
+            { (float) blockWorldPosition.GetX() - blockSizeToCenter, (float) blockWorldPosition.GetY() - blockSizeToCenter, (float) blockWorldPosition.GetZ() - blockSizeToCenter } // v8
+    };
 
 	GX_Begin(GX_LINESTRIP, GX_VTXFMT0, 16);
 		GX_Position3f32(vertices[1].x,vertices[1].y,vertices[1].z);

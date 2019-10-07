@@ -17,7 +17,7 @@
  *
 ***/
 
-#include "Hud.h"
+#include "world/hud/Hud.h"
 
 // define all component names here!
 

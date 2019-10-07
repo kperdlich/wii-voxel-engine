@@ -17,9 +17,9 @@
  *
 ***/
 
-#include "Socket.h"
 #include <network.h>
-#include "../utils/Debug.h"
+#include "net/Socket.h"
+#include "utils/Debug.h"
 
 Socket::Socket() {}
 

@@ -20,18 +20,18 @@
 #include <string>
 #include <errno.h>
 #include <algorithm>
-#include "ChunkManager.h"
-#include "chunkdata.h"
-#include "../../utils/Job.h"
-#include "../../event/eventmanager.h"
-#include "../../event/event.h"
-#include "Chunk.h"
+#include "world/chunk/ChunkManager.h"
+#include "world/chunk/chunkdata.h"
+#include "utils/Job.h"
+#include "event/eventmanager.h"
+#include "event/event.h"
+#include "world/chunk/Chunk.h"
 #include "jobs/ChunkLoaderJob.h"
 #include "jobs/SerializationJob.h"
-#include "../GameWorld.h"
-#include "../../utils/Filesystem.h"
-#include "../../utils/Debug.h"
-#include "../../utils/clock.h"
+#include "world/GameWorld.h"
+#include "utils/Filesystem.h"
+#include "utils/Debug.h"
+#include "utils/clock.h"
 
 ChunkManager::ChunkManager() {}
 

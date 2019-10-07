@@ -17,11 +17,11 @@
  *
 ***/
 
-#include "Frustrum.h"
 #include <math.h>
-#include "../utils/matrix4x4.h"
-#include "../utils/Debug.h"
-#include "../core/grrlib.h"
+#include "world/Frustrum.h"
+#include "utils/matrix4x4.h"
+#include "utils/Debug.h"
+#include "core/grrlib.h"
 
 extern Mtx	_GRR_view;
 extern Mtx	_ObjTransformationMtx;

@@ -17,8 +17,8 @@
  *
 ***/
 
-#include "InputHandler.h"
-#include "../utils/Debug.h"
+#include "input/InputHandler.h"
+#include "utils/Debug.h"
 
 InputHandler::InputHandler() {
 }

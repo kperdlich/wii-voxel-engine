@@ -1,7 +1,7 @@
 #include <fstream>
 #include <stdexcept>
-#include "iniconfig.h"
-#include "Debug.h"
+#include "utils/iniconfig.h"
+#include "utils/Debug.h"
 
 IniConfig::IniConfig() {}
 

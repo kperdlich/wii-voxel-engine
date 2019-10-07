@@ -18,8 +18,8 @@
 ***/
 
 
-#include "FontHandler.h"
-#include "../utils/Debug.h"
+#include "font/FontHandler.h"
+#include "utils/Debug.h"
 
 FontHandler::~FontHandler() {
 

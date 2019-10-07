@@ -20,11 +20,11 @@
 #pragma once
 
 #include <map>
-#include "../utils/GameHelper.h"
-#include "../commands/BasicCommand.h"
-#include "../commands/client/SwitchToInGameCommand.h"
-#include "../commands/client/SwitchToIntroCommand.h"
-#include "../commands/client/SwitchToMainMenuCommand.h"
+#include "utils/GameHelper.h"
+#include "commands/BasicCommand.h"
+#include "commands/client/SwitchToInGameCommand.h"
+#include "commands/client/SwitchToIntroCommand.h"
+#include "commands/client/SwitchToMainMenuCommand.h"
 
 
 class BasicCommandHandler {

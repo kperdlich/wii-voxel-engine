@@ -17,9 +17,9 @@
  *
 ***/
 
-#include "Thread.h"
-#include "Debug.h"
-#include "lockguard.h"
+#include "utils/Thread.h"
+#include "utils/Debug.h"
+#include "utils/lockguard.h"
 
 Thread::Thread() {}
 

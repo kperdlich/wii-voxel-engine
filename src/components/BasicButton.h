@@ -20,30 +20,29 @@
 #pragma once
 
 #include <functional>
-
-#include "UiTextureElement.h"
-#include "../textures/Texture.h"
-#include "../textures/Label.h"
+#include "components/UiTextureElement.h"
+#include "textures/Texture.h"
+#include "textures/Label.h"
 
 class BasicButton: public UiTextureElement
 {
 public:
     using ButtonCallback = std::function<void(BasicButton*)>;
 
-    BasicButton(float x, float y, const char* name, Sprite* defaultTexture,
+    BasicButton(uint32_t x, uint32_t y, const char* name, Sprite* defaultTexture,
                  Sprite* highlightTexture, Label* label, ButtonCallback clickCallback);
     BasicButton(const BasicButton&) = delete;
     BasicButton(BasicButton&&) = delete;
     void operator=(const BasicButton&) = delete;
     void operator=(BasicButton&&) = delete;
-    virtual ~BasicButton();
+    virtual ~BasicButton() override;
 
-	void Update();
+    void Update() override;
     bool MouseOver();
     void CheckForClick();
 	void UpdateLabel();
 
-	void SetColor(u32 color);
+    void SetColor(u32 color) override;
     void SetButtonCallback(ButtonCallback callback);
 
     virtual void SetX(uint32_t x) override;

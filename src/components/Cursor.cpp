@@ -17,9 +17,9 @@
  *
 ***/
 
-#include "Cursor.h"
-#include "../Engine.h"
-#include "../utils/Debug.h"
+#include "Engine.h"
+#include "components/Cursor.h"
+#include "utils/Debug.h"
 
 
 Cursor::Cursor( const char* name, Sprite* sprite ) : UiTextureElement( 0, 0, name, sprite )

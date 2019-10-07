@@ -17,11 +17,11 @@
  *
 ***/
 
-#include "ChunkLoaderJob.h"
 #include <iostream>
 #include <stdlib.h>
-#include "../Chunk.h"
-#include "../chunkdata.h"
+#include "world/chunk/jobs/ChunkLoaderJob.h"
+#include "world/chunk/Chunk.h"
+#include "world/chunk/chunkdata.h"
 
 void ChunkLoaderJob::Execute()
 {

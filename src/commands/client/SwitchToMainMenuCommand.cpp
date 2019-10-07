@@ -17,7 +17,7 @@
  *
 ***/
 
-#include "SwitchToMainMenuCommand.h"
+#include "commands/client/SwitchToMainMenuCommand.h"
 
 SwitchToMainMenuCommand::SwitchToMainMenuCommand() {
 	// TODO Auto-generated constructor stub

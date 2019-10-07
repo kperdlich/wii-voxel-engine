@@ -19,8 +19,8 @@
 
 #pragma once
 
-#include "../utils/Vector3.h"
-#include "../entity/Entity.h"
+#include "utils/Vector3.h"
+#include "entity/Entity.h"
 
 class Camera {
 public:
@@ -34,7 +34,7 @@ public:
 
 	void AttachTo(class Entity& entity);
 
-        inline void SetCameraOffset(double value) { m_cameraOffset = value; }
+    inline void SetCameraOffset(double value) { m_cameraOffset = value; }
 
 	void SetWorldPosititon(Vector3 position);
 	void SetWorldAngle(Vector3 angle);
@@ -60,7 +60,6 @@ private:
 			 m_worldPosition,
 			 m_worldAngle,
 			 m_wordScale;
-        double m_cameraOffset = .0;
-
+    double m_cameraOffset = .0;
     Entity* m_attachedToEntity = nullptr;
 };

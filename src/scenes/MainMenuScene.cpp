@@ -18,11 +18,11 @@
 ***/
 
 #include <string>
-#include "MainMenuScene.h"
-#include "../components/Cursor.h"
-#include "../components/UiTextureElement.h"
-#include "../components/List.h"
-#include "../utils/Debug.h"
+#include "scenes/MainMenuScene.h"
+#include "components/Cursor.h"
+#include "components/UiTextureElement.h"
+#include "components/List.h"
+#include "utils/Debug.h"
 #include "Cursor_png.h"
 #include "ClassicBackgroundSprite_png.h"
 #include "BasicButtonBig_png.h"

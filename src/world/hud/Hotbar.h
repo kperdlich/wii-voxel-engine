@@ -19,8 +19,8 @@
 
 #pragma once
 
-#include "../../components/UiTextureElement.h"
-#include "../../textures/Sprite.h"
+#include "components/UiTextureElement.h"
+#include "textures/Sprite.h"
 
 class Hotbar: public UiTextureElement {
 public:

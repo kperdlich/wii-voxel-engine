@@ -18,11 +18,11 @@
 ***/
 
 #include <sstream>
-#include "SerializationJob.h"
-#include "../../../utils/Filesystem.h"
-#include "../../../utils/Debug.h"
-#include "../../../event/eventmanager.h"
-#include "../../../event/event.h"
+#include "world/chunk/jobs/SerializationJob.h"
+#include "utils/Filesystem.h"
+#include "utils/Debug.h"
+#include "event/eventmanager.h"
+#include "event/event.h"
 
 void SerializationJob::Execute()
 {   

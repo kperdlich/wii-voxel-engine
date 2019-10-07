@@ -2,9 +2,9 @@
 
 #include <unordered_map>
 #include <vector>
-#include "event.h"
-#include "eventlistener.h"
-#include "../utils/SafeQueue.h"
+#include "event/event.h"
+#include "event/eventlistener.h"
+#include "utils/SafeQueue.h"
 
 class EventManager
 {

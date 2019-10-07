@@ -19,8 +19,8 @@
 
 #pragma once
 
-#include "packet/Packet.h"
-#include "ServerConnection.h"
+#include "net/packet/Packet.h"
+#include "net/ServerConnection.h"
 
 class NetworkManager
 {

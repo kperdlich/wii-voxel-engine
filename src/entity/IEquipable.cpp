@@ -17,7 +17,7 @@
  *
 ***/
 
-#include "IEquipable.h"
+#include "entity/IEquipable.h"
 
 IEquipable::IEquipable() {
 	// TODO Auto-generated constructor stub

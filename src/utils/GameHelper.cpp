@@ -18,7 +18,7 @@
 ***/
 
 
-#include "GameHelper.h"
+#include "utils/GameHelper.h"
 
 static uint8_t fps = 0;
 

@@ -18,10 +18,10 @@
 ***/
 
 #include "BlockManager.h"
-#include "../Frustrum.h"
-#include "../GameWorld.h"
-#include "../../utils/Vector3.h"
-#include "../../utils/Debug.h"
+#include "world/Frustrum.h"
+#include "world/GameWorld.h"
+#include "utils/Vector3.h"
+#include "utils/Debug.h"
 
 #include "Dirt_tpl.h"
 #include "Grass_tpl.h"

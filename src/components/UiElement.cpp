@@ -18,7 +18,7 @@
 ***/
 
 
-#include "UiElement.h"
+#include "components/UiElement.h"
 
 UiElement::UiElement(uint32_t x, uint32_t y, float width, float height, const char* name) :
         m_x( x ), m_y( y ), m_width( width ), m_height( height ), m_pName( name )

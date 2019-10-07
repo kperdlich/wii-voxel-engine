@@ -18,14 +18,14 @@
 ***/
 
 #include <cmath>
-#include "Player.h"
-#include "../event/eventmanager.h"
-#include "../event/event.h"
-#include "../utils/MathHelper.h"
-#include "../utils/Debug.h"
-#include "../physics/collision/AABB.h"
-#include "../net/packet/PacketPlayerPosition.h"
-#include "../renderer/MasterRenderer.h"
+#include "entity/Player.h"
+#include "event/eventmanager.h"
+#include "event/event.h"
+#include "utils/MathHelper.h"
+#include "utils/Debug.h"
+#include "physics/collision/AABB.h"
+#include "net/packet/PacketPlayerPosition.h"
+#include "renderer/MasterRenderer.h"
 
 constexpr float ROTATION_SPEED  = 70.0f;
 constexpr float MOVEMENT_SPEED  = 4.0f;

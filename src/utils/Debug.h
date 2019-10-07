@@ -21,9 +21,9 @@
 
 #include <fstream>
 #include <assert.h>
-#include "Mutex.h"
-#include "../net/Socket.h"
-#include "../Engine.h"
+#include "utils/Mutex.h"
+#include "net/Socket.h"
+#include "Engine.h"
 
 #ifdef DEBUG
     #define ASSERT(expression)  if (!(expression)) \

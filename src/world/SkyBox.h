@@ -19,9 +19,9 @@
 
 #pragma once
 
-#include "../renderer/displaylist.h"
-#include "../textures/Texture.h"
-#include "../Engine.h"
+#include "renderer/displaylist.h"
+#include "textures/Texture.h"
+#include "Engine.h"
 
 class SkyBox {
 public:

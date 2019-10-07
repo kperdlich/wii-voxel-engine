@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../textures/Texture.h"
-#include "../textures/Sprite.h"
 #include <cinttypes>
 #include <cstddef>
+#include "textures/Texture.h"
+#include "textures/Sprite.h"
 
 class MasterRenderer
 {

@@ -19,12 +19,12 @@
 
 #pragma once
 
-#include "Scene.h"
-#include "../components/UiElement.h"
-#include "../entity/EntityHandler.h"
-#include "../world/Camera.h"
-#include "../world/GameWorld.h"
-#include "../world/SkyBox.h"
+#include "scenes/Scene.h"
+#include "components/UiElement.h"
+#include "entity/EntityHandler.h"
+#include "world/Camera.h"
+#include "world/GameWorld.h"
+#include "world/SkyBox.h"
 
 class Basic3DScene: public Scene {
 public:

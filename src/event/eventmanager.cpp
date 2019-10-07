@@ -1,6 +1,6 @@
-#include "eventmanager.h"
-#include "../utils/lockguard.h"
-#include "../utils/Debug.h"
+#include "event/eventmanager.h"
+#include "utils/lockguard.h"
+#include "utils/Debug.h"
 
 std::unordered_map<uint32_t, std::vector<IEventListener*>> EventManager::s_eventListeners;
 SafeQueue<Event> EventManager::s_eventQueue;

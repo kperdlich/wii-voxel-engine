@@ -17,14 +17,13 @@
  *
 ***/
 
-#include "../core/grrlib.h"
 #include <vector>
 #include <math.h>
-#include "IntroScene.h"
-#include "../components/UiTextureElement.h"
-#include "../commands/client/SwitchToMainMenuCommand.h"
-
-#include "../utils/Debug.h"
+#include "core/grrlib.h"
+#include "scenes/IntroScene.h"
+#include "components/UiTextureElement.h"
+#include "commands/client/SwitchToMainMenuCommand.h"
+#include "utils/Debug.h"
 #include "ClassicBackgroundSprite_png.h"
 #include "WoxelCraft_png.h"
 

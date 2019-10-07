@@ -17,9 +17,9 @@
  *
 ***/
 
-#include "List.h"
-#include "UiElement.h"
-#include "../utils/Debug.h"
+#include "components/List.h"
+#include "components/UiElement.h"
+#include "utils/Debug.h"
 
 List::List(uint32_t x, uint32_t y, uint32_t sizeBetweenElements )
     : UiElement(x, y, 0.f, 0.f, nullptr), m_sizeBetweenElements(sizeBetweenElements) {}

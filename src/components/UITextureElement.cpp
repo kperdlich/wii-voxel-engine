@@ -17,7 +17,7 @@
  *
 ***/
 
-#include "UiTextureElement.h"
+#include "components/UiTextureElement.h"
 
 UiTextureElement::UiTextureElement(uint32_t x, uint32_t y,
         const char* name, Sprite* tex) : UiElement( x, y, tex->GetWidth(), tex->GetHeight(), name ), m_sprite(tex)

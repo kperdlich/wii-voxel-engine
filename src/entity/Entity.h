@@ -19,10 +19,10 @@
 
 #pragma once
 
-#include "../renderer/EntityRenderer.h"
-#include "../core/grrlib.h"
-#include "../utils/MathHelper.h"
-#include "../world/GameWorld.h"
+#include "renderer/EntityRenderer.h"
+#include "core/grrlib.h"
+#include "utils/MathHelper.h"
+#include "world/GameWorld.h"
 
 class EntityRenderer;
 

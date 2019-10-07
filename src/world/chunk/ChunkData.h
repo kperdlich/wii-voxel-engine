@@ -19,8 +19,8 @@
 
 #pragma once
 
-#include "../blocks/BlockManager.h"
-#include "../../utils/vecint.h"
+#include "world/blocks/BlockManager.h"
+#include "utils/vecint.h"
 
 constexpr int32_t CHUNK_MAP_CASH_X = 5;
 constexpr int32_t CHUNK_MAP_CASH_Y = 5;

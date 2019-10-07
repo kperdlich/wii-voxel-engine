@@ -17,8 +17,8 @@
  *
 ***/
 
-#include "EntityRenderer.h"
-#include "../Engine.h"
+#include "Engine.h"
+#include "renderer/EntityRenderer.h"
 
 EntityRenderer::EntityRenderer( Entity* entity ) : m_Entity(entity) {
 

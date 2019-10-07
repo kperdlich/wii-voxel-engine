@@ -29,10 +29,9 @@
  *
  *
  */
-#include "WiiPad.h"
-#include "../core/grrlib.h"
 #include <math.h>
-
+#include "WiiPad.h"
+#include "core/grrlib.h"
 
 WiiPad::WiiPad(int chanID) : m_ChanID(chanID)
 {

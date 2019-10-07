@@ -17,7 +17,7 @@
  *
 ***/
 
-#include "PlayerInventory.h"
+#include "entity/PlayerInventory.h"
 
 PlayerInventory::PlayerInventory() {
 	// TODO Auto-generated constructor stub

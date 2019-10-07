@@ -19,7 +19,7 @@
 
 #pragma once
 
-#include "IHudComponent.h"
+#include "world/hud/IHudComponent.h"
 
 class PlayerInventoryHud: public IHudComponent {
 public:   

@@ -19,12 +19,12 @@
 
 #pragma once
 
-#include "../core/grrlib.h"
-#include "../textures/ISprite.h"
 #include <unordered_map>
 #include <map>
 #include <vector>
 #include <string>
+#include "core/grrlib.h"
+#include "textures/ISprite.h"
 
 class SpriteStageManager {
 
