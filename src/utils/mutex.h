@@ -24,23 +24,23 @@
 class Mutex
 {
 public:
-    Mutex(const Mutex&) = delete;
-    Mutex(Mutex&&) = delete;
-    void operator=(const Mutex&) = delete;
-    void operator=(Mutex&&) = delete;
+	Mutex(const Mutex&) = delete;
+	Mutex(Mutex&&) = delete;
+	void operator=(const Mutex&) = delete;
+	void operator=(Mutex&&) = delete;
 
-    Mutex()
-    {
-        LWP_MutexInit(&m_mutex, true);
-    }
+	Mutex()
+	{
+		LWP_MutexInit(&m_mutex, true);
+	}
 
-    ~Mutex()
-    {
-        LWP_MutexDestroy(m_mutex);
-    }
+	~Mutex()
+	{
+		LWP_MutexDestroy(m_mutex);
+	}
 
-    friend class lock_guard;
+	friend class lock_guard;
 
 private:
-    mutex_t m_mutex;
+	mutex_t m_mutex;
 };

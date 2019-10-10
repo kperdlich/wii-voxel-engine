@@ -31,17 +31,17 @@ SceneHandler::SceneHandler() {}
  */
 SceneHandler::~SceneHandler()
 {
-    LOG("Try destroy SceneHandler");
-    for ( uint32_t i = 0; i < m_scenes.size(); i++ )
-	{       
-        if ( m_scenes[i]->IsLoaded() )
-        {
-            m_scenes[i]->Unload();
-        }
-        delete m_scenes[i];
+	LOG("Try destroy SceneHandler");
+	for (uint32_t i = 0; i < m_scenes.size(); i++)
+	{
+		if (m_scenes[i]->IsLoaded())
+		{
+			m_scenes[i]->Unload();
+		}
+		delete m_scenes[i];
 	}
-    m_scenes.clear();
-    LOG("SceneHandler destroyed");
+	m_scenes.clear();
+	LOG("SceneHandler destroyed");
 }
 
 
@@ -53,54 +53,54 @@ void SceneHandler::Init() {
 	 * 2. Main menue
 	 * 3. Ingame
 	 */
-    m_scenes.push_back( new IntroScene() );
-    m_scenes.push_back( new MainMenuScene() );
-    m_scenes.push_back( new InGameScene() );
+	m_scenes.push_back(new IntroScene());
+	m_scenes.push_back(new MainMenuScene());
+	m_scenes.push_back(new InGameScene());
 	// ..
 
-    LOG("SceneHandler initialized");
+	LOG("SceneHandler initialized");
 }
 
-void SceneHandler::LoadScene( int32_t index )
+void SceneHandler::LoadScene(int32_t index)
 {
-    if ( index != m_currentSceneIndex && index != m_nextSceneIndex && index > INVALID_SCENE)
+	if (index != m_currentSceneIndex && index != m_nextSceneIndex && index > INVALID_SCENE)
 	{
 		m_bLoadNextScene = true;
-        m_nextSceneIndex = index;
+		m_nextSceneIndex = index;
 	}
 }
 
 
 void SceneHandler::DrawScene()
 {
-    GetCurrentScene()->Draw();
+	GetCurrentScene()->Draw();
 }
 
 void SceneHandler::Update(float deltaSeconds)
 {
-	if ( m_bLoadNextScene )
+	if (m_bLoadNextScene)
 	{
 		m_bLoadNextScene = false;
 
-        if ( m_nextSceneIndex < ((int32_t)m_scenes.size()) && m_nextSceneIndex >= 0)
+		if (m_nextSceneIndex < ((int32_t)m_scenes.size()) && m_nextSceneIndex >= 0)
 		{
-            if ( m_currentSceneIndex > INVALID_SCENE )
+			if (m_currentSceneIndex > INVALID_SCENE)
 			{
-                LOG("Try unload Scene: %d", m_currentSceneIndex);
-                GetCurrentScene()->Unload();
-                LOG("Unloaded Scene: %d", m_currentSceneIndex);
+				LOG("Try unload Scene: %d", m_currentSceneIndex);
+				GetCurrentScene()->Unload();
+				LOG("Unloaded Scene: %d", m_currentSceneIndex);
 			}
-            m_currentSceneIndex = m_nextSceneIndex;
-            LOG("Try loading Scene: %d", m_currentSceneIndex);
-            GetCurrentScene()->Load();
-            LOG("Loaded Scene: %d", m_currentSceneIndex);
+			m_currentSceneIndex = m_nextSceneIndex;
+			LOG("Try loading Scene: %d", m_currentSceneIndex);
+			GetCurrentScene()->Load();
+			LOG("Loaded Scene: %d", m_currentSceneIndex);
 		}
 	}
 
-    GetCurrentScene()->Update(deltaSeconds);
+	GetCurrentScene()->Update(deltaSeconds);
 }
 
 Scene* SceneHandler::GetCurrentScene()
 {
-    return m_scenes[m_currentSceneIndex];
+	return m_scenes[m_currentSceneIndex];
 }

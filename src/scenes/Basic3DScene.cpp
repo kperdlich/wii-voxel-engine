@@ -26,24 +26,24 @@ constexpr float MAX_DIST = 200.0f;
 constexpr float FIELD_OF_VIEW = 70.0f;
 
 Basic3DScene::Basic3DScene()
-{    
+{
 	m_entityHandler = new EntityHandler();
 	m_mainCamera = new Camera();
-    m_skyBox = new SkyBox();
+	m_skyBox = new SkyBox();
 }
 
 Basic3DScene::~Basic3DScene()
-{	
+{
 	delete m_entityHandler;
 	delete m_mainCamera;
-    delete m_skyBox;
+	delete m_skyBox;
 }
 
 void Basic3DScene::Load()
-{    
+{
 	m_mainCamera->Init();
-    m_skyBox->Init();
-    Scene::Load();
+	m_skyBox->Init();
+	Scene::Load();
 }
 
 void Basic3DScene::Draw()
@@ -54,40 +54,40 @@ void Basic3DScene::Draw()
 	GRRLIB_3dMode(MIN_DIST, MAX_DIST, FIELD_OF_VIEW, 1, 1);
 
 	GRRLIB_ObjectViewBegin();
-	GRRLIB_ObjectViewScale( m_mainCamera->GetWorldScaleX(), m_mainCamera->GetWorldScaleY(), m_mainCamera->GetWorldScaleZ() );
-	GRRLIB_ObjectViewTrans( -50, -50, -50 );
-	GRRLIB_ObjectViewRotate( 0, 360 - m_mainCamera->GetWorldAngleY(), 0);
-	GRRLIB_ObjectViewRotate( m_mainCamera->GetWorldAngleX(), 0, 0);
-	GRRLIB_ObjectViewRotate( 0, 0, m_mainCamera->GetWorldAngleZ());
+	GRRLIB_ObjectViewScale(m_mainCamera->GetWorldScaleX(), m_mainCamera->GetWorldScaleY(), m_mainCamera->GetWorldScaleZ());
+	GRRLIB_ObjectViewTrans(-50, -50, -50);
+	GRRLIB_ObjectViewRotate(0, 360 - m_mainCamera->GetWorldAngleY(), 0);
+	GRRLIB_ObjectViewRotate(m_mainCamera->GetWorldAngleX(), 0, 0);
+	GRRLIB_ObjectViewRotate(0, 0, m_mainCamera->GetWorldAngleZ());
 	GRRLIB_ObjectViewEnd();
 
-    MasterRenderer::SetGraphicsMode(true, false);
-    MasterRenderer::EnableFog();
-    m_skyBox->Render();
-    MasterRenderer::SetGraphicsMode(true, true);
+	MasterRenderer::SetGraphicsMode(true, false);
+	MasterRenderer::EnableFog();
+	m_skyBox->Render();
+	MasterRenderer::SetGraphicsMode(true, true);
 
 	GRRLIB_ObjectViewBegin();
-	GRRLIB_ObjectViewScale( m_mainCamera->GetWorldScaleX(), m_mainCamera->GetWorldScaleY(), m_mainCamera->GetWorldScaleZ() );
-	GRRLIB_ObjectViewTrans( -m_mainCamera->GetWorldPositionX(), -m_mainCamera->GetWorldPositionY(), -m_mainCamera->GetWorldPositionZ() );
-	GRRLIB_ObjectViewRotate( 0, 360 - m_mainCamera->GetWorldAngleY(), 0);
-	GRRLIB_ObjectViewRotate( m_mainCamera->GetWorldAngleX(), 0, 0);
-	GRRLIB_ObjectViewRotate( 0, 0, m_mainCamera->GetWorldAngleZ());
+	GRRLIB_ObjectViewScale(m_mainCamera->GetWorldScaleX(), m_mainCamera->GetWorldScaleY(), m_mainCamera->GetWorldScaleZ());
+	GRRLIB_ObjectViewTrans(-m_mainCamera->GetWorldPositionX(), -m_mainCamera->GetWorldPositionY(), -m_mainCamera->GetWorldPositionZ());
+	GRRLIB_ObjectViewRotate(0, 360 - m_mainCamera->GetWorldAngleY(), 0);
+	GRRLIB_ObjectViewRotate(m_mainCamera->GetWorldAngleX(), 0, 0);
+	GRRLIB_ObjectViewRotate(0, 0, m_mainCamera->GetWorldAngleZ());
 	GRRLIB_ObjectViewEnd();
 
 	m_pGameWorld->Draw();
 
-    Render2D();
+	Render2D();
 }
 
 void Basic3DScene::Render2D() const
 {
-    GRRLIB_2dMode();
+	GRRLIB_2dMode();
 
-    auto sprites = m_spriteStageManager->GetSpriteRenderList();
-    for (auto it = sprites.begin(); it != sprites.end(); it++)
-    {
-        (*it)->Render();
-    }
+	auto sprites = m_spriteStageManager->GetSpriteRenderList();
+	for (auto it = sprites.begin(); it != sprites.end(); it++)
+	{
+		(*it)->Render();
+	}
 }
 
 void Basic3DScene::Update(float deltaSeconds)
@@ -100,23 +100,23 @@ void Basic3DScene::Update(float deltaSeconds)
 
 EntityHandler& Basic3DScene::GetEntityHandler()
 {
-    return *m_entityHandler;
+	return *m_entityHandler;
 }
 
 void Basic3DScene::ClearUiElements()
 {
-    for (uint32_t i = 0; i < m_uiElements.size(); i++)
-    {
-        delete m_uiElements[i];
-    }
+	for (uint32_t i = 0; i < m_uiElements.size(); i++)
+	{
+		delete m_uiElements[i];
+	}
 
-    m_uiElements.clear();
+	m_uiElements.clear();
 }
 
 void Basic3DScene::Unload()
 {
-    ClearUiElements();
+	ClearUiElements();
 	m_entityHandler->Clear();
-    m_skyBox->Clear();
-    Scene::Unload();
+	m_skyBox->Clear();
+	Scene::Unload();
 }

@@ -19,10 +19,10 @@
 
 #include "world/hud/Hotbar.h"
 
-Hotbar::Hotbar( const char* name, Sprite* sprite ) : UiTextureElement(0, 0, name, sprite )
+Hotbar::Hotbar(const char* name, Sprite* sprite) : UiTextureElement(0, 0, name, sprite)
 {
-    sprite->SetX( (rmode->viWidth / 2) - (m_sprite->GetWidth() / 2) );
-    sprite->SetY( rmode->viHeight - m_sprite->GetHeight() );
+	sprite->SetX((rmode->viWidth / 2) - (m_sprite->GetWidth() / 2));
+	sprite->SetY(rmode->viHeight - m_sprite->GetHeight());
 }
 
 Hotbar::~Hotbar() {

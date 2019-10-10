@@ -21,28 +21,27 @@
 
 Scene::Scene()
 {
-    m_spriteStageManager = new SpriteStageManager();
+	m_spriteStageManager = new SpriteStageManager();
 }
-
 
 Scene::~Scene()
 {
-    if (m_spriteStageManager)
-    {
-        delete m_spriteStageManager;
-        m_spriteStageManager = nullptr;
-    }
+	if (m_spriteStageManager)
+	{
+		delete m_spriteStageManager;
+		m_spriteStageManager = nullptr;
+	}
 }
 
 void Scene::Load()
 {
-    m_bLoaded = true;
+	m_bLoaded = true;
 }
 
 void Scene::Unload()
 {
-    m_spriteStageManager->Clear();
-    m_bLoaded = false;
+	m_spriteStageManager->Clear();
+	m_bLoaded = false;
 }
 
 void Scene::Draw() {
@@ -52,5 +51,5 @@ void Scene::Update(float deltaSeconds) {}
 
 SpriteStageManager& Scene::GetSpriteStageManager() const
 {
-    return *m_spriteStageManager;
+	return *m_spriteStageManager;
 }

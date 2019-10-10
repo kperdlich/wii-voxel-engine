@@ -24,17 +24,17 @@
 #include "components/worldloader.h"
 
 
-class InGameScene: public Basic3DScene, public IEventListener {
+class InGameScene : public Basic3DScene, public IEventListener {
 public:
-    InGameScene();   
-    virtual ~InGameScene();
-    void Update(float deltaSeconds) override;
+	InGameScene();
+	virtual ~InGameScene();
+	void Update(float deltaSeconds) override;
 	void Load() override;
-    void Unload() override;
+	void Unload() override;
 	void Draw() override;
-    virtual void OnEvent(Event event) override;    
+	virtual void OnEvent(Event event) override;
 
 protected:
 	void InitEntities();
-    WorldLoader* m_pWorldLoader;
+	WorldLoader* m_pWorldLoader;
 };

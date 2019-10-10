@@ -34,45 +34,45 @@
 #define LOGO_INDEX 0
 
 void IntroScene::Load()
-{    
+{
 	m_BackgroundAlpha = 255;
-    auto logoSprite = Sprite::Create(WoxelCraft_png, WoxelCraft_png_size, IS_LOGO);
-    m_elements.push_back( new UiTextureElement( (rmode->viWidth / 2) - (logoSprite->GetWidth() / 2), (rmode->viHeight / 2) - ( logoSprite->GetHeight() / 2 ), IS_LOGO, logoSprite));
-    Basic2DScene::Load();
+	auto logoSprite = Sprite::Create(WoxelCraft_png, WoxelCraft_png_size, IS_LOGO);
+	m_elements.push_back(new UiTextureElement((rmode->viWidth / 2) - (logoSprite->GetWidth() / 2), (rmode->viHeight / 2) - (logoSprite->GetHeight() / 2), IS_LOGO, logoSprite));
+	Basic2DScene::Load();
 }
 
 void IntroScene::Update(float deltaSeconds)
 {
-    Basic2DScene::Update(deltaSeconds);
+	Basic2DScene::Update(deltaSeconds);
 
 	if (m_BackgroundAlpha > 0)
 	{
-        m_BackgroundAlpha -= deltaSeconds * 10;
-        for ( uint32_t i = 0; i < m_elements.size(); i++)
+		m_BackgroundAlpha -= deltaSeconds * 10;
+		for (uint32_t i = 0; i < m_elements.size(); i++)
 		{
 			UiTextureElement* element = dynamic_cast<UiTextureElement*>(m_elements[i]);
 			if (element && element->IsVisible())
 			{
-				element->SetColor( 0xFFFFFF00 | m_BackgroundAlpha );
+				element->SetColor(0xFFFFFF00 | m_BackgroundAlpha);
 			}
 		}
 	}
 	else
 	{
-        Engine::Get().GetBasicCommandHandler().ExecuteCommand( SwitchToMainMenuCommand::Name() );
+		Engine::Get().GetBasicCommandHandler().ExecuteCommand(SwitchToMainMenuCommand::Name());
 	}
 
 #ifdef DEBUG
-    WiiPad* pad = Engine::Get().GetInputHandler().GetPadByID( WII_PAD_0 );
-	if ( pad->ButtonsDown() & WPAD_BUTTON_RIGHT)
+	WiiPad* pad = Engine::Get().GetInputHandler().GetPadByID(WII_PAD_0);
+	if (pad->ButtonsDown() & WPAD_BUTTON_RIGHT)
 	{
-        Engine::Get().GetBasicCommandHandler().ExecuteCommand( SwitchToMainMenuCommand::Name() );
-    }
+		Engine::Get().GetBasicCommandHandler().ExecuteCommand(SwitchToMainMenuCommand::Name());
+	}
 #endif
 }
 
 void IntroScene::Draw()
 {
 	GRRLIB_SetBackgroundColour(0x00, 0x00, 0x00, 0xFF);
-    Basic2DScene::Draw();
+	Basic2DScene::Draw();
 }

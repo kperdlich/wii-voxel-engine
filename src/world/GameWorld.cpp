@@ -32,47 +32,47 @@
 #include "world/Camera.h"
 
 GameWorld::GameWorld()
-{    
-    m_blockManager = new BlockManager();
-    m_blockManager->LoadBlocks();    
+{
+	m_blockManager = new BlockManager();
+	m_blockManager->LoadBlocks();
 
-    //ReadSeed();
+	//ReadSeed();
 }
 
 GameWorld::~GameWorld()
 {
 	m_blockManager->UnloadBlocks();
-	delete m_blockManager;	
+	delete m_blockManager;
 }
 
 void GameWorld::GenerateWorld()
 {
-    auto& playerPosition = static_cast<Basic3DScene*>(Engine::Get().GetSceneHandler().GetCurrentScene())->GetEntityHandler().GetPlayer()->GetPosition();
-    m_chunkLoader.Init(playerPosition, this);
+	auto& playerPosition = static_cast<Basic3DScene*>(Engine::Get().GetSceneHandler().GetCurrentScene())->GetEntityHandler().GetPlayer()->GetPosition();
+	m_chunkLoader.Init(playerPosition, this);
 }
 
 void GameWorld::Draw()
 {
-    //Clock clockRender, clockUpdate;
-    //clockRender.Start();
-    auto& playerPosition = static_cast<Basic3DScene*>(Engine::Get().GetSceneHandler().GetCurrentScene())->GetEntityHandler().GetPlayer()->GetPosition();
-    auto& loadedChunks = m_chunkLoader.GetLoadedChunks();
-    //Frustrum::Instance().CalculateFrustum();
-    for (auto& chunk : loadedChunks)
-    {        
-        if (chunk->IsDirty())
-        {             
-            chunk->RebuildDisplayList();            
-        }
-        chunk->Render();
-    }
-    //clockRender.Stop();
-    //clockUpdate.Start();
-    m_chunkLoader.UpdateChunksBy(playerPosition);
-    DrawFocusOnSelectedCube();
-    //clockUpdate.Stop();
-    //if (clockUpdate.GetSecs() > 0.0f || clockRender.GetSecs() > 0.0f)
-        //LOG("World Chunk Update: %f s, Render %f s", clockUpdate.GetSecs(), clockRender.GetSecs());
+	//Clock clockRender, clockUpdate;
+	//clockRender.Start();
+	auto& playerPosition = static_cast<Basic3DScene*>(Engine::Get().GetSceneHandler().GetCurrentScene())->GetEntityHandler().GetPlayer()->GetPosition();
+	auto& loadedChunks = m_chunkLoader.GetLoadedChunks();
+	//Frustrum::Instance().CalculateFrustum();
+	for (auto& chunk : loadedChunks)
+	{
+		if (chunk->IsDirty())
+		{
+			chunk->RebuildDisplayList();
+		}
+		chunk->Render();
+	}
+	//clockRender.Stop();
+	//clockUpdate.Start();
+	m_chunkLoader.UpdateChunksBy(playerPosition);
+	DrawFocusOnSelectedCube();
+	//clockUpdate.Stop();
+	//if (clockUpdate.GetSecs() > 0.0f || clockRender.GetSecs() > 0.0f)
+		//LOG("World Chunk Update: %f s, Render %f s", clockUpdate.GetSecs(), clockRender.GetSecs());
 }
 
 BlockManager& GameWorld::GetBlockManager()
@@ -82,37 +82,37 @@ BlockManager& GameWorld::GetBlockManager()
 
 Chunk* GameWorld::GetCashedChunkAt(const Vec2i& centerPosition)
 {
-    return m_chunkLoader.GetChunkFromCash(centerPosition);
+	return m_chunkLoader.GetChunkFromCash(centerPosition);
 }
 
 Chunk* GameWorld::GetCashedChunkByWorldPosition(const Vector3& worldPosition)
 {
-    return m_chunkLoader.GetCashedChunkByWorldPosition(worldPosition);
+	return m_chunkLoader.GetCashedChunkByWorldPosition(worldPosition);
 }
 
 void GameWorld::RemoveBlockByWorldPosition(const Vector3& blockPosition)
 {
-    auto pChunk = GetCashedChunkByWorldPosition(blockPosition);
-	if ( pChunk )
+	auto pChunk = GetCashedChunkByWorldPosition(blockPosition);
+	if (pChunk)
 	{
-		pChunk->RemoveBlockByWorldPosition( blockPosition );
+		pChunk->RemoveBlockByWorldPosition(blockPosition);
 	}
 }
 void GameWorld::AddBlockAtWorldPosition(const Vector3& blockPosition, BlockType type)
 {
-    auto pChunk = GetCashedChunkByWorldPosition(blockPosition);
-	if ( pChunk )
+	auto pChunk = GetCashedChunkByWorldPosition(blockPosition);
+	if (pChunk)
 	{
-		pChunk->AddBlockByWorldPosition(blockPosition, type );
+		pChunk->AddBlockByWorldPosition(blockPosition, type);
 	}
 }
 
-void GameWorld::UpdateFocusedBlockByWorldPosition( const Vector3& blockPosition )
+void GameWorld::UpdateFocusedBlockByWorldPosition(const Vector3& blockPosition)
 {
-    auto pChunk = GetCashedChunkByWorldPosition(blockPosition);
-	if ( pChunk )
+	auto pChunk = GetCashedChunkByWorldPosition(blockPosition);
+	if (pChunk)
 	{
-		m_SelectedBlockPosition = pChunk->GetBlockPositionByWorldPosition( blockPosition );
+		m_SelectedBlockPosition = pChunk->GetBlockPositionByWorldPosition(blockPosition);
 		m_bHasSelectedBlock = true;
 	}
 	else
@@ -123,19 +123,19 @@ void GameWorld::UpdateFocusedBlockByWorldPosition( const Vector3& blockPosition 
 
 Vector3 GameWorld::GetBlockPositionByWorldPosition(const Vector3& worldPosition)
 {
-    auto pChunk = GetCashedChunkByWorldPosition(worldPosition);
-	if ( pChunk )
+	auto pChunk = GetCashedChunkByWorldPosition(worldPosition);
+	if (pChunk)
 	{
 		return pChunk->GetBlockPositionByWorldPosition(worldPosition);
 	}
 
-    return Vector3();
+	return Vector3();
 }
 
 BlockType GameWorld::GetBlockByWorldPosition(const Vector3& worldPosition)
 {
-    auto pChunk = GetCashedChunkByWorldPosition(worldPosition);
-	if ( pChunk )
+	auto pChunk = GetCashedChunkByWorldPosition(worldPosition);
+	if (pChunk)
 	{
 		return pChunk->GetBlockTypeByWorldPosition(worldPosition);
 	}
@@ -145,49 +145,49 @@ BlockType GameWorld::GetBlockByWorldPosition(const Vector3& worldPosition)
 
 
 void GameWorld::DrawFocusOnSelectedCube()
-{    
-    if (m_bHasSelectedBlock )
+{
+	if (m_bHasSelectedBlock)
 	{
-        MasterRenderer::SetGraphicsMode(false, false);
-        BlockRenderer::DrawFocusOnSelectedCube( m_SelectedBlockPosition, BLOCK_SIZE_HALF );
-        MasterRenderer::SetGraphicsMode(true, true);
-    }
+		MasterRenderer::SetGraphicsMode(false, false);
+		BlockRenderer::DrawFocusOnSelectedCube(m_SelectedBlockPosition, BLOCK_SIZE_HALF);
+		MasterRenderer::SetGraphicsMode(true, true);
+	}
 }
 
 void GameWorld::ReadSeed()
 {
-    srand(time(nullptr));
-    int seed = rand();
+	srand(time(nullptr));
+	int seed = rand();
 
-    if (FileSystem::FileExist(SEED_FILE))
-    {
-        std::ifstream file;
-        file.open(SEED_FILE);
-        if (file.is_open())
-        {
-            std::string line;
-            std::getline(file, line);
-            seed = std::atoi(line.c_str());
-            file.close();
-        }
-    }
-    else
-    {
-        std::ofstream stream(SEED_FILE);
-        stream << seed << '\n';
-        stream.flush();
-        stream.close();
-    }
+	if (FileSystem::FileExist(SEED_FILE))
+	{
+		std::ifstream file;
+		file.open(SEED_FILE);
+		if (file.is_open())
+		{
+			std::string line;
+			std::getline(file, line);
+			seed = std::atoi(line.c_str());
+			file.close();
+		}
+	}
+	else
+	{
+		std::ofstream stream(SEED_FILE);
+		stream << seed << '\n';
+		stream.flush();
+		stream.close();
+	}
 
-    m_noise.Set(.10, .1, .5, 6.0, seed);
+	m_noise.Set(.10, .1, .5, 6.0, seed);
 }
 
 void GameWorld::Serialize(const CompressedChunkData& data)
 {
-    m_chunkLoader.Serialize(data);
+	m_chunkLoader.Serialize(data);
 }
 
 uint32_t GameWorld::GetSerializationQueueCount()
 {
-    return m_chunkLoader.m_serializationJob.GetQueueCount();
+	return m_chunkLoader.m_serializationJob.GetQueueCount();
 }

@@ -22,13 +22,13 @@
 #include "scenes/Basic2DScene.h"
 #include "components/BasicButton.h"
 
-class MainMenuScene: public Basic2DScene {
+class MainMenuScene : public Basic2DScene {
 public:
 	void Load() override;
 	void Draw() override;
-    void Update(float deltaSeconds) override;
+	void Update(float deltaSeconds) override;
 private:
 	void CreateMainMenuButtonList();
-    BasicButton* CreateDefaultMainMenuButton(const char* buttonName, const char* buttontext, std::function<void(BasicButton*)> clickCallback);
+	BasicButton* CreateDefaultMainMenuButton(const char* buttonName, const char* buttontext, std::function<void(BasicButton*)> clickCallback);
 
 };

@@ -31,18 +31,18 @@ constexpr uint8_t WII_PAD_3 = 3;
 class InputHandler {
 
 private:
-    std::vector<WiiPad*> m_pads;
+	std::vector<WiiPad*> m_pads;
 
 public:
 	~InputHandler();
 	InputHandler();
-    InputHandler(const InputHandler&) = delete;
-    InputHandler(InputHandler&&) = delete;
-    void operator=(const InputHandler&) = delete;
-    void operator=(InputHandler&&) = delete;
+	InputHandler(const InputHandler&) = delete;
+	InputHandler(InputHandler&&) = delete;
+	void operator=(const InputHandler&) = delete;
+	void operator=(InputHandler&&) = delete;
 
 	void Init();
 	void Update();
-    WiiPad* GetPadByID( uint32_t padID );
+	WiiPad* GetPadByID(uint32_t padID);
 };
 

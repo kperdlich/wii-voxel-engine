@@ -24,32 +24,32 @@ static uint8_t fps = 0;
 
 uint8_t CalculateFrameRate()
 {
-    static uint8_t frameCount = 0;
-    static uint32_t fpsLastTime;
+	static uint8_t frameCount = 0;
+	static uint32_t fpsLastTime;
 
-    uint32_t currentTime = ticks_to_millisecs(gettime());
+	uint32_t currentTime = ticks_to_millisecs(gettime());
 
-    frameCount++;
-    if(currentTime - fpsLastTime > 1000)
-    {
-    	fpsLastTime = currentTime;
-    	fps = frameCount;
-        frameCount = 0;
-    }
+	frameCount++;
+	if (currentTime - fpsLastTime > 1000)
+	{
+		fpsLastTime = currentTime;
+		fps = frameCount;
+		frameCount = 0;
+	}
 
-    return fps;
+	return fps;
 }
 
-void PrintFps(uint32_t x, uint32_t y, GRRLIB_ttfFont* font, uint32_t fontSize, const u32 color )
+void PrintFps(uint32_t x, uint32_t y, GRRLIB_ttfFont* font, uint32_t fontSize, const u32 color)
 {
 	char buffer[20];
 	sprintf(buffer, "FPS: %d", fps);
-	GRRLIB_PrintfTTF( x, y, font, buffer, fontSize, color );
+	GRRLIB_PrintfTTF(x, y, font, buffer, fontSize, color);
 }
 
 void PrintGameVersion(uint32_t x, uint32_t y, GRRLIB_ttfFont* font, uint32_t fontSize, const u32 color)
 {
-    char buffer[20];
-    sprintf(buffer, "%s %s", GAME_NAME, BUILD_VERSION);
-	GRRLIB_PrintfTTF( x, y, font, buffer, fontSize, color );
+	char buffer[20];
+	sprintf(buffer, "%s %s", GAME_NAME, BUILD_VERSION);
+	GRRLIB_PrintfTTF(x, y, font, buffer, fontSize, color);
 }

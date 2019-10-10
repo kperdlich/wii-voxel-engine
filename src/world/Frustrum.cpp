@@ -31,23 +31,23 @@ Frustrum::Frustrum() {}
 
 Frustrum::~Frustrum() {}
 
-bool Frustrum::CubeInFrustum( float x1, float y1, float z1, float x2, float y2, float z2 )
+bool Frustrum::CubeInFrustum(float x1, float y1, float z1, float x2, float y2, float z2)
 {
 	for (int i = 0; i < 6; i++)
+	{
+		if ((m_Frustum[i][0] * x1 + m_Frustum[i][1] * y1 + m_Frustum[i][2] * z1 + m_Frustum[i][3] <= 0.0F) &&
+			(m_Frustum[i][0] * x2 + m_Frustum[i][1] * y1 + m_Frustum[i][2] * z1 + m_Frustum[i][3] <= 0.0F) &&
+			(m_Frustum[i][0] * x1 + m_Frustum[i][1] * y2 + m_Frustum[i][2] * z1 + m_Frustum[i][3] <= 0.0F) &&
+			(m_Frustum[i][0] * x2 + m_Frustum[i][1] * y2 + m_Frustum[i][2] * z1 + m_Frustum[i][3] <= 0.0F) &&
+			(m_Frustum[i][0] * x1 + m_Frustum[i][1] * y1 + m_Frustum[i][2] * z2 + m_Frustum[i][3] <= 0.0F) &&
+			(m_Frustum[i][0] * x2 + m_Frustum[i][1] * y1 + m_Frustum[i][2] * z2 + m_Frustum[i][3] <= 0.0F) &&
+			(m_Frustum[i][0] * x1 + m_Frustum[i][1] * y2 + m_Frustum[i][2] * z2 + m_Frustum[i][3] <= 0.0F) &&
+			(m_Frustum[i][0] * x2 + m_Frustum[i][1] * y2 + m_Frustum[i][2] * z2 + m_Frustum[i][3] <= 0.0F))
 		{
-			if ((m_Frustum[i][0] * x1 + m_Frustum[i][1] * y1 + m_Frustum[i][2] * z1 + m_Frustum[i][3] <= 0.0F) &&
-				(m_Frustum[i][0] * x2 + m_Frustum[i][1] * y1 + m_Frustum[i][2] * z1 + m_Frustum[i][3] <= 0.0F) &&
-				(m_Frustum[i][0] * x1 + m_Frustum[i][1] * y2 + m_Frustum[i][2] * z1 + m_Frustum[i][3] <= 0.0F) &&
-				(m_Frustum[i][0] * x2 + m_Frustum[i][1] * y2 + m_Frustum[i][2] * z1 + m_Frustum[i][3] <= 0.0F) &&
-				(m_Frustum[i][0] * x1 + m_Frustum[i][1] * y1 + m_Frustum[i][2] * z2 + m_Frustum[i][3] <= 0.0F) &&
-				(m_Frustum[i][0] * x2 + m_Frustum[i][1] * y1 + m_Frustum[i][2] * z2 + m_Frustum[i][3] <= 0.0F) &&
-				(m_Frustum[i][0] * x1 + m_Frustum[i][1] * y2 + m_Frustum[i][2] * z2 + m_Frustum[i][3] <= 0.0F) &&
-				(m_Frustum[i][0] * x2 + m_Frustum[i][1] * y2 + m_Frustum[i][2] * z2 + m_Frustum[i][3] <= 0.0F))
-			{
-				return false;
-			}
+			return false;
 		}
-		return true;
+	}
+	return true;
 }
 
 
@@ -79,46 +79,46 @@ bool Frustrum::PointInFrustum(float x, float y, float z)
 
 void Frustrum::CalculateFrustum()
 {
-    proj[0] = _projectionMtx[0][0];
-    proj[1] = _projectionMtx[0][1];
-    proj[2] = _projectionMtx[0][2];
-    proj[3] = _projectionMtx[0][3];
-    proj[4] = _projectionMtx[1][0];
-    proj[5] = _projectionMtx[1][1];
-    proj[6] = _projectionMtx[1][2];
-    proj[7] = _projectionMtx[1][3];
-    proj[8] = _projectionMtx[2][0];
-    proj[9] = _projectionMtx[2][1];
-    proj[10] = _projectionMtx[2][2];
-    proj[11] = _projectionMtx[2][3];
-    proj[12] = _projectionMtx[3][0];
-    proj[13] = _projectionMtx[3][1];
-    proj[14] = _projectionMtx[3][2];
-    proj[15] = _projectionMtx[3][3];
+	proj[0] = _projectionMtx[0][0];
+	proj[1] = _projectionMtx[0][1];
+	proj[2] = _projectionMtx[0][2];
+	proj[3] = _projectionMtx[0][3];
+	proj[4] = _projectionMtx[1][0];
+	proj[5] = _projectionMtx[1][1];
+	proj[6] = _projectionMtx[1][2];
+	proj[7] = _projectionMtx[1][3];
+	proj[8] = _projectionMtx[2][0];
+	proj[9] = _projectionMtx[2][1];
+	proj[10] = _projectionMtx[2][2];
+	proj[11] = _projectionMtx[2][3];
+	proj[12] = _projectionMtx[3][0];
+	proj[13] = _projectionMtx[3][1];
+	proj[14] = _projectionMtx[3][2];
+	proj[15] = _projectionMtx[3][3];
 
-    /**
-     * View Matrix
-     *  11: 1 12: 0 13: 0 14: 0
-        21: 0 22: 1 23: 0 24: 0
-        31: 0 32: 0 33: 1 34: 0.1
-        41: 0 42: 0 43: 0 44: 0
-     */
+	/**
+	 * View Matrix
+	 *  11: 1 12: 0 13: 0 14: 0
+		21: 0 22: 1 23: 0 24: 0
+		31: 0 32: 0 33: 1 34: 0.1
+		41: 0 42: 0 43: 0 44: 0
+	 */
 
-    /**
-        _ObjTransformationMtx
-        11: -0.707107 	12: 0 			13: 0.707107 	14: -315.062
-        21: 0.122788 	22: 0.984808 	23: 0.122788 	24: -79.6138
-        31: -0.696364 	32: 0.173648 	33: -0.696364 	34: 40.7966
-        41: 0 			42: 0 			43: 0 			44: 0
-     */
+	 /**
+		 _ObjTransformationMtx
+		 11: -0.707107 	12: 0 			13: 0.707107 	14: -315.062
+		 21: 0.122788 	22: 0.984808 	23: 0.122788 	24: -79.6138
+		 31: -0.696364 	32: 0.173648 	33: -0.696364 	34: 40.7966
+		 41: 0 			42: 0 			43: 0 			44: 0
+	  */
 
-    Mtx mv;
-    guMtxConcat(_ObjTransformationMtx, _GRR_view, mv);
+	Mtx mv;
+	guMtxConcat(_ObjTransformationMtx, _GRR_view, mv);
 
-    Matrix4x4 matrix44(_ObjTransformationMtx);
-    LOG("%s", matrix44.ToString().c_str());
+	Matrix4x4 matrix44(_ObjTransformationMtx);
+	LOG("%s", matrix44.ToString().c_str());
 
-    return;
+	return;
 
 	modl[0] = mv[0][0];
 	modl[1] = mv[0][1];
@@ -215,7 +215,7 @@ void Frustrum::NormalizePlane(float frustum[6][4], int side)
 
 Frustrum& Frustrum::Instance()
 {
-  static Frustrum frustum;
-  frustum.CalculateFrustum();
-  return frustum;
+	static Frustrum frustum;
+	frustum.CalculateFrustum();
+	return frustum;
 }

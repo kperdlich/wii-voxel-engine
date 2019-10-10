@@ -27,37 +27,37 @@
 class ServerConnection : public Thread
 {
 public:
-    ServerConnection();
-    ServerConnection(const ServerConnection&) = delete;
-    ServerConnection(ServerConnection&&) = delete;
-    void operator=(const ServerConnection&) = delete;
-    void operator=(ServerConnection&&) = delete;
+	ServerConnection();
+	ServerConnection(const ServerConnection&) = delete;
+	ServerConnection(ServerConnection&&) = delete;
+	void operator=(const ServerConnection&) = delete;
+	void operator=(ServerConnection&&) = delete;
 
-    bool Connect(const std::string& ip, uint16_t port);
-    void Destroy();
+	bool Connect(const std::string& ip, uint16_t port);
+	void Destroy();
 
-    inline const Socket& GetSocket() const
-    {
-        return m_socket;
-    }
+	inline const Socket& GetSocket() const
+	{
+		return m_socket;
+	}
 
-    inline class Packet* PopPacket()
-    {
-        if (!m_queue.IsEmpty())
-            return m_queue.Pop();
-        return nullptr;
-    }
+	inline class Packet* PopPacket()
+	{
+		if (!m_queue.IsEmpty())
+			return m_queue.Pop();
+		return nullptr;
+	}
 
 private:
-    static void DestroyPacketMap();
-    static void InitPacketMap();
-    static class Packet* CreatePacketByID(char id);
-    void DestroyQueue();
+	static void DestroyPacketMap();
+	static void InitPacketMap();
+	static class Packet* CreatePacketByID(char id);
+	void DestroyQueue();
 protected:
-    void Execute() override;
-    void PreExecute() override;
+	void Execute() override;
+	void PreExecute() override;
 private:
-    Socket m_socket;
-    SafeQueue<class Packet*> m_queue;
-    static std::map<unsigned char, class Packet*> s_PacketMap;
+	Socket m_socket;
+	SafeQueue<class Packet*> m_queue;
+	static std::map<unsigned char, class Packet*> s_PacketMap;
 };

@@ -30,21 +30,21 @@ constexpr float BLOCK_SIZE = BLOCK_SIZE_HALF * 2;
 
 enum class BlockType : unsigned char
 {
-    AIR     = 0,
-    STONE   = 4,
-    GRASS   = 2,
-    DIRT    = 3,
-    WOOD    = 17,
-    LEAF    = 18
+	AIR = 0,
+	STONE = 4,
+	GRASS = 2,
+	DIRT = 3,
+	WOOD = 17,
+	LEAF = 18
 };
 
 class BlockManager {
 public:
-    BlockManager();
-    BlockManager(const BlockManager&) = delete;
-    BlockManager(BlockManager&&) = delete;
-    void operator=(const BlockManager&) = delete;
-    void operator=(BlockManager&&) = delete;
+	BlockManager();
+	BlockManager(const BlockManager&) = delete;
+	BlockManager(BlockManager&&) = delete;
+	void operator=(const BlockManager&) = delete;
+	void operator=(BlockManager&&) = delete;
 	virtual ~BlockManager();
 
 	void LoadBlocks();
@@ -54,11 +54,11 @@ public:
 
 private:
 
-    const Texture* AddToTextureList(const Texture* texture);
+	const Texture* AddToTextureList(const Texture* texture);
 
 	std::map<BlockType, Block*> m_blocks;
 	std::map<BlockType, std::vector<Vector3*> > m_mBlockRenderList;
-    std::vector<const Texture*> m_textures;
+	std::vector<const Texture*> m_textures;
 	BlockRenderer* m_blockRenderer;
 
 };

@@ -35,9 +35,9 @@ private:
 	std::vector<GRRLIB_ttfFont*> m_fonts;
 
 public:
-    ~FontHandler();
-    void Init();
+	~FontHandler();
+	void Init();
 	void CreateFont(const u8* file_base, s32 file_size);
-    GRRLIB_ttfFont* GetNativFontByID( uint32_t id );
+	GRRLIB_ttfFont* GetNativFontByID(uint32_t id);
 
 };

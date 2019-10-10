@@ -22,12 +22,12 @@
 #include "utils/Debug.h"
 
 void Packet::Send() const
-{    
-    const Socket& socket = NetworkManager::Get().GetSocket();
-    if(socket.IsConnected())
-    {
-        //LOG("Send Packet: %d", m_ID);
-        socket.Send<char>(m_ID);
-        SendContent(socket);
-    }
+{
+	const Socket& socket = NetworkManager::Get().GetSocket();
+	if (socket.IsConnected())
+	{
+		//LOG("Send Packet: %d", m_ID);
+		socket.Send<char>(m_ID);
+		SendContent(socket);
+	}
 }

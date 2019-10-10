@@ -21,10 +21,10 @@
 
 class Vector3 {
 public:
-    Vector3(const Vector3& vec);
-    Vector3(double x, double y, double z);
+	Vector3(const Vector3& vec);
+	Vector3(double x, double y, double z);
 	Vector3();
-	virtual ~Vector3();    
+	virtual ~Vector3();
 
 	double GetX() const;
 	void SetX(double x);
@@ -38,21 +38,21 @@ public:
 	static Vector3 Left();
 	static Vector3 Right();
 
-    bool operator==(const Vector3 &vec) const
-    {        
-        return (m_x == vec.m_x) && (m_y == vec.m_y) && (m_z == vec.m_z);
-    }
+	bool operator==(const Vector3& vec) const
+	{
+		return (m_x == vec.m_x) && (m_y == vec.m_y) && (m_z == vec.m_z);
+	}
 
-    bool operator!=(const Vector3 &vec) const
-    {
-        return (m_x != vec.m_x) || (m_y != vec.m_y) || (m_z != vec.m_z);
-    }
+	bool operator!=(const Vector3& vec) const
+	{
+		return (m_x != vec.m_x) || (m_y != vec.m_y) || (m_z != vec.m_z);
+	}
 
 	Vector3& operator+=(const Vector3& vec);
 
 
-	friend Vector3 operator+(const Vector3& lvec, const Vector3& rvec );
-    friend Vector3 operator-(const Vector3& lvec, const Vector3& rvec );
+	friend Vector3 operator+(const Vector3& lvec, const Vector3& rvec);
+	friend Vector3 operator-(const Vector3& lvec, const Vector3& rvec);
 
 
 

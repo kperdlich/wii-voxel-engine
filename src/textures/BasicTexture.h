@@ -25,111 +25,111 @@
 
 struct TextureLoadingData
 {
-    const uint8_t* textureData;
-    uint32_t textureSize;
+	const uint8_t* textureData;
+	uint32_t textureSize;
 };
 
 class BasicTexture : public IDrawable {
 public:
-    BasicTexture(float x, float y, TextureLoadingData textureData);
-    virtual ~BasicTexture();
-    BasicTexture(const BasicTexture&) = delete;
-    BasicTexture(BasicTexture&&) = delete;
-    void operator=(const BasicTexture&) = delete;
-    void operator=(BasicTexture&&) = delete;
-    virtual void Load();
-    virtual void Unload();
+	BasicTexture(float x, float y, TextureLoadingData textureData);
+	virtual ~BasicTexture();
+	BasicTexture(const BasicTexture&) = delete;
+	BasicTexture(BasicTexture&&) = delete;
+	void operator=(const BasicTexture&) = delete;
+	void operator=(BasicTexture&&) = delete;
+	virtual void Load();
+	virtual void Unload();
 
-    float GetX() const override
-    {
-        return m_x;
-    }
+	float GetX() const override
+	{
+		return m_x;
+	}
 
-    void SetX(float x) override
-    {
-        m_x = x;
-    }
+	void SetX(float x) override
+	{
+		m_x = x;
+	}
 
-    float GetY() const override
-    {
-        return m_y;
-    }
+	float GetY() const override
+	{
+		return m_y;
+	}
 
-    void SetY(float y) override
-    {
-        m_y = y;
-    }
+	void SetY(float y) override
+	{
+		m_y = y;
+	}
 
-    void SetColor(uint32_t color)
-    {
-        m_color = color;
-    }
+	void SetColor(uint32_t color)
+	{
+		m_color = color;
+	}
 
-    uint32_t GetColor() const
-    {
-        return m_color;
-    }
+	uint32_t GetColor() const
+	{
+		return m_color;
+	}
 
-    virtual uint32_t GetWidth() const
-    {
-        return m_width;
-    }
+	virtual uint32_t GetWidth() const
+	{
+		return m_width;
+	}
 
-    virtual uint32_t GetHeight() const
-    {
-        return m_height;
-    }
+	virtual uint32_t GetHeight() const
+	{
+		return m_height;
+	}
 
-    bool IsLoaded() const
-    {
-        return m_bTextureLoaded;
-    }   
+	bool IsLoaded() const
+	{
+		return m_bTextureLoaded;
+	}
 
-    /**
-     * @brief GetLoadedTexture
-     * @return Returns null if the texture is not loaded otherwise loading informations depending on the TextureLoadingData
-     */
-    void* GetLoadedTexture() const
-    {
-        return m_loadedTexture;
-    }
+	/**
+	 * @brief GetLoadedTexture
+	 * @return Returns null if the texture is not loaded otherwise loading informations depending on the TextureLoadingData
+	 */
+	void* GetLoadedTexture() const
+	{
+		return m_loadedTexture;
+	}
 
-    /**
-     * @brief GetTextureObject
-     * @return Returns null if texture not loaded otherwise a pointer to the initialized GXTexObj
-     */
-    GXTexObj* GetTextureObject() const
-    {
-        return m_textureObject;
-    }
+	/**
+	 * @brief GetTextureObject
+	 * @return Returns null if texture not loaded otherwise a pointer to the initialized GXTexObj
+	 */
+	GXTexObj* GetTextureObject() const
+	{
+		return m_textureObject;
+	}
 
-    float GetScaleX() const
-    {
-        return m_scaleX;
-    }
+	float GetScaleX() const
+	{
+		return m_scaleX;
+	}
 
-    void SetScaleX(float scaleX)
-    {
-        m_scaleX = scaleX;
-    }
+	void SetScaleX(float scaleX)
+	{
+		m_scaleX = scaleX;
+	}
 
-    float GetScaleY() const
-    {
-        return m_scaleY;
-    }
+	float GetScaleY() const
+	{
+		return m_scaleY;
+	}
 
-    void SetScaleY(float scaleY)
-    {
-        m_scaleX = scaleY;
-    }
+	void SetScaleY(float scaleY)
+	{
+		m_scaleX = scaleY;
+	}
 
 protected:
-    float m_x, m_y;
-    float m_width, m_height;
-    float m_scaleX = 1.0f, m_scaleY = 1.0f;
-    uint32_t m_color;
-    TextureLoadingData m_textureLoadingData;
-    bool m_bTextureLoaded = false;
-    void* m_loadedTexture = nullptr;
-    GXTexObj* m_textureObject = nullptr;
+	float m_x, m_y;
+	float m_width, m_height;
+	float m_scaleX = 1.0f, m_scaleY = 1.0f;
+	uint32_t m_color;
+	TextureLoadingData m_textureLoadingData;
+	bool m_bTextureLoaded = false;
+	void* m_loadedTexture = nullptr;
+	GXTexObj* m_textureObject = nullptr;
 };

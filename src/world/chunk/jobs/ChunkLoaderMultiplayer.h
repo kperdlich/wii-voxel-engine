@@ -6,6 +6,5 @@
 class ChunkLoaderMultiplayer : public Job<ChunkLoadingData>
 {
 protected:
-    void Execute() override;
-
+	void Execute() override;
 };

@@ -22,8 +22,8 @@
 #include "components/UiTextureElement.h"
 #include "textures/Sprite.h"
 
-class Hotbar: public UiTextureElement {
+class Hotbar : public UiTextureElement {
 public:
-    Hotbar( const char* name, Sprite* sprite);
-    virtual ~Hotbar();
+	Hotbar(const char* name, Sprite* sprite);
+	virtual ~Hotbar();
 };

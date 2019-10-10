@@ -22,18 +22,17 @@
 #include "utils/Debug.h"
 
 
-Cursor::Cursor( const char* name, Sprite* sprite ) : UiTextureElement( 0, 0, name, sprite )
+Cursor::Cursor(const char* name, Sprite* sprite) : UiTextureElement(0, 0, name, sprite)
 {
-	SetX( rmode->viWidth / 2 );
-	SetY( rmode->viHeight / 2 );
+	SetX(rmode->viWidth / 2);
+	SetY(rmode->viHeight / 2);
 }
-
 
 Cursor::~Cursor() {}
 
 void Cursor::Update()
 {
-    WiiPad* pad = Engine::Get().GetInputHandler().GetPadByID( WII_PAD_0 );
-	SetX( pad->GetX());
-	SetY( pad->GetY());
+	WiiPad* pad = Engine::Get().GetInputHandler().GetPadByID(WII_PAD_0);
+	SetX(pad->GetX());
+	SetY(pad->GetY());
 }

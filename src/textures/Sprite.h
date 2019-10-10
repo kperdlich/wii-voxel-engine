@@ -26,52 +26,52 @@
 class Sprite : public BasicTexture, public ISprite
 {
 protected:
-    Sprite( float x, float y, TextureLoadingData textureData );
+	Sprite(float x, float y, TextureLoadingData textureData);
 
-public:    
-    ~Sprite();
+public:
+	~Sprite();
 
-    static Sprite* Create(const uint8_t *pSpriteData, uint32_t spriteSize, std::string searchName, uint16_t sortingLayer = 0);
+	static Sprite* Create(const uint8_t* pSpriteData, uint32_t spriteSize, std::string searchName, uint16_t sortingLayer = 0);
 
-    void Render() const override;
+	void Render() const override;
 
-    ESpriteType GetType() const override
-    {
-        return ESpriteType::SPRITE;
-    }
+	ESpriteType GetType() const override
+	{
+		return ESpriteType::SPRITE;
+	}
 
-    bool IsVisible() const override
-    {
-        return m_bVisible && m_bTextureLoaded;
-    }
+	bool IsVisible() const override
+	{
+		return m_bVisible && m_bTextureLoaded;
+	}
 
-    void SetVisible(bool value) override
-    {
-        m_bVisible = value;
-    }
+	void SetVisible(bool value) override
+	{
+		m_bVisible = value;
+	}
 
-    void SetSortingLayerIndex(uint16_t index) override
-    {
-        m_sortingLayerIndex = index;
-    }
+	void SetSortingLayerIndex(uint16_t index) override
+	{
+		m_sortingLayerIndex = index;
+	}
 
-    uint16_t GetSortingLayerIndex() const override
-    {
-        return m_sortingLayerIndex;
-    }
+	uint16_t GetSortingLayerIndex() const override
+	{
+		return m_sortingLayerIndex;
+	}
 
-    const std::string& GetName() const override
-    {
-        return m_name;
-    }
+	const std::string& GetName() const override
+	{
+		return m_name;
+	}
 
-    void SetName(const std::string& name) override
-    {
-        m_name = name;
-    }
+	void SetName(const std::string& name) override
+	{
+		m_name = name;
+	}
 
 protected:
-    std::string m_name;
-    bool m_bVisible = true;
-    uint16_t m_sortingLayerIndex = 0;
+	std::string m_name;
+	bool m_bVisible = true;
+	uint16_t m_sortingLayerIndex = 0;
 };

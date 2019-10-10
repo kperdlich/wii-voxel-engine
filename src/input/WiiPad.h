@@ -30,11 +30,11 @@ private:
 	u32 m_ButtonHeld;
 	u32 m_ButtonUp;
 public:
-    explicit WiiPad(int chanID);
-    WiiPad(const WiiPad&) = delete;
-    WiiPad(WiiPad&&) = delete;
-    void operator=(const WiiPad&) = delete;
-    void operator=(WiiPad&&) = delete;
+	explicit WiiPad(int chanID);
+	WiiPad(const WiiPad&) = delete;
+	WiiPad(WiiPad&&) = delete;
+	void operator=(const WiiPad&) = delete;
+	void operator=(WiiPad&&) = delete;
 
 	virtual ~WiiPad();
 	void Update();

@@ -27,43 +27,43 @@
 
 class ChunkManager
 {
-public:   
-    ChunkManager();
-    ChunkManager(const ChunkManager&) = delete;
-    ChunkManager(ChunkManager&&) = delete;
-    void operator=(const ChunkManager&) = delete;
-    void operator=(ChunkManager&&) = delete;
-    ~ChunkManager();
-    void Init(const Vector3 &position, class GameWorld* world);
-    const std::vector<Chunk *> GetLoadedChunks() const;
-    void UpdateChunksBy(const Vector3 &position);
-    class Chunk* GetChunkFromCash(const Vec2i &position);
-    class Chunk* GetCashedChunkByWorldPosition(const Vector3 &worldPosition);
+public:
+	ChunkManager();
+	ChunkManager(const ChunkManager&) = delete;
+	ChunkManager(ChunkManager&&) = delete;
+	void operator=(const ChunkManager&) = delete;
+	void operator=(ChunkManager&&) = delete;
+	~ChunkManager();
+	void Init(const Vector3& position, class GameWorld* world);
+	const std::vector<Chunk*> GetLoadedChunks() const;
+	void UpdateChunksBy(const Vector3& position);
+	class Chunk* GetChunkFromCash(const Vec2i& position);
+	class Chunk* GetCashedChunkByWorldPosition(const Vector3& worldPosition);
 
 
-    void Serialize(const CompressedChunkData& data);
-
-private:
-
-    std::vector<Chunk*>::iterator GetCashedChunkIterator(const Vec2i &chunkPosition);
-
-    Vec2i GetChunkPositionByWorldPosition(const Vector3 &worldPosition) const;
-    void SetChunkNeighbors();   
-    void DestroyChunkCash();
-    void LoadChunks(const Vec2i& chunkPosition);
-    std::vector<Vec2i> GetChunkMapAround(const Vec2i &chunkPosition) const;
-    bool IsCloseToChunk(const Vec2i &chunkPosition, const Vec2i &position) const;
+	void Serialize(const CompressedChunkData& data);
 
 private:
-    std::vector<class Chunk*> m_chunkCash;
-    std::vector<class Chunk*> m_chunkLoadingStage;
 
-    Vec2i m_lastUpdateChunkPos;
-    class GameWorld* m_world;
+	std::vector<Chunk*>::iterator GetCashedChunkIterator(const Vec2i& chunkPosition);
+
+	Vec2i GetChunkPositionByWorldPosition(const Vector3& worldPosition) const;
+	void SetChunkNeighbors();
+	void DestroyChunkCash();
+	void LoadChunks(const Vec2i& chunkPosition);
+	std::vector<Vec2i> GetChunkMapAround(const Vec2i& chunkPosition) const;
+	bool IsCloseToChunk(const Vec2i& chunkPosition, const Vec2i& position) const;
+
+private:
+	std::vector<class Chunk*> m_chunkCash;
+	std::vector<class Chunk*> m_chunkLoadingStage;
+
+	Vec2i m_lastUpdateChunkPos;
+	class GameWorld* m_world;
 
 
-    SerializationJob m_serializationJob;
-    ChunkLoaderMultiplayer m_loaderJob;
+	SerializationJob m_serializationJob;
+	ChunkLoaderMultiplayer m_loaderJob;
 
-    friend class GameWorld;
+	friend class GameWorld;
 };

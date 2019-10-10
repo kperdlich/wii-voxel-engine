@@ -22,16 +22,16 @@
 #include <stdint.h>
 #include "utils/MathHelper.h"
 
-constexpr uint8_t LEFT_FACE   = 0x01;
-constexpr uint8_t RIGHT_FACE  = (LEFT_FACE  << 1);
-constexpr uint8_t FRONT_FACE  = (RIGHT_FACE << 1);
-constexpr uint8_t BACK_FACE   = (FRONT_FACE << 1);
-constexpr uint8_t TOP_FACE    = (BACK_FACE  << 1);
-constexpr uint8_t BOTTOM_FACE = (TOP_FACE   << 1);
+constexpr uint8_t LEFT_FACE = 0x01;
+constexpr uint8_t RIGHT_FACE = (LEFT_FACE << 1);
+constexpr uint8_t FRONT_FACE = (RIGHT_FACE << 1);
+constexpr uint8_t BACK_FACE = (FRONT_FACE << 1);
+constexpr uint8_t TOP_FACE = (BACK_FACE << 1);
+constexpr uint8_t BOTTOM_FACE = (TOP_FACE << 1);
 
 struct BlockRenderVO
-{    
-    uint8_t FaceMask = 0;
-    uint32_t Faces = 0;
-    Vector3 BlockPosition;
+{
+	uint8_t FaceMask = 0;
+	uint32_t Faces = 0;
+	Vector3 BlockPosition;
 };

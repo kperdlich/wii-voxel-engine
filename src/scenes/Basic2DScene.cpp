@@ -25,28 +25,28 @@ Basic2DScene::~Basic2DScene() {}
 
 void Basic2DScene::Draw()
 {
-    auto sprites = m_spriteStageManager->GetSpriteRenderList();
-    for (auto it = sprites.begin(); it != sprites.end(); it++)
-    {
-        (*it)->Render();
-    }
+	auto sprites = m_spriteStageManager->GetSpriteRenderList();
+	for (auto it = sprites.begin(); it != sprites.end(); it++)
+	{
+		(*it)->Render();
+	}
 }
 
 void Basic2DScene::Load()
 {
-    Scene::Load();
+	Scene::Load();
 	GRRLIB_2dMode();
 }
 
 
 void Basic2DScene::Unload()
 {
-    for (uint32_t i = 0; i < m_elements.size(); i++)
+	for (uint32_t i = 0; i < m_elements.size(); i++)
 	{
 		delete m_elements[i];
 	}
 	m_elements.clear();
-    Scene::Unload();
+	Scene::Unload();
 }
 
 

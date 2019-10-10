@@ -34,89 +34,89 @@
 
 void FileSystem::Init()
 {
-    assert(fatInitDefault());
+	assert(fatInitDefault());
 
-    if (!DirectoryExist(WORLD_PATH))
-        CreateDirectory(WORLD_PATH);
+	if (!DirectoryExist(WORLD_PATH))
+		CreateDirectory(WORLD_PATH);
 }
 
 bool FileSystem::CreateDirectory(const std::string& directoryPath)
 {
-    if (!directoryPath.empty())
-    {
-        return (mkdir(directoryPath.c_str(), ACCESSPERMS) == 0);
-    }
+	if (!directoryPath.empty())
+	{
+		return (mkdir(directoryPath.c_str(), ACCESSPERMS) == 0);
+	}
 
-    return false;
+	return false;
 }
 
 bool FileSystem::DirectoryExist(const std::string& directoryPath)
 {
-    struct stat sb;
-    return stat(directoryPath.c_str(), &sb) == 0 && S_ISDIR(sb.st_mode);
+	struct stat sb;
+	return stat(directoryPath.c_str(), &sb) == 0 && S_ISDIR(sb.st_mode);
 }
 
-bool FileSystem::FileExist(const std::string &filePath)
+bool FileSystem::FileExist(const std::string& filePath)
 {
-    std::ifstream fstream;
-    fstream.open(filePath);
-    return fstream.is_open();
+	std::ifstream fstream;
+	fstream.open(filePath);
+	return fstream.is_open();
 }
 
-void FileSystem::Write(const std::string &file, const char* data, size_t size)
+void FileSystem::Write(const std::string& file, const char* data, size_t size)
 {
-    std::ofstream stream(file);
-    stream.write(data, size);
-    stream.close();
+	std::ofstream stream(file);
+	stream.write(data, size);
+	stream.close();
 }
 
 int FileSystem::RemoveDirectory(const std::string& directoryPath)
 {
-    return RemoveDirectory(directoryPath.c_str());
+	return RemoveDirectory(directoryPath.c_str());
 }
 
-int FileSystem::RemoveDirectory(const char *directoryPath)
+int FileSystem::RemoveDirectory(const char* directoryPath)
 {
-    DIR* pdir = opendir(directoryPath);
-    if (pdir != nullptr)
-    {
-        while(true)
-        {
-            struct dirent* pent = readdir(pdir);
-            if(pent == nullptr)
-                break;
+	DIR* pdir = opendir(directoryPath);
+	if (pdir != nullptr)
+	{
+		while (true)
+		{
+			struct dirent* pent = readdir(pdir);
+			if (pent == nullptr)
+				break;
 
-            if(strcmp(".", pent->d_name) != 0 && strcmp("..", pent->d_name) != 0)
-            {
-                char dnbuf[260];
-                sprintf(dnbuf, "%s/%s", directoryPath, pent->d_name);
+			if (strcmp(".", pent->d_name) != 0 && strcmp("..", pent->d_name) != 0)
+			{
+				char dnbuf[260];
+				sprintf(dnbuf, "%s/%s", directoryPath, pent->d_name);
 
-                struct stat statbuf;
-                stat(dnbuf, &statbuf);
+				struct stat statbuf;
+				stat(dnbuf, &statbuf);
 
-                if(S_ISDIR(statbuf.st_mode))
-                {
-                    LOG("%s <DIR>\n", dnbuf);
-                    RemoveDirectory(dnbuf);
-                }
-                else
-                {
-                    LOG("Deleting %s (%d)\n", dnbuf, (int)statbuf.st_size);
-                    RemoveFile(dnbuf);
-                }
-            }
-        }
-        closedir(pdir);
-    }
-    return rmdir(directoryPath);
+				if (S_ISDIR(statbuf.st_mode))
+				{
+					LOG("%s <DIR>\n", dnbuf);
+					RemoveDirectory(dnbuf);
+				}
+				else
+				{
+					LOG("Deleting %s (%d)\n", dnbuf, (int)statbuf.st_size);
+					RemoveFile(dnbuf);
+				}
+			}
+		}
+		closedir(pdir);
+	}
+	return rmdir(directoryPath);
 }
 
-int FileSystem::RemoveFile(const std::string &filePath)
+int FileSystem::RemoveFile(const std::string& filePath)
 {
-    return RemoveFile(filePath.c_str());
+	return RemoveFile(filePath.c_str());
 }
 
-int FileSystem::RemoveFile(const char *filePath)
+int FileSystem::RemoveFile(const char* filePath)
 {
-    return unlink(filePath);
+	return unlink(filePath);
 }

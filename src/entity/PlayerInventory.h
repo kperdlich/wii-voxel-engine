@@ -25,16 +25,16 @@
 
 class PlayerInventory {
 public:
-    PlayerInventory();
-    virtual ~PlayerInventory();
-    PlayerInventory(const PlayerInventory&) = delete;
-    PlayerInventory(PlayerInventory&&) = delete;
-    void operator=(const PlayerInventory&) = delete;
-    void operator=(PlayerInventory&&) = delete;
+	PlayerInventory();
+	virtual ~PlayerInventory();
+	PlayerInventory(const PlayerInventory&) = delete;
+	PlayerInventory(PlayerInventory&&) = delete;
+	void operator=(const PlayerInventory&) = delete;
+	void operator=(PlayerInventory&&) = delete;
 
 	bool AddToInventory(IEquipable& item);
 
 private:
 	std::vector<IEquipable*> m_pInventory;
-    uint32_t m_inventoryIndex = 0;
+	uint32_t m_inventoryIndex = 0;
 };

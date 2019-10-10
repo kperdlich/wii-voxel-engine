@@ -25,21 +25,21 @@ Sprite::Sprite(float x, float y, TextureLoadingData textureData) : BasicTexture(
 
 Sprite::~Sprite()
 {
-    Engine::Get().GetSpriteStageManager().Remove(*this);
+	Engine::Get().GetSpriteStageManager().Remove(*this);
 }
 
-Sprite* Sprite::Create(const uint8_t *spriteData, uint32_t spriteSize, std::string searchName, uint16_t sortingLayer)
+Sprite* Sprite::Create(const uint8_t* spriteData, uint32_t spriteSize, std::string searchName, uint16_t sortingLayer)
 {
-    TextureLoadingData spriteLoadingData = { spriteData, spriteSize };
-    auto sprite = new Sprite( 0, 0, spriteLoadingData );
-    sprite->SetName(searchName);
-    sprite->SetSortingLayerIndex(sortingLayer);
-    sprite->Load();
-    Engine::Get().GetSpriteStageManager().Add(sprite);
-    return sprite;
+	TextureLoadingData spriteLoadingData = { spriteData, spriteSize };
+	auto sprite = new Sprite(0, 0, spriteLoadingData);
+	sprite->SetName(searchName);
+	sprite->SetSortingLayerIndex(sortingLayer);
+	sprite->Load();
+	Engine::Get().GetSpriteStageManager().Add(sprite);
+	return sprite;
 }
 
 void Sprite::Render() const
 {
-    MasterRenderer::DrawSprite(*this);
+	MasterRenderer::DrawSprite(*this);
 }

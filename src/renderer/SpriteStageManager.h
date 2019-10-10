@@ -30,35 +30,35 @@ class SpriteStageManager {
 
 private:
 
-    std::vector<const ISprite*> m_spriteRenderCash;
-    bool m_spriteCashDirty = true;
-    std::unordered_map<std::string, ISprite*> m_spriteAtlas;
+	std::vector<const ISprite*> m_spriteRenderCash;
+	bool m_spriteCashDirty = true;
+	std::unordered_map<std::string, ISprite*> m_spriteAtlas;
 
 public:
-    SpriteStageManager() {}
-    ~SpriteStageManager() {}
-    SpriteStageManager(const SpriteStageManager&) = delete;
-    SpriteStageManager(SpriteStageManager&&) = delete;
-    void operator=(const SpriteStageManager&) = delete;
-    void operator=(SpriteStageManager&&) = delete;
+	SpriteStageManager() {}
+	~SpriteStageManager() {}
+	SpriteStageManager(const SpriteStageManager&) = delete;
+	SpriteStageManager(SpriteStageManager&&) = delete;
+	void operator=(const SpriteStageManager&) = delete;
+	void operator=(SpriteStageManager&&) = delete;
 
-    void Clear();    
-    bool FindSprite(const std::string& name) const;
+	void Clear();
+	bool FindSprite(const std::string& name) const;
 
-    ISprite* Add(ISprite* sprite);
-    bool Remove(const ISprite& sprite);
+	ISprite* Add(ISprite* sprite);
+	bool Remove(const ISprite& sprite);
 
-    const ISprite* GetSprite(const std::string& key) const;
+	const ISprite* GetSprite(const std::string& key) const;
 
-    std::vector<const ISprite*>& GetSpriteRenderList();
+	std::vector<const ISprite*>& GetSpriteRenderList();
 
-    uint32_t SpriteCount() const
-    {
-        return m_spriteAtlas.size();
-    }
+	uint32_t SpriteCount() const
+	{
+		return m_spriteAtlas.size();
+	}
 
-    void SetSpriteCashDirty(bool value)
-    {
-        m_spriteCashDirty = value;
-    }   
+	void SetSpriteCashDirty(bool value)
+	{
+		m_spriteCashDirty = value;
+	}
 };

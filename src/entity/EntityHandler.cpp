@@ -19,35 +19,30 @@
 
 #include "entity/EntityHandler.h"
 
-EntityHandler::EntityHandler() {
-
-}
+EntityHandler::EntityHandler() {}
 
 EntityHandler::~EntityHandler()
 {
 	Clear();
-
 }
 
 Entity* EntityHandler::GetEntity(uint32_t id)
 {
-    std::map<uint32_t, Entity*>::iterator it = m_entityMap.find(id);
-	if ( it != m_entityMap.end() )
+	std::map<uint32_t, Entity*>::iterator it = m_entityMap.find(id);
+	if (it != m_entityMap.end())
 		return it->second;
 
-    return nullptr;
+	return nullptr;
 }
 
 void EntityHandler::AddEntity(Entity* entity)
 {
-    uint32_t newId = GetNewID();
-	entity->SetId( newId );
-    m_entityMap.insert( std::pair<uint32_t, Entity*>(newId, entity) );
+	uint32_t newId = GetNewID();
+	entity->SetId(newId);
+	m_entityMap.insert(std::pair<uint32_t, Entity*>(newId, entity));
 }
 
-void EntityHandler::Update() {
-
-}
+void EntityHandler::Update() {}
 
 const std::map<uint32_t, Entity*>* EntityHandler::GetEntities() const
 {
@@ -66,18 +61,18 @@ void EntityHandler::Clear() {
 Entity* EntityHandler::GetPlayer() const {
 	for (auto it = m_entityMap.begin(); it != m_entityMap.end(); ++it)
 	{
-		if ( it->second->IsPlayer() )
+		if (it->second->IsPlayer())
 		{
 			return it->second;
 		}
 	}
 
-    return nullptr;
+	return nullptr;
 }
 
 uint32_t EntityHandler::GetNewID()
 {
-	if ( m_entityMap.size() < 1)
+	if (m_entityMap.size() < 1)
 		return 0;
 	return m_entityMap.end()->first + 1;
 }

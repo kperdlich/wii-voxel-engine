@@ -28,35 +28,35 @@ class EntityRenderer;
 
 class Entity {
 public:
-    Entity();
-    Entity( Vector3 position );
-    virtual ~Entity();
+	Entity();
+	Entity(Vector3 position);
+	virtual ~Entity();
 
-    uint32_t GetId() const;
-    void SetId( uint32_t id );
+	uint32_t GetId() const;
+	void SetId(uint32_t id);
 
-    virtual void SetPosition( const Vector3& position );
-	const Vector3& GetPosition() const;   
+	virtual void SetPosition(const Vector3& position);
+	const Vector3& GetPosition() const;
 
-    void SetRotation( const Vector3& position );
+	void SetRotation(const Vector3& position);
 	const Vector3& GetRotation() const;
 
 	void SetVisible(bool value);
 	bool IsVisible() const;
 
 	bool IsPlayer() const;
-	void SetPlayer( bool value );
+	void SetPlayer(bool value);
 
 	void SetWorld(class GameWorld* pWorld);
 
 	const EntityRenderer* GetRenderer() const;
 
 
-protected:	
-	Vector3 m_position, m_rotation;    
+protected:
+	Vector3 m_position, m_rotation;
 	EntityRenderer* m_entityRenderer;
 	class GameWorld* m_pWorld;
-    uint32_t m_id;
-    bool m_visible = true, m_isPlayer = false;
+	uint32_t m_id;
+	bool m_visible = true, m_isPlayer = false;
 
 };

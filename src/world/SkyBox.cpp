@@ -37,145 +37,141 @@ constexpr uint8_t SKY_DOWN = 5;
 constexpr float PLAYER_DISTANCE = 120.0f;
 constexpr uint8_t SKYBOX_FACES = 6;
 
-SkyBox::SkyBox() {}
-
-SkyBox::~SkyBox() {}
-
 void SkyBox::Init()
 {
-    m_pSkyBoxTextures[SKY_FRONT] = Texture::Create(SkyBox_Front_png, SkyBox_Front_png_size);
-    m_pSkyBoxTextures[SKY_RIGHT] = Texture::Create(SkyBox_Right_png, SkyBox_Right_png_size);
-    m_pSkyBoxTextures[SKY_LEFT]  = Texture::Create(SkyBox_Left_png, SkyBox_Left_png_size);
-    m_pSkyBoxTextures[SKY_BACK]  = Texture::Create(SkyBox_Back_png, SkyBox_Back_png_size);
-    m_pSkyBoxTextures[SKY_UP]    = Texture::Create(SkyBox_Top_png, SkyBox_Top_png_size);
-    m_pSkyBoxTextures[SKY_DOWN]  = Texture::Create(SkyBox_Bottom_png, SkyBox_Bottom_png_size);
+	m_pSkyBoxTextures[SKY_FRONT] = Texture::Create(SkyBox_Front_png, SkyBox_Front_png_size);
+	m_pSkyBoxTextures[SKY_RIGHT] = Texture::Create(SkyBox_Right_png, SkyBox_Right_png_size);
+	m_pSkyBoxTextures[SKY_LEFT] = Texture::Create(SkyBox_Left_png, SkyBox_Left_png_size);
+	m_pSkyBoxTextures[SKY_BACK] = Texture::Create(SkyBox_Back_png, SkyBox_Back_png_size);
+	m_pSkyBoxTextures[SKY_UP] = Texture::Create(SkyBox_Top_png, SkyBox_Top_png_size);
+	m_pSkyBoxTextures[SKY_DOWN] = Texture::Create(SkyBox_Bottom_png, SkyBox_Bottom_png_size);
 
-	CreateSkyBox();    
+	CreateSkyBox();
 }
 
 void SkyBox::Clear()
 {
-    for ( uint8_t i = 0; i < 6; i++)
-    {
-        delete m_pSkyBoxTextures[i];
-        m_pSkyBoxTextures[i] = nullptr;
-    }
+	for (uint8_t i = 0; i < 6; i++)
+	{
+		delete m_pSkyBoxTextures[i];
+		m_pSkyBoxTextures[i] = nullptr;
+	}
 
-    m_displayList.Clear();
+	m_displayList.Clear();
 }
 
 void SkyBox::CreateSkyBox()
 {
-    m_displayList.Begin(MasterRenderer::GetDisplayListSizeForFaces(SKYBOX_FACES));
+	m_displayList.Begin(MasterRenderer::GetDisplayListSizeForFaces(SKYBOX_FACES));
 
 	GX_SetCullMode(GX_CULL_BACK);
 
-    m_pSkyBoxTextures[SKY_RIGHT]->Bind();
+	m_pSkyBoxTextures[SKY_RIGHT]->Bind();
 	GX_Begin(GX_QUADS, GX_VTXFMT0, 4);
-		GX_Position3f32(PLAYER_DISTANCE,PLAYER_DISTANCE,0);
+		GX_Position3f32(PLAYER_DISTANCE, PLAYER_DISTANCE, 0);
 		GX_Color1u32(0xFFFFFFFF);
-		GX_TexCoord2f32(0,0);
-		GX_Position3f32(PLAYER_DISTANCE,PLAYER_DISTANCE,PLAYER_DISTANCE);
+		GX_TexCoord2f32(0, 0);
+		GX_Position3f32(PLAYER_DISTANCE, PLAYER_DISTANCE, PLAYER_DISTANCE);
 		GX_Color1u32(0xFFFFFFFF);
-		GX_TexCoord2f32(1,0);
-		GX_Position3f32(PLAYER_DISTANCE,0,PLAYER_DISTANCE);
+		GX_TexCoord2f32(1, 0);
+		GX_Position3f32(PLAYER_DISTANCE, 0, PLAYER_DISTANCE);
 		GX_Color1u32(0xFFFFFFFF);
-		GX_TexCoord2f32(1,1);
-		GX_Position3f32(PLAYER_DISTANCE,0,0);
+		GX_TexCoord2f32(1, 1);
+		GX_Position3f32(PLAYER_DISTANCE, 0, 0);
 		GX_Color1u32(0xFFFFFFFF);
-		GX_TexCoord2f32(0,1);
+		GX_TexCoord2f32(0, 1);
 	GX_End();
 
-    m_pSkyBoxTextures[SKY_FRONT]->Bind();
+	m_pSkyBoxTextures[SKY_FRONT]->Bind();
 	GX_Begin(GX_QUADS, GX_VTXFMT0, 4);
-		GX_Position3f32(0,PLAYER_DISTANCE,0);
+		GX_Position3f32(0, PLAYER_DISTANCE, 0);
 		GX_Color1u32(0xFFFFFFFF);
-		GX_TexCoord2f32(0,0);
-		GX_Position3f32(PLAYER_DISTANCE,PLAYER_DISTANCE,0);
+		GX_TexCoord2f32(0, 0);
+		GX_Position3f32(PLAYER_DISTANCE, PLAYER_DISTANCE, 0);
 		GX_Color1u32(0xFFFFFFFF);
-		GX_TexCoord2f32(1,0);
-		GX_Position3f32(PLAYER_DISTANCE,0,0);
+		GX_TexCoord2f32(1, 0);
+		GX_Position3f32(PLAYER_DISTANCE, 0, 0);
 		GX_Color1u32(0xFFFFFFFF);
-		GX_TexCoord2f32(1,1);
-		GX_Position3f32(0,0,0);
+		GX_TexCoord2f32(1, 1);
+		GX_Position3f32(0, 0, 0);
 		GX_Color1u32(0xFFFFFFFF);
-		GX_TexCoord2f32(0,1);
+		GX_TexCoord2f32(0, 1);
 	GX_End();
 
 
-    m_pSkyBoxTextures[SKY_UP]->Bind();
+	m_pSkyBoxTextures[SKY_UP]->Bind();
 	GX_Begin(GX_QUADS, GX_VTXFMT0, 4);
-		GX_Position3f32(0,PLAYER_DISTANCE,0);
+		GX_Position3f32(0, PLAYER_DISTANCE, 0);
 		GX_Color1u32(0xFFFFFFFF);
-		GX_TexCoord2f32(0,0);
-		GX_Position3f32(0,PLAYER_DISTANCE,PLAYER_DISTANCE);
+		GX_TexCoord2f32(0, 0);
+		GX_Position3f32(0, PLAYER_DISTANCE, PLAYER_DISTANCE);
 		GX_Color1u32(0xFFFFFFFF);
-		GX_TexCoord2f32(1,0);
-		GX_Position3f32(PLAYER_DISTANCE,PLAYER_DISTANCE,PLAYER_DISTANCE);
+		GX_TexCoord2f32(1, 0);
+		GX_Position3f32(PLAYER_DISTANCE, PLAYER_DISTANCE, PLAYER_DISTANCE);
 		GX_Color1u32(0xFFFFFFFF);
-		GX_TexCoord2f32(1,1);
-		GX_Position3f32(PLAYER_DISTANCE,PLAYER_DISTANCE,0);
+		GX_TexCoord2f32(1, 1);
+		GX_Position3f32(PLAYER_DISTANCE, PLAYER_DISTANCE, 0);
 		GX_Color1u32(0xFFFFFFFF);
-		GX_TexCoord2f32(0,1);
+		GX_TexCoord2f32(0, 1);
 	GX_End();
 
 	GX_SetCullMode(GX_CULL_FRONT);
 
-    m_pSkyBoxTextures[SKY_LEFT]->Bind();
+	m_pSkyBoxTextures[SKY_LEFT]->Bind();
 	GX_Begin(GX_QUADS, GX_VTXFMT0, 4);
-		GX_Position3f32(0,PLAYER_DISTANCE,0);
+		GX_Position3f32(0, PLAYER_DISTANCE, 0);
 		GX_Color1u32(0xFFFFFFFF);
-		GX_TexCoord2f32(0,0);
-		GX_Position3f32(0,PLAYER_DISTANCE,PLAYER_DISTANCE);
+		GX_TexCoord2f32(0, 0);
+		GX_Position3f32(0, PLAYER_DISTANCE, PLAYER_DISTANCE);
 		GX_Color1u32(0xFFFFFFFF);
-		GX_TexCoord2f32(1,0);
-		GX_Position3f32(0,0,PLAYER_DISTANCE);
+		GX_TexCoord2f32(1, 0);
+		GX_Position3f32(0, 0, PLAYER_DISTANCE);
 		GX_Color1u32(0xFFFFFFFF);
-		GX_TexCoord2f32(1,1);
-		GX_Position3f32(0,0,0);
+		GX_TexCoord2f32(1, 1);
+		GX_Position3f32(0, 0, 0);
 		GX_Color1u32(0xFFFFFFFF);
-		GX_TexCoord2f32(0,1);
+		GX_TexCoord2f32(0, 1);
 	GX_End();
 
-    m_pSkyBoxTextures[SKY_BACK]->Bind();
+	m_pSkyBoxTextures[SKY_BACK]->Bind();
 	GX_Begin(GX_QUADS, GX_VTXFMT0, 4);
-		GX_Position3f32(0,PLAYER_DISTANCE,PLAYER_DISTANCE);
+		GX_Position3f32(0, PLAYER_DISTANCE, PLAYER_DISTANCE);
 		GX_Color1u32(0xFFFFFFFF);
-		GX_TexCoord2f32(0,0);
-		GX_Position3f32(PLAYER_DISTANCE,PLAYER_DISTANCE,PLAYER_DISTANCE);
+		GX_TexCoord2f32(0, 0);
+		GX_Position3f32(PLAYER_DISTANCE, PLAYER_DISTANCE, PLAYER_DISTANCE);
 		GX_Color1u32(0xFFFFFFFF);
-		GX_TexCoord2f32(1,0);
-		GX_Position3f32(PLAYER_DISTANCE,0,PLAYER_DISTANCE);
+		GX_TexCoord2f32(1, 0);
+		GX_Position3f32(PLAYER_DISTANCE, 0, PLAYER_DISTANCE);
 		GX_Color1u32(0xFFFFFFFF);
-		GX_TexCoord2f32(1,1);
-		GX_Position3f32(0,0,PLAYER_DISTANCE);
+		GX_TexCoord2f32(1, 1);
+		GX_Position3f32(0, 0, PLAYER_DISTANCE);
 		GX_Color1u32(0xFFFFFFFF);
-		GX_TexCoord2f32(0,1);
+		GX_TexCoord2f32(0, 1);
 	GX_End();
 
-    m_pSkyBoxTextures[SKY_DOWN]->Bind();
+	m_pSkyBoxTextures[SKY_DOWN]->Bind();
 	GX_Begin(GX_QUADS, GX_VTXFMT0, 4);
-		GX_Position3f32(0,0,0);
+		GX_Position3f32(0, 0, 0);
 		GX_Color1u32(0xFFFFFFFF);
-		GX_TexCoord2f32(1,1);
-		GX_Position3f32(0,0,PLAYER_DISTANCE);
+		GX_TexCoord2f32(1, 1);
+		GX_Position3f32(0, 0, PLAYER_DISTANCE);
 		GX_Color1u32(0xFFFFFFFF);
-		GX_TexCoord2f32(0,1);
-		GX_Position3f32(PLAYER_DISTANCE,0,PLAYER_DISTANCE);
+		GX_TexCoord2f32(0, 1);
+		GX_Position3f32(PLAYER_DISTANCE, 0, PLAYER_DISTANCE);
 		GX_Color1u32(0xFFFFFFFF);
-		GX_TexCoord2f32(0,0);
-		GX_Position3f32(PLAYER_DISTANCE,0,0);
+		GX_TexCoord2f32(0, 0);
+		GX_Position3f32(PLAYER_DISTANCE, 0, 0);
 		GX_Color1u32(0xFFFFFFFF);
-		GX_TexCoord2f32(1,0);
+		GX_TexCoord2f32(1, 0);
 	GX_End();
 
 	GX_SetCullMode(GX_CULL_BACK);
 
-    m_displayList.End();
+	m_displayList.End();
 }
 
 void SkyBox::Render()
 {
-    m_displayList.Render();
+	m_displayList.Render();
 }
 

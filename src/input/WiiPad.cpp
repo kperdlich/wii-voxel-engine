@@ -43,10 +43,10 @@ WiiPad::~WiiPad() { }
 
 void WiiPad::Update()
 {
-    m_Data = WPAD_Data(m_ChanID);
-    m_ButtonDown = WPAD_ButtonsDown(m_ChanID);
-    m_ButtonHeld = WPAD_ButtonsHeld(m_ChanID);
-    m_ButtonUp = WPAD_ButtonsUp(m_ChanID);
+	m_Data = WPAD_Data(m_ChanID);
+	m_ButtonDown = WPAD_ButtonsDown(m_ChanID);
+	m_ButtonHeld = WPAD_ButtonsHeld(m_ChanID);
+	m_ButtonUp = WPAD_ButtonsUp(m_ChanID);
 }
 
 float WiiPad::GetX() const

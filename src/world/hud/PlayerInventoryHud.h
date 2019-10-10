@@ -21,13 +21,13 @@
 
 #include "world/hud/IHudComponent.h"
 
-class PlayerInventoryHud: public IHudComponent {
-public:   
+class PlayerInventoryHud : public IHudComponent {
+public:
 	PlayerInventoryHud();
-    PlayerInventoryHud(const PlayerInventoryHud&) = delete;
-    PlayerInventoryHud(PlayerInventoryHud&&) = delete;
-    void operator=(const PlayerInventoryHud&) = delete;
-    void operator=(PlayerInventoryHud&&) = delete;
+	PlayerInventoryHud(const PlayerInventoryHud&) = delete;
+	PlayerInventoryHud(PlayerInventoryHud&&) = delete;
+	void operator=(const PlayerInventoryHud&) = delete;
+	void operator=(PlayerInventoryHud&&) = delete;
 	virtual ~PlayerInventoryHud();
 	void Update();
 };

@@ -29,43 +29,43 @@
 
 class GameWorld {
 public:
-    GameWorld();
-    GameWorld(const GameWorld&) = delete;
-    GameWorld(GameWorld&&) = delete;
-    void operator=(const GameWorld&) = delete;
-    void operator=(GameWorld&&) = delete;
+	GameWorld();
+	GameWorld(const GameWorld&) = delete;
+	GameWorld(GameWorld&&) = delete;
+	void operator=(const GameWorld&) = delete;
+	void operator=(GameWorld&&) = delete;
 	virtual ~GameWorld();
 	void GenerateWorld();
 	void Draw();
 
 	class BlockManager& GetBlockManager();
-    class Chunk* GetCashedChunkAt(const Vec2i &centerPosition);
-    class Chunk* GetCashedChunkByWorldPosition(const Vector3& worldPosition);
+	class Chunk* GetCashedChunkAt(const Vec2i& centerPosition);
+	class Chunk* GetCashedChunkByWorldPosition(const Vector3& worldPosition);
 	void RemoveBlockByWorldPosition(const Vector3& blockPosition);
 	void AddBlockAtWorldPosition(const Vector3& blockPosition, BlockType type);
-	void UpdateFocusedBlockByWorldPosition( const Vector3& blockPosition );
+	void UpdateFocusedBlockByWorldPosition(const Vector3& blockPosition);
 	BlockType GetBlockByWorldPosition(const Vector3& worldPosition);
-	Vector3 GetBlockPositionByWorldPosition(const Vector3& worldPosition);    
-    void Serialize(const CompressedChunkData& data);
+	Vector3 GetBlockPositionByWorldPosition(const Vector3& worldPosition);
+	void Serialize(const CompressedChunkData& data);
 
-    uint32_t GetSerializationQueueCount();
+	uint32_t GetSerializationQueueCount();
 
-    inline const PerlinNoise& GetNoise() const
-    {
-        return m_noise;
-    }
+	inline const PerlinNoise& GetNoise() const
+	{
+		return m_noise;
+	}
 
-private:    
+private:
 	void DrawFocusOnSelectedCube();
-    void ReadSeed();
+	void ReadSeed();
 
-private:	   
+private:
 
-    ChunkManager m_chunkLoader;
+	ChunkManager m_chunkLoader;
 
 	Vector3 m_SelectedBlockPosition;
-    bool m_bHasSelectedBlock            = false;
+	bool m_bHasSelectedBlock = false;
 
-    BlockManager* m_blockManager        = nullptr;
-    PerlinNoise m_noise;
+	BlockManager* m_blockManager = nullptr;
+	PerlinNoise m_noise;
 };

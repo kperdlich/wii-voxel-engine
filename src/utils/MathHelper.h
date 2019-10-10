@@ -32,18 +32,18 @@ private:
 	MathHelper();
 public:
 	virtual ~MathHelper();
-    MathHelper(const MathHelper&) = delete;
-    MathHelper(MathHelper&&) = delete;
-    void operator=(const MathHelper&) = delete;
-    void operator=(MathHelper&&) = delete;
+	MathHelper(const MathHelper&) = delete;
+	MathHelper(MathHelper&&) = delete;
+	void operator=(const MathHelper&) = delete;
+	void operator=(MathHelper&&) = delete;
 
-	static Vector3 CalculateNewWorldPositionByRotation( const Vector3& rotation, const Vector3& currentWorldPosition, const Vector3& directionVector );
-	static Vector3 CalculateNewWorldPositionByRotation( const Vector3& rotation, const Vector3& currentWorldPosition, float direction );
-	static Vector3 CalculateNewWorldPositionByRotation( float rotation, const Vector3& currentWorldPosition, const Vector3& directionVector );
-	static Vector3 CalculateNewWorldPositionByRotation( float rotation, const Vector3& currentWorldPosition, float direction );
+	static Vector3 CalculateNewWorldPositionByRotation(const Vector3& rotation, const Vector3& currentWorldPosition, const Vector3& directionVector);
+	static Vector3 CalculateNewWorldPositionByRotation(const Vector3& rotation, const Vector3& currentWorldPosition, float direction);
+	static Vector3 CalculateNewWorldPositionByRotation(float rotation, const Vector3& currentWorldPosition, const Vector3& directionVector);
+	static Vector3 CalculateNewWorldPositionByRotation(float rotation, const Vector3& currentWorldPosition, float direction);
 
 	static double Clamp(double value, double minValue, double maxValue);
-    static double Min(double value1, double value2 );
-    static double Max(double value1, double value2 );
-    static double Mod(double x, double y);
+	static double Min(double value1, double value2);
+	static double Max(double value1, double value2);
+	static double Mod(double x, double y);
 };

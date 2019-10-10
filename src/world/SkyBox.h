@@ -25,18 +25,18 @@
 
 class SkyBox {
 public:
-    SkyBox();
-    SkyBox(const SkyBox&) = delete;
-    SkyBox(SkyBox&&) = delete;
-    void operator=(const SkyBox&) = delete;
-    void operator=(SkyBox&&) = delete;
-    ~SkyBox();
+	SkyBox() = default;
+	~SkyBox() = default;
+	SkyBox(const SkyBox&) = delete;
+	SkyBox(SkyBox&&) = delete;
+	void operator=(const SkyBox&) = delete;
+	void operator=(SkyBox&&) = delete;
 	void Render();
 	void Init();
-    void Clear();
+	void Clear();
 
 private:
-	void CreateSkyBox();    
-    Texture* m_pSkyBoxTextures[6];	
-    DisplayList m_displayList;
+	void CreateSkyBox();
+	Texture* m_pSkyBoxTextures[6];
+	DisplayList m_displayList;
 };

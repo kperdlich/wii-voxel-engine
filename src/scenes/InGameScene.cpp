@@ -42,69 +42,69 @@ InGameScene::~InGameScene() {}
 
 void InGameScene::Update(float deltaSeconds)
 {
-    Basic3DScene::Update(deltaSeconds);
+	Basic3DScene::Update(deltaSeconds);
 
-    if (m_bLoaded)
-    {
-        CPlayer* player = static_cast<CPlayer*>(m_entityHandler->GetPlayer());
-        player->Update(deltaSeconds);
-    }    
+	if (m_bLoaded)
+	{
+		CPlayer* player = static_cast<CPlayer*>(m_entityHandler->GetPlayer());
+		player->Update(deltaSeconds);
+	}
 }
 
 void InGameScene::Load()
 {
-    m_pGameWorld = new GameWorld();
-    InitEntities();
-    m_pGameWorld->GenerateWorld();
+	m_pGameWorld = new GameWorld();
+	InitEntities();
+	m_pGameWorld->GenerateWorld();
 
-    EventManager::AddListener(this, EVENT_PREPARE_WORLD);    
-    m_pWorldLoader = new WorldLoader(IGS_LOADING_SCREEN,
-                                     Sprite::Create(LoadingBackground_png, LoadingBackground_png_size, IGS_LOADING_SCREEN, 0));
-    m_uiElements.push_back(m_pWorldLoader);    
+	EventManager::AddListener(this, EVENT_PREPARE_WORLD);
+	m_pWorldLoader = new WorldLoader(IGS_LOADING_SCREEN,
+		Sprite::Create(LoadingBackground_png, LoadingBackground_png_size, IGS_LOADING_SCREEN, 0));
+	m_uiElements.push_back(m_pWorldLoader);
 }
 
 void InGameScene::Unload()
 {
-    delete m_pGameWorld;
-    Basic3DScene::Unload();
+	delete m_pGameWorld;
+	Basic3DScene::Unload();
 }
 
 
 void InGameScene::Draw()
 {
-    if (m_bLoaded)
-        Basic3DScene::Draw();
-    else
-        Basic3DScene::Render2D();
+	if (m_bLoaded)
+		Basic3DScene::Draw();
+	else
+		Basic3DScene::Render2D();
 }
 
 void InGameScene::OnEvent(Event event)
 {
-    switch(event.ID)
-    {
-        case EVENT_PREPARE_WORLD:
-        {
-            EventManager::RemoveListener(this, EVENT_PREPARE_WORLD);
-            m_pWorldLoader = nullptr;
-            m_spriteStageManager->Clear();
-            ClearUiElements();
-            m_uiElements.push_back(new Hotbar(IGS_HUD_HOTBAR, Sprite::Create(Hotbar_png, Hotbar_png_size, IGS_HUD_HOTBAR)));
-            m_uiElements.push_back(new Cursor(IGS_HUD_CROSSHAIR, Sprite::Create(Crosshair_png, Crosshair_png_size, IGS_HUD_CROSSHAIR)));
-            Basic3DScene::Load();
-            break;
-        }
-        default:
-            break;
-    }
+	switch (event.ID)
+	{
+	case EVENT_PREPARE_WORLD:
+	{
+		EventManager::RemoveListener(this, EVENT_PREPARE_WORLD);
+		m_pWorldLoader = nullptr;
+		m_spriteStageManager->Clear();
+		ClearUiElements();
+		m_uiElements.push_back(new Hotbar(IGS_HUD_HOTBAR, Sprite::Create(Hotbar_png, Hotbar_png_size, IGS_HUD_HOTBAR)));
+		m_uiElements.push_back(new Cursor(IGS_HUD_CROSSHAIR, Sprite::Create(Crosshair_png, Crosshair_png_size, IGS_HUD_CROSSHAIR)));
+		Basic3DScene::Load();
+		break;
+	}
+	default:
+		break;
+	}
 }
 
 void InGameScene::InitEntities()
 {
-    CPlayer* pPlayer = new CPlayer();    
-    pPlayer->SetPosition(Vector3(-189.5,74.5, 248.5));
-    pPlayer->SetRotation(Vector3(10.0f, 225.0f, .0f));
+	CPlayer* pPlayer = new CPlayer();
+	pPlayer->SetPosition(Vector3(-189.5, 74.5, 248.5));
+	pPlayer->SetRotation(Vector3(10.0f, 225.0f, .0f));
 	pPlayer->SetWorld(m_pGameWorld);
 	m_mainCamera->AttachTo(*pPlayer);
-    m_mainCamera->SetCameraOffset(1.32f);
+	m_mainCamera->SetCameraOffset(1.32f);
 	m_entityHandler->AddEntity(pPlayer);
 }

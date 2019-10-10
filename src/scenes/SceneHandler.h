@@ -22,31 +22,31 @@
 #include <vector>
 #include "scenes/Scene.h"
 
-constexpr int32_t INVALID_SCENE     = -1;
-constexpr int32_t INTRO_SCENE_ID    = 0;
-constexpr int32_t MAIN_MENU_ID      = 1;
-constexpr int32_t IN_GAME_ID        = 2;
+constexpr int32_t INVALID_SCENE = -1;
+constexpr int32_t INTRO_SCENE_ID = 0;
+constexpr int32_t MAIN_MENU_ID = 1;
+constexpr int32_t IN_GAME_ID = 2;
 
 class SceneHandler
 {
 
 private:
-    std::vector<Scene*> m_scenes;
-    int32_t m_currentSceneIndex = INVALID_SCENE;
+	std::vector<Scene*> m_scenes;
+	int32_t m_currentSceneIndex = INVALID_SCENE;
 	bool m_bLoadNextScene = false;
-    int32_t m_nextSceneIndex = INVALID_SCENE;
+	int32_t m_nextSceneIndex = INVALID_SCENE;
 
 public:
-    SceneHandler();
-    ~SceneHandler();    
-    SceneHandler(const SceneHandler&) = delete;
-    SceneHandler(SceneHandler&&) = delete;
-    void operator=(const SceneHandler&) = delete;
-    void operator=(SceneHandler&&) = delete;
+	SceneHandler();
+	~SceneHandler();
+	SceneHandler(const SceneHandler&) = delete;
+	SceneHandler(SceneHandler&&) = delete;
+	void operator=(const SceneHandler&) = delete;
+	void operator=(SceneHandler&&) = delete;
 	void Init();
-    void LoadScene(int32_t index );
+	void LoadScene(int32_t index);
 	void DrawScene();
-    void Update(float deltaSeconds);
-    Scene *GetCurrentScene();
+	void Update(float deltaSeconds);
+	Scene* GetCurrentScene();
 
 };

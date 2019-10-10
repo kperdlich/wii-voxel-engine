@@ -25,5 +25,5 @@
 class SerializationJob : public Job<CompressedChunkData>
 {
 protected:
-    void Execute() override;
+	void Execute() override;
 };

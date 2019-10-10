@@ -24,17 +24,17 @@
 
 class Camera {
 public:
-	Camera();    
-    Camera(const Camera&) = delete;
-    Camera(Camera&&) = delete;
-    void operator=(const Camera&) = delete;
-    void operator=(Camera&&) = delete;
+	Camera();
+	Camera(const Camera&) = delete;
+	Camera(Camera&&) = delete;
+	void operator=(const Camera&) = delete;
+	void operator=(Camera&&) = delete;
 
 	void Init();
 
 	void AttachTo(class Entity& entity);
 
-    inline void SetCameraOffset(double value) { m_cameraOffset = value; }
+	inline void SetCameraOffset(double value) { m_cameraOffset = value; }
 
 	void SetWorldPosititon(Vector3 position);
 	void SetWorldAngle(Vector3 angle);
@@ -55,11 +55,11 @@ public:
 
 private:
 	Vector3 m_cam,
-			 m_up,
-			 m_look,
-			 m_worldPosition,
-			 m_worldAngle,
-			 m_wordScale;
-    double m_cameraOffset = .0;
-    Entity* m_attachedToEntity = nullptr;
+		m_up,
+		m_look,
+		m_worldPosition,
+		m_worldAngle,
+		m_wordScale;
+	double m_cameraOffset = .0;
+	Entity* m_attachedToEntity = nullptr;
 };

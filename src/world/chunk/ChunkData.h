@@ -29,33 +29,33 @@ constexpr int32_t CHUNK_SIZE_X = 16;
 constexpr int32_t CHUNK_SIZE_Y = 256;
 constexpr int32_t CHUNK_SIZE_Z = 16;
 
-constexpr float CHUNK_BLOCK_SIZE_X (BLOCK_SIZE * CHUNK_SIZE_X);
-constexpr float CHUNK_BLOCK_SIZE_Y (BLOCK_SIZE * CHUNK_SIZE_Y);
-constexpr float CHUNK_BLOCK_SIZE_Z (BLOCK_SIZE * CHUNK_SIZE_Z);
+constexpr float CHUNK_BLOCK_SIZE_X = BLOCK_SIZE * CHUNK_SIZE_X;
+constexpr float CHUNK_BLOCK_SIZE_Y = BLOCK_SIZE* CHUNK_SIZE_Y;
+constexpr float CHUNK_BLOCK_SIZE_Z = BLOCK_SIZE* CHUNK_SIZE_Z;
 
 #define CHUNK_GLOBAL_X(value) value * CHUNK_BLOCK_SIZE_X
 #define CHUNK_GLOBAL_Z(value) value * CHUNK_BLOCK_SIZE_Z
 
 struct CompressedChunkData
 {
-    int32_t m_X;
-    int32_t m_Z;
-    bool m_bGroundUpCon;
-    uint16_t m_PrimaryBitMap;
-    uint16_t m_AddBitMap;
-    int32_t m_CompressedSize;
-    unsigned char* m_CompressedData;
+	int32_t m_X;
+	int32_t m_Z;
+	bool m_bGroundUpCon;
+	uint16_t m_PrimaryBitMap;
+	uint16_t m_AddBitMap;
+	int32_t m_CompressedSize;
+	unsigned char* m_CompressedData;
 };
 
 struct BlockChangeData
 {
-    std::string Filepath;
-    BlockType   Type;
-    Vec3i       BlockPosition;
-    Vec2i       ChunkPosition;
+	std::string Filepath;
+	BlockType   Type;
+	Vec3i       BlockPosition;
+	Vec2i       ChunkPosition;
 };
 
 struct ChunkLoadingData
 {
-    class Chunk*    ChunkObj;
+	class Chunk* ChunkObj;
 };

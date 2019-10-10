@@ -25,34 +25,34 @@
 #include "utils/Mutex.h"
 #include "utils/Debug.h"
 
-class Thread        
+class Thread
 {
-    using ThreadEntryCallback = void*(*)(void *);
+	using ThreadEntryCallback = void* (*)(void*);
 public:
-    Thread();
-    virtual ~Thread();
-    Thread(const Thread&) = delete;
-    Thread(Thread&&) = delete;
-    void operator=(const Thread&) = delete;
-    void operator=(Thread&&) = delete;
+	Thread();
+	virtual ~Thread();
+	Thread(const Thread&) = delete;
+	Thread(Thread&&) = delete;
+	void operator=(const Thread&) = delete;
+	void operator=(Thread&&) = delete;
 
-    int Start();
-    bool IsStopped();
-    void Stop();
-    bool IsSuspended();
-    void Resume();
-    void Suspend();
+	int Start();
+	bool IsStopped();
+	void Stop();
+	bool IsSuspended();
+	void Resume();
+	void Suspend();
 
 private:
-    int Create(ThreadEntryCallback entryCallback, void *stackbase, u32 stack_size, u8 prio);
-    static void* ThreadEntry(void* args);
+	int Create(ThreadEntryCallback entryCallback, void* stackbase, u32 stack_size, u8 prio);
+	static void* ThreadEntry(void* args);
 
 protected:
-    virtual void PreExecute() = 0;
-    virtual void Execute() = 0;
+	virtual void PreExecute() = 0;
+	virtual void Execute() = 0;
 
 private:
-    lwp_t m_threadID;   
-    bool m_bStop = false;    
-    Mutex m_mutex;
+	lwp_t m_threadID;
+	bool m_bStop = false;
+	Mutex m_mutex;
 };

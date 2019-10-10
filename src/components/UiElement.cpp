@@ -21,17 +21,15 @@
 #include "components/UiElement.h"
 
 UiElement::UiElement(uint32_t x, uint32_t y, float width, float height, const char* name) :
-        m_x( x ), m_y( y ), m_width( width ), m_height( height ), m_pName( name )
+	m_x(x), m_y(y), m_width(width), m_height(height), m_pName(name)
 {
 
-    this->m_bVisible = true;
+	this->m_bVisible = true;
 }
 
 UiElement::~UiElement()
 {
 }
-
-
 
 float UiElement::GetHeight() const
 {
@@ -45,17 +43,17 @@ void UiElement::SetHeight(float height)
 
 const char* UiElement::GetName() const
 {
-    return m_pName;
+	return m_pName;
 }
 
 bool UiElement::IsVisible() const
 {
-    return m_bVisible;
+	return m_bVisible;
 }
 
 void UiElement::SetVisible(bool visible)
 {
-    m_bVisible = visible;
+	m_bVisible = visible;
 }
 
 float UiElement::GetWidth() const
@@ -90,4 +88,4 @@ void UiElement::SetY(uint32_t y)
 
 void UiElement::Update() {}
 
-void UiElement::Load(){}
+void UiElement::Load() {}

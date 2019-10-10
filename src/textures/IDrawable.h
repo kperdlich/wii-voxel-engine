@@ -21,10 +21,10 @@
 
 class IDrawable
 {
-public:    
-    virtual float GetX() const = 0;
-    virtual void SetX(float x) = 0;
+public:
+	virtual float GetX() const = 0;
+	virtual void SetX(float x) = 0;
 
-    virtual float GetY() const = 0;
-    virtual void SetY(float y) = 0;
+	virtual float GetY() const = 0;
+	virtual void SetY(float y) = 0;
 };

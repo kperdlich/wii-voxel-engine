@@ -27,17 +27,17 @@ class BlockRenderer {
 public:
 	BlockRenderer();
 	virtual ~BlockRenderer();
-    BlockRenderer(const BlockRenderer&) = delete;
-    BlockRenderer(BlockRenderer&&) = delete;
-    void operator=(const BlockRenderer&) = delete;
-    void operator=(BlockRenderer&&) = delete;
-    void Prepare(std::vector<BlockRenderVO> *positionList, const Block& block);
-    void Draw();
+	BlockRenderer(const BlockRenderer&) = delete;
+	BlockRenderer(BlockRenderer&&) = delete;
+	void operator=(const BlockRenderer&) = delete;
+	void operator=(BlockRenderer&&) = delete;
+	void Prepare(std::vector<BlockRenderVO>* positionList, const Block& block);
+	void Draw();
 	void Finish();
-    static void DrawFocusOnSelectedCube(const Vector3& blockWorldPosition, float blockSizeToCenter);
+	static void DrawFocusOnSelectedCube(const Vector3& blockWorldPosition, float blockSizeToCenter);
 
 private:
-    const Block* m_pBlock;
+	const Block* m_pBlock;
 	float m_renderBlockSize = 0.0f;
-    std::vector<BlockRenderVO>* m_positions;
+	std::vector<BlockRenderVO>* m_positions;
 };

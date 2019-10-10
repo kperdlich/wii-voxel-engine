@@ -26,25 +26,25 @@
 class Texture : public BasicTexture
 {
 protected:
-    Texture(float x, float y, TextureLoadingData textureData) : BasicTexture(x, y, textureData) {}
+	Texture(float x, float y, TextureLoadingData textureData) : BasicTexture(x, y, textureData) {}
 
-public:    
-    ~Texture() override {}
+public:
+	~Texture() override {}
 
-    void Load() override;
-    void Unload() override;
+	void Load() override;
+	void Unload() override;
 
-    static Texture* Create(const uint8_t* textureData, uint32_t textureSize);
+	static Texture* Create(const uint8_t* textureData, uint32_t textureSize);
 
-    void Bind(uint8_t textureMapSlot = GX_TEXMAP0) const;
+	void Bind(uint8_t textureMapSlot = GX_TEXMAP0) const;
 
-    uint32_t GetWidth() const override;
-    uint32_t GetHeight() const override;
+	uint32_t GetWidth() const override;
+	uint32_t GetHeight() const override;
 protected:
-    void* m_pTPLTextureData = nullptr;
+	void* m_pTPLTextureData = nullptr;
 
 private:
-    void LoadTPLTexture();
-    bool IsTPLTexture();
+	void LoadTPLTexture();
+	bool IsTPLTexture();
 
 };

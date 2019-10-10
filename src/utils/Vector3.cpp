@@ -19,12 +19,11 @@
 
 #include "utils/Vector3.h"
 
-Vector3::Vector3( const Vector3& vec) : m_x(vec.GetX()), m_y(vec.GetY()), m_z(vec.GetZ()) {}
+Vector3::Vector3(const Vector3& vec) : m_x(vec.GetX()), m_y(vec.GetY()), m_z(vec.GetZ()) {}
 
-Vector3::Vector3( double x, double y, double z ) : m_x(x), m_y(y), m_z(z) {}
+Vector3::Vector3(double x, double y, double z) : m_x(x), m_y(y), m_z(z) {}
 
-Vector3::Vector3() : m_x(0), m_y(0), m_z(0) {
-}
+Vector3::Vector3() : m_x(0), m_y(0), m_z(0) {}
 
 Vector3::~Vector3() { }
 
@@ -70,12 +69,12 @@ Vector3 Vector3::Backward()
 
 Vector3 Vector3::Left()
 {
-	return Vector3( 1, 0, 0 );
+	return Vector3(1, 0, 0);
 }
 
 Vector3 Vector3::Right()
 {
-    return Vector3( -1, 0, 0 );
+	return Vector3(-1, 0, 0);
 }
 
 Vector3& Vector3::operator+=(const Vector3& vec)
@@ -102,17 +101,17 @@ Vector3& Vector3::operator+=(const Vector3& vec)
 	m_y += vec.m_y;
 	m_z += vec.m_z;
 
-    return *this;
+	return *this;
 }
 
-Vector3 operator-(const Vector3 &lvec, const Vector3 &rvec)
+Vector3 operator-(const Vector3& lvec, const Vector3& rvec)
 {
-    return Vector3(lvec.m_x - rvec.m_x, lvec.m_y - rvec.m_y, lvec.m_z - rvec.m_z);
+	return Vector3(lvec.m_x - rvec.m_x, lvec.m_y - rvec.m_y, lvec.m_z - rvec.m_z);
 }
 
-Vector3 operator+(const Vector3& lvec, const Vector3& rvec )
+Vector3 operator+(const Vector3& lvec, const Vector3& rvec)
 {
-	Vector3 vec(lvec.m_x, lvec.m_y, lvec.m_z );
+	Vector3 vec(lvec.m_x, lvec.m_y, lvec.m_z);
 	return vec += rvec;
 }
 

@@ -25,36 +25,36 @@
 
 enum EBlockFaces
 {
-    Left,
-    Right,
-    Front,
-    Back,
-    Top,
-    Bottom
+	Left,
+	Right,
+	Front,
+	Back,
+	Top,
+	Bottom
 };
 
 class Block
 {
 public:
-    Block( float size, const std::map<const Texture*, std::vector<EBlockFaces>>& textureMap)
-        : m_size(size), m_textureMap(textureMap){}
-    Block(const Block&) = delete;
-    Block(Block&&) = delete;
-    void operator=(const Block&) = delete;
-    void operator=(Block&&) = delete;
+	Block(float size, const std::map<const Texture*, std::vector<EBlockFaces>>& textureMap)
+		: m_size(size), m_textureMap(textureMap) {}
+	Block(const Block&) = delete;
+	Block(Block&&) = delete;
+	void operator=(const Block&) = delete;
+	void operator=(Block&&) = delete;
 
-    inline const std::map<const Texture*, std::vector<EBlockFaces>>& GetTextures() const
-    {
-        return m_textureMap;
-    }
+	inline const std::map<const Texture*, std::vector<EBlockFaces>>& GetTextures() const
+	{
+		return m_textureMap;
+	}
 
-    inline float GetSize() const
-    {
-        return m_size;
-    }
+	inline float GetSize() const
+	{
+		return m_size;
+	}
 
 protected:
 	float m_size; // the size from the middle point to each axis   
-    std::map<const Texture*, std::vector<EBlockFaces>> m_textureMap;
+	std::map<const Texture*, std::vector<EBlockFaces>> m_textureMap;
 
 };

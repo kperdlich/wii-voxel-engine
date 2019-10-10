@@ -25,39 +25,39 @@
 class NetworkManager
 {
 private:
-    NetworkManager(){}
+	NetworkManager() {}
 public:
-    void Init();
-    void Connect(const std::string& ip, uint16_t port);
-    void Destroy();
-    void Update();
+	void Init();
+	void Connect(const std::string& ip, uint16_t port);
+	void Destroy();
+	void Update();
 
-    static NetworkManager& Get()
-    {
-        static NetworkManager s_instance;
-        return s_instance;
-    }
+	static NetworkManager& Get()
+	{
+		static NetworkManager s_instance;
+		return s_instance;
+	}
 
-    inline bool Initialized() const
-    {
-        return m_bInitialized;
-    }
+	inline bool Initialized() const
+	{
+		return m_bInitialized;
+	}
 
-    inline const Socket& GetSocket() const
-    {
-        return m_ServerConnection.GetSocket();
-    }
+	inline const Socket& GetSocket() const
+	{
+		return m_ServerConnection.GetSocket();
+	}
 
-    NetworkManager(const NetworkManager&) = delete;
-    NetworkManager(NetworkManager&&) = delete;
-    void operator=(const NetworkManager&) = delete;
-    void operator=(NetworkManager&&) = delete;
+	NetworkManager(const NetworkManager&) = delete;
+	NetworkManager(NetworkManager&&) = delete;
+	void operator=(const NetworkManager&) = delete;
+	void operator=(NetworkManager&&) = delete;
 
 private:
-    char m_LocalIP[16];
-    char m_Gateway[16];
-    char m_Netmask[16];
-    bool m_bInitialized = false;
+	char m_LocalIP[16];
+	char m_Gateway[16];
+	char m_Netmask[16];
+	bool m_bInitialized = false;
 
-    ServerConnection m_ServerConnection;    
+	ServerConnection m_ServerConnection;
 };

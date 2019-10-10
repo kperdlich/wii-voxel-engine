@@ -31,23 +31,22 @@
 class Chunk {
 public:
 
-    Chunk(class GameWorld &gameWorld);
-    Chunk(const Chunk&) = delete;
-    Chunk(Chunk&&) = delete;
-    void operator=(const Chunk&) = delete;
-    void operator=(Chunk&&) = delete;
-    virtual ~Chunk();
+	Chunk(class GameWorld& gameWorld);
+	Chunk(const Chunk&) = delete;
+	Chunk(Chunk&&) = delete;
+	void operator=(const Chunk&) = delete;
+	void operator=(Chunk&&) = delete;
+	virtual ~Chunk();
 
-    void Init();
-    void Build();
-    void Clear();
+	void Init();
+	void Clear();
 	void RebuildDisplayList();
-    void Render();
+	void Render();
 
-    void SetToAir();
+	void SetToAir();
 
-    bool IsDirty() const;
-	void SetDirty(bool dirty);
+	inline bool IsDirty() const { return m_bIsDirty; }
+	inline void SetDirty(bool value) { m_bIsDirty = value; }
 
 	uint32_t GetDisplayListSize() const;
 	uint64_t GetAmountOfBlocks() const;
@@ -55,64 +54,63 @@ public:
 
 	void DeleteDisplayList();
 
-    const Vec2i& GetPosition() const;
+	const Vec2i& GetPosition() const;
 
-    void SetChunkNeighbors();
-    bool NeighborsLoaded();
+	void SetChunkNeighbors();
+	bool NeighborsLoaded();
 
 	void RemoveBlockByWorldPosition(const Vector3& blockPosition);
 	void AddBlockByWorldPosition(const Vector3& blockPosition, BlockType type);
 	Vector3 GetBlockPositionByWorldPosition(const Vector3& worldPosition) const;
 	BlockType GetBlockTypeByWorldPosition(const Vector3& worldPosition) const;
 
-    BlockType*** GetBlocks() const
-    {
-        return m_blocks;
-    }
+	BlockType*** GetBlocks() const
+	{
+		return m_blocks;
+	}
 
-    static std::string GetFilePath(const Vec2i &position);
+	static std::string GetFilePath(const Vec2i& position);
 
-    void SetPosition(const Vec2i &position);
+	void SetPosition(const Vec2i& position);
 
-    void SetLoaded(bool value);
+	void SetLoaded(bool value);
 
-    bool IsLoaded();
+	bool IsLoaded();
 
-    bool HasDisplayList() const;
+	bool HasDisplayList() const;
 
 private:
-    void CreateDisplayList(size_t sizeOfDisplayList);
+	void CreateDisplayList(size_t sizeOfDisplayList);
 	void FinishDisplayList();
-    bool AddBlockToRenderList(BlockType type, const BlockRenderVO &blockRenderVO);
+	void AddBlockToRenderList(BlockType type, const BlockRenderVO& blockRenderVO);
 	void RemoveBlock(const Vector3& position);
 	void ClearBlockRenderList();
 	void BuildBlockRenderList();
-    bool IsBlockVisible(uint32_t iX, uint32_t iY, uint32_t iZ, BlockRenderVO & blockRenderVO );
+	bool IsBlockVisible(uint32_t iX, uint32_t iY, uint32_t iZ, BlockRenderVO& blockRenderVO);
 	Vec3i GetLocalBlockPositionByWorldPosition(const Vector3& blockWorldPosition) const;
 	Vector3 LocalPositionToGlobalPosition(const Vec3i& localPosition) const;
 
-    void CreateTrees();
-    void BlockListUpdated(const BlockChangeData& data);
+	void BlockListUpdated(const BlockChangeData& data);
 
 private:
-    Mutex m_mutex;
+	Mutex m_mutex;
 
-    bool m_bLoadingDone         = false;
-    //bool m_bIsDirty             = false;
-    bool m_bNeighbourUpdate     = false;    
-    DisplayList m_displayList;
+	bool m_bLoadingDone = false;
+	bool m_bIsDirty = false;
+	bool m_bNeighbourUpdate = false;
+	DisplayList m_displayList;
 
-    uint32_t m_amountOfBlocks   = 0;
-    uint32_t m_amountOfFaces    = 0;
+	uint32_t m_amountOfBlocks = 0;
+	uint32_t m_amountOfFaces = 0;
 
-    Vec2i m_Position;
+	Vec2i m_Position;
 
-    BlockType*** m_blocks;
-    std::map<BlockType, std::vector<BlockRenderVO> > m_mBlockRenderList;
+	BlockType*** m_blocks;
+	std::map<BlockType, std::vector<BlockRenderVO> > m_mBlockRenderList;
 	class GameWorld* m_pWorldManager;
 
-    Chunk* m_pChunkLeft         = nullptr;
-    Chunk* m_pChunkRight        = nullptr;
-    Chunk* m_pChunkFront        = nullptr;
-    Chunk* m_pChunkBack         = nullptr;
+	Chunk* m_pChunkLeft = nullptr;
+	Chunk* m_pChunkRight = nullptr;
+	Chunk* m_pChunkFront = nullptr;
+	Chunk* m_pChunkBack = nullptr;
 };

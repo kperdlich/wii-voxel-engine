@@ -20,7 +20,7 @@
 #include "Engine.h"
 #include "renderer/EntityRenderer.h"
 
-EntityRenderer::EntityRenderer( Entity* entity ) : m_Entity(entity) {
+EntityRenderer::EntityRenderer(Entity* entity) : m_Entity(entity) {
 
 }
 
@@ -30,7 +30,7 @@ EntityRenderer::~EntityRenderer() {
 
 void EntityRenderer::SetTexture(Texture* texture)
 {
-	m_entityTexture = texture;	
+	m_entityTexture = texture;
 }
 
 Texture* EntityRenderer::GetTexture() const
@@ -42,5 +42,5 @@ void EntityRenderer::Render() const {}
 
 SpriteStageManager& EntityRenderer::GetSpriteStageManager()
 {
-    return Engine::Get().GetSceneHandler().GetCurrentScene()->GetSpriteStageManager();
+	return Engine::Get().GetSceneHandler().GetCurrentScene()->GetSpriteStageManager();
 }

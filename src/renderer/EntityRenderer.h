@@ -27,16 +27,16 @@ class Entity;
 class EntityRenderer {
 public:
 	EntityRenderer(Entity* entity);
-    EntityRenderer(const EntityRenderer&) = delete;
-    EntityRenderer(EntityRenderer&&) = delete;
-    void operator=(const EntityRenderer&) = delete;
-    void operator=(EntityRenderer&&) = delete;
+	EntityRenderer(const EntityRenderer&) = delete;
+	EntityRenderer(EntityRenderer&&) = delete;
+	void operator=(const EntityRenderer&) = delete;
+	void operator=(EntityRenderer&&) = delete;
 	virtual ~EntityRenderer();
 	virtual void Render() const;
-    void SetTexture( Texture* texture );
-    Texture* GetTexture() const;
+	void SetTexture(Texture* texture);
+	Texture* GetTexture() const;
 protected:
-    SpriteStageManager& GetSpriteStageManager();
+	SpriteStageManager& GetSpriteStageManager();
 	Texture* m_entityTexture;
 	Entity* m_Entity;
 };

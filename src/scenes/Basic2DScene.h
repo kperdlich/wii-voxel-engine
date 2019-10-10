@@ -24,18 +24,18 @@
 #include "components/UiElement.h"
 
 
-class Basic2DScene: public Scene {
+class Basic2DScene : public Scene {
 public:
-    Basic2DScene();
-    Basic2DScene(const Basic2DScene&) = delete;
-    Basic2DScene(Basic2DScene&&) = delete;
-    void operator=(const Basic2DScene&) = delete;
-    void operator=(Basic2DScene&&) = delete;
-    virtual ~Basic2DScene();
+	Basic2DScene();
+	Basic2DScene(const Basic2DScene&) = delete;
+	Basic2DScene(Basic2DScene&&) = delete;
+	void operator=(const Basic2DScene&) = delete;
+	void operator=(Basic2DScene&&) = delete;
+	virtual ~Basic2DScene();
 	virtual void Draw() override;
 	virtual void Load() override;
 	virtual void Unload() override;
-    virtual void Update(float deltaSeconds) override;
+	virtual void Update(float deltaSeconds) override;
 
 protected:
 	std::vector<UiElement*> m_elements;

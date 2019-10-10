@@ -25,14 +25,14 @@ class UiElement
 {
 
 protected:
-    UiElement(uint32_t x, uint32_t y, float width, float height, const char* name );
-    uint32_t m_x, m_y;
+	UiElement(uint32_t x, uint32_t y, float width, float height, const char* name);
+	uint32_t m_x, m_y;
 	float m_width, m_height;
-    const char* m_pName; // note: the name has to be unique per scene!!!
-    bool m_bVisible;
+	const char* m_pName; // note: the name has to be unique per scene!!!
+	bool m_bVisible;
 
 public:
-    virtual ~UiElement();
+	virtual ~UiElement();
 	virtual void Load();
 	virtual void Update();
 
@@ -44,8 +44,8 @@ public:
 	float GetWidth() const;
 	void SetWidth(float width);
 
-    virtual uint32_t GetX() const;
-    virtual void SetX(uint32_t x);
-    virtual uint32_t GetY() const;
-    virtual void SetY(uint32_t y);
+	virtual uint32_t GetX() const;
+	virtual void SetX(uint32_t x);
+	virtual uint32_t GetY() const;
+	virtual void SetY(uint32_t y);
 };

@@ -21,10 +21,11 @@
 #include "core/grrlib.h"
 
 
-Camera::Camera() : m_cam(0, 0, 0.1f), m_up(.0f, 1.0f, .0f),
-    m_look(0, 0, 0), m_worldPosition(10.0f, CHUNK_BLOCK_SIZE_Y , 10.0f),
-    m_worldAngle(0, 0, 0),
-    m_wordScale(1.0f, 1.0f, 1.0f) {}
+Camera::Camera()
+	: m_cam(0, 0, 0.1f), m_up(.0f, 1.0f, .0f),
+	m_look(0, 0, 0), m_worldPosition(10.0f, CHUNK_BLOCK_SIZE_Y, 10.0f),
+	m_worldAngle(0, 0, 0),
+	m_wordScale(1.0f, 1.0f, 1.0f) {}
 
 void Camera::Init()
 {
@@ -38,7 +39,7 @@ double Camera::GetWorldPositionX() const
 
 double Camera::GetWorldPositionY() const
 {
-    return m_attachedToEntity->GetPosition().GetY() + m_cameraOffset;
+	return m_attachedToEntity->GetPosition().GetY() + m_cameraOffset;
 }
 
 double Camera::GetWorldPositionZ() const

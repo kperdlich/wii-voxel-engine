@@ -20,116 +20,116 @@
 
 #include "textures/Texture.h"
 
-struct TPL_Header{
-    uint32_t	magic;
-    uint32_t	texCount;
-    uint32_t	headerSize;
+struct TPL_Header {
+	uint32_t	magic;
+	uint32_t	texCount;
+	uint32_t	headerSize;
 };
 
-struct TPL_Addr{
-    uint32_t	textureOffs;
-    uint32_t	tlutOffs;
+struct TPL_Addr {
+	uint32_t	textureOffs;
+	uint32_t	tlutOffs;
 };
 
-struct TPL_Texture{
-    uint16_t	height;
-    uint16_t	width;
-    uint32_t	format;
-    uint32_t	dataOffs;
-    uint32_t	wrap_s;
-    uint32_t	wrap_t;
-    uint32_t	minFilt;
-    uint32_t	magFilt;
-    float       lodBias;
-    uint8_t     edgeLod;
-    uint8_t     minLod;
-    uint8_t     maxLod;
-    uint8_t     unpacked;
+struct TPL_Texture {
+	uint16_t	height;
+	uint16_t	width;
+	uint32_t	format;
+	uint32_t	dataOffs;
+	uint32_t	wrap_s;
+	uint32_t	wrap_t;
+	uint32_t	minFilt;
+	uint32_t	magFilt;
+	float       lodBias;
+	uint8_t     edgeLod;
+	uint8_t     minLod;
+	uint8_t     maxLod;
+	uint8_t     unpacked;
 };
 
 void Texture::LoadTPLTexture()
 {
-    m_textureObject = new GXTexObj();
+	m_textureObject = new GXTexObj();
 
-    //const TPL_Header* pHeader = reinterpret_cast<const TPL_Header*>(m_textureData.pTextureData);
-    //const TPL_Addr* pAddr =reinterpret_cast<const TPL_Addr*>((m_textureData.pTextureData + sizeof(TPL_Header)));
-    const TPL_Texture* pTexture = reinterpret_cast<const TPL_Texture*>((m_textureLoadingData.textureData + sizeof(TPL_Header) + sizeof(TPL_Addr)));
+	//const TPL_Header* pHeader = reinterpret_cast<const TPL_Header*>(m_textureData.pTextureData);
+	//const TPL_Addr* pAddr =reinterpret_cast<const TPL_Addr*>((m_textureData.pTextureData + sizeof(TPL_Header)));
+	const TPL_Texture* pTexture = reinterpret_cast<const TPL_Texture*>((m_textureLoadingData.textureData + sizeof(TPL_Header) + sizeof(TPL_Addr)));
 
-    uint32_t size = m_textureLoadingData.textureSize - sizeof(TPL_Header) - sizeof(TPL_Addr) - sizeof(TPL_Texture);
-    m_pTPLTextureData = memalign(32, size);
-    memcpy(m_pTPLTextureData, (void*) (m_textureLoadingData.textureData + pTexture->dataOffs), size);
+	uint32_t size = m_textureLoadingData.textureSize - sizeof(TPL_Header) - sizeof(TPL_Addr) - sizeof(TPL_Texture);
+	m_pTPLTextureData = memalign(32, size);
+	memcpy(m_pTPLTextureData, (void*)(m_textureLoadingData.textureData + pTexture->dataOffs), size);
 
-    DCFlushRange(m_pTPLTextureData, size);    
+	DCFlushRange(m_pTPLTextureData, size);
 
-    GX_InitTexObj(m_textureObject, m_pTPLTextureData, pTexture->width, pTexture->height, pTexture->format, pTexture->wrap_s, pTexture->wrap_t, GX_FALSE);
+	GX_InitTexObj(m_textureObject, m_pTPLTextureData, pTexture->width, pTexture->height, pTexture->format, pTexture->wrap_s, pTexture->wrap_t, GX_FALSE);
 
-    if (pTexture->maxLod)
-    {
-        GX_InitTexObjLOD(m_textureObject, pTexture->minFilt, pTexture->magFilt, pTexture->minLod, pTexture->maxLod, pTexture->lodBias, GX_DISABLE, pTexture->edgeLod, GX_ANISO_4);
+	if (pTexture->maxLod)
+	{
+		GX_InitTexObjLOD(m_textureObject, pTexture->minFilt, pTexture->magFilt, pTexture->minLod, pTexture->maxLod, pTexture->lodBias, GX_DISABLE, pTexture->edgeLod, GX_ANISO_4);
 
-        GX_InitTexObjEdgeLOD(m_textureObject, GX_ENABLE);
-        GX_InitTexObjMaxAniso(m_textureObject, GX_ANISO_4);
-    }
-    else
-    {
-        GX_InitTexObjFilterMode(m_textureObject, pTexture->minFilt, pTexture->magFilt);
-    }
+		GX_InitTexObjEdgeLOD(m_textureObject, GX_ENABLE);
+		GX_InitTexObjMaxAniso(m_textureObject, GX_ANISO_4);
+	}
+	else
+	{
+		GX_InitTexObjFilterMode(m_textureObject, pTexture->minFilt, pTexture->magFilt);
+	}
 
-    m_width = pTexture->width;
-    m_height = pTexture->height;
-    m_bTextureLoaded = true;
+	m_width = pTexture->width;
+	m_height = pTexture->height;
+	m_bTextureLoaded = true;
 }
 
 
 bool Texture::IsTPLTexture()
 {
-    const TPL_Header* pHeader = reinterpret_cast<const TPL_Header*>(m_textureLoadingData.textureData);
-    return (pHeader && pHeader->magic == 0x20af30);
+	const TPL_Header* pHeader = reinterpret_cast<const TPL_Header*>(m_textureLoadingData.textureData);
+	return (pHeader && pHeader->magic == 0x20af30);
 }
 
 void Texture::Load()
 {
-    Unload();    
+	Unload();
 
-    if ( IsTPLTexture())
-    {
-        LoadTPLTexture();
-    }
-    else
-    {
-        BasicTexture::Load();      
-    }
+	if (IsTPLTexture())
+	{
+		LoadTPLTexture();
+	}
+	else
+	{
+		BasicTexture::Load();
+	}
 }
 
 void Texture::Unload()
 {
-    if (  m_pTPLTextureData )
-    {
-        free(m_pTPLTextureData);
-    }
+	if (m_pTPLTextureData)
+	{
+		free(m_pTPLTextureData);
+	}
 
-    BasicTexture::Unload();   
+	BasicTexture::Unload();
 }
 
-Texture *Texture::Create(const uint8_t *textureData, uint32_t textureSize)
+Texture* Texture::Create(const uint8_t* textureData, uint32_t textureSize)
 {
-    TextureLoadingData txLoadingData = { textureData, textureSize };
-    Texture* texture = new Texture( 0, 0, txLoadingData);
-    texture->Load();
-    return texture;
+	TextureLoadingData txLoadingData = { textureData, textureSize };
+	Texture* texture = new Texture(0, 0, txLoadingData);
+	texture->Load();
+	return texture;
 }
 
 void Texture::Bind(uint8_t textureMapSlot) const
 {
-    GX_LoadTexObj(m_textureObject, textureMapSlot);
+	GX_LoadTexObj(m_textureObject, textureMapSlot);
 }
 
 uint32_t Texture::GetWidth() const
 {
-   return m_width;
+	return m_width;
 }
 
 uint32_t Texture::GetHeight() const
 {
-   return m_height;
+	return m_height;
 }

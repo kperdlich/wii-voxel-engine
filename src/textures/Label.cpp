@@ -22,57 +22,57 @@
 #include "core/grrlib.h"
 
 Label::Label(const std::string& text, float x, float y, GRRLIB_ttfFont* font, uint32_t fontSize, uint32_t color)
-    : m_text(text), m_font(font), m_fontSize(fontSize), m_textColor(color), m_x(x), m_y(y)
+	: m_text(text), m_font(font), m_fontSize(fontSize), m_textColor(color), m_x(x), m_y(y)
 {
 }
 
 Label::~Label() { }
 
-Label *Label::Create(std::string text, GRRLIB_ttfFont *font, std::string searchName, uint16_t sortingLayer)
+Label* Label::Create(std::string text, GRRLIB_ttfFont* font, std::string searchName, uint16_t sortingLayer)
 {
-    Label* label = new Label(text, 0, 0, font, DEFAULT_FONT_SIZE, GRRLIB_WHITE);
-    label->SetName(searchName);
-    label->SetSortingLayerIndex(sortingLayer);    
-    Engine::Get().GetSpriteStageManager().Add(label);
-    return label;
+	Label* label = new Label(text, 0, 0, font, DEFAULT_FONT_SIZE, GRRLIB_WHITE);
+	label->SetName(searchName);
+	label->SetSortingLayerIndex(sortingLayer);
+	Engine::Get().GetSpriteStageManager().Add(label);
+	return label;
 }
 
 void Label::Render() const
 {
-    GRRLIB_PrintfTTF(m_x, m_y, m_font, m_text.c_str(), m_fontSize, m_textColor);
+	GRRLIB_PrintfTTF(m_x, m_y, m_font, m_text.c_str(), m_fontSize, m_textColor);
 }
 
 void Label::SetX(float x)
 {
-    m_x = x;
-    m_bCenteredX = false;
+	m_x = x;
+	m_bCenteredX = false;
 }
 
-void Label::SetText(const std::string &text)
+void Label::SetText(const std::string& text)
 {
-    m_text = text;
-    UpdateCenteredX();
+	m_text = text;
+	UpdateCenteredX();
 }
 
 void Label::SetFontSize(uint32_t fontSize)
 {
-    m_fontSize = fontSize;
-    UpdateCenteredX();
+	m_fontSize = fontSize;
+	UpdateCenteredX();
 }
 
 void Label::SetCenteredX(bool value)
 {
-    m_bCenteredX = value;
-    UpdateCenteredX();
+	m_bCenteredX = value;
+	UpdateCenteredX();
 }
 
 void Label::UpdateCenteredX()
 {
-    if (m_bCenteredX)
-    {
-        uint32_t textWidthInPixel = GRRLIB_WidthTTF(m_font, m_text.c_str(), m_fontSize);
-        m_x = rmode->viWidth / 2 - (textWidthInPixel / 2);
-    }
+	if (m_bCenteredX)
+	{
+		uint32_t textWidthInPixel = GRRLIB_WidthTTF(m_font, m_text.c_str(), m_fontSize);
+		m_x = rmode->viWidth / 2 - (textWidthInPixel / 2);
+	}
 }
 
 

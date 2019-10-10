@@ -22,25 +22,25 @@
 #include "components/UiElement.h"
 #include "textures/Sprite.h"
 
-class UiTextureElement: public UiElement {
+class UiTextureElement : public UiElement {
 public:
-    UiTextureElement(uint32_t x, uint32_t y, const char* name, Sprite* tex);
-    UiTextureElement(const char* name, Sprite* tex);
-    virtual ~UiTextureElement() override;
-    UiTextureElement(const UiTextureElement&) = delete;
-    UiTextureElement(UiTextureElement&&) = delete;
-    void operator=(const UiTextureElement&) = delete;
-    void operator=(UiTextureElement&&) = delete;
+	UiTextureElement(uint32_t x, uint32_t y, const char* name, Sprite* tex);
+	UiTextureElement(const char* name, Sprite* tex);
+	virtual ~UiTextureElement() override;
+	UiTextureElement(const UiTextureElement&) = delete;
+	UiTextureElement(UiTextureElement&&) = delete;
+	void operator=(const UiTextureElement&) = delete;
+	void operator=(UiTextureElement&&) = delete;
 
 	void Load() override;
 
-    virtual void SetColor(uint32_t color);
-    virtual uint32_t GetColor() const;
+	virtual void SetColor(uint32_t color);
+	virtual uint32_t GetColor() const;
 
-    virtual void SetX(uint32_t x) override;
-    virtual void SetY(uint32_t y) override;
+	virtual void SetX(uint32_t x) override;
+	virtual void SetY(uint32_t y) override;
 
 protected:
-        Sprite* m_sprite;
+	Sprite* m_sprite;
 };
 

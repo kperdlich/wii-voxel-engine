@@ -32,6 +32,6 @@ class BasicCommandHandler {
 public:
 	BasicCommandHandler();
 	virtual ~BasicCommandHandler();
-	void ExecuteCommand( const char* commandName );
+	void ExecuteCommand(const char* commandName);
 	void Init();
 };

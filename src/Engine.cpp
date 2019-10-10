@@ -32,11 +32,11 @@
 
 Engine::Engine()
 {
-    m_bRunning = false;
-    m_pSceneHandler = new SceneHandler();
-    m_pInputHandler = new InputHandler();
-    m_pFontHandler = new FontHandler();
-    m_pBasicCommandHandler = new BasicCommandHandler();
+	m_bRunning = false;
+	m_pSceneHandler = new SceneHandler();
+	m_pInputHandler = new InputHandler();
+	m_pFontHandler = new FontHandler();
+	m_pBasicCommandHandler = new BasicCommandHandler();
 }
 
 Engine::~Engine() {}
@@ -44,123 +44,123 @@ Engine::~Engine() {}
 
 void Engine::Start()
 {
-    m_bRunning = true;
+	m_bRunning = true;
 
-    try
-    {
-        Init();
+	try
+	{
+		Init();
 
-        m_pBasicCommandHandler->ExecuteCommand( SwitchToIntroCommand::Name() );
+		m_pBasicCommandHandler->ExecuteCommand(SwitchToIntroCommand::Name());
 
-        while(m_bRunning)
-        {
-            uint64_t startFrameTime = ticks_to_millisecs(gettime());
+		while (m_bRunning)
+		{
+			uint64_t startFrameTime = ticks_to_millisecs(gettime());
 
-            GRRLIB_SetBackgroundColour(0x00, 0x00, 0x00, 0xFF);
+			GRRLIB_SetBackgroundColour(0x00, 0x00, 0x00, 0xFF);
 
-            m_pInputHandler->Update();
-            m_pSceneHandler->Update(m_millisecondsLastFrame / 1000.0f);
-            NetworkManager::Get().Update();
-            EventManager::PullEvents();
-            m_pSceneHandler->DrawScene();
+			m_pInputHandler->Update();
+			m_pSceneHandler->Update(m_millisecondsLastFrame / 1000.0f);
+			NetworkManager::Get().Update();
+			EventManager::PullEvents();
+			m_pSceneHandler->DrawScene();
 
 
-            WiiPad* pad = m_pInputHandler->GetPadByID( WII_PAD_0 );
-            u32 padButtonDown = pad->ButtonsDown();
-            if ( padButtonDown & WPAD_BUTTON_HOME)
-            {
-                End();
-            }
+			WiiPad* pad = m_pInputHandler->GetPadByID(WII_PAD_0);
+			u32 padButtonDown = pad->ButtonsDown();
+			if (padButtonDown & WPAD_BUTTON_HOME)
+			{
+				End();
+			}
 
-            PrintFps( 500, 25, m_pFontHandler->GetNativFontByID(DEFAULT_MINECRAFT_FONT_ID), DEFAULT_FONT_SIZE, GRRLIB_YELLOW);
+			PrintFps(500, 25, m_pFontHandler->GetNativFontByID(DEFAULT_MINECRAFT_FONT_ID), DEFAULT_FONT_SIZE, GRRLIB_YELLOW);
 
-    #ifdef DEBUG
-            PrintGameVersion(0, 25, m_pFontHandler->GetNativFontByID(DEFAULT_MINECRAFT_FONT_ID), DEFAULT_FONT_SIZE, GRRLIB_WHITE);
-    #endif
+#ifdef DEBUG
+			PrintGameVersion(0, 25, m_pFontHandler->GetNativFontByID(DEFAULT_MINECRAFT_FONT_ID), DEFAULT_FONT_SIZE, GRRLIB_WHITE);
+#endif
 
-            GRRLIB_Render();
-            CalculateFrameRate();
+			GRRLIB_Render();
+			CalculateFrameRate();
 
-            m_millisecondsLastFrame = ticks_to_millisecs(gettime()) - startFrameTime;
-            //LOG("Frame Time: %f s", m_millisecondsLastFrame / 1000.0f);
-        }
+			m_millisecondsLastFrame = ticks_to_millisecs(gettime()) - startFrameTime;
+			//LOG("Frame Time: %f s", m_millisecondsLastFrame / 1000.0f);
+		}
 
-        NetworkManager::Get().Destroy();
+		NetworkManager::Get().Destroy();
 
-        delete m_pBasicCommandHandler;
-        delete m_pSceneHandler;
-        delete m_pInputHandler;
-        delete m_pFontHandler;
+		delete m_pBasicCommandHandler;
+		delete m_pSceneHandler;
+		delete m_pInputHandler;
+		delete m_pFontHandler;
 
-        GRRLIB_Exit();
-        LOG("Graphics System uninitialized");
-    }
-    catch(const std::exception& ex)
-    {
-        ERROR("Engine Exception: %s", ex.what());
-    }
-    catch(...)
-    {
-        ERROR("Unkown Engine crash!");
-    }
+		GRRLIB_Exit();
+		LOG("Graphics System uninitialized");
+	}
+	catch (const std::exception& ex)
+	{
+		ERROR("Engine Exception: %s", ex.what());
+	}
+	catch (...)
+	{
+		ERROR("Unkown Engine crash!");
+	}
 
-    Debug::Release();
+	Debug::Release();
 }
 
 void Engine::End()
 {
-    m_bRunning = false;
+	m_bRunning = false;
 }
 
 void Engine::Init()
-{    
-    SYS_SetResetCallback([]() { Engine::Get().End(); });
-    SYS_SetPowerCallback([]() { Engine::Get().End(); });
+{
+	SYS_SetResetCallback([]() { Engine::Get().End(); });
+	SYS_SetPowerCallback([]() { Engine::Get().End(); });
 
-    FileSystem::Init();
-    Debug::Init();    
-    m_iniConfig.Parse(CONFIG_FILE);
+	FileSystem::Init();
+	Debug::Init();
+	m_iniConfig.Parse(CONFIG_FILE);
 
-    LOG("****** %s %s ******", GAME_NAME, BUILD_VERSION);
-    NetworkManager::Get().Init();
+	LOG("****** %s %s ******", GAME_NAME, BUILD_VERSION);
+	NetworkManager::Get().Init();
 #ifdef DEBUG    
-    const std::string& debugHost = m_iniConfig.GetValue<std::string>("DebugServer", "Host");
-    uint16_t debugPort = m_iniConfig.GetValue<uint16_t>("DebugServer", "Port");
-    Debug::InitServer(debugHost, debugPort, true);
+	const std::string& debugHost = m_iniConfig.GetValue<std::string>("DebugServer", "Host");
+	uint16_t debugPort = m_iniConfig.GetValue<uint16_t>("DebugServer", "Port");
+	Debug::InitServer(debugHost, debugPort, true);
 #endif
 
 	GRRLIB_Init();
-    GRRLIB_Settings.antialias = true;
-    LOG("Graphics System initialized");
-    LOG("Resolution x: %d y: %d", rmode->viWidth, rmode->viHeight);
+	GRRLIB_Settings.antialias = true;
+	LOG("Graphics System initialized");
+	LOG("Resolution x: %d y: %d", rmode->viWidth, rmode->viHeight);
 
-    m_pFontHandler->Init();
-    m_pInputHandler->Init();
-    m_pSceneHandler->Init();
-    m_pBasicCommandHandler->Init();
+	m_pFontHandler->Init();
+	m_pInputHandler->Init();
+	m_pSceneHandler->Init();
+	m_pBasicCommandHandler->Init();
 }
 
 SceneHandler& Engine::GetSceneHandler()
 {
-    return *m_pSceneHandler;
+	return *m_pSceneHandler;
 }
 
 InputHandler& Engine::GetInputHandler()
 {
-    return *m_pInputHandler;
+	return *m_pInputHandler;
 }
 
 FontHandler& Engine::GetFontHandler()
 {
-    return *m_pFontHandler;
+	return *m_pFontHandler;
 }
 
 BasicCommandHandler& Engine::GetBasicCommandHandler()
 {
-    return *m_pBasicCommandHandler;
+	return *m_pBasicCommandHandler;
 }
 
 SpriteStageManager& Engine::GetSpriteStageManager()
 {
-    return GetSceneHandler().GetCurrentScene()->GetSpriteStageManager();
+	return GetSceneHandler().GetCurrentScene()->GetSpriteStageManager();
 }

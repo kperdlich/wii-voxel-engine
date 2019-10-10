@@ -30,7 +30,7 @@ PlayerInventory::~PlayerInventory() {
 
 bool PlayerInventory::AddToInventory(IEquipable& item)
 {
-	if ( m_pInventory.size() < INVENTORY_MAX_SIZE )
+	if (m_pInventory.size() < INVENTORY_MAX_SIZE)
 	{
 		m_pInventory.push_back(&item);
 		return true;

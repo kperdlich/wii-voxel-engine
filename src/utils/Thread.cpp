@@ -25,63 +25,63 @@ Thread::Thread() {}
 
 Thread::~Thread() {}
 
-int Thread::Create(ThreadEntryCallback entryCallback, void *stackbase, u32 stack_size, u8 prio)
+int Thread::Create(ThreadEntryCallback entryCallback, void* stackbase, u32 stack_size, u8 prio)
 {
-    int32_t ret = LWP_CreateThread(&m_threadID, entryCallback, this, stackbase, stack_size, prio);
-    if (ret < 0)
-    {
-        ERROR("Thread: Couldn't create Thread!");
-    }
+	int32_t ret = LWP_CreateThread(&m_threadID, entryCallback, this, stackbase, stack_size, prio);
+	if (ret < 0)
+	{
+		ERROR("Thread: Couldn't create Thread!");
+	}
 
-    return ret;
+	return ret;
 }
 
-void* Thread::ThreadEntry(void *args)
+void* Thread::ThreadEntry(void* args)
 {
-    static_cast<Thread*>(args)->PreExecute();
-    return nullptr;
+	static_cast<Thread*>(args)->PreExecute();
+	return nullptr;
 }
 
 
 int Thread::Start()
 {
-    return Create(Thread::ThreadEntry, nullptr, 0, 128);
+	return Create(Thread::ThreadEntry, nullptr, 0, 128);
 }
 
 bool Thread::IsStopped()
 {
-    lock_guard guard(m_mutex);
-    bool val = m_bStop;
-    return val;
+	lock_guard guard(m_mutex);
+	bool val = m_bStop;
+	return val;
 }
 
 void Thread::Stop()
 {
-    lock_guard guard(m_mutex);
-    m_bStop = true;
-    guard.Release();
+	lock_guard guard(m_mutex);
+	m_bStop = true;
+	guard.Release();
 
-    if (IsSuspended())
-    {
-        Resume();
-    }
-    LWP_JoinThread(m_threadID, nullptr);
+	if (IsSuspended())
+	{
+		Resume();
+	}
+	LWP_JoinThread(m_threadID, nullptr);
 
-    guard.Lock();
-    m_bStop = false;
+	guard.Lock();
+	m_bStop = false;
 }
 
 bool Thread::IsSuspended()
 {
-    return LWP_ThreadIsSuspended(m_threadID);
+	return LWP_ThreadIsSuspended(m_threadID);
 }
 
 void Thread::Resume()
 {
-    LWP_ResumeThread(m_threadID);
+	LWP_ResumeThread(m_threadID);
 }
 
 void Thread::Suspend()
 {
-    LWP_SuspendThread(m_threadID);
+	LWP_SuspendThread(m_threadID);
 }

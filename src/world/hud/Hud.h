@@ -26,13 +26,13 @@
 
 class Hud {
 public:
-    Hud();
-    Hud(const Hud&) = delete;
-    Hud(Hud&&) = delete;
-    void operator=(const Hud&) = delete;
-    void operator=(Hud&&) = delete;
-    virtual ~Hud();
-	void addComponent( UiTextureElement* component );
+	Hud();
+	Hud(const Hud&) = delete;
+	Hud(Hud&&) = delete;
+	void operator=(const Hud&) = delete;
+	void operator=(Hud&&) = delete;
+	virtual ~Hud();
+	void addComponent(UiTextureElement* component);
 	void Init();
 
 protected:

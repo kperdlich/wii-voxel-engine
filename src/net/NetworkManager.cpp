@@ -25,50 +25,50 @@
 #include "utils/SafeQueue.h"
 
 void NetworkManager::Init()
-{    
-    m_bInitialized = if_config(m_LocalIP, m_Gateway, m_Netmask, true, 5) >= 0;
-    if (m_bInitialized)
-    {
-        LOG("Network configured, ip: %s, gw: %s, mask %s", m_LocalIP, m_Gateway, m_Netmask);
-        int initStatus = net_init();
-        if (initStatus != 0)
-        {
-            ERROR("net_init failed!");
-        }
-    }
-    else
-    {
-        ERROR("Network configuration failed!");
-    }    
+{
+	m_bInitialized = if_config(m_LocalIP, m_Gateway, m_Netmask, true, 5) >= 0;
+	if (m_bInitialized)
+	{
+		LOG("Network configured, ip: %s, gw: %s, mask %s", m_LocalIP, m_Gateway, m_Netmask);
+		int initStatus = net_init();
+		if (initStatus != 0)
+		{
+			ERROR("net_init failed!");
+		}
+	}
+	else
+	{
+		ERROR("Network configuration failed!");
+	}
 }
 
-void NetworkManager::Connect(const std::string &ip, uint16_t port)
+void NetworkManager::Connect(const std::string& ip, uint16_t port)
 {
-    if (m_bInitialized)
-        m_ServerConnection.Connect(ip, port);
+	if (m_bInitialized)
+		m_ServerConnection.Connect(ip, port);
 }
 
 void NetworkManager::Destroy()
 {
-    if (m_bInitialized)
-    {
-        m_ServerConnection.Destroy();
-        //net_deinit();
-    }
+	if (m_bInitialized)
+	{
+		m_ServerConnection.Destroy();
+		//net_deinit();
+	}
 }
 
 void NetworkManager::Update()
 {
-    if(!m_bInitialized)
-        return;
+	if (!m_bInitialized)
+		return;
 
-    for (uint16_t i = 0; i < 10; ++i)
-    {
-        Packet* p = m_ServerConnection.PopPacket();
-        if (p)
-        {
-            p->Action();
-            delete p;
-        }
-    }
+	for (uint16_t i = 0; i < 10; ++i)
+	{
+		Packet* p = m_ServerConnection.PopPacket();
+		if (p)
+		{
+			p->Action();
+			delete p;
+		}
+	}
 }

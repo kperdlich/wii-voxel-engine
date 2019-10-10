@@ -21,14 +21,14 @@
 #include "components/UiElement.h"
 #include "utils/Debug.h"
 
-List::List(uint32_t x, uint32_t y, uint32_t sizeBetweenElements )
-    : UiElement(x, y, 0.f, 0.f, nullptr), m_sizeBetweenElements(sizeBetweenElements) {}
+List::List(uint32_t x, uint32_t y, uint32_t sizeBetweenElements)
+	: UiElement(x, y, 0.f, 0.f, nullptr), m_sizeBetweenElements(sizeBetweenElements) {}
 
 List::List(uint32_t sizeBetweenElements) : List(0, 0, sizeBetweenElements) {}
 
 List::~List()
 {
-	for ( uint32_t i = 0; i < m_elements.size(); i++)
+	for (uint32_t i = 0; i < m_elements.size(); i++)
 	{
 		delete m_elements[i];
 	}
@@ -40,7 +40,7 @@ List::~List()
 void List::AddComponent(UiElement* element)
 {
 	uint32_t entryX, entryY;
-	if ( m_elements.size() == 0 )
+	if (m_elements.size() == 0)
 	{
 		entryX = m_x;
 		entryY = m_y;
@@ -48,24 +48,23 @@ void List::AddComponent(UiElement* element)
 	else
 	{
 		UiElement* lastEntry = m_elements.back();
-		entryX= lastEntry->GetX();
+		entryX = lastEntry->GetX();
 		entryY = lastEntry->GetY() + m_sizeBetweenElements;
 	}
 
 	element->SetX(entryX);
 	element->SetY(entryY);
 
-	m_elements.push_back( element );
+	m_elements.push_back(element);
 }
 
 void List::Update()
 {
 	UiElement::Update();
 
-	for ( uint32_t i = 0; i < m_elements.size(); i++)
+	for (uint32_t i = 0; i < m_elements.size(); i++)
 	{
 		m_elements[i]->Update();
 	}
-
 }
 

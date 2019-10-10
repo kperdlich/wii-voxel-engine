@@ -26,39 +26,39 @@
 #include "world/GameWorld.h"
 #include "world/SkyBox.h"
 
-class Basic3DScene: public Scene {
+class Basic3DScene : public Scene {
 public:
-    Basic3DScene();
-    Basic3DScene(const Basic3DScene&) = delete;
-    Basic3DScene(Basic3DScene&&) = delete;
-    void operator=(const Basic3DScene&) = delete;
-    void operator=(Basic3DScene&&) = delete;
-    virtual ~Basic3DScene();
-    virtual void Load() override;
-    virtual void Unload() override;
+	Basic3DScene();
+	Basic3DScene(const Basic3DScene&) = delete;
+	Basic3DScene(Basic3DScene&&) = delete;
+	void operator=(const Basic3DScene&) = delete;
+	void operator=(Basic3DScene&&) = delete;
+	virtual ~Basic3DScene();
+	virtual void Load() override;
+	virtual void Unload() override;
 
-    virtual void Draw() override;
-    virtual void Update(float deltaSeconds) override;
+	virtual void Draw() override;
+	virtual void Update(float deltaSeconds) override;
 
-    inline const class Camera* GetCamera() const
-    {
-        return m_mainCamera;
-    }
+	inline const class Camera* GetCamera() const
+	{
+		return m_mainCamera;
+	}
 
-    inline class GameWorld* GetWorld() const
-    {
-        return m_pGameWorld;
-    }
+	inline class GameWorld* GetWorld() const
+	{
+		return m_pGameWorld;
+	}
 
-    class EntityHandler& GetEntityHandler();
+	class EntityHandler& GetEntityHandler();
 
-protected:	
-    void Render2D() const;
-    void ClearUiElements();
+protected:
+	void Render2D() const;
+	void ClearUiElements();
 
-    std::vector<UiElement*> m_uiElements;
-    class EntityHandler* m_entityHandler    = nullptr;
-    class Camera* m_mainCamera              = nullptr;
-    class GameWorld* m_pGameWorld           = nullptr;
-    class SkyBox* m_skyBox                 = nullptr;
+	std::vector<UiElement*> m_uiElements;
+	class EntityHandler* m_entityHandler = nullptr;
+	class Camera* m_mainCamera = nullptr;
+	class GameWorld* m_pGameWorld = nullptr;
+	class SkyBox* m_skyBox = nullptr;
 };

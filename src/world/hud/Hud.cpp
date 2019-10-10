@@ -21,16 +21,13 @@
 
 // define all component names here!
 
-Hud::Hud() {
-
-
-
-}
+Hud::Hud() {}
 
 Hud::~Hud() {}
 
-void Hud::addComponent(UiTextureElement* component) {
-	m_hudComponents.push_back( component );
+void Hud::addComponent(UiTextureElement* component) 
+{
+	m_hudComponents.push_back(component);
 }
 
 void Hud::Init()

@@ -22,9 +22,9 @@
 
 class IntroScene : public Basic2DScene
 {
-public:   
+public:
 	void Load() override;
-    void Update(float deltaSeconds) override;
+	void Update(float deltaSeconds) override;
 	void Draw() override;
 
 private:

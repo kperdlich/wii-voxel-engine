@@ -19,12 +19,10 @@
 
 #include "commands/BasicCommandHandler.h"
 
-BasicCommandHandler::BasicCommandHandler() {
-
-}
+BasicCommandHandler::BasicCommandHandler() {}
 
 BasicCommandHandler::~BasicCommandHandler() {
-	for( auto cMapIt = m_commandMap.begin(); cMapIt != m_commandMap.end(); ++cMapIt )
+	for (auto cMapIt = m_commandMap.begin(); cMapIt != m_commandMap.end(); ++cMapIt)
 	{
 		delete cMapIt->second;
 	}
@@ -33,9 +31,9 @@ BasicCommandHandler::~BasicCommandHandler() {
 }
 
 void BasicCommandHandler::ExecuteCommand(const char* commandName) {
-	if( m_commandMap.find( commandName ) != m_commandMap.end())
+	if (m_commandMap.find(commandName) != m_commandMap.end())
 	{
-		m_commandMap.at( commandName )->ExecuteCommand();
+		m_commandMap.at(commandName)->ExecuteCommand();
 	}
 }
 
@@ -43,7 +41,7 @@ void BasicCommandHandler::Init() {
 	// register all client side commands
 	m_commandMap.clear();
 
-	m_commandMap[ SwitchToIntroCommand::Name() ] = new SwitchToIntroCommand();
-	m_commandMap[ SwitchToMainMenuCommand::Name() ] = new SwitchToMainMenuCommand();
-	m_commandMap[ SwitchToInGameCommand::Name() ] = new SwitchToInGameCommand();
+	m_commandMap[SwitchToIntroCommand::Name()] = new SwitchToIntroCommand();
+	m_commandMap[SwitchToMainMenuCommand::Name()] = new SwitchToMainMenuCommand();
+	m_commandMap[SwitchToInGameCommand::Name()] = new SwitchToInGameCommand();
 }

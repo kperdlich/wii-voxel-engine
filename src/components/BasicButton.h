@@ -24,34 +24,34 @@
 #include "textures/Texture.h"
 #include "textures/Label.h"
 
-class BasicButton: public UiTextureElement
+class BasicButton : public UiTextureElement
 {
 public:
-    using ButtonCallback = std::function<void(BasicButton*)>;
+	using ButtonCallback = std::function<void(BasicButton*)>;
 
-    BasicButton(uint32_t x, uint32_t y, const char* name, Sprite* defaultTexture,
-                 Sprite* highlightTexture, Label* label, ButtonCallback clickCallback);
-    BasicButton(const BasicButton&) = delete;
-    BasicButton(BasicButton&&) = delete;
-    void operator=(const BasicButton&) = delete;
-    void operator=(BasicButton&&) = delete;
-    virtual ~BasicButton() override;
+	BasicButton(uint32_t x, uint32_t y, const char* name, Sprite* defaultTexture,
+		Sprite* highlightTexture, Label* label, ButtonCallback clickCallback);
+	BasicButton(const BasicButton&) = delete;
+	BasicButton(BasicButton&&) = delete;
+	void operator=(const BasicButton&) = delete;
+	void operator=(BasicButton&&) = delete;
+	virtual ~BasicButton() override;
 
-    void Update() override;
-    bool MouseOver();
-    void CheckForClick();
+	void Update() override;
+	bool MouseOver();
+	void CheckForClick();
 	void UpdateLabel();
 
-    void SetColor(u32 color) override;
-    void SetButtonCallback(ButtonCallback callback);
+	void SetColor(u32 color) override;
+	void SetButtonCallback(ButtonCallback callback);
 
-    virtual void SetX(uint32_t x) override;
-    virtual void SetY(uint32_t y) override;
+	virtual void SetX(uint32_t x) override;
+	virtual void SetY(uint32_t y) override;
 
 
 private:
-    Sprite* m_highlightTexture = nullptr;
-    Label* m_label = nullptr;
-    ButtonCallback m_clickCallback;
-    bool m_mouseOver = false;
+	Sprite* m_highlightTexture = nullptr;
+	Label* m_label = nullptr;
+	ButtonCallback m_clickCallback;
+	bool m_mouseOver = false;
 };

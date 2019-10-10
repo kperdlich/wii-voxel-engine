@@ -34,39 +34,36 @@
 class Engine {
 
 private:
-    Engine();   
-    class SceneHandler* m_pSceneHandler;
-    class InputHandler* m_pInputHandler;
-    class FontHandler*  m_pFontHandler;
-    class BasicCommandHandler* m_pBasicCommandHandler;
-    IniConfig m_iniConfig;
-    bool m_bRunning = false;
-    uint64_t m_millisecondsLastFrame = 0;
+	Engine();
+	class SceneHandler* m_pSceneHandler;
+	class InputHandler* m_pInputHandler;
+	class FontHandler* m_pFontHandler;
+	class BasicCommandHandler* m_pBasicCommandHandler;
+	IniConfig m_iniConfig;
+	bool m_bRunning = false;
+	uint64_t m_millisecondsLastFrame = 0;
 
 public:
-    ~Engine();
+	~Engine();
 	void Start();
 	void End();
-    void Init();
+	void Init();
 
-    class SceneHandler& GetSceneHandler();
-    class InputHandler& GetInputHandler();
-    class FontHandler& GetFontHandler();
-    class BasicCommandHandler& GetBasicCommandHandler();
-    class SpriteStageManager& GetSpriteStageManager();        
-    inline IniConfig& GetIniConfig() { return m_iniConfig; }
+	class SceneHandler& GetSceneHandler();
+	class InputHandler& GetInputHandler();
+	class FontHandler& GetFontHandler();
+	class BasicCommandHandler& GetBasicCommandHandler();
+	class SpriteStageManager& GetSpriteStageManager();
+	inline IniConfig& GetIniConfig() { return m_iniConfig; }
 
-    static Engine& Get()
+	static Engine& Get()
 	{
-        static Engine s_instance;
-        return s_instance;
+		static Engine s_instance;
+		return s_instance;
 	}
 
-    Engine(Engine&&) = delete;
-    void operator=(Engine&&) = delete;
-    Engine(Engine const&)	  = delete;
-    void operator=(Engine const&) = delete;
-private:
-    void ParseIniFile();
-
+	Engine(Engine&&) = delete;
+	void operator=(Engine&&) = delete;
+	Engine(Engine const&) = delete;
+	void operator=(Engine const&) = delete;
 };

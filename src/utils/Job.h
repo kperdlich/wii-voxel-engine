@@ -26,45 +26,45 @@ template<class T>
 class Job : public Thread
 {
 public:
-    Job() {}
-    virtual ~Job(){}
-    Job(const Job&) = delete;
-    Job(Job&&) = delete;
-    void operator=(const Job&) = delete;
-    void operator=(Job&&) = delete;
+	Job() {}
+	virtual ~Job() {}
+	Job(const Job&) = delete;
+	Job(Job&&) = delete;
+	void operator=(const Job&) = delete;
+	void operator=(Job&&) = delete;
 
-    void Add(const T& data)
-    {
-        m_queue.Push(data);
-        if (IsSuspended())
-        {
-            Resume();
-        }
-    }
-    uint32_t GetQueueCount()
-    {
-        return m_queue.GetCount();
-    }
-
-protected:
-    virtual void PreExecute() override
-    {        
-        while(true)
-        {
-            if (IsStopped())
-                break;
-
-            if (m_queue.IsEmpty())
-            {
-                Suspend();
-            }
-            else
-            {                
-                Execute();
-            }
-        }
-    }
+	void Add(const T& data)
+	{
+		m_queue.Push(data);
+		if (IsSuspended())
+		{
+			Resume();
+		}
+	}
+	uint32_t GetQueueCount()
+	{
+		return m_queue.GetCount();
+	}
 
 protected:
-    SafeQueue<T> m_queue;    
+	virtual void PreExecute() override
+	{
+		while (true)
+		{
+			if (IsStopped())
+				break;
+
+			if (m_queue.IsEmpty())
+			{
+				Suspend();
+			}
+			else
+			{
+				Execute();
+			}
+		}
+	}
+
+protected:
+	SafeQueue<T> m_queue;
 };

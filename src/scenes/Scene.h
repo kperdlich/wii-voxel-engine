@@ -24,27 +24,27 @@
 class Scene {
 
 public:
-    Scene();
-    virtual ~Scene();
-    Scene(const Scene&) = delete;
-    Scene(Scene&&) = delete;
-    void operator=(const Scene&) = delete;
-    void operator=(Scene&&) = delete;
+	Scene();
+	virtual ~Scene();
+	Scene(const Scene&) = delete;
+	Scene(Scene&&) = delete;
+	void operator=(const Scene&) = delete;
+	void operator=(Scene&&) = delete;
 	virtual void Load();
 	virtual void Unload();
 	virtual void Draw();
-    virtual void Update(float deltaSeconds);
-	virtual SpriteStageManager& GetSpriteStageManager() const;	
+	virtual void Update(float deltaSeconds);
+	virtual SpriteStageManager& GetSpriteStageManager() const;
 
-    bool IsLoaded() const
-    {
-        return m_bLoaded;
-    }
-
-protected:
-    bool m_bLoaded = false;
+	bool IsLoaded() const
+	{
+		return m_bLoaded;
+	}
 
 protected:
-    SpriteStageManager *m_spriteStageManager;
+	bool m_bLoaded = false;
+
+protected:
+	SpriteStageManager* m_spriteStageManager;
 
 };
