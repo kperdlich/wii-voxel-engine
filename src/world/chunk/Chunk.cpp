@@ -224,6 +224,7 @@ void Chunk::CreateDisplayList(size_t sizeOfDisplayList)
 void Chunk::FinishDisplayList()
 {
 	m_displayList.End();
+    m_bIsDirty = false;
 }
 
 uint32_t Chunk::GetDisplayListSize() const
