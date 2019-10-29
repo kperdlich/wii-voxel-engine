@@ -19,6 +19,7 @@
 
 
 #include "Engine.h"
+#include "renderer/displaylist.h"
 #include "utils/GameHelper.h"
 
 static uint8_t fps = 0;
@@ -51,9 +52,12 @@ void PrintFPS(uint32_t x, uint32_t y, GRRLIB_ttfFont* font, uint32_t fontSize, c
 void PrintDebugPanel(uint32_t x, uint32_t y, GRRLIB_ttfFont* font, uint32_t fontSize, const u32 color)
 {
 	char buffer[20];
-    char memoryBuffer[50];
+    char memoryBuffer[20];
+    char displayListBuffer[20];
 	sprintf(buffer, "%s %s", GAME_NAME, BUILD_VERSION);
     sprintf(memoryBuffer, "Heap: %.2f MB", (float) GetCurrentHeapMemory() / 1048576.0f);
+    sprintf(displayListBuffer, "DPL Heap: %.2f MB", (float) GetGlobalDisplayListSize() / 1048576.0f);
 	GRRLIB_PrintfTTF(x, y, font, buffer, fontSize, color);
     GRRLIB_PrintfTTF(x, y + 20, font, memoryBuffer, fontSize, color);
+    GRRLIB_PrintfTTF(x, y + 40, font, displayListBuffer, fontSize, color);
 }

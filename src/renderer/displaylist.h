@@ -3,6 +3,8 @@
 #include <stdint.h>
 #include <cstdlib>
 
+size_t GetGlobalDisplayListSize();
+
 class DisplayList
 {
 public:

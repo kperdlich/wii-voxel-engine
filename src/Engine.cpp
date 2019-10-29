@@ -188,7 +188,7 @@ void operator delete(void* ptr) noexcept
 
 size_t AllocatedSize(void* ptr)
 {
-  return ((size_t*)ptr)[-1];
+    return ((size_t*)ptr)[-1];
 }
 
 size_t GetCurrentHeapMemory()
