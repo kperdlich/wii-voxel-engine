@@ -5,8 +5,8 @@
 
 enum class EWorldLoaderState : unsigned char
 {   
-    CHECK_WORLD_CASH,
-    CLEAN_WORLD_CASH,
+    CHECK_WORLD_CACHE,
+    CLEAN_WORLD_CACHE,
     TRY_CONNECTING_TO_SERVER,
     WAIT_FOR_SERVER_LOGIN,
     CONNECTED_TO_SERVER,

@@ -10,7 +10,7 @@
 #include "scenes/Basic3DScene.h"
 
 WorldLoader::WorldLoader(const char* name, Sprite* sprite) : UiTextureElement(0, 0, name, sprite),
-m_state(EWorldLoaderState::CHECK_WORLD_CASH), m_nextState(EWorldLoaderState::CHECK_WORLD_CASH)
+m_state(EWorldLoaderState::CHECK_WORLD_CACHE), m_nextState(EWorldLoaderState::CHECK_WORLD_CACHE)
 {
 	m_pStateLabel = Label::Create("",
 		Engine::Get().GetFontHandler().GetNativFontByID(DEFAULT_MINECRAFT_FONT_ID),
@@ -29,11 +29,11 @@ void WorldLoader::Update()
 
 	switch (m_state)
 	{
-		case EWorldLoaderState::CHECK_WORLD_CASH:
+        case EWorldLoaderState::CHECK_WORLD_CACHE:
             m_pStateLabel->SetText("Clean old world cache...");
-			m_nextState = EWorldLoaderState::CLEAN_WORLD_CASH;
+            m_nextState = EWorldLoaderState::CLEAN_WORLD_CACHE;
 			break;
-		case EWorldLoaderState::CLEAN_WORLD_CASH:
+        case EWorldLoaderState::CLEAN_WORLD_CACHE:
 		{
 			int value = FileSystem::RemoveDirectory(WORLD_PATH);
 			if (value == -1)
