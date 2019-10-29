@@ -30,7 +30,7 @@ void WorldLoader::Update()
 	switch (m_state)
 	{
 		case EWorldLoaderState::CHECK_WORLD_CASH:
-			m_pStateLabel->SetText("Clean old world cash...");
+            m_pStateLabel->SetText("Clean old world cache...");
 			m_nextState = EWorldLoaderState::CLEAN_WORLD_CASH;
 			break;
 		case EWorldLoaderState::CLEAN_WORLD_CASH:
