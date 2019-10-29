@@ -72,11 +72,8 @@ void Engine::Start()
 				End();
 			}
 
-			PrintFps(500, 25, m_pFontHandler->GetNativFontByID(DEFAULT_MINECRAFT_FONT_ID), DEFAULT_FONT_SIZE, GRRLIB_YELLOW);
-
-#ifdef DEBUG
-			PrintGameVersion(0, 25, m_pFontHandler->GetNativFontByID(DEFAULT_MINECRAFT_FONT_ID), DEFAULT_FONT_SIZE, GRRLIB_WHITE);
-#endif
+            PrintFPS(500, 25, m_pFontHandler->GetNativFontByID(DEFAULT_MINECRAFT_FONT_ID), DEFAULT_FONT_SIZE, GRRLIB_YELLOW);
+            PrintDebugPanel(2, 25, m_pFontHandler->GetNativFontByID(DEFAULT_MINECRAFT_FONT_ID), DEFAULT_FONT_SIZE, GRRLIB_YELLOW);
 
 			GRRLIB_Render();
 			CalculateFrameRate();
@@ -163,4 +160,38 @@ BasicCommandHandler& Engine::GetBasicCommandHandler()
 SpriteStageManager& Engine::GetSpriteStageManager()
 {
 	return GetSceneHandler().GetCurrentScene()->GetSpriteStageManager();
+}
+
+static size_t currentHeapMemory = 0;
+
+void* operator new(size_t size)
+{
+    size_t* ptr = (size_t*) std::malloc(sizeof(size_t) + size);
+    if (ptr)
+    {
+        ptr[0] = size;
+        currentHeapMemory += size;
+        return &ptr[1];
+    }
+    else
+    {
+        throw std::bad_alloc{};
+    }
+}
+
+void operator delete(void* ptr) noexcept
+{
+    size_t size = AllocatedSize(ptr);
+    std::free((size_t*)ptr - 1);
+    currentHeapMemory -= size;
+}
+
+size_t AllocatedSize(void* ptr)
+{
+  return ((size_t*)ptr)[-1];
+}
+
+size_t GetCurrentHeapMemory()
+{
+    return currentHeapMemory;
 }

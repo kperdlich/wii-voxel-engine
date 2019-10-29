@@ -18,6 +18,7 @@
 ***/
 
 
+#include "Engine.h"
 #include "utils/GameHelper.h"
 
 static uint8_t fps = 0;
@@ -40,16 +41,19 @@ uint8_t CalculateFrameRate()
 	return fps;
 }
 
-void PrintFps(uint32_t x, uint32_t y, GRRLIB_ttfFont* font, uint32_t fontSize, const u32 color)
+void PrintFPS(uint32_t x, uint32_t y, GRRLIB_ttfFont* font, uint32_t fontSize, const u32 color)
 {
-	char buffer[20];
-	sprintf(buffer, "FPS: %d", fps);
-	GRRLIB_PrintfTTF(x, y, font, buffer, fontSize, color);
+    char fpsBuffer[10];
+    sprintf(fpsBuffer, "FPS: %d", fps);
+    GRRLIB_PrintfTTF(x, y, font, fpsBuffer, fontSize, color);
 }
 
-void PrintGameVersion(uint32_t x, uint32_t y, GRRLIB_ttfFont* font, uint32_t fontSize, const u32 color)
+void PrintDebugPanel(uint32_t x, uint32_t y, GRRLIB_ttfFont* font, uint32_t fontSize, const u32 color)
 {
 	char buffer[20];
+    char memoryBuffer[50];
 	sprintf(buffer, "%s %s", GAME_NAME, BUILD_VERSION);
+    sprintf(memoryBuffer, "Heap: %.2f MB", (float) GetCurrentHeapMemory() / 1048576.0f);
 	GRRLIB_PrintfTTF(x, y, font, buffer, fontSize, color);
+    GRRLIB_PrintfTTF(x, y + 20, font, memoryBuffer, fontSize, color);
 }

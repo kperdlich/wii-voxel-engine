@@ -31,6 +31,11 @@
 #include "font/FontHandler.h"
 #include "commands/BasicCommandHandler.h"
 
+void* operator new(size_t size);
+void operator delete(void* ptr) noexcept;
+size_t GetCurrentHeapMemory();
+size_t AllocatedSize(void* ptr);
+
 class Engine {
 
 private:
